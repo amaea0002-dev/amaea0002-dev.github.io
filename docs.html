@@ -51,7 +51,7 @@
     <div class="sidebar-user">
       <div class="sidebar-avatar">H</div>
       <div>
-        <div class="sidebar-user-name">Hasna Linsi</div>
+        <div class="sidebar-user-name">Hasna Sahul Hameed</div>
         <div class="sidebar-user-role">CEO &amp; Co-founder</div>
       </div>
     </div>
@@ -252,6 +252,22 @@
     overlayEl.addEventListener('click', close);
     sidebarEl.querySelectorAll('a.sidebar-item').forEach(a => a.addEventListener('click', close));
   }
+</script>
+<script>
+const _USERS = {
+  hasna: { name: 'Hasna Sahul Hameed', role: 'CEO & Co-founder', initial: 'H', bg: 'linear-gradient(135deg,#4C2C4B,#8B6189)' },
+  milan: { name: 'Milan Sajiv', role: 'CTO & Co-founder', initial: 'M', bg: 'linear-gradient(135deg,#1a4080,#4292c6)' }
+};
+function switchUser(id) {
+  const u = _USERS[id];
+  const a = document.getElementById('sidebarAvatar'); if (a) { a.textContent = u.initial; a.style.background = u.bg; }
+  const n = document.getElementById('sidebarUserName'); if (n) n.textContent = u.name;
+  const r = document.getElementById('sidebarUserRole'); if (r) r.textContent = u.role;
+  document.querySelectorAll('.sidebar-user-option').forEach(o => o.classList.toggle('active', o.dataset.user === id));
+  localStorage.setItem('amaea-user', id);
+}
+document.querySelectorAll('.sidebar-user-option').forEach(btn => btn.addEventListener('click', () => switchUser(btn.dataset.user)));
+switchUser(localStorage.getItem('amaea-user') || 'hasna');
 </script>
 </body>
 </html>
