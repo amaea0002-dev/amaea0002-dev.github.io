@@ -12,6 +12,7 @@
 </head>
 <body>
 
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar">
   <div class="sidebar-logo">
     <img src="logo.png" alt="Amaea" onerror="this.style.display='none'"/>
@@ -59,6 +60,7 @@
 
 <header class="topbar">
   <div class="topbar-left">
+    <button class="topbar-hamburger" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
     <span class="bc-root">Amaea</span>
     <span class="bc-sep">/</span>
     <span class="bc-current">Dashboard</span>
@@ -281,6 +283,16 @@
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('amaea-theme', next);
   });
+  // Mobile sidebar
+  const menuBtn = document.getElementById('menuBtn');
+  const sidebarEl = document.querySelector('.sidebar');
+  const overlayEl = document.getElementById('sidebarOverlay');
+  if (menuBtn && sidebarEl && overlayEl) {
+    const close = () => { sidebarEl.classList.remove('open'); overlayEl.classList.remove('open'); };
+    menuBtn.addEventListener('click', () => { sidebarEl.classList.toggle('open'); overlayEl.classList.toggle('open'); });
+    overlayEl.addEventListener('click', close);
+    sidebarEl.querySelectorAll('a.sidebar-item').forEach(a => a.addEventListener('click', close));
+  }
 </script>
 </body>
 </html>
