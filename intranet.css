@@ -110,7 +110,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .sidebar-user { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .sidebar-switcher { display: flex; align-items: center; gap: 6px; }
-.sidebar-switcher-label { font-size: 0.58rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; flex: 1; }
+.sidebar-switcher-label { font-size: 0.58rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; flex: 1; }
 .sidebar-user-option {
   width: 26px; height: 26px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
