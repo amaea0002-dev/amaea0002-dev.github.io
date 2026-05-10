@@ -8,6 +8,7 @@
   <link rel="icon" href="https://raw.githubusercontent.com/amaea0002-dev/webpage/main/assets/logo.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
   <style>
     /* ── Design tokens (matching amaea.io) ──────────────────── */
     :root {
@@ -48,6 +49,31 @@
       --r-lg: 16px;
       --r-xl: 24px;
       --r-pill: 999px;
+      --nav-bg: rgba(255,255,255,0.88);
+    }
+
+    /* ── Dark theme ───────────────────────────────────────────── */
+    [data-theme="dark"] {
+      --plum:        #a868a6;
+      --plum-dark:   #7a4878;
+      --plum-mid:    #c084be;
+      --plum-soft:   #c8a4c6;
+      --plum-tint:   rgba(168,104,166,0.12);
+      --plum-border: rgba(168,104,166,0.22);
+      --white:    #190d18;
+      --bg:       #0e080e;
+      --gray-50:  #201220;
+      --gray-100: #291728;
+      --gray-200: rgba(255,255,255,0.08);
+      --gray-300: rgba(255,255,255,0.16);
+      --gray-500: #a094aa;
+      --gray-600: #c8b8cc;
+      --gray-900: #f2ecf4;
+      --red-tint:   rgba(239,68,68,0.09);
+      --red-border: rgba(239,68,68,0.22);
+      --sh-sm: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+      --sh-md: 0 4px 16px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+      --nav-bg: rgba(14,8,14,0.92);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -59,6 +85,7 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
     a { text-decoration: none; color: inherit; }
     img { display: block; max-width: 100%; }
@@ -67,7 +94,7 @@
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       height: var(--nav-h);
-      background: rgba(255,255,255,0.88);
+      background: var(--nav-bg);
       border-bottom: 1px solid var(--gray-200);
       backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
       display: flex; align-items: center;
@@ -89,6 +116,21 @@
       background: var(--plum-tint); border: 1px solid var(--plum-border);
       padding: 4px 12px; border-radius: var(--r-pill);
     }
+    .nav-right { display: flex; align-items: center; }
+    .theme-toggle {
+      position: relative; width: 40px; height: 22px;
+      border-radius: 11px; background: var(--gray-200);
+      cursor: pointer; border: none; flex-shrink: 0;
+      transition: background 0.3s ease;
+    }
+    .theme-toggle::before {
+      content: ''; position: absolute; top: 2px; left: 2px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--gray-500);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.3s ease;
+    }
+    [data-theme="dark"] .theme-toggle { background: var(--plum); }
+    [data-theme="dark"] .theme-toggle::before { transform: translateX(18px); background: #fff; }
 
     /* ── Layout ───────────────────────────────────────────────── */
     .page-top { padding-top: var(--nav-h); }
@@ -116,7 +158,7 @@
     /* ── Hero ─────────────────────────────────────────────────── */
     .hero {
       padding: 100px 0 88px;
-      background: linear-gradient(170deg, #FAF9FB 0%, var(--white) 100%);
+      background: linear-gradient(170deg, var(--gray-50) 0%, var(--white) 100%);
       text-align: center; position: relative; overflow: hidden;
     }
     .hero::before {
@@ -290,7 +332,12 @@
       <img src="https://raw.githubusercontent.com/amaea0002-dev/webpage/main/assets/logo.png" alt="Amaea" onerror="this.style.display='none'"/>
       <span class="nav-logo-text">Amaea</span>
     </div>
-    <span class="nav-badge">Brand Guidelines</span>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="nav-badge">Brand Guidelines</span>
+      <div class="nav-right">
+        <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -507,5 +554,15 @@
   </div>
 </footer>
 
+<script>
+  const toggle = document.querySelector('.theme-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('amaea-theme', next);
+    });
+  }
+</script>
 </body>
 </html>
