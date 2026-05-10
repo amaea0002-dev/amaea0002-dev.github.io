@@ -14,29 +14,10 @@
 
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar">
-  <div class="sidebar-logo" id="sidebarLogoBtn">
+  <div class="sidebar-logo">
     <img src="logo-white.png" alt="Amaea"/>
     <span class="sidebar-logo-text">Amaea</span>
     <span class="sidebar-logo-badge">Intranet</span>
-    <svg class="sidebar-logo-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-  </div>
-  <div class="user-select-panel" id="userSelectPanel">
-    <button class="user-select-btn" data-user="hasna">
-      <div class="usa" style="background:linear-gradient(135deg,#4C2C4B,#8B6189);">H</div>
-      <div class="user-select-info">
-        <div class="user-select-name">Hasna Sahul Hameed</div>
-        <div class="user-select-role">CEO &amp; Co-founder</div>
-      </div>
-      <span class="user-select-tick">✓</span>
-    </button>
-    <button class="user-select-btn" data-user="milan">
-      <div class="usa" style="background:linear-gradient(135deg,#1a4080,#4292c6);">M</div>
-      <div class="user-select-info">
-        <div class="user-select-name">Milan Sajiv</div>
-        <div class="user-select-role">CTO &amp; Co-founder</div>
-      </div>
-      <span class="user-select-tick" style="opacity:0;">✓</span>
-    </button>
   </div>
   <nav class="sidebar-nav">
     <div class="sidebar-label">Workspace</div>
@@ -66,13 +47,32 @@
       Prototype <span class="ext">↗</span>
     </a>
   </nav>
-  <div class="sidebar-footer">
-    <div class="sidebar-user">
-      <div class="sidebar-avatar">H</div>
-      <div>
-        <div class="sidebar-user-name">Hasna Sahul Hameed</div>
-        <div class="sidebar-user-role">CEO &amp; Co-founder</div>
+  <div class="sidebar-footer" style="position:relative;">
+    <div class="user-select-panel" id="userSelectPanel">
+      <button class="user-select-btn" data-user="hasna">
+        <div class="usa" style="background:linear-gradient(135deg,#4C2C4B,#8B6189);">H</div>
+        <div class="user-select-info">
+          <div class="user-select-name">Hasna Sahul Hameed</div>
+          <div class="user-select-role">CEO &amp; Co-founder</div>
+        </div>
+        <span class="user-select-tick">✓</span>
+      </button>
+      <button class="user-select-btn" data-user="milan">
+        <div class="usa" style="background:linear-gradient(135deg,#1a4080,#4292c6);">M</div>
+        <div class="user-select-info">
+          <div class="user-select-name">Milan Sajiv</div>
+          <div class="user-select-role">CTO &amp; Co-founder</div>
+        </div>
+        <span class="user-select-tick" style="opacity:0;">✓</span>
+      </button>
+    </div>
+    <div class="sidebar-user sidebar-user-clickable" id="sidebarUserArea" title="Switch user">
+      <div class="sidebar-avatar" id="sidebarAvatar">H</div>
+      <div style="flex:1;min-width:0;">
+        <div class="sidebar-user-name" id="sidebarUserName">Hasna Sahul Hameed</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">CEO &amp; Co-founder</div>
       </div>
+      <svg width="11" height="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;margin-left:auto;"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
   </div>
 </aside>
@@ -340,18 +340,15 @@ function switchUser(id) {
   });
   localStorage.setItem('amaea-user', id);
 }
-const _logoBtn = document.getElementById('sidebarLogoBtn');
+const _userArea = document.getElementById('sidebarUserArea');
 const _userPanel = document.getElementById('userSelectPanel');
-if (_logoBtn && _userPanel) {
-  _logoBtn.addEventListener('click', () => {
-    const open = _userPanel.classList.toggle('open');
-    _logoBtn.classList.toggle('panel-open', open);
-  });
+if (_userArea && _userPanel) {
+  _userArea.addEventListener('click', (e) => { e.stopPropagation(); _userPanel.classList.toggle('open'); });
   _userPanel.querySelectorAll('.user-select-btn').forEach(btn => btn.addEventListener('click', () => {
     switchUser(btn.dataset.user);
     _userPanel.classList.remove('open');
-    _logoBtn.classList.remove('panel-open');
   }));
+  document.addEventListener('click', (e) => { if (!e.target.closest('.sidebar-footer')) _userPanel.classList.remove('open'); });
 }
 document.querySelectorAll('.sidebar-user-option').forEach(btn => btn.addEventListener('click', () => switchUser(btn.dataset.user)));
 switchUser(localStorage.getItem('amaea-user') || 'hasna');
