@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Documents — Amaea Intranet</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/amaea0002-dev/webpage/main/assets/logo.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="intranet.css"/>
+  <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="https://raw.githubusercontent.com/amaea0002-dev/webpage/main/assets/logo.png" alt="Amaea" onerror="this.style.display='none'"/>
+    <span class="sidebar-logo-text">Amaea</span>
+    <span class="sidebar-logo-badge">Intranet</span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-label">Workspace</div>
+    <a href="index.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="brand.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Brand
+    </a>
+    <a href="team.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Team
+    </a>
+    <a href="docs.html" class="sidebar-item active">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Documents
+    </a>
+    <div class="sidebar-label">External</div>
+    <a href="https://amaea0002-dev.github.io/webpage" class="sidebar-item" target="_blank">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website <span class="ext">↗</span>
+    </a>
+    <a href="https://github.com/amaea0002-dev/prototype" class="sidebar-item" target="_blank">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      Prototype <span class="ext">↗</span>
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">H</div>
+      <div>
+        <div class="sidebar-user-name">Hasna Linsi</div>
+        <div class="sidebar-user-role">CEO &amp; Co-founder</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <span class="bc-root">Amaea</span>
+    <span class="bc-sep">/</span>
+    <span class="bc-current">Documents</span>
+  </div>
+  <div class="topbar-right">
+    <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+  </div>
+</header>
+
+<main class="main">
+  <div class="content">
+
+    <div class="page-header">
+      <p class="page-eyebrow">Company records</p>
+      <h1 class="page-title">Documents</h1>
+      <p class="page-sub">Company setup, legal documents, operational templates, and open action items. Status reflects current position as of May 2026.</p>
+    </div>
+
+    <!-- Company setup -->
+    <div class="section-label">Company</div>
+    <h2 class="section-title-lg" style="margin-bottom:16px;">Company Setup</h2>
+
+    <div class="card" style="margin-bottom:28px;">
+      <div class="doc-item">
+        <div class="doc-icon">⚖</div>
+        <div class="doc-info">
+          <p class="doc-name">Limited Company Registration</p>
+          <p class="doc-desc">Amaea Ltd — Companies House. Required before taking revenue or opening a business bank account.</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-amber">Pending</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">📋</div>
+        <div class="doc-info">
+          <p class="doc-name">Co-founder Agreement</p>
+          <p class="doc-desc">Equity split, vesting schedule, exit provisions, IP ownership, and what happens if one founder leaves. Must be in place before any external conversation.</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-amber">Not started</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">📄</div>
+        <div class="doc-info">
+          <p class="doc-name">Business Bank Account</p>
+          <p class="doc-desc">Required once Ltd company is formed. Keep company finances completely separate from personal.</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-gray">Blocked on Ltd</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">🔒</div>
+        <div class="doc-info">
+          <p class="doc-name">Lucent Employment Contract Review</p>
+          <p class="doc-desc">Hasna: check IP assignment, non-solicitation, and garden leave clauses before building anything that could be claimed by Lucent. Do this now, not on the way out.</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-red">Action required</span></div>
+      </div>
+    </div>
+
+    <!-- Legal / regulatory -->
+    <div class="section-label">Legal &amp; Regulatory</div>
+    <h2 class="section-title-lg" style="margin-bottom:16px;">Legal &amp; FCA Position</h2>
+
+    <div class="card" style="margin-bottom:28px;">
+      <div class="doc-item">
+        <div class="doc-icon">⚠</div>
+        <div class="doc-info">
+          <p class="doc-name">FCA Regulatory Position for Amaea</p>
+          <p class="doc-desc">Open question: does providing AI compliance guidance to FCA-regulated firms make Amaea itself a regulated entity? This is critical and needs a legal answer before product launch — not after. Seek specialist FCA regulatory counsel.</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-red">Open question</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">🛡</div>
+        <div class="doc-info">
+          <p class="doc-name">GDPR / Data Processing Agreement</p>
+          <p class="doc-desc">Amaea will handle client data (IFA firm records, possibly client personal data). A DPA framework is needed before any beta client arrangement.</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-amber">Not started</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">📝</div>
+        <div class="doc-info">
+          <p class="doc-name">Terms of Service &amp; Privacy Policy</p>
+          <p class="doc-desc">Required before charging any customer. Must accurately reflect how Amaea uses, stores, and processes data.</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-amber">Not started</span></div>
+      </div>
+    </div>
+
+    <!-- Commercial / financial -->
+    <div class="section-label">Commercial</div>
+    <h2 class="section-title-lg" style="margin-bottom:16px;">Commercial &amp; Financial</h2>
+
+    <div class="card" style="margin-bottom:28px;">
+      <div class="doc-item">
+        <div class="doc-icon">📊</div>
+        <div class="doc-info">
+          <p class="doc-name">Financial Model</p>
+          <p class="doc-desc">ARR projections, CAC, LTV, churn assumptions, and runway model. No investor conversation or pricing decision can be made confidently without this. Build Q3 2026.</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-amber">Not started</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">💰</div>
+        <div class="doc-info">
+          <p class="doc-name">Pricing Model &amp; Validation</p>
+          <p class="doc-desc">Current pricing page exists on the website but numbers are unvalidated. Must be tested through customer discovery interviews — "what would you budget for this?"</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-amber">Unvalidated</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">💼</div>
+        <div class="doc-info">
+          <p class="doc-name">Exit Fund — Hasna</p>
+          <p class="doc-desc">Target: £30–45k saved before leaving Lucent in September 2028. This covers personal living costs for 12–18 months while Amaea reaches revenue. Track monthly.</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-amber">In progress</span></div>
+      </div>
+    </div>
+
+    <!-- Brand / operational -->
+    <div class="section-label">Operational</div>
+    <h2 class="section-title-lg" style="margin-bottom:16px;">Brand &amp; Operational Documents</h2>
+
+    <div class="card" style="margin-bottom:28px;">
+      <div class="doc-item">
+        <div class="doc-icon">◆</div>
+        <div class="doc-info">
+          <p class="doc-name">Brand Guidelines</p>
+          <p class="doc-desc">Mission, vision, tagline, values, operating principles, non-negotiables, colour palette, typography. Published to intranet.</p>
+        </div>
+        <div class="doc-status"><a href="brand.html"><span class="badge badge-green">View →</span></a></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">⬡</div>
+        <div class="doc-info">
+          <p class="doc-name">Co-founder Framework</p>
+          <p class="doc-desc">Decision tiers, weekly cadence, boundary protocols, conflict resolution. See team page.</p>
+        </div>
+        <div class="doc-status"><a href="team.html#cofounder"><span class="badge badge-green">View →</span></a></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">🗺</div>
+        <div class="doc-info">
+          <p class="doc-name">Customer Discovery Template</p>
+          <p class="doc-desc">Interview guide for IFA practice managers and compliance officers. 30-minute structured discovery framework. 15–20 interviews needed by end 2026.</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-amber">To create</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">🧪</div>
+        <div class="doc-info">
+          <p class="doc-name">Competitive Analysis</p>
+          <p class="doc-desc">Documented review of Thistle Initiatives, Threesixty Services, Defaqto, and emerging AI compliance tools. Where are they weak? Where is Amaea different?</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-amber">Not started</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">🎯</div>
+        <div class="doc-info">
+          <p class="doc-name">Intelliflo Conference Plan</p>
+          <p class="doc-desc">Target contact list, demo script, 60-second pitch, and specific ask. June/July 2026. The most important near-term event — needs dedicated preparation.</p>
+        </div>
+        <div class="doc-status"><span class="badge badge-red">Urgent</span></div>
+      </div>
+    </div>
+
+    <!-- Note -->
+    <div style="background:var(--plum-tint);border:1px solid var(--plum-border);border-radius:var(--r-lg);padding:20px 24px;">
+      <p style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--plum-soft);margin-bottom:8px;">Note on document status</p>
+      <p style="font-size:0.82rem;color:var(--gray-600);line-height:1.65;">This is a live tracker, not a static list. Documents marked "Not started" or "Pending" represent real gaps that need to be closed before Amaea can launch or raise money. Prioritise in the order shown on the dashboard.</p>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  document.querySelector('.theme-toggle').addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('amaea-theme', next);
+  });
+</script>
+</body>
+</html>

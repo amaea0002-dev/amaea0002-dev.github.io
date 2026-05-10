@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team — Amaea Intranet</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/amaea0002-dev/webpage/main/assets/logo.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="intranet.css"/>
+  <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="https://raw.githubusercontent.com/amaea0002-dev/webpage/main/assets/logo.png" alt="Amaea" onerror="this.style.display='none'"/>
+    <span class="sidebar-logo-text">Amaea</span>
+    <span class="sidebar-logo-badge">Intranet</span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-label">Workspace</div>
+    <a href="index.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="brand.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Brand
+    </a>
+    <a href="team.html" class="sidebar-item active">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Team
+    </a>
+    <a href="docs.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Documents
+    </a>
+    <div class="sidebar-label">External</div>
+    <a href="https://amaea0002-dev.github.io/webpage" class="sidebar-item" target="_blank">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website <span class="ext">↗</span>
+    </a>
+    <a href="https://github.com/amaea0002-dev/prototype" class="sidebar-item" target="_blank">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      Prototype <span class="ext">↗</span>
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">H</div>
+      <div>
+        <div class="sidebar-user-name">Hasna Linsi</div>
+        <div class="sidebar-user-role">CEO &amp; Co-founder</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <span class="bc-root">Amaea</span>
+    <span class="bc-sep">/</span>
+    <span class="bc-current">Team</span>
+  </div>
+  <div class="topbar-right">
+    <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+  </div>
+</header>
+
+<main class="main">
+  <div class="content">
+
+    <div class="page-header">
+      <p class="page-eyebrow">Founding team</p>
+      <h1 class="page-title">Team Directory</h1>
+      <p class="page-sub">Amaea is a two-person founding team. This page covers roles, responsibilities, and how the co-founder structure works.</p>
+    </div>
+
+    <!-- Team cards -->
+    <div class="grid-half" style="margin-bottom:32px;">
+
+      <div class="profile-card">
+        <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:16px;">
+          <div class="profile-avatar">H</div>
+          <div style="padding-top:4px;">
+            <p class="profile-name">Hasna Linsi</p>
+            <p class="profile-role">CEO &amp; Co-founder</p>
+            <span class="badge badge-green">Active</span>
+          </div>
+        </div>
+        <p class="profile-bio">Building FCA regulatory depth at Lucent while laying the groundwork for Amaea's launch. Background in financial planning compliance. Speaker at FP Advance. Interviewed by Robin Powell. Known to the CISI CEO. Attending Intelliflo conference June/July 2026.</p>
+        <p class="profile-owns-label">Owns</p>
+        <div class="profile-own">Vision, narrative, and founding story</div>
+        <div class="profile-own">IFA market: customer discovery, relationships, and sales</div>
+        <div class="profile-own">FCA regulatory domain and compliance product direction</div>
+        <div class="profile-own">Pricing, packaging, and commercial model</div>
+        <div class="profile-own">Brand, marketing, and external communications</div>
+        <div class="profile-own">Fundraising, investor relations, and board</div>
+      </div>
+
+      <div class="profile-card">
+        <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:16px;">
+          <div class="profile-avatar" style="background:linear-gradient(135deg,#1a4080,#4292c6);">M</div>
+          <div style="padding-top:4px;">
+            <p class="profile-name">Milan Sajiv</p>
+            <p class="profile-role">CTO &amp; Co-founder</p>
+            <span class="badge badge-green">Active</span>
+          </div>
+        </div>
+        <p class="profile-bio">Building the technical product: FCA compliance intelligence backend, RAG pipeline, prototype dashboard, and the technical foundations of Amaea. Handles all engineering, infrastructure, and product build decisions. Currently maintaining portfolio at MilanSajiv.github.io.</p>
+        <p class="profile-owns-label">Owns</p>
+        <div class="profile-own">Technical architecture and all engineering decisions</div>
+        <div class="profile-own">Product build: what gets built, in what order, to what standard</div>
+        <div class="profile-own">Infrastructure, security, and data handling</div>
+        <div class="profile-own">AI/ML layer: RAG pipeline, model selection, accuracy</div>
+        <div class="profile-own">Integrations: Intelliflo and future platform partnerships</div>
+        <div class="profile-own">Technical due diligence in any fundraise or exit</div>
+      </div>
+
+    </div>
+
+    <!-- Co-founder structure -->
+    <div id="cofounder">
+      <div class="section-label">Working structure</div>
+      <h2 class="section-title-lg">Co-founder Framework</h2>
+      <p class="section-sub">How Hasna and Milan divide decisions, work together, and keep the personal relationship protected while building a company together.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;">
+      <div class="card">
+        <p class="card-title">Tier 1 — Hasna decides</p>
+        <p style="font-size:0.78rem;color:var(--gray-500);margin-bottom:12px;">Commercial and domain decisions within the CEO mandate</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="badge badge-plum">Client pricing</span>
+          <span class="badge badge-plum">Sales strategy</span>
+          <span class="badge badge-plum">Brand direction</span>
+          <span class="badge badge-plum">Compliance positioning</span>
+          <span class="badge badge-plum">Partnership terms</span>
+          <span class="badge badge-plum">Investor narrative</span>
+        </div>
+      </div>
+      <div class="card">
+        <p class="card-title">Tier 2 — Milan decides</p>
+        <p style="font-size:0.78rem;color:var(--gray-500);margin-bottom:12px;">Technical and product decisions within the CTO mandate</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="badge badge-plum">Tech stack</span>
+          <span class="badge badge-plum">Infrastructure</span>
+          <span class="badge badge-plum">Build vs buy</span>
+          <span class="badge badge-plum">AI model selection</span>
+          <span class="badge badge-plum">Release schedule</span>
+          <span class="badge badge-plum">Security</span>
+        </div>
+      </div>
+      <div class="card" style="border-color:var(--plum-border);">
+        <p class="card-title">Tier 3 — Both must agree</p>
+        <p style="font-size:0.78rem;color:var(--gray-500);margin-bottom:12px;">Decisions that define the company or the relationship</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="badge badge-plum">Equity structure</span>
+          <span class="badge badge-plum">Fundraising terms</span>
+          <span class="badge badge-plum">Major pivots</span>
+          <span class="badge badge-plum">Senior hires</span>
+          <span class="badge badge-plum">Exit decisions</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-half" style="margin-bottom:32px;">
+      <div class="card">
+        <p class="card-title">Weekly cadence</p>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--gray-200);">
+            <span style="font-size:0.7rem;font-weight:700;color:var(--plum-soft);text-transform:uppercase;letter-spacing:0.07em;min-width:72px;padding-top:2px;flex-shrink:0;">Monday</span>
+            <div>
+              <p style="font-size:0.85rem;font-weight:600;color:var(--gray-900);">Co-founder sync (30 min)</p>
+              <p style="font-size:0.76rem;color:var(--gray-500);">What are we each working on? Any blockers?</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--gray-200);">
+            <span style="font-size:0.7rem;font-weight:700;color:var(--plum-soft);text-transform:uppercase;letter-spacing:0.07em;min-width:72px;padding-top:2px;flex-shrink:0;">Thursday</span>
+            <div>
+              <p style="font-size:0.85rem;font-weight:600;color:var(--gray-900);">Product check-in (30 min)</p>
+              <p style="font-size:0.76rem;color:var(--gray-500);">Build progress. Joint decisions needed?</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--gray-200);">
+            <span style="font-size:0.7rem;font-weight:700;color:var(--plum-soft);text-transform:uppercase;letter-spacing:0.07em;min-width:72px;padding-top:2px;flex-shrink:0;">Monthly</span>
+            <div>
+              <p style="font-size:0.85rem;font-weight:600;color:var(--gray-900);">Metrics &amp; direction (1 hr)</p>
+              <p style="font-size:0.76rem;color:var(--gray-500);">KPIs, pipeline, runway, what's changing.</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;padding:12px 0;">
+            <span style="font-size:0.7rem;font-weight:700;color:var(--plum-soft);text-transform:uppercase;letter-spacing:0.07em;min-width:72px;padding-top:2px;flex-shrink:0;">Annually</span>
+            <div>
+              <p style="font-size:0.85rem;font-weight:600;color:var(--gray-900);">Co-founder reset</p>
+              <p style="font-size:0.76rem;color:var(--gray-500);">Full review: roles, equity, what would change.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <p class="card-title">Boundaries</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="padding:12px;background:var(--bg);border:1px solid var(--gray-200);border-radius:var(--r-md);">
+            <p style="font-size:0.82rem;font-weight:700;color:var(--gray-900);margin-bottom:4px;">Work has a container</p>
+            <p style="font-size:0.76rem;color:var(--gray-600);line-height:1.55;">Amaea conversations stay in working hours. Not at dinner, not in bed. The container makes the rest of life safe.</p>
+          </div>
+          <div style="padding:12px;background:var(--bg);border:1px solid var(--gray-200);border-radius:var(--r-md);">
+            <p style="font-size:0.82rem;font-weight:700;color:var(--gray-900);margin-bottom:4px;">The co-founder hat is removable</p>
+            <p style="font-size:0.76rem;color:var(--gray-600);line-height:1.55;">Milan is the CTO at work. He is the partner at home. If it's unclear which conversation this is — ask.</p>
+          </div>
+          <div style="padding:12px;background:var(--bg);border:1px solid var(--gray-200);border-radius:var(--r-md);">
+            <p style="font-size:0.82rem;font-weight:700;color:var(--gray-900);margin-bottom:4px;">Monthly founder date</p>
+            <p style="font-size:0.76rem;color:var(--gray-600);line-height:1.55;">One evening a month for the future — not operational, not problem-solving. Why are we doing this?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  document.querySelector('.theme-toggle').addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('amaea-theme', next);
+  });
+</script>
+</body>
+</html>

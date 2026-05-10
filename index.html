@@ -3,566 +3,284 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Amaea — Brand Guidelines</title>
-  <meta name="description" content="Amaea brand guidelines — mission, vision, values, operating principles, and non-negotiables."/>
+  <title>Dashboard — Amaea Intranet</title>
   <link rel="icon" href="https://raw.githubusercontent.com/amaea0002-dev/webpage/main/assets/logo.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="intranet.css"/>
   <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
-  <style>
-    /* ── Design tokens (matching amaea.io) ──────────────────── */
-    :root {
-      --plum:        #40243F;
-      --plum-dark:   #2D1A2C;
-      --plum-mid:    #5A3558;
-      --plum-soft:   #8B6189;
-      --plum-tint:   rgba(64,36,63,0.06);
-      --plum-border: rgba(64,36,63,0.14);
-
-      --white:    #FFFFFF;
-      --bg:       #FAFAF9;
-      --gray-50:  #F3F2F6;
-      --gray-100: #ECEAEF;
-      --gray-200: #D8D4E0;
-      --gray-300: #B8B2C4;
-      --gray-500: #9088A3;
-      --gray-600: #47405A;
-      --gray-900: #17131E;
-
-      --green:  #10B981;
-      --amber:  #F59E0B;
-      --red:    #EF4444;
-      --red-tint:   rgba(239,68,68,0.06);
-      --red-border: rgba(239,68,68,0.18);
-
-      --font: 'Inter', -apple-system, "SF Pro Display", "Helvetica Neue", sans-serif;
-      --nav-h: 68px;
-      --max-w: 1100px;
-      --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-      --sh-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-      --sh-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
-      --sh-lg: 0 8px 40px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05);
-
-      --r-sm: 8px;
-      --r-md: 12px;
-      --r-lg: 16px;
-      --r-xl: 24px;
-      --r-pill: 999px;
-      --nav-bg: rgba(255,255,255,0.88);
-    }
-
-    /* ── Dark theme ───────────────────────────────────────────── */
-    [data-theme="dark"] {
-      --plum:        #a868a6;
-      --plum-dark:   #7a4878;
-      --plum-mid:    #c084be;
-      --plum-soft:   #c8a4c6;
-      --plum-tint:   rgba(168,104,166,0.12);
-      --plum-border: rgba(168,104,166,0.22);
-      --white:    #190d18;
-      --bg:       #0e080e;
-      --gray-50:  #201220;
-      --gray-100: #291728;
-      --gray-200: rgba(255,255,255,0.08);
-      --gray-300: rgba(255,255,255,0.16);
-      --gray-500: #a094aa;
-      --gray-600: #c8b8cc;
-      --gray-900: #f2ecf4;
-      --red-tint:   rgba(239,68,68,0.09);
-      --red-border: rgba(239,68,68,0.22);
-      --sh-sm: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
-      --sh-md: 0 4px 16px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
-      --nav-bg: rgba(14,8,14,0.92);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--gray-900);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-      transition: background-color 0.25s ease, color 0.25s ease;
-    }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
-
-    /* ── Nav ──────────────────────────────────────────────────── */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      height: var(--nav-h);
-      background: var(--nav-bg);
-      border-bottom: 1px solid var(--gray-200);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      display: flex; align-items: center;
-    }
-    .nav-inner {
-      width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 28px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
-    }
-    .nav-logo img { height: 26px; width: auto; }
-    .nav-logo-text {
-      font-size: 1.1rem; font-weight: 800; letter-spacing: -0.04em; color: var(--plum);
-    }
-    .nav-badge {
-      font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.1em; color: var(--plum-soft);
-      background: var(--plum-tint); border: 1px solid var(--plum-border);
-      padding: 4px 12px; border-radius: var(--r-pill);
-    }
-    .nav-right { display: flex; align-items: center; }
-    .theme-toggle {
-      position: relative; width: 40px; height: 22px;
-      border-radius: 11px; background: var(--gray-200);
-      cursor: pointer; border: none; flex-shrink: 0;
-      transition: background 0.3s ease;
-    }
-    .theme-toggle::before {
-      content: ''; position: absolute; top: 2px; left: 2px;
-      width: 18px; height: 18px; border-radius: 50%;
-      background: var(--gray-500);
-      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.3s ease;
-    }
-    [data-theme="dark"] .theme-toggle { background: var(--plum); }
-    [data-theme="dark"] .theme-toggle::before { transform: translateX(18px); background: #fff; }
-
-    /* ── Layout ───────────────────────────────────────────────── */
-    .page-top { padding-top: var(--nav-h); }
-    .container { width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
-    section { padding: 88px 0; }
-
-    /* ── Section headers ──────────────────────────────────────── */
-    .section-label {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--plum-soft);
-      background: var(--plum-tint); border: 1px solid var(--plum-border);
-      padding: 5px 12px; border-radius: var(--r-pill); margin-bottom: 18px;
-    }
-    .section-title {
-      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
-      font-weight: 800; letter-spacing: -0.04em; color: var(--gray-900);
-      line-height: 1.12; margin-bottom: 14px;
-    }
-    .section-sub {
-      font-size: 1rem; color: var(--gray-600); line-height: 1.7;
-      max-width: 540px; margin-bottom: 52px;
-    }
-
-    /* ── Hero ─────────────────────────────────────────────────── */
-    .hero {
-      padding: 100px 0 88px;
-      background: linear-gradient(170deg, var(--gray-50) 0%, var(--white) 100%);
-      text-align: center; position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; top: -180px; left: 50%; transform: translateX(-50%);
-      width: 900px; height: 900px;
-      background: radial-gradient(circle, rgba(64,36,63,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--plum-soft);
-      background: var(--plum-tint); border: 1px solid var(--plum-border);
-      padding: 6px 16px; border-radius: var(--r-pill); margin-bottom: 28px;
-    }
-    .hero-badge-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; }
-    .hero h1 {
-      font-size: clamp(2.6rem, 5.5vw, 4rem);
-      font-weight: 800; letter-spacing: -0.05em; color: var(--gray-900);
-      line-height: 1.06; max-width: 720px; margin: 0 auto 22px;
-    }
-    .hero h1 em { font-style: normal; color: var(--plum); }
-    .hero-sub {
-      font-size: 1.1rem; color: var(--gray-600); line-height: 1.7;
-      max-width: 540px; margin: 0 auto 0;
-    }
-
-    /* ── Divider ──────────────────────────────────────────────── */
-    hr { border: none; border-top: 1px solid var(--gray-200); }
-
-    /* ── Mission + Vision + Tagline ───────────────────────────── */
-    .mv-row {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-      margin-bottom: 20px;
-    }
-    .mv-card {
-      background: var(--white); border: 1px solid var(--gray-200);
-      border-radius: var(--r-xl); padding: 36px; position: relative;
-      box-shadow: var(--sh-sm);
-    }
-    .mv-card.featured {
-      border-color: var(--plum-border); background: var(--plum-tint);
-    }
-    .mv-label {
-      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.12em; color: var(--plum-soft); margin-bottom: 14px;
-    }
-    .mv-text {
-      font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em;
-      color: var(--gray-900); line-height: 1.35;
-    }
-    .mv-text em { font-style: normal; color: var(--plum); }
-    .mv-support {
-      font-size: 0.85rem; color: var(--gray-500); margin-top: 10px; line-height: 1.6;
-    }
-    .tagline-card {
-      background: var(--plum); border-radius: var(--r-xl); padding: 44px;
-      text-align: center; box-shadow: 0 8px 32px rgba(64,36,63,0.28);
-    }
-    .tagline-label {
-      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.14em; color: rgba(255,255,255,0.5); margin-bottom: 14px;
-    }
-    .tagline-text {
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800;
-      letter-spacing: -0.04em; color: #fff; line-height: 1.15;
-    }
-
-    /* ── Values ───────────────────────────────────────────────── */
-    .values-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
-    }
-    .value-card {
-      background: var(--white); border: 1px solid var(--gray-200);
-      border-radius: var(--r-lg); padding: 28px; box-shadow: var(--sh-sm);
-      transition: border-color 0.18s var(--ease), box-shadow 0.18s var(--ease), transform 0.18s var(--ease);
-    }
-    .value-card:hover {
-      border-color: var(--plum-border);
-      box-shadow: var(--sh-md);
-      transform: translateY(-2px);
-    }
-    .value-icon {
-      width: 42px; height: 42px; border-radius: 10px;
-      background: var(--plum-tint); border: 1px solid var(--plum-border);
-      color: var(--plum); font-size: 1.1rem; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 18px;
-    }
-    .value-name {
-      font-size: 1rem; font-weight: 700; letter-spacing: -0.02em;
-      color: var(--gray-900); margin-bottom: 8px;
-    }
-    .value-desc { font-size: 0.84rem; color: var(--gray-600); line-height: 1.65; }
-
-    /* ── Principles ───────────────────────────────────────────── */
-    .principles-list { border-top: 1px solid var(--gray-200); }
-    .principle-row {
-      display: flex; gap: 32px; align-items: flex-start;
-      padding: 26px 0; border-bottom: 1px solid var(--gray-200);
-      transition: background 0.14s;
-    }
-    .principle-row:hover { background: var(--gray-50); margin: 0 -16px; padding-left: 16px; padding-right: 16px; border-radius: var(--r-md); border-color: transparent; }
-    .principle-num {
-      font-size: 0.72rem; font-weight: 700;
-      color: var(--plum-soft); min-width: 28px; padding-top: 3px;
-      letter-spacing: 0.04em; font-variant-numeric: tabular-nums;
-    }
-    .principle-body { flex: 1; }
-    .principle-title {
-      font-size: 1rem; font-weight: 700; letter-spacing: -0.015em;
-      color: var(--gray-900); margin-bottom: 6px;
-    }
-    .principle-desc { font-size: 0.85rem; color: var(--gray-600); line-height: 1.65; }
-
-    /* ── Non-Negotiables ──────────────────────────────────────── */
-    .nono-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-    }
-    .nono-card {
-      background: var(--white); border: 1px solid var(--red-border);
-      border-left: 3px solid var(--red);
-      border-radius: var(--r-lg); padding: 26px;
-      box-shadow: var(--sh-sm);
-    }
-    .nono-no {
-      font-size: 0.65rem; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 0.14em; color: var(--red); margin-bottom: 8px;
-    }
-    .nono-title {
-      font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em;
-      color: var(--gray-900); margin-bottom: 8px;
-    }
-    .nono-desc { font-size: 0.82rem; color: var(--gray-600); line-height: 1.62; }
-
-    /* ── Footer ───────────────────────────────────────────────── */
-    footer {
-      padding: 36px 0; border-top: 1px solid var(--gray-200);
-      background: var(--white);
-    }
-    .footer-inner {
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 12px;
-    }
-    .footer-left { display: flex; align-items: center; gap: 10px; }
-    .footer-left img { height: 20px; }
-    .footer-left span { font-size: 0.9rem; font-weight: 700; color: var(--plum); letter-spacing: -0.03em; }
-    .footer-meta { font-size: 0.75rem; color: var(--gray-500); }
-
-    /* ── Responsive ───────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      .mv-row, .nono-grid { grid-template-columns: 1fr; }
-      .values-grid { grid-template-columns: 1fr; }
-      .container { padding: 0 20px; }
-      section { padding: 64px 0; }
-      .tagline-card { padding: 32px 24px; }
-    }
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 2.4rem; }
-      .principle-row:hover { margin: 0; padding-left: 0; padding-right: 0; }
-    }
-  </style>
 </head>
 <body>
 
-<!-- ── Nav ── -->
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="nav-logo">
-      <img src="https://raw.githubusercontent.com/amaea0002-dev/webpage/main/assets/logo.png" alt="Amaea" onerror="this.style.display='none'"/>
-      <span class="nav-logo-text">Amaea</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <span class="nav-badge">Brand Guidelines</span>
-      <div class="nav-right">
-        <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="https://raw.githubusercontent.com/amaea0002-dev/webpage/main/assets/logo.png" alt="Amaea" onerror="this.style.display='none'"/>
+    <span class="sidebar-logo-text">Amaea</span>
+    <span class="sidebar-logo-badge">Intranet</span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-label">Workspace</div>
+    <a href="index.html" class="sidebar-item active">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="brand.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Brand
+    </a>
+    <a href="team.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Team
+    </a>
+    <a href="docs.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Documents
+    </a>
+    <div class="sidebar-label">External</div>
+    <a href="https://amaea0002-dev.github.io/webpage" class="sidebar-item" target="_blank">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website <span class="ext">↗</span>
+    </a>
+    <a href="https://github.com/amaea0002-dev/prototype" class="sidebar-item" target="_blank">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      Prototype <span class="ext">↗</span>
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">H</div>
+      <div>
+        <div class="sidebar-user-name">Hasna Linsi</div>
+        <div class="sidebar-user-role">CEO &amp; Co-founder</div>
       </div>
     </div>
   </div>
-</nav>
+</aside>
 
-<div class="page-top">
-
-<!-- ── Hero ── -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      Internal Brand Document
-    </div>
-    <h1>Stay compliant.<br><em>Stay confident.</em></h1>
-    <p class="hero-sub">
-      Amaea is the compliance intelligence platform for FCA-regulated firms.
-      This document defines who we are, what we believe, and how we work.
-    </p>
+<header class="topbar">
+  <div class="topbar-left">
+    <span class="bc-root">Amaea</span>
+    <span class="bc-sep">/</span>
+    <span class="bc-current">Dashboard</span>
   </div>
-</section>
-
-<hr/>
-
-<!-- ── Mission, Vision, Tagline ── -->
-<section>
-  <div class="container">
-    <span class="section-label">The foundation</span>
-    <h2 class="section-title">What we stand for</h2>
-    <p class="section-sub">Everything we build, every decision we make, and every relationship we form is rooted in these statements.</p>
-
-    <div class="mv-row">
-      <div class="mv-card featured">
-        <p class="mv-label">Mission</p>
-        <p class="mv-text">To remove chaos from compliance.</p>
-        <p class="mv-support">Our reason for existing. If a decision doesn't help remove chaos from compliance, it's not our decision to make.</p>
-      </div>
-      <div class="mv-card">
-        <p class="mv-label">Vision</p>
-        <p class="mv-text">To be the platform that powers compliance for <em>FCA regulated industries.</em></p>
-        <p class="mv-support">Starting with UK independent financial advisers. Expanding to every FCA-regulated sector that follows.</p>
-      </div>
-    </div>
-
-    <div class="tagline-card">
-      <p class="tagline-label">Brand tagline</p>
-      <p class="tagline-text">Stay compliant. Stay confident.</p>
-    </div>
+  <div class="topbar-right">
+    <span class="topbar-date" id="topbar-date"></span>
+    <button class="theme-toggle" aria-label="Toggle dark mode"></button>
   </div>
-</section>
+</header>
 
-<hr/>
+<main class="main">
+  <div class="content">
 
-<!-- ── Values ── -->
-<section>
-  <div class="container">
-    <span class="section-label">What we believe</span>
-    <h2 class="section-title">Values</h2>
-    <p class="section-sub">These are the principles that shape how we work, how we build, and how we treat each other — every day, not just when it's easy.</p>
-
-    <div class="values-grid">
-
-      <div class="value-card">
-        <div class="value-icon">◻</div>
-        <p class="value-name">Simplicity</p>
-        <p class="value-desc">We make complex things clear — in our product and in how we work. Clarity is not a nice-to-have. It is our competitive advantage.</p>
-      </div>
-
-      <div class="value-card">
-        <div class="value-icon">◆</div>
-        <p class="value-name">Integrity</p>
-        <p class="value-desc">Trust is the foundation of compliance and of our relationships. We do what we say, and we say what we mean.</p>
-      </div>
-
-      <div class="value-card">
-        <div class="value-icon">◎</div>
-        <p class="value-name">Build for People</p>
-        <p class="value-desc">We build technology that genuinely helps people do their jobs better. Real problems, real solutions — not features for a pitch deck.</p>
-      </div>
-
-      <div class="value-card">
-        <div class="value-icon">△</div>
-        <p class="value-name">Respect</p>
-        <p class="value-desc">We treat each other with professionalism, fairness, and trust — especially when we disagree. Respect is not optional.</p>
-      </div>
-
-      <div class="value-card">
-        <div class="value-icon">↗</div>
-        <p class="value-name">Learn and Improve</p>
-        <p class="value-desc">We continuously develop ourselves, our product, and our thinking. Standing still in compliance is falling behind.</p>
-      </div>
-
+    <div class="page-header">
+      <p class="page-eyebrow">Good morning</p>
+      <h1 class="page-title">Welcome back, Hasna.</h1>
+      <p class="page-sub">Amaea is in pre-launch validation phase. Launch target: September 2028.</p>
     </div>
-  </div>
-</section>
 
-<hr/>
+    <!-- Stats -->
+    <div class="stats-strip">
+      <div class="stat-card">
+        <div class="stat-label">Phase</div>
+        <div class="stat-value" style="font-size:1.2rem;padding-top:4px;">Pre-launch</div>
+        <div class="stat-sub">Validation stage</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Team</div>
+        <div class="stat-value">2</div>
+        <div class="stat-sub">Hasna &amp; Milan</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Launch target</div>
+        <div class="stat-value" style="font-size:1.3rem;padding-top:4px;">Sept 2028</div>
+        <div class="stat-sub">~28 months away</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Beta clients</div>
+        <div class="stat-value">0</div>
+        <div class="stat-sub">Target: 2–3 by 2027</div>
+      </div>
+    </div>
 
-<!-- ── Operating Principles ── -->
-<section>
-  <div class="container">
-    <span class="section-label">How we work</span>
-    <h2 class="section-title">Operating Principles</h2>
-    <p class="section-sub">These are the standards we hold ourselves to. Not aspirations — behaviours.</p>
+    <!-- Main grid -->
+    <div class="grid-2">
 
-    <div class="principles-list">
+      <!-- Left: updates -->
+      <div style="display:flex;flex-direction:column;gap:18px;">
 
-      <div class="principle-row">
-        <p class="principle-num">01</p>
-        <div class="principle-body">
-          <p class="principle-title">Work Flexibly, Deliver Consistently</p>
-          <p class="principle-desc">We trust people to manage their time and work in ways that suit them. What matters is delivering high-quality work and meeting commitments. Flexibility is earned through consistency, not assumed.</p>
+        <div class="card">
+          <p class="card-title">Latest updates</p>
+
+          <div class="update-item">
+            <div class="update-dot urgent"></div>
+            <div>
+              <p class="update-title">Intelliflo Conference — prepare now</p>
+              <p class="update-desc">June/July 2026. Most important near-term event. Need a working demo, target contact list, and a clear Amaea pitch ready before you arrive.</p>
+              <p class="update-meta">🔴 Urgent &nbsp;·&nbsp; June/July 2026</p>
+            </div>
+          </div>
+
+          <div class="update-item">
+            <div class="update-dot active"></div>
+            <div>
+              <p class="update-title">Customer discovery — not started</p>
+              <p class="update-desc">Target 15–20 interviews with IFA practice managers and compliance officers. The Intelliflo conference is an opportunity to run 3–4 in person.</p>
+              <p class="update-meta">🟡 In progress &nbsp;·&nbsp; Target: end 2026</p>
+            </div>
+          </div>
+
+          <div class="update-item">
+            <div class="update-dot done"></div>
+            <div>
+              <p class="update-title">Brand identity published</p>
+              <p class="update-desc">Mission, vision, tagline, values, operating principles, and non-negotiables all defined and live on the intranet.</p>
+              <p class="update-meta">✅ Done &nbsp;·&nbsp; May 2026</p>
+            </div>
+          </div>
+
+          <div class="update-item">
+            <div class="update-dot done"></div>
+            <div>
+              <p class="update-title">FCA knowledge base ingested</p>
+              <p class="update-desc">173+ FCA document chunks (Consumer Duty, COBS, SYSC) ingested into the compliance intelligence backend via RAG pipeline.</p>
+              <p class="update-meta">✅ Done &nbsp;·&nbsp; May 2026</p>
+            </div>
+          </div>
+
+          <div class="update-item">
+            <div class="update-dot active"></div>
+            <div>
+              <p class="update-title">Financial model — not built</p>
+              <p class="update-desc">No ARR projections, CAC, LTV, or runway model exists yet. Required before any investor conversation or pricing decision can be made with confidence.</p>
+              <p class="update-meta">🟡 Action required &nbsp;·&nbsp; Q3 2026</p>
+            </div>
+          </div>
+
         </div>
-      </div>
 
-      <div class="principle-row">
-        <p class="principle-num">02</p>
-        <div class="principle-body">
-          <p class="principle-title">Decisions Backed by Evidence</p>
-          <p class="principle-desc">Important decisions should be supported by data, reasoning, and evidence — not hierarchy or assumptions. We question before we accept. We challenge before we commit.</p>
+        <div class="card">
+          <p class="card-title">Quick links</p>
+          <div class="quick-links">
+            <a href="brand.html" class="quick-link">◆ Brand Guidelines</a>
+            <a href="team.html" class="quick-link">⬡ Team Directory</a>
+            <a href="docs.html" class="quick-link">▤ Documents</a>
+            <a href="team.html#cofounder" class="quick-link">🤝 Co-founder Framework</a>
+            <a href="https://amaea0002-dev.github.io/webpage" class="quick-link" target="_blank">↗ Amaea Website</a>
+            <a href="https://github.com/amaea0002-dev/prototype" class="quick-link" target="_blank">↗ Prototype</a>
+          </div>
         </div>
+
       </div>
 
-      <div class="principle-row">
-        <p class="principle-num">03</p>
-        <div class="principle-body">
-          <p class="principle-title">Sustainable Performance</p>
-          <p class="principle-desc">Great work should not require burnout. We aim for sustainable pace and healthy workloads. We are building for the long game — and that requires people who are well, not worn out.</p>
+      <!-- Right: dates + status -->
+      <div style="display:flex;flex-direction:column;gap:18px;">
+
+        <div class="card">
+          <p class="card-title">Key dates</p>
+
+          <div class="date-item">
+            <span class="date-badge next">Next</span>
+            <div>
+              <div class="date-label">Intelliflo Conference</div>
+              <div class="date-when">June / July 2026</div>
+            </div>
+          </div>
+          <div class="date-item">
+            <span class="date-badge soon">Q3 2026</span>
+            <div>
+              <div class="date-label">Financial model built</div>
+              <div class="date-when">ARR, CAC, LTV, runway</div>
+            </div>
+          </div>
+          <div class="date-item">
+            <span class="date-badge soon">End 2026</span>
+            <div>
+              <div class="date-label">15–20 discovery interviews</div>
+              <div class="date-when">IFA practice managers &amp; compliance officers</div>
+            </div>
+          </div>
+          <div class="date-item">
+            <span class="date-badge future">2027</span>
+            <div>
+              <div class="date-label">First beta clients</div>
+              <div class="date-when">Target 2–3 IFA firms committed</div>
+            </div>
+          </div>
+          <div class="date-item">
+            <span class="date-badge future">Mid 2027</span>
+            <div>
+              <div class="date-label">Legal &amp; IP foundations</div>
+              <div class="date-when">Ltd company, co-founder agreement, IP review</div>
+            </div>
+          </div>
+          <div class="date-item">
+            <span class="date-badge future">Sept 2028</span>
+            <div>
+              <div class="date-label">Amaea Launch</div>
+              <div class="date-when">Target: 10–20 paying IFA firms in 90 days</div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="principle-row">
-        <p class="principle-num">04</p>
-        <div class="principle-body">
-          <p class="principle-title">Share Knowledge</p>
-          <p class="principle-desc">We work as a team. Information should be accessible and shared so everyone can learn, contribute, and make better decisions. Knowledge hoarding slows us all down.</p>
+        <div class="card">
+          <p class="card-title">Checklist status</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+              <span style="color:var(--gray-600);">Brand identity</span>
+              <span class="badge badge-green">Done</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+              <span style="color:var(--gray-600);">Website live</span>
+              <span class="badge badge-green">Done</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+              <span style="color:var(--gray-600);">Prototype built</span>
+              <span class="badge badge-green">Done</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+              <span style="color:var(--gray-600);">FCA knowledge base</span>
+              <span class="badge badge-green">Done</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+              <span style="color:var(--gray-600);">Customer discovery</span>
+              <span class="badge badge-amber">Not started</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+              <span style="color:var(--gray-600);">Financial model</span>
+              <span class="badge badge-amber">Not started</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+              <span style="color:var(--gray-600);">FCA regulatory position</span>
+              <span class="badge badge-red">Open question</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+              <span style="color:var(--gray-600);">Ltd company formed</span>
+              <span class="badge badge-gray">Pending</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+              <span style="color:var(--gray-600);">Beta clients</span>
+              <span class="badge badge-gray">2027 target</span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="principle-row">
-        <p class="principle-num">05</p>
-        <div class="principle-body">
-          <p class="principle-title">Develop People</p>
-          <p class="principle-desc">We invest in growth through feedback, learning, and clear career development. We want the people who work here to be better because they were here.</p>
-        </div>
       </div>
-
-      <div class="principle-row">
-        <p class="principle-num">06</p>
-        <div class="principle-body">
-          <p class="principle-title">Solve Real Problems</p>
-          <p class="principle-desc">Our focus is always on solving meaningful problems for the people who rely on our product. We build what matters — not what is easy to demo.</p>
-        </div>
-      </div>
-
     </div>
+
   </div>
-</section>
-
-<hr/>
-
-<!-- ── Non-Negotiables ── -->
-<section style="padding-bottom: 104px;">
-  <div class="container">
-    <span class="section-label">The lines</span>
-    <h2 class="section-title">Non-Negotiables</h2>
-    <p class="section-sub">These are not guidelines. They are the conditions under which Amaea operates. All of them. Always.</p>
-
-    <div class="nono-grid">
-
-      <div class="nono-card">
-        <p class="nono-no">No.</p>
-        <p class="nono-title">Politics</p>
-        <p class="nono-desc">Decisions are made based on evidence and what is best for the company and our users — not hierarchy, ego, or internal politics. We leave that at the door.</p>
-      </div>
-
-      <div class="nono-card">
-        <p class="nono-no">No.</p>
-        <p class="nono-title">Disrespect</p>
-        <p class="nono-desc">Professionalism and fairness are expected at all times. We treat each other with respect — especially when we disagree. This is non-negotiable.</p>
-      </div>
-
-      <div class="nono-card">
-        <p class="nono-no">No.</p>
-        <p class="nono-title">Avoiding Responsibility</p>
-        <p class="nono-desc">If something goes wrong, we address it and fix it. Blame and defensiveness are not productive. Ownership is. We do not look for someone else to point at.</p>
-      </div>
-
-      <div class="nono-card">
-        <p class="nono-no">No.</p>
-        <p class="nono-title">Burnout Culture</p>
-        <p class="nono-desc">Sustainable performance matters. Overtime should not be the default way work gets done. We protect each other's capacity to perform over time, not just this week.</p>
-      </div>
-
-      <div class="nono-card">
-        <p class="nono-no">No.</p>
-        <p class="nono-title">Silos</p>
-        <p class="nono-desc">Knowledge should be shared. Collaboration is how we build better systems. Working in isolation helps no one and weakens the whole.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-</div><!-- end .page-top -->
-
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-left">
-        <img src="https://raw.githubusercontent.com/amaea0002-dev/webpage/main/assets/logo.png" alt="Amaea" onerror="this.style.display='none'"/>
-        <span>Amaea</span>
-      </div>
-      <p class="footer-meta">Internal Brand Guidelines &nbsp;·&nbsp; FCA Compliance Intelligence &nbsp;·&nbsp; amaea.io</p>
-    </div>
-  </div>
-</footer>
+</main>
 
 <script>
-  const toggle = document.querySelector('.theme-toggle');
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('amaea-theme', next);
-    });
-  }
+  // Date in topbar
+  const d = new Date();
+  document.getElementById('topbar-date').textContent = d.toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'long', year:'numeric' });
+
+  // Theme toggle
+  document.querySelector('.theme-toggle').addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('amaea-theme', next);
+  });
 </script>
 </body>
 </html>
