@@ -14,10 +14,29 @@
 
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar">
-  <div class="sidebar-logo">
+  <div class="sidebar-logo" id="sidebarLogoBtn">
     <img src="logo-white.png" alt="Amaea"/>
     <span class="sidebar-logo-text">Amaea</span>
     <span class="sidebar-logo-badge">Intranet</span>
+    <svg class="sidebar-logo-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="user-select-panel" id="userSelectPanel">
+    <button class="user-select-btn" data-user="hasna">
+      <div class="usa" style="background:linear-gradient(135deg,#4C2C4B,#8B6189);">H</div>
+      <div class="user-select-info">
+        <div class="user-select-name">Hasna Sahul Hameed</div>
+        <div class="user-select-role">CEO &amp; Co-founder</div>
+      </div>
+      <span class="user-select-tick">✓</span>
+    </button>
+    <button class="user-select-btn" data-user="milan">
+      <div class="usa" style="background:linear-gradient(135deg,#1a4080,#4292c6);">M</div>
+      <div class="user-select-info">
+        <div class="user-select-name">Milan Sajiv</div>
+        <div class="user-select-role">CTO &amp; Co-founder</div>
+      </div>
+      <span class="user-select-tick" style="opacity:0;">✓</span>
+    </button>
   </div>
   <nav class="sidebar-nav">
     <div class="sidebar-label">Workspace</div>
@@ -278,7 +297,25 @@ function switchUser(id) {
   const n = document.getElementById('sidebarUserName'); if (n) n.textContent = u.name;
   const r = document.getElementById('sidebarUserRole'); if (r) r.textContent = u.role;
   document.querySelectorAll('.sidebar-user-option').forEach(o => o.classList.toggle('active', o.dataset.user === id));
+  document.querySelectorAll('.user-select-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.user === id);
+    const tick = btn.querySelector('.user-select-tick');
+    if (tick) tick.style.opacity = btn.dataset.user === id ? '1' : '0';
+  });
   localStorage.setItem('amaea-user', id);
+}
+const _logoBtn = document.getElementById('sidebarLogoBtn');
+const _userPanel = document.getElementById('userSelectPanel');
+if (_logoBtn && _userPanel) {
+  _logoBtn.addEventListener('click', () => {
+    const open = _userPanel.classList.toggle('open');
+    _logoBtn.classList.toggle('panel-open', open);
+  });
+  _userPanel.querySelectorAll('.user-select-btn').forEach(btn => btn.addEventListener('click', () => {
+    switchUser(btn.dataset.user);
+    _userPanel.classList.remove('open');
+    _logoBtn.classList.remove('panel-open');
+  }));
 }
 document.querySelectorAll('.sidebar-user-option').forEach(btn => btn.addEventListener('click', () => switchUser(btn.dataset.user)));
 switchUser(localStorage.getItem('amaea-user') || 'hasna');

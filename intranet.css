@@ -76,7 +76,46 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: flex; align-items: center; gap: 9px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.15s;
 }
+.sidebar-logo:hover { background: rgba(255,255,255,0.05); }
+.sidebar-logo-chevron {
+  margin-left: auto; flex-shrink: 0;
+  color: rgba(255,255,255,0.35);
+  transition: transform 0.22s var(--ease);
+}
+.sidebar-logo.panel-open .sidebar-logo-chevron { transform: rotate(180deg); }
+.sidebar-logo.panel-open { background: rgba(255,255,255,0.06); border-bottom-color: transparent; }
+
+/* ── User select panel ── */
+.user-select-panel {
+  max-height: 0; opacity: 0; overflow: hidden;
+  background: rgba(0,0,0,0.18);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: max-height 0.28s var(--ease), opacity 0.2s ease;
+  flex-shrink: 0;
+}
+.user-select-panel.open { max-height: 160px; opacity: 1; }
+.user-select-btn {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 11px 16px;
+  background: none; border: none; cursor: pointer;
+  transition: background 0.14s; font-family: inherit;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.user-select-btn:last-child { border-bottom: none; }
+.user-select-btn:hover { background: rgba(255,255,255,0.07); }
+.user-select-btn.active { background: rgba(255,255,255,0.11); }
+.usa {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 800; color: #fff; flex-shrink: 0;
+}
+.user-select-info { flex: 1; text-align: left; }
+.user-select-name { font-size: 0.78rem; font-weight: 700; color: #fff; line-height: 1.3; }
+.user-select-role { font-size: 0.6rem; color: rgba(255,255,255,0.45); }
+.user-select-tick { margin-left: auto; font-size: 0.72rem; color: rgba(255,255,255,0.65); flex-shrink: 0; }
 .sidebar-logo img { height: 22px; filter: brightness(0) invert(1); opacity: 0.9; }
 .sidebar-logo-text { font-size: 1rem; font-weight: 800; letter-spacing: -0.04em; color: #fff; }
 .sidebar-logo-badge {
