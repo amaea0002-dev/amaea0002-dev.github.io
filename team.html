@@ -229,15 +229,29 @@
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('amaea-theme', next);
   });
-  // Mobile sidebar
+  // Sidebar collapse/expand (desktop + mobile)
   const menuBtn = document.getElementById('menuBtn');
   const sidebarEl = document.querySelector('.sidebar');
   const overlayEl = document.getElementById('sidebarOverlay');
   if (menuBtn && sidebarEl && overlayEl) {
-    const close = () => { sidebarEl.classList.remove('open'); overlayEl.classList.remove('open'); };
-    menuBtn.addEventListener('click', () => { sidebarEl.classList.toggle('open'); overlayEl.classList.toggle('open'); });
-    overlayEl.addEventListener('click', close);
-    sidebarEl.querySelectorAll('a.sidebar-item').forEach(a => a.addEventListener('click', close));
+    // Restore desktop collapsed state from localStorage
+    if (window.innerWidth > 768 && localStorage.getItem('amaea-sidebar') === 'collapsed') {
+      document.body.classList.add('sidebar-collapsed');
+    }
+    const closeMobile = () => { sidebarEl.classList.remove('open'); overlayEl.classList.remove('open'); };
+    menuBtn.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        const open = sidebarEl.classList.toggle('open');
+        overlayEl.classList.toggle('open', open);
+      } else {
+        const collapsed = document.body.classList.toggle('sidebar-collapsed');
+        localStorage.setItem('amaea-sidebar', collapsed ? 'collapsed' : 'expanded');
+      }
+    });
+    overlayEl.addEventListener('click', closeMobile);
+    sidebarEl.querySelectorAll('a.sidebar-item').forEach(a => a.addEventListener('click', () => {
+      if (window.innerWidth <= 768) closeMobile();
+    }));
   }
 </script>
 <script>

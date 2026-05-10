@@ -340,9 +340,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .swatch-name { font-size: 0.64rem; font-weight: 600; color: var(--gray-600); }
 .swatch-hex { font-size: 0.58rem; color: var(--gray-500); font-family: monospace; }
 
-/* ── Mobile hamburger ── */
+/* ── Sidebar collapse (desktop + mobile) ── */
+.sidebar { transition: transform 0.25s var(--ease); }
+.main    { transition: margin-left 0.25s var(--ease); }
+.topbar  { transition: left 0.25s var(--ease), background 0.25s ease; }
+
+/* Desktop collapsed state */
+body.sidebar-collapsed .sidebar  { transform: translateX(-100%); box-shadow: none; }
+body.sidebar-collapsed .main     { margin-left: 0; }
+body.sidebar-collapsed .topbar   { left: 0; }
+
+/* ── Hamburger (visible on all sizes) ── */
 .topbar-hamburger {
-  display: none;
+  display: flex;
   flex-direction: column; gap: 5px;
   cursor: pointer; padding: 5px;
   border-radius: 6px; border: none; background: none;
@@ -363,7 +373,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .topbar-hamburger { display: flex; }
   .sidebar {
     transform: translateX(-100%);
     transition: transform 0.25s var(--ease);
