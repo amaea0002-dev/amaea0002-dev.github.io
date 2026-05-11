@@ -251,6 +251,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ── Grid helpers ── */
 .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
 .grid-half { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.ecosystem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.cf-tier-grid   { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+
+/* ── Card sub-label ── */
+.card-sub { font-size: 0.82rem; color: var(--gray-500); line-height: 1.5; }
 
 /* ── Update items ── */
 .update-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--gray-200); align-items: flex-start; }
@@ -467,8 +472,11 @@ body.sidebar-collapsed .user-select-panel { display: none !important; }
   .topbar-date { display: none; }
   .stats-strip { grid-template-columns: 1fr 1fr; }
   .grid-2, .grid-half, .brand-mv-row, .values-grid, .nono-grid { grid-template-columns: 1fr; }
+  .ecosystem-grid, .cf-tier-grid { grid-template-columns: 1fr; }
   .content { padding: 20px 16px; }
   .page-title { font-size: 1.4rem; }
+  .ecosystem-grid > div { display: flex; flex-direction: column; }
+  .cf-tier-grid .card { padding: 18px; }
 }
 @media (max-width: 480px) {
   .stats-strip, .quick-links { grid-template-columns: 1fr; }
