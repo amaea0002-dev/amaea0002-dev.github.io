@@ -401,11 +401,8 @@ body.sidebar-collapsed .sidebar-item .ext { display: none; }
 
 /* Footer: avatar only */
 body.sidebar-collapsed .sidebar-footer { padding: 8px 6px 12px; }
-body.sidebar-collapsed .sidebar-user   { justify-content: center; padding: 8px 6px; }
-body.sidebar-collapsed .sidebar-user-name,
-body.sidebar-collapsed .sidebar-user-role,
-body.sidebar-collapsed .sidebar-user-text,
-body.sidebar-collapsed .sidebar-user-clickable > svg { display: none; }
+body.sidebar-collapsed .sidebar-user { justify-content: center; padding: 6px 0; margin-bottom: 0; }
+body.sidebar-collapsed .sidebar-user > :not(.sidebar-avatar) { display: none; }
 body.sidebar-collapsed .user-select-panel { display: none !important; }
 
 /* ── Hamburger (visible on all sizes) ── */
