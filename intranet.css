@@ -8,13 +8,14 @@
   --plum-mid:    #5A3558;
   --plum-soft:   #8B6189;
   --plum-tint:   rgba(64,36,63,0.06);
-  --plum-border: rgba(64,36,63,0.14);
+  --plum-border: rgba(64,36,63,0.12);
+  --plum-glow:   rgba(64,36,63,0.18);
   --white:    #FFFFFF;
-  --bg:       #F8F7FA;
-  --gray-50:  #F3F2F6;
-  --gray-100: #ECEAEF;
-  --gray-200: #D8D4E0;
-  --gray-300: #B8B2C4;
+  --bg:       #F9F8FA;
+  --gray-50:  #F9F8FA;
+  --gray-100: #F3F2F6;
+  --gray-200: #E8E6ED;
+  --gray-300: #D1CDD8;
   --gray-500: #9088A3;
   --gray-600: #47405A;
   --gray-900: #17131E;
@@ -31,9 +32,12 @@
 
 [data-theme="dark"] {
   --plum:        #a868a6;
+  --plum-dark:   #7a4878;
+  --plum-mid:    #c084be;
   --plum-soft:   #c8a4c6;
   --plum-tint:   rgba(168,104,166,0.12);
   --plum-border: rgba(168,104,166,0.22);
+  --plum-glow:   rgba(168,104,166,0.25);
   --white:    #1a0f19;
   --bg:       #0e080e;
   --gray-50:  #211421;
@@ -394,8 +398,18 @@ body.sidebar-collapsed .topbar   { left: 0; }
 .topbar-hamburger:hover { background: var(--gray-100); }
 .topbar-hamburger span {
   display: block; width: 18px; height: 1.5px;
-  background: var(--gray-600); border-radius: 2px; transition: all 0.2s ease;
+  background: var(--gray-600); border-radius: 2px;
+  transition: transform 0.25s var(--ease), opacity 0.2s ease, background 0.2s ease;
+  transform-origin: center;
 }
+/* Animate to × when sidebar is collapsed (desktop) */
+body.sidebar-collapsed .topbar-hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+body.sidebar-collapsed .topbar-hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+body.sidebar-collapsed .topbar-hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+/* Animate to × when mobile sidebar is open */
+body.mobile-nav-open .topbar-hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+body.mobile-nav-open .topbar-hamburger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+body.mobile-nav-open .topbar-hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 /* Sidebar overlay (tap outside to close) */
 .sidebar-overlay {

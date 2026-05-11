@@ -256,11 +256,12 @@
     if (window.innerWidth > 768 && localStorage.getItem('amaea-sidebar') === 'collapsed') {
       document.body.classList.add('sidebar-collapsed');
     }
-    const closeMobile = () => { sidebarEl.classList.remove('open'); overlayEl.classList.remove('open'); };
+    const closeMobile = () => { sidebarEl.classList.remove('open'); overlayEl.classList.remove('open'); document.body.classList.remove('mobile-nav-open'); };
     menuBtn.addEventListener('click', () => {
       if (window.innerWidth <= 768) {
         const open = sidebarEl.classList.toggle('open');
         overlayEl.classList.toggle('open', open);
+        document.body.classList.toggle('mobile-nav-open', open);
       } else {
         const collapsed = document.body.classList.toggle('sidebar-collapsed');
         localStorage.setItem('amaea-sidebar', collapsed ? 'collapsed' : 'expanded');
