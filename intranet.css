@@ -128,6 +128,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.13em; color: rgba(255,255,255,0.3);
   padding: 16px 8px 5px;
+  white-space: nowrap; overflow: hidden;
 }
 .sidebar-item {
   display: flex; align-items: center; gap: 9px;
@@ -136,6 +137,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   color: rgba(255,255,255,0.6);
   transition: background 0.14s, color 0.14s;
   cursor: pointer;
+  white-space: nowrap; overflow: hidden;
 }
 .sidebar-item:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.9); }
 .sidebar-item.active { background: rgba(255,255,255,0.14); color: #fff; font-weight: 600; }
@@ -383,31 +385,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .swatch-name { font-size: 0.64rem; font-weight: 600; color: var(--gray-600); }
 .swatch-hex { font-size: 0.58rem; color: var(--gray-500); font-family: monospace; }
 
-/* ── Sidebar collapse (desktop + mobile) ── */
-.sidebar { transition: transform 0.25s var(--ease); }
-.main    { transition: margin-left 0.25s var(--ease); }
-.topbar  { transition: left 0.25s var(--ease), background 0.25s ease; }
+/* ── Sidebar slide (desktop + mobile) ── */
+.sidebar { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.main    { transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.topbar  { transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s ease; }
 
-/* Desktop collapsed state — mini icon sidebar (matches prototype) */
-body.sidebar-collapsed .sidebar  { width: 62px; }
-body.sidebar-collapsed .main     { margin-left: 62px; }
-body.sidebar-collapsed .topbar   { left: 62px; }
-
-/* Logo: centre the image, hide the badge */
-body.sidebar-collapsed .sidebar-logo { justify-content: center; padding: 16px 8px; }
-body.sidebar-collapsed .sidebar-logo-badge { display: none; }
-
-/* Nav labels: collapse to nothing */
-body.sidebar-collapsed .sidebar-label { height: 0; overflow: hidden; padding: 0; margin: 0; }
-
-/* Nav items: icon only — font-size:0 hides text, SVG width/height attrs keep icons visible */
-body.sidebar-collapsed .sidebar-item { justify-content: center; padding: 10px 6px; font-size: 0; gap: 0; }
-body.sidebar-collapsed .sidebar-item .ext { display: none; }
-
-/* Footer: avatar only */
-body.sidebar-collapsed .sidebar-footer { padding: 8px 6px 12px; }
-body.sidebar-collapsed .sidebar-user { justify-content: center; padding: 6px 0; margin-bottom: 0; }
-body.sidebar-collapsed .sidebar-user > :not(.sidebar-avatar) { display: none; }
+/* Desktop: sidebar slides fully off-screen, content expands to fill */
+body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+body.sidebar-collapsed .main    { margin-left: 0; }
+body.sidebar-collapsed .topbar  { left: 0; }
 body.sidebar-collapsed .user-select-panel { display: none !important; }
 
 /* ── Hamburger (visible on all sizes) ── */
