@@ -36,12 +36,24 @@
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       Documents
     </a>
+    <a href="roadmap.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Roadmap
+    </a>
+    <a href="decisions.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Decisions
+    </a>
+    <a href="investor.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      Investor
+    </a>
     <div class="sidebar-label">External</div>
     <a href="https://amaea0002-dev.github.io/webpage" class="sidebar-item" target="_blank">
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       Website <span class="ext">↗</span>
     </a>
-    <a href="https://amaea0002-dev.github.io/prototype/analytics.html" class="sidebar-item" target="_blank">
+    <a href="https://amaea0002-dev.github.io/prototype/dashboard.html" class="sidebar-item" target="_blank">
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
       Prototype <span class="ext">↗</span>
     </a>
@@ -113,7 +125,7 @@
       <div class="stat-card">
         <div class="stat-label">Launch target</div>
         <div class="stat-value" style="font-size:1.3rem;padding-top:4px;">Sept 2028</div>
-        <div class="stat-sub">~28 months away</div>
+        <div class="stat-sub" id="months-to-launch">~28 months away</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Beta clients</div>
@@ -145,7 +157,7 @@
             <div>
               <p class="update-title">Customer discovery — not started</p>
               <p class="update-desc">Target 15–20 interviews with IFA practice managers and compliance officers. The Intelliflo conference is an opportunity to run 3–4 in person.</p>
-              <p class="update-meta">🟡 In progress &nbsp;·&nbsp; Target: end 2026</p>
+              <p class="update-meta">🔴 Not started &nbsp;·&nbsp; Target: end 2026</p>
             </div>
           </div>
 
@@ -186,7 +198,7 @@
             <a href="docs.html" class="quick-link">▤ Documents</a>
             <a href="team.html#cofounder" class="quick-link">🤝 Co-founder Framework</a>
             <a href="https://amaea0002-dev.github.io/webpage" class="quick-link" target="_blank">↗ Amaea Website</a>
-            <a href="https://amaea0002-dev.github.io/prototype/analytics.html" class="quick-link" target="_blank">↗ Prototype</a>
+            <a href="https://amaea0002-dev.github.io/prototype/dashboard.html" class="quick-link" target="_blank">↗ Prototype</a>
           </div>
         </div>
 
@@ -294,6 +306,8 @@
   // Date in topbar
   const d = new Date();
   document.getElementById('topbar-date').textContent = d.toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'long', year:'numeric' });
+  // Dynamic months-to-launch
+  (function(){const el=document.getElementById('months-to-launch');if(!el)return;const m=Math.round((new Date('2028-09-01')-new Date())/(1000*60*60*24*30.44));el.textContent='~'+m+' months away';})();
 
   // Theme toggle
   document.querySelector('.theme-toggle').addEventListener('click', () => {

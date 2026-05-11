@@ -36,12 +36,24 @@
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       Documents
     </a>
+    <a href="roadmap.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Roadmap
+    </a>
+    <a href="decisions.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Decisions
+    </a>
+    <a href="investor.html" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      Investor
+    </a>
     <div class="sidebar-label">External</div>
     <a href="https://amaea0002-dev.github.io/webpage" class="sidebar-item" target="_blank">
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       Website <span class="ext">↗</span>
     </a>
-    <a href="https://amaea0002-dev.github.io/prototype/analytics.html" class="sidebar-item" target="_blank">
+    <a href="https://amaea0002-dev.github.io/prototype/dashboard.html" class="sidebar-item" target="_blank">
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
       Prototype <span class="ext">↗</span>
     </a>
@@ -108,7 +120,7 @@
           <p class="doc-name">Limited Company Registration</p>
           <p class="doc-desc">Amaea Ltd — Companies House. Required before taking revenue or opening a business bank account.</p>
         </div>
-        <div class="doc-status"><span class="badge badge-amber">Pending</span></div>
+        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">Pending</span><button class="btn btn-secondary btn-sm" style="font-size:0.72rem;" onclick="showToast('Upload confirmation of registration when complete','info')">Upload</button></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">📋</div>
@@ -116,7 +128,7 @@
           <p class="doc-name">Co-founder Agreement</p>
           <p class="doc-desc">Equity split, vesting schedule, exit provisions, IP ownership, and what happens if one founder leaves. Must be in place before any external conversation.</p>
         </div>
-        <div class="doc-status"><span class="badge badge-amber">Not started</span></div>
+        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">Not started</span><button class="btn btn-secondary btn-sm" style="font-size:0.72rem;" onclick="showToast('Upload draft when ready','info')">Upload</button></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">📄</div>
@@ -132,7 +144,7 @@
           <p class="doc-name">Lucent Employment Contract Review</p>
           <p class="doc-desc">Hasna: check IP assignment, non-solicitation, and garden leave clauses before building anything that could be claimed by Lucent. Do this now, not on the way out.</p>
         </div>
-        <div class="doc-status"><span class="badge badge-red">Action required</span></div>
+        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-red">Action required</span><button class="btn btn-primary btn-sm" style="font-size:0.72rem;" onclick="showToast('Mark as reviewed once clauses are checked','info')">Review now</button></div>
       </div>
     </div>
 
@@ -147,7 +159,7 @@
           <p class="doc-name">FCA Regulatory Position for Amaea</p>
           <p class="doc-desc">Open question: does providing AI compliance guidance to FCA-regulated firms make Amaea itself a regulated entity? This is critical and needs a legal answer before product launch — not after. Seek specialist FCA regulatory counsel.</p>
         </div>
-        <div class="doc-status"><span class="badge badge-red">Open question</span></div>
+        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-red">Open question</span><button class="btn btn-primary btn-sm" style="font-size:0.72rem;" onclick="showToast('Book specialist FCA regulatory counsel — do not delay','info')">Book counsel</button></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">🛡</div>
@@ -155,7 +167,7 @@
           <p class="doc-name">GDPR / Data Processing Agreement</p>
           <p class="doc-desc">Amaea will handle client data (IFA firm records, possibly client personal data). A DPA framework is needed before any beta client arrangement.</p>
         </div>
-        <div class="doc-status"><span class="badge badge-amber">Not started</span></div>
+        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">Not started</span><button class="btn btn-secondary btn-sm" style="font-size:0.72rem;" onclick="showToast('Upload DPA template when drafted','info')">Upload</button></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">📝</div>
@@ -163,7 +175,7 @@
           <p class="doc-name">Terms of Service &amp; Privacy Policy</p>
           <p class="doc-desc">Required before charging any customer. Must accurately reflect how Amaea uses, stores, and processes data.</p>
         </div>
-        <div class="doc-status"><span class="badge badge-amber">Not started</span></div>
+        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">Not started</span><button class="btn btn-secondary btn-sm" style="font-size:0.72rem;" onclick="showToast('Upload draft when ready','info')">Upload</button></div>
       </div>
     </div>
 
@@ -178,7 +190,7 @@
           <p class="doc-name">Financial Model</p>
           <p class="doc-desc">ARR projections, CAC, LTV, churn assumptions, and runway model. No investor conversation or pricing decision can be made confidently without this. Build Q3 2026.</p>
         </div>
-        <div class="doc-status"><span class="badge badge-amber">Not started</span></div>
+        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">Not started</span><button class="btn btn-secondary btn-sm" style="font-size:0.72rem;" onclick="showToast('Upload financial model spreadsheet when built','info')">Upload</button></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">💰</div>
@@ -186,7 +198,7 @@
           <p class="doc-name">Pricing Model &amp; Validation</p>
           <p class="doc-desc">Current pricing page exists on the website but numbers are unvalidated. Must be tested through customer discovery interviews — "what would you budget for this?"</p>
         </div>
-        <div class="doc-status"><span class="badge badge-amber">Unvalidated</span></div>
+        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">Unvalidated</span><a href="https://amaea0002-dev.github.io/webpage/pricing.html" target="_blank"><button class="btn btn-secondary btn-sm" style="font-size:0.72rem;">View pricing →</button></a></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">💼</div>
@@ -194,7 +206,7 @@
           <p class="doc-name">Exit Fund — Hasna</p>
           <p class="doc-desc">Target: £30–45k saved before leaving Lucent in September 2028. This covers personal living costs for 12–18 months while Amaea reaches revenue. Track monthly.</p>
         </div>
-        <div class="doc-status"><span class="badge badge-amber">In progress</span></div>
+        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">In progress</span><button class="btn btn-secondary btn-sm" style="font-size:0.72rem;" onclick="showToast('Opening savings tracker…','info')">View tracker</button></div>
       </div>
     </div>
 
@@ -225,7 +237,7 @@
           <p class="doc-name">Customer Discovery Template</p>
           <p class="doc-desc">Interview guide for IFA practice managers and compliance officers. 30-minute structured discovery framework. 15–20 interviews needed by end 2026.</p>
         </div>
-        <div class="doc-status"><span class="badge badge-amber">To create</span></div>
+        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">To create</span><button class="btn btn-secondary btn-sm" style="font-size:0.72rem;" onclick="showToast('Create discovery template in Google Docs, then upload here','info')">Create</button></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">🧪</div>
@@ -233,7 +245,7 @@
           <p class="doc-name">Competitive Analysis</p>
           <p class="doc-desc">Documented review of Thistle Initiatives, Threesixty Services, Defaqto, and emerging AI compliance tools. Where are they weak? Where is Amaea different?</p>
         </div>
-        <div class="doc-status"><span class="badge badge-amber">Not started</span></div>
+        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">Not started</span><button class="btn btn-secondary btn-sm" style="font-size:0.72rem;" onclick="showToast('Upload competitive analysis when complete','info')">Upload</button></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">🎯</div>
@@ -241,7 +253,7 @@
           <p class="doc-name">Intelliflo Conference Plan</p>
           <p class="doc-desc">Target contact list, demo script, 60-second pitch, and specific ask. June/July 2026. The most important near-term event — needs dedicated preparation.</p>
         </div>
-        <div class="doc-status"><span class="badge badge-red">Urgent</span></div>
+        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-red">Urgent</span><button class="btn btn-primary btn-sm" style="font-size:0.72rem;" onclick="showToast('Start conference plan now — 6 weeks out','info')">Start planning</button></div>
       </div>
     </div>
 
@@ -255,6 +267,13 @@
 </main>
 
 <script>
+function showToast(msg, type) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:24px;right:24px;background:'+(type==='info'?'var(--gray-900)':'#10B981')+';color:#fff;padding:10px 18px;border-radius:8px;font-size:0.82rem;font-weight:600;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.18);';
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),3000);
+}
   document.querySelector('.theme-toggle').addEventListener('click', () => {
     const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
