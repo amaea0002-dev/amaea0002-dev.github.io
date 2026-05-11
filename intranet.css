@@ -73,7 +73,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   width: var(--sidebar-w);
   background: linear-gradient(170deg, #4C2C4B 0%, #2B1929 100%);
   display: flex; flex-direction: column;
-  z-index: 100; overflow-y: auto;
+  z-index: 100; overflow-y: auto; overflow-x: hidden;
+  transition: width 0.25s var(--ease);
 }
 .sidebar-logo {
   padding: 18px 16px 16px;
@@ -382,10 +383,30 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .main    { transition: margin-left 0.25s var(--ease); }
 .topbar  { transition: left 0.25s var(--ease), background 0.25s ease; }
 
-/* Desktop collapsed state */
-body.sidebar-collapsed .sidebar  { transform: translateX(-100%); box-shadow: none; }
-body.sidebar-collapsed .main     { margin-left: 0; }
-body.sidebar-collapsed .topbar   { left: 0; }
+/* Desktop collapsed state — mini icon sidebar (matches prototype) */
+body.sidebar-collapsed .sidebar  { width: 62px; }
+body.sidebar-collapsed .main     { margin-left: 62px; }
+body.sidebar-collapsed .topbar   { left: 62px; }
+
+/* Logo: centre the image, hide the badge */
+body.sidebar-collapsed .sidebar-logo { justify-content: center; padding: 16px 8px; }
+body.sidebar-collapsed .sidebar-logo-badge { display: none; }
+
+/* Nav labels: collapse to nothing */
+body.sidebar-collapsed .sidebar-label { height: 0; overflow: hidden; padding: 0; margin: 0; }
+
+/* Nav items: icon only — font-size:0 hides text, SVG width/height attrs keep icons visible */
+body.sidebar-collapsed .sidebar-item { justify-content: center; padding: 10px 6px; font-size: 0; gap: 0; }
+body.sidebar-collapsed .sidebar-item .ext { display: none; }
+
+/* Footer: avatar only */
+body.sidebar-collapsed .sidebar-footer { padding: 8px 6px 12px; }
+body.sidebar-collapsed .sidebar-user   { justify-content: center; padding: 8px 6px; }
+body.sidebar-collapsed .sidebar-user-name,
+body.sidebar-collapsed .sidebar-user-role,
+body.sidebar-collapsed .sidebar-user-text,
+body.sidebar-collapsed .sidebar-user-clickable > svg { display: none; }
+body.sidebar-collapsed .user-select-panel { display: none !important; }
 
 /* ── Hamburger (visible on all sizes) ── */
 .topbar-hamburger {
