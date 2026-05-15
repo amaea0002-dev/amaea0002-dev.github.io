@@ -304,35 +304,45 @@
   }
 </script>
 <script>
-const _USERS = {
-  hasna: { name: 'Hasna Sahul Hameed', role: 'CEO & Co-founder', initial: 'H', bg: 'linear-gradient(135deg,#4C2C4B,#8B6189)' },
-  milan: { name: 'Milan Sajiv', role: 'CTO & Co-founder', initial: 'M', bg: 'linear-gradient(135deg,#1a4080,#4292c6)' }
-};
-function switchUser(id) {
-  const u = _USERS[id];
-  const a = document.getElementById('sidebarAvatar'); if (a) { a.textContent = u.initial; a.style.background = u.bg; }
-  const n = document.getElementById('sidebarUserName'); if (n) n.textContent = u.name;
-  const r = document.getElementById('sidebarUserRole'); if (r) r.textContent = u.role;
-  document.querySelectorAll('.sidebar-user-option').forEach(o => o.classList.toggle('active', o.dataset.user === id));
-  document.querySelectorAll('.user-select-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.user === id);
-    const tick = btn.querySelector('.user-select-tick');
-    if (tick) tick.style.opacity = btn.dataset.user === id ? '1' : '0';
-  });
-  localStorage.setItem('amaea-user', id);
-}
-const _userArea = document.getElementById('sidebarUserArea');
-const _userPanel = document.getElementById('userSelectPanel');
-if (_userArea && _userPanel) {
-  _userArea.addEventListener('click', (e) => { e.stopPropagation(); _userPanel.classList.toggle('open'); });
-  _userPanel.querySelectorAll('.user-select-btn').forEach(btn => btn.addEventListener('click', () => {
-    switchUser(btn.dataset.user);
-    _userPanel.classList.remove('open');
-  }));
-  document.addEventListener('click', (e) => { if (!e.target.closest('.sidebar-footer')) _userPanel.classList.remove('open'); });
-}
-document.querySelectorAll('.sidebar-user-option').forEach(btn => btn.addEventListener('click', () => switchUser(btn.dataset.user)));
-switchUser(localStorage.getItem('amaea-user') || 'hasna');
+// Show the authenticated Cloudflare Access user in the sidebar footer.
+// Falls back silently to the static markup if the endpoint isn't reachable
+// (e.g. viewing the file directly without Cloudflare Access in front).
+(function () {
+  const userArea  = document.getElementById('sidebarUserArea');
+  const userPanel = document.getElementById('userSelectPanel');
+  const nameEl    = document.getElementById('sidebarUserName');
+  const roleEl    = document.getElementById('sidebarUserRole');
+  const avatarEl  = document.getElementById('sidebarAvatar');
+
+  // The user-switcher panel is no longer meaningful — Cloudflare Access decides who you are.
+  if (userPanel) userPanel.style.display = 'none';
+  if (userArea) {
+    userArea.classList.remove('sidebar-user-clickable');
+    userArea.style.cursor = 'default';
+    userArea.removeAttribute('title');
+    const chevron = userArea.querySelector('svg');
+    if (chevron) chevron.style.display = 'none';
+  }
+
+  const ROLE_BY_EMAIL = {
+    'milan@amaea.co.uk': { role: 'Chief Technical Officer & Co-Founder', bg: 'linear-gradient(135deg,#1a4080,#4292c6)' },
+    'hasna@amaea.co.uk': { role: 'Chief Executive Officer & Co-Founder', bg: 'linear-gradient(135deg,#4C2C4B,#8B6189)' },
+  };
+
+  fetch('/cdn-cgi/access/get-identity', { credentials: 'include' })
+    .then(r => (r.ok ? r.json() : null))
+    .then(id => {
+      if (!id || !id.email) return;
+      const email   = id.email;
+      const name    = id.name || email.split('@')[0];
+      const initial = (name || '?').charAt(0).toUpperCase();
+      const meta    = ROLE_BY_EMAIL[email] || { role: 'Team', bg: 'linear-gradient(135deg,#3D3651,#8B809C)' };
+      if (nameEl)   nameEl.textContent   = name;
+      if (roleEl)   roleEl.textContent   = meta.role;
+      if (avatarEl) { avatarEl.textContent = initial; avatarEl.style.background = meta.bg; }
+    })
+    .catch(() => {});
+})();
 </script>
 <script>
   // Topbar date — current date in UK long format
