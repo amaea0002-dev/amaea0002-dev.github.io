@@ -305,6 +305,7 @@
 </script>
 <script>
 // Show the authenticated Cloudflare Access user in the sidebar footer.
+// Also updates any #pageWelcomeName span (e.g. the dashboard "Welcome back, X.").
 // Falls back silently to the static markup if the endpoint isn't reachable
 // (e.g. viewing the file directly without Cloudflare Access in front).
 (function () {
@@ -313,6 +314,7 @@
   const nameEl    = document.getElementById('sidebarUserName');
   const roleEl    = document.getElementById('sidebarUserRole');
   const avatarEl  = document.getElementById('sidebarAvatar');
+  const welcomeEl = document.getElementById('pageWelcomeName');
 
   // The user-switcher panel is no longer meaningful — Cloudflare Access decides who you are.
   if (userPanel) userPanel.style.display = 'none';
@@ -324,22 +326,25 @@
     if (chevron) chevron.style.display = 'none';
   }
 
+  // Short role for the narrow sidebar; full title lives on the team page + email signatures.
   const ROLE_BY_EMAIL = {
-    'milan@amaea.co.uk': { role: 'Chief Technical Officer & Co-Founder', bg: 'linear-gradient(135deg,#1a4080,#4292c6)' },
-    'hasna@amaea.co.uk': { role: 'Chief Executive Officer & Co-Founder', bg: 'linear-gradient(135deg,#4C2C4B,#8B6189)' },
+    'milan@amaea.co.uk': { role: 'CTO & Co-Founder', bg: 'linear-gradient(135deg,#1a4080,#4292c6)' },
+    'hasna@amaea.co.uk': { role: 'CEO & Co-Founder', bg: 'linear-gradient(135deg,#4C2C4B,#8B6189)' },
   };
 
   fetch('/cdn-cgi/access/get-identity', { credentials: 'include' })
     .then(r => (r.ok ? r.json() : null))
     .then(id => {
       if (!id || !id.email) return;
-      const email   = id.email;
-      const name    = id.name || email.split('@')[0];
-      const initial = (name || '?').charAt(0).toUpperCase();
-      const meta    = ROLE_BY_EMAIL[email] || { role: 'Team', bg: 'linear-gradient(135deg,#3D3651,#8B809C)' };
-      if (nameEl)   nameEl.textContent   = name;
-      if (roleEl)   roleEl.textContent   = meta.role;
-      if (avatarEl) { avatarEl.textContent = initial; avatarEl.style.background = meta.bg; }
+      const email     = id.email;
+      const name      = id.name || email.split('@')[0];
+      const firstName = name.split(/\s+/)[0];
+      const initial   = (name || '?').charAt(0).toUpperCase();
+      const meta      = ROLE_BY_EMAIL[email] || { role: 'Team', bg: 'linear-gradient(135deg,#3D3651,#8B809C)' };
+      if (nameEl)    nameEl.textContent    = name;
+      if (roleEl)    roleEl.textContent    = meta.role;
+      if (avatarEl)  { avatarEl.textContent = initial; avatarEl.style.background = meta.bg; }
+      if (welcomeEl) welcomeEl.textContent = firstName;
     })
     .catch(() => {});
 })();
