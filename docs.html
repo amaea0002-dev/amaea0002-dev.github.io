@@ -316,7 +316,8 @@ function showToast(msg, type) {
 </script>
 <script>
 // Show the authenticated Cloudflare Access user in the sidebar footer.
-// Also updates any #pageWelcomeName span (e.g. the dashboard "Welcome back, X.").
+// Also updates any #pageWelcomeName span (e.g. the dashboard "Welcome back, X.")
+// and injects a logout button next to the user widget.
 // Falls back silently to the static markup if the endpoint isn't reachable
 // (e.g. viewing the file directly without Cloudflare Access in front).
 (function () {
@@ -333,8 +334,20 @@ function showToast(msg, type) {
     userArea.classList.remove('sidebar-user-clickable');
     userArea.style.cursor = 'default';
     userArea.removeAttribute('title');
+
+    // Replace the (now-unused) dropdown chevron with a logout icon button.
     const chevron = userArea.querySelector('svg');
-    if (chevron) chevron.style.display = 'none';
+    if (chevron) {
+      const logout = document.createElement('a');
+      logout.href  = '/cdn-cgi/access/logout';
+      logout.title = 'Sign out';
+      logout.setAttribute('aria-label', 'Sign out');
+      logout.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;color:rgba(255,255,255,0.4);text-decoration:none;flex-shrink:0;margin-left:auto;transition:background .15s ease, color .15s ease;';
+      logout.addEventListener('mouseenter', () => { logout.style.background = 'rgba(255,255,255,0.08)'; logout.style.color = 'rgba(255,255,255,0.85)'; });
+      logout.addEventListener('mouseleave', () => { logout.style.background = 'transparent';            logout.style.color = 'rgba(255,255,255,0.4)';   });
+      logout.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+      chevron.replaceWith(logout);
+    }
   }
 
   // Short role for the narrow sidebar; full title lives on the team page + email signatures.
