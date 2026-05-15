@@ -45,6 +45,10 @@
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       Documents
     </a>
+    <a href="mvp-docs/" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Product Docs
+    </a>
         <a href="features.html" class="sidebar-item">
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
       Product Features
@@ -100,9 +104,10 @@
     <button class="topbar-hamburger" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
     <span class="bc-root">Amaea</span>
     <span class="bc-sep">/</span>
-    <span class="bc-current">Decision Log</span>
+    <span class="bc-current">Decisions</span>
   </div>
   <div class="topbar-right">
+    <span class="topbar-date" id="topbar-date"></span>
     <button class="theme-toggle" aria-label="Toggle dark mode"></button>
   </div>
 </header>
@@ -114,6 +119,36 @@
       <p class="page-eyebrow">Strategy</p>
       <h1 class="page-title">Decision Log</h1>
       <p class="page-sub">Key product, commercial and operational decisions with rationale. Keeps us from relitigating past choices.</p>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-meta">
+        <span class="decision-date">15 May 2026</span>
+        <span class="badge badge-green">Confirmed</span>
+      </div>
+      <div class="decision-title">19-type document taxonomy with Zod-validated schemas</div>
+      <div class="decision-decision">Classify every uploaded compliance document into one of 19 canonical IFA types, then extract per-type fields against a Zod schema. Lenient enum coercion handles case/spacing variance from Claude's vision output.</div>
+      <div class="decision-rationale"><strong>Why:</strong> Loose JSON extraction returned inconsistent shapes that broke downstream code. Per-type Zod schemas force the extraction to either succeed cleanly or surface a typed error — never silent corruption. The taxonomy was chosen by mapping real Lucent documents to FCA rulebook obligations, then collapsing synonyms (e.g. SOA / ROA / Suitability Letter → one type). 19 types covers the entire IFA compliance file based on the May 2026 corpus review.</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-meta">
+        <span class="decision-date">7 May 2026</span>
+        <span class="badge badge-green">Confirmed</span>
+      </div>
+      <div class="decision-title">Bootstrap to public launch; no pre-launch seed</div>
+      <div class="decision-decision">Year 1 total cost ~£20–35k, funded by personal savings. Milan takes no Amaea salary while working full-time elsewhere. Hasna takes a tax-efficient £12k salary + £50k dividend (~£62k gross) once Lucent employment ends.</div>
+      <div class="decision-rationale"><strong>Why:</strong> With ~70–80% gross margins and a strong GTM stack (Robin Powell + CISI + Intelliflo + Founders Programme), Amaea should be self-funding from early scale. ~2 Professional firms = break-even, ~5 Professional firms = full dividend coverage. Raising VC pre-launch would dilute ownership for a problem we don't have. Raise from strength later, if at all.</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-meta">
+        <span class="decision-date">April 2026</span>
+        <span class="badge badge-green">Confirmed</span>
+      </div>
+      <div class="decision-title">Compliance health score formula: 40 / 35 / 25</div>
+      <div class="decision-decision">Live 0–100 firm health score = 40% document completeness + 35% review completion + 25% inverse flag severity (critical=15, high=8, medium=3, low=1 weighted penalty).</div>
+      <div class="decision-rationale"><strong>Why:</strong> An IFA's compliance posture is dominated by documentation gaps (which break FCA evidencing) and overdue annual reviews (which break COBS 9.5). Flag severity matters but must be weighted lower because it's already partly captured by the doc/review components. The weights produce intuitive results on the Sterling demo firm (88/100) and the formula is documented in the platform docs so we can defend it under FCA review.</div>
     </div>
 
     <div class="decision-card">
@@ -214,6 +249,16 @@ if (_userArea && _userPanel) {
   document.addEventListener('click', (e) => { if (!e.target.closest('.sidebar-footer')) _userPanel.classList.remove('open'); });
 }
 switchUser(localStorage.getItem('amaea-user') || 'hasna');
+</script>
+<script>
+  // Topbar date — current date in UK long format
+  (function(){
+    var el = document.getElementById('topbar-date');
+    if (!el) return;
+    el.textContent = new Date().toLocaleDateString('en-GB', {
+      weekday:'short', day:'numeric', month:'long', year:'numeric'
+    });
+  })();
 </script>
 </body>
 </html>
