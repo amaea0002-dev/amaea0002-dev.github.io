@@ -201,6 +201,46 @@
       <div class="decision-rationale"><strong>Why:</strong> These channels concentrate compliance-aware IFAs who would be natural early adopters. The 200-spot scarcity creates urgency. The lifetime discount rewards early commitment and builds long-term loyalty before we have social proof.</div>
     </div>
 
+    <div class="decision-card">
+      <div class="decision-meta">
+        <span class="decision-date">15 May 2026</span>
+        <span class="badge badge-green">Confirmed</span>
+      </div>
+      <div class="decision-title">Demo form delivery: switched from formsubmit.co to a Vercel serverless function using Resend</div>
+      <div class="decision-decision">New Vercel serverless function <code>api/demo.js</code> on the amaea.ai project calls the Resend HTTP API directly. Routes to milan@ and hasna@ via a comma-separated <code>DEMO_TO_EMAIL</code> env var. The old amaea0002@gmail.com address was purged from the codebase.</div>
+      <div class="decision-rationale"><strong>Why:</strong> formsubmit.co verification for the new amaea.co.uk email was stuck behind a provider outage. Resend was already verified for the domain (SPF/DKIM), so a single-file serverless function was faster to ship and removes a third-party dependency we no longer need.</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-meta">
+        <span class="decision-date">15 May 2026</span>
+        <span class="badge badge-green">Confirmed</span>
+      </div>
+      <div class="decision-title">founders@amaea.co.uk clarified as a Google Group, not a mailbox</div>
+      <div class="decision-decision">Demo requests now route directly to milan@amaea.co.uk and hasna@amaea.co.uk via <code>DEMO_TO_EMAIL</code>. The founders@ group is retained for human-to-human external use only.</div>
+      <div class="decision-rationale"><strong>Why:</strong> The group was rejecting Resend-relayed mail (treated as an external sender). Routing directly to named inboxes was the simpler fix; configuring group posting policies would have added complexity with no benefit.</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-meta">
+        <span class="decision-date">15 May 2026</span>
+        <span class="badge badge-green">Confirmed</span>
+      </div>
+      <div class="decision-title">Live AI chat on the marketing site dropped; reverted to auto-loop animation only</div>
+      <div class="decision-decision">Briefly integrated a live <code>/api/public/chat</code> input on the homepage. Reverted: the auto-typing demo animation conflicts with live request/response timing, creating overlapping outputs. The looping animation is retained as a passive showcase.</div>
+      <div class="decision-rationale"><strong>Why:</strong> The demo is more reliable — and more legible — as a passive "show, don't interact" feature at this stage. A real try-it-yourself interface belongs in the product, not the marketing site, and requires session isolation we haven't built.</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-meta">
+        <span class="decision-date">15 May 2026</span>
+        <span class="badge badge-green">Confirmed</span>
+      </div>
+      <div class="decision-title">RMAR Section F pre-population shipped without a DB migration</div>
+      <div class="decision-decision">The Section F aggregator queries the existing <code>documents</code> table directly using <code>type='complaint_record'</code> and <code>status='complete'</code> with a period filter. No new table or schema change was required for Slice 1.</div>
+      <div class="decision-rationale"><strong>Why:</strong> Avoids touching the CHECK constraint on <code>documents</code> and ships Slice 1 today. A migration approach can be revisited if Slices 2 or 3 require it. Inline DISP 1.6 8-week breach flags surface on the Section F page at the moment compliance officers are reviewing complaints — persistent cron-raised flags deferred to a later slice.</div>
+    </div>
+
   </div>
 </main>
 
