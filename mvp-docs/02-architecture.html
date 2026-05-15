@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Technical Architecture · Amaea MVP Docs</title>
+  <link rel="icon" href="logo-plum.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-top">
+    <img src="logo-white.png" alt="Amaea"/>
+    <span class="cover-badge">MVP Documentation</span>
+  </div>
+
+  <div class="cover-body">
+    <p class="cover-eyebrow">Doc 02 · Engineers · technical due diligence</p>
+    <h1 class="cover-title">Technical Architecture</h1>
+    <p class="cover-sub">System design, multi-tenancy via Row Level Security, database schema, data flow, computed views, and the rationale behind every key technical decision.</p>
+  </div>
+
+  <div class="cover-foot">
+    <div>
+      <p class="cover-meta-label">Status</p>
+      <p class="cover-meta-value">MVP · pre-launch</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">As of</p>
+      <p class="cover-meta-value">14 May 2026</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Owners</p>
+      <p class="cover-meta-value">Hasna Sahul Hameed · Milan Sajiv</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Length</p>
+      <p class="cover-meta-value">~30 min read</p>
+    </div>
+  </div>
+
+  <div class="cover-tagline">
+    <p class="cover-tagline-text">Stay compliant. Stay confident.</p>
+    <p class="cover-tagline-sub">amaea</p>
+  </div>
+</section>
+
+<nav class="doc-nav">
+  <a href="index.html">← All documents</a>
+  <span class="doc-nav-meta">Doc 02 · ~30 min read</span>
+</nav>
+
+<article class="doc">
+<p>This document describes the production architecture of the Amaea MVP: tech stack, system design, database schema, multi-tenancy, and the key technical decisions that shape the build.</p>
+<h2 id="tech-stack">Tech stack</h2>
+<table>
+<thead><tr>
+<th>Layer</th>
+<th>Technology</th>
+<th>Version</th>
+<th>Rationale</th>
+</tr></thead><tbody>
+<tr>
+<td>Framework</td>
+<td>Next.js (App Router)</td>
+<td>16.2.6</td>
+<td>Server components for dashboard data (no client-side state for compliance-critical reads), App Router for clean route grouping, native API routes for backend</td>
+</tr>
+<tr>
+<td>UI</td>
+<td>React</td>
+<td>19.2.4</td>
+<td>Aligned with Next.js 16</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>TypeScript</td>
+<td>^5</td>
+<td>Type safety is non-negotiable for compliance data</td>
+</tr>
+<tr>
+<td>Styling</td>
+<td>Tailwind CSS</td>
+<td>^4</td>
+<td>Velocity of iteration; design tokens centralised</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>PostgreSQL via Supabase</td>
+<td>Latest</td>
+<td>Relational integrity, RLS for multi-tenancy, pgvector for embeddings</td>
+</tr>
+<tr>
+<td>Vector store</td>
+<td>pgvector (Supabase extension)</td>
+<td>Latest</td>
+<td>Co-located with relational data — no separate vector DB to manage</td>
+</tr>
+<tr>
+<td>Auth</td>
+<td>Supabase Auth</td>
+<td>^0.10.3</td>
+<td>JWT-based, integrates natively with Postgres RLS</td>
+</tr>
+<tr>
+<td>File storage</td>
+<td>Supabase Storage</td>
+<td>—</td>
+<td>One bucket (<code>firm-documents</code>) with per-firm path prefixes</td>
+</tr>
+<tr>
+<td>AI completion</td>
+<td>Anthropic Claude API</td>
+<td>claude-sonnet-4-6</td>
+<td>Vision capability for document extraction; strong reasoning for compliance assistant</td>
+</tr>
+<tr>
+<td>AI SDK</td>
+<td><code>@anthropic-ai/sdk</code></td>
+<td>^0.95.2</td>
+<td>Official Anthropic SDK</td>
+</tr>
+<tr>
+<td>Embeddings</td>
+<td>Voyage AI</td>
+<td>voyage-3-lite (512-dim)</td>
+<td>Compact, fast, performs well on regulatory text</td>
+</tr>
+<tr>
+<td>Schema validation</td>
+<td>Zod</td>
+<td>4.4.3</td>
+<td>Runtime validation of all AI output</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>Resend</td>
+<td>—</td>
+<td>Transactional notifications</td>
+</tr>
+<tr>
+<td>PDF</td>
+<td>React-PDF / Puppeteer</td>
+<td>—</td>
+<td>Report PDF generation</td>
+</tr>
+<tr>
+<td>Hosting</td>
+<td>Vercel</td>
+<td>—</td>
+<td>EU region (data residency); serverless functions for APIs</td>
+</tr>
+<tr>
+<td>Cron</td>
+<td>Vercel Cron</td>
+<td>—</td>
+<td>Two scheduled jobs (nightly AR sweep, weekly Regulatory Horizon ingest)</td>
+</tr>
+<tr>
+<td>Browser automation</td>
+<td>Playwright</td>
+<td>^1.60.0</td>
+<td>Used by FCA Handbook scrapers (the Handbook is JS-rendered)</td>
+</tr>
+<tr>
+<td>PDF parsing</td>
+<td>pdf-parse</td>
+<td>^2.4.5</td>
+<td>Used by FCA publications scrapers</td>
+</tr>
+</tbody></table>
+<h2 id="high-level-architecture">High-level architecture</h2>
+<pre><code>                         ┌─────────────────────────────────────────┐
+                         │            VERCEL EU REGION              │
+                         │                                          │
+   browser ───https───▶ │  Next.js 16 (SSR + API routes)            │
+                         │  • App pages: /dashboard, /clients, …    │
+                         │  • API: /api/import, /api/chat, …        │
+                         │  • Cron: /api/cron/ar-sweep nightly      │
+                         │  • Cron: /api/rag/horizon weekly         │
+                         └────────────────┬─────────────────────────┘
+                                          │
+                                          │  postgres + storage + auth
+                                          ▼
+                         ┌─────────────────────────────────────────┐
+                         │       SUPABASE EU-WEST (IRELAND)         │
+                         │                                          │
+                         │  Postgres                                │
+                         │  • Tenant tables (RLS by firm_id)        │
+                         │  • fca_documents (pgvector, 11,645 rows) │
+                         │  • firm_embeddings (pgvector, per firm)  │
+                         │  • compliance_events (append-only)       │
+                         │                                          │
+                         │  Storage                                 │
+                         │  • firm-documents bucket                 │
+                         │  • Path: {firm_id}/{client_id}/...       │
+                         │                                          │
+                         │  Auth                                    │
+                         │  • JWT with firm_id claim                │
+                         └─────────────────────────────────────────┘
+                                          │
+                                          │
+                         ┌────────────────┴─────────────┬────────────────┐
+                         ▼                              ▼                ▼
+                ┌──────────────────┐         ┌──────────────────┐    ┌──────────┐
+                │  Anthropic API   │         │  Voyage AI       │    │ Resend   │
+                │  Claude vision   │         │  Embeddings      │    │ Email    │
+                │  Claude messages │         │  (voyage-3-lite) │    │          │
+                └──────────────────┘         └──────────────────┘    └──────────┘</code></pre>
+<h2 id="architecture-principles">Architecture principles</h2>
+<h3 id="1-multi-tenancy-via-row-level-security">1. Multi-tenancy via Row Level Security</h3>
+<p>Every tenant table carries a <code>firm_id</code> column. Supabase RLS policies enforce at the database level that an authenticated user can only read or write rows where <code>firm_id = auth.jwt() -&gt;&gt; &#x27;firm_id&#x27;</code>.</p>
+<p>This is the single most important architectural decision in the schema. Even if application code has a bug that constructs the wrong query, the database rejects it. There is no path to cross-tenant data leakage short of a deliberate database configuration change.</p>
+<p>Helper function <code>get_firm_id()</code> (introduced in migration <code>003_users.sql</code>) returns the firm_id from the current JWT and is used by all RLS policies. The same function is used by the <code>match_firm_embeddings</code> RPC for RAG retrieval, ensuring firm-specific embeddings never leak across tenants.</p>
+<h3 id="2-append-only-audit-trail">2. Append-only audit trail</h3>
+<p>The <code>compliance_events</code> table is <strong>insert-only</strong>. RLS policies block both UPDATE and DELETE on this table. It is the source of truth for the Compliance Activity Log report and is intended to satisfy FCA SYSC 9 record-keeping (minimum 7 years).</p>
+<p>Every meaningful action in the system writes a row here: document uploads, integration syncs, risk flag resolutions, report generations, AI chat queries (with token counts), and manual cleanup actions.</p>
+<h3 id="3-computed-metrics-not-stored">3. Computed metrics, not stored</h3>
+<p>Dashboard numbers (compliance health score, missing-document count, overdue review count, vulnerable-client documentation %) are computed at query time via PostgreSQL views, not stored as columns. This guarantees they&#x27;re never out of sync with underlying data. Caching can be added later if performance requires it; at MVP scale (&lt; 1000 clients per firm), live queries are sub-100ms.</p>
+<p>Key views (defined in <code>012_views.sql</code>):</p>
+<ul>
+<li><code>v_document_completeness</code> — % of clients with all required doc types <code>complete</code></li>
+<li><code>v_review_completion</code> — % of all reviews in <code>complete</code> status, plus overdue/in-progress counts</li>
+<li><code>v_risk_flag_summary</code> — counts by severity + computed penalty score</li>
+<li><code>v_firm_health_scores</code> — weighted composite: 40% doc + 35% review + 25% flag</li>
+<li><code>v_dashboard</code> — single row per firm with everything the dashboard needs</li>
+<li><code>v_vulnerable_doc_status</code> — vulnerable-client documentation coverage</li>
+</ul>
+<h3 id="4-snapshots-for-reports">4. Snapshots for reports</h3>
+<p>When a report is generated, a snapshot of the underlying data is saved as JSONB in the <code>reports.data</code> column. This means a report generated on 11 May 2026 will always show the same content when retrieved later, even if client records have changed since. This matches how FCA reporting works (RMAR submissions are point-in-time) and means historical reports are auditable.</p>
+<p>Reports with <code>status = &#x27;complete&#x27;</code> are locked from UPDATE via RLS.</p>
+<h3 id="5-per-document-validated-metadata">5. Per-document validated metadata</h3>
+<p><code>documents.metadata</code> is a JSONB column added in migration <code>017</code>. It stores the per-document-type extracted fields produced by the AI extraction pipeline. The shape varies by <code>documents.type</code> — a <code>fact_find</code> has <code>attitudeToRiskRating</code>, a <code>db_transfer_report</code> has <code>transferValue</code> and <code>coolingOffNoticeProvided</code>, an <code>aml_cdd</code> has <code>cddLastRefreshedDate</code>, etc.</p>
+<p>The application enforces shape consistency via Zod schemas (<code>src/lib/extraction/schemas.ts</code>). The database doesn&#x27;t constrain the JSONB shape — that&#x27;s deliberate. The schema can evolve without DB migrations, and per-version shape can coexist as the extraction pipeline matures.</p>
+<h3 id="6-doc-level-vs-client-level-risk-flags">6. Doc-level vs client-level risk flags</h3>
+<p><code>risk_flags.source_document_id</code> (added in migration 017) is a nullable FK to <code>documents</code>. When NULL, the flag is <strong>client-level</strong> (e.g. &quot;this client has an overdue annual review&quot;). When populated, the flag is <strong>doc-level</strong> (e.g. &quot;this specific DB transfer report is missing a cooling-off notice&quot;).</p>
+<p>Unique constraints are split:</p>
+<ul>
+<li><code>risk_flags_client_level_unique</code> — UNIQUE (client_id, type, is_resolved) WHERE source_document_id IS NULL</li>
+<li><code>risk_flags_doc_level_unique</code> — UNIQUE (client_id, type, source_document_id, is_resolved) WHERE source_document_id IS NOT NULL</li>
+</ul>
+<p>This means a client can simultaneously have one client-level <code>missing_signature</code> flag AND multiple doc-level <code>missing_signature</code> flags (one per source document).</p>
+<h2 id="database-schema">Database schema</h2>
+<p>All tables under the <code>public</code> schema. All have <code>firm_id</code> (except <code>firms</code> itself) and have RLS enabled.</p>
+<h3 id="core-tenancy-tables">Core tenancy tables</h3>
+<h4 id="firms"><code>firms</code></h4>
+<p>The top-level tenant. One row per IFA firm.</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>name</td>
+<td>text</td>
+<td>&quot;Sterling IFA Ltd&quot;</td>
+</tr>
+<tr>
+<td>fca_reference</td>
+<td>text</td>
+<td>&quot;FRN 789012&quot;</td>
+</tr>
+<tr>
+<td>subscription_tier</td>
+<td>text</td>
+<td>starter / growth / enterprise</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="users"><code>users</code></h4>
+<p>Extends Supabase&#x27;s <code>auth.users</code>. One row per person who logs in.</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK — references auth.users</td>
+</tr>
+<tr>
+<td>firm_id</td>
+<td>uuid</td>
+<td>FK → firms (RLS anchor)</td>
+</tr>
+<tr>
+<td>full_name</td>
+<td>text</td>
+<td>&quot;Hasna Sahul Hameed&quot;</td>
+</tr>
+<tr>
+<td>role</td>
+<td>text</td>
+<td>admin / compliance_officer / adviser</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="client-reviews-documents">Client + reviews + documents</h3>
+<h4 id="clients"><code>clients</code></h4>
+<p>The core entity. Every advisory client.</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>firm_id</td>
+<td>uuid</td>
+<td>FK → firms</td>
+</tr>
+<tr>
+<td>adviser_id</td>
+<td>uuid</td>
+<td>FK → users</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>text</td>
+<td>Firm-scoped human-readable ID (&quot;CLI-0047&quot;)</td>
+</tr>
+<tr>
+<td>first_name, last_name</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>date_of_birth</td>
+<td>date</td>
+<td></td>
+</tr>
+<tr>
+<td>email, phone</td>
+<td>text</td>
+<td></td>
+</tr>
+<tr>
+<td>address</td>
+<td>jsonb</td>
+<td>UK-shaped address object</td>
+</tr>
+<tr>
+<td>risk_profile</td>
+<td>text</td>
+<td>conservative / balanced / aggressive</td>
+</tr>
+<tr>
+<td>status</td>
+<td>text</td>
+<td>active / inactive / prospect</td>
+</tr>
+<tr>
+<td>onboarded_at</td>
+<td>date</td>
+<td></td>
+</tr>
+<tr>
+<td>intelliflo_id</td>
+<td>text</td>
+<td>External sync reference (read-only at MVP)</td>
+</tr>
+<tr>
+<td>last_synced_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+<tr>
+<td>created_at, updated_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>Sequence <code>clients_reference_seq</code> and trigger auto-generate <code>CLI-NNNN</code> references on insert.</p>
+<h4 id="client_vulnerability"><code>client_vulnerability</code></h4>
+<p>Consumer Duty vulnerable-client tracking. Multiple rows allowed per client (history).</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>firm_id, client_id</td>
+<td>uuid</td>
+<td>FKs</td>
+</tr>
+<tr>
+<td>is_vulnerable</td>
+<td>boolean</td>
+<td></td>
+</tr>
+<tr>
+<td>driver</td>
+<td>text</td>
+<td>health / life_event / financial_resilience / low_capability (FG21/1 drivers)</td>
+</tr>
+<tr>
+<td>details</td>
+<td>text</td>
+<td>Free-text functional impact</td>
+</tr>
+<tr>
+<td>flagged_at, flagged_by</td>
+<td>timestamptz, uuid</td>
+<td></td>
+</tr>
+<tr>
+<td>reviewed_at, reviewed_by</td>
+<td>timestamptz, uuid</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>Current vulnerability status = most recent row where <code>is_vulnerable = true</code>.</p>
+<h4 id="reviews"><code>reviews</code></h4>
+<p>Annual reviews and ad-hoc reviews.</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>firm_id, client_id, adviser_id</td>
+<td>uuid</td>
+<td>FKs</td>
+</tr>
+<tr>
+<td>type</td>
+<td>text</td>
+<td>annual / ad_hoc / initial</td>
+</tr>
+<tr>
+<td>status</td>
+<td>text</td>
+<td>scheduled / in_progress / complete / overdue</td>
+</tr>
+<tr>
+<td>due_date</td>
+<td>date</td>
+<td></td>
+</tr>
+<tr>
+<td>completed_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+<tr>
+<td>notes</td>
+<td>text</td>
+<td>Reason-for-delay notes (used by nightly AR sweep)</td>
+</tr>
+<tr>
+<td>created_at, updated_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>A daily Supabase scheduled function moves <code>scheduled</code> → <code>overdue</code> once <code>due_date &lt; now()</code>. Completion of an <code>annual</code> review auto-schedules the next one at +12 months via a trigger.</p>
+<h4 id="documents"><code>documents</code></h4>
+<p>Every compliance document. Extended significantly by migration 017.</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>firm_id, client_id</td>
+<td>uuid</td>
+<td>FKs</td>
+</tr>
+<tr>
+<td>review_id</td>
+<td>uuid</td>
+<td>nullable FK → reviews</td>
+</tr>
+<tr>
+<td>superseded_by</td>
+<td>uuid</td>
+<td>nullable FK → self (document versioning)</td>
+</tr>
+<tr>
+<td>type</td>
+<td>text</td>
+<td>CHECK constraint: 23 allowed values (4 legacy aliases + 19 canonical types)</td>
+</tr>
+<tr>
+<td>status</td>
+<td>text</td>
+<td>complete / missing / expired / in_progress</td>
+</tr>
+<tr>
+<td>file_path</td>
+<td>text</td>
+<td>Path in Supabase Storage (primary file if multi-file group)</td>
+</tr>
+<tr>
+<td>file_name</td>
+<td>text</td>
+<td>Display name; for groups: &quot;primary.pdf (+N more)&quot;</td>
+</tr>
+<tr>
+<td>expires_at</td>
+<td>date</td>
+<td>For LOAs, SPS records, etc.</td>
+</tr>
+<tr>
+<td>metadata</td>
+<td>jsonb</td>
+<td>Per-doc-type extracted fields (Zod-validated at app layer)</td>
+</tr>
+<tr>
+<td>uploaded_by</td>
+<td>uuid</td>
+<td>FK → users</td>
+</tr>
+<tr>
+<td>uploaded_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+<tr>
+<td>external_ref</td>
+<td>text</td>
+<td>SharePoint / Intelliflo doc ID</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>The 23 allowed <code>type</code> values:</p>
+<p><strong>Legacy (kept for back-compat):</strong> <code>suitability_letter</code>, <code>soa</code>, <code>cd_assessment</code>, <code>vulnerability_reassessment</code></p>
+<p><strong>Canonical 19:</strong> <code>suitability_report</code>, <code>fact_find</code>, <code>client_agreement</code>, <code>annual_review</code>, <code>db_transfer_report</code>, <code>vulnerability_assessment</code>, <code>consumer_duty_outcome</code>, <code>letter_of_authority</code>, <code>product_illustration</code>, <code>terms_of_business</code>, <code>complaint_record</code>, <code>ongoing_service_evidence</code>, <code>aml_cdd</code>, <code>training_competency</code>, <code>expression_of_wish</code>, <code>application_form</code>, <code>portfolio_snapshot</code>, <code>sales_file_cover</code>, <code>attitude_to_risk</code></p>
+<h4 id="risk_flags"><code>risk_flags</code></h4>
+<p>AI-generated compliance alerts. Drives the Insights page, dashboard priority list, and chat context.</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>firm_id, client_id</td>
+<td>uuid</td>
+<td>FKs</td>
+</tr>
+<tr>
+<td>source_document_id</td>
+<td>uuid</td>
+<td>nullable FK → documents (added in 017)</td>
+</tr>
+<tr>
+<td>type</td>
+<td>text</td>
+<td>CHECK constraint: 20 allowed flag types</td>
+</tr>
+<tr>
+<td>severity</td>
+<td>text</td>
+<td>critical / high / medium / low</td>
+</tr>
+<tr>
+<td>title, description</td>
+<td>text</td>
+<td>Human-readable summary</td>
+</tr>
+<tr>
+<td>recommended_action</td>
+<td>text</td>
+<td>What to do next</td>
+</tr>
+<tr>
+<td>metadata</td>
+<td>jsonb</td>
+<td><code>{ fca_rule, reason, source: &#x27;extraction&#x27; }</code></td>
+</tr>
+<tr>
+<td>is_resolved</td>
+<td>boolean</td>
+<td>Default false</td>
+</tr>
+<tr>
+<td>resolved_at, resolved_by</td>
+<td>timestamptz, uuid</td>
+<td></td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>The 20 allowed <code>type</code> values:</p>
+<p><strong>Original client-level:</strong> <code>overdue_review</code>, <code>missing_document</code>, <code>cd_breach</code>, <code>vulnerable_undocumented</code>, <code>rmar_gap</code>, <code>expired_document</code></p>
+<p><strong>Doc-level (added in 017):</strong> <code>missing_signature</code>, <code>soa_not_delivered</code>, <code>incomplete_kyc</code>, <code>review_incomplete</code>, <code>cobs_19_breach</code>, <code>unqualified_advice</code>, <code>gdpr_breach</code>, <code>expired_loa</code>, <code>disp_breach</code>, <code>aml_cdd_stale</code>, <code>sps_expired</code>, <code>cpd_shortfall</code>, <code>cpd_structured_shortfall</code>, <code>extraction_uncertain</code></p>
+<h3 id="audit-trail">Audit trail</h3>
+<h4 id="compliance_events"><code>compliance_events</code></h4>
+<p>Append-only audit log. Cannot be UPDATE or DELETE via RLS.</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>firm_id</td>
+<td>uuid</td>
+<td>FK</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>uuid</td>
+<td>nullable FK</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>uuid</td>
+<td>nullable FK (NULL = system action)</td>
+</tr>
+<tr>
+<td>category</td>
+<td>text</td>
+<td>breach / alert / document / sync / update / report</td>
+</tr>
+<tr>
+<td>event</td>
+<td>text</td>
+<td>Human-readable</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>text</td>
+<td>&quot;DOC-0158&quot;, &quot;SYNC-0089&quot;</td>
+</tr>
+<tr>
+<td>metadata</td>
+<td>jsonb</td>
+<td>Renamed <code>ai_metadata</code> in migration 016 — holds Claude model name, tokens, latency for AI events</td>
+</tr>
+<tr>
+<td>occurred_at</td>
+<td>timestamptz</td>
+<td>DB-supplied, not client</td>
+</tr>
+</tbody></table>
+<h3 id="reports-integrations">Reports + integrations</h3>
+<h4 id="reports"><code>reports</code></h4>
+<p>Generated reports with snapshotted data.</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>firm_id</td>
+<td>uuid</td>
+<td>FK</td>
+</tr>
+<tr>
+<td>type</td>
+<td>text</td>
+<td>rmar / suitability / consumer_duty / vulnerable / log / board</td>
+</tr>
+<tr>
+<td>status</td>
+<td>text</td>
+<td>draft / complete / submitted</td>
+</tr>
+<tr>
+<td>period_start, period_end</td>
+<td>date</td>
+<td></td>
+</tr>
+<tr>
+<td>generated_by</td>
+<td>uuid</td>
+<td>FK → users</td>
+</tr>
+<tr>
+<td>generated_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+<tr>
+<td>file_path</td>
+<td>text</td>
+<td>PDF in Storage</td>
+</tr>
+<tr>
+<td>data</td>
+<td>jsonb</td>
+<td>Snapshot at generation time (used for re-render)</td>
+</tr>
+<tr>
+<td>submitted_at</td>
+<td>timestamptz</td>
+<td>When marked as filed with FCA</td>
+</tr>
+</tbody></table>
+<p><code>UPDATE</code> blocked once <code>status = &#x27;complete&#x27;</code>.</p>
+<h4 id="integrations"><code>integrations</code></h4>
+<p>Per-firm connections to external systems.</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>firm_id</td>
+<td>uuid</td>
+<td>FK</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>text</td>
+<td>intelliflo / sharepoint / salesforce / dynamic_planner / docusign</td>
+</tr>
+<tr>
+<td>status</td>
+<td>text</td>
+<td>connected / disconnected / error</td>
+</tr>
+<tr>
+<td>credentials</td>
+<td>jsonb</td>
+<td>Encrypted server-side; never returned in SELECT</td>
+</tr>
+<tr>
+<td>sync_frequency</td>
+<td>text</td>
+<td>hourly / 6h / daily / manual</td>
+</tr>
+<tr>
+<td>last_sync_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+<tr>
+<td>config</td>
+<td>jsonb</td>
+<td>Provider-specific</td>
+</tr>
+<tr>
+<td>connected_by</td>
+<td>uuid</td>
+<td>FK → users</td>
+</tr>
+<tr>
+<td>connected_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="sync_logs"><code>sync_logs</code></h4>
+<p>Per-sync-run record for debugging.</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>integration_id</td>
+<td>uuid</td>
+<td>FK</td>
+</tr>
+<tr>
+<td>firm_id</td>
+<td>uuid</td>
+<td>FK</td>
+</tr>
+<tr>
+<td>status</td>
+<td>text</td>
+<td>success / partial / failed</td>
+</tr>
+<tr>
+<td>records_synced</td>
+<td>int</td>
+<td></td>
+</tr>
+<tr>
+<td>errors</td>
+<td>jsonb</td>
+<td></td>
+</tr>
+<tr>
+<td>started_at, completed_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="rag-infrastructure-migration-016">RAG infrastructure (migration 016)</h3>
+<h4 id="fca_documents"><code>fca_documents</code></h4>
+<p>Shared FCA knowledge base. <strong>No RLS</strong> — all firms share this corpus.</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>source</td>
+<td>text</td>
+<td>&quot;COBS 9.5&quot;, &quot;PS22/9&quot;, &quot;FG21/1&quot;, etc.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>text</td>
+<td>Section title</td>
+</tr>
+<tr>
+<td>chunk_index</td>
+<td>int</td>
+<td></td>
+</tr>
+<tr>
+<td>content</td>
+<td>text</td>
+<td>The chunk text</td>
+</tr>
+<tr>
+<td>embedding</td>
+<td>vector(512)</td>
+<td>voyage-3-lite</td>
+</tr>
+<tr>
+<td>token_count</td>
+<td>int</td>
+<td></td>
+</tr>
+<tr>
+<td>created_at, updated_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>Indexed via IVFFlat (<code>vector_cosine_ops</code>, <code>lists = 50</code>).</p>
+<p>Currently holds 11,645 chunks across the full FCA publications archive + Handbook.</p>
+<h4 id="firm_embeddings"><code>firm_embeddings</code></h4>
+<p>Firm-specific embedded context for RAG. Per-firm, isolated by RLS.</p>
+<table>
+<thead><tr>
+<th>Column</th>
+<th>Type</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>id</td>
+<td>uuid</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>firm_id</td>
+<td>uuid</td>
+<td>FK (RLS anchor)</td>
+</tr>
+<tr>
+<td>source_type</td>
+<td>text</td>
+<td>client_summary / risk_flag / firm_overview / document_extraction</td>
+</tr>
+<tr>
+<td>source_id</td>
+<td>uuid</td>
+<td>nullable — points back to the source row</td>
+</tr>
+<tr>
+<td>content</td>
+<td>text</td>
+<td>The chunk text</td>
+</tr>
+<tr>
+<td>embedding</td>
+<td>vector(512)</td>
+<td>voyage-3-lite</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamptz</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>Rebuilt entirely on every &quot;Refresh AI Context&quot; click. Indexed via IVFFlat.</p>
+<h4 id="rpcs-remote-procedure-calls">RPCs (Remote Procedure Calls)</h4>
+<ul>
+<li><code>match_fca_documents(query_embedding, match_threshold, match_count)</code> — semantic search against <code>fca_documents</code>. Used by chat + report generation. Default threshold 0.60, top-6.</li>
+<li><code>match_firm_embeddings(query_embedding, match_threshold, match_count)</code> — semantic search against <code>firm_embeddings</code> for the current firm only (uses <code>get_firm_id()</code>). Default threshold 0.45, top-12.</li>
+</ul>
+<h3 id="helper-view-migration-017">Helper view (migration 017)</h3>
+<h4 id="documents_with_flag_count"><code>documents_with_flag_count</code></h4>
+<p>Convenience view joining documents with a count of open flags raised from each.</p>
+<pre><code>CREATE OR REPLACE VIEW public.documents_with_flag_count AS
+SELECT
+  d.*,
+  COALESCE(
+    (SELECT COUNT(*) FROM public.risk_flags rf
+     WHERE rf.source_document_id = d.id AND rf.is_resolved = false), 0
+  ) AS open_flag_count
+FROM public.documents d;</code></pre>
+<h2 id="migrations">Migrations</h2>
+<p>All migrations live in <code>/Users/milan/Documents/Amaea/amaea-db/migrations/</code> (numbered SQL files) with a parallel timestamped copy in <code>amaea-db/supabase/migrations/</code> for Supabase CLI compatibility.</p>
+<table>
+<thead><tr>
+<th>#</th>
+<th>File</th>
+<th>Purpose</th>
+</tr></thead><tbody>
+<tr>
+<td>001</td>
+<td>extensions</td>
+<td>Enable <code>uuid-ossp</code>, <code>pgcrypto</code></td>
+</tr>
+<tr>
+<td>002</td>
+<td>firms</td>
+<td>Top-level tenant</td>
+</tr>
+<tr>
+<td>003</td>
+<td>users</td>
+<td>Users + <code>get_firm_id()</code> helper</td>
+</tr>
+<tr>
+<td>004</td>
+<td>clients</td>
+<td>Core client records + reference auto-gen</td>
+</tr>
+<tr>
+<td>005</td>
+<td>client_vulnerability</td>
+<td>Consumer Duty vulnerability tracking</td>
+</tr>
+<tr>
+<td>006</td>
+<td>reviews</td>
+<td>Annual + ad-hoc reviews + overdue logic</td>
+</tr>
+<tr>
+<td>007</td>
+<td>documents</td>
+<td>Compliance documents + expiry logic</td>
+</tr>
+<tr>
+<td>008</td>
+<td>risk_flags</td>
+<td>AI-generated alerts + UNIQUE-by-type-per-client</td>
+</tr>
+<tr>
+<td>009</td>
+<td>compliance_events</td>
+<td>Append-only audit trail + auto-log triggers</td>
+</tr>
+<tr>
+<td>010</td>
+<td>reports</td>
+<td>Reports + snapshot locking</td>
+</tr>
+<tr>
+<td>011</td>
+<td>integrations</td>
+<td>External system connections + sync logs</td>
+</tr>
+<tr>
+<td>012</td>
+<td>views</td>
+<td>Computed metrics (health score, dashboard)</td>
+</tr>
+<tr>
+<td>013</td>
+<td>rls_policies</td>
+<td>Row Level Security policies for all tables</td>
+</tr>
+<tr>
+<td>014</td>
+<td>indexes</td>
+<td>Performance indexes</td>
+</tr>
+<tr>
+<td>015</td>
+<td>seed_data</td>
+<td>Dev seed data (Sterling IFA Ltd)</td>
+</tr>
+<tr>
+<td>016</td>
+<td>rag</td>
+<td>pgvector + fca_documents + firm_embeddings + AI metadata column</td>
+</tr>
+<tr>
+<td>017</td>
+<td>document_metadata</td>
+<td><code>documents.metadata jsonb</code> + <code>risk_flags.source_document_id</code> + extended type CHECKs + partial unique indexes + <code>documents_with_flag_count</code> view</td>
+</tr>
+<tr>
+<td>018</td>
+<td>realistic_book</td>
+<td>Bulk completed reviews + complete documents to bring Sterling IFA from &quot;failing&quot; to &quot;healthy boutique&quot;</td>
+</tr>
+<tr>
+<td>019</td>
+<td>health_score_polish</td>
+<td>Flag dedupe + doc/review completion top-up to push health score to ~88</td>
+</tr>
+<tr>
+<td>020</td>
+<td>more_doc_types</td>
+<td>Add 4 doc types: expression_of_wish, application_form, portfolio_snapshot, sales_file_cover</td>
+</tr>
+<tr>
+<td>021</td>
+<td>atr_doc_type</td>
+<td>Add attitude_to_risk as 19th canonical doc type</td>
+</tr>
+</tbody></table>
+<p>Migrations are applied via the Supabase Dashboard SQL editor (paste + Run). <code>supabase db push</code> via the CLI is supported but requires <code>supabase login</code> + <code>supabase link</code> first; the historic pattern has been Dashboard pasting.</p>
+<h2 id="application-code-structure">Application code structure</h2>
+<pre><code>amaea-app/
+├── public/                       Static assets
+├── scripts/                      Node scripts (ingest, eval, doc gen, verify)
+│   ├── ingest.mjs                Original FCA ingest (82 chunks, baseline)
+│   ├── ingest-scraped.mjs        Bulk ingest from scraped/*.json
+│   ├── fca-scrape.mjs            FCA publications scraper (PDFs via pdf-parse)
+│   ├── fca-scrape-handbook.mjs   FCA Handbook scraper (Playwright)
+│   ├── eval.mjs                  50-scenario eval harness
+│   ├── eval-to-csv.mjs           Convert eval JSON → CSV
+│   ├── eval-to-xlsx.py           Convert eval CSV → formatted Excel workbook
+│   ├── generate-test-pdfs.mjs    Original 5 test PDFs
+│   ├── generate-test-pdfs-v2.mjs Extended 25+ test PDFs
+│   └── check-imports.mjs         Diagnostic for recent uploads
+├── src/
+│   ├── app/
+│   │   ├── (app)/                Authenticated app routes
+│   │   │   ├── dashboard/
+│   │   │   ├── clients/
+│   │   │   ├── reviews/
+│   │   │   ├── documents/
+│   │   │   ├── assistant/        Full-page chat
+│   │   │   ├── insights/
+│   │   │   ├── reports/
+│   │   │   ├── governance/
+│   │   │   ├── import/           Document import drag-drop
+│   │   │   ├── integrations/
+│   │   │   └── settings/
+│   │   ├── api/
+│   │   │   ├── chat/             Dashboard chat
+│   │   │   ├── cron/ar-sweep/    Nightly cron
+│   │   │   ├── flags/
+│   │   │   ├── import/documents/ Main extraction pipeline
+│   │   │   ├── onboarding/firm/
+│   │   │   ├── public/chat/      Marketing site demo
+│   │   │   ├── rag/
+│   │   │   │   ├── ingest/       FCA ingest endpoint
+│   │   │   │   ├── firm-embed/   Rebuild firm embeddings (Refresh AI Context)
+│   │   │   │   └── horizon/      Weekly FCA RSS ingest
+│   │   │   ├── reports/generate/
+│   │   │   └── reviews/[id]/notes/
+│   │   ├── auth/
+│   │   ├── login/
+│   │   └── onboarding/
+│   ├── lib/
+│   │   ├── extraction/
+│   │   │   ├── schemas.ts        19 Zod schemas + flagsFromExtraction()
+│   │   │   └── extract.ts        classifyDocument + extractDocument orchestrator
+│   │   ├── rag/
+│   │   │   ├── embed.ts          Voyage AI client
+│   │   │   ├── chunk-fca.ts      FCA knowledge chunker (legacy 82-chunk)
+│   │   │   └── embed-firm.ts     Builds firm-context chunks
+│   │   ├── supabase/
+│   │   │   ├── server.ts         RLS-respecting client (user session)
+│   │   │   └── admin.ts          Service-role client (bypasses RLS, server-only)
+│   │   └── fca-knowledge.ts      Fallback static FCA knowledge (used if RAG unavailable)
+│   ├── components/               Shared UI components
+│   ├── context/
+│   │   └── ChatContext.tsx       Chat state shared between dashboard + insights
+│   ├── hooks/
+│   │   └── useChat.ts            Chat fetch hook
+│   └── middleware.ts             Auth check / session refresh
+├── vercel.json                   Cron schedule definition
+├── next.config.ts
+├── package.json
+└── .env.local                    Local secrets (gitignored)</code></pre>
+<h2 id="data-flow-document-upload">Data flow: document upload</h2>
+<pre><code>1. User drags PDF(s) onto /import page
+2. Optional: ticks &quot;Treat these N files as ONE document&quot;
+3. processAll() in ImportClient.tsx:
+   - If group toggle ON + 2+ files: single POST with all files in one FormData
+   - If OFF: sequential POSTs, one per file
+4. POST /api/import/documents:
+   a. auth check (Supabase server client)
+   b. resolve firm_id from users table
+   c. parse all files via formData.getAll(&#x27;file&#x27;)
+   d. base64-encode each file
+5. processDocument(files):
+   a. classifyDocument(files) → Claude vision call with all files as content blocks → DocumentType
+   b. extractDocument(files, type) → Claude vision call → JSON → Zod.parse → ExtractedDocument
+6. matchClient(extracted, firmId) → look up client by reference, then by name fuzzy match
+7. Upload all files to Supabase Storage (firm-documents bucket)
+8. Persist documents row:
+   - file_name = &quot;primary.pdf&quot; or &quot;primary.pdf (+N more)&quot;
+   - metadata = ExtractedDocument + { additionalFiles: [...], totalFiles: N }
+9. flagsFromExtraction(extracted) → array of RiskFlag descriptors
+10. Upsert each flag into risk_flags with source_document_id = the new doc id
+11. Resolve any pre-existing missing/expired risk flags for this client+type
+12. If annual_review: mark overdue review complete, create next scheduled review
+13. Insert compliance_events row for audit trail
+14. Return JSON: { success, doc_type, doc_date, client_name, client_ref, raised_flags, extraction, ... }
+15. Frontend updates the result card with extracted fields + raised flag pills</code></pre>
+<h2 id="data-flow-chat-query">Data flow: chat query</h2>
+<pre><code>1. User asks question in dashboard chat OR /assistant OR /insights AskAmaea
+2. POST /api/chat with { messages: [...], stats: {...} }
+3. Build context (Promise.all in parallel):
+   a. retrieveFcaContext(query)
+      - embedText(query) via Voyage AI
+      - sb.rpc(&#x27;match_fca_documents&#x27;, threshold: 0.60, count: 6)
+      - Fallback to static FCA_KNOWLEDGE if RAG fails
+   b. retrieveFirmContext(query)
+      - same embedding
+      - sb.rpc(&#x27;match_firm_embeddings&#x27;, threshold: 0.45, count: 12)
+      - Returns empty if firm embeddings haven&#x27;t been built
+   c. getRecentImportContext(firmId)
+      - SQL: top 25 doc-level critical/high/medium flags (NOT NULL source_document_id)
+      - SQL: top 30 documents with metadata, sorted by uploaded_at DESC
+      - Dedupe by (type × client) so re-uploads don&#x27;t bloat
+      - Returns formatted prompt sections &quot;FLAGS RAISED BY RECENT…&quot; + &quot;RECENT DOCUMENT IMPORTS…&quot;
+   d. getAdviserStats(firmId)
+      - For each adviser: count clients, count overdue reviews
+      - Returns &quot;James Morrison (88 clients, 0 overdue), …&quot;
+4. buildSystemPrompt(stats, adviserStats, fcaContext, firmContext, importContext, usingRag):
+   - Identity + capabilities
+   - Live stats from front-end (active clients, overdue, health score)
+   - Live adviser stats from SQL
+   - Priority client notes (Margaret/Robert/Priya — described as &quot;may have issues, verify&quot;)
+   - Response guidelines
+   - RETRIEVED FIRM CONTEXT block
+   - RECENTLY IMPORTED DOCUMENTS AND DOC-LEVEL FLAGS block
+   - RETRIEVED REGULATORY CONTEXT block (FCA corpus)
+   - Formatting rules (plain prose, no markdown)
+5. anthropic.messages.create({ model: &#x27;claude-sonnet-4-6&#x27;, max_tokens: 16384, system, messages })
+6. Log compliance_event with token counts, latency, retrieval query
+7. Return { text, ragUsed }</code></pre>
+<h2 id="vercel-cron-jobs">Vercel cron jobs</h2>
+<p>Defined in <code>amaea-app/vercel.json</code>:</p>
+<pre><code>{
+  &quot;crons&quot;: [
+    { &quot;path&quot;: &quot;/api/rag/horizon&quot;,   &quot;schedule&quot;: &quot;0 8 * * 1&quot; },
+    { &quot;path&quot;: &quot;/api/cron/ar-sweep&quot;, &quot;schedule&quot;: &quot;0 6 * * *&quot; }
+  ]
+}</code></pre>
+<p><strong>Nightly AR sweep (06:00 UTC daily)</strong> at <code>/api/cron/ar-sweep</code>:</p>
+<ul>
+<li>Queries all overdue reviews across the firm</li>
+<li>For each: fetches delay-reason notes recorded by the adviser</li>
+<li>Calls Claude (max_tokens 512) with the review details + notes for a COBS 9.5 sufficiency evaluation</li>
+<li>If notes are absent or insufficient: creates/updates an <code>overdue_review</code> risk flag</li>
+<li>If notes are sufficient: resolves any existing <code>overdue_review</code> flag for that client</li>
+<li>Severity ladder: 8+ weeks = critical, 4–7 = high, 2–3 = medium, &lt;2 = low</li>
+</ul>
+<p><strong>Weekly Regulatory Horizon ingest (08:00 UTC Mondays)</strong> at <code>/api/rag/horizon</code>:</p>
+<ul>
+<li>Fetches the FCA RSS feed</li>
+<li>Parses new publications</li>
+<li>Embeds each title + abstract via Voyage AI</li>
+<li>Inserts into <code>fca_documents</code> with <code>source = &#x27;FCA Horizon&#x27;</code></li>
+<li>Duplicates skipped by URL</li>
+</ul>
+<h2 id="environment-variables-production">Environment variables (production)</h2>
+<p>All set in Vercel project settings. Local copies in <code>amaea-app/.env.local</code>.</p>
+<table>
+<thead><tr>
+<th>Variable</th>
+<th>Purpose</th>
+</tr></thead><tbody>
+<tr>
+<td><code>NEXT_PUBLIC_SUPABASE_URL</code></td>
+<td>Supabase project URL</td>
+</tr>
+<tr>
+<td><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></td>
+<td>Supabase anon key (public; used by browser)</td>
+</tr>
+<tr>
+<td><code>SUPABASE_SERVICE_ROLE_KEY</code></td>
+<td>Server-only admin client; bypasses RLS for compliance event logging and cross-firm queries</td>
+</tr>
+<tr>
+<td><code>ANTHROPIC_API_KEY</code></td>
+<td>Claude API access</td>
+</tr>
+<tr>
+<td><code>VOYAGE_API_KEY</code></td>
+<td>Voyage AI embeddings</td>
+</tr>
+<tr>
+<td><code>INGEST_SECRET</code></td>
+<td>Bearer token for manual cron triggers (currently <code>amaea-ingest-2026</code>)</td>
+</tr>
+</tbody></table>
+<h2 id="architectural-decisions-worth-knowing">Architectural decisions worth knowing</h2>
+<p><strong>Why pgvector and not a separate vector DB.</strong> Co-locating embeddings with relational data means we can JOIN client records with their embedded summaries in one query, and we don&#x27;t operate two systems. Pinecone / Weaviate / Qdrant would add ops burden for no functional gain at MVP scale.</p>
+<p><strong>Why Voyage AI and not OpenAI embeddings.</strong> Voyage&#x27;s <code>voyage-3-lite</code> is 512-dim (vs 1536 for OpenAI ada-002 and 3072 for text-embedding-3-large), which means 6× smaller index footprint and faster retrieval at comparable quality on regulatory text. Cost is also ~5x lower. Quality benchmarks were run against the 50-scenario eval set during selection.</p>
+<p><strong>Why a discriminated union for ExtractedDocument.</strong> Each of the 19 document types has different fields. A discriminated union (<code>z.discriminatedUnion(&#x27;documentType&#x27;, [...])</code>) gives us full TypeScript type narrowing — if <code>docType === &#x27;db_transfer_report&#x27;</code>, we get <code>transferValue: number | null</code> available; if it&#x27;s a <code>fact_find</code>, we get <code>attitudeToRiskRating: string | null</code>. No type assertions needed.</p>
+<p><strong>Why classify-then-extract in two steps, not one.</strong> A single prompt asking Claude to both classify AND extract would either be too verbose (every field for every type listed) or too sloppy (Claude inventing fields). Splitting into a cheap classify call (max_tokens 20, just the type identifier) followed by a type-specific extract call gives better accuracy on both steps and lets the prompts stay focused.</p>
+<p><strong>Why Zod&#x27;s <code>.partial()</code> on inner array objects.</strong> Claude vision sometimes omits fields it can&#x27;t determine from a document (e.g. a phone-call touchpoint in an ongoing-service-evidence log doesn&#x27;t have a <code>chargeLevied</code> field shown). Without <code>.partial()</code>, undefined fields cause schema validation errors. With <code>.partial()</code>, missing fields are tolerated and the validated output represents what was actually extracted.</p>
+<p><strong>Why unconditional injection of recent uploads in the chat prompt.</strong> RAG retrieval is similarity-based. On broad queries like &quot;give me a compliance rundown&quot;, the highest-ranked chunks tend to be firm-overview summaries — specific document_extraction chunks score lower and miss the top-K. Injecting the 30 most recent uploads directly into the system prompt guarantees they&#x27;re always visible to the model, independent of retrieval. This is the layer that makes the chat able to reference &quot;Margaret&#x27;s £412,500 DB transfer&quot; by extracted value, not just by general description.</p>
+<p><strong>Why we accept doc records without file storage on the document import path.</strong> If the Supabase Storage upload fails (bucket misconfigured, file too large), the import route catches the error and proceeds without <code>file_path</code>. The extraction still runs and the metadata is still persisted. We optimise for &quot;compliance state is captured&quot; over &quot;file is archived&quot; because the former is the immediate user value.</p>
+<h2 id="whats-deliberately-not-built">What&#x27;s deliberately not built</h2>
+<p>These have been considered and parked:</p>
+<ul>
+<li><strong>Document classification via tool-use rather than free-text response.</strong> Anthropic&#x27;s tool-use API would constrain Claude&#x27;s output to one of the 19 type values. Free-text + Zod validation is functionally equivalent and easier to evolve.</li>
+<li><strong>Multi-tenant FCA knowledge base.</strong> All firms share <code>fca_documents</code>. Future: per-firm customisation (e.g. a firm&#x27;s own templates / policies) would live in a separate table.</li>
+<li><strong>Per-document file versioning.</strong> <code>documents.superseded_by</code> FK exists but no UI / pipeline yet creates supersession chains. Reuploading a document of the same type currently UPDATEs the latest record rather than creating a new version.</li>
+<li><strong>Per-adviser document table (training_competency).</strong> Adviser-level documents (SPS, CPD records) currently fail to persist because <code>documents.client_id</code> is NOT NULL. They&#x27;re extracted and returned to the UI but not stored. A separate <code>adviser_documents</code> table is on the post-MVP list.</li>
+<li><strong>PDF page-level metadata.</strong> For multi-page grouped uploads, we don&#x27;t record which extracted field came from which page. Adding <code>metadata.fields_by_page</code> is a future enhancement for audit defensibility.</li>
+</ul>
+<h2 id="what-to-read-next">What to read next</h2>
+<ul>
+<li>For the compliance moat (the actual product IP): <strong><a href="03-extraction.html">03 — Document Extraction &amp; Compliance Flag System</a></strong></li>
+<li>For the AI layer: <strong><a href="04-ai-kb.html">04 — AI Layer &amp; FCA Knowledge Base</a></strong></li>
+<li>For ops: <strong><a href="05-ops.html">05 — Operations Handbook</a></strong></li>
+</ul>
+</article>
+
+</body>
+</html>

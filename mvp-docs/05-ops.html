@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Operations Handbook · Amaea MVP Docs</title>
+  <link rel="icon" href="logo-plum.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-top">
+    <img src="logo-white.png" alt="Amaea"/>
+    <span class="cover-badge">MVP Documentation</span>
+  </div>
+
+  <div class="cover-body">
+    <p class="cover-eyebrow">Doc 05 · Anyone responsible for keeping it running</p>
+    <h1 class="cover-title">Operations Handbook</h1>
+    <p class="cover-sub">Deployment procedure, environment variables, migrations, cron inventory, cost monitoring, routine maintenance, and the runbook for common issues.</p>
+  </div>
+
+  <div class="cover-foot">
+    <div>
+      <p class="cover-meta-label">Status</p>
+      <p class="cover-meta-value">MVP · pre-launch</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">As of</p>
+      <p class="cover-meta-value">14 May 2026</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Owners</p>
+      <p class="cover-meta-value">Hasna Sahul Hameed · Milan Sajiv</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Length</p>
+      <p class="cover-meta-value">~20 min read</p>
+    </div>
+  </div>
+
+  <div class="cover-tagline">
+    <p class="cover-tagline-text">Stay compliant. Stay confident.</p>
+    <p class="cover-tagline-sub">amaea</p>
+  </div>
+</section>
+
+<nav class="doc-nav">
+  <a href="index.html">← All documents</a>
+  <span class="doc-nav-meta">Doc 05 · ~20 min read</span>
+</nav>
+
+<article class="doc">
+<p>The runbook. How to deploy, what to do when something breaks, what costs to monitor, what routine maintenance looks like.</p>
+<h2 id="production-environments">Production environments</h2>
+<table>
+<thead><tr>
+<th>Environment</th>
+<th>URL</th>
+<th>What lives there</th>
+</tr></thead><tbody>
+<tr>
+<td>App (production)</td>
+<td><code>https://amaea.vercel.app</code></td>
+<td>The main IFA-facing product. Authenticated.</td>
+</tr>
+<tr>
+<td>Marketing site</td>
+<td><code>https://amaeaai.vercel.app</code></td>
+<td>Public marketing. Includes the live AI demo.</td>
+</tr>
+<tr>
+<td>Supabase</td>
+<td><code>sqsqyhcrkwjopwlosqlh.supabase.co</code></td>
+<td>Postgres + Storage + Auth. EU-West (Ireland).</td>
+</tr>
+<tr>
+<td>Vercel project (app)</td>
+<td><code>amaea0002-devs-projects/amaea</code></td>
+<td>Vercel project linked to the <code>amaea-app</code> codebase.</td>
+</tr>
+</tbody></table>
+<h2 id="deployment">Deployment</h2>
+<h3 id="standard-deploy">Standard deploy</h3>
+<p>The Vercel CLI deploys the current local state directly — there&#x27;s no GitHub remote / Git-based deploy at present. From a Mac with <code>vercel login</code> already done:</p>
+<pre><code>cd /Users/milan/Documents/Amaea/amaea-app
+npx vercel --prod</code></pre>
+<p>Vercel:</p>
+<ol>
+<li>Uploads the working tree (~90MB compressed)</li>
+<li>Runs <code>npm install</code> (picks up dependencies from <code>package.json</code>)</li>
+<li>Runs <code>next build</code></li>
+<li>Deploys to the production alias <code>amaea.vercel.app</code></li>
+</ol>
+<p>Typical end-to-end time: 1–3 minutes (faster on warm cache).</p>
+<h3 id="first-time-deploy-on-a-new-machine">First-time deploy on a new machine</h3>
+<pre><code># 1. Authenticate Vercel
+npx vercel login
+# Pick the same method used previously (likely GitHub OAuth)
+# Browser opens for confirmation
+
+# 2. Verify the project link
+cat /Users/milan/Documents/Amaea/amaea-app/.vercel/project.json
+# Should show:
+# { &quot;projectId&quot;: &quot;prj_51REnXWtZezLKKNAx744qlIqzacN&quot;,
+#   &quot;orgId&quot;:     &quot;team_p5flIlgZvFKNUiGtcywMWfB1&quot;,
+#   &quot;projectName&quot;: &quot;amaea&quot; }
+
+# 3. Deploy
+cd /Users/milan/Documents/Amaea/amaea-app &amp;&amp; npx vercel --prod</code></pre>
+<p>If <code>.vercel/project.json</code> is missing, run <code>npx vercel link</code> first and select the existing <code>amaea</code> project under the <code>amaea0002-devs-projects</code> team.</p>
+<h3 id="rolling-back">Rolling back</h3>
+<pre><code>npx vercel list                          # see recent deployments
+npx vercel promote &lt;deployment-url&gt;      # promote a previous deploy to production</code></pre>
+<p>Alternatively from the Vercel dashboard: Project → Deployments → click an old one → Promote.</p>
+<h3 id="watching-the-build">Watching the build</h3>
+<p>The CLI outputs a JSON summary with deployment ID, inspector URL, and the alias URL. Inspector URL is the Vercel build log.</p>
+<h2 id="environment-variables">Environment variables</h2>
+<p>All set in <strong>Vercel Project Settings → Environment Variables</strong> with the same values in <code>amaea-app/.env.local</code> for local development. Six required:</p>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Where it&#x27;s used</th>
+<th>What it does</th>
+</tr></thead><tbody>
+<tr>
+<td><code>NEXT_PUBLIC_SUPABASE_URL</code></td>
+<td>Browser + server</td>
+<td>Supabase project URL (used by both auth client and admin client)</td>
+</tr>
+<tr>
+<td><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></td>
+<td>Browser</td>
+<td>Anon key for browser-side Supabase calls (RLS-respecting)</td>
+</tr>
+<tr>
+<td><code>SUPABASE_SERVICE_ROLE_KEY</code></td>
+<td>Server only</td>
+<td>Service-role key for admin client (bypasses RLS — used for compliance event logging, cross-firm queries, the AR sweep cron, and the firm-embed rebuild)</td>
+</tr>
+<tr>
+<td><code>ANTHROPIC_API_KEY</code></td>
+<td>Server only</td>
+<td>Claude API for chat, document extraction, report generation, AR sweep</td>
+</tr>
+<tr>
+<td><code>VOYAGE_API_KEY</code></td>
+<td>Server only</td>
+<td>Voyage AI embeddings for FCA ingest, chat retrieval, firm embedding rebuild</td>
+</tr>
+<tr>
+<td><code>INGEST_SECRET</code></td>
+<td>Server only</td>
+<td>Bearer token for manual cron triggers (currently <code>amaea-ingest-2026</code>)</td>
+</tr>
+</tbody></table>
+<p><strong>Security notes:</strong></p>
+<ul>
+<li><code>SUPABASE_SERVICE_ROLE_KEY</code> is server-only and never reaches the browser. If accidentally leaked: rotate via Supabase Dashboard → Project Settings → API → Reset.</li>
+<li><code>ANTHROPIC_API_KEY</code> and <code>VOYAGE_API_KEY</code> — rotate annually or sooner if a deploy log is shared publicly.</li>
+<li><code>INGEST_SECRET</code> is only useful for manually triggering crons; rotating it requires updating both Vercel env and any manual trigger scripts.</li>
+</ul>
+<h3 id="pulling-env-from-vercel-to-local">Pulling env from Vercel to local</h3>
+<pre><code>cd /Users/milan/Documents/Amaea/amaea-app
+npx vercel env pull .env.local</code></pre>
+<p>This pulls the current production env vars into <code>.env.local</code>. Useful when setting up a new machine.</p>
+<h2 id="migrations">Migrations</h2>
+<h3 id="where-they-live">Where they live</h3>
+<ul>
+<li><code>/Users/milan/Documents/Amaea/amaea-db/migrations/</code> — the canonical numbered SQL files (<code>001_extensions.sql</code> through <code>021_atr_doc_type.sql</code>)</li>
+<li><code>/Users/milan/Documents/Amaea/amaea-db/supabase/migrations/</code> — timestamped copies for Supabase CLI compatibility (<code>20260511000001_*.sql</code> through <code>20260514000021_*.sql</code>)</li>
+</ul>
+<p>When adding a new migration: create both copies. The numbered version is human-readable, the timestamped version is what <code>supabase db push</code> would use if we set that up.</p>
+<h3 id="applying-a-migration">Applying a migration</h3>
+<p>The historic pattern is <strong>paste into the Supabase Dashboard SQL editor</strong> — not CLI push. To apply migration N:</p>
+<pre><code># 1. Copy to clipboard
+pbcopy &lt; /Users/milan/Documents/Amaea/amaea-db/migrations/0NN_name.sql
+
+# 2. Open the SQL editor
+open &quot;https://supabase.com/dashboard/project/sqsqyhcrkwjopwlosqlh/sql/new&quot;
+
+# 3. Cmd+V, then click Run</code></pre>
+<p>After running, verify with a quick query (often a SELECT against <code>information_schema.columns</code> or a test row INSERT/DELETE).</p>
+<h3 id="migration-verification-scripts">Migration verification scripts</h3>
+<p>Available at <code>amaea-app/scripts/</code>:</p>
+<ul>
+<li><code>verify-migration-017.mjs</code> — confirms migration 017 schema changes (metadata columns, source_document_id, type CHECKs, view)</li>
+<li><code>check-imports.mjs</code> — lists recent documents with metadata, useful for verifying that a doc-type CHECK extension works in practice</li>
+<li><code>check-client-signals.mjs</code> — diagnostic for the client query in <code>embed-firm.ts</code></li>
+<li><code>check-health.mjs</code> — pulls the current health score breakdown by component</li>
+</ul>
+<p>To run any: <code>cd amaea-app &amp;&amp; node scripts/&lt;name&gt;.mjs</code></p>
+<h3 id="migration-history">Migration history</h3>
+<table>
+<thead><tr>
+<th>#</th>
+<th>File</th>
+<th>Effect</th>
+</tr></thead><tbody>
+<tr>
+<td>001-016</td>
+<td>Original schema</td>
+<td>Extensions through RAG infrastructure</td>
+</tr>
+<tr>
+<td>017</td>
+<td><code>document_metadata</code></td>
+<td>Document extraction v2 schema (jsonb metadata, doc-level flag linkage)</td>
+</tr>
+<tr>
+<td>018</td>
+<td><code>realistic_book</code></td>
+<td>Bulk-completed reviews + complete documents → demo firm goes 9 → 64</td>
+</tr>
+<tr>
+<td>019</td>
+<td><code>health_score_polish</code></td>
+<td>Flag dedupe + doc/review top-up → demo firm 64 → 88</td>
+</tr>
+<tr>
+<td>020</td>
+<td><code>more_doc_types</code></td>
+<td>4 new doc types: expression_of_wish, application_form, portfolio_snapshot, sales_file_cover</td>
+</tr>
+<tr>
+<td>021</td>
+<td><code>atr_doc_type</code></td>
+<td>attitude_to_risk as 19th canonical type</td>
+</tr>
+</tbody></table>
+<h2 id="cron-inventory">Cron inventory</h2>
+<p>Defined in <code>amaea-app/vercel.json</code>:</p>
+<pre><code>{
+  &quot;crons&quot;: [
+    { &quot;path&quot;: &quot;/api/rag/horizon&quot;,   &quot;schedule&quot;: &quot;0 8 * * 1&quot; },
+    { &quot;path&quot;: &quot;/api/cron/ar-sweep&quot;, &quot;schedule&quot;: &quot;0 6 * * *&quot; }
+  ]
+}</code></pre>
+<h3 id="apiraghorizon-mondays-at-0800-utc"><code>/api/rag/horizon</code> — Mondays at 08:00 UTC</h3>
+<p>Fetches FCA RSS feed, embeds new publications, inserts into <code>fca_documents</code> with <code>source = &#x27;FCA Horizon&#x27;</code>. Skips duplicates by URL.</p>
+<p>Manual trigger:</p>
+<pre><code>curl -X GET https://amaea.vercel.app/api/rag/horizon \
+  -H &quot;Authorization: Bearer amaea-ingest-2026&quot;</code></pre>
+<h3 id="apicronar-sweep-every-day-at-0600-utc"><code>/api/cron/ar-sweep</code> — Every day at 06:00 UTC</h3>
+<p>Evaluates every overdue review against COBS 9.5 using Claude. Creates / resolves <code>overdue_review</code> flags. Max_tokens 512 per review.</p>
+<p>Manual trigger:</p>
+<pre><code>curl -X GET https://amaea.vercel.app/api/cron/ar-sweep \
+  -H &quot;Authorization: Bearer amaea-ingest-2026&quot;</code></pre>
+<h3 id="checking-cron-status">Checking cron status</h3>
+<p>Vercel Dashboard → Project <code>amaea</code> → Logs → filter by <code>/api/cron/</code>. Each cron execution logs with a request ID, duration, and any error.</p>
+<h2 id="cost-monitoring">Cost monitoring</h2>
+<h3 id="anthropic-claude">Anthropic Claude</h3>
+<p>The biggest cost line. Three places:</p>
+<table>
+<thead><tr>
+<th>Surface</th>
+<th>Per-call cost</th>
+<th>Typical volume</th>
+<th>Monthly estimate (per firm)</th>
+</tr></thead><tbody>
+<tr>
+<td>Chat (dashboard + assistant)</td>
+<td>$0.05 – $0.20</td>
+<td>20–100 calls/day</td>
+<td>£20 – £100</td>
+</tr>
+<tr>
+<td>Document extraction (classify + extract)</td>
+<td>$0.03 – $0.10</td>
+<td>5–50 docs/day</td>
+<td>£5 – £50</td>
+</tr>
+<tr>
+<td>Report generation (Scribe)</td>
+<td>$0.05 – $0.15</td>
+<td>1–5 reports/day</td>
+<td>£1 – £10</td>
+</tr>
+<tr>
+<td>AR sweep cron</td>
+<td>$0.005 per review</td>
+<td>Daily, 1–17 reviews</td>
+<td>£1 – £5</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td></td>
+<td></td>
+<td><strong>£30 – £170 per firm/month</strong></td>
+</tr>
+</tbody></table>
+<p>Anthropic billing: monitor at https://console.anthropic.com/. Set spending limits via the dashboard.</p>
+<h3 id="voyage-ai">Voyage AI</h3>
+<p>Embeddings cost ~$0.02 per 1M tokens. Volumes:</p>
+<table>
+<thead><tr>
+<th>Activity</th>
+<th>Frequency</th>
+<th>Cost/month</th>
+</tr></thead><tbody>
+<tr>
+<td>FCA ingest (one-time)</td>
+<td>One-shot</td>
+<td>~£0.50 total</td>
+</tr>
+<tr>
+<td>Regulatory Horizon ingest</td>
+<td>Weekly</td>
+<td>~£0.10/month</td>
+</tr>
+<tr>
+<td>Chat retrieval embeddings</td>
+<td>Per chat call</td>
+<td>~£0.50/month per firm</td>
+</tr>
+<tr>
+<td>Firm embedding rebuilds</td>
+<td>Per &quot;Refresh AI Context&quot; click</td>
+<td>~£0.10/month per firm</td>
+</tr>
+<tr>
+<td>Document import (none — Voyage isn&#x27;t used for extraction)</td>
+<td>—</td>
+<td>£0</td>
+</tr>
+</tbody></table>
+<p>Voyage billing: https://dash.voyageai.com/.</p>
+<h3 id="supabase">Supabase</h3>
+<table>
+<thead><tr>
+<th>Resource</th>
+<th>Free tier</th>
+<th>Production usage</th>
+</tr></thead><tbody>
+<tr>
+<td>Database</td>
+<td>500MB</td>
+<td>~300MB at MVP scale; bumps to Pro tier at ~50 firms</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>1GB</td>
+<td>Document storage for ~5,000 docs</td>
+</tr>
+<tr>
+<td>Bandwidth</td>
+<td>2GB/mo</td>
+<td>Easy to exceed once chat is active</td>
+</tr>
+<tr>
+<td>Auth users</td>
+<td>50,000</td>
+<td>Nowhere near limit</td>
+</tr>
+</tbody></table>
+<p><strong>Currently on Pro tier</strong> (~$25/month base + usage). Watch the storage line as document uploads scale.</p>
+<h3 id="vercel">Vercel</h3>
+<p>Pro tier ~$20/month + bandwidth. Vercel&#x27;s edge function executions are the main scaling variable — chat is the heaviest.</p>
+<h3 id="total-ballpark-per-firm-at-mvp-scale">Total ballpark per firm at MVP scale</h3>
+<p><strong>~£40 – £180 per firm per month in variable AI + infra costs.</strong></p>
+<p>Against £1,599/month Professional tier revenue, gross margin is ~85–95%. Well within the 70–80% target.</p>
+<h2 id="routine-maintenance">Routine maintenance</h2>
+<h3 id="daily-automated">Daily (automated)</h3>
+<ul>
+<li><code>/api/cron/ar-sweep</code> runs at 06:00 UTC, no human action needed</li>
+</ul>
+<h3 id="weekly-automated">Weekly (automated)</h3>
+<ul>
+<li><code>/api/rag/horizon</code> runs Monday 08:00 UTC, no human action needed</li>
+<li>Check Vercel logs for any cron failures (5-min weekly scan)</li>
+</ul>
+<h3 id="monthly">Monthly</h3>
+<ul>
+<li>Review Anthropic + Voyage + Supabase usage dashboards for unexpected spikes</li>
+<li>Run <code>check-health.mjs</code> to confirm demo firm health score is in the expected range</li>
+<li>Review unresolved risk flag counts — if a flag type is exploding (e.g. 50+ open <code>incomplete_kyc</code>), it may indicate an extraction prompt issue</li>
+</ul>
+<h3 id="quarterly">Quarterly</h3>
+<ul>
+<li>Rotate <code>ANTHROPIC_API_KEY</code> and <code>VOYAGE_API_KEY</code> if not already</li>
+<li>Re-run the 50-scenario eval against the current FCA knowledge base; record scores</li>
+<li>Re-validate the demo firm seed data (Sterling IFA still presents well in walkthrough)</li>
+</ul>
+<h2 id="common-issues-fixes">Common issues + fixes</h2>
+<h3 id="migration-breaks-because-of-an-existing-constraint">Migration breaks because of an existing constraint</h3>
+<p>Migrations use <code>DROP CONSTRAINT IF EXISTS</code> then <code>ADD CONSTRAINT</code>, which is idempotent. If it fails:</p>
+<ol>
+<li>Check the SQL editor error</li>
+<li>Common cause: a row that doesn&#x27;t satisfy the new constraint (e.g., trying to extend a type CHECK while a row has an unknown type). Fix: either UPDATE the offending rows or relax the CHECK temporarily.</li>
+</ol>
+<h3 id="a-chat-request-returns-empty-errors">A chat request returns empty / errors</h3>
+<pre><code># Check Vercel logs first
+# Then check the Anthropic dashboard for rate limit or API key issues
+# Then check Supabase logs for any RLS denial</code></pre>
+<p>If a specific user can&#x27;t chat: their <code>users</code> row may be missing a <code>firm_id</code>. The chat route falls back to the first firm if user has no firm_id, but RLS-driven queries (like <code>match_firm_embeddings</code>) return empty. Fix: set the user&#x27;s firm_id directly via the SQL editor.</p>
+<h3 id="extraction-fails-with-zod-validation-error">Extraction fails with Zod validation error</h3>
+<p>The error message includes the validation path. Common causes:</p>
+<ul>
+<li>Field expected but Claude returned <code>undefined</code> instead of <code>null</code> → fix: add <code>.optional()</code> or <code>.partial()</code> to the schema</li>
+<li>Enum value with wrong case → should be auto-handled by <code>coerceEnumsInPlace()</code>, but if it&#x27;s a nested array enum, verify the recursion is working</li>
+<li>Date format wrong → Claude returned <code>&quot;15/03/2026&quot;</code> instead of <code>&quot;2026-03-15&quot;</code> → strengthen the prompt or add a date coercion</li>
+</ul>
+<p>Quick test: deploy the schema fix, ask user to re-upload. If extraction still fails, the prompt may need refinement.</p>
+<h3 id="firm-embeddings-show-0-client_summary-chunks-after-a-refresh">Firm embeddings show 0 client_summary chunks after a refresh</h3>
+<p>Common cause: the column-name bug from <code>embed-firm.ts</code>. The Supabase select tries to read a column that doesn&#x27;t exist (e.g. <code>severity</code> when the actual column is <code>is_vulnerable</code>). Run <code>node scripts/check-client-signals.mjs</code> — if it errors with <code>column does not exist</code>, fix the select clause in <code>embed-firm.ts</code> and redeploy.</p>
+<h3 id="chat-doesnt-reference-recent-uploads">Chat doesn&#x27;t reference recent uploads</h3>
+<p>Two likely causes:</p>
+<ol>
+<li><strong>Firm embeddings stale</strong> — Hasna hasn&#x27;t clicked &quot;Refresh AI Context&quot; since the uploads. The unconditional injection (top 30 docs) should pick them up regardless, but firm RAG retrieval won&#x27;t.</li>
+<li><strong>Cap too low for upload volume</strong> — if 31+ documents have been uploaded recently, the oldest get pushed out of the top 30. Either increase the limit (in <code>getRecentImportContext()</code> in chat route) or click Refresh to add them to firm embeddings.</li>
+</ol>
+<h3 id="document-upload-classified-as-the-wrong-type">Document upload classified as the wrong type</h3>
+<p>Inspect the response in the import page result card. The classifier returns one of 19 types. If consistently wrong on a category of document:</p>
+<ol>
+<li>Check <code>TYPE_DESCRIPTIONS</code> in <code>extract.ts</code> for the type — does it cover the synonyms Claude is seeing?</li>
+<li>Add more synonyms (e.g. &quot;TVAS&quot; for <code>db_transfer_report</code>)</li>
+<li>Deploy</li>
+</ol>
+<h3 id="document-persisted-to-wrong-client-mis-matched">Document persisted to wrong client (mis-matched)</h3>
+<p>The <code>matchClient()</code> function in the import route uses (a) reference number exact match first, then (b) fuzzy name match. If a doc has both, it&#x27;ll use the reference. If the doc has a similar name to another client, fuzzy match may pick the wrong one.</p>
+<p>Cleanup script pattern: <code>find-bad-group-upload.mjs</code> shows how to identify and delete an unwanted doc record + its raised flags. Use this as a template for any cleanup task.</p>
+<h3 id="chat-says-no-data-but-the-data-is-in-the-db">Chat says &quot;no data&quot; but the data is in the DB</h3>
+<p>Usually a deploy lag issue — the cap bump or schema change hasn&#x27;t propagated yet. Re-deploy: <code>npx vercel --prod</code> from <code>amaea-app/</code> and wait 1 minute.</p>
+<p>If still failing after deploy: check the actual response payload via the Network tab in browser DevTools. The chat sends back <code>{ text, ragUsed }</code>. Check that <code>ragUsed: true</code>. If false, the Voyage API key may be missing or invalid.</p>
+<h2 id="disaster-recovery">Disaster recovery</h2>
+<h3 id="database-backup">Database backup</h3>
+<p>Supabase Pro tier includes automatic daily backups with 7-day retention. To trigger a manual backup:</p>
+<p>Supabase Dashboard → Project → Database → Backups → &quot;Create new backup&quot;</p>
+<p>To restore: select a backup and click &quot;Restore&quot;. Note: this is a full project restore, not selective.</p>
+<h3 id="document-storage-backup">Document storage backup</h3>
+<p><code>firm-documents</code> bucket is on Supabase Storage. For a snapshot: use the Supabase CLI:</p>
+<pre><code>supabase storage download firm-documents --recursive --output ~/backups/firm-documents-$(date +%F)</code></pre>
+<h3 id="knowledge-base-rebuild">Knowledge base rebuild</h3>
+<p>If <code>fca_documents</code> is corrupted or wiped: the scraped JSON files in <code>amaea-app/scripts/scraped/</code> are the canonical source. Re-ingest:</p>
+<pre><code>cd amaea-app
+node scripts/ingest-scraped.mjs</code></pre>
+<p>Cost: ~£1 in Voyage AI embedding costs to re-embed 11k chunks.</p>
+<h3 id="firm-embeddings-rebuild">Firm embeddings rebuild</h3>
+<p>Per-firm, on demand. The dashboard &quot;Refresh AI Context&quot; button POSTs to <code>/api/rag/firm-embed</code> which calls <code>embedFirmContext(firmId)</code>. Rebuilds all chunks for that firm. ~10 seconds per firm at MVP scale.</p>
+<h2 id="production-checklist-before-opening-a-firm-to-a-real-user">Production checklist before opening a firm to a real user</h2>
+<p>If/when a real IFA firm onboards for the first time:</p>
+<ul>
+<li>[ ] DPA signed (Amaea is data processor; firm is controller)</li>
+<li>[ ] Sub-processor DPAs in place with Supabase, Vercel, Anthropic, Voyage, Resend</li>
+<li>[ ] Firm record created in <code>firms</code> table with their FCA reference</li>
+<li>[ ] Firm&#x27;s compliance officer added to <code>auth.users</code> + <code>public.users</code> with role <code>admin</code></li>
+<li>[ ] Their initial clients imported (CSV or Intelliflo sync)</li>
+<li>[ ] At least one adviser record + adviser-client assignment</li>
+<li>[ ] Risk flag thresholds reviewed for their book size</li>
+<li>[ ] Test document uploaded and verified to flag correctly</li>
+<li>[ ] &quot;Refresh AI Context&quot; run to populate firm embeddings</li>
+<li>[ ] Test chat query to confirm dual RAG is returning their data</li>
+</ul>
+<h2 id="pre-launch-ops-items-post-mvp-pre-sept-2028">Pre-launch ops items (post-MVP, pre Sept 2028)</h2>
+<ul>
+<li>[ ] <strong>ICO registration</strong> (£52/yr) — Hasna&#x27;s responsibility</li>
+<li>[ ] <strong>Companies House incorporation</strong> (£50) — Hasna&#x27;s responsibility</li>
+<li>[ ] <strong>SEIS advance assurance from HMRC</strong> (6-8 weeks) — Hasna&#x27;s responsibility</li>
+<li>[ ] <strong>DPA sub-processor templates</strong> for Supabase, Vercel, Anthropic, Voyage, Resend</li>
+<li>[ ] <strong>FCA regulatory position paper</strong> before any demo to a compliance officer</li>
+<li>[ ] <strong>Penetration test</strong> before first paying customer</li>
+<li>[ ] <strong>SOC 2 Type II</strong> — marketing site mentions this; needs to actually exist before enterprise sale</li>
+<li>[ ] <strong>Cyber liability insurance</strong> ~ £400/yr minimum</li>
+<li>[ ] <strong>PI insurance</strong> review (Hasna may have firm-level cover at Lucent that doesn&#x27;t extend)</li>
+<li>[ ] <strong>Co-founder agreement</strong> executed by solicitor (drafted; needs Kingsley Napley / Mishcon de Reya / Pinsent Masons review)</li>
+<li>[ ] <strong>Nominee Director Agreement</strong> for Hasna&#x27;s mother on dormant holding company until she leaves Lucent</li>
+</ul>
+<h2 id="file-paths-quick-reference">File paths quick reference</h2>
+<pre><code>~/Documents/Amaea/                       Root
+├── amaea-app/                           Next.js app (deployed)
+│   ├── .env.local                       Local env (gitignored)
+│   ├── .vercel/                         Vercel link
+│   ├── scripts/                         CLI scripts (ingest, eval, verify)
+│   ├── src/                             App code
+│   ├── vercel.json                      Cron schedule
+│   └── package.json
+├── amaea-db/                            SQL migrations
+│   ├── migrations/                      Numbered (001-021)
+│   └── supabase/migrations/             Timestamped copies
+├── amaea-website/                       Marketing site (separate Vercel project)
+├── amaea-brand/                         Internal intranet (mockup, GitHub)
+├── docs/                                This documentation
+│   ├── 00-INDEX.md
+│   ├── 01-product.html
+│   ├── 02-architecture.html
+│   ├── 03-extraction.html
+│   ├── 04-ai-kb.html
+│   └── 05-ops.html
+└── test-samples/pdfs/                   43 synthetic test PDFs</code></pre>
+<h2 id="contact-escalation">Contact + escalation</h2>
+<p>In the MVP phase, all production issues route to Milan. Post-launch:</p>
+<ul>
+<li><strong>Compliance / regulatory questions</strong> → Hasna</li>
+<li><strong>AI / model behaviour</strong> → Milan</li>
+<li><strong>Database / infra</strong> → Milan</li>
+<li><strong>Customer support</strong> → Hasna (until she&#x27;s full-time, then dedicated CS hire)</li>
+</ul>
+<h2 id="where-to-read-next">Where to read next</h2>
+<ul>
+<li>For the product overview: <strong><a href="01-product.html">01 — Product &amp; Architecture Overview</a></strong></li>
+<li>For technical architecture detail: <strong><a href="02-architecture.html">02 — Technical Architecture</a></strong></li>
+<li>For the document extraction system: <strong><a href="03-extraction.html">03 — Document Extraction &amp; Compliance Flag System</a></strong></li>
+<li>For the AI side: <strong><a href="04-ai-kb.html">04 — AI Layer &amp; FCA Knowledge Base</a></strong></li>
+</ul>
+<hr/>
+<p><em>End of MVP documentation set. Last updated: 14 May 2026.</em></p>
+</article>
+
+</body>
+</html>

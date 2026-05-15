@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product & Architecture Overview · Amaea MVP Docs</title>
+  <link rel="icon" href="logo-plum.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-top">
+    <img src="logo-white.png" alt="Amaea"/>
+    <span class="cover-badge">MVP Documentation</span>
+  </div>
+
+  <div class="cover-body">
+    <p class="cover-eyebrow">Doc 01 · Investors · new team · partners</p>
+    <h1 class="cover-title">Product & Architecture Overview</h1>
+    <p class="cover-sub">What Amaea is, who it's for, key features, tech stack at a glance, and the strategic decisions that shape the build.</p>
+  </div>
+
+  <div class="cover-foot">
+    <div>
+      <p class="cover-meta-label">Status</p>
+      <p class="cover-meta-value">MVP · pre-launch</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">As of</p>
+      <p class="cover-meta-value">14 May 2026</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Owners</p>
+      <p class="cover-meta-value">Hasna Sahul Hameed · Milan Sajiv</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Length</p>
+      <p class="cover-meta-value">~20 min read</p>
+    </div>
+  </div>
+
+  <div class="cover-tagline">
+    <p class="cover-tagline-text">Stay compliant. Stay confident.</p>
+    <p class="cover-tagline-sub">amaea</p>
+  </div>
+</section>
+
+<nav class="doc-nav">
+  <a href="index.html">← All documents</a>
+  <span class="doc-nav-meta">Doc 01 · ~20 min read</span>
+</nav>
+
+<article class="doc">
+<h2 id="what-amaea-is">What Amaea is</h2>
+<p>Amaea is an <strong>FCA compliance platform for UK Independent Financial Adviser (IFA) firms</strong>. It replaces manual compliance tracking — spreadsheets, fragmented file checking, and reactive supervision — with a single AI-driven dashboard that monitors every client&#x27;s compliance state in real time.</p>
+<p>The product reads the documents IFAs already produce — Fact Finds, Suitability Reports, Annual Reviews, Pension Transfer Reports, Letters of Authority, AML records — extracts the compliance-critical fields from each one using Claude vision, validates them against the FCA Handbook, and raises specific compliance flags with rule citations when something is missing or wrong.</p>
+<p>The headline value: an IFA firm using Amaea can answer questions like <em>&quot;Which clients have unsigned suitability reports?&quot;</em> or <em>&quot;Which DB transfers are missing cooling-off notices?&quot;</em> or <em>&quot;What&#x27;s our Consumer Duty position right now?&quot;</em> in seconds, with evidence linked to the source document. Without Amaea, those answers require manual file review.</p>
+<h2 id="who-its-for">Who it&#x27;s for</h2>
+<p>The MVP target is <strong>UK IFA firms with 5–15 advisers</strong> — large enough to have a compliance burden the founders genuinely feel (annual reviews, RMAR, Consumer Duty board assessments) but small enough that they don&#x27;t already have a dedicated compliance team using enterprise tools.</p>
+<p>The post-MVP expansion target is the <strong>full UK regulated services market</strong> — mortgage brokers, insurance intermediaries, wealth managers, accountants — all of whom face similar documentation and supervisory obligations under different FCA / PRA / ICAEW rulebooks.</p>
+<p>The long-term target is the global compliance intelligence layer — but everything before 2030 is focused on owning UK IFA.</p>
+<h2 id="why-now">Why now</h2>
+<p>Three forces have aligned in 2024–2026 to make this product possible and commercially attractive:</p>
+<ol>
+<li><strong>Consumer Duty (PS22/9, in force from July 2023)</strong> has materially increased the documentation burden on IFAs. Firms now need to evidence good outcomes across four outcome areas for every client, every year, plus an annual board assessment. The manual cost of doing this well is significant.</li>
+<li><strong>AI vision models</strong> can now read the documents IFAs produce (mostly PDFs and phone-photographed scans) to a standard that genuinely competes with a junior compliance officer. Claude Sonnet 4.6&#x27;s vision performance on real IFA documents — Fact Finds with mixed handwriting and form layouts, multi-part Suitability Reports of 40+ pages, hand-completed AML/CDD records — is what unlocks this product. The pipeline pulls structured compliance fields out of these documents at &gt;85% extraction accuracy on the test corpus.</li>
+<li><strong>The FCA has been data-led in supervision since 2022.</strong> Firms that look bad on regulatory data (overdue reviews, complaints data inconsistencies, missing documentation patterns) are identifiable before a supervision visit even takes place. Amaea is in effect a &quot;look as good as you should&quot; tool for firms that ARE compliant but can&#x27;t easily prove it.</li>
+</ol>
+<h2 id="key-features-mvp">Key features (MVP)</h2>
+<h3 id="1-document-import-with-19-type-extraction">1. Document import with 19-type extraction</h3>
+<p>Drag and drop any IFA compliance document. The system classifies it as one of 19 canonical types (Suitability Report, Fact Find, Client Agreement, Annual Review, DB Transfer Report, Vulnerability Assessment, Consumer Duty Outcome, Letter of Authority, Product Illustration, Terms of Business, Complaint Record, Ongoing Service Evidence, AML/CDD, Training &amp; Competency, Expression of Wish, Application Form, Portfolio Snapshot, Sales File Cover, Attitude to Risk), extracts the compliance-critical fields per the document type, validates against a strict Zod schema, and persists to the database.</p>
+<p>Multi-part documents (a 5-part Suitability Report, an 18-page ATR questionnaire) can be uploaded as a group via a single toggle — the system treats them as one consolidated document and extracts across all pages.</p>
+<p>Full detail: see <strong><a href="03-extraction.html">03 — Document Extraction &amp; Compliance Flag System</a></strong>.</p>
+<h3 id="2-auto-flag-raising-with-fca-rule-citations">2. Auto-flag-raising with FCA rule citations</h3>
+<p>When the extraction completes, the system runs the result through a flag-raising function that checks for compliance gaps and raises specific flags with the FCA rule that&#x27;s been breached. Examples:</p>
+<ul>
+<li>DB Transfer Report with <code>coolingOffNoticeProvided = false</code> → critical <code>cobs_19_breach</code> flag citing COBS 19.1</li>
+<li>Fact Find with <code>attitudeToRiskRating = null</code> → high <code>incomplete_kyc</code> flag citing COBS 9.2</li>
+<li>Letter of Authority with <code>authorityExpiryDate &lt; today</code> → medium <code>expired_loa</code> flag citing COBS 2.1</li>
+<li>Complaint Record with <code>acknowledgedDate - complaintReceivedDate &gt; 5 days</code> → high <code>disp_breach</code> flag citing DISP 1.6.1</li>
+<li>AML/CDD with <code>cddLastRefreshedDate &gt; 3 years ago</code> → high <code>aml_cdd_stale</code> citing SYSC 6.3 / MLR 2017</li>
+</ul>
+<p>Every flag is linked back to the source document and the source FCA rule. This is the audit-trail spine of the product.</p>
+<h3 id="3-ai-compliance-assistant">3. AI compliance assistant</h3>
+<p>A chat interface on the dashboard and <code>/assistant</code> page. Asks questions and gets answers grounded in two retrieval sources: the firm&#x27;s own live data (clients, reviews, flags, recent uploads) and an 11,645-chunk knowledge base of FCA regulatory text (full Handbook + Final Notices + Dear CEO letters + Policy Statements + Thematic Reviews).</p>
+<p>The chat correctly distinguishes between things it can assert specifically (because there&#x27;s evidence in an uploaded document) and things it can only summarise (because the underlying file hasn&#x27;t been seen). It doesn&#x27;t hallucinate rule citations.</p>
+<p>Full detail: see <strong><a href="04-ai-kb.html">04 — AI Layer &amp; FCA Knowledge Base</a></strong>.</p>
+<h3 id="4-live-compliance-health-score">4. Live compliance health score</h3>
+<p>A single 0–100 score per firm, computed in real time:</p>
+<ul>
+<li>40% <strong>doc completeness</strong> (% of clients with all required document types complete)</li>
+<li>35% <strong>review completion</strong> (% of reviews in <code>complete</code> status)</li>
+<li>25% <strong>flag score</strong> (100 minus weighted penalty: critical=15, high=8, medium=3, low=1)</li>
+</ul>
+<p>The score updates instantly when a document is uploaded or a flag is resolved.</p>
+<h3 id="5-ai-generated-fca-ready-reports">5. AI-generated FCA-ready reports</h3>
+<p>Six report types (RMAR, Suitability, Consumer Duty, Activity Log, Vulnerable Clients, Board Summary). Each is generated by composing live firm data with FCA-corpus retrieval and an executive analysis section written by Claude grounded in retrieved regulatory text. Reports are snapshotted as JSONB at generation time so they don&#x27;t change retroactively.</p>
+<h3 id="6-nightly-automated-compliance-monitoring">6. Nightly automated compliance monitoring</h3>
+<p>A Vercel cron job runs at 06:00 UTC every night. It evaluates every overdue annual review against COBS 9.5 using Claude (assessing whether the adviser&#x27;s recorded delay reason constitutes a sufficient justification), creates or resolves risk flags accordingly, and writes to the compliance event audit trail. A second cron runs every Monday at 08:00 UTC to ingest new FCA Horizon publications into the knowledge base.</p>
+<h2 id="tech-stack-at-a-glance">Tech stack at a glance</h2>
+<table>
+<thead><tr>
+<th>Layer</th>
+<th>Tech</th>
+<th>Why</th>
+</tr></thead><tbody>
+<tr>
+<td>Frontend</td>
+<td>Next.js 16 (App Router) + React 19 + TypeScript</td>
+<td>Server components for dashboard data, App Router for clean routing, TS for compliance-critical type safety</td>
+</tr>
+<tr>
+<td>Styling</td>
+<td>Tailwind CSS v4</td>
+<td>Speed of iteration</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>Supabase (PostgreSQL + pgvector)</td>
+<td>Built-in Row Level Security (critical for multi-tenancy), pgvector for RAG embeddings, EU-West hosting for GDPR</td>
+</tr>
+<tr>
+<td>Auth + RLS</td>
+<td>Supabase Auth</td>
+<td>JWT-based, integrates natively with Postgres RLS</td>
+</tr>
+<tr>
+<td>File Storage</td>
+<td>Supabase Storage</td>
+<td>One-bucket-per-firm pattern for document files</td>
+</tr>
+<tr>
+<td>AI</td>
+<td>Anthropic Claude API (claude-sonnet-4-6)</td>
+<td>Vision capability for document extraction, strong reasoning for the compliance assistant</td>
+</tr>
+<tr>
+<td>Embeddings</td>
+<td>Voyage AI (voyage-3-lite, 512-dim)</td>
+<td>Compact, fast, performs well on regulatory text</td>
+</tr>
+<tr>
+<td>Schema validation</td>
+<td>Zod 4.4.3</td>
+<td>Runtime validation of AI output is non-negotiable for compliance data</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>Resend</td>
+<td>Transactional notifications</td>
+</tr>
+<tr>
+<td>PDF generation</td>
+<td>React-PDF / Puppeteer</td>
+<td>Generated reports</td>
+</tr>
+<tr>
+<td>Hosting</td>
+<td>Vercel (EU region)</td>
+<td>Serverless functions for API routes, edge for static</td>
+</tr>
+<tr>
+<td>Cron</td>
+<td>Vercel Cron</td>
+<td>Scheduled compliance jobs</td>
+</tr>
+</tbody></table>
+<p>Full detail: see <strong><a href="02-architecture.html">02 — Technical Architecture</a></strong>.</p>
+<h2 id="architecture-at-a-glance">Architecture at a glance</h2>
+<pre><code>                                            FCA Handbook + Publications archive
+                                            (scraped + chunked + embedded)
+                                                     │
+                                                     ▼
+                                          ┌────────────────────────┐
+                                          │  Supabase pgvector      │
+                                          │  fca_documents          │
+                                          │  (11,645 chunks)        │
+                                          └────────┬───────────────┘
+                                                   │
+   User uploads doc(s)                             │ semantic search
+        │                                          │
+        ▼                                          │
+   ┌─────────────────────┐    classify    ┌──────────────────────┐
+   │   /api/import/      │ ─────────────▶ │  Claude vision       │
+   │   documents         │    + extract   │  (claude-sonnet-4-6) │
+   └────┬────────────────┘                └──────────────────────┘
+        │                                          │
+        │ persisted as one doc                     │
+        ▼                                          │
+   ┌─────────────────────┐                         │
+   │  documents (+ rich  │                         │
+   │  metadata jsonb)    │                         │
+   └────┬────────────────┘                         │
+        │                                          │
+        │ flagsFromExtraction()                    │
+        ▼                                          │
+   ┌─────────────────────┐                         │
+   │  risk_flags         │                         │
+   │  (auto-raised, with │                         │
+   │   FCA rule citation)│                         │
+   └────┬────────────────┘                         │
+        │                                          │
+        ├─────────────▶ Dashboard health score     │
+        │                                          │
+        ├─────────────▶ Insights page              │
+        │                                          │
+        ▼                                          ▼
+   ┌─────────────────────────────────────────────────┐
+   │   Chat assistant (/api/chat)                    │
+   │   • Live firm SQL stats                         │
+   │   • Firm embeddings (dual RAG)                  │
+   │   • FCA corpus retrieval (dual RAG)             │
+   │   • Unconditional recent-imports injection      │
+   │   • Claude completion (max_tokens 16384)        │
+   └─────────────────────────────────────────────────┘</code></pre>
+<h2 id="strategic-decisions-baked-into-the-mvp">Strategic decisions baked into the MVP</h2>
+<p>These have been deliberately chosen, not defaults, and are worth knowing.</p>
+<p><strong>IFA-first GTM, not networks (May 2026).</strong> Network deals come with long procurement cycles and pricing constraints. Direct IFA relationships give faster feedback, pricing control, and real usage data before scaling. We will revisit network distribution once we have ~50 direct customers and clear product-market fit signals.</p>
+<p><strong>Read-only Intelliflo integration at MVP (May 2026).</strong> Write access creates liability (we could corrupt an IFA&#x27;s CRM) and requires deeper security review. Read-only is sufficient to deliver core value at MVP and dramatically reduces the firm&#x27;s risk surface.</p>
+<p><strong>Adviser-count tier pricing, not per-client (April 2026).</strong> Per-client pricing penalises growth and creates unpredictable costs. Flat per-firm-size SaaS pricing aligns Amaea&#x27;s revenue with the firm&#x27;s growth without friction.</p>
+<p><strong>UK-only launch, no international before 2030 (April 2026).</strong> Consumer Duty is UK-specific. International markets have entirely different compliance frameworks. Focus beats optionality at this stage.</p>
+<p><strong>Founders Programme as GTM entry (March 2026).</strong> 200 founder spots at 20% lifetime discount, accessed through four warm channels: SP Advanced Conference, Robin Powell&#x27;s newsletter, the CISI member network, and Intelliflo&#x27;s firm base. These channels concentrate compliance-aware IFAs who are predisposed to be early adopters.</p>
+<p><strong>Bootstrap by default; raise only from strength (May 2026).</strong> With Hasna&#x27;s GTM network and ~70% gross margins, the business should be self-funding from early scale. External capital is optional, not required. If raised, it&#x27;ll be from strength (competitor entry / international expansion / acquisition opportunity) rather than need.</p>
+<h2 id="pricing-from-amaeaaivercelapppricinghtml">Pricing (from <code>amaeaai.vercel.app/pricing.html</code>)</h2>
+<table>
+<thead><tr>
+<th>Tier</th>
+<th>Monthly</th>
+<th>Annual</th>
+<th>Clients</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>Essentials</td>
+<td>£699/mo</td>
+<td>£582/mo</td>
+<td>Up to 100</td>
+<td>No AI assistant, no Consumer Duty monitoring, no RMAR pre-population</td>
+</tr>
+<tr>
+<td>Professional ⭐</td>
+<td>£1,599/mo</td>
+<td>£1,332/mo</td>
+<td>Up to 350</td>
+<td>AI assistant, Consumer Duty, RMAR, SharePoint + Salesforce — <strong>most popular</strong></td>
+</tr>
+<tr>
+<td>Scale</td>
+<td>£2,199/mo</td>
+<td>£1,832/mo</td>
+<td>Up to 1,000</td>
+<td>Board-level packs, FCA visit toolkit, custom reports</td>
+</tr>
+<tr>
+<td>Enterprise</td>
+<td>Custom</td>
+<td>Custom</td>
+<td>Unlimited</td>
+<td>Networks / AR firms</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>30-day free trial</strong>, no credit card</li>
+<li><strong>3-month minimum commitment</strong> after trial</li>
+<li><strong>Annual billing = 2 months free</strong> (~17–20% discount)</li>
+<li><strong>Founders Programme</strong>: 200 spots at 20% off for life, ref-based via SP Advanced / Robin Powell / CISI / Intelliflo</li>
+</ul>
+<h2 id="roadmap">Roadmap</h2>
+<p><strong>Phase 1 — Foundation (Q1–Q2 2026, in progress)</strong> Core compliance dashboard, client journey tracking, Intelliflo read integration, marketing website, <strong>19-type document extraction pipeline (shipped May 2026)</strong>, <strong>auto-flag-raising with FCA rule citations (shipped May 2026)</strong>, <strong>AI compliance assistant (shipped May 2026 with dual RAG + 11,645-chunk FCA corpus)</strong>, <strong>multi-page document grouping (shipped May 2026)</strong>.</p>
+<p><strong>Phase 2 — Intelligence (Q3–Q4 2026, planned)</strong> Annual review auto-generation, Consumer Duty annual assessment report generation, vulnerable client enhanced monitoring, SharePoint integration, priority support and onboarding workflows.</p>
+<p><strong>Phase 3 — Scale (2027)</strong> Full integration suite (Salesforce + Dynamic Planner + Evidentli + others), board-level reporting packs, FCA visit preparation toolkit, custom report builder, multi-adviser firm management, Open API beta.</p>
+<p><strong>Phase 4 — Launch (Q1–Q3 2028)</strong> <strong>Public launch: September 2028.</strong> Enterprise / network tier, custom AI training on firm policies, dedicated compliance success manager offering, FCA mock audit module.</p>
+<h2 id="team">Team</h2>
+<p><strong>Hasna Sahul Hameed — CEO &amp; Co-founder.</strong> Background in financial planning compliance, currently at Lucent (cannot actively work on Amaea until summer 2028). Owns: vision, IFA market relationships, FCA regulatory direction, pricing, brand, fundraising. Speaker at FP Advance, interviewed by Robin Powell, known to the CISI CEO.</p>
+<p><strong>Milan Sajiv — CTO &amp; Co-founder.</strong> Owns: technical architecture, product build, infrastructure, AI/ML layer, integrations, technical due diligence.</p>
+<p>50/50 equity, 4-year vesting with 1-year cliff. Nominee director (Hasna&#x27;s mother) on dormant holding company until Hasna leaves Lucent.</p>
+<h2 id="investment">Investment</h2>
+<p>Stage 1 (2028–2030): own UK IFA compliance, £2–5M ARR. Stage 2 (2030–2032): expand to all UK regulated sectors, £20–50M ARR. Stage 3 (2032–2035): international (US SEC/FINRA, EU MiFID II), £100M+ ARR. Stage 4 (2035+): the compliance OS, £3–10B+ valuation.</p>
+<p>Default position: bootstrapped. With ~70–80% gross margins and the Founders Programme + Robin Powell + CISI + Intelliflo GTM stack, the business should be self-funding from early scale.</p>
+<h2 id="where-to-read-next">Where to read next</h2>
+<ul>
+<li>For technical depth: <strong><a href="02-architecture.html">02 — Technical Architecture</a></strong></li>
+<li>For the compliance moat: <strong><a href="03-extraction.html">03 — Document Extraction &amp; Compliance Flag System</a></strong></li>
+<li>For the AI side: <strong><a href="04-ai-kb.html">04 — AI Layer &amp; FCA Knowledge Base</a></strong></li>
+<li>For ops / running it: <strong><a href="05-ops.html">05 — Operations Handbook</a></strong></li>
+</ul>
+</article>
+
+</body>
+</html>

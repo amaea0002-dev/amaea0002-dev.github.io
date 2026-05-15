@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amaea — MVP Documentation</title>
+  <link rel="icon" href="logo-plum.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-top">
+    <img src="logo-white.png" alt="Amaea"/>
+    <span class="cover-badge">MVP Documentation</span>
+  </div>
+
+  <div class="cover-body">
+    <p class="cover-eyebrow">Official documentation set · v1.0 · 14 May 2026</p>
+    <h1 class="cover-title">The Amaea MVP, in five documents.</h1>
+    <p class="cover-sub">Everything an investor, engineer, compliance reviewer, or new joiner needs to understand the product, the technology, and how it runs in production.</p>
+  </div>
+
+  <div class="cover-foot">
+    <div>
+      <p class="cover-meta-label">Status</p>
+      <p class="cover-meta-value">MVP · pre-launch</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Owners</p>
+      <p class="cover-meta-value">Hasna Sahul Hameed · CEO<br/>Milan Sajiv · CTO</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Live URLs</p>
+      <p class="cover-meta-value">amaea.vercel.app<br/>amaeaai.vercel.app</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Length</p>
+      <p class="cover-meta-value">~2½ hours · 5 documents</p>
+    </div>
+  </div>
+
+  <div class="cover-tagline">
+    <p class="cover-tagline-text">Stay compliant. Stay confident.</p>
+    <p class="cover-tagline-sub">amaea</p>
+  </div>
+</section>
+
+<nav class="doc-nav">
+  <a href="../index.html">← Back to intranet</a>
+  <span class="doc-nav-meta">5 documents · ~20,000 words</span>
+</nav>
+
+<article class="doc">
+
+  <h1>How to read this set</h1>
+  <p>This is the canonical documentation set for the Amaea compliance platform MVP. Five documents cover different aspects of the product — each readable on its own. Read in order if you're new to the project, or jump straight to whichever doc matches your role.</p>
+
+  <h2 id="documents">The documents</h2>
+
+  <div class="doc-grid">
+
+    <a class="doc-card" href="01-product.html">
+      <div class="doc-card-row">
+        <span class="doc-card-num">DOC 01</span>
+        <p class="doc-card-title">Product &amp; Architecture Overview</p>
+      </div>
+      <p class="doc-card-desc">What Amaea is, who it's for, key features, tech stack at a glance, and the strategic decisions that shape the build. Start here if you've never seen the product.</p>
+      <div class="doc-card-meta">
+        <span>~20 min read</span>
+        <span>Investors · partners · new team</span>
+      </div>
+    </a>
+
+    <a class="doc-card" href="02-architecture.html">
+      <div class="doc-card-row">
+        <span class="doc-card-num">DOC 02</span>
+        <p class="doc-card-title">Technical Architecture</p>
+      </div>
+      <p class="doc-card-desc">System design, multi-tenancy via Row Level Security, database schema, data flow, computed views, and the rationale behind every key technical decision.</p>
+      <div class="doc-card-meta">
+        <span>~30 min read</span>
+        <span>Engineers · technical DD</span>
+      </div>
+    </a>
+
+    <a class="doc-card" href="03-extraction.html">
+      <div class="doc-card-row">
+        <span class="doc-card-num">DOC 03</span>
+        <p class="doc-card-title">Document Extraction &amp; Compliance Flag System</p>
+      </div>
+      <p class="doc-card-desc">The core IP. All 19 document types, the classify-then-extract pipeline, per-type schemas, multi-page grouping, the auto-flag-raising system, and the FCA rule mapping table.</p>
+      <div class="doc-card-meta">
+        <span>~40 min read</span>
+        <span>Compliance evaluation</span>
+      </div>
+    </a>
+
+    <a class="doc-card" href="04-ai-kb.html">
+      <div class="doc-card-row">
+        <span class="doc-card-num">DOC 04</span>
+        <p class="doc-card-title">AI Layer &amp; FCA Knowledge Base</p>
+      </div>
+      <p class="doc-card-desc">Claude integration, Voyage embeddings, the 11,645-chunk FCA corpus, dual RAG retrieval, prompt structure, evaluation framework, AI-generated reports, and the cron jobs that keep regulatory data fresh.</p>
+      <div class="doc-card-meta">
+        <span>~30 min read</span>
+        <span>AI/ML reviewers · technical investors</span>
+      </div>
+    </a>
+
+    <a class="doc-card" href="05-ops.html">
+      <div class="doc-card-row">
+        <span class="doc-card-num">DOC 05</span>
+        <p class="doc-card-title">Operations Handbook</p>
+      </div>
+      <p class="doc-card-desc">Deployment procedure, environment variables, migrations, cron inventory, cost monitoring, routine maintenance, and the runbook for common issues.</p>
+      <div class="doc-card-meta">
+        <span>~20 min read</span>
+        <span>Whoever keeps it running</span>
+      </div>
+    </a>
+
+  </div>
+
+  <h2 id="quick-facts">Quick facts</h2>
+  <div class="panel">
+    <p class="panel-title">At a glance</p>
+    <div class="facts">
+      <div class="fact">
+        <p class="fact-label">Stack</p>
+        <p class="fact-value">Next.js 16 · Supabase · Anthropic Claude · Voyage AI · Vercel (EU)</p>
+      </div>
+      <div class="fact">
+        <p class="fact-label">Architecture</p>
+        <p class="fact-value">Multi-tenant SaaS, RLS at the database layer</p>
+      </div>
+      <div class="fact">
+        <p class="fact-label">Knowledge base</p>
+        <p class="fact-value">11,645-row FCA regulatory corpus</p>
+      </div>
+      <div class="fact">
+        <p class="fact-label">Document extraction</p>
+        <p class="fact-value">19 IFA compliance doc types · per-type Zod schemas</p>
+      </div>
+      <div class="fact">
+        <p class="fact-label">Demo data</p>
+        <p class="fact-value">Sterling IFA Ltd · 261 clients · 88/100 health score</p>
+      </div>
+      <div class="fact">
+        <p class="fact-label">Test corpus</p>
+        <p class="fact-value">43 synthetic test PDFs · all 19 doc types covered</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="conventions">Document conventions</h2>
+  <ul>
+    <li>Code paths are absolute or relative to <code>/Users/milan/Documents/Amaea/</code>.</li>
+    <li>All references to FCA rules use the FCA Handbook abbreviation pattern: <code>COBS 9.5</code>, <code>PS22/9</code>, <code>FG21/1</code>, <code>SYSC 9.1</code>, <code>DISP 1.6.1</code>.</li>
+    <li>"We" in operational docs refers to Sterling IFA (the demo firm) where the context is product behaviour, or to Amaea (the firm) where the context is business decisions.</li>
+    <li>Money values shown in pounds sterling.</li>
+    <li>Dates in ISO 8601 (YYYY-MM-DD) or "DD Month YYYY" UK format.</li>
+  </ul>
+
+  <h2 id="export">Export to PDF</h2>
+  <p>Open any document in Safari (or your preferred browser). Use <strong>File → Export as PDF…</strong> or <strong>Cmd + P → Save as PDF</strong>. The print stylesheet handles cover-page sizing, page breaks, and table layout automatically.</p>
+
+</article>
+
+</body>
+</html>

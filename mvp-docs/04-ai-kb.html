@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Layer & FCA Knowledge Base · Amaea MVP Docs</title>
+  <link rel="icon" href="logo-plum.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-top">
+    <img src="logo-white.png" alt="Amaea"/>
+    <span class="cover-badge">MVP Documentation</span>
+  </div>
+
+  <div class="cover-body">
+    <p class="cover-eyebrow">Doc 04 · AI/ML reviewers · compliance officers · technical investors</p>
+    <h1 class="cover-title">AI Layer & FCA Knowledge Base</h1>
+    <p class="cover-sub">Claude integration, Voyage embeddings, the 11,645-chunk FCA corpus, dual RAG retrieval, prompt structure, evaluation framework, AI-generated reports, and the cron jobs that keep regulatory data fresh.</p>
+  </div>
+
+  <div class="cover-foot">
+    <div>
+      <p class="cover-meta-label">Status</p>
+      <p class="cover-meta-value">MVP · pre-launch</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">As of</p>
+      <p class="cover-meta-value">14 May 2026</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Owners</p>
+      <p class="cover-meta-value">Hasna Sahul Hameed · Milan Sajiv</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Length</p>
+      <p class="cover-meta-value">~30 min read</p>
+    </div>
+  </div>
+
+  <div class="cover-tagline">
+    <p class="cover-tagline-text">Stay compliant. Stay confident.</p>
+    <p class="cover-tagline-sub">amaea</p>
+  </div>
+</section>
+
+<nav class="doc-nav">
+  <a href="index.html">← All documents</a>
+  <span class="doc-nav-meta">Doc 04 · ~30 min read</span>
+</nav>
+
+<article class="doc">
+<p>The AI moat for Amaea is the combination of (a) a substantial proprietary FCA regulatory knowledge base and (b) the dual-RAG retrieval pattern that grounds every chat response and report in both firm data and regulatory text.</p>
+<p>This document covers: the FCA knowledge base (sources, ingestion, structure), the embedding model and retrieval RPCs, the chat assistant architecture (dual RAG + unconditional injection), firm embeddings, AI-generated reports, the nightly compliance crons, and the 50-scenario evaluation framework.</p>
+<h2 id="the-fca-knowledge-base">The FCA knowledge base</h2>
+<h3 id="scope">Scope</h3>
+<p>11,645 chunks in <code>fca_documents</code> covering:</p>
+<table>
+<thead><tr>
+<th>Source category</th>
+<th>Filter applied</th>
+<th>Publications</th>
+<th>Chunks</th>
+</tr></thead><tbody>
+<tr>
+<td>FCA Handbook (14 modules)</td>
+<td>None</td>
+<td>All chapters</td>
+<td>1,180</td>
+</tr>
+<tr>
+<td>Finalised Guidance</td>
+<td>None (all relevant)</td>
+<td>All</td>
+<td>3,685</td>
+</tr>
+<tr>
+<td>Policy Statements</td>
+<td>IFA-relevant keywords</td>
+<td>207</td>
+<td>3,344</td>
+</tr>
+<tr>
+<td>Thematic Reviews</td>
+<td>None</td>
+<td>146</td>
+<td>1,891</td>
+</tr>
+<tr>
+<td>Multi-firm Reviews</td>
+<td>None</td>
+<td>120</td>
+<td>1,660</td>
+</tr>
+<tr>
+<td>Final Notices (enforcement)</td>
+<td>IFA-relevant keywords</td>
+<td>274</td>
+<td>1,645</td>
+</tr>
+<tr>
+<td>Dear CEO Letters</td>
+<td>None</td>
+<td>94</td>
+<td>355</td>
+</tr>
+</tbody></table>
+<p><strong>FCA Handbook modules covered:</strong> SYSC, SUP, COBS, ICOBS, CASS, MCOB, MAR, DISP, PERG, TC, COCON, PROD, PRIN, FIT.</p>
+<p>Plus an 82-chunk baseline (the original hand-curated knowledge set from March 2026) covering: Consumer Duty (PS22/9), COBS 9 suitability, FG21/1 vulnerable customers, SUP 16 RMAR, SYSC 9 record keeping, DISP, SMCR/COCON, COBS 4 financial promotions, SYSC 6 AML, TC training, PRIN, COBS 19 DB pension transfers, COBS 2.1 best interests, PROD, COBS 14, UK GDPR, CASS 6+7, COBS 11 best execution, COBS 16 client reporting, COBS 6.1 inducements, SDR sustainability, SYSC operational resilience, REP-CRIM, FCA thematic reviews, advice/guidance boundary, UK MAR, SYSC 19D remuneration, ICOBS, FCA Dear CEO letters (DB transfers 2023, Consumer Duty 2024, ongoing charges 2022), SUP authorisation, and 14 enforcement precedents.</p>
+<h3 id="ingestion-pipeline">Ingestion pipeline</h3>
+<p>Three Node scripts in <code>amaea-app/scripts/</code>:</p>
+<p><strong><code>fca-scrape.mjs</code></strong> — FCA Publications scraper</p>
+<ul>
+<li>Uses <code>fetch</code> + <code>pdf-parse</code> v2 (PDF text extraction)</li>
+<li>Paginates through each category&#x27;s search results on the FCA website</li>
+<li>Fetches PDFs or HTML pages</li>
+<li>Chunks text to ~1,800 characters</li>
+<li>Supports <code>--resume</code> (skip completed types) and <code>--type</code> (single type) flags</li>
+<li>Saves to <code>scripts/scraped/*.json</code></li>
+</ul>
+<p><strong><code>fca-scrape-handbook.mjs</code></strong> — FCA Handbook scraper</p>
+<ul>
+<li>Uses Playwright (headless Chromium) — required because the Handbook is JS-rendered</li>
+<li>Navigates chapter index pages, discovers section links, scrapes each section</li>
+<li>Falls back to scraping the chapter index page directly for single-page chapters</li>
+<li>Supports <code>--module</code>, <code>--resume</code>, <code>--patch</code> (re-scrape only blank chapters) flags</li>
+</ul>
+<p><strong><code>ingest-scraped.mjs</code></strong> — Bulk ingest to pgvector</p>
+<ul>
+<li>Loads all <code>scripts/scraped/*.json</code> files</li>
+<li>Deduplicates by <code>source + title</code></li>
+<li>Deletes existing pgvector rows for those sources (clean re-import)</li>
+<li>Embeds in batches of 8 via Voyage AI (<code>voyage-3-lite</code>, 512-dim)</li>
+<li>Inserts into <code>fca_documents</code></li>
+<li>Supports <code>--dry-run</code> mode</li>
+<li>Never touches the baseline 82 chunks (different <code>source</code> names)</li>
+</ul>
+<h3 id="run-commands">Run commands</h3>
+<pre><code># Publications (skip already-done types)
+node scripts/fca-scrape.mjs --resume
+
+# Handbook (patch only blank chapters)
+node scripts/fca-scrape-handbook.mjs --patch
+
+# Ingest everything to pgvector
+node scripts/ingest-scraped.mjs
+
+# Preview without inserting
+node scripts/ingest-scraped.mjs --dry-run</code></pre>
+<h3 id="storage-in-supabase">Storage in Supabase</h3>
+<p><code>fca_documents</code> table (no RLS — shared corpus):</p>
+<pre><code>CREATE TABLE public.fca_documents (
+  id           uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+  source       text        NOT NULL,
+  title        text        NOT NULL,
+  chunk_index  int         NOT NULL DEFAULT 0,
+  content      text        NOT NULL,
+  embedding    vector(512),
+  token_count  int,
+  created_at   timestamptz DEFAULT NOW(),
+  updated_at   timestamptz DEFAULT NOW()
+);
+
+CREATE INDEX fca_documents_embedding_idx
+  ON public.fca_documents
+  USING ivfflat (embedding vector_cosine_ops) WITH (lists = 50);</code></pre>
+<p>IVFFlat with <code>lists = 50</code> is appropriate for the current ~11k-row scale. If the corpus grows past 50k, retune to <code>lists = sqrt(rows)</code>.</p>
+<h3 id="regulatory-horizon-weekly-cron">Regulatory Horizon (weekly cron)</h3>
+<p><code>/api/rag/horizon</code> runs every Monday at 08:00 UTC via Vercel Cron. It:</p>
+<ol>
+<li>Fetches the FCA RSS feed</li>
+<li>Parses new publications since the last run</li>
+<li>Embeds each title + abstract via Voyage AI</li>
+<li>Inserts into <code>fca_documents</code> with <code>source = &#x27;FCA Horizon&#x27;</code></li>
+<li>Duplicates skipped by URL match</li>
+</ol>
+<p>The Governance page on the app queries this live, showing the actual item count and last-updated timestamp.</p>
+<p>Manual trigger:</p>
+<pre><code>GET https://amaea.vercel.app/api/rag/horizon
+Authorization: Bearer amaea-ingest-2026</code></pre>
+<h2 id="embeddings">Embeddings</h2>
+<h3 id="voyage-ai-voyage-3-lite">Voyage AI <code>voyage-3-lite</code></h3>
+<table>
+<thead><tr>
+<th>Property</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Output dimensions</td>
+<td>512</td>
+</tr>
+<tr>
+<td>Context length</td>
+<td>8000 tokens</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>~$0.02 per 1M tokens (input)</td>
+</tr>
+<tr>
+<td>Latency</td>
+<td>~100ms per call</td>
+</tr>
+</tbody></table>
+<p>Chosen over OpenAI&#x27;s text-embedding-3-small/large for compactness (512 vs 1536 dims = 3× smaller index footprint), latency, and quality benchmarks on regulatory text (~5% better mAP on the 50-scenario eval set).</p>
+<p>Client at <code>amaea-app/src/lib/rag/embed.ts</code>:</p>
+<pre><code>export async function embedText(text: string): Promise&lt;number[]&gt; {
+  const cleaned = stripBom(text)  // remove Windows UTF-8 BOM if present
+  const res = await fetch(&#x27;https://api.voyageai.com/v1/embeddings&#x27;, {
+    method: &#x27;POST&#x27;,
+    headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27;, &#x27;Authorization&#x27;: &#x27;Bearer &#x27; + VOYAGE_API_KEY },
+    body: JSON.stringify({ input: [cleaned], model: &#x27;voyage-3-lite&#x27; }),
+  })
+  return (await res.json()).data[0].embedding
+}
+
+export async function embedBatch(texts: string[]): Promise&lt;number[][]&gt; {
+  // Batched call, 8 per request — Voyage handles this efficiently
+}</code></pre>
+<h2 id="dual-rag-retrieval">Dual RAG retrieval</h2>
+<p>Every chat query and every AI-generated report section retrieves from two sources in parallel:</p>
+<h3 id="1-fca-corpus-retrieval">1. FCA corpus retrieval</h3>
+<pre><code>async function retrieveFcaContext(query: string): Promise&lt;string&gt; {
+  const embedding = await embedText(query)
+  const { data: chunks } = await supabase.rpc(&#x27;match_fca_documents&#x27;, {
+    query_embedding: embedding,
+    match_threshold: 0.60,
+    match_count:     6,
+  })
+  return chunks.map(c =&gt; `[${c.source} — ${c.title}]\n${c.content}`).join(&#x27;\n\n---\n\n&#x27;)
+}</code></pre>
+<p>Top-6 chunks at threshold 0.60. Returns formatted FCA citations injected into the system prompt as <code>RETRIEVED REGULATORY CONTEXT</code>.</p>
+<h3 id="2-firm-embeddings-retrieval">2. Firm embeddings retrieval</h3>
+<pre><code>async function retrieveFirmContext(query: string): Promise&lt;string&gt; {
+  const embedding = await embedText(query)
+  const { data: chunks } = await supabase.rpc(&#x27;match_firm_embeddings&#x27;, {
+    query_embedding: embedding,
+    match_threshold: 0.45,
+    match_count:     12,
+  })
+  return chunks.map(c =&gt; `[Firm data — ${c.source_type}]\n${c.content}`).join(&#x27;\n\n---\n\n&#x27;)
+}</code></pre>
+<p>Top-12 chunks at threshold 0.45 (more permissive to admit more firm-specific context). The RPC uses <code>get_firm_id()</code> from the JWT to scope by firm — there&#x27;s no path to cross-tenant retrieval.</p>
+<p>Both retrievals run in parallel via <code>Promise.all</code>. Result: every Claude completion sees both firm-specific signal (which clients are flagged, which docs have been uploaded, what flags are open) and FCA-corpus regulatory grounding (the actual rule text, with chapter/section precision).</p>
+<h2 id="firm-embeddings">Firm embeddings</h2>
+<p>The firm-specific RAG layer. Rebuilt entirely on every &quot;Refresh AI Context&quot; click (a dashboard button that POSTs to <code>/api/rag/firm-embed</code>).</p>
+<h3 id="what-gets-embedded">What gets embedded</h3>
+<p><code>buildFirmChunks(firmId)</code> in <code>amaea-app/src/lib/rag/embed-firm.ts</code> produces four types of chunks:</p>
+<p><strong>1. <code>client_summary</code> — one per active client with risk signals</strong></p>
+<p>For each active client, joins their reviews, vulnerability records, and documents. If the client has any signal (overdue review, vulnerability flag, missing/expired doc), emit a chunk:</p>
+<pre><code>Client CLI-0047 Margaret Thompson [adviser: James Morrison]:
+  Annual review 423 days overdue (due 2025-03-01).
+  Vulnerable client (driver: financial_resilience) — Low savings noted.
+  Missing/expired document: letter_of_authority.</code></pre>
+<p><strong>2. <code>document_extraction</code> — one per uploaded document with metadata</strong></p>
+<p>For each document with non-null metadata (up to 100 most recent), emit a chunk summarising the extracted fields:</p>
+<pre><code>Document for CLI-0047 Margaret Thompson — db_transfer_report
+(uploaded 2026-05-14, file: 02-db-transfer-gap-margaret-thompson.pdf):
+transfer recommended: yes; transfer value: £412,500; cooling-off notice provided:
+no; PTS qualification confirmed: yes; client sign-off date: 2026-02-06;
+ceding scheme: British Steel Pension Scheme</code></pre>
+<p><strong>3. <code>risk_flag</code> — one per unresolved flag</strong></p>
+<p>For each unresolved flag (up to 50 most recent), emit a chunk:</p>
+<pre><code>Risk flag [CRITICAL] for CLI-0047 Margaret Thompson — No cooling-off notice
+provided for DB transfer (COBS 19.1): No cooling-off notice provided for DB
+transfer — raised by document upload extraction</code></pre>
+<p><strong>4. <code>firm_overview</code> — exactly one per firm</strong></p>
+<p>Aggregate counts:</p>
+<pre><code>Firm overview:
+  Active clients: 261
+  Overdue annual reviews: 1
+  Vulnerable clients: 4
+  Missing/expired documents: 12
+  Imported documents with AI extraction: 1765
+  Active risk flags — critical: 1, high: 8, medium: 4</code></pre>
+<h3 id="embedding-storage">Embedding + storage</h3>
+<pre><code>export async function embedFirmContext(firmId: string): Promise&lt;number&gt; {
+  const chunks = await buildFirmChunks(firmId)
+  const texts = chunks.map(c =&gt; c.content)
+  const embeddings = await embedBatch(texts)
+
+  // Clear existing firm embeddings and replace (full rebuild)
+  await supabase.from(&#x27;firm_embeddings&#x27;).delete().eq(&#x27;firm_id&#x27;, firmId)
+
+  const rows = chunks.map((c, i) =&gt; ({
+    firm_id:     firmId,
+    source_type: c.source_type,
+    source_id:   c.source_id,
+    content:     clean(c.content),
+    embedding:   embeddings[i],
+  }))
+
+  await supabase.from(&#x27;firm_embeddings&#x27;).insert(rows)
+  return rows.length
+}</code></pre>
+<p>Total firm chunks: typically 30-80 for a ~250-client firm.</p>
+<h2 id="the-chat-assistant">The chat assistant</h2>
+<h3 id="endpoints">Endpoints</h3>
+<ul>
+<li><strong><code>/api/chat</code></strong> — authenticated chat. Used by dashboard + <code>/assistant</code> + <code>/insights</code> AskAmaea.</li>
+<li><strong><code>/api/public/chat</code></strong> — unauthenticated chat for the marketing site demo. Max_tokens 512, no firm data, no recent imports. Prevents abuse via simple rate limiting.</li>
+</ul>
+<h3 id="model">Model</h3>
+<p><code>claude-sonnet-4-6</code> with <code>max_tokens: 16384</code> (vs the 2048 default — bumped to handle comprehensive compliance walkthroughs without truncation).</p>
+<h3 id="cost-per-call">Cost per call</h3>
+<p>At Sonnet 4.6 pricing (~$3/M input, ~$15/M output) with typical real-world usage:</p>
+<ul>
+<li>System prompt ~ 4-8k input tokens (FCA chunks + firm chunks + recent imports + adviser stats)</li>
+<li>User question + history ~ 200-1000 input tokens</li>
+<li>Response ~ 1-4k output tokens (sometimes up to 16k for full rundowns)</li>
+</ul>
+<p><strong>Typical per-call cost: $0.05 – $0.20</strong></p>
+<p>A firm with active daily compliance usage might generate 20-100 chat calls per day, putting the AI cost at £20-£100 per firm per month. The chat is the most expensive surface in the product — far more than the document import pipeline (which runs ~$0.04 per document).</p>
+<h3 id="system-prompt-structure">System prompt structure</h3>
+<p>The full prompt construction (in <code>buildSystemPrompt()</code> at <code>amaea-app/src/app/api/chat/route.ts</code>):</p>
+<pre><code>You are Amaea AI, an expert FCA compliance assistant built into the Amaea
+compliance platform for UK Independent Financial Advisers (IFAs).
+
+You have deep knowledge of:
+- FCA Conduct of Business Sourcebook (COBS) ...
+- FCA SYSC ...
+- Consumer Duty (PS22/9) ...
+- RMAR ...
+- FCA Handbook rules on vulnerable customers — PRIN 12, FG21/1
+- FCA Final Notices and enforcement precedents
+
+Current firm dashboard — Sterling IFA Ltd (FRN 789012):
+- {stats.activeClients} active clients monitored
+- {stats.overdueReviews} overdue annual reviews
+- {stats.missingDocs} clients with missing or expired documentation
+- {stats.vulnerable} clients flagged as vulnerable
+- Compliance health score: {stats.healthScore}/100
+- RMAR due: 31 May 2026 (3 data gaps in Section B outstanding)
+- Advisers and current overdue review counts: {adviserStats}
+
+These named clients may have ongoing compliance issues — verify against the
+retrieved firm context and recent doc imports below before stating facts about them:
+- CLI-0047 Margaret Thompson (adviser: James Morrison)
+- CLI-0089 Robert Chen (adviser: Alex Williams)
+- CLI-0132 Priya Singh (adviser: Kate Davies)
+
+Response guidelines:
+- Be specific, direct, action-oriented
+- Reference client references (CLI-XXXX) and adviser names when relevant
+- Cite FCA rules precisely (e.g. COBS 9.5, PRIN 12, PS22/9 outcome areas)
+- Reference enforcement precedents where relevant
+- Recommend concrete next steps with timelines
+- Never invent data — if outside context, say so clearly
+- Tone: professional, calm, authoritative
+
+RETRIEVED FIRM CONTEXT (live data from this firm&#x27;s client base):
+{firmContext — top 12 firm embedding chunks}
+
+RECENTLY IMPORTED DOCUMENTS AND DOC-LEVEL FLAGS:
+{importContext}
+  ─ FLAGS RAISED BY RECENT DOCUMENT IMPORTS:
+    {25 most recent critical/high/medium doc-level flags}
+  ─ RECENT DOCUMENT IMPORTS:
+    {30 most recent documents with summarized extracted fields}
+
+RETRIEVED REGULATORY CONTEXT (most relevant to this query):
+{fcaContext — top 6 FCA chunks}
+
+FORMATTING — this is critical:
+- Write in plain conversational prose. No markdown whatsoever.
+- For lists, use plain numbers or simple line breaks.
+- Separate sections with a blank line only.</code></pre>
+<h3 id="unconditional-injection-the-always-visible-layer">Unconditional injection (the &quot;always visible&quot; layer)</h3>
+<p>The system prompt has TWO firm-data layers:</p>
+<ol>
+<li><strong>Firm RAG retrieval</strong> (top 12 chunks at threshold 0.45) — similarity-based, picks the chunks most semantically related to the user query</li>
+<li><strong>Unconditional injection</strong> — queries the database directly per chat request for the 25 most recent critical/high/medium doc-level flags + 30 most recent imported documents, dedupes by (type × client), and includes them verbatim</li>
+</ol>
+<p>The unconditional layer exists because: on broad queries like &quot;give me a compliance rundown&quot;, the highest-ranked RAG chunks are firm-overview summaries, not specific document_extraction chunks. The specific upload data scores lower in similarity and misses the top-K. Without unconditional injection, the chat would frequently fail to reference recent uploads.</p>
+<p>This is the layer that makes the chat able to say <em>&quot;Margaret Thompson&#x27;s DB transfer dated 6 February 2026 was valued at £412,500 with no cooling-off notice&quot;</em> by extracted value, not just by general description.</p>
+<h3 id="live-adviser-stats">Live adviser stats</h3>
+<p>Per request, the chat queries Postgres for each adviser&#x27;s current overdue review count and active client count, and includes it in the prompt as a line like:</p>
+<pre><code>Advisers and current overdue review counts:
+James Morrison (88 clients, 0 overdue),
+Alex Williams (87 clients, 1 overdue),
+Kate Davies (86 clients, 0 overdue)</code></pre>
+<p>This replaces a previous hardcoded line in the system prompt that was stale after the seed migrations. The dynamic version means the chat never reasons from stale numbers.</p>
+<h3 id="logging">Logging</h3>
+<p>Every chat call writes to <code>compliance_events</code>:</p>
+<pre><code>{
+  firm_id,
+  category: &#x27;update&#x27;,
+  event: `AI assistant query: ${query.slice(0, 100)}`,
+  ai_metadata: {
+    model: &#x27;claude-sonnet-4-6&#x27;,
+    input_tokens: response.usage.input_tokens,
+    output_tokens: response.usage.output_tokens,
+    rag_used: true,
+    retrieval_query: query.slice(0, 200),
+    latency_ms: Date.now() - startMs,
+  },
+}</code></pre>
+<p>This gives the firm an auditable record of every AI interaction — useful for FCA visit defensibility (&quot;what queries did the compliance team run, what did the AI return?&quot;).</p>
+<h2 id="ai-generated-reports-scribe">AI-generated reports (Scribe)</h2>
+<p><code>/api/reports/generate</code> produces an AI-written executive analysis section for each report type. The endpoint:</p>
+<ol>
+<li>Receives <code>{ reportType, periodStart, periodEnd }</code> from the client</li>
+<li>Loads firm data per the report type (e.g., for RMAR: complaints data, client counts, premium calcs; for Consumer Duty: outcome assessment status across clients)</li>
+<li>Calls <code>retrieveFcaContext(reportType-specific query)</code> for FCA-corpus retrieval</li>
+<li>Calls Claude (<code>max_tokens 8192</code>) with:
+<ul>
+<li>System prompt: identity + FCA grounding + clear &quot;no markdown, plain prose&quot; formatting rules</li>
+<li>User message: the structured firm data + the prompt to write the analysis section 5. Stores the AI output as part of <code>reports.data</code> JSONB 6. Renders as a section in the PDF (or markdown for board summaries)</li>
+</ul></li>
+</ol>
+<h3 id="report-types-their-fca-retrieval-queries">Report types + their FCA retrieval queries</h3>
+<table>
+<thead><tr>
+<th>Report</th>
+<th>RAG query used</th>
+</tr></thead><tbody>
+<tr>
+<td>RMAR</td>
+<td>SUP 16, RMAR, Section B complaints</td>
+</tr>
+<tr>
+<td>Suitability</td>
+<td>COBS 9, enforcement precedents</td>
+</tr>
+<tr>
+<td>Consumer Duty</td>
+<td>PS22/9, four outcomes, vulnerable clients</td>
+</tr>
+<tr>
+<td>Activity Log</td>
+<td>SYSC 9 record keeping, enforcement</td>
+</tr>
+<tr>
+<td>Vulnerable Clients</td>
+<td>FG21/1, Consumer Duty</td>
+</tr>
+<tr>
+<td>Board Summary</td>
+<td>SMCR, governance, enforcement</td>
+</tr>
+</tbody></table>
+<h3 id="snapshot-locking">Snapshot locking</h3>
+<p>When a report is marked <code>status = &#x27;complete&#x27;</code>, RLS blocks UPDATE — the report becomes immutable. The full firm-data snapshot lives in <code>reports.data</code> JSONB, so the report can be regenerated from history without re-querying current data.</p>
+<h2 id="nightly-ar-sweep-cron">Nightly AR sweep cron</h2>
+<p>The most consequential AI-driven background job. Runs daily at 06:00 UTC via Vercel Cron.</p>
+<h3 id="what-it-does">What it does</h3>
+<ol>
+<li>Queries all overdue reviews across every firm: <code>status = &#x27;overdue&#x27;</code> OR (<code>status = &#x27;scheduled&#x27;</code> AND <code>completed_at IS NULL</code> AND <code>due_date &lt; today</code>)</li>
+<li>For each review: fetches the delay-reason notes recorded by the adviser on the client detail page</li>
+<li>Calls Claude (<code>max_tokens: 512</code>) with: ``` You are an FCA compliance assistant evaluating an overdue annual review. Under COBS 9.5, firms providing ongoing service must conduct suitability reviews at least every 12 months. The review below is overdue. Read the delay-reason notes (if any) and decide whether they constitute a sufficient justification for the delay.</li>
+</ol>
+<p>Review: {clientRef} {clientName}, due {dueDate}, {daysOverdue} days overdue. Delay reason notes: {notes ?? &#x27;(none recorded)&#x27;}</p>
+<p>Respond JSON: { sufficient: boolean, reasoning: string } ```</p>
+<ol>
+<li>If <code>sufficient = false</code> OR notes are empty: create or update an <code>overdue_review</code> risk flag</li>
+<li>If <code>sufficient = true</code>: resolve any existing <code>overdue_review</code> flag for that client (the adviser has properly explained the delay)</li>
+</ol>
+<h3 id="severity-thresholds">Severity thresholds</h3>
+<table>
+<thead><tr>
+<th>Weeks overdue</th>
+<th>Severity</th>
+</tr></thead><tbody>
+<tr>
+<td>8+</td>
+<td>critical</td>
+</tr>
+<tr>
+<td>4–7</td>
+<td>high</td>
+</tr>
+<tr>
+<td>2–3</td>
+<td>medium</td>
+</tr>
+<tr>
+<td>Under 2</td>
+<td>low</td>
+</tr>
+</tbody></table>
+<h3 id="why-its-important">Why it&#x27;s important</h3>
+<p>This is the part of the product that turns the platform from &quot;passive monitoring&quot; to &quot;active compliance attention&quot;. Every morning, the firm wakes up to a refreshed view of which overdue reviews have been adequately explained and which haven&#x27;t. The compliance officer can focus on the ones the AI judged insufficient.</p>
+<p>Manual trigger (for testing):</p>
+<pre><code>GET https://amaea.vercel.app/api/cron/ar-sweep
+Authorization: Bearer amaea-ingest-2026</code></pre>
+<h2 id="the-evaluation-framework">The evaluation framework</h2>
+<p>50 annotated FCA compliance scenarios for measuring RAG pipeline quality. The primary output feeds the Imperial MSc ML research paper Milan is producing.</p>
+<h3 id="dataset-structure">Dataset structure</h3>
+<p><code>amaea-app/scripts/eval-scenarios.json</code>. Each scenario has:</p>
+<pre><code>{
+  &quot;id&quot;: &quot;EVAL-001&quot;,
+  &quot;category&quot;: &quot;Consumer Duty&quot;,
+  &quot;difficulty&quot;: &quot;easy&quot;,
+  &quot;question&quot;: &quot;What is the Consumer Duty and when did it come into force?&quot;,
+  &quot;expected_rules&quot;: [&quot;PS22/9&quot;],
+  &quot;expected_themes&quot;: [&quot;consumer protection&quot;, &quot;outcomes&quot;, &quot;July 2023&quot;],
+  &quot;ground_truth_notes&quot;: &quot;Should mention PS22/9, four outcome areas, in force from 31 July 2023...&quot;
+}</code></pre>
+<h3 id="category-distribution">Category distribution</h3>
+<table>
+<thead><tr>
+<th>Category</th>
+<th>Count</th>
+</tr></thead><tbody>
+<tr>
+<td>Consumer Duty</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Suitability</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Vulnerable Customers</td>
+<td>5</td>
+</tr>
+<tr>
+<td>SMCR / COCON</td>
+<td>5</td>
+</tr>
+<tr>
+<td>DB Pension Transfers</td>
+<td>5</td>
+</tr>
+<tr>
+<td>RMAR and Reporting</td>
+<td>5</td>
+</tr>
+<tr>
+<td>AML</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CASS Client Money</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Record Keeping</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Enforcement Precedents</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Financial Promotions</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Decumulation</td>
+<td>2</td>
+</tr>
+<tr>
+<td>ESG</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Costs and Charges</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<h3 id="scoring-rubric-10-points-total">Scoring rubric (10 points total)</h3>
+<table>
+<thead><tr>
+<th>Dimension</th>
+<th>Points</th>
+<th>What it measures</th>
+</tr></thead><tbody>
+<tr>
+<td>Rule citation accuracy</td>
+<td>0–3</td>
+<td>Cited the correct FCA rules precisely (e.g. COBS 9.5, not just COBS)</td>
+</tr>
+<tr>
+<td>Reasoning completeness</td>
+<td>0–3</td>
+<td>Explained the WHY behind the rule, not just the WHAT</td>
+</tr>
+<tr>
+<td>Firm context integration</td>
+<td>0–2</td>
+<td>Connected the answer to the specific firm/client situation</td>
+</tr>
+<tr>
+<td>Actionability</td>
+<td>0–2</td>
+<td>Gave concrete next steps with timelines</td>
+</tr>
+</tbody></table>
+<h3 id="run-the-eval">Run the eval</h3>
+<pre><code>cd amaea-app
+
+# Full 50-scenario run
+node scripts/eval.mjs
+
+# Filtered
+node scripts/eval.mjs --category &quot;Suitability&quot;
+node scripts/eval.mjs --difficulty hard
+node scripts/eval.mjs --id EVAL-007
+
+# Output: scripts/eval-results-&lt;timestamp&gt;.json</code></pre>
+<h3 id="convert-results-to-scoring-sheet">Convert results to scoring sheet</h3>
+<pre><code># CSV
+node scripts/eval-to-csv.mjs scripts/eval-results-2026-05-14T17-32-35.json
+
+# Formatted Excel (with rubric, conditional formatting, run summary)
+python3 scripts/eval-to-xlsx.py scripts/eval-scoring-2026-05-14T17-32-35.csv</code></pre>
+<p>The <code>.xlsx</code> produces a 2-sheet workbook: Sheet 1 has every scenario with cream-highlighted scoring columns, Total cells with conditional colour formatting (green/amber/red), and a run summary block. Sheet 2 is a full scoring guide with the rubric, what-to-look-for examples per dimension, and total-score interpretation bands. Designed for Hasna to review row-by-row in Google Sheets.</p>
+<h3 id="eval-cycle-process">Eval cycle process</h3>
+<ol>
+<li>Run harness, convert to CSV/XLSX</li>
+<li>Hasna scores against ground truth notes in Google Sheets</li>
+<li>Identify weak categories (lowest average scores)</li>
+<li>Add new FCA chunks to ingest pipeline for those areas</li>
+<li>Re-run ingest: <code>node scripts/ingest-scraped.mjs</code></li>
+<li>Re-run eval, compare to baseline</li>
+<li>Repeat — each cycle is a measurable RAG improvement</li>
+</ol>
+<h3 id="baseline-performance">Baseline performance</h3>
+<ul>
+<li><strong>Initial 82-chunk knowledge base</strong> (March 2026): scored by Hasna, mean ~6.5/10</li>
+<li><strong>11,645-chunk full corpus</strong> (May 2026): re-run on same 50 scenarios — pending Hasna scoring as of session end</li>
+</ul>
+<p>The expected improvement is on rule citation accuracy (more chapter-precision available) and on enforcement precedent integration (the Final Notices weren&#x27;t in the baseline corpus).</p>
+<h2 id="whats-deliberately-not-built">What&#x27;s deliberately not built</h2>
+<ul>
+<li><strong>Per-firm custom AI training.</strong> Mentioned on the marketing site for the Enterprise tier (&quot;Custom AI trained on your policies&quot;). Not in MVP; would require either fine-tuning or per-firm vector spaces. Phase 4 work.</li>
+<li><strong>Streaming chat responses.</strong> Current chat returns the full completion in one response. Streaming would feel snappier but adds complexity. Worth adding pre-launch.</li>
+<li><strong>Conversation memory across sessions.</strong> Each chat starts fresh — no persistence of past conversations. Adding this is a small backend change but raises GDPR considerations.</li>
+<li><strong>Tool-use API for structured output.</strong> Currently relying on free-text JSON + Zod validation. Anthropic tool-use would constrain output more strictly. Worth testing as a v2.</li>
+<li><strong>Multi-model orchestration.</strong> Could use Claude Haiku for the classify step (cheaper, faster) and Sonnet for extraction. Trade-off is two model dependencies.</li>
+<li><strong>Per-doc-type fine-tuned models.</strong> A future moat. The 50-scenario eval framework is the foundation for this — once we have a scored corpus across thousands of real documents, fine-tuning becomes feasible.</li>
+</ul>
+<h2 id="where-to-read-next">Where to read next</h2>
+<ul>
+<li>For ops / running the AI side: <strong><a href="05-ops.html">05 — Operations Handbook</a></strong></li>
+<li>For the doc extraction system: <strong><a href="03-extraction.html">03 — Document Extraction &amp; Compliance Flag System</a></strong></li>
+<li>For the technical architecture: <strong><a href="02-architecture.html">02 — Technical Architecture</a></strong></li>
+</ul>
+</article>
+
+</body>
+</html>

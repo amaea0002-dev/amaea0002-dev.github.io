@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document Extraction & Compliance Flag System · Amaea MVP Docs</title>
+  <link rel="icon" href="logo-plum.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-top">
+    <img src="logo-white.png" alt="Amaea"/>
+    <span class="cover-badge">MVP Documentation</span>
+  </div>
+
+  <div class="cover-body">
+    <p class="cover-eyebrow">Doc 03 · Compliance evaluation · technical reviewers</p>
+    <h1 class="cover-title">Document Extraction & Compliance Flag System</h1>
+    <p class="cover-sub">The core IP. All 19 document types, the classify-then-extract pipeline, per-type schemas, multi-page grouping, the auto-flag-raising system, and the FCA rule mapping table.</p>
+  </div>
+
+  <div class="cover-foot">
+    <div>
+      <p class="cover-meta-label">Status</p>
+      <p class="cover-meta-value">MVP · pre-launch</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">As of</p>
+      <p class="cover-meta-value">14 May 2026</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Owners</p>
+      <p class="cover-meta-value">Hasna Sahul Hameed · Milan Sajiv</p>
+    </div>
+    <div>
+      <p class="cover-meta-label">Length</p>
+      <p class="cover-meta-value">~40 min read</p>
+    </div>
+  </div>
+
+  <div class="cover-tagline">
+    <p class="cover-tagline-text">Stay compliant. Stay confident.</p>
+    <p class="cover-tagline-sub">amaea</p>
+  </div>
+</section>
+
+<nav class="doc-nav">
+  <a href="index.html">← All documents</a>
+  <span class="doc-nav-meta">Doc 03 · ~40 min read</span>
+</nav>
+
+<article class="doc">
+<p>This is the core IP. Amaea reads IFA compliance documents using Claude vision, extracts compliance-critical fields into validated structured data, and raises specific compliance flags with FCA rule citations when fields are missing or incorrect.</p>
+<p>This document covers: the 19 canonical document types, their per-type schemas, the classify-then-extract pipeline, multi-page document grouping, the auto-flag-raising system, and the complete FCA rule mapping table.</p>
+<h2 id="the-19-document-types">The 19 document types</h2>
+<p>Each type has its own Zod schema (<code>amaea-app/src/lib/extraction/schemas.ts</code>) that defines the extracted fields and the flag-raising rules. The classifier (<code>extract.ts</code>) routes each upload to the right schema.</p>
+<h3 id="client-level-documents-extend-baseclientdocfields">Client-level documents (extend <code>BaseClientDocFields</code>)</h3>
+<p>Most documents share a base set of fields (document date, adviser name, client name + reference, signed-by-client booleans, copy-filed/copy-sent booleans, extraction confidence). These are spread into each schema via <code>...BaseClientDocFields</code>.</p>
+<ol>
+<li><strong><code>suitability_report</code></strong> — SOA / ROA / Suitability Letter Extracted: <code>recommendationSummary</code>, <code>reviewTrigger</code> (new_business / annual_review / ad_hoc), <code>productOrInvestmentReferenced</code> + base fields.</li>
+<li><strong><code>fact_find</code></strong> — Fact Find / KYC / Client Profile Extracted: <code>completionDate</code>, <code>lastUpdatedDate</code>, income/expenditure/assets/liabilities booleans, <strong><code>attitudeToRiskRating</code></strong> (string), <strong><code>capacityForLossRecorded</code></strong>, <strong><code>investmentObjectivesRecorded</code></strong>, <code>vulnerabilityIndicatorsNoted</code> + base fields.</li>
+<li><strong><code>client_agreement</code></strong> — Service Proposition Letter / Terms of Engagement Extracted: <code>dateIssuedToClient</code>, <code>serviceLevelAgreed</code> (ongoing / transactional / one_off / other), <code>ongoingFeeAgreed</code> (string like &quot;0.75% p.a.&quot;), <code>subsequentAmendmentDates[]</code> + base fields.</li>
+<li><strong><code>annual_review</code></strong> — Annual Review Report Extracted: <code>reviewMeetingDate</code>, <code>suitabilityReassessed</code>, <code>newRecommendationsMade</code>, <code>nextReviewDueDate</code>, <strong><code>consumerDutyOutcomeIncluded</code></strong> + base fields.</li>
+<li><strong><code>db_transfer_report</code></strong> — Pension Transfer Report Extracted: <code>tvaDate</code>, <code>pensionTransferSpecialistName</code>, <strong><code>ptsQualificationConfirmed</code></strong>, <code>transferRecommended</code>, <code>clientSignOffDate</code>, <strong><code>coolingOffNoticeProvided</code></strong>, <code>schemeName</code>, <code>transferValue</code> (number), <code>cedingSchemeDetails</code>, <code>receivingArrangementDetails</code> + base fields.</li>
+</ol>
+<h3 id="documents-with-their-own-field-set">Documents with their own field set</h3>
+<ol>
+<li><strong><code>vulnerability_assessment</code></strong> — Consumer Duty Vulnerability Record Fields: <code>assessmentDate</code>, <code>adviserName</code>, <code>clientName</code>, <code>clientReference</code>, <strong><code>vulnerabilityDriver</code></strong> (health / life_event / financial_resilience / low_capability), <code>functionalImpact</code>, <code>serviceAdaptations</code>, <strong><code>clientConsentForSensitiveData</code></strong> (boolean — UK GDPR Art. 9), <code>nextReviewDate</code>, extraction confidence.</li>
+<li><strong><code>consumer_duty_outcome</code></strong> — Consumer Duty Client-Level Outcome Assessment Fields: <code>assessmentDate</code>, adviser/client identifiers, <strong><code>outcomeAreasAssessed</code></strong> (array of: products_and_services / price_and_value / consumer_understanding / consumer_support), <code>fairValueConfirmed</code>, <code>concernsIdentified</code>, <code>actionsTakenOrPlanned</code>, <code>nextAssessmentDate</code>.</li>
+<li><strong><code>letter_of_authority</code></strong> — LOA / Third Party Authority Fields: <code>documentDate</code>, <code>dateSignedByClient</code>, <code>providerName</code>, <code>productOrPlanReferenced</code>, <strong><code>authorityExpiryDate</code></strong>, <code>copyFiled</code>, client identifiers.</li>
+<li><strong><code>product_illustration</code></strong> — Key Features Illustration / KFI Fields: <code>documentDate</code>, <code>productProviderName</code>, <code>productType</code>, <code>illustrationReferenceNumber</code>, <code>matchesSoaRecommendationDate</code>, <code>projectedValues</code> (raw text), <code>chargesSummary</code>, client identifiers.</li>
+<li><strong><code>terms_of_business</code></strong> — ToB / Client Consent Form Fields: <code>documentDate</code>, <code>dateIssued</code>, <code>dateSignedByClient</code>, <strong><code>consentsGranted</code></strong> (array of: data_processing / marketing / third_party_referral / special_category_data / other), <strong><code>gdprConsentLanguagePresent</code></strong>, client identifiers.</li>
+<li><strong><code>complaint_record</code></strong> — Complaint Log Entry / Final Response Fields: <strong><code>complaintReceivedDate</code></strong>, <code>natureOfComplaint</code>, <code>adviserNamed</code>, <strong><code>acknowledgedDate</code></strong>, <code>finalResponseDate</code>, <code>outcome</code> (upheld / not_upheld / partially_upheld / withdrawn), <code>redressAmount</code> (number), <strong><code>fosReferralRightsCommunicated</code></strong>, <code>rootCauseCategory</code>, client identifiers.</li>
+<li><strong><code>ongoing_service_evidence</code></strong> — Service Touchpoint Log Fields: client identifiers, adviserName, <strong><code>touchpoints</code></strong> — an array of partial objects: <code>{ date, serviceType (meeting/call/report/email/review/other), matchesClientAgreement, chargeLevied, notes }</code>. Inner objects are <code>.partial()</code> to allow the AI to omit fields that aren&#x27;t applicable to a given touchpoint.</li>
+<li><strong><code>aml_cdd</code></strong> — AML / KYC Verification Record Fields: <strong><code>cddDocumentType</code></strong> (passport / driving_licence / utility_bill / bank_statement / birth_certificate / other), <code>documentDate</code>, <code>verifiedDate</code>, <code>verificationMethod</code> (in_person / electronic / certified_copy), <strong><code>cddLastRefreshedDate</code></strong>, <code>enhancedDueDiligenceApplied</code>, <code>eddReason</code>, client identifiers.</li>
+<li><strong><code>training_competency</code></strong> — Adviser-Level Training &amp; Competency Fields: <strong><code>adviserName</code></strong>, <code>qualificationHeld</code>, <code>awardingBody</code>, <strong><code>spsRenewalDate</code></strong>, <code>cpdHoursTotal</code>, <strong><code>cpdHoursStructured</code></strong>, <code>cpdHoursUnstructured</code>, <code>lastCompetencyAssessmentDate</code>, <code>supervisionStatus</code> (supervised / unsupervised / training). Note: this type has no <code>client_id</code> — adviser-level. Currently extracted but not persisted (DB requires <code>client_id NOT NULL</code>); a separate <code>adviser_documents</code> table is post-MVP.</li>
+</ol>
+<h3 id="doc-types-added-15-may-2026">Doc types added 15 May 2026</h3>
+<ol>
+<li><strong><code>expression_of_wish</code></strong> — Pension Death Benefit Nomination Extends <code>BaseClientDocFields</code>. Fields: <code>pensionScheme</code>, <code>pensionPolicyReference</code>, <strong><code>nominees</code></strong> (array of <code>{ name, relationship, sharePercent }</code>, <code>.partial()</code>), <strong><code>totalSharePercent</code></strong> (number — should equal 100), <code>witnessSignaturePresent</code>, <strong><code>lastReviewedDate</code></strong>.</li>
+<li><strong><code>application_form</code></strong> — Transfer In / New Account / Wrapper Change Extends <code>BaseClientDocFields</code>. Fields: <code>applicationType</code> (transfer_in / new_account / wrapper_change / withdrawal_instruction / other), <code>receivingProvider</code> (e.g. &quot;Fundment&quot;), <code>receivingProductWrapper</code> (e.g. &quot;Fundment SIPP&quot;), <code>cedingProvider</code>, <code>cedingPolicyReference</code>, <code>transferAmount</code> (number), <strong><code>isDbTransfer</code></strong> (boolean), <strong><code>adviserSignedOff</code></strong>.</li>
+<li><strong><code>portfolio_snapshot</code></strong> — Point-in-Time Valuation Extends <code>BaseClientDocFields</code>. Fields: <code>snapshotDate</code>, <code>totalPortfolioValue</code> (number), <code>numberOfHoldings</code>, <code>riskProfileAtSnapshot</code>, <code>yearToDateReturnPct</code> (number), <code>benchmarkComparison</code> (text). No automatic flags — informational.</li>
+<li><strong><code>sales_file_cover</code></strong> — Compliance File Index / Cover Sheet Extends <code>BaseClientDocFields</code>. Fields: <code>recommendationDate</code>, <strong><code>factFindPresent</code></strong>, <strong><code>suitabilityReportPresent</code></strong>, <code>applicationFormsPresent</code>, <code>illustrationsPresent</code>, <code>termsOfBusinessPresent</code>, <strong><code>complianceOfficerReviewed</code></strong>, <code>complianceOfficerName</code>, <code>complianceReviewDate</code>.</li>
+<li><strong><code>attitude_to_risk</code></strong> — Standalone ATR Questionnaire Extends <code>BaseClientDocFields</code>. Fields: <code>questionnaireProvider</code> (e.g. &quot;FinaMetrica Pro&quot;), <code>questionsAnswered</code> (number), <code>totalQuestions</code> (number), <code>riskRating</code> (string — e.g. &quot;Conservative (3/10)&quot;), <code>riskProfileCategory</code> (conservative / moderately_conservative / balanced / moderately_aggressive / aggressive), <strong><code>reviewedWithClient</code></strong> (boolean), <code>capacityForLossDiscussed</code>.</li>
+</ol>
+<h2 id="the-extraction-pipeline">The extraction pipeline</h2>
+<h3 id="step-1-classify">Step 1: Classify</h3>
+<p>Single Claude vision call. Output is one of the 19 type identifiers, or <code>unknown</code>.</p>
+<p>Function: <code>classifyDocument(files: FileInput[])</code> in <code>extract.ts</code>.</p>
+<pre><code>Prompt (single-file):
+  &quot;You are a UK FCA compliance document classifier. Look at this document
+   and identify which of the IFA compliance document types listed below
+   it is. [TYPE_DESCRIPTIONS table]. Respond with ONLY the type identifier
+   (e.g. &#x27;fact_find&#x27;). If the document does not match any type, respond
+   with: unknown&quot;
+
+Prompt (multi-file):
+  &quot;The user has uploaded MULTIPLE FILES that together form ONE document
+   (e.g. a multi-part Suitability Report or a multi-page Fact Find).
+   Identify which SINGLE document type the combined set represents…&quot;</code></pre>
+<p>Each <code>TYPE_DESCRIPTIONS</code> entry includes synonyms found in real-world IFA documents: &quot;SOA&quot;, &quot;Statement of Advice&quot;, &quot;ROA&quot;, &quot;Reasons of Advice&quot;, &quot;Suitability Letter&quot; all classify as <code>suitability_report</code>.</p>
+<p>Cost: ~$0.01 per call (20 max output tokens, classify prompt + image input).</p>
+<h3 id="step-2-extract">Step 2: Extract</h3>
+<p>Single Claude vision call per classified type. Output is a JSON object matching the per-type schema.</p>
+<p>Function: <code>extractDocument(files: FileInput[], type: DocumentType)</code> in <code>extract.ts</code>.</p>
+<pre><code>Prompt:
+  &quot;You are extracting structured compliance data from a UK IFA {type} document.
+
+   Document type: {type}
+   Context: {TYPE_DESCRIPTIONS[type]}
+   [If multi-page]: The document spans N files which are pages/parts of ONE
+   consolidated document. Consider information across all files when
+   extracting.
+
+   Extract the following fields and return them as a single JSON object with
+   this shape:
+   {
+     &#x27;documentType&#x27;: &#x27;{type}&#x27;,
+     [field listing built from Zod schema with type hints]
+   }
+
+   RULES:
+   - Return ONLY a valid JSON object. No markdown, no explanation, no fences.
+   - Dates in ISO format: YYYY-MM-DD. If a year is missing, return null.
+   - For boolean fields: true if clearly shown, false if clearly not, null
+     if not determinable.
+   - For enums, return the exact identifier from the listed options or null.
+   - For &#x27;extractionConfidence&#x27;, return a number 0–1.
+   - Do not invent data. If a field is not present, return null.&quot;</code></pre>
+<p>The field listing is auto-generated from the Zod schema — type hints like <code>string</code>, <code>boolean</code>, <code>number or null</code>, <code>array of one of: &quot;meeting&quot; | &quot;call&quot; | …</code>.</p>
+<h3 id="step-3-validate">Step 3: Validate</h3>
+<p>Output is parsed as JSON, the <code>documentType</code> is forced to match the classifier output (Claude sometimes drops it), enum values are coerced case-insensitively (turn <code>&quot;Upheld&quot;</code> → <code>&quot;upheld&quot;</code>, <code>&quot;Life event&quot;</code> → <code>&quot;life_event&quot;</code>, including nested array items via recursion), then validated against the Zod discriminated union.</p>
+<p>If validation fails: the raw error is logged and returned to the caller. The Zod failures are usually:</p>
+<ul>
+<li>Missing required fields (<code>undefined ≠ null</code>) — fix by <code>.partial()</code> on nested objects</li>
+<li>Wrong enum case — handled by <code>coerceEnumsInPlace()</code></li>
+<li>Bad date format — Claude needs the prompt to remind it about ISO</li>
+</ul>
+<h3 id="step-4-flag-raising">Step 4: Flag raising</h3>
+<p><code>flagsFromExtraction(doc: ExtractedDocument): RiskFlag[]</code> runs per-type checks and returns an array of <code>{ type, severity, rule, reason }</code> descriptors. The route then upserts these as rows in <code>risk_flags</code> with <code>source_document_id</code> linking to the just-created document.</p>
+<p>Multi-page document grouping: when the user toggles &quot;Treat these N files as ONE document&quot; on the import page, the frontend sends all files in a single POST with multiple <code>file</code> fields. The route calls <code>processDocument(files)</code> with the array. The classifier and extractor receive all files as separate vision content blocks in one Claude call with a multi-page-aware prompt. The result is one document record with <code>metadata.totalFiles = N</code> and <code>metadata.additionalFiles = [...]</code> recording the secondary file paths.</p>
+<h2 id="the-fca-rule-mapping-flagsfromextraction">The FCA rule mapping (<code>flagsFromExtraction</code>)</h2>
+<p>The complete set of flag-raising rules. Each entry shows: the doc type, the trigger condition, the flag raised, severity, and FCA rule citation.</p>
+<h3 id="suitability_report"><code>suitability_report</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>signedByClient === false</code> OR (no signature AND no date signed)</td>
+<td><code>missing_signature</code></td>
+<td>high</td>
+<td>COBS 9.4</td>
+</tr>
+<tr>
+<td><code>copySentToClient === false</code></td>
+<td><code>soa_not_delivered</code></td>
+<td>high</td>
+<td>COBS 9.4.1</td>
+</tr>
+</tbody></table>
+<h3 id="fact_find"><code>fact_find</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>attitudeToRiskRating == null</code></td>
+<td><code>incomplete_kyc</code></td>
+<td>high</td>
+<td>COBS 9.2</td>
+</tr>
+<tr>
+<td><code>capacityForLossRecorded === false</code></td>
+<td><code>incomplete_kyc</code></td>
+<td>high</td>
+<td>COBS 9.2.2</td>
+</tr>
+<tr>
+<td><code>investmentObjectivesRecorded === false</code></td>
+<td><code>incomplete_kyc</code></td>
+<td>high</td>
+<td>COBS 9.2</td>
+</tr>
+<tr>
+<td>Unsigned (signedByClient false OR no date signed)</td>
+<td><code>missing_signature</code></td>
+<td>medium</td>
+<td>COBS 9.2</td>
+</tr>
+</tbody></table>
+<h3 id="annual_review"><code>annual_review</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>suitabilityReassessed === false</code></td>
+<td><code>review_incomplete</code></td>
+<td>high</td>
+<td>COBS 9.3</td>
+</tr>
+<tr>
+<td><code>consumerDutyOutcomeIncluded === false</code></td>
+<td><code>cd_breach</code></td>
+<td>high</td>
+<td>PS22/9</td>
+</tr>
+<tr>
+<td>Unsigned</td>
+<td><code>missing_signature</code></td>
+<td>medium</td>
+<td>COBS 9.4</td>
+</tr>
+</tbody></table>
+<h3 id="db_transfer_report"><code>db_transfer_report</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>coolingOffNoticeProvided === false</code></td>
+<td><code>cobs_19_breach</code></td>
+<td><strong>critical</strong></td>
+<td>COBS 19.1</td>
+</tr>
+<tr>
+<td><code>ptsQualificationConfirmed === false</code></td>
+<td><code>unqualified_advice</code></td>
+<td><strong>critical</strong></td>
+<td>COBS 19.1B</td>
+</tr>
+<tr>
+<td><code>clientSignOffDate == null</code></td>
+<td><code>missing_signature</code></td>
+<td><strong>critical</strong></td>
+<td>COBS 19.1</td>
+</tr>
+</tbody></table>
+<h3 id="client_agreement"><code>client_agreement</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td>Unsigned</td>
+<td><code>missing_signature</code></td>
+<td>high</td>
+<td>COBS 8.1</td>
+</tr>
+</tbody></table>
+<h3 id="terms_of_business"><code>terms_of_business</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>dateSignedByClient == null</code></td>
+<td><code>missing_signature</code></td>
+<td>high</td>
+<td>COBS 8.1</td>
+</tr>
+</tbody></table>
+<h3 id="vulnerability_assessment"><code>vulnerability_assessment</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>clientConsentForSensitiveData === false</code></td>
+<td><code>gdpr_breach</code></td>
+<td><strong>critical</strong></td>
+<td>UK GDPR Art. 9</td>
+</tr>
+<tr>
+<td><code>serviceAdaptations</code> empty</td>
+<td><code>vulnerable_undocumented</code></td>
+<td>high</td>
+<td>FG21/1</td>
+</tr>
+</tbody></table>
+<h3 id="consumer_duty_outcome"><code>consumer_duty_outcome</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>fairValueConfirmed === false</code></td>
+<td><code>cd_breach</code></td>
+<td>high</td>
+<td>PS22/9</td>
+</tr>
+</tbody></table>
+<h3 id="letter_of_authority"><code>letter_of_authority</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>authorityExpiryDate &lt; today</code></td>
+<td><code>expired_loa</code></td>
+<td>medium</td>
+<td>COBS 2.1</td>
+</tr>
+<tr>
+<td><code>dateSignedByClient == null</code></td>
+<td><code>missing_signature</code></td>
+<td>high</td>
+<td>COBS 2.1</td>
+</tr>
+</tbody></table>
+<h3 id="complaint_record"><code>complaint_record</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>fosReferralRightsCommunicated === false</code></td>
+<td><code>disp_breach</code></td>
+<td><strong>critical</strong></td>
+<td>DISP 1.6</td>
+</tr>
+<tr>
+<td><code>acknowledgedDate - complaintReceivedDate &gt; 5 days</code></td>
+<td><code>disp_breach</code></td>
+<td>high</td>
+<td>DISP 1.6.1</td>
+</tr>
+</tbody></table>
+<h3 id="aml_cdd"><code>aml_cdd</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>cddLastRefreshedDate &gt; 3 years ago</code></td>
+<td><code>aml_cdd_stale</code></td>
+<td>high</td>
+<td>SYSC 6.3 / MLR 2017</td>
+</tr>
+</tbody></table>
+<h3 id="training_competency"><code>training_competency</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>spsRenewalDate &lt; today</code></td>
+<td><code>sps_expired</code></td>
+<td><strong>critical</strong></td>
+<td>TC 2.1</td>
+</tr>
+<tr>
+<td><code>cpdHoursTotal &lt; 35</code></td>
+<td><code>cpd_shortfall</code></td>
+<td>high</td>
+<td>TC 2.1.15R</td>
+</tr>
+<tr>
+<td><code>cpdHoursStructured &lt; 21</code></td>
+<td><code>cpd_structured_shortfall</code></td>
+<td>high</td>
+<td>TC 2.1.15R</td>
+</tr>
+</tbody></table>
+<h3 id="expression_of_wish"><code>expression_of_wish</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td>Unsigned</td>
+<td><code>missing_signature</code></td>
+<td>high</td>
+<td>SYSC 9.1</td>
+</tr>
+<tr>
+<td><code>nominees</code> empty</td>
+<td><code>incomplete_kyc</code></td>
+<td>high</td>
+<td>PS22/9</td>
+</tr>
+<tr>
+<td><code>totalSharePercent !== 100</code></td>
+<td><code>incomplete_kyc</code></td>
+<td>medium</td>
+<td>SYSC 9.1</td>
+</tr>
+<tr>
+<td><code>lastReviewedDate &gt; 5 years ago</code></td>
+<td><code>extraction_uncertain</code></td>
+<td>medium</td>
+<td>PS22/9</td>
+</tr>
+</tbody></table>
+<h3 id="application_form"><code>application_form</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>isDbTransfer === true</code> AND <code>adviserSignedOff !== true</code></td>
+<td><code>cobs_19_breach</code></td>
+<td><strong>critical</strong></td>
+<td>COBS 19.1B</td>
+</tr>
+<tr>
+<td>Unsigned</td>
+<td><code>missing_signature</code></td>
+<td>high</td>
+<td>COBS 2.1</td>
+</tr>
+</tbody></table>
+<h3 id="sales_file_cover"><code>sales_file_cover</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>complianceOfficerReviewed === false</code> OR <code>complianceOfficerName == null</code></td>
+<td><code>missing_document</code></td>
+<td>high</td>
+<td>SYSC 9.1</td>
+</tr>
+<tr>
+<td><code>factFindPresent === false</code></td>
+<td><code>missing_document</code></td>
+<td>high</td>
+<td>COBS 9.2</td>
+</tr>
+<tr>
+<td><code>suitabilityReportPresent === false</code></td>
+<td><code>missing_document</code></td>
+<td>high</td>
+<td>COBS 9.4</td>
+</tr>
+</tbody></table>
+<h3 id="attitude_to_risk"><code>attitude_to_risk</code></h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td>Both <code>riskRating</code> and <code>riskProfileCategory</code> null</td>
+<td><code>incomplete_kyc</code></td>
+<td>high</td>
+<td>COBS 9.2</td>
+</tr>
+<tr>
+<td><code>questionsAnswered &lt; totalQuestions</code></td>
+<td><code>incomplete_kyc</code></td>
+<td>medium</td>
+<td>COBS 9.2</td>
+</tr>
+<tr>
+<td><code>reviewedWithClient === false</code></td>
+<td><code>incomplete_kyc</code></td>
+<td>high</td>
+<td>COBS 9.2</td>
+</tr>
+<tr>
+<td>Unsigned</td>
+<td><code>missing_signature</code></td>
+<td>medium</td>
+<td>COBS 9.2</td>
+</tr>
+</tbody></table>
+<h3 id="universal-any-doc-type">Universal (any doc type)</h3>
+<table>
+<thead><tr>
+<th>Trigger</th>
+<th>Flag type</th>
+<th>Severity</th>
+<th>FCA rule</th>
+</tr></thead><tbody>
+<tr>
+<td><code>extractionConfidence &lt; 0.7</code></td>
+<td><code>extraction_uncertain</code></td>
+<td>low</td>
+<td>Internal</td>
+</tr>
+</tbody></table>
+<h2 id="flag-severity-penalty-impacts-health-score">Flag severity penalty (impacts health score)</h2>
+<p>The compliance health score uses a weighted penalty on unresolved flags:</p>
+<ul>
+<li>Critical = −15 per flag</li>
+<li>High = −8 per flag</li>
+<li>Medium = −3 per flag</li>
+<li>Low = −1 per flag</li>
+</ul>
+<p><code>flag_score = max(0, 100 − penalty)</code>. Health score = 40% doc completeness + 35% review completion + 25% flag score.</p>
+<h2 id="multi-page-document-grouping">Multi-page document grouping</h2>
+<p>Real IFA documents are often split across multiple files — a 46-page Suitability Report photographed as 5 separate PDFs, an 18-page ATR questionnaire across 3 files, a 10-page Fact Find as individual pages.</p>
+<h3 id="how-grouping-works">How grouping works</h3>
+<ol>
+<li>User drops multiple files onto <code>/import</code></li>
+<li>UI shows a checkbox: <strong>&quot;Treat these N files as ONE document&quot;</strong></li>
+<li>When ticked, the Process button changes to <em>&quot;Process as 1 document (5 files)&quot;</em></li>
+<li>Single POST to <code>/api/import/documents</code> with all files in a single FormData under the same <code>file</code> field name (<code>formData.getAll(&#x27;file&#x27;)</code> returns the array)</li>
+<li>Route calls <code>processDocument(files: FileInput[])</code> with all files</li>
+<li>Classifier receives all files as separate Anthropic content blocks in a single Claude message, with the multi-page-aware prompt</li>
+<li>Extractor consolidates across pages — fields are extracted considering information across all files</li>
+<li>Result is one Zod-validated <code>ExtractedDocument</code></li>
+<li>Storage: all files uploaded to Supabase Storage under unique paths</li>
+<li>Database: one <code>documents</code> row with:
+<ul>
+<li><code>file_name</code>: <code>&quot;primary.pdf (+N more)&quot;</code></li>
+<li><code>file_path</code>: path of the primary file</li>
+<li><code>metadata.additionalFiles</code>: array of <code>{ name, path }</code> for the others</li>
+<li><code>metadata.totalFiles</code>: N</li>
+</ul></li>
+</ol>
+<h3 id="limits">Limits</h3>
+<ul>
+<li>Up to ~20 files per group (Anthropic vision recommendation)</li>
+<li>Up to ~100 pages of content per Claude call (rough working limit)</li>
+<li>Total request size limit: ~100MB per Anthropic call</li>
+</ul>
+<h3 id="what-this-enables">What this enables</h3>
+<p>Real-world test results (from the synthetic test corpus):</p>
+<ul>
+<li><strong>Anne Morrison&#x27;s ATR</strong> (test docs 37 + 38, grouped): correctly extracts <code>questionsAnswered: 12, totalQuestions: 12, riskProfileCategory: &#x27;conservative&#x27;, riskRating: &#x27;Conservative (3/10)&#x27;</code> — the result section is on pt2 only, only visible after consolidation.</li>
+<li><strong>David Williams&#x27; Fact Find</strong> (39 + 40): correctly extracts <code>signedByClient: true, capacityForLossRecorded: true, investmentObjectivesRecorded: true</code> plus total household assets £1,091,500 — the asset table is on pt2.</li>
+<li><strong>David Williams&#x27; Suitability Report</strong> (41 + 42 + 43): correctly produces a recommendation summary referencing the 2027 round-the-world trip (mentioned in pt2), the 4-point recommendation list (pt2), and the signature date (pt3).</li>
+</ul>
+<h2 id="what-the-ai-is-good-at-vs-not">What the AI is good at vs not</h2>
+<p>Based on production behaviour across the 43-PDF test corpus and the real Lucent example documents:</p>
+<h3 id="reliably-handles">Reliably handles</h3>
+<ul>
+<li>Standard typed/printed documents in PDF form</li>
+<li>Multi-page documents (with grouping)</li>
+<li>Mixed prose + tables + checkboxes</li>
+<li>Specific date extraction (ISO format compliance is high)</li>
+<li>Specific monetary value extraction (£412,500 etc.)</li>
+<li>Enum classification (vulnerability driver, complaint outcome, etc.)</li>
+<li>Signature detection (&quot;Signed by client: [name]&quot; → <code>signedByClient: true</code>)</li>
+<li>Phone-photographed documents at reasonable resolution</li>
+<li>Slightly skewed scans (within ~10°)</li>
+<li>Mixed-quality scans (older docs with degraded contrast)</li>
+</ul>
+<h3 id="sometimes-struggles-with">Sometimes struggles with</h3>
+<ul>
+<li>Hand-completed fields where the handwriting is unclear (returns <code>null</code> rather than guessing — defensive, good)</li>
+<li>Cases where signature vs initials are ambiguous</li>
+<li>Multi-column form layouts with dense small text</li>
+<li>Documents where the same field appears in multiple places with different values (Claude picks one — sometimes the wrong one)</li>
+<li>Very low-resolution images (&lt; 800px shortest side)</li>
+</ul>
+<h3 id="architectural-mitigations">Architectural mitigations</h3>
+<ul>
+<li>Schema validation catches malformed output before it persists</li>
+<li>Zod&#x27;s <code>.partial()</code> on nested arrays allows graceful degradation</li>
+<li>Enum coercion handles case/whitespace variations</li>
+<li><code>extractionConfidence</code> field surfaces uncertainty as a flag for human review</li>
+<li>Compliance flags are advisory, not blocking — a flagged document can still be filed; the flag invites human review</li>
+</ul>
+<h2 id="code-references">Code references</h2>
+<table>
+<thead><tr>
+<th>Concern</th>
+<th>File</th>
+</tr></thead><tbody>
+<tr>
+<td>All Zod schemas</td>
+<td><code>amaea-app/src/lib/extraction/schemas.ts</code></td>
+</tr>
+<tr>
+<td>All flag rules</td>
+<td><code>flagsFromExtraction()</code> in <code>schemas.ts</code></td>
+</tr>
+<tr>
+<td>Classify-then-extract orchestrator</td>
+<td><code>amaea-app/src/lib/extraction/extract.ts</code></td>
+</tr>
+<tr>
+<td>Document import API</td>
+<td><code>amaea-app/src/app/api/import/documents/route.ts</code></td>
+</tr>
+<tr>
+<td>Frontend import page</td>
+<td><code>amaea-app/src/app/(app)/import/ImportClient.tsx</code></td>
+</tr>
+<tr>
+<td>Client detail display</td>
+<td><code>amaea-app/src/app/(app)/clients/[id]/page.tsx</code> (DOC_LABELS + summarizeDoc)</td>
+</tr>
+<tr>
+<td>Firm RAG summary</td>
+<td><code>amaea-app/src/lib/rag/embed-firm.ts</code> (summarizeMetadata)</td>
+</tr>
+<tr>
+<td>Chat unconditional injection</td>
+<td><code>amaea-app/src/app/api/chat/route.ts</code> (getRecentImportContext + summarizeImportForPrompt)</td>
+</tr>
+</tbody></table>
+<h2 id="migrations-affecting-this-system">Migrations affecting this system</h2>
+<ul>
+<li><code>017_document_metadata.sql</code> — adds <code>documents.metadata jsonb</code>, <code>risk_flags.source_document_id</code> + <code>metadata</code>, extends both type CHECK constraints, partial unique indexes (client-level vs doc-level flags)</li>
+<li><code>020_more_doc_types.sql</code> — adds 4 doc types: expression_of_wish, application_form, portfolio_snapshot, sales_file_cover</li>
+<li><code>021_atr_doc_type.sql</code> — adds attitude_to_risk as 19th canonical type</li>
+</ul>
+<h2 id="test-corpus">Test corpus</h2>
+<p>43 synthetic test PDFs in <code>/Users/milan/Documents/Amaea/test-samples/pdfs/</code>. Generated by:</p>
+<ul>
+<li><code>amaea-app/scripts/generate-test-pdfs.mjs</code> — the original 5 (docs 01-05)</li>
+<li><code>amaea-app/scripts/generate-test-pdfs-v2.mjs</code> — extended set 06-48 (with gaps; 36 PDFs in this set)</li>
+</ul>
+<p>Covers:</p>
+<ul>
+<li>Every canonical doc type</li>
+<li>Clean variants (no flags) for baseline behaviour</li>
+<li>Flag-triggering variants (missing fields, expired dates, unsigned, etc.) for each major flag rule</li>
+<li>Multi-page groupings — Anne ATR (2 files), David FF (2 files), David SR (3 files) — for testing the grouping flow</li>
+</ul>
+<p>Total file size: ~6MB across all 43.</p>
+<h2 id="future-enhancements">Future enhancements</h2>
+<p>Tracked in the open items / future-improvements list:</p>
+<ul>
+<li><strong>Cross-document validation</strong> — e.g., does the SOA&#x27;s recommendation date match the Product Illustration&#x27;s date? Does the Application Form&#x27;s transfer amount match the DB Transfer Report&#x27;s stated value?</li>
+<li><strong>Auto-grouping by filename pattern</strong> — currently users must tick the toggle. A heuristic that detects &quot;SR pt1.pdf&quot; through &quot;SR pt5.pdf&quot; as a group would be a UX win.</li>
+<li><strong>Consent Form as a separate type</strong> — currently lives under <code>terms_of_business</code>. Real CFs are often issued separately; making it a 20th type would let the AI capture the GDPR consent scope more precisely.</li>
+<li><strong>Per-page field provenance</strong> — for multi-page docs, record which extracted field came from which file. Audit-defensibility win.</li>
+<li><strong><code>delayReason</code> field on all client docs</strong> — previous (v1) pipeline used to extract delay reasons across any doc type to update review notes. v2 dropped this. Worth restoring.</li>
+<li><strong>Adviser-level document table</strong> — <code>training_competency</code> extracts cleanly but doesn&#x27;t persist because <code>documents.client_id NOT NULL</code>. A separate <code>adviser_documents</code> table would unblock SPS / CPD tracking.</li>
+<li><strong>Tool-use API for extraction</strong> — Anthropic&#x27;s tool-use would constrain Claude&#x27;s output to the exact schema shape. Free-text + Zod is functionally equivalent and easier to evolve, but tool-use could improve extraction accuracy on weird edge cases.</li>
+</ul>
+<h2 id="what-to-read-next">What to read next</h2>
+<ul>
+<li>For the AI layer (RAG, chat, knowledge base): <strong><a href="04-ai-kb.html">04 — AI Layer &amp; FCA Knowledge Base</a></strong></li>
+<li>For ops / running it: <strong><a href="05-ops.html">05 — Operations Handbook</a></strong></li>
+<li>For the product overview: <strong><a href="01-product.html">01 — Product &amp; Architecture Overview</a></strong></li>
+</ul>
+</article>
+
+</body>
+</html>
