@@ -57,7 +57,13 @@
   .doc-footer { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--gray-200); font-size: 0.78rem; color: var(--gray-500); text-align: center; line-height: 1.6; }
   .doc-footer .tagline { color: var(--plum); font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px; font-size: 0.82rem; }
   .clause-num { color: var(--plum-soft); font-weight: 700; }
+  .nav-strip { background: var(--gray-50); border-bottom: 1px solid var(--gray-200); padding: 14px 64px; font-size: 0.84rem; display: flex; align-items: center; gap: 12px; }
+  .nav-strip .nav-crumb { color: var(--gray-500); }
+  .nav-strip .nav-sep { color: var(--gray-300); }
+  .back-link { color: var(--plum-soft); text-decoration: none; font-weight: 600; transition: color 0.15s; display: inline-flex; align-items: center; gap: 6px; }
+  .back-link:hover { color: var(--plum); }
   @media print {
+    .nav-strip { display: none !important; }
     body { font-size: 11pt; }
     .doc-cover { background: var(--plum) !important; padding: 36px 36px 32px; margin: 0 0 28px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .doc-cover h1 { font-size: 1.7rem; }
@@ -70,6 +76,19 @@
 </style>
 </head>
 <body>
+
+<nav class="nav-strip">
+  <a href="docs.html" class="back-link">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to Documents
+  </a>
+  <span class="nav-sep">·</span>
+  <span class="nav-crumb">Amaea Intranet</span>
+  <span class="nav-sep">/</span>
+  <span class="nav-crumb">Documents</span>
+  <span class="nav-sep">/</span>
+  <span class="nav-crumb" style="color:var(--plum);font-weight:600;">CTO Working Agreement</span>
+</nav>
 
 <header class="doc-cover">
   <p class="doc-cover-eyebrow">Confidential · Founder Working Agreement</p>
