@@ -41,10 +41,16 @@
   --shadow-sm: 0 1px 2px rgba(23,19,30,0.04);
   --shadow:    0 4px 12px rgba(23,19,30,0.06);
   --shadow-lg: 0 20px 60px rgba(23,19,30,0.12);
+
+  /* Surface used for card-style elements (.doc-card, .panel, table) */
+  --card-surface: #fff;
+  --card-border:  var(--gray-200);
 }
 
 /* Dark-mode variants so MVP docs respect [data-theme="dark"] from intranet.css */
 [data-theme="dark"] {
+  --card-surface: #2b192a;
+  --card-border:  rgba(255,255,255,0.1);
   --plum:       #a868a6;
   --plum-dark:  #7a4878;
   --plum-mid:   #c084be;
@@ -332,8 +338,8 @@ table {
   border-collapse: collapse;
   margin: 24px 0;
   font-size: 0.92rem;
-  background: #fff;
-  border: 1px solid var(--gray-200);
+  background: var(--card-surface);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-sm);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -380,8 +386,8 @@ hr {
 
 /* "Quick facts" panel + cards (used on index.html) */
 .panel {
-  background: #fff;
-  border: 1px solid var(--gray-200);
+  background: var(--card-surface);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 28px 32px;
   box-shadow: var(--shadow-sm);
@@ -405,8 +411,8 @@ hr {
 }
 .doc-card {
   display: block;
-  background: #fff;
-  border: 1px solid var(--gray-200);
+  background: var(--card-surface);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 24px 28px;
   text-decoration: none;
