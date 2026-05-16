@@ -299,6 +299,39 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .quick-link:hover { border-color: var(--plum-border); color: var(--plum); background: var(--plum-tint); }
 
+/* ── Buttons — theme-aware so View / Review now / Upload all stay readable in both modes ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-weight: 600;
+  border-radius: var(--r-sm); border: 1px solid transparent;
+  padding: 7px 12px; font-size: 0.78rem; line-height: 1;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.14s, color 0.14s, border-color 0.14s;
+}
+.btn-sm { padding: 5px 10px; font-size: 0.72rem; }
+.btn-primary {
+  background: var(--plum); color: #fff;
+  border-color: var(--plum);
+}
+.btn-primary:hover { background: var(--plum-dark); border-color: var(--plum-dark); }
+.btn-secondary {
+  background: var(--bg); color: var(--gray-900);
+  border-color: var(--gray-200);
+}
+.btn-secondary:hover { border-color: var(--plum); color: var(--plum); background: var(--plum-tint); }
+[data-theme="dark"] .btn-secondary {
+  background: var(--gray-100); color: var(--gray-900);
+  border-color: var(--gray-300);
+}
+[data-theme="dark"] .btn-secondary:hover { background: var(--plum-tint); color: var(--plum-soft); border-color: var(--plum-border); }
+
+/* ── Sidebar items in dark mode — bump contrast a touch ── */
+[data-theme="dark"] .sidebar-item { color: rgba(255,255,255,0.72); }
+[data-theme="dark"] .sidebar-item:hover { color: rgba(255,255,255,0.95); }
+
+/* ── Breadcrumb separator in dark mode — was too faint at gray-300 ── */
+[data-theme="dark"] .bc-sep { color: rgba(255,255,255,0.28); }
+
 /* ── Badges ── */
 .badge {
   display: inline-flex; align-items: center;
