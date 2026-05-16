@@ -139,7 +139,7 @@
       <p class="page-eyebrow">Financial planning</p>
       <h1 class="page-title">Financial Model</h1>
       <p class="page-sub">
-        Three-scenario bootstrap-fundable model built 16 May 2026. Bear / Base / Bull projections across 36 months (May 2026 → Apr 2029) backed by three Google Sheets workbooks. Current version: <span class="fm-version-pill">v1.3</span>
+        Three-scenario bootstrap-fundable model. Bear / Base / Bull projections across 60 months (May 2026 → Apr 2031) backed by three Google Sheets workbooks. Current version: <span class="fm-version-pill">v2</span>
       </p>
     </div>
 
@@ -176,18 +176,18 @@
 
     <!-- 2. Headline outputs at Y3 -->
     <div class="fm-section">
-      <div class="section-label">Headline outputs</div>
+      <div class="section-label">Headline outputs · v2</div>
       <h2 class="section-title-lg" style="margin-bottom:16px;">Year 3 (April 2029)</h2>
       <div class="card" style="padding:20px 24px;overflow:hidden;">
         <p style="font-size:0.82rem;color:var(--gray-500);margin:0 0 14px;line-height:1.55;">
-          CSV-output numbers use full ARPA. Reality-adjusted numbers apply the 20% lifetime Founders discount that the spreadsheet doesn't model. All v1.3 cost scaling applied (People + S&amp;M + G&amp;A + engineer step functions).
+          v2 properly models the Founders 20% lifetime discount per cohort (no mental adjustment needed). All v2 cost scaling applied: People + S&amp;M (with 8% revenue floor) + G&amp;A + engineer step functions + recruitment fees + office cost above 100 customers.
         </p>
         <table class="fm-table">
           <thead>
             <tr>
               <th>Scenario</th>
               <th>Active</th>
-              <th>ARR (adjusted)</th>
+              <th>ARR</th>
               <th>Revenue Y3</th>
               <th>Costs Y3</th>
               <th>Net P&amp;L Y3</th>
@@ -198,143 +198,208 @@
           <tbody>
             <tr>
               <td><strong>Bear</strong></td>
-              <td class="num">119</td>
-              <td class="num">£2.56M</td>
-              <td class="num">£2.41M</td>
-              <td class="num">~£380k</td>
-              <td class="num">~£2.03M</td>
-              <td class="num">~£2.55M</td>
-              <td class="num">79%</td>
+              <td class="num">123</td>
+              <td class="num">£2.69M</td>
+              <td class="num">£2.11M</td>
+              <td class="num">£488k</td>
+              <td class="num">£1.62M</td>
+              <td class="num">£2.09M</td>
+              <td class="num">77%</td>
             </tr>
             <tr style="background:var(--plum-tint);">
               <td><strong>Base</strong></td>
-              <td class="num">192</td>
-              <td class="num">£4.15M</td>
-              <td class="num">£3.98M</td>
-              <td class="num">~£540k</td>
-              <td class="num">~£3.44M</td>
-              <td class="num">~£4.29M</td>
-              <td class="num">83%</td>
+              <td class="num">211</td>
+              <td class="num">£4.62M</td>
+              <td class="num">£3.49M</td>
+              <td class="num">£801k</td>
+              <td class="num">£2.69M</td>
+              <td class="num">£3.29M</td>
+              <td class="num">77%</td>
             </tr>
             <tr>
               <td><strong>Bull</strong></td>
-              <td class="num">290</td>
-              <td class="num">£6.36M</td>
-              <td class="num">£5.92M</td>
-              <td class="num">~£760k</td>
-              <td class="num">~£5.16M</td>
-              <td class="num">~£6.26M</td>
-              <td class="num">81%</td>
+              <td class="num">341</td>
+              <td class="num">£7.66M</td>
+              <td class="num">£5.40M</td>
+              <td class="num">£1.07M</td>
+              <td class="num">£4.33M</td>
+              <td class="num">£5.09M</td>
+              <td class="num">80%</td>
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- 2b. Headline outputs at Y5 (new in v2) -->
+    <div class="fm-section">
+      <div class="section-label">Headline outputs · v2</div>
+      <h2 class="section-title-lg" style="margin-bottom:16px;">Year 5 (April 2031) — new in v2</h2>
+      <div class="card" style="padding:20px 24px;overflow:hidden;">
+        <p style="font-size:0.82rem;color:var(--gray-500);margin:0 0 14px;line-height:1.55;">
+          v2 extended the model horizon from 36 to 60 months. Y5 captures the realistic end-state of the bootstrap trajectory — all three scenarios remain bootstrap-fundable through end Apr 2031 without outside capital.
+        </p>
+        <table class="fm-table">
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Active (% SAM)</th>
+              <th>ARR</th>
+              <th>Revenue Y5</th>
+              <th>Costs Y5</th>
+              <th>Net P&amp;L Y5</th>
+              <th>Cash Apr 31</th>
+              <th>Net margin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Bear</strong></td>
+              <td class="num">203 (~11%)</td>
+              <td class="num">£4.80M</td>
+              <td class="num">£4.30M</td>
+              <td class="num">£1.00M</td>
+              <td class="num">£3.30M</td>
+              <td class="num">£7.87M</td>
+              <td class="num">77%</td>
+            </tr>
+            <tr style="background:var(--plum-tint);">
+              <td><strong>Base</strong></td>
+              <td class="num">346 (~19%)</td>
+              <td class="num">£8.13M</td>
+              <td class="num">£7.41M</td>
+              <td class="num">£1.42M</td>
+              <td class="num">£5.99M</td>
+              <td class="num">£13.72M</td>
+              <td class="num">81%</td>
+            </tr>
+            <tr>
+              <td><strong>Bull</strong></td>
+              <td class="num">593 (~33%)</td>
+              <td class="num">£14.12M</td>
+              <td class="num">£12.74M</td>
+              <td class="num">£2.12M</td>
+              <td class="num">£10.61M</td>
+              <td class="num">£23.51M</td>
+              <td class="num">83%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:0.78rem;color:var(--gray-500);margin:14px 0 0;font-style:italic;line-height:1.55;">
+          Y5 cash &gt; Y5 ARR in all three scenarios — signal that real companies would redeploy surplus into growth (more S&amp;M, faster hires, sector expansion). v2 is deliberately under-reinvesting; sector / international expansion will be modelled in v3.
+        </p>
       </div>
     </div>
 
     <!-- 3. New customers ramp -->
     <div class="fm-section">
-      <div class="section-label">Spreadsheet inputs</div>
-      <h2 class="section-title-lg" style="margin-bottom:8px;">New customers ramp — Monthly tab, Row 5</h2>
+      <div class="section-label">Spreadsheet inputs · v2</div>
+      <h2 class="section-title-lg" style="margin-bottom:8px;">New customers ramp — Monthly tab Rows 5 + 6</h2>
       <p style="font-size:0.85rem;color:var(--gray-500);line-height:1.55;margin:0 0 16px;">
-        Monthly tab covers 36 months: May 2026 (col B, M1) → April 2029 (col AK, M36). Key anchors: <strong>Q (M17, Sep 2027)</strong> = incorporation + founders.html goes live · <strong>AC (M29, Sep 2028)</strong> = public launch.
+        Monthly tab covers 60 months: May 2026 (col B, M1) → April 2031 (col BI, M60). Key anchors: <strong>Q (M17, Sep 2027)</strong> = incorporation + founders.html goes live · <strong>AC (M29, Sep 2028)</strong> = public launch · <strong>BI (M60, Apr 2031)</strong> = model end. <strong>Row 5 = New Founders</strong>, <strong>Row 6 = New full-price</strong> — Founders ramp through Aug 2028 only; full-price funnel starts Sep 2028.
       </p>
 
       <div class="card" style="padding:20px 24px;margin-bottom:14px;">
-        <p class="fm-eyebrow" style="margin-bottom:12px;">Bear (no channels, 90 Founders)</p>
+        <p class="fm-eyebrow" style="margin-bottom:12px;">Bear (no channels, ~68 Founders, ~3/mo steady state)</p>
         <table class="fm-table">
-          <thead><tr><th>Columns</th><th>Months</th><th>Value</th></tr></thead>
+          <thead><tr><th>Row</th><th>Phase</th><th>Cells / months</th><th>Value</th></tr></thead>
           <tbody>
-            <tr><td>B–P</td><td>May 2026 → Aug 2027 (15 cells)</td><td class="num">0</td></tr>
-            <tr><td>Q</td><td>Sep 2027 — page goes live</td><td class="num">5</td></tr>
-            <tr><td>R</td><td>Oct 2027</td><td class="num">7</td></tr>
-            <tr><td>S</td><td>Nov 2027</td><td class="num">8</td></tr>
-            <tr><td>T–AB</td><td>Dec 2027 → Aug 2028 (9 cells)</td><td class="num">8</td></tr>
-            <tr><td>AC</td><td>Sep 2028 — public launch</td><td class="num">4</td></tr>
-            <tr><td>AD–AK</td><td>Oct 2028 → Apr 2029 (7 cells)</td><td class="num">5</td></tr>
+            <tr><td><strong>5 Founders</strong></td><td>Founders ramp</td><td>Q (Sep 27), R, S, T–AB</td><td class="num">5, 7, 8, then 8</td></tr>
+            <tr><td><strong>6 Full-price</strong></td><td>Launch tail</td><td>AC, AD, AE, AF</td><td class="num">5, 4, 4, 3</td></tr>
+            <tr><td><strong>6 Full-price</strong></td><td>Steady state</td><td>AG onwards (Jan 29 → Apr 31)</td><td class="num">3 / mo</td></tr>
           </tbody>
         </table>
-        <p style="font-size:0.78rem;color:var(--gray-500);margin:10px 0 0;font-style:italic;">Sum: 131 customers acquired across the model period.</p>
+        <p style="font-size:0.78rem;color:var(--gray-500);margin:10px 0 0;font-style:italic;">5y total acquired: ~68 Founders + ~135 full-price = ~203 active end Y5.</p>
       </div>
 
       <div class="card" style="padding:20px 24px;margin-bottom:14px;background:var(--plum-tint);border-color:var(--plum-border);">
-        <p class="fm-eyebrow plum" style="margin-bottom:12px;">Base (Intelliflo + warming, 150 Founders)</p>
+        <p class="fm-eyebrow plum" style="margin-bottom:12px;">Base (Intelliflo confirmed, ~150 Founders, ~8/mo steady state)</p>
         <table class="fm-table">
-          <thead><tr><th>Columns</th><th>Months</th><th>Value</th></tr></thead>
+          <thead><tr><th>Row</th><th>Phase</th><th>Cells / months</th><th>Value</th></tr></thead>
           <tbody>
-            <tr><td>B–P</td><td>May 2026 → Aug 2027 (15 cells)</td><td class="num">0</td></tr>
-            <tr><td>Q</td><td>Sep 2027</td><td class="num">8</td></tr>
-            <tr><td>R</td><td>Oct 2027</td><td class="num">12</td></tr>
-            <tr><td>S–AB</td><td>Nov 2027 → Aug 2028 (10 cells)</td><td class="num">13</td></tr>
-            <tr><td>AC</td><td>Sep 2028 — public launch</td><td class="num">8</td></tr>
-            <tr><td>AD</td><td>Oct 2028</td><td class="num">10</td></tr>
-            <tr><td>AE</td><td>Nov 2028</td><td class="num">10</td></tr>
-            <tr><td>AF–AK</td><td>Dec 2028 → Apr 2029 (6 cells)</td><td class="num">6</td></tr>
+            <tr><td><strong>5 Founders</strong></td><td>Founders ramp</td><td>Q (Sep 27), R, S–AB</td><td class="num">8, 12, then 13</td></tr>
+            <tr><td><strong>6 Full-price</strong></td><td>Launch tail</td><td>AC, AD, AE, AF, AG</td><td class="num">12, 11, 10, 9, 8</td></tr>
+            <tr><td><strong>6 Full-price</strong></td><td>Steady state</td><td>AH onwards (Feb 29 → Apr 31)</td><td class="num">8 / mo</td></tr>
           </tbody>
         </table>
-        <p style="font-size:0.78rem;color:var(--gray-600);margin:10px 0 0;font-style:italic;">Sum: 214 customers acquired.</p>
+        <p style="font-size:0.78rem;color:var(--gray-600);margin:10px 0 0;font-style:italic;">5y total acquired: ~150 Founders + ~280 full-price = ~346 active end Y5.</p>
       </div>
 
       <div class="card" style="padding:20px 24px;">
-        <p class="fm-eyebrow green" style="margin-bottom:12px;">Bull (all 4 channels, 200 Founders maxed)</p>
+        <p class="fm-eyebrow green" style="margin-bottom:12px;">Bull (all 4 channels, ~203 Founders, ~14/mo steady state)</p>
         <table class="fm-table">
-          <thead><tr><th>Columns</th><th>Months</th><th>Value</th></tr></thead>
+          <thead><tr><th>Row</th><th>Phase</th><th>Cells / months</th><th>Value</th></tr></thead>
           <tbody>
-            <tr><td>B–P</td><td>May 2026 → Aug 2027 (15 cells)</td><td class="num">0</td></tr>
-            <tr><td>Q</td><td>Sep 2027</td><td class="num">8</td></tr>
-            <tr><td>R</td><td>Oct 2027</td><td class="num">15</td></tr>
-            <tr><td>S</td><td>Nov 2027</td><td class="num">18</td></tr>
-            <tr><td>T–AB</td><td>Dec 2027 → Aug 2028 (9 cells)</td><td class="num">18</td></tr>
-            <tr><td>AC</td><td>Sep 2028 — public launch</td><td class="num">25</td></tr>
-            <tr><td>AD</td><td>Oct 2028</td><td class="num">28</td></tr>
-            <tr><td>AE</td><td>Nov 2028</td><td class="num">27</td></tr>
-            <tr><td>AF–AK</td><td>Dec 2028 → Apr 2029 (6 cells)</td><td class="num">6</td></tr>
+            <tr><td><strong>5 Founders</strong></td><td>Founders ramp</td><td>Q (Sep 27), R, S, T–AB</td><td class="num">8, 15, 18, then 18</td></tr>
+            <tr><td><strong>6 Full-price</strong></td><td>Launch tail</td><td>AC, AD, AE, AF, AG</td><td class="num">28, 22, 18, 15, 14</td></tr>
+            <tr><td><strong>6 Full-price</strong></td><td>Steady state</td><td>AH onwards (Feb 29 → Apr 31)</td><td class="num">14 / mo</td></tr>
           </tbody>
         </table>
-        <p style="font-size:0.78rem;color:var(--gray-500);margin:10px 0 0;font-style:italic;">Sum: 319 customers acquired.</p>
+        <p style="font-size:0.78rem;color:var(--gray-500);margin:10px 0 0;font-style:italic;">5y total acquired: ~203 Founders + ~470 full-price = ~593 active end Y5.</p>
       </div>
+
+      <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.55;margin:14px 0 0;font-style:italic;">
+        Steady-state rates differ 5× across scenarios (3 → 14 per month) because Bear has no distribution channels, while Bull runs all four (Intelliflo marketplace, CISI endorsement, Robin Powell newsletter, FP Advance talk) plus a 200-firm Founders cohort generating referrals. v1.3 incorrectly had all scenarios collapse to 6/mo after the launch spike — v2 corrects this.
+      </p>
     </div>
 
-    <!-- 4. Cost scaling formulas (v1.3) -->
+    <!-- 4. Cost scaling formulas (v2) -->
     <div class="fm-section">
-      <div class="section-label">Cost scaling — v1.3</div>
+      <div class="section-label">Cost scaling · v2</div>
       <h2 class="section-title-lg" style="margin-bottom:8px;">Formulas in the Monthly tab</h2>
       <p style="font-size:0.85rem;color:var(--gray-500);line-height:1.55;margin:0 0 16px;">
-        Three rows in the Monthly tab use time-varying ramps plus per-customer scaling. People also includes engineer step functions. Paste into the B-column cell, drag right to AK.
+        v2 cost rows use time-varying ramps + per-customer scaling. People includes engineer step functions. S&amp;M adds a revenue floor. Office toggles on at &gt;100 customers. Recruitment fees auto-detect hire onboardings. References active customers via Row 12 (total active = Founders + full-price). Paste into the B-column cell, drag right to BI.
       </p>
 
       <div class="card" style="padding:20px 24px;margin-bottom:14px;">
-        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">People — cell B15</p>
-        <div class="fm-formula">=IF(B$2&lt;29,0,IF(B$2&lt;32,5041,9041)) + MAX(0, B7 - 50) * 50 + IF(B7 &gt; 30, 8000, 0) + IF(B7 &gt; 100, 8000, 0) + IF(B7 &gt; 150, 10000, 0)</div>
+        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">People — cell B22</p>
+        <div class="fm-formula">=IF(B$2&lt;29,0,IF(B$2&lt;32,5041,9041)) + MAX(0,B12-50)*50 + IF(B12&gt;30,8000,0) + IF(B12&gt;100,8000,0) + IF(B12&gt;150,10000,0)</div>
         <ul class="fm-list" style="margin-top:12px;">
           <li><strong>Months 1–28:</strong> £0 (Hasna at Lucent, no Amaea payroll)</li>
-          <li><strong>Months 29–31:</strong> £5,041 (Hasna £1,041 + Sales hire £4,000 onboard at public launch)</li>
+          <li><strong>Months 29–31:</strong> £5,041 (Hasna £1,041 + Sales hire £4,000)</li>
           <li><strong>Month 32+:</strong> £9,041 (CX manager onboards)</li>
           <li><strong>+£50 per active customer</strong> above 50 — CS / support headcount scaling</li>
-          <li><strong>+£8,000 when active &gt; 30:</strong> first engineer hire (~£90k loaded London mid-level)</li>
-          <li><strong>+£8,000 when active &gt; 100:</strong> second engineer</li>
-          <li><strong>+£10,000 when active &gt; 150:</strong> Milan goes full-time (~£120k loaded)</li>
+          <li><strong>+£8,000 when active &gt; 30 / &gt; 100 / &gt; 150:</strong> first engineer / second engineer / Milan full-time</li>
         </ul>
       </div>
 
       <div class="card" style="padding:20px 24px;margin-bottom:14px;">
-        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">S&amp;M — cell B16</p>
-        <div class="fm-formula">=IF(B$2&lt;17,0,IF(B$2&lt;29,600,2700)) + MAX(0, B7 - 50) * 20</div>
+        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">S&amp;M — cell B23 <span style="font-size:0.7rem;font-weight:600;color:var(--plum);background:var(--plum-tint);padding:2px 8px;border-radius:4px;margin-left:6px;">v2 fix: revenue floor</span></p>
+        <div class="fm-formula">=IF(B$2&lt;17,0,IF(B$2&lt;29,600+MAX(0,B12-50)*20,MAX(2700+MAX(0,B12-50)*20,B17*0.08)))</div>
         <ul class="fm-list" style="margin-top:12px;">
           <li><strong>Months 1–16:</strong> £0 (pre-incorporation)</li>
-          <li><strong>Months 17–28:</strong> £600 (content + outbound tooling)</li>
-          <li><strong>Month 29+:</strong> £2,700 (content + paid acquisition + events + tooling)</li>
-          <li><strong>+£20 per active customer</strong> above 50 — content / events / paid scaling with book size</li>
+          <li><strong>Months 17–28:</strong> £600 + £20/customer scaling</li>
+          <li><strong>Month 29+:</strong> <strong>MAX of:</strong> base (£2,700 + £20/customer scaling) <strong>or</strong> 8% of MRR (revenue floor)</li>
+          <li>Revenue floor takes over at high MRR — S&amp;M scales realistically with the company, not stuck at the base level</li>
+        </ul>
+      </div>
+
+      <div class="card" style="padding:20px 24px;margin-bottom:14px;">
+        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">G&amp;A — cell B24</p>
+        <div class="fm-formula">=IF(B$2&lt;17,0,IF(B$2&lt;29,675+MAX(0,B12-50)*5,1225+MAX(0,B12-50)*5))</div>
+        <ul class="fm-list" style="margin-top:12px;">
+          <li><strong>Months 1–16:</strong> £0</li>
+          <li><strong>Months 17–28:</strong> £675 + £5/customer above 50 (accountancy + legal + Claude Max + software)</li>
+          <li><strong>Month 29+:</strong> £1,225 + £5/customer (adds insurance + more software seats)</li>
+        </ul>
+      </div>
+
+      <div class="card" style="padding:20px 24px;margin-bottom:14px;">
+        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">Office — cell B25 <span style="font-size:0.7rem;font-weight:600;color:var(--plum);background:var(--plum-tint);padding:2px 8px;border-radius:4px;margin-left:6px;">v2 new</span></p>
+        <div class="fm-formula">=IF(B12&gt;100,2000,0)</div>
+        <ul class="fm-list" style="margin-top:12px;">
+          <li>£2,000/mo small London office or co-working when active customers exceed 100</li>
+          <li>Triggers in Y4 for Bear, late Y3 for Base, mid-Y3 for Bull</li>
         </ul>
       </div>
 
       <div class="card" style="padding:20px 24px;">
-        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">G&amp;A — cell B17</p>
-        <div class="fm-formula">=IF(B$2&lt;17,0,IF(B$2&lt;29,675,1225)) + MAX(0, B7 - 50) * 5</div>
+        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">Recruitment fees — cell B26 <span style="font-size:0.7rem;font-weight:600;color:var(--plum);background:var(--plum-tint);padding:2px 8px;border-radius:4px;margin-left:6px;">v2 new</span></p>
+        <div class="fm-formula">=IF(B22-(prev B22)&gt;=3500,12000,0)</div>
         <ul class="fm-list" style="margin-top:12px;">
-          <li><strong>Months 1–16:</strong> £0</li>
-          <li><strong>Months 17–28:</strong> £675 (accountancy + legal + Claude Max + software)</li>
-          <li><strong>Month 29+:</strong> £1,225 (adds insurance + more software seats)</li>
-          <li><strong>+£5 per active customer</strong> above 50 — modest team-size proxy</li>
+          <li>Detects month-over-month People-cost jumps ≥£3,500 (a new hire onboarded)</li>
+          <li>Adds £12,000 one-off — ≈15% of average loaded salary at UK tech recruiter fees</li>
+          <li>Fires automatically when Sales / CX / engineers / Milan-FT come on board</li>
         </ul>
       </div>
     </div>
@@ -359,21 +424,27 @@
           <tbody>
             <tr>
               <td><strong>First engineer</strong> (active &gt; 30)</td>
-              <td>~Feb 2028 (M21)</td>
-              <td>~Dec 2027 (M19)</td>
-              <td>~Nov 2027 (M19)</td>
+              <td>~Sep 2028 (M29)</td>
+              <td>~Aug 2028 (M28)</td>
+              <td>~Jul 2028 (M27)</td>
             </tr>
             <tr>
               <td><strong>Second engineer</strong> (active &gt; 100)</td>
-              <td>~May 2029 (M36)</td>
-              <td>~Jan 2029 (M32)</td>
-              <td>~Apr 2028 (M23)</td>
+              <td>~Sep 2030 (M53)</td>
+              <td>~Jan 2029 (M33)</td>
+              <td>~Apr 2028 (M24)</td>
             </tr>
             <tr>
               <td><strong>Milan full-time</strong> (active &gt; 150)</td>
               <td>never within model</td>
-              <td>~Apr 2029 (M36)</td>
-              <td>~Sep 2028 (M29)</td>
+              <td>~Sep 2029 (M41)</td>
+              <td>~Aug 2028 (M28)</td>
+            </tr>
+            <tr>
+              <td><strong>Office</strong> (active &gt; 100)</td>
+              <td>~Sep 2030 (M53)</td>
+              <td>~Jan 2029 (M33)</td>
+              <td>~Apr 2028 (M24)</td>
             </tr>
           </tbody>
         </table>
@@ -410,8 +481,15 @@
           <div style="display:flex;gap:14px;align-items:flex-start;">
             <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v1.3</span>
             <div>
-              <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">Engineer step functions <span style="font-size:0.7rem;color:var(--gray-400);font-weight:500;margin-left:6px;">— current</span></p>
+              <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">Engineer step functions</p>
               <p style="font-size:0.84rem;color:var(--gray-600);line-height:1.6;margin:0;">Three engineer hire triggers in the People row: first engineer at &gt;30 customers, second at &gt;100, Milan full-time at &gt;150. Net margins drop to 79–83% — at the upper bound of real SaaS norms (60–75%) and defensible for investor due diligence.</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v2</span>
+            <div>
+              <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">60-month horizon · Founders discount modelled · realistic cost scaling <span style="font-size:0.7rem;color:var(--gray-400);font-weight:500;margin-left:6px;">— current</span></p>
+              <p style="font-size:0.84rem;color:var(--gray-600);line-height:1.6;margin:0;">Extended to 60 months (May 2026 → Apr 2031) so Y3 + new Y5 are both captured. Founders 20% lifetime discount properly modelled via cohort-split MRR (no mental adjustment). S&amp;M with 8% revenue floor — scales realistically at high MRR. Recruitment fees: auto-detected £12k spike per hire onboarding. Office: toggles on at &gt;100 active customers (+£2k/mo). COGS sensitivity row (£50 baseline vs £75 high-usage). Steady-state acquisition rates calibrated per-scenario (3 / 8 / 14 per month) instead of all collapsing to 6/mo.</p>
             </div>
           </div>
         </div>
@@ -420,17 +498,17 @@
 
     <!-- 7. Known limitations -->
     <div class="fm-section">
-      <div class="section-label">Caveats</div>
-      <h2 class="section-title-lg" style="margin-bottom:16px;">Known limitations</h2>
+      <div class="section-label">Caveats · v2</div>
+      <h2 class="section-title-lg" style="margin-bottom:16px;">Known limitations (v3 candidates)</h2>
       <div class="card" style="padding:20px 24px;">
-        <p style="font-size:0.85rem;color:var(--gray-600);line-height:1.6;margin:0 0 12px;">These are real gaps in the v1.3 model — flag in investor conversations if asked. Carry forward to v2 if/when the model needs to support a fundraise.</p>
+        <p style="font-size:0.85rem;color:var(--gray-600);line-height:1.6;margin:0 0 12px;">v2 closed the four biggest v1.3 limitations (Founders discount, 60-month horizon, S&amp;M floor, recruitment fees, office). These are the remaining gaps — carry forward to v3 if/when the model needs to support sector or international expansion conversations.</p>
         <ol class="fm-list" style="padding-left:22px;">
-          <li><strong>Founders 20% lifetime discount not modelled in CSV.</strong> Spreadsheet applies blended ARPA (£2,094) to all customers — overstates ARR by ~15%. Numbers above adjust for this manually. v2 fix: add a "% Founders in cohort" row.</li>
-          <li><strong>S&amp;M doesn't scale steeply enough at high revenue.</strong> At £6M ARR a real company would spend £500k–1.5M/yr on marketing. Bull case shows £90k S&amp;M which is light.</li>
-          <li><strong>No recruitment fees modelled.</strong> Each hire typically costs 15–20% of base salary in agency fees — a one-off £10–15k spike per hire.</li>
-          <li><strong>Office / co-working £0.</strong> Assumes work-from-home indefinitely. Realistic at Bear, less so at Bull.</li>
-          <li><strong>Anthropic API spend assumption (£8/customer/mo) unverified.</strong> No production data yet (1 test firm as of May 2026). Revisit when 5+ Founders live.</li>
-          <li><strong>36-month horizon ends April 2029</strong> — only 8 months post-launch. The "Year 3 ARR" target of £2.6M from the assumptions doc is end of 2031, beyond this model. v2 should extend to 60 months.</li>
+          <li><strong>Sector expansion not modelled.</strong> v2 assumes UK IFA only forever. Real plan is to expand into mortgage brokers / insurance intermediaries / wealth managers / accountants. v3 should add a "sector mix" dimension. See <a href="financial-model#sector-timing" style="color:var(--plum);">sector expansion timing</a> below for the trigger logic.</li>
+          <li><strong>NRR expansion not modelled</strong> (tier upgrades, seat add-ons, premium reports). Real SaaS NRR &gt; 100% is common.</li>
+          <li><strong>International expansion not modelled.</strong> v3 should add country-by-country acquisition + cost lines.</li>
+          <li><strong>Anthropic API spend assumption (£50/customer/mo) unverified.</strong> No production data yet. Revisit when 5+ Founders live. v2 already includes a B34 sensitivity row at £75/customer.</li>
+          <li><strong>Customer concentration not modelled.</strong> At Y5 Bull (593 customers), single firms representing &gt;10% of ARR would be a real risk to track separately.</li>
+          <li><strong>Hire timing detected via cost jumps</strong> (heuristic). Works in practice but v3 could add explicit "hire month" input cells.</li>
         </ol>
       </div>
     </div>
