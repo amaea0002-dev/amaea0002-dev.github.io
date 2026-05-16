@@ -522,7 +522,7 @@
 <tr>
 <td>type</td>
 <td>text</td>
-<td>CHECK constraint: 23 allowed values (4 legacy aliases + 19 canonical types)</td>
+<td>CHECK constraint: 25 allowed values (4 legacy aliases + 21 canonical types — 19 client-level + 2 firm-level)</td>
 </tr>
 <tr>
 <td>status</td>
@@ -570,9 +570,10 @@
 <td></td>
 </tr>
 </tbody></table>
-<p>The 23 allowed <code>type</code> values:</p>
+<p>The 25 allowed <code>type</code> values:</p>
 <p><strong>Legacy (kept for back-compat):</strong> <code>suitability_letter</code>, <code>soa</code>, <code>cd_assessment</code>, <code>vulnerability_reassessment</code></p>
-<p><strong>Canonical 19:</strong> <code>suitability_report</code>, <code>fact_find</code>, <code>client_agreement</code>, <code>annual_review</code>, <code>db_transfer_report</code>, <code>vulnerability_assessment</code>, <code>consumer_duty_outcome</code>, <code>letter_of_authority</code>, <code>product_illustration</code>, <code>terms_of_business</code>, <code>complaint_record</code>, <code>ongoing_service_evidence</code>, <code>aml_cdd</code>, <code>training_competency</code>, <code>expression_of_wish</code>, <code>application_form</code>, <code>portfolio_snapshot</code>, <code>sales_file_cover</code>, <code>attitude_to_risk</code></p>
+<p><strong>Canonical 19 (client-level):</strong> <code>suitability_report</code>, <code>fact_find</code>, <code>client_agreement</code>, <code>annual_review</code>, <code>db_transfer_report</code>, <code>vulnerability_assessment</code>, <code>consumer_duty_outcome</code>, <code>letter_of_authority</code>, <code>product_illustration</code>, <code>terms_of_business</code>, <code>complaint_record</code>, <code>ongoing_service_evidence</code>, <code>aml_cdd</code>, <code>training_competency</code>, <code>expression_of_wish</code>, <code>application_form</code>, <code>portfolio_snapshot</code>, <code>sales_file_cover</code>, <code>attitude_to_risk</code></p>
+<p><strong>Firm-level (added May 2026):</strong> <code>pii_policy</code>, <code>revenue_record</code> — no <code>client_id</code>; uploaded against the firm and feed the RMAR return directly (Sections E, B, D, and B sub-block).</p>
 <h4 id="risk_flags"><code>risk_flags</code></h4>
 <p>AI-generated compliance alerts. Drives the Insights page, dashboard priority list, and chat context.</p>
 <table>
@@ -1085,6 +1086,26 @@ FROM public.documents d;</code></pre>
 <td>atr_doc_type</td>
 <td>Add attitude_to_risk as 19th canonical doc type</td>
 </tr>
+<tr>
+<td>023</td>
+<td>rmar_manual_entries</td>
+<td>Adds <code>rmar_manual_entries</code> table for firm-entered RMAR figures (sections not yet derivable from extracted data). Key: (firm_id, period_start, period_end); <code>data jsonb</code>; RLS by firm_id. Largely supplemented by revenue_record extraction (026).</td>
+</tr>
+<tr>
+<td>024</td>
+<td>pii_policy_doc_type</td>
+<td>Add <code>pii_policy</code> as firm-level doc type (no client_id) — drives RMAR Section E</td>
+</tr>
+<tr>
+<td>025</td>
+<td>firm_advisers</td>
+<td>Adds <code>firm_advisers</code> roster table (name, fca_individual_ref, qualifications[], regulated_activities[], status, dates); RLS by firm_id. Source of truth for RMAR Section G.</td>
+</tr>
+<tr>
+<td>026</td>
+<td>revenue_record_doc_type</td>
+<td>Add <code>revenue_record</code> as firm-level doc type — auto-populates RMAR Section B (P&amp;L), Section D (Regulatory Capital), and Section B sub-block (revenue breakdown)</td>
+</tr>
 </tbody></table>
 <p>Migrations are applied via the Supabase Dashboard SQL editor (paste + Run). <code>supabase db push</code> via the CLI is supported but requires <code>supabase login</code> + <code>supabase link</code> first; the historic pattern has been Dashboard pasting.</p>
 <h2 id="application-code-structure">Application code structure</h2>
@@ -1272,7 +1293,7 @@ FROM public.documents d;</code></pre>
 <h2 id="architectural-decisions-worth-knowing">Architectural decisions worth knowing</h2>
 <p><strong>Why pgvector and not a separate vector DB.</strong> Co-locating embeddings with relational data means we can JOIN client records with their embedded summaries in one query, and we don&#x27;t operate two systems. Pinecone / Weaviate / Qdrant would add ops burden for no functional gain at MVP scale.</p>
 <p><strong>Why Voyage AI and not OpenAI embeddings.</strong> Voyage&#x27;s <code>voyage-3-lite</code> is 512-dim (vs 1536 for OpenAI ada-002 and 3072 for text-embedding-3-large), which means 6× smaller index footprint and faster retrieval at comparable quality on regulatory text. Cost is also ~5x lower. Quality benchmarks were run against the 50-scenario eval set during selection.</p>
-<p><strong>Why a discriminated union for ExtractedDocument.</strong> Each of the 19 document types has different fields. A discriminated union (<code>z.discriminatedUnion(&#x27;documentType&#x27;, [...])</code>) gives us full TypeScript type narrowing — if <code>docType === &#x27;db_transfer_report&#x27;</code>, we get <code>transferValue: number | null</code> available; if it&#x27;s a <code>fact_find</code>, we get <code>attitudeToRiskRating: string | null</code>. No type assertions needed.</p>
+<p><strong>Why a discriminated union for ExtractedDocument.</strong> Each of the 21 document types has different fields. A discriminated union (<code>z.discriminatedUnion(&#x27;documentType&#x27;, [...])</code>) gives us full TypeScript type narrowing — if <code>docType === &#x27;db_transfer_report&#x27;</code>, we get <code>transferValue: number | null</code> available; if it&#x27;s a <code>fact_find</code>, we get <code>attitudeToRiskRating: string | null</code>. No type assertions needed.</p>
 <p><strong>Why classify-then-extract in two steps, not one.</strong> A single prompt asking Claude to both classify AND extract would either be too verbose (every field for every type listed) or too sloppy (Claude inventing fields). Splitting into a cheap classify call (max_tokens 20, just the type identifier) followed by a type-specific extract call gives better accuracy on both steps and lets the prompts stay focused.</p>
 <p><strong>Why Zod&#x27;s <code>.partial()</code> on inner array objects.</strong> Claude vision sometimes omits fields it can&#x27;t determine from a document (e.g. a phone-call touchpoint in an ongoing-service-evidence log doesn&#x27;t have a <code>chargeLevied</code> field shown). Without <code>.partial()</code>, undefined fields cause schema validation errors. With <code>.partial()</code>, missing fields are tolerated and the validated output represents what was actually extracted.</p>
 <p><strong>Why unconditional injection of recent uploads in the chat prompt.</strong> RAG retrieval is similarity-based. On broad queries like &quot;give me a compliance rundown&quot;, the highest-ranked chunks tend to be firm-overview summaries — specific document_extraction chunks score lower and miss the top-K. Injecting the 30 most recent uploads directly into the system prompt guarantees they&#x27;re always visible to the model, independent of retrieval. This is the layer that makes the chat able to reference &quot;Margaret&#x27;s £412,500 DB transfer&quot; by extracted value, not just by general description.</p>
@@ -1280,7 +1301,7 @@ FROM public.documents d;</code></pre>
 <h2 id="whats-deliberately-not-built">What&#x27;s deliberately not built</h2>
 <p>These have been considered and parked:</p>
 <ul>
-<li><strong>Document classification via tool-use rather than free-text response.</strong> Anthropic&#x27;s tool-use API would constrain Claude&#x27;s output to one of the 19 type values. Free-text + Zod validation is functionally equivalent and easier to evolve.</li>
+<li><strong>Document classification via tool-use rather than free-text response.</strong> Anthropic&#x27;s tool-use API would constrain Claude&#x27;s output to one of the 21 type values. Free-text + Zod validation is functionally equivalent and easier to evolve.</li>
 <li><strong>Multi-tenant FCA knowledge base.</strong> All firms share <code>fca_documents</code>. Future: per-firm customisation (e.g. a firm&#x27;s own templates / policies) would live in a separate table.</li>
 <li><strong>Per-document file versioning.</strong> <code>documents.superseded_by</code> FK exists but no UI / pipeline yet creates supersession chains. Reuploading a document of the same type currently UPDATEs the latest record rather than creating a new version.</li>
 <li><strong>Per-adviser document table (training_competency).</strong> Adviser-level documents (SPS, CPD records) currently fail to persist because <code>documents.client_id</code> is NOT NULL. They&#x27;re extracted and returned to the UI but not stored. A separate <code>adviser_documents</code> table is on the post-MVP list.</li>

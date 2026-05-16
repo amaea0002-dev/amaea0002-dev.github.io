@@ -171,8 +171,8 @@ npx vercel env pull .env.local</code></pre>
 <h2 id="migrations">Migrations</h2>
 <h3 id="where-they-live">Where they live</h3>
 <ul>
-<li><code>/Users/milan/Documents/Amaea/amaea-db/migrations/</code> — the canonical numbered SQL files (<code>001_extensions.sql</code> through <code>021_atr_doc_type.sql</code>)</li>
-<li><code>/Users/milan/Documents/Amaea/amaea-db/supabase/migrations/</code> — timestamped copies for Supabase CLI compatibility (<code>20260511000001_*.sql</code> through <code>20260514000021_*.sql</code>)</li>
+<li><code>/Users/milan/Documents/Amaea/amaea-db/migrations/</code> — the canonical numbered SQL files (<code>001_extensions.sql</code> through <code>026_revenue_record_doc_type.sql</code>)</li>
+<li><code>/Users/milan/Documents/Amaea/amaea-db/supabase/migrations/</code> — timestamped copies for Supabase CLI compatibility (<code>20260511000001_*.sql</code> through <code>20260516000026_*.sql</code>)</li>
 </ul>
 <p>When adding a new migration: create both copies. The numbered version is human-readable, the timestamped version is what <code>supabase db push</code> would use if we set that up.</p>
 <h3 id="applying-a-migration">Applying a migration</h3>
@@ -230,6 +230,26 @@ open &quot;https://supabase.com/dashboard/project/sqsqyhcrkwjopwlosqlh/sql/new&q
 <td>021</td>
 <td><code>atr_doc_type</code></td>
 <td>attitude_to_risk as 19th canonical type</td>
+</tr>
+<tr>
+<td>023</td>
+<td><code>rmar_manual_entries</code></td>
+<td>Firm-entered RMAR figures table (keyed by firm_id + period) — supplemented by revenue_record extraction (026)</td>
+</tr>
+<tr>
+<td>024</td>
+<td><code>pii_policy_doc_type</code></td>
+<td>pii_policy as firm-level doc type — drives RMAR Section E</td>
+</tr>
+<tr>
+<td>025</td>
+<td><code>firm_advisers</code></td>
+<td>Canonical firm-managed adviser roster (source of truth for RMAR Section G) — managed via /settings/advisers UI + /api/firm-advisers</td>
+</tr>
+<tr>
+<td>026</td>
+<td><code>revenue_record_doc_type</code></td>
+<td>revenue_record as firm-level doc type — auto-populates RMAR Section B (P&amp;L), Section D (Reg Capital), Section B sub-block (revenue breakdown)</td>
 </tr>
 </tbody></table>
 <h2 id="cron-inventory">Cron inventory</h2>
@@ -414,7 +434,7 @@ open &quot;https://supabase.com/dashboard/project/sqsqyhcrkwjopwlosqlh/sql/new&q
 <li><strong>Cap too low for upload volume</strong> — if 31+ documents have been uploaded recently, the oldest get pushed out of the top 30. Either increase the limit (in <code>getRecentImportContext()</code> in chat route) or click Refresh to add them to firm embeddings.</li>
 </ol>
 <h3 id="document-upload-classified-as-the-wrong-type">Document upload classified as the wrong type</h3>
-<p>Inspect the response in the import page result card. The classifier returns one of 19 types. If consistently wrong on a category of document:</p>
+<p>Inspect the response in the import page result card. The classifier returns one of 21 types. If consistently wrong on a category of document:</p>
 <ol>
 <li>Check <code>TYPE_DESCRIPTIONS</code> in <code>extract.ts</code> for the type — does it cover the synonyms Claude is seeing?</li>
 <li>Add more synonyms (e.g. &quot;TVAS&quot; for <code>db_transfer_report</code>)</li>
