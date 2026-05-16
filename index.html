@@ -198,6 +198,42 @@
           <div class="update-item">
             <div class="update-dot done"></div>
             <div>
+              <p class="update-title">Founder agreements drafted — 50/50 equity locked in</p>
+              <p class="update-desc">Three documents drafted to replace the earlier "Milan's Contract": <a href="cofounder-agreement">Co-Founder &amp; Shareholder Agreement</a> (50/50 equity, 4-year reverse vesting with 1-year cliff, IP assignment, leaver provisions, drag/tag, deadlock mechanics), <a href="cto-working-agreement">CTO Working Agreement</a>, <a href="ceo-working-agreement">CEO Working Agreement</a>. All v1 drafts pending legal review (SeedLegals or boutique firm) before signing.</p>
+              <p class="update-meta">✅ Done &nbsp;·&nbsp; 16 May 2026</p>
+            </div>
+          </div>
+
+          <div class="update-item">
+            <div class="update-dot done"></div>
+            <div>
+              <p class="update-title">Funding stance: bootstrap-first locked in</p>
+              <p class="update-desc">Intranet sidebar renamed Investor → Funding. <a href="investor">/investor</a> rebuilt with explicit dual trigger: raise only enters scope when BOTH multi-sector expansion AND international expansion are live (post-2030). All £500k Q4 2026 pre-seed references removed. Materials retained for advisor / partnership conversations.</p>
+              <p class="update-meta">✅ Done &nbsp;·&nbsp; 16 May 2026</p>
+            </div>
+          </div>
+
+          <div class="update-item">
+            <div class="update-dot done"></div>
+            <div>
+              <p class="update-title">AI fair-use rate limits — shipped to production</p>
+              <p class="update-desc">Per-firm monthly caps on the /api/chat AI assistant — Essentials 500 / Professional 1,500 / Scale 3,500 / Enterprise unlimited. New <code>ai_usage_monthly</code> table (migration 028), <code>subscription_tier</code> renamed to canonical 4-tier model (migration 027), &lt;UsageDisplay/&gt; widget on dashboard, 429 with tier-specific message when over cap. Prevents runaway Anthropic spend from breaking gross-margin assumption.</p>
+              <p class="update-meta">✅ Done &nbsp;·&nbsp; 16 May 2026</p>
+            </div>
+          </div>
+
+          <div class="update-item">
+            <div class="update-dot done"></div>
+            <div>
+              <p class="update-title">amaea-db schema repository under version control</p>
+              <p class="update-desc">28 Supabase migrations committed to a new private GitHub repo (amaea0002-dev/amaea-db). Schema-as-code with PR review for future changes. 015_seed_data.sql (contains dev passwords) deliberately gitignored.</p>
+              <p class="update-meta">✅ Done &nbsp;·&nbsp; 16 May 2026</p>
+            </div>
+          </div>
+
+          <div class="update-item">
+            <div class="update-dot done"></div>
+            <div>
               <p class="update-title">RMAR Section H Slice 1 — shipped to production</p>
               <p class="update-desc">Last Phase 1 feature live at app.amaea.co.uk. Aggregates complaint records (H.1–H.5), inline DISP 1.6 8-week breach flags, CSV export, and a period selector. 23 vitest tests passing. Slices 2 and 3 deferred.</p>
               <p class="update-meta">✅ Done &nbsp;·&nbsp; 15 May 2026</p>
