@@ -43,6 +43,36 @@
   --shadow-lg: 0 20px 60px rgba(23,19,30,0.12);
 }
 
+/* Dark-mode variants so MVP docs respect [data-theme="dark"] from intranet.css */
+[data-theme="dark"] {
+  --plum:       #a868a6;
+  --plum-dark:  #7a4878;
+  --plum-mid:   #c084be;
+  --plum-soft:  #c8a4c6;
+  --plum-tint:  rgba(168,104,166,0.12);
+  --near-black: #f0eaf2;
+  --gray-50:    #211421;
+  --gray-100:   #2b192a;
+  --gray-200:   rgba(255,255,255,0.08);
+  --gray-300:   rgba(255,255,255,0.15);
+  --gray-400:   #a494ae;
+  --gray-500:   #b8a8be;
+  --gray-600:   #c8b8cc;
+  --gray-700:   #d8c8dc;
+  --gray-800:   #e8d8ec;
+  --gray-900:   #f0eaf2;
+}
+[data-theme="dark"] html, [data-theme="dark"] body { background: #1a0f19; color: var(--gray-800); }
+[data-theme="dark"] a { color: var(--plum-mid); border-bottom-color: rgba(192,132,190,0.35); }
+[data-theme="dark"] a:hover { color: var(--plum-soft); border-bottom-color: var(--plum-mid); }
+
+/* Layout adjustments when wrapped in the intranet shell (sidebar+topbar) */
+.main > .cover { min-height: 70vh; height: auto; }
+@media print {
+  .sidebar, .topbar, .sidebar-overlay { display: none !important; }
+  .main { margin-left: 0 !important; padding-top: 0 !important; }
+}
+
 /* ===== Base ===== */
 * { box-sizing: border-box; }
 html, body {
