@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Co-Founder & Shareholder Agreement | Amaea</title>
+<link rel="icon" href="logo-plum.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --plum:       #40243F;
+    --plum-dark:  #2D1A2C;
+    --plum-mid:   #5A3558;
+    --plum-soft:  #8B6189;
+    --plum-tint:  rgba(64,36,63,0.04);
+    --plum-band:  rgba(64,36,63,0.08);
+    --gray-900:   #17131E;
+    --gray-700:   #3D3651;
+    --gray-500:   #8B809C;
+    --gray-300:   #C7C0D2;
+    --gray-200:   #E8E6ED;
+    --gray-100:   #F3F0F8;
+    --gray-50:    #FAFAFC;
+    --green:      #10B981;
+    --amber:      #F59E0B;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    color: var(--gray-900);
+    background: white;
+    line-height: 1.65;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .doc-cover {
+    background: linear-gradient(135deg, var(--plum-dark) 0%, var(--plum) 60%, var(--plum-mid) 100%);
+    color: white;
+    padding: 64px 64px 56px;
+    margin: 0 0 48px;
+  }
+  .doc-cover-eyebrow {
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(255,255,255,0.55);
+    margin: 0 0 22px;
+  }
+  .doc-cover-logo {
+    height: 32px;
+    margin-bottom: 36px;
+    filter: brightness(0) invert(1);
+  }
+  .doc-cover h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+    margin: 0 0 14px;
+    color: white;
+  }
+  .doc-cover-sub {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.55;
+    max-width: 640px;
+    margin: 0 0 24px;
+  }
+  .doc-cover-meta {
+    display: flex;
+    gap: 36px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.55);
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 22px;
+    flex-wrap: wrap;
+  }
+  .doc-cover-meta dt {
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.66rem;
+    margin: 0 0 3px;
+    color: rgba(255,255,255,0.4);
+  }
+  .doc-cover-meta dd {
+    margin: 0;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+  }
+  .doc-content {
+    max-width: 820px;
+    padding: 0 64px 80px;
+    margin: 0 auto;
+  }
+  .preamble {
+    background: var(--plum-tint);
+    border-left: 3px solid var(--plum);
+    padding: 22px 26px;
+    margin: 0 0 36px;
+    border-radius: 0 8px 8px 0;
+  }
+  .preamble p { margin: 0 0 12px; }
+  .preamble p:last-child { margin: 0; }
+  .draft-notice {
+    background: rgba(245,158,11,0.06);
+    border: 1px solid rgba(245,158,11,0.22);
+    color: var(--gray-700);
+    padding: 18px 22px;
+    margin: 0 0 40px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .draft-notice strong { color: var(--amber); }
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--plum);
+    margin: 44px 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--plum-band);
+  }
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 28px 0 10px;
+    letter-spacing: -0.01em;
+  }
+  h4 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--plum-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 22px 0 8px;
+  }
+  p { margin: 0 0 14px; }
+  ul, ol {
+    margin: 0 0 18px;
+    padding-left: 26px;
+  }
+  ul li, ol li { margin-bottom: 6px; }
+  ul li::marker { color: var(--plum-soft); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 0 0 22px;
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: top;
+  }
+  th {
+    background: var(--plum-tint);
+    color: var(--plum);
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  tr:last-child td { border-bottom: none; }
+  .note {
+    background: var(--plum-tint);
+    border-left: 3px solid var(--plum-soft);
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    border-radius: 0 6px 6px 0;
+    color: var(--gray-700);
+  }
+  .note strong { color: var(--plum); }
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.84em;
+    background: var(--gray-100);
+    color: var(--plum-dark);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--gray-200);
+    margin: 36px 0;
+  }
+  .signature-block {
+    background: var(--plum-tint);
+    border: 1px solid var(--plum-band);
+    border-radius: 8px;
+    padding: 32px 36px;
+    margin: 48px 0 28px;
+    page-break-inside: avoid;
+  }
+  .signature-block h3 {
+    color: var(--plum);
+    margin-top: 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--plum-band);
+    padding-bottom: 10px;
+    margin-bottom: 22px;
+  }
+  .sig-party {
+    margin-bottom: 26px;
+  }
+  .sig-party-name {
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 0 0 12px;
+    font-size: 0.98rem;
+  }
+  .sig-party-role {
+    font-size: 0.78rem;
+    color: var(--gray-500);
+    font-weight: 500;
+    margin-left: 4px;
+  }
+  .sig-line {
+    display: flex;
+    gap: 24px;
+    align-items: flex-end;
+    margin-top: 8px;
+  }
+  .sig-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .sig-field-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--plum-soft);
+    margin-bottom: 4px;
+  }
+  .sig-field-line {
+    border-bottom: 1.5px solid var(--gray-300);
+    height: 28px;
+  }
+  .doc-footer {
+    margin-top: 64px;
+    padding-top: 28px;
+    border-top: 1px solid var(--gray-200);
+    font-size: 0.78rem;
+    color: var(--gray-500);
+    text-align: center;
+    line-height: 1.6;
+  }
+  .doc-footer .tagline {
+    color: var(--plum);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    font-size: 0.82rem;
+  }
+  .clause-num {
+    color: var(--plum-soft);
+    font-weight: 700;
+  }
+  /* Print styles — clean, no gradient */
+  @media print {
+    body { font-size: 11pt; }
+    .doc-cover {
+      background: var(--plum) !important;
+      padding: 36px 36px 32px;
+      margin: 0 0 28px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .doc-cover h1 { font-size: 1.8rem; }
+    .doc-content { padding: 0 36px 40px; max-width: none; }
+    h2 { page-break-after: avoid; font-size: 1.15rem; }
+    h3 { page-break-after: avoid; }
+    .signature-block { page-break-inside: avoid; }
+    .note, .preamble { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<header class="doc-cover">
+  <p class="doc-cover-eyebrow">Confidential · Founder Document</p>
+  <img class="doc-cover-logo" src="logo-white.png" alt="Amaea"/>
+  <h1>Co-Founder &amp; Shareholder Agreement</h1>
+  <p class="doc-cover-sub">Amaea Ltd <em>(in formation — incorporation targeted Q3 2027).</em> Governs the rights and obligations of the Co-Founders to each other and to the Business.</p>
+  <dl class="doc-cover-meta">
+    <div><dt>Parties</dt><dd>Milan Sajiv · Hasna Sahul Hameed</dd></div>
+    <div><dt>Drafted</dt><dd>16 May 2026</dd></div>
+    <div><dt>Status</dt><dd>Draft — pending legal review</dd></div>
+    <div><dt>Governing law</dt><dd>England &amp; Wales</dd></div>
+  </dl>
+</header>
+
+<main class="doc-content">
+
+<div class="preamble">
+  <p>This Co-Founder &amp; Shareholder Agreement (the "<strong>Agreement</strong>") is made between:</p>
+  <ul style="margin-bottom:12px;">
+    <li><strong>Milan Sajiv</strong> ("<strong>Milan</strong>"), an individual residing in the United Kingdom; and</li>
+    <li><strong>Hasna Sahul Hameed</strong> ("<strong>Hasna</strong>"), an individual residing in the United Kingdom</li>
+  </ul>
+  <p>(each a "<strong>Founder</strong>", together the "<strong>Founders</strong>") in respect of the business commonly known as <strong>Amaea</strong> (the "<strong>Business</strong>"), which the Founders intend to incorporate as a UK private limited company ("<strong>Amaea Ltd</strong>" or the "<strong>Company</strong>").</p>
+  <p>This Agreement governs the Founders' rights and obligations to each other and to the Business, both <strong>before</strong> the Company is incorporated and <strong>after</strong> incorporation. On incorporation, the Founders intend for the Company to adopt this Agreement (or its substantive terms in a form negotiated with legal counsel and the Company's then-shareholders).</p>
+</div>
+
+<div class="draft-notice">
+  <strong>DRAFT STATUS.</strong> This is a working draft prepared 2026-05-16 to replace an earlier "Milan's Contract" working agreement. Both Founders should review independently, then jointly bring this to a UK startup lawyer (e.g. SeedLegals, Linkilaw, or equivalent boutique firm) for validation before signing. Estimated lawyer cost for review + refinement: £500–£1,500.
+</div>
+
+<h2><span class="clause-num">1.</span> Definitions</h2>
+<table>
+  <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Effective Date</strong></td><td>The date both Founders sign this Agreement.</td></tr>
+    <tr><td><strong>Incorporation Date</strong></td><td>The date Amaea Ltd is registered at Companies House.</td></tr>
+    <tr><td><strong>Founders' Shares</strong></td><td>The ordinary shares to be issued to each Founder on Incorporation, in the proportions set out in Clause 2.</td></tr>
+    <tr><td><strong>Vesting Period</strong></td><td>A four-year period beginning on the Effective Date.</td></tr>
+    <tr><td><strong>Cliff</strong></td><td>The twelve-month period from the Effective Date.</td></tr>
+    <tr><td><strong>Bad Leaver</strong></td><td>A Founder who (a) is dismissed for serious misconduct, (b) materially breaches this Agreement, or (c) voluntarily resigns before the Cliff.</td></tr>
+    <tr><td><strong>Good Leaver</strong></td><td>A Founder who ceases to be active for any reason other than as a Bad Leaver, including ill-health, mutual agreement, or resignation after the Cliff with reasonable notice.</td></tr>
+    <tr><td><strong>Reserved Matter</strong></td><td>A decision listed in Schedule 1 which requires the <strong>unanimous written consent of both Founders</strong> while only the two of them are shareholders.</td></tr>
+    <tr><td><strong>Business</strong></td><td>The Amaea compliance platform for UK Independent Financial Advisers and any successor or expanded business, including expansion into adjacent regulated sectors (mortgage brokers, insurance intermediaries, wealth managers, accountants) or international markets.</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="clause-num">2.</span> Equity Split &amp; Share Issuance</h2>
+<h3>2.1 Agreed equity split</h3>
+<p>On the Incorporation Date, ordinary shares in the Company shall be issued as follows:</p>
+<ul>
+  <li><strong>Milan</strong>: <strong>50%</strong> of issued ordinary shares</li>
+  <li><strong>Hasna</strong>: <strong>50%</strong> of issued ordinary shares</li>
+</ul>
+<p>The Founders have agreed an equal 50/50 split, recognising that (a) Milan built the working prototype contributing significant prior IP, (b) Hasna brings the regulatory-domain expertise and is the future full-time operator, and (c) the two contributions are commercially equivalent across the lifetime of the Business notwithstanding short-term time commitment differences.</p>
+<div class="note">
+  <strong>Governance note:</strong> A 50/50 split requires robust deadlock mechanics (see Clause 11.3) because no Founder can outvote the other. The Reserved Matters framework in Schedule 1 is designed for this — most decisions either fall within one Founder's domain authority (Clause 4.2) or require mutual agreement (Clause 4.3 / Schedule 1). The shotgun clause in 11.3 is the ultimate backstop.
+</div>
+
+<h3>2.2 Capital subscription</h3>
+<p>Each Founder shall subscribe at par value (£0.0001 per share or such other nominal value as is set on Incorporation) for their respective Founders' Shares. Total founder capital subscription at Incorporation is <strong>£8,000</strong>, split <strong>£4,000 each</strong> pro rata to their equity percentages, to be paid in full at Incorporation.</p>
+
+<h3>2.3 SEIS / EIS</h3>
+<p>The Founders intend for the Company to seek SEIS advance assurance at Incorporation, and for the £8,000 capital subscription to qualify for SEIS relief where eligible. Each Founder will claim their proportionate SEIS tax relief on their personal tax return for the relevant year.</p>
+
+<h2><span class="clause-num">3.</span> Vesting</h2>
+<h3>3.1 Reverse vesting</h3>
+<p>Notwithstanding that the Founders' Shares are issued in full at Incorporation, each Founder's shares are subject to <strong>reverse vesting</strong> over the Vesting Period. Unvested shares are subject to repurchase by the Company at nominal value if the Founder ceases to be active in the Business as a Bad Leaver.</p>
+
+<h3>3.2 Vesting schedule</h3>
+<ul>
+  <li><strong>Cliff (months 1–12 from the Effective Date):</strong> Zero shares are vested. If a Founder leaves as a Bad Leaver during the Cliff, the Company may repurchase 100% of that Founder's shares at par value.</li>
+  <li><strong>Monthly thereafter (months 13–48):</strong> Shares vest in equal monthly instalments. At the end of month 48, all shares are fully vested.</li>
+</ul>
+
+<h3>3.3 Acceleration</h3>
+<p>100% of unvested shares accelerate to vested on:</p>
+<ul>
+  <li>The Company's acquisition by a third party (single-trigger acceleration), or</li>
+  <li>A material change in the Founder's role following a change of control, including but not limited to constructive dismissal (double-trigger acceleration).</li>
+</ul>
+
+<h3>3.4 Effective Date for vesting purposes</h3>
+<p>The Vesting Period and Cliff are calculated from the <strong>Effective Date</strong> of this Agreement (i.e. from signing), not from Incorporation. This recognises that founder labour invested before formal incorporation also vests toward the same schedule.</p>
+
+<h2><span class="clause-num">4.</span> Roles &amp; Responsibilities</h2>
+<h3>4.1 Initial roles</h3>
+<ul>
+  <li><strong>Milan</strong>: Chief Technology Officer ("<strong>CTO</strong>"). Detailed expectations in <em>Amaea CTO Working Agreement</em>.</li>
+  <li><strong>Hasna</strong>: Chief Executive Officer ("<strong>CEO</strong>"). Detailed expectations in <em>Amaea CEO Working Agreement</em>.</li>
+</ul>
+
+<h3>4.2 Domain authority</h3>
+<p>Each Founder has decision authority within their respective domain, subject always to Reserved Matters in Schedule 1:</p>
+<p><strong>Milan's domain (CTO):</strong> Technical architecture, AI systems, security, engineering hiring (within agreed budget), code quality standards, technical roadmap, technical-feasibility veto.</p>
+<p><strong>Hasna's domain (CEO):</strong> Commercial strategy, pricing decisions (within tier framework agreed in the financial model), customer success, marketing and content, sales and partnerships, regulatory positioning, board-facing communications.</p>
+
+<h3>4.3 Joint decision domains</h3>
+<p>The following sit outside either individual domain and require <strong>mutual agreement</strong>:</p>
+<ul>
+  <li>Total headcount and total people budget</li>
+  <li>Setting or changing the equity split</li>
+  <li>Issuing equity to new hires, options pools, advisors</li>
+  <li>Taking on debt or external financing</li>
+  <li>Material changes to the product strategy (e.g. pivoting away from UK IFA)</li>
+  <li>Acquisitions, partnerships involving equity, or any change of control</li>
+  <li>Replacing this Agreement, the Articles, or other constitutional documents</li>
+</ul>
+
+<h3>4.4 Peer governance, not principal/agent</h3>
+<p>For the avoidance of doubt: the Founders are <strong>peers</strong>, not in an employer/employee or principal/agent relationship with each other. Neither Founder reports to the other. Both Founders report jointly to the Board (which is composed of the Founders until external investors are admitted).</p>
+
+<h2><span class="clause-num">5.</span> Time Commitment</h2>
+<h3>5.1 Minimum commitment</h3>
+<ul>
+  <li><strong>Milan:</strong> A minimum of 10 hours per week pre-Incorporation; reviewed at Incorporation; expected to increase if and when the Business can support full-time founder compensation. See <em>Amaea CTO Working Agreement</em> for detail.</li>
+  <li><strong>Hasna:</strong> Increasing commitment from current part-time through to full-time on Lucent exit (targeted Q3 2028). See <em>Amaea CEO Working Agreement</em> for detail.</li>
+</ul>
+
+<h3>5.2 No moonlighting in conflicting roles</h3>
+<p>Neither Founder shall engage in any other paid work, consulting, advisory role, or directorship that materially competes with, or impairs their ability to perform, their role in the Business, without the other Founder's prior written consent. Outside employment in a non-competing field (e.g. Milan's existing software engineering role) is expressly permitted.</p>
+
+<h2><span class="clause-num">6.</span> Intellectual Property</h2>
+<h3>6.1 Pre-Incorporation IP</h3>
+<p>Each Founder hereby:</p>
+<ul>
+  <li>Confirms that all intellectual property created in connection with the Business between the Effective Date and the Incorporation Date is held by that Founder <strong>on trust for the Company</strong>; and</li>
+  <li>Agrees to <strong>execute a formal IP Assignment Deed</strong> in favour of the Company on the Incorporation Date, assigning to the Company all such intellectual property absolutely and free of any encumbrance.</li>
+</ul>
+<p>This includes (without limitation): source code in the Amaea app, marketing site, brand assets, documentation, the FCA knowledge base, schema designs, AI prompts, financial models, and any derivative works.</p>
+
+<h3>6.2 Post-Incorporation IP</h3>
+<p>All intellectual property created by either Founder in the course of their work for the Business after the Incorporation Date is the property of the Company at the moment of creation.</p>
+
+<h3>6.3 Pre-existing IP</h3>
+<p>Each Founder shall identify in writing, before signing this Agreement, any pre-existing intellectual property they own which they are not transferring to the Company but which is used in the Business. Such pre-existing IP is licensed royalty-free, irrevocably, to the Company for use in the Business.</p>
+
+<h3>6.4 Personal capacity work</h3>
+<p>Work created by a Founder that is genuinely outside the scope of the Business (e.g. unrelated open-source contributions, personal projects) remains the property of that Founder.</p>
+
+<h2><span class="clause-num">7.</span> Confidentiality</h2>
+<p>Each Founder shall keep confidential, both during their tenure and indefinitely thereafter, all non-public information relating to the Business, including but not limited to: customer data, pricing, financial information, technical architecture, AI models, strategy, prospect lists, internal communications, and the terms of this Agreement itself.</p>
+<p>This obligation does not apply to information that (a) becomes public through no fault of the Founder, (b) is required to be disclosed by law or regulator, or (c) is independently developed by the Founder without reference to confidential information.</p>
+
+<h2><span class="clause-num">8.</span> Non-Compete &amp; Non-Solicit</h2>
+<h3>8.1 Non-compete</h3>
+<p>During each Founder's tenure and for <strong>twelve (12) months</strong> following their cessation, that Founder shall not, directly or indirectly, anywhere in the United Kingdom:</p>
+<ul>
+  <li>Engage in any business that competes with the core UK IFA compliance offering of the Business; or</li>
+  <li>Hold a material equity stake (&gt;5%) in a competing business.</li>
+</ul>
+<div class="note"><strong>Lawyer review note:</strong> UK courts apply a reasonableness test to non-compete clauses. 12 months in the UK IFA compliance space is defensible if narrowly drawn. A lawyer should validate the geographic and sector scope.</div>
+
+<h3>8.2 Non-solicit</h3>
+<p>During each Founder's tenure and for <strong>twenty-four (24) months</strong> following their cessation, that Founder shall not:</p>
+<ul>
+  <li>Solicit or attempt to hire any employee, contractor, or material consultant of the Business; or</li>
+  <li>Solicit any customer, prospect (where active engagement existed in the 12 months pre-cessation), or partnership counterparty for a competing purpose.</li>
+</ul>
+
+<h2><span class="clause-num">9.</span> Leaver Provisions</h2>
+<h3>9.1 Bad Leaver</h3>
+<p>If a Founder ceases to be active as a <strong>Bad Leaver</strong>, the Company may, within 90 days of cessation, <strong>repurchase 100% of that Founder's shares (both vested and unvested) at the lower of:</strong></p>
+<ul>
+  <li>£1 per share, or</li>
+  <li>The fair market value as determined by an independent valuation.</li>
+</ul>
+
+<h3>9.2 Good Leaver</h3>
+<p>If a Founder ceases to be active as a <strong>Good Leaver</strong>:</p>
+<ul>
+  <li><strong>Unvested shares:</strong> the Company may repurchase at par value within 90 days of cessation.</li>
+  <li><strong>Vested shares:</strong> the Good Leaver retains them, subject to (a) the non-compete in Clause 8, (b) any drag-along rights in Clause 10, and (c) any pre-emption rights in the Company's Articles of Association as they evolve.</li>
+</ul>
+
+<h3>9.3 Notice period</h3>
+<p>Either Founder wishing to step away as a Good Leaver shall give the other Founder no less than <strong>eight (8) weeks' written notice</strong>, during which they will:</p>
+<ul>
+  <li>Continue to perform their role to the same standard;</li>
+  <li>Assist in a written handover of their responsibilities;</li>
+  <li>Assist in the search and onboarding of a suitable replacement if and as required.</li>
+</ul>
+
+<h2><span class="clause-num">10.</span> Drag-Along &amp; Tag-Along</h2>
+<h3>10.1 Drag-along</h3>
+<p>If Founders together holding at least 75% of the issued ordinary shares accept a bona fide offer for 100% of the Company, they may require the remaining Founder to sell their shares on the same terms ("drag-along").</p>
+
+<h3>10.2 Tag-along</h3>
+<p>If a Founder receives an offer to sell more than 10% of their shares to a third party, the other Founder has a right to participate in that sale on the same terms, pro rata to their holding ("tag-along").</p>
+
+<h3>10.3 Pre-emption</h3>
+<p>Before any third-party sale, the selling Founder must first offer their shares to the other Founder on the same terms, with a 30-day acceptance window.</p>
+
+<h2><span class="clause-num">11.</span> Reserved Matters &amp; Governance</h2>
+<h3>11.1 Reserved Matters</h3>
+<p>While the Founders are the only shareholders, all matters listed in <strong>Schedule 1</strong> require the <strong>unanimous written consent of both Founders</strong>.</p>
+
+<h3>11.2 Board</h3>
+<p>Until external investors are admitted, the Board of the Company shall be composed of the two Founders, each as a director with one vote. The Board shall meet at least monthly. Quorum is both directors; chair rotates monthly.</p>
+
+<h3>11.3 Deadlock</h3>
+<p>If the Founders are unable to agree on a Reserved Matter or any other material decision after good-faith discussion over a 14-day period:</p>
+<ol>
+  <li>The Founders shall attempt <strong>mediation</strong> through a mutually agreed mediator. Cost split equally.</li>
+  <li>If mediation fails after 30 days, the Founders shall attempt <strong>non-binding expert determination</strong> through a sector-specialist (e.g. a fintech-experienced NED or industry expert).</li>
+  <li>If determination fails, either Founder may serve a <strong>buy-sell ("shotgun") notice</strong>: the Founder serving the notice offers to buy the other Founder's shares at a price per share. The receiving Founder must, within 30 days, either (a) accept the offer and sell, or (b) buy the offering Founder's shares at the same price.</li>
+</ol>
+<div class="note"><strong>Drafting note:</strong> Shotgun clauses are nuclear options and rarely invoked. Their presence usually motivates resolution through earlier steps. A lawyer may suggest alternative deadlock mechanics; this is a robust default.</div>
+
+<h2><span class="clause-num">12.</span> Personal Relationship</h2>
+<p>The Founders acknowledge that they share a personal relationship in addition to their professional one. Both Founders agree to:</p>
+<ul>
+  <li><strong>Separate company governance from personal dynamics.</strong> Decisions about the Business are made on the merits, not influenced by personal events.</li>
+  <li><strong>Address tensions early.</strong> If a disagreement in one sphere is bleeding into the other, raise it within 14 days rather than allowing it to compound.</li>
+  <li><strong>Protect the personal relationship.</strong> The strength of the personal relationship outside the Business is a non-negotiable priority for both Founders.</li>
+</ul>
+<p>If the personal relationship materially changes (e.g. ends), the Founders agree that this <strong>does not in itself trigger any leaver provisions or change ownership</strong>. Both Founders retain their roles and equity subject only to the standard Bad Leaver / Good Leaver / non-compete provisions of this Agreement.</p>
+<p>The Founders further agree to revisit this clause within 30 days of any material change in the personal relationship to confirm — in writing — that the Business arrangements continue unchanged, or to negotiate adjustments in good faith.</p>
+
+<h2><span class="clause-num">13.</span> Future Founders &amp; Investors</h2>
+<h3>13.1 New equity issuance</h3>
+<p>Any new shares issued (to new hires, advisors, an options pool, or external investors) shall dilute both Founders <strong>pro rata to their then-current holdings</strong>, unless both Founders agree otherwise in writing.</p>
+
+<h3>13.2 Options pool</h3>
+<p>The Founders agree in principle to create an EMI-eligible employee options pool of <strong>up to 10%</strong> of fully diluted shares prior to any external funding round, with the timing and exact size to be agreed between the Founders.</p>
+
+<h3>13.3 Investor admission</h3>
+<p>The admission of external investors (whether by equity, convertible note, SAFE, or otherwise) is a Reserved Matter (Schedule 1) and requires mutual agreement. The Founders confirm their current stance is <strong>bootstrap-first</strong> — see <em>Funding stance memo / intranet</em>.</p>
+
+<h2><span class="clause-num">14.</span> Term &amp; Termination</h2>
+<p>This Agreement takes effect on the Effective Date and continues in force until:</p>
+<ul>
+  <li>Both Founders agree in writing to terminate;</li>
+  <li>A change of control completes (in which case the Agreement is replaced by the new shareholder framework);</li>
+  <li>The Business is wound up or dissolved;</li>
+  <li>Replaced by a successor agreement signed by both Founders.</li>
+</ul>
+<p>Cessation of a Founder's active role does <strong>not</strong> terminate this Agreement as to that Founder's residual shareholding, leaver, confidentiality, and non-compete obligations.</p>
+
+<h2><span class="clause-num">15.</span> General Provisions</h2>
+<h3>15.1 Governing law</h3>
+<p>This Agreement is governed by the laws of <strong>England &amp; Wales</strong> and any dispute shall be subject to the exclusive jurisdiction of the English courts (subject to the dispute resolution mechanics in Clause 11.3).</p>
+
+<h3>15.2 Independent advice</h3>
+<p>Each Founder confirms they have had the opportunity to take <strong>independent legal advice</strong> before signing.</p>
+
+<h3>15.3 Counterparts and electronic signature</h3>
+<p>This Agreement may be signed in counterparts and by electronic means. Electronic signature (DocuSign, HelloSign, or equivalent) is acceptable provided both Founders sign the same final form.</p>
+
+<h3>15.4 Severability</h3>
+<p>If any provision is held unenforceable, the remainder continues in full force.</p>
+
+<h3>15.5 Entire agreement</h3>
+<p>This Agreement supersedes all prior agreements, drafts, and understandings between the Founders relating to the Business, including the earlier "Milan's Contract" working agreement. Going forward, day-to-day expectations are documented in:</p>
+<ul>
+  <li><em>Amaea CTO Working Agreement</em> (Milan)</li>
+  <li><em>Amaea CEO Working Agreement</em> (Hasna)</li>
+</ul>
+<p>These working agreements are subordinate to this Agreement and must be consistent with it.</p>
+
+<h3>15.6 Amendment</h3>
+<p>This Agreement may only be amended by written agreement signed by both Founders.</p>
+
+<h2>Schedule 1 — Reserved Matters</h2>
+<p>The following decisions require <strong>unanimous written consent of both Founders</strong> while they remain the only shareholders:</p>
+<ol>
+  <li>Issuing new shares, granting options, or creating any class of equity.</li>
+  <li>Borrowing or taking on debt in excess of £25,000 in aggregate.</li>
+  <li>Acquiring or disposing of assets valued at more than £25,000 (other than ordinary-course operations).</li>
+  <li>Entering into any commitment exceeding £25,000 outside the agreed budget.</li>
+  <li>Paying dividends or making distributions.</li>
+  <li>Changing the registered office, principal place of business, or governing law.</li>
+  <li>Adopting or materially changing the Articles of Association.</li>
+  <li>Filing for insolvency, administration, or winding up.</li>
+  <li>Hiring or terminating any employee earning over £75,000 base salary (or equivalent).</li>
+  <li>Entering into any partnership, joint venture, or licensing arrangement involving equity.</li>
+  <li>Setting Founder compensation or dividends to Founders.</li>
+  <li>Approving or amending the annual budget.</li>
+  <li>Approving the annual financial statements.</li>
+  <li>Changing the size or composition of the Board.</li>
+  <li>Admitting any external investor.</li>
+  <li>Any change of control or sale of the Business.</li>
+  <li>Material pivot away from the UK IFA compliance market.</li>
+</ol>
+
+<div class="signature-block">
+  <h3>Signed</h3>
+  <div class="sig-party">
+    <p class="sig-party-name">Milan Sajiv<span class="sig-party-role">CTO &amp; Co-Founder</span></p>
+    <div class="sig-line">
+      <div class="sig-field"><span class="sig-field-label">Signature</span><span class="sig-field-line"></span></div>
+      <div class="sig-field" style="max-width:160px;"><span class="sig-field-label">Date</span><span class="sig-field-line"></span></div>
+    </div>
+  </div>
+  <div class="sig-party">
+    <p class="sig-party-name">Hasna Sahul Hameed<span class="sig-party-role">CEO &amp; Co-Founder</span></p>
+    <div class="sig-line">
+      <div class="sig-field"><span class="sig-field-label">Signature</span><span class="sig-field-line"></span></div>
+      <div class="sig-field" style="max-width:160px;"><span class="sig-field-label">Date</span><span class="sig-field-line"></span></div>
+    </div>
+  </div>
+</div>
+
+<div class="doc-footer">
+  <p class="tagline">Stay compliant. Stay confident.</p>
+  <p>Amaea Ltd (in formation) · Confidential · Founder document · v1 draft 16 May 2026</p>
+</div>
+
+</main>
+</body>
+</html>
