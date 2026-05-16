@@ -329,8 +329,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 [data-theme="dark"] .sidebar-item { color: rgba(255,255,255,0.72); }
 [data-theme="dark"] .sidebar-item:hover { color: rgba(255,255,255,0.95); }
 
-/* ── Breadcrumb separator in dark mode — was too faint at gray-300 ── */
-[data-theme="dark"] .bc-sep { color: rgba(255,255,255,0.28); }
+/* ── Breadcrumb text in dark mode — bump all three for legibility ── */
+[data-theme="dark"] .bc-root { color: rgba(255,255,255,0.62); }
+[data-theme="dark"] .bc-sep { color: rgba(255,255,255,0.32); }
+[data-theme="dark"] .bc-current { color: rgba(255,255,255,0.95); }
+[data-theme="dark"] .bc-link { color: rgba(255,255,255,0.78); }
 
 /* ── Badges ── */
 .badge {
