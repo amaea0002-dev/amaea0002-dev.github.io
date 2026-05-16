@@ -69,8 +69,12 @@
 /* Layout adjustments when wrapped in the intranet shell (sidebar+topbar) */
 .main > .cover { min-height: 70vh; height: auto; }
 /* Ensure the intranet chrome (sidebar+topbar) renders in the same font
-   as every other intranet page — not in mvp-docs's body Inter override. */
+   as every other intranet page — not in mvp-docs's body Inter override.
+   Also strip the document `a { border-bottom: ... }` underline from
+   sidebar/topbar links so they don't render with a faint plum underline
+   the other intranet pages don't have. */
 .sidebar, .sidebar *, .topbar, .topbar * { font-family: var(--font); }
+.sidebar a, .topbar a { border-bottom: none; }
 @media print {
   .sidebar, .topbar, .sidebar-overlay { display: none !important; }
   .main { margin-left: 0 !important; padding-top: 0 !important; }
