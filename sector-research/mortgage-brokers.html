@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mortgage Brokers | Sector Research | Amaea Intranet</title>
+  <link rel="icon" href="../logo-plum.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../intranet.css"/>
+  <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <style>
+    .memo-meta-bar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 18px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--r-md); margin-bottom: 24px; font-size: 0.78rem; color: var(--gray-700); }
+    .memo-meta-bar strong { color: var(--gray-900); font-weight: 600; }
+    .memo-meta-sep { color: var(--gray-300); }
+    .memo-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--gray-600); text-decoration: none; margin-bottom: 18px; }
+    .memo-back:hover { color: var(--gray-900); }
+
+    .memo-body { font-size: 0.88rem; line-height: 1.7; color: var(--gray-800); }
+    .memo-body h2 { font-size: 1.35rem; font-weight: 700; color: var(--gray-900); margin: 38px 0 14px; letter-spacing: -0.02em; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+    .memo-body h2:first-child { margin-top: 0; }
+    .memo-body h3 { font-size: 1.08rem; font-weight: 700; color: var(--gray-900); margin: 28px 0 10px; letter-spacing: -0.01em; }
+    .memo-body h4 { font-size: 0.95rem; font-weight: 700; color: var(--gray-800); margin: 22px 0 8px; }
+    .memo-body p { margin: 0 0 14px; }
+    .memo-body strong { color: var(--gray-900); font-weight: 600; }
+    .memo-body em { font-style: italic; color: var(--gray-700); }
+    .memo-body a { color: var(--accent, #4C2C4B); text-decoration: underline; text-underline-offset: 2px; }
+    .memo-body a:hover { text-decoration: none; }
+    .memo-body ul, .memo-body ol { margin: 0 0 16px; padding-left: 22px; }
+    .memo-body li { margin: 4px 0; }
+    .memo-body li > ul, .memo-body li > ol { margin: 6px 0 6px; }
+    .memo-body code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.84em; background: var(--gray-100); padding: 1px 5px; border-radius: 4px; color: var(--gray-900); }
+    .memo-body pre { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--r-md); padding: 14px 16px; overflow-x: auto; margin: 0 0 18px; }
+    .memo-body pre code { background: transparent; padding: 0; font-size: 0.82rem; line-height: 1.55; }
+    .memo-body table { width: 100%; border-collapse: collapse; margin: 8px 0 22px; font-size: 0.82rem; }
+    .memo-body th, .memo-body td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--gray-200); vertical-align: top; }
+    .memo-body th { font-weight: 600; color: var(--gray-900); background: var(--gray-50); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    .memo-body tr:last-child td { border-bottom: none; }
+    .memo-body hr { border: none; border-top: 1px solid var(--gray-200); margin: 28px 0; }
+    .memo-body blockquote { border-left: 3px solid var(--gray-300); padding: 4px 0 4px 16px; margin: 0 0 16px; color: var(--gray-600); font-style: italic; }
+
+    /* Constrain to readable width on wide screens */
+    .memo-body { max-width: 880px; }
+  </style>
+</head>
+<body>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="../logo-white.png" alt="Amaea"/>
+    <span class="sidebar-logo-badge">Intranet</span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-label">Workspace</div>
+    <a href="../index" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="../brand" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Brand
+    </a>
+    <a href="../team" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Team
+    </a>
+    <a href="../docs" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Documents
+    </a>
+    <a href="../mvp-docs/" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Product Docs
+    </a>
+    <a href="../features" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      Product Features
+    </a>
+    <a href="../roadmap" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Roadmap
+    </a>
+    <a href="../decisions" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Decisions
+    </a>
+    <a href="../sector-research" class="sidebar-item active">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Sector Research
+    </a>
+    <a href="../investor" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      Funding
+    </a>
+    <div class="sidebar-label">External</div>
+    <a href="https://amaea0002-dev.github.io/webpage" class="sidebar-item" target="_blank">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website <span class="ext">↗</span>
+    </a>
+    <a href="https://amaea0002-dev.github.io/prototype/dashboard.html" class="sidebar-item" target="_blank">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      Prototype <span class="ext">↗</span>
+    </a>
+  </nav>
+  <div class="sidebar-footer" style="position:relative;">
+    <div class="sidebar-user" id="sidebarUserArea">
+      <div class="sidebar-avatar" id="sidebarAvatar">H</div>
+      <div style="flex:1;min-width:0;">
+        <div class="sidebar-user-name" id="sidebarUserName">Hasna Sahul Hameed</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">CEO &amp; Co-founder</div>
+      </div>
+      <svg width="11" height="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;margin-left:auto;"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </div>
+</aside>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="topbar-hamburger" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <span class="bc-root">Amaea</span>
+    <span class="bc-sep">/</span>
+    <a href="../sector-research" class="bc-link">Sector Research</a>
+    <span class="bc-sep">/</span>
+    <span class="bc-current">Mortgage Brokers</span>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-date" id="topbar-date"></span>
+    <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+  </div>
+</header>
+
+<main class="main">
+  <div class="content">
+
+    <a href="../sector-research" class="memo-back">← Back to Sector Research index</a>
+
+    <div class="page-header">
+      <p class="page-eyebrow">Sector 1 · Q3 2026 priority</p>
+      <h1 class="page-title">Mortgage Brokers</h1>
+    </div>
+
+    <div class="memo-meta-bar">
+      <span><strong>Next review:</strong> 16 Aug 2026</span>
+      <span class="memo-meta-sep">·</span>
+      <span><strong>Source:</strong> <code>sector-research/mortgage-brokers.md</code></span>
+      <span class="memo-meta-sep">·</span>
+      <span>Living document — update quarterly</span>
+    </div>
+
+    <div class="memo-body">
+<p><strong>Last updated:</strong> 2026-05-16 <strong>Next review:</strong> 2026-08-16 <strong>Authors:</strong> Amaea — Milan Sajiv + Hasna Sahul Hameed <strong>Status:</strong> Living document, updated quarterly</p>
+<hr/>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li>Executive Summary</li>
+<li>Regulatory Landscape</li>
+<li>Market Sizing — TAM / SAM / SOM</li>
+<li>Customer Segmentation</li>
+<li>Sample Target Firms</li>
+<li>Compliance Pain Points</li>
+<li>Competitive Landscape</li>
+<li>Pricing Benchmarks</li>
+<li>Go-to-Market Notes</li>
+<li>Domain Expert Profile</li>
+<li>Adjacency to UK IFA</li>
+<li>Risks and Unknowns</li>
+<li>Quarterly Update Log</li>
+<li>Sources / References</li>
+</ol>
+<hr/>
+<h2 id="1-executive-summary">1. Executive Summary</h2>
+<p>The UK mortgage intermediary sector is the most natural first adjacency for Amaea after IFA. It is large (approximately 5,000 firms, ~34,000 active advisers), growing in intermediary share (87% of all mortgages in 2024, forecast 91% by 2026), and under increasing FCA compliance pressure that maps directly to Amaea&#x27;s core capabilities.</p>
+<p><strong>Market size:</strong> Gross mortgage lending was £237.5bn in 2024, with the intermediary-routed portion representing ~£207bn. Reported sector revenue from mortgage broking fell slightly to ~£1.37bn in 2023 (2024 data pending, FCA RMAR). The broker market itself is valued at approximately USD 3.16bn in 2025, growing at ~6.5% CAGR to 2031.</p>
+<p><strong>Regulatory driver:</strong> The FCA&#x27;s January 2025 Dear CEO letter to mortgage intermediaries named Consumer Duty embedding, suitability of advice, financial promotions, high-pressure selling cultures, conflicts of interest in appointed representative (AR) models, and vulnerability identification as the watchpoints for the next two years. A March 2026 thematic review into second charge mortgages found systematic suitability failures, record-keeping gaps, and inadequate vulnerability processes — confirming that compliance quality in this sector lags the bar Consumer Duty sets.</p>
+<p><strong>Fit with Amaea:</strong> Strong. The compliance obligations (Consumer Duty / PRIN 2A, suitability documentation under MCOB 4, vulnerable customer identification, T&amp;C scheme administration, file reviews, outcome MI) are structurally similar to the IFA obligations Amaea is already building for. The main difference is the governing sourcebook: MCOB rather than COBS. Key workflow differences (mortgage fact-finds vs. suitability letters, ESIS vs. suitability reports) are material but learnable from a single experienced hire.</p>
+<p><strong>Key risks:</strong></p>
+<ul>
+<li>Curvestone AI + OMS already deploying AI compliance checking in mortgage CRM workflows as of April 2026 — Amaea enters a market where an early mover exists.</li>
+<li>Network distribution dominates: selling to the DA (directly authorised) tail of 3,000+ small firms is a different GTM motion than selling to a network&#x27;s central compliance team.</li>
+<li>AI regulatory risk: FCA is actively watching how AI is used in advice and compliance decisions.</li>
+</ul>
+<p><strong>Recommended launch posture:</strong> Base case — Mortgage Founders Programme launch at approximately M53 (September 2030). Amaea should use 2027–2030 to build two things quietly: (a) one advisory relationship with a mid-size DA mortgage firm to test product-market fit and shape the roadmap, and (b) one domain expert hire or formal adviser from a network compliance background. Do not build mortgage-specific features before IFA product is validated.</p>
+<hr/>
+<h2 id="2-regulatory-landscape">2. Regulatory Landscape</h2>
+<h3 id="21-fca-as-regulator">2.1 FCA as Regulator</h3>
+<p>The Financial Conduct Authority (FCA) is the sole conduct regulator for UK mortgage intermediaries. Firms must either be directly authorised (DA) by the FCA or operate as appointed representatives (ARs) of an authorised principal. There is no dual-regulator structure (unlike banks, which also face PRA oversight). The FCA&#x27;s mortgage regulatory priorities have historically been published via portfolio letters; from 2026 the FCA replaced these with annual Regulatory Priorities reports by sector.</p>
+<p>Approximately 5,000 mortgage intermediary firms are registered with the FCA. Nearly one in ten new firms joining the register in H2 2025 offered mortgage advice (316 new entrants from 3,331 new registrants in that period). The FCA Register held 69,385 active firms across all regulated sectors during H2 2025.</p>
+<p><strong>Relevant FCA register and RMAR data:</strong></p>
+<ul>
+<li>34,149 registered mortgage adviser posts in 2024 (down from 36,836 in 2023 — a 7.3% fall, attributed to market contraction in 2023–2024)</li>
+<li>~12,000 intermediary firms submit RMAR returns annually across mortgage, insurance, and investment mediation</li>
+<li>Equity release: approximately 6,200 advisers with this separate permission</li>
+</ul>
+<h3 id="22-mcob-mortgages-and-home-finance-conduct-of-business-sourcebook">2.2 MCOB — Mortgages and Home Finance: Conduct of Business Sourcebook</h3>
+<p>MCOB is the primary rulebook for mortgage intermediaries. Its purpose: promote fairness, prevent consumer harm, encourage competition. It covers all regulated mortgage contracts, home purchase plans, home reversion plans, lifetime mortgages, and sale and rent back agreements.</p>
+<p><strong>Key chapters relevant to compliance software:</strong></p>
+<table>
+<thead><tr>
+<th>MCOB Chapter</th>
+<th>Subject</th>
+<th>Compliance Software Relevance</th>
+</tr></thead><tbody>
+<tr>
+<td>MCOB 3A</td>
+<td>Financial promotions</td>
+<td>Approval workflow, fair/clear/not misleading checks</td>
+</tr>
+<tr>
+<td>MCOB 4</td>
+<td>Advice and selling standards</td>
+<td>Fact-find adequacy, suitability assessment, advised vs. execution-only</td>
+</tr>
+<tr>
+<td>MCOB 4.7A</td>
+<td>Suitability for advised sales</td>
+<td>Core of every file review — the suitability assessment obligation</td>
+</tr>
+<tr>
+<td>MCOB 6</td>
+<td>Pre-offer disclosure (ESIS)</td>
+<td>Document generation, delivery tracking</td>
+</tr>
+<tr>
+<td>MCOB 11</td>
+<td>Responsible lending</td>
+<td>Affordability data collection, income verification</td>
+</tr>
+<tr>
+<td>MCOB Sch 1</td>
+<td>Record-keeping requirements</td>
+<td>All records must be available within 2 business days of FCA request</td>
+</tr>
+</tbody></table>
+<p><strong>MCOB 4.7A suitability — what it requires:</strong> Firms giving advised mortgage sales must take reasonable steps to ensure the contract is suitable for the customer. Factors assessed include: whether requirements fall within the lender&#x27;s known eligibility criteria; whether interest-only, repayment, or combination is appropriate; appropriate term; and documentation of the reasoning. This maps directly to the kind of structured, auditable fact-find workflow Amaea would build.</p>
+<p><strong>MCOB record-keeping:</strong> Records must be retained for a minimum period (typically 3 years from the advice date for mortgage records; 5 years where applicable under MiFID-equivalent standards for lifetime mortgages and equity release) and must be producible within 2 business days on FCA request. This creates a strong pull toward structured digital record systems.</p>
+<p><strong>2025 Mortgage Rule Review (PS25/11):</strong> On 22 July 2025, the FCA published PS25/11 simplifying certain MCOB rules. Key changes: removal of the &quot;interaction trigger&quot; (which previously forced advice every time a firm contacted a customer about a mortgage); removal of mandatory full affordability assessment when a term is only being reduced. The changes were contested by intermediaries and their trade associations, who feared lenders would use the permissive rules to disintermediate brokers. Impact on compliance workflows: modest — suitability documentation obligations for advised sales remain unchanged.</p>
+<h3 id="23-perg-perimeter-guidance-on-mortgage-activities">2.3 PERG — Perimeter Guidance on Mortgage Activities</h3>
+<p>PERG Chapter 4 governs which mortgage-related activities require FCA authorisation. The key points for Amaea&#x27;s purposes:</p>
+<ul>
+<li><strong>Advising on regulated mortgage contracts</strong> is a regulated activity only when it relates to a <em>specific</em> contract (generic financial education is not regulated).</li>
+<li>Six regulated mortgage activities in total require authorisation or exemption.</li>
+<li>Arranging (bringing about) and making arrangements for mortgages are separate regulated activities.</li>
+<li>A firm providing generic information without identifying a specific product does not need authorisation, but if generic advice leads to a specific recommendation, the whole interaction is regulated.</li>
+</ul>
+<p>This matters for Amaea&#x27;s product design: any AI-generated suggestion about a specific product for a specific client would fall within the regulatory perimeter and require clear human adviser sign-off.</p>
+<h3 id="24-consumer-duty-prin-2a-applied-to-mortgage-advice">2.4 Consumer Duty — PRIN 2A Applied to Mortgage Advice</h3>
+<p>Consumer Duty (in force July 2023) applies in full to mortgage intermediaries. The four outcome areas — products and services, price and value, consumer understanding, consumer support — must all be actively evidenced.</p>
+<p><strong>Key obligations for mortgage intermediaries under Consumer Duty:</strong></p>
+<ul>
+<li><strong>Products and services:</strong> Intermediaries must assess whether the products they recommend meet the needs, characteristics, and objectives of the target market. Where they are acting as a distributor (not manufacturer), they must obtain relevant product information from the lender.</li>
+<li><strong>Price and value:</strong> Firms must be able to demonstrate fair value — that the fee or commission received is proportionate to the benefit delivered. The FCA named this as a priority area in the January 2025 Dear CEO letter, flagging conflicts of interest where advisers are financially incentivised to recommend products carrying higher commission.</li>
+<li><strong>Consumer understanding:</strong> Communications must enable customers to evaluate their options by assessing benefits, risks, and costs. Financial promotions must avoid exploiting behavioural biases. The FCA expects testing, monitoring, and adaptation of communications.</li>
+<li><strong>Consumer support:</strong> Support must be designed to meet the needs of retail customers, including those with characteristics of vulnerability (PRIN 2A.6.2R).</li>
+</ul>
+<p><strong>Outcomes monitoring obligation:</strong> Firms must regularly monitor and test outcomes across their customer base, including identifying whether any group of customers (e.g., those with vulnerability characteristics) receives materially different outcomes. The FCA found in its 2024–2025 multi-firm reviews that MI on outcomes was often inadequate — lacking breadth, depth, and regular review cadence.</p>
+<h3 id="25-smcr-for-mortgage-firms">2.5 SM&amp;CR for Mortgage Firms</h3>
+<p>The Senior Managers and Certification Regime was extended to FCA solo-regulated firms (including mortgage intermediaries) in December 2019.</p>
+<p><strong>Mortgage broker firms typically fall in the Core tier</strong> of SM&amp;CR unless they meet Enhanced firm thresholds. Key obligations:</p>
+<ul>
+<li>Every Senior Management Function (SMF) holder must have a Statement of Responsibilities.</li>
+<li>SMF holders must be assessed as fit and proper at least annually.</li>
+<li>Six prescribed responsibilities for Core firms.</li>
+<li>Certification functions (e.g., customer-facing advisers) must be certified annually.</li>
+</ul>
+<p><strong>2026 reforms (PS26/6):</strong> The FCA finalised Phase 1 SM&amp;CR reforms in April 2026, effective in two stages (24 April 2026 and 10 July 2026). Changes include extending validity of criminal record checks for SMF applications from 3 to 6 months, removing duplicate checks within the same firm/group, and new fit-and-proper guidance. These are administrative simplifications and do not alter the substance of oversight obligations.</p>
+<p><strong>Relevance to Amaea:</strong> Amaea should build functionality for annual F&amp;P attestation tracking, SoR management, and SMF register maintenance — these are standard across both IFA and mortgage firm compliance programmes.</p>
+<h3 id="26-recent-enforcement-actions-and-fca-communications">2.6 Recent Enforcement Actions and FCA Communications</h3>
+<p><strong>January 2025 — FCA Dear CEO Letter to Mortgage Intermediaries</strong> The most significant recent regulatory signal. Key supervisory priorities stated for the following two years:</p>
+<ol>
+<li><strong>Consumer Duty embedding:</strong> The FCA&#x27;s primary focus. Firms must demonstrate that customers&#x27; needs and circumstances are at the heart of the advice process. The FCA will review whether sufficient assessment of customer circumstances is being carried out and whether advice given is suitable.</li>
+<li><strong>High-pressure selling:</strong> Supervisory work had already found firms with cultures driven by sales targets, with advisers financially incentivised to recommend higher-commission products. The FCA expects incentive schemes to not reward quantity over quality.</li>
+<li><strong>Fair value assessment:</strong> Firms must demonstrate that their products and services offer fair value.</li>
+<li><strong>Financial promotions:</strong> Firms must not exploit consumers&#x27; behavioural biases. Communications must avoid foreseeable harm.</li>
+<li><strong>Conflicts of interest and conditional selling:</strong> Estate agents requiring buyers to use specific brokers (conditional selling) named as an ongoing concern. The FCA is reviewing incentive structures across the chain.</li>
+<li><strong>Appointed representative management:</strong> The FCA flagged the retention of dormant ARs, mismanagement of conflicts within AR networks, and incorrect registration of trading names as ongoing failures.</li>
+</ol>
+<p>CEOs were expected to discuss the letter with their leadership team and satisfy themselves that these areas are addressed under existing Consumer Duty programmes.</p>
+<p><strong>March 2026 — FCA Second Charge Mortgage Thematic Review</strong> The FCA reviewed a sample of second charge firms covering over 40% of market share. Findings included:</p>
+<ul>
+<li>Advisers were assessing <em>eligibility</em> for a loan rather than <em>suitability</em> — conflating the two, which the FCA characterised as a conduct failure.</li>
+<li>Affordability assessments overlooked key living expenses (childcare, household goods/repairs).</li>
+<li>Some advisers recommended debt consolidation when it was not clearly affordable or appropriate.</li>
+<li>Advisers failed to pass full expenditure details to lenders, causing lenders to underestimate client costs.</li>
+<li>Record keeping was incomplete and inconsistent, making it impossible to retrospectively assess advice quality.</li>
+<li>Fee transparency was poor — fees were often added to loans without clear disclosure.</li>
+</ul>
+<p>This review&#x27;s findings matter beyond second charge: the FCA explicitly said the findings inform expectations for the wider intermediary market.</p>
+<p><strong>FCA 2026 Mortgage Regulatory Priorities Report</strong> Replacing portfolio letters, this annual document (published March 2026) confirmed: evidence-based Consumer Duty outcomes monitoring; reviewing suitability of advice for debt consolidation and later-life borrowing; monitoring conflicts of interest; and addressing standards raised by the second charge review.</p>
+<h3 id="27-vulnerable-customer-obligations">2.7 Vulnerable Customer Obligations</h3>
+<p>The FCA&#x27;s Consumer Duty (PRIN 2A.6.2R) requires firms to design and deliver support that meets the needs of customers with characteristics of vulnerability. This is not a bolt-on — it must be embedded in the advice process.</p>
+<p>For mortgage brokers specifically, vulnerability characteristics relevant to the advice process include: mental health issues affecting decision-making capacity; recent life events (bereavement, job loss, divorce); limited financial resilience; and low financial literacy. Advisers must:</p>
+<ul>
+<li>Identify vulnerability indicators during the fact-find.</li>
+<li>Document what adaptations to the advice process were made.</li>
+<li>Evidence that the customer understood the product and its risks.</li>
+<li>Capture this in a way that can be reviewed and reported as part of outcomes MI.</li>
+</ul>
+<p>The FCA&#x27;s March 2025 multi-firm review on retail banks found that firms generally lacked breadth and detail in their vulnerability MI, with data not consistently giving a clear picture of outcomes for vulnerable customers. The same gap is likely present across the intermediary market.</p>
+<p><strong>Amaea opportunity:</strong> A structured vulnerability screening and documentation workflow — comparable to what Amaea is building for IFAs — has clear demand in the mortgage broker market.</p>
+<h3 id="28-anti-money-laundering-mlr-2017">2.8 Anti-Money Laundering — MLR 2017</h3>
+<p>Mortgage brokers are not always within the scope of the Money Laundering Regulations 2017 (MLR 2017) in the same way that estate agents and conveyancers are. However, where mortgage brokers also carry on activities as credit brokers or act in arranging finance for clients, CDD obligations can apply. More importantly, the FCA&#x27;s AML requirements under SYSC and the Money Laundering Sourcebook (AML section of SYSC) apply to all FCA-authorised firms.</p>
+<p>In practice, most mortgage intermediaries carry out Customer Due Diligence (CDD) on their clients, often using third-party ID verification tools (SmartSearch, Credas, Thirdfort, etc.) because:</p>
+<ol>
+<li>Lenders require evidence of identity verification before submitting applications.</li>
+<li>Network/principal firm compliance requirements mandate CDD as part of the T&amp;C scheme.</li>
+<li>The FCA expects AML controls proportionate to risk across all regulated firms.</li>
+</ol>
+<p><strong>CDD framework (MLR 2017):</strong></p>
+<ul>
+<li>Standard CDD: Identity verification and beneficial ownership for all business relationships.</li>
+<li>Enhanced Due Diligence (EDD): Mandatory for PEPs, high-risk jurisdictions, complex/unusual transactions.</li>
+<li>Record retention: 5 years from end of relationship.</li>
+<li>Firms must take a risk-based approach and maintain policies, controls, and procedures.</li>
+</ul>
+<p><strong>Amaea consideration:</strong> The AML/KYC workflow is currently served by specialist point solutions (SmartSearch acquired Credas in October 2025, serving 7,500+ regulated businesses). Amaea&#x27;s angle is not AML verification per se but evidencing that the CDD process was completed and documented within the client file — a workflow and audit trail play rather than a verification play.</p>
+<hr/>
+<h2 id="3-market-sizing-tam-sam-som">3. Market Sizing — TAM / SAM / SOM</h2>
+<h3 id="31-firm-and-adviser-population">3.1 Firm and Adviser Population</h3>
+<table>
+<thead><tr>
+<th>Metric</th>
+<th>Figure</th>
+<th>Source / Date</th>
+</tr></thead><tbody>
+<tr>
+<td>Total mortgage intermediary firms (FCA)</td>
+<td>~5,000</td>
+<td>FCA 2026 Regulatory Priorities Report, March 2026</td>
+</tr>
+<tr>
+<td>Active mortgage adviser posts</td>
+<td>34,149</td>
+<td>FCA RMAR data 2024</td>
+</tr>
+<tr>
+<td>Equity release advisers</td>
+<td>~6,200</td>
+<td>FCA RMAR data 2024</td>
+</tr>
+<tr>
+<td>New firms entering FCA register (H2 2025) offering mortgage advice</td>
+<td>316</td>
+<td>Mortgage Solutions, Feb 2026</td>
+</tr>
+<tr>
+<td>Gross mortgage lending (2024)</td>
+<td>£237.5bn</td>
+<td>IMLA, Dec 2024</td>
+</tr>
+<tr>
+<td>Gross mortgage lending (2025 estimate)</td>
+<td>£288bn</td>
+<td>IMLA, Dec 2025</td>
+</tr>
+<tr>
+<td>Intermediary share of gross mortgage lending (2024)</td>
+<td>87%</td>
+<td>IMLA</td>
+</tr>
+<tr>
+<td>Intermediary share forecast (2026)</td>
+<td>91%</td>
+<td>IMLA</td>
+</tr>
+<tr>
+<td>Mortgage broking sector revenue (2023)</td>
+<td>£1.37bn (down 13% from 2022)</td>
+<td>FCA RMAR 2023</td>
+</tr>
+<tr>
+<td>Mortgage broking sector revenue (2024)</td>
+<td>~£1.4bn (down ~0.5%)</td>
+<td>FCA RMAR 2024 (estimated)</td>
+</tr>
+<tr>
+<td>Broker market USD value (2025)</td>
+<td>~USD 3.16bn</td>
+<td>Mordor Intelligence 2025</td>
+</tr>
+<tr>
+<td>UK broker market CAGR (2026–2031)</td>
+<td>6.53%</td>
+<td>Mordor Intelligence 2025</td>
+</tr>
+</tbody></table>
+<p>The structural growth story is strong: intermediary share of mortgage lending has been growing consistently and is approaching 91% of all new mortgages. This means broker numbers and revenues should grow as the overall market recovers from the 2022–2024 rate-shock contraction.</p>
+<p>Mortgage broker firms have grown 40% in total number since 2016. Multi-adviser firms (2–5 advisers) grew 60% from 2016 to 712 firms in 2024, now representing 38% of the market. Solo-adviser firms (still 55%+ of firms in 2016) have been falling in share since 2022, as compliance complexity favours scale.</p>
+<h3 id="32-geographic-distribution">3.2 Geographic Distribution</h3>
+<p>No comprehensive regional breakdown of mortgage broker firms is available in published data [needs verification from FCA Register extract]. Broadly:</p>
+<ul>
+<li>Concentration in metropolitan areas (London, Birmingham, Manchester, Leeds, Bristol) reflecting the housing market.</li>
+<li>Northern England and Scotland show resilient volumes due to diverse regional economies and moderate price-to-income ratios.</li>
+<li>Wales and Northern Ireland smaller markets with lower absolute firm numbers.</li>
+<li>Offline advice retained approximately 66% market share in 2025; online/digital platforms growing at ~10% CAGR.</li>
+</ul>
+<h3 id="33-tam-sam-som-for-amaea">3.3 TAM / SAM / SOM for Amaea</h3>
+<p><strong>TAM (Total Addressable Market):</strong> All UK FCA-authorised mortgage intermediary firms needing compliance management software.</p>
+<p>~5,000 firms. At Amaea&#x27;s proposed Mortgage tier pricing (£489–£2,450/mo), and assuming a blended ARPA of ~£900/mo for the mortgage market (lower than IFA given smaller average firm size), TAM = <strong>~£54m/year</strong>.</p>
+<p>Alternatively, modelling on per-adviser: 34,149 advisers × an estimated £300/adviser/year blended spend = <strong>~£10m/year</strong> (this is the conservative view; it reflects the reality that many small sole-trader brokers spend almost nothing on compliance software).</p>
+<p><strong>SAM (Serviceable Addressable Market):</strong> Directly authorised firms with 2+ advisers that are not served by a network&#x27;s proprietary compliance tool and are willing to buy third-party SaaS. Estimated at 1,500–2,000 firms based on the DA population and size distribution.</p>
+<p>At £900/mo blended ARPA: SAM = <strong>~£16–22m/year</strong>.</p>
+<p><strong>SOM (Serviceable Obtainable Market) — 5-year horizon post-launch:</strong> Amaea Mortgage Founders launch targeted at Base case September 2030. Assuming:</p>
+<ul>
+<li>3% market penetration of SAM within 3 years of launch = 45–60 firms</li>
+<li>10% penetration within 5 years = 150–200 firms</li>
+<li>At £900/mo blended ARPA → <strong>SOM at 5 years: ~£1.6–2.2m ARR from mortgage sector alone</strong></li>
+</ul>
+<p>This is conservative and deliberately so — the network sales motion (getting embedded as a recommended tool for a network&#x27;s DA members) could compress the timeline materially if landed.</p>
+<hr/>
+<h2 id="4-customer-segmentation">4. Customer Segmentation</h2>
+<h3 id="41-networks-appointed-representative-principals">4.1 Networks (Appointed Representative Principals)</h3>
+<p>Networks are the largest distribution channel in the mortgage intermediary market. They hold the FCA authorisation; their appointed representatives (ARs) operate under the network&#x27;s umbrella. Networks provide: FCA authorisation, Professional Indemnity (PI) insurance, compliance oversight (T&amp;C scheme), technology (sourcing systems, CRM, often compliance tools), and lender panel access.</p>
+<p>The network&#x27;s central compliance team carries the regulatory responsibility for all its ARs. This means networks have both the pain (managing compliance for hundreds or thousands of advisers) and the power (they can mandate tools to their entire AR base). A network sale is high ACV but requires a different sales motion — procurement, compliance director approval, integration with existing tech stack.</p>
+<p><strong>Major networks by adviser/firm count (2024–2025):</strong></p>
+<table>
+<thead><tr>
+<th>Network</th>
+<th>Adviser/Firm Count</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>Sesame Bankhall Group (Sesame + Bankhall + PMS)</td>
+<td>~10,000+ advisers across all services</td>
+<td>Largest UK distribution group; Sesame is the appointed rep network arm; Bankhall provides DA compliance support; PMS is a mortgage club for DAs</td>
+</tr>
+<tr>
+<td>Mortgage Advice Bureau (MAB)</td>
+<td>2,135 mainstream advisers (end 2025), 707+ member firms</td>
+<td>Publicly listed (AIM: MAB1); revenue £318.8m in 2025 (+20% YoY); highest productivity per adviser (~£157k)</td>
+</tr>
+<tr>
+<td>Primis Mortgage Network (LSL Property Services)</td>
+<td>~2,900 advisers, ~1,000 firms</td>
+<td>Absorbed TenetLime in early 2024; net loss of 48 firms in 2024; largest by adviser count among pure mortgage networks</td>
+</tr>
+<tr>
+<td>Stonebridge</td>
+<td>707 member firms (end 2025); ~1,350+ protection advisers</td>
+<td>Record £16.2bn mortgage lending in 2025; second largest network by firm count after overtaking Quilter</td>
+</tr>
+<tr>
+<td>The Right Mortgage and Protection Network</td>
+<td>~886 advisers, ~402 firms (mid-2025)</td>
+<td>Fastest-growing network in 2024; net +38 firms in FY2024</td>
+</tr>
+<tr>
+<td>Openwork</td>
+<td>~600+ firms (declining; net -64 firms in 2024)</td>
+<td>Broader financial planning network with significant mortgage component</td>
+</tr>
+<tr>
+<td>Connect for Intermediaries</td>
+<td>Specialist BTL/commercial network</td>
+<td>Award-winning (Network of Year 2024); focus on specialist sectors</td>
+</tr>
+<tr>
+<td>Paradigm Mortgage Services</td>
+<td>~1,900 DA firms, ~3,000 advisers</td>
+<td>Mortgage distributor / club rather than traditional network; provides compliance support to ~425 firms</td>
+</tr>
+</tbody></table>
+<p><strong>Note on network vs. distributor/club distinction:</strong> Networks hold the FCA authorisation for their ARs. Clubs/distributors (Paradigm, Legal &amp; General Mortgage Club, PMS) provide services to DA firms without holding their authorisation. Amaea&#x27;s sales motion differs for each:</p>
+<ul>
+<li><strong>Network:</strong> Sell to the central compliance team; if embedded, instant access to hundreds of advisers.</li>
+<li><strong>Club/distributor:</strong> Sell to the club as a preferred partner; firms choose independently.</li>
+<li><strong>DA firm:</strong> Direct B2B SaaS sale.</li>
+</ul>
+<h3 id="42-directly-authorised-da-firms-by-size-band">4.2 Directly Authorised (DA) Firms by Size Band</h3>
+<table>
+<thead><tr>
+<th>Size Band</th>
+<th>Estimated Firm Count</th>
+<th>Characteristics</th>
+</tr></thead><tbody>
+<tr>
+<td>1 adviser (sole trader)</td>
+<td>~1,800–2,000</td>
+<td>Very price sensitive; minimal compliance infrastructure; often use network for support</td>
+</tr>
+<tr>
+<td>2–5 advisers</td>
+<td>~712 (2024 data; fastest growing segment)</td>
+<td>Compliance increasingly formalised; one person wearing the CO hat part-time; most likely to feel the pain Amaea solves</td>
+</tr>
+<tr>
+<td>6–20 advisers</td>
+<td>~300–500 (estimate)</td>
+<td>Dedicated compliance function emerging; higher FCA scrutiny; active Consumer Duty programmes</td>
+</tr>
+<tr>
+<td>21–50 advisers</td>
+<td>~100–150 (estimate)</td>
+<td>Full compliance team; likely already using some specialist tools</td>
+</tr>
+<tr>
+<td>50+ advisers</td>
+<td>~50 (estimate)</td>
+<td>Enterprise; likely network status or part of larger group</td>
+</tr>
+</tbody></table>
+<p>[Note: The FCA&#x27;s RMAR data breaks down by firm size but the granular published version does not provide an exact count in each adviser-number band for mortgage firms alone — the 2024 data notes the 2–5 adviser band as 712 firms / 38% of market. Other estimates based on market reports and FCA retail intermediary analysis.]</p>
+<h3 id="43-specialist-segments">4.3 Specialist Segments</h3>
+<p><strong>Buy-to-Let (BTL):</strong> A large specialist segment. BTL gross lending reached £33.2bn in 2024, up 10% on 2023. Complex compliance: landlord-specific fact-finds, rental income stress testing, portfolio landlord assessments (PRA rules), and often different lender eligibility criteria. Compliance documentation is more complex than standard residential.</p>
+<p><strong>Equity Release:</strong> ~6,200 advisers hold equity release qualifications (CF8 / CeRER). Separate regulatory sub-set with lifetime mortgage rules under MCOB. Equity Release Council (ERC) membership brings additional conduct standards. Vulnerability is particularly acute in this segment given the age of customers.</p>
+<p><strong>Second Charge / Secured Loans:</strong> Smaller market but under intense FCA scrutiny following the March 2026 thematic review (see Section 2.6). Firms must be separately authorised for second charge business.</p>
+<p><strong>Bridging and Commercial:</strong> Growing segment. 68% of brokers expected more bridging business in 2024. Less standardised processes; commercial lending is often unregulated or regulated only at the FCA margin. Compliance documentation needs vary significantly.</p>
+<p><strong>Sharia / Islamic Finance:</strong> Niche but growing. Home purchase plans (HPPs) are regulated under MCOB alongside conventional mortgages. Advisers need specific training and product knowledge. Compliance documentation mirrors conventional but with HPP-specific terminology.</p>
+<hr/>
+<h2 id="5-sample-target-firms">5. Sample Target Firms</h2>
+<p>The following firms are illustrative targets across size segments and network types. This list should be refined as the GTM strategy develops. All firms listed are named in public sources (trade press, FCA Register, company websites).</p>
+<p><strong>[Large Networks — sell to central compliance team]</strong></p>
+<table>
+<thead><tr>
+<th>Firm</th>
+<th>Type</th>
+<th>Approx. Size</th>
+<th>Why Amaea Target</th>
+</tr></thead><tbody>
+<tr>
+<td>Mortgage Advice Bureau (MAB)</td>
+<td>Network</td>
+<td>2,135 advisers, 707 firms</td>
+<td>Publicly listed, strong compliance culture, sophisticated buyer, Consumer Duty programme actively reported in annual results</td>
+</tr>
+<tr>
+<td>Stonebridge</td>
+<td>Network</td>
+<td>707 firms, 1,350+ advisers</td>
+<td>Rapid growth creating compliance scalability challenge; 2024 national conference cited compliance as priority</td>
+</tr>
+<tr>
+<td>The Right Mortgage and Protection Network</td>
+<td>Network</td>
+<td>886 advisers, 402 firms</td>
+<td>Fastest-growing network; compliance infrastructure needs to scale with firm growth</td>
+</tr>
+<tr>
+<td>Connect for Intermediaries</td>
+<td>Network / distributor</td>
+<td>Specialist BTL focus</td>
+<td>Award-winning network; specialist sector needs specialised compliance documentation</td>
+</tr>
+<tr>
+<td>Primis Mortgage Network</td>
+<td>Network (LSL)</td>
+<td>~2,900 advisers</td>
+<td>Post-TenetLime integration creating compliance consolidation challenge</td>
+</tr>
+</tbody></table>
+<p><strong>[Mid-size DA firms — direct SaaS sale]</strong></p>
+<table>
+<thead><tr>
+<th>Firm</th>
+<th>Type</th>
+<th>Approx. Size</th>
+<th>Why Amaea Target</th>
+</tr></thead><tbody>
+<tr>
+<td>Clifton Private Finance</td>
+<td>DA specialist (BTL, bridging, commercial)</td>
+<td>~30+ advisers</td>
+<td>Complex product mix creates documentation burden; specialist sectors under FCA lens</td>
+</tr>
+<tr>
+<td>Commercial Trust Ltd</td>
+<td>DA specialist (commercial/BTL)</td>
+<td>~20 advisers</td>
+<td>Specialist positioning means complex fact-finds; compliance documentation non-standard</td>
+</tr>
+<tr>
+<td>Fox Davidson (Bristol)</td>
+<td>DA residential + BTL</td>
+<td>~10 advisers</td>
+<td>Regional DA; size means compliance is managed manually; ripe for systematic tooling</td>
+</tr>
+<tr>
+<td>Willow Private Finance</td>
+<td>DA residential + BTL</td>
+<td>~5–10 advisers</td>
+<td>Commentary visible in trade press; articulate about compliance burden</td>
+</tr>
+</tbody></table>
+<p><strong>[Compliance-aware DA firms known from trade press]</strong></p>
+<table>
+<thead><tr>
+<th>Firm</th>
+<th>Type</th>
+<th>Approx. Size</th>
+<th>Why Amaea Target</th>
+</tr></thead><tbody>
+<tr>
+<td>MorganAsh</td>
+<td>Consumer Duty / vulnerability specialist</td>
+<td>Small but influential</td>
+<td>Published response to FCA January 2025 Dear CEO; active on Consumer Duty tooling</td>
+</tr>
+<tr>
+<td>Active Mortgages</td>
+<td>DA, residential + specialist</td>
+<td>~10 advisers</td>
+<td>Selected Acre as CRM November 2024 — demonstrates active tech buying behaviour</td>
+</tr>
+<tr>
+<td>TMG (The Mortgage Group)</td>
+<td>Network / DA group</td>
+<td>35.5% growth in 2024</td>
+<td>Among first to deploy OMS/Curvestone AI compliance — tech-forward, Amaea should understand their setup before approaching</td>
+</tr>
+<tr>
+<td>Cornerstone Finance</td>
+<td>DA group</td>
+<td>28.8% growth in 2024</td>
+<td>Fast-growing; compliance infrastructure scaling challenge</td>
+</tr>
+</tbody></table>
+<p><strong>[Paradigm DA member firms — use Paradigm as channel partner]</strong></p>
+<p>Paradigm serves approximately 1,900 DA firms. A partnership or preferred-partner arrangement with Paradigm (comparable to what Amaea might pursue with a network for IFAs) could unlock distribution to this DA population without individual firm-by-firm selling. This is the highest-leverage early distribution move in the mortgage market if Paradigm&#x27;s technology partnerships team is open to it.</p>
+<p><strong>Note:</strong> A specific 20–30 firm named list with Companies House numbers, FCA Reference Numbers, and LinkedIn decision-maker profiles should be compiled as part of the Mortgage Founders outreach programme, approximately 18 months before launch. This memo uses publicly named firms from trade press sources; a dedicated prospecting exercise will be needed closer to launch.</p>
+<hr/>
+<h2 id="6-compliance-pain-points">6. Compliance Pain Points</h2>
+<p>What mortgage broker compliance officers actually struggle with, and where Amaea can add value.</p>
+<h3 id="61-suitability-documentation-and-fact-find-quality">6.1 Suitability Documentation and Fact-Find Quality</h3>
+<p>The single largest operational pain. MCOB 4.7A requires the firm to take &quot;reasonable steps&quot; to ensure the mortgage is suitable. What this means in practice: a structured fact-find capturing income, expenditure, credit history, existing debt, repayment vehicle, term preference, vulnerability indicators, and the client&#x27;s stated objectives.</p>
+<p>The gap in most firms: fact-finds are partially completed, inconsistently structured across advisers, stored in formats that make post-hoc review difficult, and not systematically checked before the case goes to the lender or compliance. The FCA&#x27;s second charge review (March 2026) found that expenditure items (childcare, household goods) were routinely missed. This is a documentation and workflow problem, not an adviser knowledge problem.</p>
+<p><strong>Amaea&#x27;s AI opportunity:</strong> Pre-submission completeness checking that flags missing data fields, cross-references stated income against typical expenditure patterns for the client&#x27;s profile, and surfaces suitability gaps before the file reaches the compliance officer. Curvestone AI is already doing this inside OMS (April 2026) — Amaea needs to understand the positioning difference clearly.</p>
+<h3 id="62-file-review-manual-slow-and-inconsistent">6.2 File Review — Manual, Slow, and Inconsistent</h3>
+<p>Compliance officers and T&amp;C supervisors in networks and larger DA firms conduct file reviews — checking a sample of completed mortgage cases against MCOB and Consumer Duty standards. In most firms, this is done manually: pulling the file, reading through the fact-find and suitability documentation, checking against a checklist, documenting outcomes, and reporting findings upward.</p>
+<p>This process is time-consuming (30–90 minutes per file), inconsistent (different reviewers apply different standards), and provides only sample coverage (typically 10–25% of cases, leaving the remainder unchecked). Consumer Duty&#x27;s outcomes monitoring obligation requires systematic evidence of good outcomes across the <em>entire</em> client base — not a sample.</p>
+<p><strong>Amaea&#x27;s AI opportunity:</strong> Automated first-pass file review using AI to check every case against a configurable ruleset, surfacing exceptions for human review. This converts a sampling process into a 100% coverage process. The firm&#x27;s compliance officer then focuses on the exceptions the AI flags, not on reading every routine case.</p>
+<h3 id="63-vulnerability-identification-and-documentation">6.3 Vulnerability Identification and Documentation</h3>
+<p>The FCA&#x27;s Dear CEO letter (January 2025) called out vulnerability identification as a specific priority. Vulnerability must be identified during the fact-find, documented in the file, adapted into the advice process, and reported as part of outcomes MI.</p>
+<p>Most firms have a vulnerability screening question or section in their fact-find, but the documentation of what was done with that information — how the advice process was adapted, what extra support was offered, whether the client confirmed understanding — is often absent or formulaic. The FCA expects evidence, not a checkbox.</p>
+<p><strong>Amaea&#x27;s AI opportunity:</strong> Guided vulnerability workflow prompts (similar to what Amaea builds for IFAs), structured documentation capture, and inclusion of vulnerability data in outcomes MI dashboards.</p>
+<h3 id="64-training-and-competency-tc-scheme-administration">6.4 Training and Competency (T&amp;C) Scheme Administration</h3>
+<p>Under SM&amp;CR and the FCA&#x27;s training and competency sourcebook (TC), firms must maintain a T&amp;C scheme for their advisers. In networks, the network&#x27;s central compliance team manages this and provides evidence to the FCA on request. In DA firms, the responsibility falls on the Principal / Head of Compliance.</p>
+<p>T&amp;C administration involves: maintaining records of qualifications and Continuing Professional Development (CPD); tracking supervised practice periods for new advisers; annual competency assessments; and documenting remedial actions where competency gaps are found. Across a large network with hundreds of ARs, this is a substantial administrative burden.</p>
+<p><strong>Amaea&#x27;s opportunity:</strong> A structured T&amp;C register within the compliance platform — tracking CPD, qualifications, supervision status, and annual assessments.</p>
+<h3 id="65-management-information-mi-to-network-principal">6.5 Management Information (MI) to Network / Principal</h3>
+<p>ARs must submit regular MI to their network / principal as part of the T&amp;C scheme and Consumer Duty outcomes monitoring. This includes: case volumes; complaint data; file review outcomes; training completion; and vulnerability MI. Most firms assemble this manually from spreadsheets and CRM reports, creating reporting lag and inconsistency.</p>
+<p>Networks have their own MI portals (often bespoke or built into their internal compliance tools), but the data quality that comes in from ARs is variable.</p>
+<p><strong>Amaea&#x27;s opportunity:</strong> Automated MI pack generation — pre-formatted for network reporting requirements, pulling directly from the compliance system.</p>
+<h3 id="66-consumer-duty-outcomes-monitoring">6.6 Consumer Duty Outcomes Monitoring</h3>
+<p>The Consumer Duty requires firms to demonstrate — with evidence — that customers are receiving good outcomes across the four outcome areas. For mortgage intermediaries, this means tracking: complaint rates by product type; reasons for non-advised (execution-only) sales; re-mortgage rates and outcomes for customers who took a particular recommendation; vulnerability identification rates and adaptations made; and fee-to-benefit ratio across the book.</p>
+<p>Most firms are doing this inadequately. The FCA&#x27;s multi-firm reviews have consistently found that MI lacks breadth and detail. This is partly a data problem (the CRM doesn&#x27;t capture enough) and partly a process problem (no one is responsible for compiling and reviewing the MI systematically).</p>
+<p><strong>Amaea&#x27;s core value proposition:</strong> A structured outcomes monitoring dashboard that aggregates compliance and client data, surfaces trends and anomalies, and generates a quarterly Consumer Duty outcomes report ready for the board or the network.</p>
+<h3 id="67-financial-promotions-approval">6.7 Financial Promotions Approval</h3>
+<p>MCOB 3A requires that financial promotions are fair, clear, and not misleading. In practice, mortgage brokers produce a lot of marketing content — website copy, social media posts, rate comparison posts, email campaigns. Each piece needs to be reviewed and approved by a person with the appropriate competency.</p>
+<p>This is often done informally (the adviser posts something; nobody checks it). The FCA has flagged this as an enforcement risk area.</p>
+<p><strong>Amaea&#x27;s opportunity:</strong> A financial promotions approval workflow — submission, review, approval sign-off, audit trail. Lower priority than file review and outcomes monitoring but a clear module add-on.</p>
+<h3 id="68-appointed-representative-oversight-for-networks-and-principal-firms">6.8 Appointed Representative Oversight (for Networks and Principal Firms)</h3>
+<p>The January 2025 Dear CEO letter specifically called out failures in AR oversight: retention of dormant ARs, conflicts of interest within AR networks, incorrect registration of trading names. The FCA holds the principal firm responsible for the conduct of all its ARs.</p>
+<p>For network compliance teams, the challenge is maintaining visibility across hundreds of AR firms — monitoring their case files, competency records, consumer outcomes data, and complaint patterns — without an army of compliance officers.</p>
+<p><strong>Amaea&#x27;s opportunity:</strong> A network-level compliance oversight dashboard — a principal firm&#x27;s view across all ARs, surfacing outliers and enabling targeted intervention without proportionate manual effort.</p>
+<hr/>
+<h2 id="7-competitive-landscape">7. Competitive Landscape</h2>
+<h3 id="71-networks-internal-compliance-tools">7.1 Networks&#x27; Internal Compliance Tools</h3>
+<p>Most large networks have built or procured some form of internal compliance tool — often a bespoke portal or a configured version of a generic compliance management system. Sesame Bankhall Group, for example, works with Model Office (MO) software. MAB has proprietary technology. Stonebridge uses a mix of internal and third-party tools.</p>
+<p><strong>Gaps:</strong> Internal tools are typically designed for the network&#x27;s own AR oversight, not for the AR firm&#x27;s internal compliance processes. They tend to be one-directional (AR submits data to network) rather than comprehensive compliance management for the AR firm. Consumer Duty outcomes monitoring capabilities in these tools are generally weak.</p>
+<h3 id="72-specialist-mortgage-compliance-consultancies">7.2 Specialist Mortgage Compliance Consultancies</h3>
+<table>
+<thead><tr>
+<th>Provider</th>
+<th>What They Offer</th>
+<th>Pricing (estimate)</th>
+<th>Gap for Amaea</th>
+</tr></thead><tbody>
+<tr>
+<td>Bankhall (SBG)</td>
+<td>Compliance support for DA mortgage firms; launched Model Office compliance software to ~800 DA client firms in late 2023</td>
+<td>Not publicly disclosed; packaged into service retainer</td>
+<td>Bankhall serves firms that also want DA outsourced compliance — they are partly a competitor but can also be a channel (Bankhall recommends tools to its clients)</td>
+</tr>
+<tr>
+<td>Threesixty Services</td>
+<td>Compliance support for IFA and mortgage/protection firms; focuses on business growth, compliance, and regulatory requirements</td>
+<td>Not publicly disclosed</td>
+<td>Primarily consultancy, not software; no systematic automated file review or outcomes monitoring</td>
+</tr>
+<tr>
+<td>ATEB Consulting</td>
+<td>Compliance consultancy for smaller regulated firms</td>
+<td>Retainer-based (typically £1,000–3,000/mo for DA firms) [estimate — needs verification]</td>
+<td>Consultancy-led; no self-service SaaS offering; advisory model limits scalability</td>
+</tr>
+<tr>
+<td>Paradigm Compliance</td>
+<td>Compliance support to ~425 of its 1,900 DA member firms</td>
+<td>Bundled into Paradigm membership</td>
+<td>Limited to Paradigm&#x27;s network; not available as standalone software</td>
+</tr>
+</tbody></table>
+<h3 id="73-sourcing-systems-and-crm-existing-tech-stack">7.3 Sourcing Systems and CRM — Existing Tech Stack</h3>
+<p>Mortgage brokers&#x27; primary day-to-day tools are sourcing systems (to compare mortgage products from lenders) and CRM/case management platforms. These are the adjacent tech to Amaea — they hold the data Amaea would need to work with.</p>
+<table>
+<thead><tr>
+<th>Platform</th>
+<th>Role</th>
+<th>Compliance Capability</th>
+<th>Gap</th>
+</tr></thead><tbody>
+<tr>
+<td>Twenty7Tec (ADVICE platform + ADAPT)</td>
+<td>Sourcing + CRM + product monitoring</td>
+<td>Basic case status; new ADAPT monitoring tool (March 2026) tracks rate changes and alerts</td>
+<td>ADAPT monitors product rates, not compliance outcomes. No suitability quality checking or Consumer Duty MI</td>
+</tr>
+<tr>
+<td>Mortgage Brain (CRM Brain + Trigold sourcing)</td>
+<td>Sourcing + CRM</td>
+<td>Basic document storage; some case note functionality</td>
+<td>No structured compliance workflow; no outcomes monitoring</td>
+</tr>
+<tr>
+<td>Acre</td>
+<td>All-in-one sourcing + CRM</td>
+<td>Growing compliance features; integrated with networks (e.g., The Right Network)</td>
+<td>Primarily a CRM/sourcing platform; compliance is a feature, not the core product</td>
+</tr>
+<tr>
+<td>OMS (One Mortgage System)</td>
+<td>Case management / workflow</td>
+<td>In April 2026 integrated Curvestone AI for automated compliance checking of submitted files — this is the most direct competitive signal</td>
+<td>OMS + Curvestone handles file completeness checking at submission; Amaea&#x27;s broader outcomes monitoring, T&amp;C, and longitudinal MI capabilities are not present</td>
+</tr>
+<tr>
+<td>360 Lifecycle</td>
+<td>CRM for mortgage brokers</td>
+<td>Some compliance tracking</td>
+<td>Primarily CRM; compliance is secondary</td>
+</tr>
+</tbody></table>
+<p><strong>Key observation on OMS + Curvestone AI (April 2026):</strong> This is the most significant competitive development. OMS is a widely-used case management platform. Curvestone AI&#x27;s integration automatically reviews submitted files for completeness, consistency, and compliance — reading, classifying, and cross-referencing fact-finds, income evidence, bank statements, and ID documents. It surfaces missing documents, data mismatches, suitability gaps, and regulatory exceptions. The first deployers were TMG and Connect Mortgages.</p>
+<p>What this means for Amaea: the &quot;automated file review&quot; use case in a mortgage workflow context is being addressed. However, OMS + Curvestone is a point solution — compliance checking at the time of submission. It does not offer:</p>
+<ul>
+<li>Longitudinal outcomes monitoring across the client book.</li>
+<li>Consumer Duty MI dashboards and reporting.</li>
+<li>T&amp;C scheme and CPD tracking.</li>
+<li>Network-level AR oversight.</li>
+<li>Vulnerability documentation workflows integrated with the advice process.</li>
+<li>Cross-sector applicability (IFA + mortgage in one platform).</li>
+</ul>
+<p>Amaea&#x27;s positioning should be: &quot;We are not a file-checker. We are the compliance intelligence layer that tells you whether your <em>firm</em> is delivering good outcomes — across all clients, over time, and in a format the FCA can scrutinise.&quot;</p>
+<h3 id="74-amlonboarding-point-solutions">7.4 AML/Onboarding Point Solutions</h3>
+<table>
+<thead><tr>
+<th>Provider</th>
+<th>What They Do</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>SmartSearch</td>
+<td>AML/KYC verification; electronic ID checks</td>
+<td>Acquired Credas (October 2025); now serves 7,500+ clients including via Twenty7Tec integration; bespoke pricing</td>
+</tr>
+<tr>
+<td>Thirdfort</td>
+<td>Digital ID verification and AML for property transactions</td>
+<td>Strong in conveyancing; increasingly used by mortgage brokers</td>
+</tr>
+<tr>
+<td>Credas (now SmartSearch)</td>
+<td>Electronic ID, right-to-rent, AML</td>
+<td>Absorbed into SmartSearch</td>
+</tr>
+</tbody></table>
+<p><strong>Amaea&#x27;s role:</strong> Not to compete with these AML verification tools, but to provide the audit trail evidence that CDD was completed — the record within the client file that can be produced to the FCA or network on request.</p>
+<h3 id="75-recordsure">7.5 Recordsure</h3>
+<p>Recordsure offers AI-powered analysis of recorded adviser conversations to assess advice quality and compliance. Its technology processes audio/text of client conversations, classifying topics discussed and flagging compliance risks. Used by NatWest and Attivo (an IFA firm). Built and operated with TCC Group.</p>
+<p><strong>Gap for Amaea:</strong> Recordsure is a premium enterprise product suited to large firms and networks with recorded advice conversations. It is not a self-service SaaS tool for DA firms. Amaea can coexist — Recordsure handles conversation analysis; Amaea handles structured documentation and outcomes monitoring for firms that don&#x27;t record calls.</p>
+<hr/>
+<h2 id="8-pricing-benchmarks">8. Pricing Benchmarks</h2>
+<h3 id="81-what-mortgage-brokers-currently-pay">8.1 What Mortgage Brokers Currently Pay</h3>
+<table>
+<thead><tr>
+<th>Category</th>
+<th>Typical Monthly Cost (per firm)</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>Network membership (AR route)</td>
+<td>£100–500/month + commission split (typically 80–90% to adviser)</td>
+<td>Covers FCA authorisation, PI, compliance, technology. Commission split is the main &quot;cost&quot; — networks retain 10–20% of proc fees</td>
+</tr>
+<tr>
+<td>Compliance consultancy (DA firms)</td>
+<td>£500–3,000/month</td>
+<td>Bankhall, ATEB, Paradigm compliance support. Larger DA firms at higher end</td>
+</tr>
+<tr>
+<td>Sourcing system (e.g., Twenty7Tec via L&amp;G Club)</td>
+<td>~£18.50/user/month + VAT (club rate); likely £50–150/user direct</td>
+<td>Twenty7Tec L&amp;G club negotiated rate; direct pricing not published</td>
+</tr>
+<tr>
+<td>CRM (e.g., Mortgage Brain, Acre)</td>
+<td>£80–300/month per firm</td>
+<td>Varies by firm size and feature tier</td>
+</tr>
+<tr>
+<td>AML/KYC tool (e.g., SmartSearch)</td>
+<td>Bespoke; typically usage-based; £100–500+/month for active broker</td>
+<td>No published pricing; varies by volume</td>
+</tr>
+<tr>
+<td>PI Insurance (DA firms)</td>
+<td>£1,500–10,000+/year depending on firm size and claims history</td>
+<td>Mandatory; often bundled with network membership</td>
+</tr>
+</tbody></table>
+<p><strong>Total monthly compliance-adjacent spend for a 5-adviser DA firm:</strong> Approximately £800–2,000/month across compliance consultancy, CRM, sourcing, and AML tools. This gives meaningful room for Amaea to position at a price point that either replaces some of this cost or sits alongside it as a dedicated compliance layer.</p>
+<h3 id="82-amaea-mortgage-pricing-sanity-check">8.2 Amaea Mortgage Pricing — Sanity Check</h3>
+<p>The internal model has Mortgage tier at 70% of IFA pricing:</p>
+<table>
+<thead><tr>
+<th>Tier</th>
+<th>IFA Price</th>
+<th>Proposed Mortgage Price (70%)</th>
+<th>Sanity Check</th>
+</tr></thead><tbody>
+<tr>
+<td>Essentials</td>
+<td>£699/mo</td>
+<td>£489/mo</td>
+<td>Reasonable for 1–3 adviser DA firm; comparable to compliance consultancy retainer</td>
+</tr>
+<tr>
+<td>Professional</td>
+<td>£1,599/mo</td>
+<td>£1,119/mo</td>
+<td>Right for 4–15 adviser DA firm or AR-heavy network member; needs to displace part of consultancy spend</td>
+</tr>
+<tr>
+<td>Scale</td>
+<td>£2,199/mo</td>
+<td>£1,539/mo</td>
+<td>Mid-size DA firm (15–50 advisers); plausible if it displaces a compliance consultant</td>
+</tr>
+<tr>
+<td>Enterprise</td>
+<td>£3,500+/mo</td>
+<td>£2,450+/mo</td>
+<td>Network central compliance team; needs to demonstrate ROI across hundreds of ARs</td>
+</tr>
+</tbody></table>
+<p><strong>Assessment:</strong> The 70% discount to IFA pricing is defensible given:</p>
+<ol>
+<li>Average mortgage broker firm is smaller than average IFA firm.</li>
+<li>Revenue per case is lower (proc fees typically £300–800 per mortgage vs. advice fees of £1,500–3,000 for investment/pension advice).</li>
+<li>Compliance tooling spend is lower as a percentage of revenue in the mortgage market.</li>
+</ol>
+<p>The Essentials tier at £489/mo is at the top of what a 1–2 adviser DA firm would consider without a strong ROI story. To land this tier, Amaea needs to demonstrate it replaces at least one element of existing spend (e.g., the compliance consultant retainer, or the manual file review time).</p>
+<p>The Professional and Scale tiers are the best fit for 5–50 adviser DA firms — the sweet spot of the market. Founders Programme discount at 20% (bringing Professional to ~£895/mo) makes the entry point very competitive against a compliance consultancy retainer.</p>
+<p><strong>Recommendation:</strong> Keep the 70% ratio. Consider whether the Essentials tier needs a further simplification (fewer modules) to justify the £489 price point for the smallest brokers, rather than discounting the price.</p>
+<hr/>
+<h2 id="9-go-to-market-notes">9. Go-to-Market Notes</h2>
+<h3 id="91-key-trade-associations">9.1 Key Trade Associations</h3>
+<p><strong>AMI (Association of Mortgage Intermediaries)</strong> The primary trade body for UK mortgage intermediaries. Over 80% of UK mortgage brokers are AMI members. AMI produces regulatory guidance, lobbies the FCA, and organises events. Any technology firm wanting credibility in this sector needs AMI visibility — either through exhibiting at AMI events, speaking, or being cited in AMI publications.</p>
+<ul>
+<li>Website: a-m-i.org.uk</li>
+<li>CEO (as of 2025): Robert Sinclair (retiring; successor being appointed — monitor)</li>
+</ul>
+<p><strong>IMLA (Intermediary Mortgage Lenders Association)</strong> The lenders&#x27; trade body for intermediary-channel lending. Publishes authoritative market statistics (used extensively in this memo). Not directly a channel for Amaea but a source of credibility data and a potential route to lender relationships that could enable product recommendations or data partnerships.</p>
+<ul>
+<li>Website: imla.org.uk</li>
+</ul>
+<p><strong>Mortgage Club associations:</strong> Legal &amp; General Mortgage Club, Mortgage Intelligence (part of Sesame Bankhall Group) — these act as distribution aggregators and can make technology recommendations to their DA members.</p>
+<h3 id="92-trade-press-where-mortgage-professionals-read">9.2 Trade Press — Where Mortgage Professionals Read</h3>
+<table>
+<thead><tr>
+<th>Publication</th>
+<th>Audience</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>Mortgage Strategy</td>
+<td>Mortgage brokers, lenders</td>
+<td>UK&#x27;s leading trade publication for mortgage specialists; ~9,232 LinkedIn followers; editor Rebekah Commane</td>
+</tr>
+<tr>
+<td>Mortgage Solutions</td>
+<td>Brokers, advisers</td>
+<td>Strong news and analysis coverage; intermediary-focused</td>
+</tr>
+<tr>
+<td>Financial Reporter</td>
+<td>Broad financial services including mortgage</td>
+<td>Mixed audience; covers compliance and tech</td>
+</tr>
+<tr>
+<td>Mortgage Finance Gazette</td>
+<td>Broader financial services</td>
+<td>Authoritative on regulation and market data</td>
+</tr>
+<tr>
+<td>The Intermediary</td>
+<td>Brokers</td>
+<td>Growing digital presence; coverage of network news and regulatory developments</td>
+</tr>
+<tr>
+<td>Mortgage Introducer / MPA UK</td>
+<td>Brokers and networks</td>
+<td>Focused on market data and firm-level news</td>
+</tr>
+</tbody></table>
+<p><strong>Tactic:</strong> Hasna/Milan should aim for a contributed article placement in Mortgage Strategy or Mortgage Solutions no later than 6 months before the Mortgage Founders launch — framing Amaea as the compliance intelligence platform mortgage brokers need for Consumer Duty.</p>
+<h3 id="93-key-conferences-and-events">9.3 Key Conferences and Events</h3>
+<table>
+<thead><tr>
+<th>Event</th>
+<th>When</th>
+<th>What It Is</th>
+<th>Priority</th>
+</tr></thead><tbody>
+<tr>
+<td>Mortgage Business Expo (MBE) London</td>
+<td>October 2026 (20 Oct)</td>
+<td>Largest intermediary market event; exhibitors include networks, lenders, tech providers</td>
+<td>High — attend as guest; exhibit in 2029/2030</td>
+</tr>
+<tr>
+<td>MBE North (Manchester)</td>
+<td>July 2026 (9 Jul)</td>
+<td>Northern version of MBE</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Specialist Lending Event (FSE)</td>
+<td>February each year; multiple locations</td>
+<td>Specialist sector focus; bridging, BTL, commercial</td>
+<td>High for specialist segment GTM</td>
+</tr>
+<tr>
+<td>AMI events</td>
+<td>Throughout year</td>
+<td>Regulatory briefings, networking</td>
+<td>High — join AMI as an observer/associate</td>
+</tr>
+<tr>
+<td>Stonebridge National Conference</td>
+<td>Annual (January/February)</td>
+<td>Network&#x27;s principal conference</td>
+<td>Target when ready to pitch to Stonebridge</td>
+</tr>
+<tr>
+<td>MAB annual conference</td>
+<td>Annual</td>
+<td>MAB&#x27;s adviser community event</td>
+<td>Target when ready for network-level pitch</td>
+</tr>
+<tr>
+<td>UK Finance Annual Mortgage Lunch</td>
+<td>May each year</td>
+<td>Senior lender/intermediary networking</td>
+<td>Useful for relationship building</td>
+</tr>
+</tbody></table>
+<p><strong>Recommendation:</strong> Milan and Hasna should begin attending MBE London as guests in October 2026. The goal for 2026–2028 is relationship-building and market intelligence, not selling. The first commercial presence should be late 2029 or the Founders Programme launch.</p>
+<h3 id="94-network-conference-season">9.4 Network Conference Season</h3>
+<p>Networks hold their own annual conferences — typically in Q1 (January–March) and sometimes a second event in Q3. These are where compliance directors and technology teams make decisions about what tools to recommend or mandate to their AR firms. The conference season is the primary buying window for network-level deals.</p>
+<p>Stonebridge: January/February national conference. MAB: Annual conference (timing varies, typically autumn). Primis: Annual event for member firms. The Right Mortgage: Annual conference.</p>
+<h3 id="95-linkedin-strategy">9.5 LinkedIn Strategy</h3>
+<p>Hasna should begin building presence in the mortgage broker LinkedIn ecosystem now (2026–2027), before any commercial launch. This means:</p>
+<ul>
+<li>Following and engaging with compliance commentary from: AMI, Mortgage Strategy, Financial Reporter, The Intermediary.</li>
+<li>Commenting on regulatory developments (January 2025 Dear CEO, March 2026 second charge review, PS25/11).</li>
+<li>Building relationships with mortgage compliance professionals — compliance directors at networks, DA compliance officers, mortgage compliance consultants.</li>
+</ul>
+<p><strong>Suggested follow list:</strong></p>
+<ul>
+<li>AMI&#x27;s LinkedIn page and its spokespeople.</li>
+<li>Paradigm Mortgages LinkedIn (they are vocal on Consumer Duty and compliance).</li>
+<li>Stonebridge Group LinkedIn.</li>
+<li>Mortgage Strategy and Mortgage Solutions editors.</li>
+<li>Compliance consultants at Bankhall, Threesixty, ATEB.</li>
+<li>Curvestone AI and OMS — understand their positioning and messaging.</li>
+</ul>
+<hr/>
+<h2 id="10-domain-expert-profile">10. Domain Expert Profile</h2>
+<p>Amaea will need at least one person with deep mortgage intermediary compliance credibility before launching the Mortgage Founders Programme. This person is not a hire at Day 1 — they are an advisory hire or part-time consultant from approximately 2028 onwards, contributing to product roadmap validation and early customer introductions.</p>
+<h3 id="101-ideal-profile">10.1 Ideal Profile</h3>
+<p><strong>Former Network Compliance Director or Head of T&amp;C</strong></p>
+<ul>
+<li>10+ years in the mortgage intermediary sector, ideally in a network (Stonebridge, MAB, Primis, SBG, The Right Mortgage) or a large DA firm.</li>
+<li>Deep working knowledge of MCOB 4, MCOB 11, Consumer Duty application to mortgage advice, SM&amp;CR for mortgage firms, T&amp;C scheme design, and AR oversight.</li>
+<li>Has personally experienced the pain of: file reviews at scale, AR MI collection, vulnerability documentation, Consumer Duty outcomes reporting.</li>
+<li>Has FCA supervisory experience (attending meetings, responding to Section 166 reviews, thematic reviews) — understands what the regulator looks for in a compliance visit.</li>
+</ul>
+<p><strong>Alternatively: Former FCA Mortgage Supervisor</strong></p>
+<ul>
+<li>FCA staff with direct supervisory experience of the mortgage intermediary portfolio.</li>
+<li>Carries credibility with both the industry and potential early customers.</li>
+<li>Can validate that Amaea&#x27;s approach to compliance documentation and outcomes monitoring meets regulatory expectations.</li>
+</ul>
+<h3 id="102-where-to-find-these-people">10.2 Where to Find These People</h3>
+<ul>
+<li>LinkedIn search: &quot;Head of Compliance&quot; + mortgage network; &quot;Compliance Director&quot; + mortgage intermediaries.</li>
+<li>AMI events — compliance professionals attend the regulatory briefing sessions.</li>
+<li>Mortgage Strategy and Financial Reporter commentary sections — compliance directors occasionally write for trade press.</li>
+<li>Compliance consultancies (Bankhall, Threesixty, ATEB) — principals of these firms have the network background.</li>
+</ul>
+<h3 id="103-illustrative-job-titles-to-target">10.3 Illustrative Job Titles to Target</h3>
+<ul>
+<li>Head of Compliance / Director of Compliance, [Network Name]</li>
+<li>Head of T&amp;C, [Network Name]</li>
+<li>Principal Compliance Officer, [Large DA Firm]</li>
+<li>Former FCA Supervision Manager — Mortgage Intermediaries Portfolio</li>
+<li>Partner / Director, specialist mortgage compliance consultancy</li>
+</ul>
+<p><strong>Note:</strong> Named individuals are not listed here given the sensitivity of advisory relationships; they should be identified through LinkedIn and AMI engagement over 2026–2028.</p>
+<hr/>
+<h2 id="11-adjacency-to-uk-ifa">11. Adjacency to UK IFA</h2>
+<h3 id="111-what-is-the-same">11.1 What Is the Same</h3>
+<p>The regulatory obligations that Amaea is already building for in the IFA sector have significant overlap with the mortgage intermediary sector:</p>
+<table>
+<thead><tr>
+<th>Compliance Area</th>
+<th>IFA</th>
+<th>Mortgage Broker</th>
+<th>Overlap</th>
+</tr></thead><tbody>
+<tr>
+<td>Consumer Duty (PRIN 2A)</td>
+<td>Full application</td>
+<td>Full application</td>
+<td>Identical obligation; same four outcomes; same outcomes monitoring requirement</td>
+</tr>
+<tr>
+<td>SM&amp;CR</td>
+<td>Core tier (most IFA firms)</td>
+<td>Core tier (most mortgage firms)</td>
+<td>Identical F&amp;P, SoR, certification obligations</td>
+</tr>
+<tr>
+<td>Vulnerable customer obligations</td>
+<td>PRIN 2A.6.2R</td>
+<td>PRIN 2A.6.2R</td>
+<td>Identical; same FCA guidance applies</td>
+</tr>
+<tr>
+<td>Training and competency (TC sourcebook)</td>
+<td>Applies</td>
+<td>Applies</td>
+<td>Same CPD and supervised practice obligations</td>
+</tr>
+<tr>
+<td>Financial promotions</td>
+<td>COBS 4</td>
+<td>MCOB 3A</td>
+<td>Different sourcebook chapters; very similar substantive rules</td>
+</tr>
+<tr>
+<td>Suitability obligation</td>
+<td>COBS 9A</td>
+<td>MCOB 4.7A</td>
+<td>Different sourcebook; similar structure — fact-find + recommendation + suitability assessment</td>
+</tr>
+<tr>
+<td>Record keeping</td>
+<td>COBS 9.5, SYSC</td>
+<td>MCOB Sch 1, SYSC</td>
+<td>Broadly comparable; mortgage records typically 3 years (some 5); investment records often 5–7 years</td>
+</tr>
+<tr>
+<td>AML</td>
+<td>Applies (less prominent in typical IFA work)</td>
+<td>Applies (more prominent — every client transaction)</td>
+<td>Similar framework; mortgage brokers tend to have more active CDD workflows</td>
+</tr>
+</tbody></table>
+<p>The core Amaea platform — Consumer Duty outcomes monitoring, vulnerability documentation, file review workflow, T&amp;C scheme administration, MI dashboards — is directly transferable to the mortgage market with the following adaptations.</p>
+<h3 id="112-what-is-different">11.2 What Is Different</h3>
+<table>
+<thead><tr>
+<th>Area</th>
+<th>IFA (COBS)</th>
+<th>Mortgage Broker (MCOB)</th>
+<th>Implication for Amaea</th>
+</tr></thead><tbody>
+<tr>
+<td>Governing sourcebook</td>
+<td>COBS (Conduct of Business)</td>
+<td>MCOB (Mortgage Conduct of Business)</td>
+<td>Different rule references; different checklist items in automated review; needs mortgage-specific ruleset configuration</td>
+</tr>
+<tr>
+<td>Fact-find template</td>
+<td>Investment/pension focused — assets, liabilities, risk tolerance, time horizon, tax position</td>
+<td>Mortgage focused — property details, income, expenditure, credit history, repayment vehicle, property valuation</td>
+<td>Different fact-find schema; cannot reuse IFA fact-find template; new template required</td>
+</tr>
+<tr>
+<td>Product documentation</td>
+<td>Suitability report (narrative)</td>
+<td>European Standardised Information Sheet (ESIS) + suitability letter (shorter)</td>
+<td>Different output document; generation workflow differs</td>
+</tr>
+<tr>
+<td>Advice fee model</td>
+<td>Typically percentage of AUM or fixed fee</td>
+<td>Typically proc fee (commission from lender) + optional client fee</td>
+<td>Fee disclosure rules and fair value calculation differ</td>
+</tr>
+<tr>
+<td>Product universe</td>
+<td>Investments, pensions, protection, mortgages (if permissions held)</td>
+<td>Mortgages, protection (limited), BTL, equity release (if qualified)</td>
+<td>Different product database needed for any product-specific compliance checks</td>
+</tr>
+<tr>
+<td>Lender/network relationship</td>
+<td>Fund managers, platforms, pension providers</td>
+<td>Mortgage lenders, networks, mortgage clubs</td>
+<td>Different third-party data integrations</td>
+</tr>
+<tr>
+<td>Annual review obligation</td>
+<td>Strong — regular client review for investment clients</td>
+<td>Weaker — typically only when client comes back for a product</td>
+<td>Different workflow cadence</td>
+</tr>
+<tr>
+<td>CMAP / RMAR data</td>
+<td>RMAR section D (retail investment mediation)</td>
+<td>RMAR section B (mortgage mediation)</td>
+<td>Different RMAR section; Amaea&#x27;s RMAR tooling would need mortgage-specific fields</td>
+</tr>
+</tbody></table>
+<h3 id="113-cross-sell-opportunity">11.3 Cross-Sell Opportunity</h3>
+<p>Many IFA firms hold mortgage permissions alongside their investment permissions. FCA data confirms this is common — particularly for smaller firms offering holistic financial planning. This means:</p>
+<ol>
+<li><strong>Amaea&#x27;s IFA customers may already have mortgage advisers.</strong> A mortgage module within the existing Amaea platform — serving the mortgage arm of an IFA firm — is a natural upsell before any new sector launch.</li>
+<li><strong>Cross-sector compliance dashboard:</strong> An IFA firm with mortgage permissions needs to report Consumer Duty outcomes across <em>all</em> regulated activities. Amaea could be the single compliance platform for the whole firm rather than needing separate tools for IFA and mortgage activities.</li>
+</ol>
+<p>This cross-sell opportunity inside the existing IFA customer base should be factored into the Mortgage Founders Programme design — the first mortgage customers may already be Amaea IFA customers with mortgage permissions, not pure-play mortgage brokers.</p>
+<hr/>
+<h2 id="12-risks-and-unknowns">12. Risks and Unknowns</h2>
+<p>These are the things Amaea does not yet know well enough that could materially affect the mortgage sector strategy.</p>
+<h3 id="121-curvestone-ai-oms-competitive-risk">12.1 Curvestone AI / OMS Competitive Risk</h3>
+<p><strong>Risk:</strong> OMS + Curvestone AI launched in April 2026 — four years before Amaea&#x27;s target mortgage launch. By 2030, if this product achieves meaningful penetration among mortgage brokers, the &quot;automated compliance checking&quot; use case may be commoditised. If OMS (the case management workflow) becomes the default system with compliance baked in, Amaea may struggle to sell a separate compliance platform.</p>
+<p><strong>What we don&#x27;t know:</strong> Curvestone&#x27;s pricing, adoption rate, whether networks are mandating it, and whether it is expanding beyond file completeness checking into outcomes monitoring and MI. This needs active monitoring.</p>
+<p><strong>Mitigation:</strong> Amaea&#x27;s value proposition is broader than file checking. The outcomes monitoring, T&amp;C, and longitudinal MI dimensions are less competed. But the team must track OMS/Curvestone quarterly and be prepared to pivot positioning.</p>
+<h3 id="122-network-mandated-tools">12.2 Network Mandated Tools</h3>
+<p><strong>Risk:</strong> If major networks (Primis, MAB, Stonebridge) mandate their own internal compliance tools or a single preferred technology partner for their ARs, Amaea&#x27;s access to the AR market is significantly constrained.</p>
+<p><strong>What we don&#x27;t know:</strong> Which networks are currently building or procuring centralised compliance tools, and what the purchasing timeline looks like.</p>
+<p><strong>Mitigation:</strong> Amaea should attempt to become the preferred tool <em>for</em> a network, not compete against a network. A partnership with one mid-size network (e.g., The Right Mortgage) as a Founders Programme design partner would be the ideal distribution strategy.</p>
+<h3 id="123-market-contraction-structural-change">12.3 Market Contraction / Structural Change</h3>
+<p><strong>Risk:</strong> The mortgage market contracted sharply in 2022–2024 due to interest rate rises. If rates remain elevated or another shock occurs, broker numbers and revenue decline again, squeezing willingness to spend on compliance tools.</p>
+<p><strong>What we don&#x27;t know:</strong> What interest rate environment will prevail in 2029–2030 when Amaea launches.</p>
+<p><strong>Mitigation:</strong> Compliance spend is less cyclical than broker revenue — regulatory obligations don&#x27;t reduce in a downturn. But the ability to pay for premium SaaS does decline. If the market contracts, Amaea may need to sharpen the ROI story (compliance tooling that reduces staff time, avoiding enforcement costs) rather than leading with features.</p>
+<h3 id="124-fca-regulatory-direction-on-ai-in-compliance">12.4 FCA Regulatory Direction on AI in Compliance</h3>
+<p><strong>Risk:</strong> The FCA is actively watching AI use in regulated activities. If the FCA determines that AI-generated compliance assessments require specific regulatory frameworks, human-in-the-loop mandates, or liability attribution that constrains what Amaea can automate, the product roadmap needs to adapt.</p>
+<p><strong>What we don&#x27;t know:</strong> The FCA&#x27;s 2026–2028 AI strategy as applied to compliance tools (as opposed to advice tools). Curvestone AI claims to have engaged with the FCA&#x27;s innovation programme — Amaea should understand the regulatory position before building mortgage-specific AI features.</p>
+<p><strong>Mitigation:</strong> Amaea&#x27;s AI capabilities in IFA will have been tested and positioned by 2029. The learnings transfer. Amaea should position AI as &quot;surfacing exceptions for human review&quot; rather than &quot;making compliance decisions&quot; — this is the safe and accurate framing given the FCA&#x27;s current signals.</p>
+<h3 id="125-pricing-sensitivity-in-the-mortgage-market">12.5 Pricing Sensitivity in the Mortgage Market</h3>
+<p><strong>Risk:</strong> Mortgage broker firms are generally smaller and less profitable per firm than IFA firms. A compliance SaaS tool at £489–£1,539/month may be too expensive for the long tail of 1–5 adviser DA firms.</p>
+<p><strong>What we don&#x27;t know:</strong> The actual willingness-to-pay of DA mortgage firms for a compliance SaaS platform, and how price-sensitive they are relative to IFA firms.</p>
+<p><strong>Mitigation:</strong> The Founders Programme design should include deep discovery interviews with 20+ DA mortgage firms before committing to pricing. The 70% of IFA pricing assumption is a starting hypothesis, not a validated figure.</p>
+<h3 id="126-mcob-familiarity-gap">12.6 MCOB Familiarity Gap</h3>
+<p><strong>Risk:</strong> Amaea&#x27;s founding team has IFA/COBS expertise. MCOB is a different rulebook with different terminology, different fact-find requirements, different product structures, and different lender relationships. Building MCOB-compliant compliance workflows without deep domain knowledge creates product risk.</p>
+<p><strong>What we don&#x27;t know:</strong> How long it will take to build genuine MCOB expertise internally, and whether the one advisory hire planned is sufficient or whether a more permanent senior compliance hire is needed.</p>
+<p><strong>Mitigation:</strong> This is the primary reason to begin building the advisory relationship in 2028 rather than closer to launch. Two years of informed product development — with a MCOB expert reviewing the roadmap quarterly — is the minimum viable preparation.</p>
+<h3 id="127-data-accuracy-in-this-memo">12.7 Data Accuracy in This Memo</h3>
+<p>Several figures in this memo are estimates or cross-referenced from trade press rather than primary FCA data:</p>
+<ul>
+<li>The 5,000 firm count: confirmed in the FCA&#x27;s 2026 Regulatory Priorities report but not broken down by DA vs. AR.</li>
+<li>The 2,000 SAM firm count: derived estimate [needs verification from RMAR detailed data].</li>
+<li>ATEB pricing: [needs verification — contact ATEB directly].</li>
+<li>Firm-level adviser counts for most networks other than MAB and Stonebridge: partial [needs verification from FCA Register extract or Network Consulting].</li>
+</ul>
+<p>The next quarterly review (August 2026) should include a pass through the FCA&#x27;s detailed RMAR 2024 interactive data, FCA Register extract for firms with mortgage permissions, and direct outreach to 2–3 DA mortgage firms for pricing discovery.</p>
+<hr/>
+<h2 id="13-quarterly-update-log">13. Quarterly Update Log</h2>
+<table>
+<thead><tr>
+<th>Date</th>
+<th>Updated by</th>
+<th>Changes made</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-05-16</td>
+<td>Milan Sajiv (Amaea)</td>
+<td>Initial version created</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<hr/>
+<h2 id="14-sources-references">14. Sources / References</h2>
+<h3 id="regulatory-sources">Regulatory Sources</h3>
+<ul>
+<li>FCA MCOB Sourcebook: <a href="https://handbook.fca.org.uk/handbook/MCOB.pdf">handbook.fca.org.uk/handbook/MCOB</a></li>
+<li>FCA MCOB 4.7A (Advised sales — suitability): <a href="https://handbook.fca.org.uk/handbook/MCOB/4/7A.html">handbook.fca.org.uk/handbook/MCOB/4/7A.html</a></li>
+<li>FCA MCOB 3A (Financial promotions): <a href="https://handbook.fca.org.uk/handbook/MCOB/3A/?view=chapter">handbook.fca.org.uk/handbook/MCOB/3A/</a></li>
+<li>FCA MCOB Schedule 1 (Record keeping): <a href="https://handbook.fca.org.uk/handbook/MCOB/Sch/1/1.html">handbook.fca.org.uk/handbook/MCOB/Sch/1/1.html</a></li>
+<li>FCA PERG 4 (Guidance on regulated mortgage activities): <a href="https://handbook.fca.org.uk/handbook/PERG/4/?view=chapter">handbook.fca.org.uk/handbook/PERG/4/</a></li>
+<li>FCA PS25/11 — Mortgage Rule Review: <a href="https://www.fca.org.uk/publications/policy-statements/ps25-11-mortgage-rule-review-first-steps-simplify-rules-increase-flexibility">fca.org.uk/publications/policy-statements/ps25-11</a></li>
+<li>FCA Dear CEO Letter — FCA Strategy for Mortgage Intermediaries (30 January 2025): <a href="https://www.fca.org.uk/publication/correspondence/fca-strategy-mortgage-intermediaries.pdf">fca.org.uk/publication/correspondence/fca-strategy-mortgage-intermediaries.pdf</a></li>
+<li>FCA Mortgages Regulatory Priorities Report (March 2026): <a href="https://www.fca.org.uk/publication/regulatory-priorities/mortgages-report.pdf">fca.org.uk/publication/regulatory-priorities/mortgages-report.pdf</a></li>
+<li>FCA Second Charge Mortgages — Improving Outcomes for Consumers (March 2026): <a href="https://www.fca.org.uk/publications/good-and-poor-practice/second-charge-mortgages-improving-outcomes-consumers">fca.org.uk/publications/good-and-poor-practice/second-charge-mortgages-improving-outcomes-consumers</a></li>
+<li>FCA Senior Managers and Certification Regime: <a href="https://www.fca.org.uk/firms/senior-managers-certification-regime">fca.org.uk/firms/senior-managers-certification-regime</a></li>
+<li>FCA PS26/6 — SM&amp;CR Review: <a href="https://www.fca.org.uk/publications/policy-statements/ps26-6-senior-managers-certification-regime-review">fca.org.uk/publications/policy-statements/ps26-6-senior-managers-certification-regime-review</a></li>
+<li>Money Laundering Regulations 2017 (MLR 2017): <a href="https://www.legislation.gov.uk/uksi/2017/692/contents/made">legislation.gov.uk</a></li>
+<li>FCA Retail Intermediary Market Data 2024: <a href="https://www.fca.org.uk/data/retail-intermediary-market-data-2024">fca.org.uk/data/retail-intermediary-market-data-2024</a></li>
+<li>FCA Retail Banks Treatment of Vulnerable Customers Multi-Firm Review: <a href="https://www.fca.org.uk/publications/multi-firm-reviews/retail-banks-treatment-customers-vulnerable-circumstances-multi-firm-review">fca.org.uk/publications/multi-firm-reviews/retail-banks-treatment-customers-vulnerable-circumstances-multi-firm-review</a></li>
+</ul>
+<h3 id="market-data-sources">Market Data Sources</h3>
+<ul>
+<li>IMLA — Mortgage Market Forecasts (December 2024 / December 2025): <a href="https://www.imla.org.uk/news/">imla.org.uk/news</a></li>
+<li>IMLA Intermediary Mortgage Market Tracker Q1 2025: <a href="https://www.imla.org.uk/perch/resources/publications/imla-mortgage-market-tracker-q1-2025.pdf">imla.org.uk/perch/resources/publications/imla-mortgage-market-tracker-q1-2025.pdf</a></li>
+<li>Network Consulting — 2024 Full Calendar Year Mortgage Network League Table: <a href="https://www.network-consulting.co.uk/2024-mortgage-network-league-table">network-consulting.co.uk/2024-mortgage-network-league-table</a></li>
+<li>AMI (Association of Mortgage Intermediaries): <a href="https://www.a-m-i.org.uk/">a-m-i.org.uk</a></li>
+<li>Mordor Intelligence — UK Mortgage/Loan Broker Market Report: <a href="https://www.mordorintelligence.com/industry-reports/uk-mortgage-loan-broker-market">mordorintelligence.com/industry-reports/uk-mortgage-loan-broker-market</a></li>
+</ul>
+<h3 id="trade-press-sources">Trade Press Sources</h3>
+<ul>
+<li>Mortgage Solutions — &quot;More than 300 mortgage advice firms joined FCA register in H2 2025&quot; (February 2026): <a href="https://www.mortgagesolutions.co.uk/news/2026/02/20/more-than-300-mortgage-advice-firms-joined-fca-register-in-h2-2025/">mortgagesolutions.co.uk</a></li>
+<li>Mortgage Solutions — &quot;Exclusive: Mortgage broker firms up by 40% since 2016&quot; (March 2026): <a href="https://www.mortgagesolutions.co.uk/news/2026/03/05/exclusive-mortgage-broker-firms-up-by-40-since-2016-with-multi-adviser-firms-leading-the-charge/">mortgagesolutions.co.uk</a></li>
+<li>Mortgage Solutions — &quot;MAB posts growth in advisers, revenue and profit for 2025&quot; (March 2026): <a href="https://www.mortgagesolutions.co.uk/news/2026/03/17/mab-posts-growth-in-advisers-revenue-and-profit-for-2025/">mortgagesolutions.co.uk</a></li>
+<li>Mortgage Solutions — &quot;Stonebridge completes record £13.5bn of mortgage lending in 2024&quot; (February 2025): <a href="https://www.mortgagesolutions.co.uk/news/2025/02/24/stonebridge-completes-record-13-5bn-of-mortgage-lending-in-2024/">mortgagesolutions.co.uk</a></li>
+<li>Mortgage Solutions — &quot;OMS introduces AI-powered compliance checking to platform&quot; (April 2026): <a href="https://www.mortgagesolutions.co.uk/mortgage-news/2026/04/28/oms-introduces-ai-powered-compliance-checking-to-platform/">mortgagesolutions.co.uk</a></li>
+<li>The Intermediary — &quot;OMS integrates Curvestone AI for automated mortgage compliance checks&quot; (April 2026): <a href="https://theintermediary.co.uk/2026/04/oms-integrates-curvestone-ai-for-automated-mortgage-compliance-checks/">theintermediary.co.uk</a></li>
+<li>The Intermediary — &quot;The Right Mortgage experiences record growth in 2024&quot; (February 2025): <a href="https://theintermediary.co.uk/2025/02/the-right-mortgage-protection-network-experiences-record-growth-in-2024/">theintermediary.co.uk</a></li>
+<li>Mortgage Strategy — &quot;2024: A stable year for mortgage networks&quot;: <a href="https://www.mortgagestrategy.co.uk/opinion/2024-a-stable-year-for-mortgage-networks/">mortgagestrategy.co.uk</a></li>
+<li>Mortgage Finance Gazette — &quot;FCA and PRA cut back senior managers regime&quot; (April 2026): <a href="https://www.mortgagefinancegazette.com/market-news/regulation/fca-and-pra-cut-back-senior-managers-regime-22-04-2026/">mortgagefinancegazette.com</a></li>
+<li>Mortgage Finance Gazette — &quot;Second charge market needs to raise standards for consumers: FCA&quot; (March 2026): <a href="https://www.mortgagefinancegazette.com/lending-news/second-charge-market-needs-to-raise-standards-for-consumers-fca-12-03-2026/">mortgagefinancegazette.com</a></li>
+<li>Financial Reporter — &quot;FCA sets out regulatory priorities for mortgage intermediaries in 2026&quot;: <a href="https://www.financialreporter.co.uk/fca-sets-out-regulatory-priorities-for-mortgage-intermediaries-in-2026.html">financialreporter.co.uk</a></li>
+<li>Kennedy&#x27;s Law — &quot;FCA consults on proposals to streamline the mortgage rules&quot; (2025): <a href="https://www.kennedyslaw.com/en/thought-leadership/article/2025/fca-consults-on-proposals-to-streamline-the-mortgage-rules/">kennedyslaw.com</a></li>
+<li>Browne Jacobson — &quot;FCA mortgage regulatory priorities 2026: What to do now&quot;: <a href="https://www.brownejacobson.com/insights/fca-mortgages-regulatory-priorities">brownejacobson.com</a></li>
+<li>Paradigm — &quot;FCA Dear CEO Letter to Mortgage Intermediaries&quot;: <a href="https://www.paradigm.co.uk/mortgage-protection-blog/FCA-Dear-CEO-Letter-to-Mortgage-Intermediaries.html">paradigm.co.uk</a></li>
+<li>Cosegic — &quot;Portfolio Letter — Mortgage Intermediaries&quot; (January 2025): <a href="https://www.cosegic.com/resources-library/articles/2025/portfolio-letter-mortgage-intermediaries/">cosegic.com</a></li>
+<li>TCC Group — &quot;FCA Mortgage Priorities: evidence, outcomes and Consumer Duty&quot;: <a href="https://tcc.group/blog/2026/04/23/what-the-fcas-mortgage-regulatory-priorities-report-means-for-mortgage-lenders-and-intermediaries/">tcc.group</a></li>
+<li>Recordsure — UK Mortgage Compliance overview: <a href="https://recordsure.com/">recordsure.com</a></li>
+<li>Bankhall compliance software for mortgage firms: <a href="https://www.bankhall.co.uk/Business-Consultancy/For-Mortgage-Firms">bankhall.co.uk</a></li>
+<li>Sesame Bankhall Group: <a href="https://www.sbg.co.uk/">sbg.co.uk</a></li>
+<li>Threesixty Services — Mortgage and Protection: <a href="https://www.threesixtyservices.co.uk/ourservices/mortgageandprotection">threesixtyservices.co.uk</a></li>
+<li>Mortgage Business Expo: <a href="https://www.mortgagebusinessexpo.com/">mortgagebusinessexpo.com</a></li>
+<li>Connect for Intermediaries: <a href="https://connectbrokers.co.uk/">connectbrokers.co.uk</a></li>
+<li>Paradigm Mortgage Services: <a href="https://www.paradigm.co.uk/">paradigm.co.uk</a></li>
+<li>Twenty7Tec: <a href="https://www.twenty7tec.com/">twenty7tec.com</a></li>
+<li>Acre Software: <a href="https://www.acresoftware.com/">acresoftware.com</a></li>
+<li>Mortgage Brain: <a href="https://mortgagebrain.com/">mortgagebrain.com</a></li>
+<li>SmartSearch: <a href="https://www.smartsearch.com/">smartsearch.com</a></li>
+<li>OMS (One Mortgage System): cited via Mortgage Solutions and The Intermediary above</li>
+<li>Curvestone AI: cited via The Intermediary (April 2026) above</li>
+<li>Stonebridge Group: <a href="https://stonebridgegroup.co.uk/">stonebridgegroup.co.uk</a></li>
+<li>The Right Mortgage: <a href="https://therightmortgage.co.uk/">therightmortgage.co.uk</a></li>
+<li>Mortgage Advice Bureau: <a href="https://www.mortgageadvicebureau.com/">mortgageadvicebureau.com</a></li>
+<li>Primis Mortgage Network: <a href="https://www.primis.co.uk/">primis.co.uk</a></li>
+</ul>
+<hr/>
+<p><em>This document is a living research memo. It does not constitute legal or regulatory advice. All regulatory obligations should be verified against the current FCA Handbook and confirmed with qualified legal counsel before relying on them for product decisions.</em></p>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  document.querySelector('.theme-toggle').addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('amaea-theme', next);
+  });
+  const menuBtn = document.getElementById('menuBtn');
+  const sidebarEl = document.querySelector('.sidebar');
+  const overlayEl = document.getElementById('sidebarOverlay');
+  if (menuBtn && sidebarEl && overlayEl) {
+    if (window.innerWidth > 768 && localStorage.getItem('amaea-sidebar') === 'collapsed') document.body.classList.add('sidebar-collapsed');
+    const closeMobile = () => { sidebarEl.classList.remove('open'); overlayEl.classList.remove('open'); document.body.classList.remove('mobile-nav-open'); };
+    menuBtn.addEventListener('click', () => {
+      if (window.innerWidth <= 768) { const open = sidebarEl.classList.toggle('open'); overlayEl.classList.toggle('open', open); document.body.classList.toggle('mobile-nav-open', open); }
+      else { const c = document.body.classList.toggle('sidebar-collapsed'); localStorage.setItem('amaea-sidebar', c ? 'collapsed' : 'expanded'); }
+    });
+    overlayEl.addEventListener('click', closeMobile);
+    sidebarEl.querySelectorAll('a.sidebar-item').forEach(a => a.addEventListener('click', () => { if (window.innerWidth <= 768) closeMobile(); }));
+  }
+</script>
+<script>
+(function () {
+  const userArea  = document.getElementById('sidebarUserArea');
+  const nameEl    = document.getElementById('sidebarUserName');
+  const roleEl    = document.getElementById('sidebarUserRole');
+  const avatarEl  = document.getElementById('sidebarAvatar');
+  if (userArea) {
+    const chevron = userArea.querySelector('svg');
+    if (chevron) {
+      const logout = document.createElement('a');
+      logout.href  = '/cdn-cgi/access/logout';
+      logout.title = 'Sign out';
+      logout.setAttribute('aria-label', 'Sign out');
+      logout.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;color:rgba(255,255,255,0.4);text-decoration:none;flex-shrink:0;margin-left:auto;transition:background .15s ease, color .15s ease;';
+      logout.addEventListener('mouseenter', () => { logout.style.background = 'rgba(255,255,255,0.08)'; logout.style.color = 'rgba(255,255,255,0.85)'; });
+      logout.addEventListener('mouseleave', () => { logout.style.background = 'transparent';            logout.style.color = 'rgba(255,255,255,0.4)';   });
+      logout.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+      chevron.replaceWith(logout);
+    }
+  }
+  const ROLE_BY_EMAIL = {
+    'milan@amaea.co.uk': { role: 'CTO & Co-Founder', bg: 'linear-gradient(135deg,#1a4080,#4292c6)' },
+    'hasna@amaea.co.uk': { role: 'CEO & Co-Founder', bg: 'linear-gradient(135deg,#4C2C4B,#8B6189)' },
+  };
+  fetch('/cdn-cgi/access/get-identity', { credentials: 'include' })
+    .then(r => (r.ok ? r.json() : null))
+    .then(id => {
+      if (!id || !id.email) return;
+      const email     = id.email;
+      const name      = id.name || email.split('@')[0];
+      const initial   = (name || '?').charAt(0).toUpperCase();
+      const meta      = ROLE_BY_EMAIL[email] || { role: 'Team', bg: 'linear-gradient(135deg,#3D3651,#8B809C)' };
+      if (nameEl)    nameEl.textContent    = name;
+      if (roleEl)    roleEl.textContent    = meta.role;
+      if (avatarEl)  { avatarEl.textContent = initial; avatarEl.style.background = meta.bg; }
+    })
+    .catch(() => {});
+})();
+</script>
+<script>
+  (function(){
+    var el = document.getElementById('topbar-date');
+    if (!el) return;
+    el.textContent = new Date().toLocaleDateString('en-GB', {
+      weekday:'short', day:'numeric', month:'long', year:'numeric'
+    });
+  })();
+</script>
+</body>
+</html>

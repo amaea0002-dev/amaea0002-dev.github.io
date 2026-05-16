@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wealth Platforms & DFMs | Sector Research | Amaea Intranet</title>
+  <link rel="icon" href="../logo-plum.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../intranet.css"/>
+  <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <style>
+    .memo-meta-bar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 18px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--r-md); margin-bottom: 24px; font-size: 0.78rem; color: var(--gray-700); }
+    .memo-meta-bar strong { color: var(--gray-900); font-weight: 600; }
+    .memo-meta-sep { color: var(--gray-300); }
+    .memo-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--gray-600); text-decoration: none; margin-bottom: 18px; }
+    .memo-back:hover { color: var(--gray-900); }
+
+    .memo-body { font-size: 0.88rem; line-height: 1.7; color: var(--gray-800); }
+    .memo-body h2 { font-size: 1.35rem; font-weight: 700; color: var(--gray-900); margin: 38px 0 14px; letter-spacing: -0.02em; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+    .memo-body h2:first-child { margin-top: 0; }
+    .memo-body h3 { font-size: 1.08rem; font-weight: 700; color: var(--gray-900); margin: 28px 0 10px; letter-spacing: -0.01em; }
+    .memo-body h4 { font-size: 0.95rem; font-weight: 700; color: var(--gray-800); margin: 22px 0 8px; }
+    .memo-body p { margin: 0 0 14px; }
+    .memo-body strong { color: var(--gray-900); font-weight: 600; }
+    .memo-body em { font-style: italic; color: var(--gray-700); }
+    .memo-body a { color: var(--accent, #4C2C4B); text-decoration: underline; text-underline-offset: 2px; }
+    .memo-body a:hover { text-decoration: none; }
+    .memo-body ul, .memo-body ol { margin: 0 0 16px; padding-left: 22px; }
+    .memo-body li { margin: 4px 0; }
+    .memo-body li > ul, .memo-body li > ol { margin: 6px 0 6px; }
+    .memo-body code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.84em; background: var(--gray-100); padding: 1px 5px; border-radius: 4px; color: var(--gray-900); }
+    .memo-body pre { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--r-md); padding: 14px 16px; overflow-x: auto; margin: 0 0 18px; }
+    .memo-body pre code { background: transparent; padding: 0; font-size: 0.82rem; line-height: 1.55; }
+    .memo-body table { width: 100%; border-collapse: collapse; margin: 8px 0 22px; font-size: 0.82rem; }
+    .memo-body th, .memo-body td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--gray-200); vertical-align: top; }
+    .memo-body th { font-weight: 600; color: var(--gray-900); background: var(--gray-50); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    .memo-body tr:last-child td { border-bottom: none; }
+    .memo-body hr { border: none; border-top: 1px solid var(--gray-200); margin: 28px 0; }
+    .memo-body blockquote { border-left: 3px solid var(--gray-300); padding: 4px 0 4px 16px; margin: 0 0 16px; color: var(--gray-600); font-style: italic; }
+
+    /* Constrain to readable width on wide screens */
+    .memo-body { max-width: 880px; }
+  </style>
+</head>
+<body>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="../logo-white.png" alt="Amaea"/>
+    <span class="sidebar-logo-badge">Intranet</span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-label">Workspace</div>
+    <a href="../index" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="../brand" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Brand
+    </a>
+    <a href="../team" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Team
+    </a>
+    <a href="../docs" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Documents
+    </a>
+    <a href="../mvp-docs/" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Product Docs
+    </a>
+    <a href="../features" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      Product Features
+    </a>
+    <a href="../roadmap" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Roadmap
+    </a>
+    <a href="../decisions" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Decisions
+    </a>
+    <a href="../sector-research" class="sidebar-item active">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Sector Research
+    </a>
+    <a href="../investor" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      Funding
+    </a>
+    <div class="sidebar-label">External</div>
+    <a href="https://amaea0002-dev.github.io/webpage" class="sidebar-item" target="_blank">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website <span class="ext">↗</span>
+    </a>
+    <a href="https://amaea0002-dev.github.io/prototype/dashboard.html" class="sidebar-item" target="_blank">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      Prototype <span class="ext">↗</span>
+    </a>
+  </nav>
+  <div class="sidebar-footer" style="position:relative;">
+    <div class="sidebar-user" id="sidebarUserArea">
+      <div class="sidebar-avatar" id="sidebarAvatar">H</div>
+      <div style="flex:1;min-width:0;">
+        <div class="sidebar-user-name" id="sidebarUserName">Hasna Sahul Hameed</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">CEO &amp; Co-founder</div>
+      </div>
+      <svg width="11" height="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;margin-left:auto;"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </div>
+</aside>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="topbar-hamburger" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <span class="bc-root">Amaea</span>
+    <span class="bc-sep">/</span>
+    <a href="../sector-research" class="bc-link">Sector Research</a>
+    <span class="bc-sep">/</span>
+    <span class="bc-current">Wealth Platforms & DFMs</span>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-date" id="topbar-date"></span>
+    <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+  </div>
+</header>
+
+<main class="main">
+  <div class="content">
+
+    <a href="../sector-research" class="memo-back">← Back to Sector Research index</a>
+
+    <div class="page-header">
+      <p class="page-eyebrow">Sector 4 · Q2 2027 priority</p>
+      <h1 class="page-title">Wealth Platforms & DFMs</h1>
+    </div>
+
+    <div class="memo-meta-bar">
+      <span><strong>Next review:</strong> 16 May 2027</span>
+      <span class="memo-meta-sep">·</span>
+      <span><strong>Source:</strong> <code>sector-research/wealth-platforms-dfms.md</code></span>
+      <span class="memo-meta-sep">·</span>
+      <span>Living document — update quarterly</span>
+    </div>
+
+    <div class="memo-body">
+<p><strong>Last updated:</strong> 2026-05-16 <strong>Next review:</strong> 2027-05-16 (Q2 2027 priority — Phase 2 sector entry research cycle) <strong>Authors:</strong> Amaea — Milan Sajiv + Hasna Sahul Hameed <strong>Status:</strong> Living document. Update quarterly. First used for strategic planning for ~2031–2032 sector launch.</p>
+<hr/>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li>Executive Summary</li>
+<li>Regulatory Landscape</li>
+<li>Market Sizing — TAM / SAM / SOM</li>
+<li>Customer Segmentation</li>
+<li>Sample Target Firms</li>
+<li>Compliance Pain Points</li>
+<li>Competitive Landscape</li>
+<li>Pricing Benchmarks</li>
+<li>Go-to-Market Notes</li>
+<li>Domain Expert Profile</li>
+<li>Adjacency to UK IFA</li>
+<li>Risks and Unknowns</li>
+<li>Quarterly Update Log</li>
+<li>Sources and References</li>
+</ol>
+<hr/>
+<h2 id="1-executive-summary">1. Executive Summary</h2>
+<p>This memo covers two distinct but deeply adjacent regulated segments that Amaea plans to enter as Phase 2 sectors (estimated 2031–2032): <strong>UK wealth platforms</strong> and <strong>UK discretionary fund managers (DFMs)</strong>. They share a regulator (FCA), a conduct sourcebook (COBS), core compliance obligations (suitability, Consumer Duty, SM&amp;CR), and — critically — many of the same clients. They differ in function, regulatory treatment, firm size, and internal compliance infrastructure.</p>
+<p><strong>Wealth platforms</strong> are custody and administration businesses — ISA, GIA, SIPP, and bond wrappers holding client assets on behalf of advisers and their clients. Major examples: Quilter Platform (~£104bn AUA), AJ Bell Investcentre (~£86bn AUA as at September 2024), Transact, Aviva Platform (~£198bn AUA across all lines), Aegon Platform (~£115bn AUA), Fidelity Adviser Solutions, Nucleus, Abrdn Wrap (~£75bn AUA including Elevate), and specialist tech-forward platforms like Seccl, Hubwise, and Praemium. Total UK adviser platform AUA reached approximately <strong>£739bn by Q4 2025</strong> and is growing at ~13% per year.</p>
+<p><strong>DFMs</strong> are FCA-authorised investment managers running discretionary portfolios — whether bespoke mandates for high-net-worth individuals or standardised model portfolios served to retail clients via advisers (the managed portfolio service, or MPS, model). Major examples: Rathbones (£109bn FUMA including the former Investec W&amp;I business), RBC Brewin Dolphin (~£57bn AUM), Evelyn Partners (~£59bn AUM), Quilter Cheviot (~£30bn), Brooks Macdonald (~£18bn FUM), Charles Stanley, Cazenove Capital (part of Schroders Wealth, ~£72bn), and specialist MPS providers like Tatton (~£18–19bn AUM) and Timeline. Total UK private wealth AUM exceeded <strong>£1.1 trillion</strong> in 2024; the MPS subset alone reached ~£123bn (as at March 2024) and grew 36% in the year to September 2024.</p>
+<p><strong>Key regulatory obligations</strong> that generate compliance workload: Consumer Duty (PRIN 2A) — fair value assessments, board reports, outcome monitoring; COBS 9A suitability cascade between DFM and adviser; SM&amp;CR conduct rules and fitness and propriety obligations; CASS (custody and client money segregation) for platforms; 10% depreciation notifications (currently paused by FCA, pending revocation of Article 62); PRIIPs/CCI divergence (new CCI regime mandatory from June 2027); MIFIDPRU prudential returns; and operational resilience under PS21/3 (full implementation deadline: 31 March 2025, now passed).</p>
+<p><strong>Fit with Amaea:</strong> Strong — the regulatory DNA is identical to IFA. The primary difference is firm scale and internal compliance headcount. Where an IFA firm might have one part-time compliance officer using Amaea, a DFM or platform will have a compliance team of 10–50 people. Amaea&#x27;s product wedge is not replacing those teams but augmenting their oversight capability: Consumer Duty MI dashboards, model portfolio governance workflows, suitability cascade audit trails, and automated board-pack generation. Pricing at this tier is Enterprise/custom (likely £5k–£20k/month per firm).</p>
+<p><strong>Key risks:</strong> Highly competitive RegTech segment already served by ACA, FundApps, Clausematch, and large consultancies. Sales cycles 6–12 months. Buyers are sophisticated compliance professionals, not IFA principals. Build cost is significantly higher than IFA (CASS rules, MiFID II suitability cascade, prudential returns). This is the right sector for Amaea in 2031 — not 2028.</p>
+<hr/>
+<h2 id="2-regulatory-landscape">2. Regulatory Landscape</h2>
+<h3 id="21-the-fca-as-regulator">2.1 The FCA as Regulator</h3>
+<p>Both wealth platforms and DFMs are authorised and supervised by the <strong>Financial Conduct Authority (FCA)</strong>. DFMs with assets above PRA-designated thresholds may also interact with the PRA for prudential purposes, but the majority of DFMs are FCA-solo-regulated. The FCA&#x27;s primary conduct sourcebook for both segments is COBS (Conduct of Business Sourcebook), supplemented by CASS (Client Assets), SYSC (Senior Management Arrangements, Systems and Controls), MIFIDPRU (prudential regime for MiFID investment firms, from 1 January 2022), and PRIN (Principles for Businesses, now including Principle 12 Consumer Duty via PRIN 2A).</p>
+<p>The FCA supervises these firms through its Wholesale and Specialist Supervision (WSS) directorate. DFMs and platforms are generally in the &quot;enhanced&quot; or &quot;significant&quot; tier of the supervisory framework, meaning more frequent supervisory engagement, dedicated supervisors, and higher expectations on governance.</p>
+<h3 id="22-cobs-conduct-of-business-sourcebook">2.2 COBS — Conduct of Business Sourcebook</h3>
+<p>COBS is the primary rulebook for conduct. For DFMs and platforms, the most operationally demanding chapters are:</p>
+<p><strong>COBS 2</strong> — Conduct standards. Requires firms to act honestly, fairly and professionally in the best interests of clients. The source obligation that flows through to Consumer Duty.</p>
+<p><strong>COBS 4</strong> — Communicating with clients. Marketing and financial promotions must be fair, clear and not misleading. Platforms hosting third-party products (DFM model portfolios) must apply this at the point of onboarding advisers to those products.</p>
+<p><strong>COBS 9 / COBS 9A</strong> — Suitability. COBS 9A applies to MiFID business. For DFMs acting on a discretionary mandate, suitability must be assessed at the point the mandate is agreed and on an ongoing basis. Critically, where an adviser recommends a DFM (or an MPS), the adviser retains primary suitability responsibility for whether the DFM/MPS is suitable for the end client — but the DFM also has obligations in respect of the mandate&#x27;s parameters. This &quot;suitability cascade&quot; (adviser assesses client, DFM manages within agreed parameters, platform delivers custody) is poorly documented and monitored at most firms and is a core pain point.</p>
+<p><strong>COBS 16A</strong> — Periodic reporting and 10% depreciation notifications. Under the onshored MiFID II Article 62, DFMs managing retail portfolios were required to notify clients and their advisers when portfolio value dropped 10% (or a subsequent multiple of 10%) in a reporting period. The FCA has paused enforcement of this rule (COBS 16A.4.3 UK) pending its formal revocation. The rule was widely viewed as producing noise without meaningful client protection. Even with the pause, many firms built internal processes around it; those processes represent sunk cost and ongoing maintenance.</p>
+<p><strong>COBS 19</strong> — Pension investments and transfers. Relevant where DFMs receive DB transfer assets — the same high-risk/high-documentation terrain Amaea already models for IFAs.</p>
+<h3 id="23-uk-mifid-ii-onshored-mifid">2.3 UK MiFID II (&quot;Onshored MiFID&quot;)</h3>
+<p>Post-Brexit, the UK onshored MiFID II into domestic legislation (the Financial Services and Markets Act 2000 as amended, the Markets in Financial Instruments Regulations 2017, and associated retained EU law). The FCA has taken a divergence approach in several areas:</p>
+<ul>
+<li><strong>Best execution reporting (RTS 27 and 28):</strong> From 1 December 2021, UK firms are no longer required to produce RTS 27 (venue quality of execution reports) or RTS 28 (top five venue reports). The FCA found these reports were rarely accessed — fewer than 10 downloads per month in a sample review. The underlying best execution obligation (take all sufficient steps to obtain the best possible result) remains in COBS 11.2A and is actively supervised.</li>
+<li><strong>Research unbundling:</strong> From August 2024, UK firms may use bundled payments for third-party research and trading commissions (reversing a key MiFID II requirement), subject to certain conditions. This reduces compliance cost for DFMs but creates record-keeping obligations around bundled arrangements.</li>
+<li><strong>10% depreciation notifications:</strong> Paused as described above. Formal revocation pending. Compliance teams spent significant effort building notification systems; those systems are becoming legacy.</li>
+<li><strong>Transaction reporting:</strong> MiFIR transaction reporting obligations remain. DFMs executing orders in financial instruments must report to the FCA via ARM (Approved Reporting Mechanism). This is a significant ongoing operational burden.</li>
+</ul>
+<h3 id="24-cass-client-assets-sourcebook">2.4 CASS — Client Assets Sourcebook</h3>
+<p>CASS applies primarily to platforms (as custodians of client assets and client money) but also to any DFM that holds or controls client money in the course of MiFID investment services.</p>
+<p><strong>CASS 6</strong> covers safe custody of client assets (securities and other financial instruments). Platforms must register assets in the name of a nominee company, segregate client assets from firm assets, perform regular reconciliations, and maintain a CASS Resolution Pack sufficient to enable rapid return of assets in the event of firm failure.</p>
+<p><strong>CASS 7</strong> covers client money — cash held pending investment or in the course of investment activity. Strict segregation (statutory trust), daily reconciliation, and acknowledgment letters from banks are required.</p>
+<p>CASS compliance is audited annually by an independent external auditor (the CASS audit). Breaches of CASS — even technical breaches — carry significant FCA enforcement risk. The FCA has brought major CASS enforcement cases against Beaufort Securities, Barings, and several banks. The audit and ongoing reconciliation process generates substantial compliance workload for platform operations teams.</p>
+<p>The FCA extended CASS obligations to certain payment and e-money firms under PS25/12 (implementation date 7 May 2026), signalling that the FCA is expanding CASS scope, not contracting it.</p>
+<h3 id="25-priips-kids-and-the-cci-regime">2.5 PRIIPs KIDs and the CCI Regime</h3>
+<p>Under EU PRIIPs (Packaged Retail and Insurance-based Investment Products) regulations, manufacturers of investment products were required to produce Key Information Documents (KIDs). Post-Brexit, the UK retained this obligation but has now introduced its own framework: <strong>Consumer Composite Investments (CCIs)</strong>.</p>
+<p>The CCI regime, which takes effect with optional early adoption from April 2026 and becomes mandatory from <strong>8 June 2027</strong>, represents a clear point of UK-EU divergence. The risk indicator methodology, cost calculation approach, and document presentation differ between the UK CCI and the EU PRIIPs KID. Firms operating in both jurisdictions must maintain parallel disclosure documents using different methodologies.</p>
+<p>For DFMs running model portfolios (which are packaged products), the CCI regime adds a documentation layer: they must produce CCIs for their MPS/model portfolio products marketed to retail investors via UK advisers. Ensuring CCI accuracy, keeping them updated after material changes, and demonstrating that advisers are using them correctly is an active compliance task.</p>
+<h3 id="26-consumer-duty-prin-2a">2.6 Consumer Duty (PRIN 2A)</h3>
+<p>The Consumer Duty (PS22/9, in force from 31 July 2023 for open products, 31 July 2024 for closed products) is the most operationally significant recent regulatory change for wealth platforms and DFMs. It applies to all firms in the distribution chain with a &quot;material influence&quot; over retail client outcomes — which explicitly includes DFMs operating MPS and platforms providing custody services to advisers serving retail clients.</p>
+<p><strong>The four outcome rules:</strong></p>
+<ol>
+<li><strong>Products and services outcome</strong> — The DFM/platform&#x27;s products must be designed to meet the needs of an identified target market and not cause harm to customers outside that target market.</li>
+<li><strong>Price and value outcome</strong> — Prices charged must be reasonable relative to overall benefits. The FCA&#x27;s September 2024 review of fair value frameworks found many assessments inadequate — firms relying on price benchmarking rather than genuine cost-benefit analysis.</li>
+<li><strong>Consumer understanding outcome</strong> — Communications and disclosures must enable retail customers to make informed decisions. For DFMs, this includes MPS factsheets, periodic reports, and any platform-hosted documentation.</li>
+<li><strong>Consumer support outcome</strong> — Customers must be able to obtain the support they need when they need it.</li>
+</ol>
+<p><strong>Annual board reporting obligation (PRIN 2A.8.3–5R):</strong> Firms must produce an annual Consumer Duty board report assessing whether they are delivering good outcomes. The FCA expects this to include: quantitative MI on outcomes, evidence of monitoring processes, remediation actions, and forward-looking commitments. The FCA published observations on board reports in April 2026, noting that many still lack sufficient challenge and data granularity. Reports must be reviewed and approved by the board — not rubber-stamped.</p>
+<p><strong>FCA Dear CEO focus on DFM fees (2024):</strong> In its Consumer Duty-related Dear CEO letter to the consumer investments portfolio (which includes DFMs), the FCA specifically highlighted DFM fee stacks — the layering of platform charges, DFM charges, and adviser charges — as a fair value concern. The FCA is scrutinising whether the total cost of a DFM/platform/adviser proposition represents fair value, and whether ongoing charges are commensurate with the service delivered. This is forcing DFMs to produce more granular fee justification documentation.</p>
+<p><strong>Consumer Duty and MPS:</strong> The FCA has indicated that DFMs running MPS have additional obligations around target market definitions for model portfolios, ongoing performance monitoring against stated objectives, and documentation demonstrating that the MPS continues to deliver good outcomes for clients at different life stages and risk appetites. Consumer Duty has been cited by DFMs themselves as a driver of increased MPS uptake — advisers outsourcing to MPS can leverage the DFM&#x27;s Consumer Duty infrastructure rather than building their own.</p>
+<h3 id="27-smcr-senior-managers-and-certification-regime">2.7 SM&amp;CR — Senior Managers and Certification Regime</h3>
+<p>SM&amp;CR applies to all FCA-authorised firms. For DFMs and platforms, the &quot;enhanced&quot; firm classification typically applies, meaning:</p>
+<ul>
+<li><strong>Senior Management Functions (SMFs):</strong> CEO (SMF1), Chief Finance (SMF2), Executive Directors (SMF3), Non-Executive Chair (SMF9), Chief Risk (SMF4), Head of Compliance (SMF16), MLRO (SMF17), and — for enhanced firms — Other Overall Responsibility (SMF18). Each SMF holder must be approved by the FCA and must have a Statement of Responsibilities (SOR).</li>
+<li><strong>Certification Regime:</strong> Individuals who are not SMF holders but could cause significant harm (e.g. portfolio managers, proprietary traders, senior advisers) must be certified as fit and proper annually by the firm. This creates significant HR and compliance process overhead — typically hundreds of certifications per year for a mid-sized DFM.</li>
+<li><strong>Conduct Rules:</strong> Apply to all staff in regulated roles and must be communicated, trained on, and monitored.</li>
+</ul>
+<p>The FCA and HM Treasury published a review of SM&amp;CR in 2024–2025, with CP25/21 (Consultation Paper) proposing reforms including removal of most of the Certification Regime from legislation. The review is ongoing as of May 2026. The reforms will not eliminate the underlying fitness-and-propriety obligations but may simplify the administrative burden.</p>
+<p>SM&amp;CR creates significant annual compliance workload: fitness and propriety assessments, SOR updates when responsibilities change, Regulatory Reference requests when staff leave, and Conduct Rule training records. This is an area where Amaea&#x27;s document-tracking and audit-trail capabilities directly translate.</p>
+<h3 id="28-dfm-specific-discretionary-mandate-suitability-cascade-periodic-statements">2.8 DFM-Specific: Discretionary Mandate, Suitability Cascade, Periodic Statements</h3>
+<p>The defining feature of DFM regulation is the <strong>discretionary mandate</strong> — the written agreement between DFM and client (or, in the case of MPS, between DFM and adviser, structured around agreed risk parameters) that defines investment objectives, risk tolerance, restrictions, and reporting requirements. The mandate must be reviewed when client circumstances change and at least annually.</p>
+<p>The <strong>suitability cascade</strong> creates a compliance chain: the adviser assesses the end client&#x27;s suitability for a DFM mandate (or MPS portfolio), the DFM manages within the agreed parameters, and the platform provides custody. If the mandate parameters change (e.g. the DFM changes the asset allocation in a model portfolio), advisers must be notified and may need to re-assess suitability for affected clients. This chain is frequently poorly documented — the DFM may send a generic &quot;material change&quot; notice; the adviser may or may not act on it; the platform may not have visibility of what action was taken. The FCA views this chain as a whole — responsibility does not disappear at any link.</p>
+<p><strong>Periodic statements</strong> (COBS 16A.4): DFMs must provide periodic reports to retail clients (or their advisers) at least annually, or more frequently depending on the portfolio type and client agreement. These must include the portfolio&#x27;s value, changes in value, income received, costs charged, and performance data.</p>
+<h3 id="29-platform-specific-cass-charges-disclosure-transfer-service-standards">2.9 Platform-Specific: CASS, Charges Disclosure, Transfer Service Standards</h3>
+<p><strong>Platform charges disclosure:</strong> Following the FCA&#x27;s Investment Platforms Market Study (MS17/1, final report March 2019), platforms were required to publish clear information about their charges, including exit charges. The FCA consulted on restricting administrative exit fees (CP19/12) and published final rules (PS19/29, December 2019). Platform switching (re-registration of assets) remains a significant operational and compliance challenge — delays and charges remain a consumer harm concern that the FCA continues to monitor.</p>
+<p><strong>Transfer service standards:</strong> The FCA mandated that platforms implement Origo&#x27;s Transfer Agency standards to speed up in-specie transfers. Execution against these standards is patchy; operational resilience failures during transfers are a recurring supervision topic.</p>
+<p><strong>CASS audit:</strong> Platforms are required to commission an annual CASS audit from an external auditor. The results are reported to the FCA. This is a significant cost — typically £100k–£500k/year for a large platform — and generates extensive documentation requirements.</p>
+<h3 id="210-operational-resilience-ps213">2.10 Operational Resilience (PS21/3)</h3>
+<p>PS21/3 (Building Operational Resilience, published March 2021) required FCA-authorised firms to:</p>
+<ol>
+<li>Identify their <strong>important business services</strong> (the services that, if disrupted, would cause significant harm to consumers or market integrity).</li>
+<li>Set and document <strong>impact tolerances</strong> for each (maximum disruption duration and scale).</li>
+<li>Map the people, processes, technology, facilities, and information underpinning each service.</li>
+<li>Conduct scenario testing to ensure they can remain within tolerances.</li>
+</ol>
+<p>The <strong>transition period ended 31 March 2025.</strong> From this date, firms must be able to demonstrate they can remain within impact tolerances. For platforms, important business services include: custody and asset valuation, transaction processing, client reporting, and adviser portal access. For DFMs: portfolio management and trading, client reporting, mandate management, and compliance monitoring. The documentation burden — business service maps, testing records, scenario outputs — is substantial and ongoing.</p>
+<h3 id="211-outsourcing-rules-sysc-8-fg165">2.11 Outsourcing Rules (SYSC 8 / FG16/5)</h3>
+<p>SYSC 8 requires firms to maintain appropriate systems and controls when outsourcing activities. FG16/5 (FCA Guidance on Outsourcing) sets expectations for due diligence, contractual protections, ongoing monitoring, and exit planning for outsourced arrangements. DFMs outsource portfolio administration, custody, and sometimes compliance monitoring. Platforms outsource technology infrastructure, custody (some via FNZ, GBST, or BFDS), and customer service. The FCA&#x27;s 2024 consultation on critical third-party (CTP) oversight (DORA-adjacent, CP24/2) is extending operational resilience expectations to technology outsourcers.</p>
+<h3 id="212-anti-money-laundering-and-trs">2.12 Anti-Money Laundering and TRS</h3>
+<p>DFMs and platforms are subject to the Money Laundering, Terrorist Financing and Transfer of Funds (Information on the Payer) Regulations 2017 (MLRs) as amended. This includes customer due diligence (CDD), enhanced due diligence (EDD) for higher-risk clients, transaction monitoring, and SARs filing. The <strong>Trust Registration Service (TRS)</strong> requires registration of most express trusts (including bare trusts, which many platform portfolios use as nominee structures), adding an annual administrative burden.</p>
+<h3 id="213-recent-enforcement-and-dear-ceo-letters">2.13 Recent Enforcement and Dear CEO Letters</h3>
+<p><strong>Consumer Duty / DFM fees (2024):</strong> The FCA&#x27;s Dear CEO letter to the consumer investments portfolio specifically called out DFM fee stacks as a fair value risk. Firms were told to review whether total charges (platform + DFM + adviser) are reasonable, and to document this analysis in their fair value assessments. Firms that cannot demonstrate fair value at the total charge level face remediation obligations.</p>
+<p><strong>Cash retention (2024):</strong> The FCA wrote to platforms about their practice of retaining interest on client cash balances held on platform — characterised as a form of &quot;double-dipping&quot; where platform charges clients fees and also retains interest on cash. Several platforms have restructured their cash propositions in response.</p>
+<p><strong>Platform exit fees:</strong> The FCA&#x27;s market study remedies required platforms to make switching easier and more transparent. The FCA retains enforcement powers over exit fees that are disproportionate or act as a barrier to switching. This remains a live supervision topic.</p>
+<p><strong>Consumer Duty board reports (2025–2026):</strong> The FCA published good and poor practice observations in April 2026. Key criticisms: insufficient granularity of MI, boards rubber-stamping rather than challenging, and reports not covering all distribution chains (e.g. DFMs not considering the adviser-client leg of their value chain).</p>
+<hr/>
+<h2 id="3-market-sizing-tam-sam-som">3. Market Sizing — TAM / SAM / SOM</h2>
+<h3 id="31-total-addressable-market">3.1 Total Addressable Market</h3>
+<p><strong>UK Adviser Platforms:</strong> Total UK adviser platform AUA reached approximately <strong>£739bn by Q4 2025</strong>, up from ~£616bn at end-2024 (a ~20% increase). Gross sales to advised platforms hit a record <strong>£93bn in 2025</strong>. The market has approximately 20–30 meaningful platforms operating at scale, with a highly concentrated top tier: the top five platforms (Quilter, Transact, Aviva, Nucleus, AJ Bell Investcentre) account for a disproportionate share of net flows. The long-term trend is consolidation — advisers are using fewer platforms, and smaller platforms are being acquired or exiting.</p>
+<p>The Lang Cat&#x27;s analysis (2025) puts total platforms available to advisers at around 40 across all categories, though fewer than 15 have AUA above £5bn.</p>
+<p><strong>UK DFMs and MPS providers:</strong> The broader UK private wealth management market (including all wealth managers, not just FCA-authorised DFMs) holds over <strong>£1.1 trillion in AUM</strong> (Money Marketing, 2024). The Investment Association reports the UK investment management industry reached <strong>£10 trillion AUM</strong> in 2024 (including institutional), reflecting that DFMs are a subset.</p>
+<p>The <strong>MPS market</strong> specifically reached ~<strong>£123bn AUA</strong> as at March 2024, growing 28% in the year. By September 2024, growth was 36% year-on-year. NextWealth&#x27;s MPS Proposition Comparison Report 2024 estimates over 200 wealth managers running MPS. DFMs/MPS providers now account for roughly a fifth (20%) of UK adviser platform assets.</p>
+<p><strong>Number of FCA-authorised DFMs:</strong> The FCA&#x27;s Freedom of Information disclosures (including the May 2025 release on authorised asset management firms and permissions) provide firm lists, but exact counts require direct download. Based on FCA Financial Services Register data, approximately 1,500–2,000 firms hold &quot;managing investments&quot; permissions, though the number running retail-client-facing discretionary mandates at meaningful scale is far lower — estimated at 200–400 by industry sources, with perhaps 30–50 of material size for Amaea&#x27;s purposes.</p>
+<p><strong>Note on data gaps:</strong> Precise firm counts and market share data for DFMs are not publicly consolidated. Platforum and NextWealth publish subscriber-only reports with more granular data. The FCA&#x27;s Register lists permissions but does not segment by AUM size or client type.</p>
+<h3 id="32-serviceable-addressable-market">3.2 Serviceable Addressable Market</h3>
+<p>Amaea&#x27;s relevant SAM within this sector (firms of appropriate size and regulatory complexity to need a compliance SaaS platform):</p>
+<ul>
+<li><strong>Large platforms (&gt;£50bn AUA):</strong> ~5–7 firms. Compliance teams of 30–100+. Existing bespoke tools. Sales cycle 12–24 months. Enterprise-only pricing.</li>
+<li><strong>Mid-tier platforms (£5–50bn AUA):</strong> ~8–12 firms. Compliance teams of 10–30. Mix of bespoke and off-the-shelf tools. Best initial entry point.</li>
+<li><strong>Specialist/tech platforms (&lt;£5bn AUA, technology-forward):</strong> ~10–15 firms. Lean compliance teams. High openness to SaaS tools. Smaller contract value.</li>
+<li><strong>Large DFMs (&gt;£10bn AUM):</strong> ~10–15 firms. Established compliance functions. Enterprise pricing.</li>
+<li><strong>Mid DFMs (£1–10bn AUM):</strong> ~30–50 firms. Compliance teams of 3–10. Scale/Enterprise pricing. Best realistic entry point.</li>
+<li><strong>Boutique DFMs (&lt;£1bn AUM):</strong> ~100–150 firms. Often 1–2 compliance staff. Professional/Scale pricing. Many are networks members or part of larger groups.</li>
+</ul>
+<p><strong>SAM estimate (Amaea&#x27;s realistic target universe by 2031–2032):</strong> approximately 80–120 firms across all categories.</p>
+<h3 id="33-serviceable-obtainable-market">3.3 Serviceable Obtainable Market</h3>
+<p>Conservative 5-year penetration estimate (2031–2036):</p>
+<ul>
+<li>Penetrating 10–15% of the SAM (8–18 firms) in years 1–3 post-launch is realistic given Amaea&#x27;s IFA track record, brand recognition in the FCA regulatory community, and specialist positioning.</li>
+<li>At blended Enterprise pricing of £8k–£15k/month, 10–15 firms = <strong>~£1M–£2.7M ARR</strong> from this sector.</li>
+<li>Upside scenario (25 firms, £12k/month average): ~£3.6M ARR.</li>
+</ul>
+<p>This is not the largest sector Amaea will enter post-IFA, but it is the most strategically important as a reference case — wealth firms with compliance credibility validate Amaea for the broader regulated financial services market.</p>
+<hr/>
+<h2 id="4-customer-segmentation">4. Customer Segmentation</h2>
+<h3 id="tier-1-largest-platforms-50bn-aua">Tier 1: Largest Platforms (&gt;£50bn AUA)</h3>
+<p>Firms: Aviva Platform (~£198bn group, ~£50bn adviser), Quilter Platform (~£104bn), AJ Bell Investcentre (~£86bn FY24), Aegon Platform (~£115bn), Abrdn Wrap + Elevate (~£75bn combined), Fidelity Adviser Solutions.</p>
+<p>Characteristics: Large internal compliance teams (30–100 staff). Multiple existing technology systems including bespoke-built compliance tools, Bloomberg and FactSet data feeds, risk systems, and regulatory reporting platforms. Long procurement cycles (12–24 months, involving Legal, Risk, IT, and Procurement as well as Compliance). Budget owner is typically the Chief Compliance Officer (CCO) or Chief Operating Officer (COO), with board-level sign-off required for new vendor relationships.</p>
+<p>Amaea positioning: Enterprise/custom only. Must be positioned not as a replacement for existing tools but as a specialist AI layer — Consumer Duty MI, outcome monitoring, board reporting automation — that supplements the existing stack. Will require compliance-grade security, ISO 27001 or equivalent, data residency in UK, and willingness to sign bespoke DPA and MSA. Proof of concept with a smaller firm in the same group is the entry strategy.</p>
+<p>Sales approach: This tier is effectively a Year 3+ play post-sector-launch. Do not open these conversations without at least 2–3 signed mid-tier platform or DFM customers as reference.</p>
+<h3 id="tier-2-mid-tier-platforms-550bn-aua">Tier 2: Mid-Tier Platforms (£5–50bn AUA)</h3>
+<p>Firms: Nucleus (~£35bn), Transact (~£55bn — large for this tier but compliance team structure is leaner than the insurance-owned platforms), Embark (now folded into Quilter), Praemium, Parmenion (owned by Abrdn), True Potential.</p>
+<p>Characteristics: Compliance teams of 10–25. More agile procurement. CCO often has budget authority up to £100k/year without board approval. Openness to external SaaS — these firms have used RegTech vendors for specific point solutions (FundApps for position limits, ACA for compliance testing). 6–12 month sales cycle.</p>
+<p>Amaea positioning: Enterprise tier. Specifically: Consumer Duty annual outcome monitoring workflow, automated board pack generation from compliance MI, MPS target market governance, and suitability cascade audit trails. These are the firms that have the problem clearly articulated but lack the internal resources to build bespoke solutions.</p>
+<p>This is <strong>Amaea&#x27;s primary launch segment</strong> for wealth platforms.</p>
+<h3 id="specialist-and-technology-forward-platforms">Specialist and Technology-Forward Platforms</h3>
+<p>Firms: Seccl (Octopus-owned platform infrastructure), Hubwise (SS&amp;C), Fundment, Wealthtime, Novia, Time4Advice.</p>
+<p>Characteristics: Typically smaller AUA, technology-first culture, lean compliance teams (2–5 staff), often use off-the-shelf compliance tools or rely on outsourced compliance consultancy. Price-sensitive but fast-moving. Some (Seccl, Hubwise) provide white-label platform infrastructure to other businesses, meaning their own compliance needs differ from those serving retail clients directly.</p>
+<p>Amaea positioning: Scale tier or lower Enterprise. Higher volume, lower value. Useful for building track record and case studies within the platforms segment. FundApps-style approach — win at the innovative end, then use as reference for the larger incumbents.</p>
+<h3 id="large-dfms-10bn-aum">Large DFMs (&gt;£10bn AUM)</h3>
+<p>Firms: Rathbones (~£109bn FUMA), Evelyn Partners (~£59bn), RBC Brewin Dolphin (~£57bn), Cazenove Capital / Schroders Wealth (~£72bn group), Quilter Cheviot, Charles Stanley (now Raymond James, acquired 2022), Investec W&amp;I (merged into Rathbones September 2023).</p>
+<p>Characteristics: Sophisticated compliance functions. Heads of Compliance with 5–20-person teams. Multiple existing RegTech vendors. Buy decisions involve CCO, CRO, General Counsel, and sometimes the board. 12–18 month sales cycles. They have the budget but also the most entrenched processes.</p>
+<p>Amaea positioning: Must be positioned around a specific regulatory pain — Consumer Duty board reporting automation and MPS governance are the sharpest wedges. Not a full compliance platform play — too competitive at that level. Start with a point-solution, expand over time.</p>
+<h3 id="mid-dfms-110bn-aum">Mid-DFMs (£1–10bn AUM)</h3>
+<p>Firms: Brooks Macdonald (~£18bn FUM), Tatton Asset Management (~£19bn AUM), Sarasin &amp; Partners, Waverton Investment Management, Heartwood (part of Handelsbanken), 7IM, Close Brothers Asset Management, Smith &amp; Williamson (now Evelyn Partners), Vermeer Investment Management, Momentum Global Investment Management.</p>
+<p>Characteristics: Compliance teams of 3–10. CCO may be one of two senior compliance staff. More likely to use external compliance consultancy support (Bovill, FSCom, Complyport). More open to SaaS than Tier 1/Tier 2 DFMs. Budget authority often at CCO level up to £50k/year. 6–9 month sales cycle.</p>
+<p>This is <strong>Amaea&#x27;s primary launch segment for DFMs</strong> — large enough to have a meaningful compliance function and real ongoing need, small enough to make decisions without 18-month procurement cycles.</p>
+<h3 id="boutique-dfms-1bn-aum">Boutique DFMs (&lt;£1bn AUM)</h3>
+<p>Firms: Multiple, including smaller regional discretionary managers, family office managers, multi-family office businesses, and boutique investment managers. Many are PIMFA members or affiliates.</p>
+<p>Characteristics: 1–2 compliance staff or reliant on a part-time compliance consultant. Often part of a network or with a shared compliance arrangement. Price-sensitive. Similar profile to the IFA market in terms of decision-making speed and openness to new tools.</p>
+<p>Amaea positioning: Professional/Scale tier. High volume, lower value. The IFA playbook applies here — Founders Programme equivalent, PIMFA channel partnership.</p>
+<h3 id="mps-only-providers">MPS-Only Providers</h3>
+<p>Firms: Tatton Investment Management (largest on-platform MPS provider, ~1,170 IFA firms using it), Timeline (Goals-Based Investing, founded by Abraham Okusanya), Dimensional Fund Advisors (model portfolios distributed via advisers), Vanguard (model portfolios), Parmenion.</p>
+<p>Characteristics: Distinctive model — they don&#x27;t custody assets; they provide model portfolio investment management services distributed through adviser firms and platforms. Their compliance obligations focus on: target market definition, fair value assessment for MPS charges, ongoing performance monitoring, and suitability cascade documentation with the adviser. They have smaller compliance teams than full-service DFMs but specific, acute pain around Consumer Duty and MPS governance.</p>
+<p>Amaea positioning: Scale/Enterprise depending on size. Acute product fit around MPS target market governance, Consumer Duty outcome monitoring, and CCI/PRIIPs documentation workflows. Tatton in particular (~1,170 IFA firms in its distribution chain) would generate multi-firm ripple effects — if Tatton uses Amaea for its Consumer Duty compliance, those IFA firms are also natural Amaea customers.</p>
+<hr/>
+<h2 id="5-sample-target-firms">5. Sample Target Firms</h2>
+<p>The following 30 firms are named research targets. AUA/AUM figures are most recent publicly available data (2024–2025). Amaea fit rating: H = High, M = Medium, L = Low (reflecting size of compliance team, regulatory pain acuity, and likely receptiveness to SaaS).</p>
+<h3 id="wealth-platforms">Wealth Platforms</h3>
+<table>
+<thead><tr>
+<th>#</th>
+<th>Firm</th>
+<th>AUA (approx.)</th>
+<th>Notes</th>
+<th>Amaea Fit</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Aviva Platform</td>
+<td>~£198bn (group) / ~£50bn adviser</td>
+<td>Insurance-owned, very large compliance function. Entry via Consumer Duty board reporting automation. Long sales cycle.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Quilter Platform</td>
+<td>~£104bn AUA (H1 2025)</td>
+<td>Part of Quilter group (also runs Quilter Cheviot DFM and advice). Compliance is centralised at group level — one sale could span platform + DFM.</td>
+<td>H</td>
+</tr>
+<tr>
+<td>3</td>
+<td>AJ Bell Investcentre</td>
+<td>~£86bn AUA (FY24)</td>
+<td>Listed company. Adviser platform + D2C. Compliance team is mid-sized. Consumer Duty outcome monitoring is an acute need.</td>
+<td>H</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Transact (IntegraFin)</td>
+<td>Not publicly broken out</td>
+<td>Lang Cat&#x27;s most popular adviser platform 2025. Highest NPS of any platform (+60%). Listed (IHP). Lean, adviser-focused culture.</td>
+<td>H</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Aegon Platform</td>
+<td>~£115bn AUA</td>
+<td>Standard Life acquisition announced; transition will create compliance complexity. Good window for entry.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Abrdn Wrap + Elevate</td>
+<td>~£75bn combined</td>
+<td>Net outflows of £3.9bn in 2024; under pressure. Cost-efficiency focus. SaaS compliance tool fits the narrative.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Fidelity Adviser Solutions</td>
+<td>Not publicly broken out</td>
+<td>Global parent (Fidelity Investments). UK adviser platform ranked 7th (Lang Cat 2025). Large compliance function.</td>
+<td>L</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Nucleus</td>
+<td>~£35bn AUA</td>
+<td>Now part of James Hay Partnership group. Mid-tier but growing. Compliance team mid-sized. Consumer Duty is a top priority.</td>
+<td>H</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Parmenion</td>
+<td>Subsidiary of Abrdn</td>
+<td>MPS and platform hybrid. ~70 staff. More accessible compliance function.</td>
+<td>H</td>
+</tr>
+<tr>
+<td>10</td>
+<td>True Potential</td>
+<td>Not publicly disclosed</td>
+<td>D2C-heavy, large scale. Has own tech team.</td>
+<td>L</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Praemium</td>
+<td>~£9bn AUA (UK)</td>
+<td>Listed (Australia). Tech-forward adviser platform. Compliance is a growth constraint.</td>
+<td>H</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Seccl</td>
+<td>Platform infrastructure</td>
+<td>Octopus-backed. Infrastructure/custody provider to other firms. Compliance is embedded in client onboarding.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Hubwise (SS&amp;C)</td>
+<td>Not publicly disclosed</td>
+<td>White-label platform for advice firms. Compliance obligations are platform-level, not advice-level.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Fundment</td>
+<td>Growing</td>
+<td>Top-four by adviser recommendation (Lang Cat 2025). Young platform, lean compliance team.</td>
+<td>H</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Wealthtime</td>
+<td>Not publicly disclosed</td>
+<td>Mid-tier. Used by national and regional IFA firms.</td>
+<td>H</td>
+</tr>
+</tbody></table>
+<h3 id="dfms-and-mps-providers">DFMs and MPS Providers</h3>
+<table>
+<thead><tr>
+<th>#</th>
+<th>Firm</th>
+<th>AUM (approx.)</th>
+<th>Notes</th>
+<th>Amaea Fit</th>
+</tr></thead><tbody>
+<tr>
+<td>16</td>
+<td>Rathbones Group</td>
+<td>~£109bn FUMA (2024)</td>
+<td>Includes former Investec W&amp;I UK. Largest listed UK DFM. Compliance function is large and sophisticated. Long sales cycle.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Evelyn Partners</td>
+<td>~£59bn AUM</td>
+<td>Merger of Tilney and Smith &amp; Williamson. FCA-authorised for advice + DFM + professional services. Complex group compliance.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>18</td>
+<td>RBC Brewin Dolphin</td>
+<td>~£57bn AUM</td>
+<td>Acquired by Royal Bank of Canada 2022. Integration compliance complexity. MPS is ~£7.5bn of AUM.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Cazenove Capital</td>
+<td>Part of Schroders Wealth (~£72bn group)</td>
+<td>Premium DFM. ESG-heavy. Schroders group compliance. Long sales cycle.</td>
+<td>L</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Quilter Cheviot</td>
+<td>~£30bn AUM</td>
+<td>Part of Quilter group. Compliance aligned with Quilter Platform — group sale opportunity.</td>
+<td>H</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Brooks Macdonald</td>
+<td>~£18bn FUM (FY24)</td>
+<td>Mid-DFM, listed. Growing MPS business (13% inflows annualised H1 FY25). Consumer Duty + CCI adaptation are acute needs.</td>
+<td>H</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Charles Stanley (Raymond James)</td>
+<td>~£25bn AUM</td>
+<td>Acquired by Raymond James UK in 2022. Integration compliance burden.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Tatton Asset Management</td>
+<td>~£19bn AUM</td>
+<td>Largest on-platform MPS provider. 1,170 IFA firms in distribution chain. Compliance team is relatively lean for scale. Strategic adjacency to IFA.</td>
+<td>H</td>
+</tr>
+<tr>
+<td>24</td>
+<td>7IM</td>
+<td>~£20bn AUM</td>
+<td>Mid-DFM. Platform + DFM hybrid. Tech-forward.</td>
+<td>H</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Close Brothers Asset Management</td>
+<td>~£17bn AUM</td>
+<td>Mid-DFM. Part of Close Brothers Group. Well-established compliance.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>26</td>
+<td>Waverton Investment Management</td>
+<td>~£12bn AUM</td>
+<td>Boutique-to-mid DFM. Independent. HNW/UHNW focus.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>27</td>
+<td>Sarasin &amp; Partners</td>
+<td>~£20bn AUM</td>
+<td>Charity and private client DFM. ESG-specialist. Basel-based group.</td>
+<td>M</td>
+</tr>
+<tr>
+<td>28</td>
+<td>Timeline</td>
+<td>Not publicly disclosed</td>
+<td>Goals-based MPS. Founder-led (Abraham Okusanya). Highly regarded in the IFA/adviser community. Small compliance team.</td>
+<td>H</td>
+</tr>
+<tr>
+<td>29</td>
+<td>Dimensional Fund Advisors UK</td>
+<td>Not publicly disclosed</td>
+<td>Factor investing MPS distributed via advisers. Academic brand. Large US parent (DFA).</td>
+<td>L</td>
+</tr>
+<tr>
+<td>30</td>
+<td>Heartwood (Handelsbanken)</td>
+<td>~£7bn AUM</td>
+<td>Bank-owned DFM. Compliance aligned with bank parent.</td>
+<td>L</td>
+</tr>
+</tbody></table>
+<hr/>
+<h2 id="6-compliance-pain-points">6. Compliance Pain Points</h2>
+<p>This is the most commercially important section. The following pain points are the areas where Amaea can build specific product wedges into the DFM and platform market.</p>
+<h3 id="61-suitability-cascade-the-undocumented-chain">6.1 Suitability Cascade: The Undocumented Chain</h3>
+<p><strong>The problem:</strong> When an IFA recommends an MPS to a client, the adviser is responsible for suitability of the choice. The DFM is responsible for managing within agreed parameters. The platform provides custody. None of these three parties typically has a unified view of whether the chain is working correctly.</p>
+<p>When the DFM makes a material change to a model portfolio — changing asset allocation, substituting a fund, adding an asset class — they issue a change notice to advisers. Advisers are supposed to reassess client suitability. In practice, the DFM has no systematic way to confirm that advisers acted. The FCA has flagged this in multiple supervisory conversations and in its Consumer Duty work.</p>
+<p><strong>Where AI/automation adds value:</strong> Amaea can build a &quot;cascade confirmation&quot; workflow — the DFM issues a material change notice; Amaea tracks which advisers acknowledged it and which marked their client portfolios as reviewed. DFMs would pay for this because it reduces their Consumer Duty exposure. Advisers already using Amaea would benefit because the confirmation is automatic. This is a two-sided network effect.</p>
+<h3 id="62-consumer-duty-annual-board-report-high-effort-poor-quality">6.2 Consumer Duty Annual Board Report: High Effort, Poor Quality</h3>
+<p><strong>The problem:</strong> The Consumer Duty board report (PRIN 2A.8.3–5R) must be produced annually, reviewed by the board, and cover all material client outcomes. For a DFM with 5,000 clients across 200 adviser firms, assembling the MI is a multi-week manual exercise. The FCA&#x27;s April 2026 observations explicitly cited inadequate data granularity and lack of board challenge as systemic weaknesses. Compliance teams often produce reports that are long on narrative and short on data.</p>
+<p><strong>Where AI/automation adds value:</strong> Amaea&#x27;s board-pack generation capability (already built for IFAs) directly translates. For DFMs, the inputs change — portfolio performance by cohort, complaint rates by adviser, MPS target market drift analysis, fair value calculation — but the assembly, narrative generation, and workflow is identical. This is Amaea&#x27;s clearest product entry point into the DFM market.</p>
+<h3 id="63-mps-target-market-governance-and-cci-accuracy">6.3 MPS Target Market Governance and CCI Accuracy</h3>
+<p><strong>The problem:</strong> Consumer Duty requires DFMs running MPS to define and document target markets for each model portfolio, monitor whether clients in that portfolio match the target market, and update CCIs (replacing PRIIPs KIDs from June 2027) when material changes occur. With potentially dozens of model portfolios and thousands of underlying clients, this is a data problem as much as a compliance problem. Most DFMs are managing this manually in spreadsheets.</p>
+<p><strong>Where AI/automation adds value:</strong> Target market definition tracking, CCI change-management workflow (flagging when a material portfolio change triggers a CCI update obligation), and cohort-level outcome monitoring (e.g. which adviser firms have clients in a model portfolio who appear outside the target market).</p>
+<h3 id="64-10-depreciation-notification-legacy-process-debt">6.4 10% Depreciation Notification: Legacy Process Debt</h3>
+<p><strong>The problem:</strong> Even though the FCA paused enforcement of the 10% drop notification rule and is moving toward formal revocation, many DFMs built operational processes and client communication workflows around this obligation. Those processes are now in limbo — firms don&#x27;t want to dismantle them (in case the rule comes back or is replaced) but the cost of running them is significant.</p>
+<p><strong>Where AI/automation adds value:</strong> Portfolio value monitoring, threshold alerts, and client communication drafting are all automatable. Even if the specific 10% rule is revoked, the underlying obligation to monitor and communicate material portfolio events remains. Amaea can build a flexible portfolio monitoring module that supports whatever notification thresholds the firm sets.</p>
+<h3 id="65-best-execution-monitoring-rts-2728-gone-obligation-remains">6.5 Best Execution Monitoring: RTS 27/28 Gone, Obligation Remains</h3>
+<p><strong>The problem:</strong> RTS 27 and RTS 28 reports were removed for UK firms from December 2021. But the underlying COBS 11.2A obligation to take all sufficient steps to obtain the best possible result when executing orders remains and is actively supervised. DFMs executing trades through multiple brokers must demonstrate they have a best execution policy, that it is effective, and that they are monitoring execution quality. Without the RTS reporting framework, there is no standardised method for this — firms must build their own monitoring.</p>
+<p><strong>Where AI/automation adds value:</strong> Execution quality analysis by broker, time-weighted analysis, slippage measurement. This is more infrastructure-heavy than a pure compliance workflow — it requires integration with order management systems (OMS). A later-stage capability for Amaea, possibly Year 2+ post-sector-launch.</p>
+<h3 id="66-vulnerable-client-identification-at-scale">6.6 Vulnerable Client Identification at Scale</h3>
+<p><strong>The problem:</strong> FG21/1 (Guidance on the Fair Treatment of Vulnerable Customers) applies to DFMs and platforms as much as to advisers. For a DFM managing 5,000+ clients, identifying vulnerability signals (health, financial, life event, resilience) in a distributed adviser-client structure is extremely difficult. The DFM&#x27;s primary contact is the adviser, not the client — so vulnerability information must flow from adviser to DFM and be factored into how the DFM manages the portfolio.</p>
+<p><strong>Where AI/automation adds value:</strong> Amaea&#x27;s vulnerable client tracking (already built for IFAs) needs to extend to include a &quot;vulnerability notification from adviser to DFM&quot; workflow. The DFM version of this problem is about aggregating vulnerability signals from across the adviser network and ensuring portfolio management (and communications) account for them.</p>
+<h3 id="67-model-portfolio-governance-committee-and-change-management">6.7 Model Portfolio Governance: Committee and Change Management</h3>
+<p><strong>The problem:</strong> Most DFMs running MPS have an Investment Committee that governs model portfolio changes. The compliance team must document Committee decisions, ensure they are implemented consistently across all client accounts, issue appropriate client notices, update factsheets and CCIs, and file records for FCA inspection. This process is managed through a mix of email, SharePoint, and manual tracking.</p>
+<p><strong>Where AI/automation adds value:</strong> Committee decision logging, action tracking, version control of model portfolio documents, automated CCI update triggers, and audit trail for FCA review. This is a workflow automation problem that maps directly to Amaea&#x27;s document management and audit trail capabilities.</p>
+<h3 id="68-cass-reconciliation-exceptions-management-platforms">6.8 CASS Reconciliation Exceptions Management (Platforms)</h3>
+<p><strong>The problem:</strong> Platforms perform daily CASS reconciliations (client money and custody assets). Exceptions — mismatches between internal records and custodian/bank records — must be investigated and resolved promptly. A platform with £50bn AUA may generate hundreds of reconciliation exceptions per day, many of which are timing differences but some of which indicate genuine errors. Tracking exceptions, assigning them for investigation, recording resolution, and escalating unresolved items to the compliance function is an operational compliance burden.</p>
+<p><strong>Where AI/automation adds value:</strong> Exception triage (classify exception type, prioritise, assign), resolution tracking, escalation workflow, and trend analysis (recurring exception types by custodian or asset type). This is more operational than strategic compliance — it sits at the interface of operations and compliance. Amaea could build this as a module or partner with existing CASS platforms (e.g. Broadridge&#x27;s IntelliMatch).</p>
+<h3 id="69-conflicts-management">6.9 Conflicts Management</h3>
+<p><strong>The problem:</strong> DFMs managing client assets while also acting as distributors of their own funds (e.g. a DFM running model portfolios that include their own in-house funds) must document and manage conflicts of interest under SYSC 10. Consumer Duty adds pressure on this — the FCA is looking at whether in-house fund allocation is genuinely in the client&#x27;s interest or serves the firm&#x27;s commercial interest. Documentation and monitoring of conflicts disclosures, board review of the conflicts register, and annual conflicts policy review are all compliance obligations.</p>
+<p><strong>Where AI/automation adds value:</strong> Conflicts register management, policy update tracking, board reporting integration, and AI-assisted review of new conflicts as business changes occur.</p>
+<h3 id="610-smcr-certification-workflows">6.10 SM&amp;CR Certification Workflows</h3>
+<p><strong>The problem:</strong> Annual fitness and propriety assessments, conduct rule training records, and Regulatory Reference management across a DFM with 200 staff means hundreds of individual compliance records per year. Most firms manage this through HR systems with limited compliance integration.</p>
+<p><strong>Where AI/automation adds value:</strong> Annual certification workflow (issue assessment → gather evidence → CCO sign-off → record), Conduct Rule training completion tracking, and Regulatory Reference generation on staff departure. This overlaps with HR systems — partnership with existing HR/people platforms (Workday, etc.) is the integration strategy.</p>
+<hr/>
+<h2 id="7-competitive-landscape">7. Competitive Landscape</h2>
+<h3 id="71-specialist-regtech-vendors">7.1 Specialist RegTech Vendors</h3>
+<p><strong>FundApps</strong> — Positions compliance monitoring and reporting for global financial institutions. Core product is automated shareholding disclosure (threshold monitoring, notification generation). Strong in asset management. Less relevant to the DFM/MPS/platform compliance workflow Amaea targets — FundApps solves a different problem (position disclosure). Revenue model is annual subscription. UK-founded, B Corp.</p>
+<p><strong>ACA Group (ComplianceAlpha)</strong> — US-headquartered, dominant in US RIA compliance. UK presence through ComplianceAlpha platform and managed services. Strong in trade surveillance, marketing review, annual review processes. More directly competitive with Amaea for DFM compliance workflows but weaker on FCA-specific regulation and Consumer Duty. Sales model is enterprise; pricing is opaque but substantial.</p>
+<p><strong>Clausematch</strong> — Policy management and regulatory change management platform. Strength is regulatory mapping — connecting policy documents to rules. Less of a client-journey/outcome-monitoring tool. Strong in banking. Growing in wealth management.</p>
+<p><strong>MyComplianceOffice (MCO)</strong> — Compliance management platform covering personal account dealing, gifts and entertainment, outside business activities, conflicts, and CM&amp;CR certification. Well established in the City. More HR/conduct compliance than outcome monitoring. Some overlap with Amaea&#x27;s SM&amp;CR capabilities.</p>
+<p><strong>Sionic</strong> — Compliance consulting and technology. More of a managed service/consultancy than a pure SaaS play. Relevant competitor in the DFM consulting space.</p>
+<p><strong>Thistle Initiatives</strong> — UK compliance consultancy and outsourced compliance services. Provides compliance officers on an outsourced basis, particularly for smaller DFMs. Not a technology product — more a managed service.</p>
+<p><strong>Apex Group Compliance Services</strong> — Global compliance services provider. Similar to Thistle — outsourced compliance function, not a self-serve SaaS tool.</p>
+<h3 id="72-platform-incumbents-internal-tools">7.2 Platform Incumbents&#x27; Internal Tools</h3>
+<p>The largest platforms (Quilter, Aviva, Aegon) have bespoke internal compliance tools built on internal data warehouses. These are not products — they are internal applications built by in-house technology teams. They are not available to competitors and are not maintained as commercial products. They represent the status quo that mid-tier platforms and DFMs cannot afford to replicate. This is the market gap Amaea enters.</p>
+<h3 id="73-bloomberg-factset-compliance-modules">7.3 Bloomberg / FactSet Compliance Modules</h3>
+<p>Bloomberg&#x27;s compliance module (AIM — Asset Investment Manager) covers investment restriction monitoring, position limit checking, and trade surveillance. FactSet has comparable tools. Both are expensive (Bloomberg terminal costs £24k+/year; compliance modules are add-on costs). They focus on investment restrictions and surveillance, not conduct compliance or Consumer Duty outcomes. They serve the investment management function, not the compliance function per se.</p>
+<h3 id="74-compliance-consultancies">7.4 Compliance Consultancies</h3>
+<p><strong>Bovill Newgate</strong> (acquired by Ocorian in 2024) — Specialist FCA compliance consultancy with a wealth management practice. Provides regulatory advice, gap analysis, remediation support, and managed compliance services. Not a technology product. Pricing: typically £1,000–£3,000/day for advisory work; retained compliance support £3k–£10k/month. The consultancy model and the SaaS model can be complementary — Bovill Newgate might refer clients to Amaea or use Amaea as the technology layer for their managed service.</p>
+<p><strong>FSCom</strong> — Asset management compliance consultancy. Similar to Bovill. Strong in MiFID compliance, SM&amp;CR, and operational risk.</p>
+<p><strong>Sicsic Advisory</strong> — Boutique FCA compliance consultancy specialising in Consumer Duty. Founded by former FCA supervisors. Highly credible in the wealth management market. Similar partnership opportunity.</p>
+<p><strong>Compliance Solutions Strategies (CSS)</strong> — Global RegTech for asset managers and banks. More US/global than UK-DFM-focused.</p>
+<p><strong>Grant Thornton / KPMG Regulatory</strong> — Big-four adjacent compliance advisory. Engaged for large-scale regulatory change projects. Not SaaS competitors — but may recommend or endorse RegTech tools. Worth building relationships with regulatory advisory partners at these firms.</p>
+<h3 id="75-amaeas-wedge-in-this-sector">7.5 Amaea&#x27;s Wedge in this Sector</h3>
+<p>The competitive landscape is well-served at the extremes: large DFMs have internal tools or big-budget enterprise software; small boutiques have consultants. The gap is the mid-market — DFMs and platforms of £1bn–£30bn AUM/AUA whose compliance teams are too small to build internally but too sophisticated to rely purely on consultancy.</p>
+<p>Amaea&#x27;s specific wedges for this sector:</p>
+<ol>
+<li><strong>Consumer Duty board report automation</strong> — No existing tool generates a regulatory-grade, evidence-backed Consumer Duty board report from live compliance MI. This is the highest-pain, highest-urgency need across all firm types in 2024–2027.</li>
+<li><strong>MPS suitability cascade audit trail</strong> — No tool currently tracks the adviser confirmation loop when a DFM makes a model portfolio change. This is an untapped need with clear FCA supervisory interest.</li>
+<li><strong>FCA regulatory corpus depth</strong> — Amaea&#x27;s 11,645-chunk FCA knowledge base (and the target 50k+ chunks by 2030) is a moat that generic compliance tools cannot replicate. DFM compliance teams spend significant time on regulatory interpretation — Amaea&#x27;s AI can answer COBS 9A and Consumer Duty questions grounded in the actual FCA Handbook.</li>
+<li><strong>IFA-to-DFM bridge</strong> — Amaea&#x27;s IFA customer base creates a natural distribution channel. If 300+ IFA firms use Amaea, and many of those firms use Tatton, Brooks Macdonald, or RBC Brewin Dolphin as their DFM, there is a natural conversation: &quot;Your adviser network is already using Amaea — here&#x27;s a module for your compliance team.&quot;</li>
+</ol>
+<hr/>
+<h2 id="8-pricing-benchmarks">8. Pricing Benchmarks</h2>
+<h3 id="81-what-dfms-and-platforms-currently-pay">8.1 What DFMs and Platforms Currently Pay</h3>
+<p>RegTech and compliance spend in this sector is substantially higher than in the IFA market. Indicative benchmarks:</p>
+<ul>
+<li><strong>Bloomberg terminal + compliance module:</strong> £30k–£50k/year per user. Typically 5–20 users at a mid-DFM = £150k–£1M/year.</li>
+<li><strong>ACA ComplianceAlpha:</strong> Opaque pricing; industry estimates suggest £50k–£200k/year for a mid-sized asset manager, scaling to £500k+ for large firms.</li>
+<li><strong>FundApps:</strong> Annual subscription. Publicly available indicative pricing suggests €50k–€200k/year for most clients.</li>
+<li><strong>CASS platform/reconciliation tools (e.g. Broadridge IntelliMatch):</strong> £100k–£500k/year for large platforms.</li>
+<li><strong>Outsourced compliance consultancy (Bovill Newgate / FSCom):</strong> £3k–£10k/month retained; £1k–£3k/day project rates. Mid-DFM spending £5k–£8k/month = £60k–£96k/year.</li>
+<li><strong>KPMG / Grant Thornton Consumer Duty projects:</strong> £150k–£500k for a large-scale remediation or assessment project.</li>
+</ul>
+<p><strong>Key takeaway:</strong> DFMs and platforms are comfortable spending £50k–£500k/year on compliance tools and advisory. The IFA pricing model (Essentials £699/month) is irrelevant here. The floor for a meaningful DFM contract is £5,000/month.</p>
+<h3 id="82-recommended-amaea-pricing-strategy-for-this-sector">8.2 Recommended Amaea Pricing Strategy for this Sector</h3>
+<p><strong>Tier structure:</strong></p>
+<ul>
+<li><strong>Platform Standard:</strong> £5,000–£8,000/month. For specialist platforms and mid-tier platforms. Includes Consumer Duty outcome monitoring, board report generation, CASS exception workflow (basic). Annual contract.</li>
+<li><strong>DFM Professional:</strong> £4,000–£7,000/month. For mid-DFMs (£1–10bn AUM). Includes MPS governance module, suitability cascade tracking, Consumer Duty board report, SM&amp;CR certification workflow. Annual contract.</li>
+<li><strong>Enterprise (Platforms &gt;£20bn AUA or DFMs &gt;£10bn AUM):</strong> Custom. Floor £12,000/month, ceiling £30,000+/month depending on module scope, integration depth, and white-glove support.</li>
+<li><strong>Usage-based component:</strong> For firms with large adviser networks using the suitability cascade module — per-adviser-firm connection fee (e.g. £25–£50/month per connected adviser firm, minimum 50 firms).</li>
+</ul>
+<p><strong>Contract model:</strong> Annual minimum with quarterly invoicing. No month-to-month in this segment — compliance tools need to be embedded in firm processes and budgeted as a fixed cost. 3-year contracts with annual CPI escalator are standard at this tier.</p>
+<p><strong>Competitor anchoring:</strong> Position against the Bovill Newgate retained service (£5k–£10k/month for a compliance adviser who visits quarterly) plus the cost of manual Consumer Duty board report preparation (internal staff time: 2–3 weeks × 2–3 senior compliance staff = £15k–£30k of internal cost per report). Amaea at £5k/month = £60k/year vs. £96k consultancy + £30k internal cost = £126k equivalent. Clear ROI.</p>
+<hr/>
+<h2 id="9-go-to-market-notes">9. Go-to-Market Notes</h2>
+<h3 id="91-trade-associations">9.1 Trade Associations</h3>
+<p><strong>PIMFA (Personal Investment Management and Financial Advice Association)</strong> — The primary trade body for wealth managers and DFMs. ~200 full member firms. Annual Conference, Compliance Conference (specific compliance professional audience), Women&#x27;s Symposium, Regional Roadshows. PIMFA publishes technical guidance on Consumer Duty, SM&amp;CR, and MiFID implementation that compliance officers read. A PIMFA relationship (starting with a speaking slot at the Compliance Conference) is the highest-leverage early investment Amaea can make in this sector. The compliance conference audience is exactly Amaea&#x27;s buyer.</p>
+<p><strong>TISA (Tax Incentivised Savings Association)</strong> — Covers platforms and product providers. More operationally focused (transfer standards, data standards, ISA administration). Less relevant for compliance software but useful for platform relationship-building.</p>
+<p><strong>The Investment Association (IA)</strong> — Covers asset management broadly. DFMs are members but the IA&#x27;s primary constituency is institutional fund managers. Less directly relevant. Their regulatory output is read by large DFMs&#x27; compliance teams.</p>
+<h3 id="92-trade-press">9.2 Trade Press</h3>
+<ul>
+<li><strong>Citywire Wealth Manager</strong> — Essential. Daily/weekly publication read by every DFM compliance and investment professional. Getting Amaea coverage here (guest article, sponsored feature, or product review) is a top priority. Consumer Duty, MPS governance, and SM&amp;CR are recurring topics.</li>
+<li><strong>Portfolio Adviser</strong> — Covers the adviser-DFM interface. Read by compliance professionals at DFMs and by the adviser community. Guest articles on suitability cascade and Consumer Duty are natural fits.</li>
+<li><strong>Investment Week</strong> — Broad investment management trade press. More fund management than DFM-specific, but compliance topics get coverage.</li>
+<li><strong>FT Adviser</strong> — Adviser-facing but read by DFM distribution teams. Bridges the IFA-to-DFM market.</li>
+<li><strong>Money Marketing</strong> — IFA-facing but covers DFMs and platforms extensively. Amaea already has natural presence in this market.</li>
+</ul>
+<h3 id="93-conferences">9.3 Conferences</h3>
+<ul>
+<li><strong>PIMFA Annual Conference</strong> — Main event. Compliance is a track. Board-level DFM attendance. Target: speaking slot or exhibition stand from Year 2 post-sector-launch.</li>
+<li><strong>PIMFA Compliance Conference</strong> — Specialist. CCO and compliance team attendees. The single best conference for Amaea in this segment. Target for Year 1 post-sector-launch.</li>
+<li><strong>Money Marketing Interactive (MMI)</strong> — Broad adviser/platform conference. Good for brand building and adviser-to-DFM referral.</li>
+<li><strong>Citywire Wealth Manager events</strong> — Exclusive, high-quality audience of senior DFM professionals. Hard to access but valuable.</li>
+<li><strong>The Lang Cat events (Illuminate, New Model Adviser)</strong> — Platform-focused. Good for brand building in the platform segment.</li>
+<li><strong>NextWealth events</strong> — Research-led events on MPS and platform market. Attended by DFM distribution and compliance teams. Sponsoring research (e.g. MPS compliance survey) is a strong entry strategy.</li>
+</ul>
+<h3 id="94-linkedin-engagement">9.4 LinkedIn Engagement</h3>
+<p>Target profiles: CCOs and Heads of Compliance at UK DFMs and platforms; PIMFA technical staff; RegTech commentators; former FCA supervisors now in industry (this is a significant talent pool in the DFM/platform space). Producing original regulatory commentary on LinkedIn (Consumer Duty board report requirements, CCI implementation, SM&amp;CR reform) builds credibility with the buyer. Hasna&#x27;s background in financial planning compliance is credible but needs supplementing with DFM-specific content by 2029–2030 to establish authority in this segment.</p>
+<hr/>
+<h2 id="10-domain-expert-profile">10. Domain Expert Profile</h2>
+<p>Amaea needs at least one domain expert in this segment before launching — ideally brought on as an adviser or fractional team member 12–18 months before sector launch (i.e. by 2029–2030).</p>
+<p><strong>Ideal profile: ex-CCO of a mid-tier DFM or platform</strong></p>
+<ul>
+<li>Spent 5–10 years as CCO or Head of Compliance at a firm in the £5bn–£30bn AUM/AUA range</li>
+<li>Has lived through a Consumer Duty board report cycle, an FCA supervisory review, and a CASS audit</li>
+<li>Understands the suitability cascade problem from personal experience</li>
+<li>Has a network of CCOs and compliance professionals at peer firms</li>
+</ul>
+<p><strong>Alternative profile: ex-FCA wealth supervisor</strong></p>
+<ul>
+<li>3–5 years in the FCA&#x27;s Wholesale and Specialist Supervision directorate, covering DFMs or platforms</li>
+<li>Understands exactly what FCA supervision looks for in firm records</li>
+<li>Brings regulatory credibility that Amaea cannot build through marketing alone</li>
+</ul>
+<p><strong>Alternative profile: PIMFA technical policy lead (former or current)</strong></p>
+<ul>
+<li>Deep knowledge of the political and regulatory landscape for DFMs</li>
+<li>Existing relationships across the PIMFA member base</li>
+<li>Could provide introductions and speaking opportunities</li>
+</ul>
+<p><strong>Compensation approach:</strong> Equity-weighted advisory role rather than a salary hire at this stage. Offer 0.25%–0.5% advisor equity over 2 years, in exchange for 2–4 days/month of domain input, customer introductions, and content credibility. This is standard for sector-expansion advisory roles at early-stage SaaS businesses.</p>
+<p><strong>Red flags:</strong> Avoid candidates who have been directly involved in FCA enforcement actions (creates reputational risk); avoid candidates whose network is entirely in one firm rather than sector-wide; avoid candidates who want to build the product rather than validate market and open doors (that role is Milan&#x27;s).</p>
+<hr/>
+<h2 id="11-adjacency-to-uk-ifa-strongest-of-all-phase-2-sectors">11. Adjacency to UK IFA — Strongest of All Phase 2 Sectors</h2>
+<p>This is the correct first Phase 2 sector for Amaea to enter. The adjacency is stronger here than for any other planned expansion (mortgage, insurance, accountancy).</p>
+<h3 id="111-what-overlaps-completely">11.1 What Overlaps Completely</h3>
+<ul>
+<li><strong>FCA as regulator</strong> — same authority, same supervisory relationship, same enforcement risk culture</li>
+<li><strong>Consumer Duty (PRIN 2A)</strong> — same rule, same board reporting obligation, same outcome framework. Amaea&#x27;s Consumer Duty engine built for IFAs is 80% transferable</li>
+<li><strong>COBS suitability</strong> — COBS 9 (IFAs) and COBS 9A (DFMs) are adjacent chapters of the same sourcebook. The conceptual framework is identical; the DFM version adds the discretionary mandate layer</li>
+<li><strong>SM&amp;CR</strong> — identical regime. Amaea&#x27;s SM&amp;CR certification workflow is directly reusable</li>
+<li><strong>Vulnerable client obligations (FG21/1)</strong> — identical guidance, identical documentation requirements</li>
+<li><strong>UK MiFID II</strong> — IFAs are MiFID firms; so are DFMs. Same best execution, same transaction reporting, same client categorisation framework</li>
+<li><strong>ESG disclosures</strong> — SDR (Sustainability Disclosure Requirements) applies to DFMs running sustainable investment products. Amaea&#x27;s FCA corpus already includes SDR guidance</li>
+<li><strong>FCA knowledge base</strong> — Amaea&#x27;s 11,645-chunk FCA knowledge base covers COBS, CASS, SYSC, PRIN, and all Consumer Duty guidance. The DFM/platform-relevant content is already in the corpus</li>
+</ul>
+<h3 id="112-what-is-different">11.2 What is Different</h3>
+<ul>
+<li><strong>Discretionary vs. advisory mandate:</strong> DFMs make investment decisions without client approval for each trade. This changes the suitability obligation (less frequent, at mandate level rather than per-transaction) and creates unique audit trail requirements (investment decision rationale)</li>
+<li><strong>Firm size:</strong> DFMs and platforms are typically 10–100× larger than IFA firms. This means an internal compliance team already exists — Amaea is not the only compliance tool in the room. The sales conversation is &quot;how does Amaea augment your existing compliance infrastructure?&quot; rather than &quot;we are your compliance infrastructure.&quot;</li>
+<li><strong>Buyer profile:</strong> IFAs are bought by the principal/owner (typically the same person who is the adviser). DFMs and platforms are bought by the CCO, who reports to a board. The CCO evaluates tools professionally and has a formal procurement process. This is a harder, longer sale.</li>
+<li><strong>CASS complexity:</strong> Platforms have CASS obligations that do not exist in the IFA world. Amaea will need CASS-specific product development before launching into the platform segment — this is not trivial</li>
+<li><strong>Transaction reporting (MiFIR):</strong> DFMs executing trades must file transaction reports. This creates a compliance data pipeline that does not exist in pure advisory</li>
+<li><strong>Sales cycle:</strong> 1–3 months for IFA vs. 6–12 months for mid-DFM, 12–24 months for large platform</li>
+</ul>
+<h3 id="113-cross-sell-potential">11.3 Cross-Sell Potential</h3>
+<p>The most powerful GTM lever in this sector is Amaea&#x27;s IFA customer base. By 2030–2031, Amaea will have 500–1,000+ IFA firms as customers. Many of those firms use DFM services from Tatton, Brooks Macdonald, Quilter Cheviot, or RBC Brewin Dolphin. The pitch to the DFM is: &quot;Your adviser distribution network — the firms referring clients to you — already uses Amaea. Here is what their compliance data shows about your shared clients. Here is a DFM governance module that connects your compliance monitoring to theirs.&quot;</p>
+<p>Vertically integrated wealth groups (Quilter, St. James&#x27;s Place, Mattioli Woods, Evelyn Partners) span advice + platform + DFM under one regulatory umbrella. A group-level compliance sale to a firm like Quilter (which has an IFA network, a platform, and a DFM) could be worth £20k–£40k/month and serve all three functions. These group-level relationships are the strategic prize.</p>
+<hr/>
+<h2 id="12-risks-and-unknowns">12. Risks and Unknowns</h2>
+<h3 id="121-sale-cycle-length-is-the-primary-operational-risk">12.1 Sale Cycle Length is the Primary Operational Risk</h3>
+<p>A 12–24 month enterprise sales cycle in a segment Amaea is entering without established brand recognition is a significant cash flow risk for a bootstrapped business. Unlike the IFA market where Hasna&#x27;s personal network accelerates decisions, Amaea will have no pre-existing relationships at the CCO level in DFMs and platforms. Building those relationships takes 2–3 years of conference presence, content production, and advisory network cultivation. <strong>Do not attempt to enter this market without at least 3 years of IFA track record and a dedicated enterprise sales hire.</strong></p>
+<h3 id="122-buyer-profile-mismatch">12.2 Buyer Profile Mismatch</h3>
+<p>The IFA market buyer (the practice principal) makes fast, intuitive decisions. The DFM/platform buyer (the CCO, reporting to a board) makes slow, evidence-based decisions with extensive due diligence. The same product positioning and sales narrative that works for an IFA does not work for a CCO at a firm with £10bn AUM. A different sales playbook, a different pitch deck, a different set of reference customers, and probably a different sales hire are required. The risk is that Amaea tries to extend the IFA playbook into this segment and finds it ineffective.</p>
+<h3 id="123-competitive-density">12.3 Competitive Density</h3>
+<p>This is the most-served RegTech segment in UK financial services. ACA, Clausematch, MCO, and multiple consultancies already compete for DFM and platform compliance budgets. The large platform compliance teams are heavily sold to. Amaea&#x27;s advantage is Consumer Duty specificity and FCA regulatory depth — but those are advantages that well-resourced competitors can replicate faster in this market than in the IFA market. <strong>Amaea must arrive in this segment with something genuinely novel (the suitability cascade module, the AI-grounded Consumer Duty board report) rather than a horizontal compliance platform.</strong></p>
+<h3 id="124-build-cost-cass-and-mifid-rules-are-complex">12.4 Build Cost: CASS and MiFID Rules are Complex</h3>
+<p>Adding genuine CASS exception management, MiFIR transaction reporting support, and DFM-specific COBS 9A suitability documentation to Amaea&#x27;s product requires significant engineering investment. These are not extensions of existing IFA features — they are new compliance domains with different data models, different regulatory sources, and different operational workflows. A conservative estimate is 6–12 months of focused engineering for a credible DFM/platform product, on top of whatever IFA product development is ongoing. <strong>Do not underestimate the build cost. A &quot;lite&quot; version of the product risks losing credibility with DFM compliance professionals who have deep domain expertise.</strong></p>
+<h3 id="125-this-may-be-enterprise-only">12.5 This May Be Enterprise-Only</h3>
+<p>Given the compliance team size at even mid-tier DFMs (3–10 staff), the internal compliance infrastructure that already exists, and the price sensitivity of their procurement process (paradoxically, large compliance teams often scrutinise vendor ROI more carefully than small ones), it is possible that Professional and Scale tier pricing (£1,599–£2,199/month, IFA levels) is not viable here. The minimum viable contract for DFMs is likely £5,000/month, and for most platform customers above that. <strong>Amaea&#x27;s IFA pricing tiers are not relevant in this segment. Build Enterprise-only pricing and custom commercial terms from day one.</strong></p>
+<h3 id="126-unknown-fca-regulatory-direction">12.6 Unknown: FCA Regulatory Direction</h3>
+<p>The SM&amp;CR reform (CP25/21), the CCI transition, the onshored MiFID review, and the FCA&#x27;s ongoing Consumer Duty multi-firm reviews are all in flight. Any significant regulatory change could materially alter the compliance burden in this segment. The most favourable scenario for Amaea is continued regulatory complexity — Consumer Duty tightening, CCI implementation challenges, and SM&amp;CR reforms creating new documentation requirements. The unfavourable scenario is significant regulatory simplification that reduces compliance workload across the board. Based on FCA&#x27;s historical trajectory, the former is more likely.</p>
+<h3 id="127-unknown-consolidation-effects">12.7 Unknown: Consolidation Effects</h3>
+<p>The DFM and platform markets are consolidating. RBC acquired Brewin Dolphin; Investec W&amp;I merged with Rathbones; Standard Life is acquiring Aegon UK; multiple boutique DFMs have been absorbed by larger groups. Consolidation reduces the total number of buying entities (fewer but larger firms) and increases the internal compliance infrastructure at acquiring groups. This could reduce the addressable market for mid-tier DFM/platform sales while increasing the prize for large enterprise group sales.</p>
+<hr/>
+<h2 id="13-quarterly-update-log">13. Quarterly Update Log</h2>
+<table>
+<thead><tr>
+<th>Date</th>
+<th>Version</th>
+<th>Summary of Changes</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-05-16</td>
+<td>1.0</td>
+<td>Initial version created. Full market research, regulatory landscape, segmentation, 30 target firms, pain points, competitive landscape, GTM notes, and risk assessment.</td>
+</tr>
+</tbody></table>
+<hr/>
+<h2 id="14-sources-and-references">14. Sources and References</h2>
+<h3 id="fca-and-regulatory">FCA and Regulatory</h3>
+<ul>
+<li><a href="https://www.fca.org.uk/publications/policy-statements/ps22-9-new-consumer-duty">FCA — Consumer Duty (PS22/9)</a></li>
+<li><a href="https://handbook.fca.org.uk/handbook/COBS/9A/">FCA — COBS Suitability (COBS 9A)</a></li>
+<li><a href="https://handbook.fca.org.uk/handbook/CASS.pdf">FCA — CASS Client Assets Sourcebook</a></li>
+<li><a href="https://www.fca.org.uk/news/statements/10-per-cent-depreciation-notifications">FCA — 10% Depreciation Notifications Statement</a></li>
+<li><a href="https://www.fca.org.uk/publications/policy-statements/ps21-3-building-operational-resilience">FCA — PS21/3 Building Operational Resilience</a></li>
+<li><a href="https://www.fca.org.uk/publications/market-studies/ms17-1-investment-platforms-market-study">FCA — Investment Platforms Market Study MS17/1</a></li>
+<li><a href="https://www.fca.org.uk/publications/corporate-documents/consumer-duty-focus-areas">FCA — Consumer Duty Focus Areas 2024/25</a></li>
+<li><a href="https://www.fca.org.uk/publications/good-and-poor-practice/consumer-duty-findings-our-review-fair-value-frameworks">FCA — Consumer Duty: Findings from review of fair value frameworks</a></li>
+<li><a href="https://www.fca.org.uk/publications/good-and-poor-practice/consumer-duty-board-reports-good-practice-areas-improvement">FCA — Consumer Duty Board Reports: Good Practice</a></li>
+<li><a href="https://www.fca.org.uk/firms/senior-managers-certification-regime">FCA — SM&amp;CR Senior Managers and Certification Regime</a></li>
+<li><a href="https://www.fca.org.uk/publications/policy-statements/ps21-17-new-uk-prudential-regime-mifid-investment-firms">FCA — PS21/17: New UK Prudential Regime for MiFID Investment Firms (MIFIDPRU)</a></li>
+<li><a href="https://www.fca.org.uk/freedom-information/information-authorised-asset-management-firms-and-permissions-may-2025">FCA — Information on Authorised Asset Management Firms and Permissions (May 2025 FOI)</a></li>
+<li><a href="https://www.skadden.com/insights/publications/2024/02/the-new-cci-regulations">Skadden — New CCI Regulations and PRIIPs divergence</a></li>
+<li><a href="https://www.sidley.com/en/insights/newsupdates/2025/05/uk-eu-investment-management-update-may-2025">Sidley Austin — UK/EU Investment Management Update 2025</a></li>
+</ul>
+<h3 id="market-data-and-industry">Market Data and Industry</h3>
+<ul>
+<li><a href="https://www.professionaladviser.com/news/4525635/advised-platform-aua-climbs-739bn-q4-2025">Professional Adviser — Advised Platform AUA Q4 2025 (£739bn)</a></li>
+<li><a href="https://www.professionaladviser.com/news/4527997/advised-platforms-gross-sales-hit-93bn-2025">Professional Adviser — Advised Platform Gross Sales £93bn 2025</a></li>
+<li><a href="https://www.professionaladviser.com/news/4411040/adviser-platform-assets-gbp616-2bn-2024">Professional Adviser — Adviser Platform Assets £616.2bn 2024</a></li>
+<li><a href="https://www.moneymarketing.co.uk/news/the-lang-cat-reveals-most-popular-adviser-platforms-for-2025/">Money Marketing — The Lang Cat Most Popular Adviser Platforms 2025</a></li>
+<li><a href="https://www.moneymarketing.co.uk/news/uk-wealth-market-tops-1-1tn-on-outsourcing-boost/">Money Marketing — UK Wealth Market Tops £1.1tn on Outsourcing Boost</a></li>
+<li><a href="https://www.pimfa.co.uk/about-us/industry-statistics/">PIMFA — Industry Statistics</a></li>
+<li><a href="https://www.theia.org/news/press-releases/uk-investment-management-industry-reaches-new-heights-ps10-trillion-aum">The Investment Association — UK Investment Management Industry Reaches £10 Trillion AUM</a></li>
+<li><a href="https://nextwealth.co.uk/research/mps-asset-update-2024/">NextWealth — MPS Asset Update 2024</a></li>
+<li><a href="https://www.professionaladviser.com/news/4414767/uk-platform-mps-market-remarkable-growth">Professional Adviser — UK Platform MPS Market Remarkable Growth</a></li>
+<li><a href="https://www.platforum.co.uk/uk-adviser-platforms/solid-start-for-adviser-platform-in-2024">Platforum — Solid Start for Adviser Platform in 2024</a></li>
+</ul>
+<h3 id="named-firm-data">Named Firm Data</h3>
+<ul>
+<li><a href="https://media.quilter.com/search/2025/quilter-reports-adjusted-profit-of-100-million-and-h1-2025-core-net-inflows-of-4.5-billion-representing-8-of-opening-auma-annualised">Quilter H1 2025 Results — £141bn AUMA, Platform AUA £104.6bn</a></li>
+<li><a href="https://www.ajbell.co.uk/group/sites/ajbell.co.uk/files/accounts/FY24-results-presentation.pdf">AJ Bell FY24 Annual Results — Platform AUA £86.5bn</a></li>
+<li><a href="https://www.ajbell.co.uk/group/sites/ajbell.co.uk/files/accounts/FY25-results-presentation.pdf">AJ Bell FY25 Results — Platform AUA £103.3bn</a></li>
+<li><a href="https://www.professionaladviser.com/news/4409049/aegon-continues-platform-growth-trajectory-aua-hits-gbp115bn">Aegon Platform — AUA £115bn</a></li>
+<li><a href="https://citywire.com/new-model-adviser/news/abrdn-to-redouble-platform-efforts-after-advisers-pull-4bn-in-2024/a2458104">Abrdn — Platform AUA £75.2bn (including Elevate), net outflows £3.9bn 2024</a></li>
+<li><a href="https://www.rathbones.com/rathbones-2024-preliminary-results">Rathbones 2024 Preliminary Results — FUMA £109.2bn</a></li>
+<li><a href="https://www.brooksmacdonald.com/sites/default/files/2024-09/BM-FY24-ARA.pdf">Brooks Macdonald FY24 Annual Report — AUM £15.8bn BMAM / £18bn Group</a></li>
+<li><a href="https://citywire.com/new-model-adviser/news/how-rbc-brewin-dolphin-s-7-5bn-mps-edged-ahead-of-the-pack/a2452558">RBC Brewin Dolphin — AUM ~£57.6bn (Oct 2024); MPS ~£7.5bn</a></li>
+<li><a href="https://citywire.com/new-model-adviser/news/tatton-reports-record-inflows-as-aum-nears-20bn/a2452092">Tatton Asset Management — AUM nears £20bn (2024), £25.8bn by Sept 2025</a></li>
+<li><a href="https://www.tattonassetmanagement.com/downloads/reports/Tatton_AR24_Web.pdf">Tatton AR 2024</a></li>
+<li><a href="https://citywire.com/wealth-manager/news/fca-dear-ceo-letter-reveals-consumer-duty-focus-on-dfm-fees/a2408037">Citywire — FCA Dear CEO Letter: Consumer Duty Focus on DFM Fees</a></li>
+<li><a href="https://www.grantthornton.co.uk/globalassets/1.-member-firms/united-kingdom/pdf/publication/2024/consumer-duty-fair-value-assessments.pdf">Grant Thornton — Consumer Duty Fair Value Assessments 2024</a></li>
+</ul>
+<h3 id="competitive-and-pricing">Competitive and Pricing</h3>
+<ul>
+<li><a href="https://www.fundapps.co/asset-manager">FundApps — Compliance Monitoring for Asset Managers</a></li>
+<li><a href="https://www.acaglobal.com/technology/">ACA Group — ComplianceAlpha Platform</a></li>
+<li><a href="https://compliance.ocorian.com/uk-europe/wealth-management/">Bovill Newgate (formerly Bovill, acquired by Ocorian 2024)</a></li>
+<li><a href="https://fscom.co/sectors/asset-management/">FSCom — Asset Management Compliance</a></li>
+<li><a href="https://www.pimfa.co.uk/event/pimfa-compliance-conference-2025/">PIMFA Events — Compliance Conference 2025</a></li>
+</ul>
+<hr/>
+<p><em>This document is confidential and intended for internal use by Amaea founders only. Not for distribution to third parties. Regulatory data is sourced from publicly available FCA publications and industry press; it does not constitute legal or regulatory advice.</em></p>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  document.querySelector('.theme-toggle').addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('amaea-theme', next);
+  });
+  const menuBtn = document.getElementById('menuBtn');
+  const sidebarEl = document.querySelector('.sidebar');
+  const overlayEl = document.getElementById('sidebarOverlay');
+  if (menuBtn && sidebarEl && overlayEl) {
+    if (window.innerWidth > 768 && localStorage.getItem('amaea-sidebar') === 'collapsed') document.body.classList.add('sidebar-collapsed');
+    const closeMobile = () => { sidebarEl.classList.remove('open'); overlayEl.classList.remove('open'); document.body.classList.remove('mobile-nav-open'); };
+    menuBtn.addEventListener('click', () => {
+      if (window.innerWidth <= 768) { const open = sidebarEl.classList.toggle('open'); overlayEl.classList.toggle('open', open); document.body.classList.toggle('mobile-nav-open', open); }
+      else { const c = document.body.classList.toggle('sidebar-collapsed'); localStorage.setItem('amaea-sidebar', c ? 'collapsed' : 'expanded'); }
+    });
+    overlayEl.addEventListener('click', closeMobile);
+    sidebarEl.querySelectorAll('a.sidebar-item').forEach(a => a.addEventListener('click', () => { if (window.innerWidth <= 768) closeMobile(); }));
+  }
+</script>
+<script>
+(function () {
+  const userArea  = document.getElementById('sidebarUserArea');
+  const nameEl    = document.getElementById('sidebarUserName');
+  const roleEl    = document.getElementById('sidebarUserRole');
+  const avatarEl  = document.getElementById('sidebarAvatar');
+  if (userArea) {
+    const chevron = userArea.querySelector('svg');
+    if (chevron) {
+      const logout = document.createElement('a');
+      logout.href  = '/cdn-cgi/access/logout';
+      logout.title = 'Sign out';
+      logout.setAttribute('aria-label', 'Sign out');
+      logout.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;color:rgba(255,255,255,0.4);text-decoration:none;flex-shrink:0;margin-left:auto;transition:background .15s ease, color .15s ease;';
+      logout.addEventListener('mouseenter', () => { logout.style.background = 'rgba(255,255,255,0.08)'; logout.style.color = 'rgba(255,255,255,0.85)'; });
+      logout.addEventListener('mouseleave', () => { logout.style.background = 'transparent';            logout.style.color = 'rgba(255,255,255,0.4)';   });
+      logout.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+      chevron.replaceWith(logout);
+    }
+  }
+  const ROLE_BY_EMAIL = {
+    'milan@amaea.co.uk': { role: 'CTO & Co-Founder', bg: 'linear-gradient(135deg,#1a4080,#4292c6)' },
+    'hasna@amaea.co.uk': { role: 'CEO & Co-Founder', bg: 'linear-gradient(135deg,#4C2C4B,#8B6189)' },
+  };
+  fetch('/cdn-cgi/access/get-identity', { credentials: 'include' })
+    .then(r => (r.ok ? r.json() : null))
+    .then(id => {
+      if (!id || !id.email) return;
+      const email     = id.email;
+      const name      = id.name || email.split('@')[0];
+      const initial   = (name || '?').charAt(0).toUpperCase();
+      const meta      = ROLE_BY_EMAIL[email] || { role: 'Team', bg: 'linear-gradient(135deg,#3D3651,#8B809C)' };
+      if (nameEl)    nameEl.textContent    = name;
+      if (roleEl)    roleEl.textContent    = meta.role;
+      if (avatarEl)  { avatarEl.textContent = initial; avatarEl.style.background = meta.bg; }
+    })
+    .catch(() => {});
+})();
+</script>
+<script>
+  (function(){
+    var el = document.getElementById('topbar-date');
+    if (!el) return;
+    el.textContent = new Date().toLocaleDateString('en-GB', {
+      weekday:'short', day:'numeric', month:'long', year:'numeric'
+    });
+  })();
+</script>
+</body>
+</html>
