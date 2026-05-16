@@ -236,9 +236,9 @@
         <span class="decision-date">15 May 2026</span>
         <span class="badge badge-green">Confirmed</span>
       </div>
-      <div class="decision-title">RMAR Section F pre-population shipped without a DB migration</div>
-      <div class="decision-decision">The Section F aggregator queries the existing <code>documents</code> table directly using <code>type='complaint_record'</code> and <code>status='complete'</code> with a period filter. No new table or schema change was required for Slice 1.</div>
-      <div class="decision-rationale"><strong>Why:</strong> Avoids touching the CHECK constraint on <code>documents</code> and ships Slice 1 today. A migration approach can be revisited if Slices 2 or 3 require it. Inline DISP 1.6 8-week breach flags surface on the Section F page at the moment compliance officers are reviewing complaints — persistent cron-raised flags deferred to a later slice.</div>
+      <div class="decision-title">RMAR Section H pre-population shipped without a DB migration</div>
+      <div class="decision-decision">The Section H aggregator queries the existing <code>documents</code> table directly using <code>type='complaint_record'</code> and <code>status='complete'</code> with a period filter. No new table or schema change was required for Slice 1. (Section H is the canonical FCA letter for the Conduct of Business return that includes complaints — earlier drafts of this log used "Section F", an internally-invented label since corrected against RegData.)</div>
+      <div class="decision-rationale"><strong>Why:</strong> Avoids touching the CHECK constraint on <code>documents</code> and ships Slice 1 today. A migration approach can be revisited if Slices 2 or 3 require it. Inline DISP 1.6 8-week breach flags surface on the Section H page at the moment compliance officers are reviewing complaints — persistent cron-raised flags deferred to a later slice.</div>
     </div>
 
   </div>
