@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Investor Readiness | Amaea Intranet</title>
+  <title>Funding | Amaea Intranet</title>
   <link rel="icon" href="logo-plum.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -69,7 +69,7 @@
     </a>
     <a href="investor.html" class="sidebar-item active">
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
-      Investor
+      Funding
     </a>
     <div class="sidebar-label">External</div>
     <a href="https://amaea0002-dev.github.io/webpage" class="sidebar-item" target="_blank">
@@ -110,7 +110,7 @@
     <button class="topbar-hamburger" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
     <span class="bc-root">Amaea</span>
     <span class="bc-sep">/</span>
-    <span class="bc-current">Investor</span>
+    <span class="bc-current">Funding</span>
   </div>
   <div class="topbar-right">
     <span class="topbar-date" id="topbar-date"></span>
@@ -122,9 +122,9 @@
   <div class="content">
 
     <div class="page-header">
-      <p class="page-eyebrow">Fundraising</p>
-      <h1 class="page-title">Investor Readiness</h1>
-      <p class="page-sub">Pre-seed fundraising materials, narrative, and readiness tracker. Target: £500k · Q4 2026 — optional, not required.</p>
+      <p class="page-eyebrow">Funding &amp; optionality</p>
+      <h1 class="page-title">Funding</h1>
+      <p class="page-sub">Default: bootstrap. The financial model is cash-flow-positive from month 2 of revenue across all three scenarios — Amaea funds its own growth from Founders revenue onwards. A raise enters scope only after multi-sector and international expansion are both active (post-2030). Materials below are maintained for that optionality.</p>
     </div>
 
     <!-- The pitch in one paragraph -->
@@ -242,10 +242,17 @@
       <div class="card">
         <p class="card-title" style="margin-bottom:14px;">Funding philosophy</p>
         <p style="font-size:0.92rem;color:var(--gray-700);line-height:1.65;margin:0 0 12px;">
-          <strong>Default: bootstrap.</strong> Strong GTM stack + 70–80% gross margins should make Amaea self-funding from early scale. ~2 firms break-even; the Founders programme can credibly fill before public launch.
+          <strong>Default: bootstrap.</strong> The v1.3 financial model is cash-flow-positive from month 2 of revenue across Bear, Base, and Bull scenarios. £8k founder contribution at incorporation is the only outside capital needed. Founders revenue funds all hires and growth from Q4 2027 onwards.
         </p>
+        <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.65;margin:0 0 12px;">
+          A raise enters scope only when <strong>both</strong> of these are true:
+        </p>
+        <ul style="font-size:0.88rem;color:var(--gray-700);line-height:1.7;margin:0 0 12px;padding-left:22px;">
+          <li><strong>Multi-sector expansion is active</strong> — Amaea has live customers beyond UK IFA (mortgage brokers, insurance intermediaries, wealth managers, accountants).</li>
+          <li><strong>International expansion is active</strong> — Amaea has live customers in at least one market outside the UK.</li>
+        </ul>
         <p style="font-size:0.88rem;color:var(--gray-600);line-height:1.65;margin:0;">
-          Raise <strong>only from strength</strong>: competitor pressure, international expansion capital, acquisition opportunity, or personal liquidity. Pre-seed £500k Q4 2026 is an <em>option</em> kept open by the materials tracked below — not a commitment.
+          Both are post-2030 milestones. Until then, no raise. Materials tracked below are maintained for that optionality, and for adjacent uses (advisor conversations, partnership discussions, customer demos).
         </p>
       </div>
     </div>
@@ -281,27 +288,27 @@
       </p>
     </div>
 
-    <!-- Raise summary -->
+    <!-- Funding stance summary -->
     <div class="stats-strip" style="margin-bottom:28px;">
       <div class="stat-card">
-        <div class="stat-label">Target raise</div>
-        <div class="stat-value" style="font-size:1.2rem;padding-top:4px;">£500k</div>
-        <div class="stat-sub">Pre-seed</div>
+        <div class="stat-label">Funding stance</div>
+        <div class="stat-value" style="font-size:1rem;padding-top:6px;">Bootstrap-first</div>
+        <div class="stat-sub">No outside raise planned</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Target close</div>
-        <div class="stat-value" style="font-size:1.2rem;padding-top:4px;">Q4 2026</div>
-        <div class="stat-sub">After Intelliflo conference</div>
+        <div class="stat-label">Founder capital</div>
+        <div class="stat-value" style="font-size:1.2rem;padding-top:4px;">£8k</div>
+        <div class="stat-sub">At incorporation, Q3 2027</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Investor type</div>
-        <div class="stat-value" style="font-size:1rem;padding-top:6px;">UK fintech</div>
-        <div class="stat-sub">Angel or seed fund</div>
+        <div class="stat-label">Cash-flow positive</div>
+        <div class="stat-value" style="font-size:1rem;padding-top:6px;">Month 2</div>
+        <div class="stat-sub">Post-revenue, all scenarios</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Materials ready</div>
         <div class="stat-value" id="inv-ready-count">2/5</div>
-        <div class="stat-sub">Pitch materials</div>
+        <div class="stat-sub">Optionality only</div>
       </div>
     </div>
 
@@ -360,7 +367,7 @@
           </div>
           <div class="inv-item">
             <div class="inv-check" title="Not started"></div>
-            <div class="inv-label">Letters of intent / MOUs<span class="inv-note">Even informal intent from 1–2 IFA firms would significantly de-risk the raise.</span></div>
+            <div class="inv-label">Letters of intent / MOUs<span class="inv-note">Even informal intent from 1–2 IFA firms would significantly de-risk any future raise.</span></div>
           </div>
         </div>
 
@@ -421,9 +428,9 @@
 
       <div style="display:flex;flex-direction:column;gap:18px;">
 
-        <!-- Milestones before raise -->
+        <!-- Founder + product milestones -->
         <div class="card">
-          <p class="card-title" style="margin-bottom:14px;">Milestones before raise</p>
+          <p class="card-title" style="margin-bottom:14px;">Founder + product milestones</p>
           <div class="inv-item">
             <div class="inv-check" title="Not started"></div>
             <div class="inv-label">5+ customer discovery interviews completed</div>
