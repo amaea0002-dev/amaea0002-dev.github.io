@@ -7,6 +7,8 @@
 <link rel="icon" href="logo-plum.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="intranet.css"/>
+<script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
 <style>
   :root {
     --plum:       #40243F;
@@ -291,9 +293,12 @@
     gap: 6px;
   }
   .back-link:hover { color: var(--plum); }
-  /* Print styles — clean, no gradient */
+  /* In-shell adjustments: cover and content live inside .main (sidebar + topbar) */
+  .main > .doc-cover { margin: 0 0 40px; }
+  /* Print styles — clean, no gradient, hide sidebar+topbar */
   @media print {
-    .nav-strip { display: none !important; }
+    .sidebar, .topbar, .sidebar-overlay, .nav-strip { display: none !important; }
+    .main { margin-left: 0 !important; padding-top: 0 !important; }
     body { font-size: 11pt; }
     .doc-cover {
       background: var(--plum) !important;
@@ -313,19 +318,55 @@
 </head>
 <body>
 
-<nav class="nav-strip">
-  <a href="docs.html" class="back-link">
-    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    Back to Documents
-  </a>
-  <span class="nav-sep">·</span>
-  <span class="nav-crumb">Amaea Intranet</span>
-  <span class="nav-sep">/</span>
-  <span class="nav-crumb">Documents</span>
-  <span class="nav-sep">/</span>
-  <span class="nav-crumb" style="color:var(--plum);font-weight:600;">Co-Founder Agreement</span>
-</nav>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="logo-white.png" alt="Amaea"/>
+    <span class="sidebar-logo-badge">Intranet</span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-label">Workspace</div>
+    <a href="index" class="sidebar-item"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</a>
+    <a href="brand" class="sidebar-item"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Brand</a>
+    <a href="team" class="sidebar-item"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Team</a>
+    <a href="docs" class="sidebar-item active"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Documents</a>
+    <a href="mvp-docs/" class="sidebar-item"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Product Docs</a>
+    <a href="features" class="sidebar-item"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Product Features</a>
+    <a href="roadmap" class="sidebar-item"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>Roadmap</a>
+    <a href="decisions" class="sidebar-item"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Decisions</a>
+    <a href="investor" class="sidebar-item"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>Funding</a>
+    <div class="sidebar-label">External</div>
+    <a href="https://amaea0002-dev.github.io/webpage" class="sidebar-item" target="_blank"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Website <span class="ext">↗</span></a>
+    <a href="https://amaea0002-dev.github.io/prototype/dashboard.html" class="sidebar-item" target="_blank"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Prototype <span class="ext">↗</span></a>
+  </nav>
+  <div class="sidebar-footer" style="position:relative;">
+    <div class="sidebar-user" id="sidebarUserArea">
+      <div class="sidebar-avatar" id="sidebarAvatar">H</div>
+      <div style="flex:1;min-width:0;">
+        <div class="sidebar-user-name" id="sidebarUserName">Hasna Sahul Hameed</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">CEO &amp; Co-founder</div>
+      </div>
+      <svg width="11" height="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;margin-left:auto;"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </div>
+</aside>
 
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="topbar-hamburger" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <span class="bc-root">Amaea</span>
+    <span class="bc-sep">/</span>
+    <a href="docs" style="color:inherit;text-decoration:none;" class="bc-link">Documents</a>
+    <span class="bc-sep">/</span>
+    <span class="bc-current">Co-Founder Agreement</span>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-date" id="topbar-date"></span>
+    <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+  </div>
+</header>
+
+<main class="main">
 <header class="doc-cover">
   <p class="doc-cover-eyebrow">Confidential · Founder Document</p>
   <img class="doc-cover-logo" src="logo-white.png" alt="Amaea"/>
@@ -339,7 +380,7 @@
   </dl>
 </header>
 
-<main class="doc-content">
+<div class="doc-content">
 
 <div class="preamble">
   <p>This Co-Founder &amp; Shareholder Agreement (the "<strong>Agreement</strong>") is made between:</p>
@@ -632,6 +673,52 @@
   <p>Amaea Ltd (in formation) · Confidential · Founder document · v1 draft 16 May 2026</p>
 </div>
 
+</div>
 </main>
+
+<script>
+  document.querySelector('.theme-toggle')?.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('amaea-theme', next);
+  });
+  const menuBtn = document.getElementById('menuBtn');
+  const sidebarEl = document.querySelector('.sidebar');
+  const overlayEl = document.getElementById('sidebarOverlay');
+  if (menuBtn && sidebarEl && overlayEl) {
+    if (window.innerWidth > 768 && localStorage.getItem('amaea-sidebar') === 'collapsed') document.body.classList.add('sidebar-collapsed');
+    const closeMobile = () => { sidebarEl.classList.remove('open'); overlayEl.classList.remove('open'); document.body.classList.remove('mobile-nav-open'); };
+    menuBtn.addEventListener('click', () => {
+      if (window.innerWidth <= 768) { const o = sidebarEl.classList.toggle('open'); overlayEl.classList.toggle('open', o); document.body.classList.toggle('mobile-nav-open', o); }
+      else { const c = document.body.classList.toggle('sidebar-collapsed'); localStorage.setItem('amaea-sidebar', c ? 'collapsed' : 'expanded'); }
+    });
+    overlayEl.addEventListener('click', closeMobile);
+    sidebarEl.querySelectorAll('a.sidebar-item').forEach(a => a.addEventListener('click', () => { if (window.innerWidth <= 768) closeMobile(); }));
+  }
+  (function(){
+    const el = document.getElementById('topbar-date');
+    if (el) el.textContent = new Date().toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'long', year:'numeric' });
+  })();
+  (function () {
+    const nameEl = document.getElementById('sidebarUserName');
+    const roleEl = document.getElementById('sidebarUserRole');
+    const avatarEl = document.getElementById('sidebarAvatar');
+    const ROLE_BY_EMAIL = {
+      'milan@amaea.co.uk': { role: 'CTO & Co-Founder', bg: 'linear-gradient(135deg,#1a4080,#4292c6)' },
+      'hasna@amaea.co.uk': { role: 'CEO & Co-Founder', bg: 'linear-gradient(135deg,#4C2C4B,#8B6189)' },
+    };
+    fetch('/cdn-cgi/access/get-identity', { credentials: 'include' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(id => {
+        if (!id || !id.email) return;
+        const email = id.email; const name = id.name || email.split('@')[0]; const initial = (name || '?').charAt(0).toUpperCase();
+        const meta = ROLE_BY_EMAIL[email] || { role: 'Team', bg: 'linear-gradient(135deg,#3D3651,#8B809C)' };
+        if (nameEl) nameEl.textContent = name;
+        if (roleEl) roleEl.textContent = meta.role;
+        if (avatarEl) { avatarEl.textContent = initial; avatarEl.style.background = meta.bg; }
+      })
+      .catch(() => {});
+  })();
+</script>
 </body>
 </html>

@@ -351,10 +351,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .doc-info { flex: 1; min-width: 0; }
 .doc-name { font-size: 0.85rem; font-weight: 700; color: var(--gray-900); margin-bottom: 2px; }
 .doc-desc { font-size: 0.74rem; color: var(--gray-500); }
-/* Fixed-width status column so badges line up in one vertical strip across rows. */
+/* Status column expands to fit badge text — minimum 150px so short
+   badges still line up across rows, no hard cap so long badges
+   (e.g. "v1.3 built — pending legal review") don't overflow into
+   the doc-info text. */
 .doc-status {
   flex-shrink: 0;
-  width: 150px;
+  min-width: 150px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -363,7 +366,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .doc-status .badge { white-space: nowrap; }
 .doc-status .btn { white-space: nowrap; }
 @media (max-width: 640px) {
-  .doc-status { width: auto; }
+  .doc-status { min-width: 0; width: auto; }
 }
 
 /* ── Brand components ── */
