@@ -10,30 +10,14 @@
 <link rel="stylesheet" href="intranet.css"/>
 <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
 <style>
-  :root {
-    --plum:       #40243F;
-    --plum-dark:  #2D1A2C;
-    --plum-mid:   #5A3558;
-    --plum-soft:  #8B6189;
-    --plum-tint:  rgba(64,36,63,0.04);
-    --plum-band:  rgba(64,36,63,0.08);
-    --gray-900:   #17131E;
-    --gray-700:   #3D3651;
-    --gray-500:   #8B809C;
-    --gray-300:   #C7C0D2;
-    --gray-200:   #E8E6ED;
-    --gray-100:   #F3F0F8;
-    --gray-50:    #FAFAFC;
-    --green:      #10B981;
-    --amber:      #F59E0B;
-  }
+  /* Colour variables sourced from intranet.css (supports light + dark mode). */
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 400;
     color: var(--gray-900);
-    background: white;
+    background: var(--bg);
     line-height: 1.65;
     font-size: 15px;
     -webkit-font-smoothing: antialiased;

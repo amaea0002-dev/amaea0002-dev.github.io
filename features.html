@@ -74,9 +74,10 @@
       padding: 2px 8px;
       border-radius: 20px;
     }
-    .badge-live    { background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; }
-    .badge-building { background: #EEF2FF; color: #4338CA; border: 1px solid #C7D2FE; }
-    .badge-planned  { background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A; }
+    /* Theme-aware tints that work in light + dark mode */
+    .badge-live    { background: rgba(16,185,129,0.12); color: var(--green); border: 1px solid rgba(16,185,129,0.28); }
+    .badge-building { background: rgba(99,102,241,0.12); color: #818cf8;      border: 1px solid rgba(99,102,241,0.28); }
+    .badge-planned  { background: rgba(245,158,11,0.12); color: var(--amber); border: 1px solid rgba(245,158,11,0.28); }
     .badge-future   { background: var(--gray-100, #F3F2F6); color: var(--gray-600); border: 1px solid var(--gray-200); }
 
     .filter-bar {

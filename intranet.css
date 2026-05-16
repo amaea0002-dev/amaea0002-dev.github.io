@@ -30,7 +30,15 @@
   --topbar-bg: rgba(255,255,255,0.92);
 }
 
+/* Aliases used by the contract pages — keep in sync with the main palette */
+:root {
+  --gray-700: #3D3651;
+  --plum-band: rgba(64,36,63,0.08);
+}
+
 [data-theme="dark"] {
+  --gray-700: #c8b8cc;
+  --plum-band: rgba(168,104,166,0.22);
   --plum:        #a868a6;
   --plum-dark:   #7a4878;
   --plum-mid:    #c084be;
