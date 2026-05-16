@@ -73,7 +73,10 @@
    Also strip the document `a { border-bottom: ... }` underline from
    sidebar/topbar links so they don't render with a faint plum underline
    the other intranet pages don't have. */
-.sidebar, .sidebar *, .topbar, .topbar * { font-family: var(--font); }
+.sidebar, .sidebar *, .topbar, .topbar * {
+  font-family: var(--font);
+  line-height: normal;
+}
 .sidebar a, .topbar a { border-bottom: none; }
 @media print {
   .sidebar, .topbar, .sidebar-overlay { display: none !important; }
