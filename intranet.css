@@ -2,37 +2,70 @@
    Amaea Intranet — Design System
    ============================================================ */
 
+/*
+ * Palette aligned with the app's design tokens
+ * (amaea-app/src/lib/design/tokens.ts). Both surfaces (team.amaea.co.uk
+ * intranet + app.amaea.co.uk product) should look identical — same plum,
+ * same greys, same radius scale, same accent colours, same sidebar.
+ * If you change a token here, change it in tokens.ts too.
+ */
 :root {
-  --plum:        #40243F;
-  --plum-dark:   #2D1A2C;
+  /* ── Plum ── */
+  --plum:        #40243F;   /* primary action / brand */
+  --plum-deep:   #2A1729;   /* sidebar background, dark hero strips */
+  --plum-dark:   #2A1729;   /* alias for legacy refs — same as plum-deep */
   --plum-mid:    #5A3558;
-  --plum-soft:   #8B6189;
-  --plum-tint:   rgba(64,36,63,0.06);
-  --plum-border: rgba(64,36,63,0.12);
+  --plum-soft:   #6B5C7B;   /* aligned with app token.ink3 for secondary plum text */
+  --plum-tint:   rgba(64,36,63,0.06);  /* matches token.plumSoft */
+  --plum-border: rgba(64,36,63,0.18);  /* matches token.plumRing */
   --plum-glow:   rgba(64,36,63,0.18);
-  --white:    #FFFFFF;
-  --bg:       #F9F8FA;
-  --gray-50:  #F9F8FA;
-  --gray-100: #F3F2F6;
-  --gray-200: #E8E6ED;
+
+  /* ── Greys (match app: ink / ink2 / ink3 / mute / line / lineSoft / surface / surface2) ── */
+  --white:    #FFFFFF;             /* token.surface */
+  --bg:       #F9F8FA;             /* token.surface2 */
+  --gray-50:  #F9F8FA;             /* token.surface2 */
+  --gray-100: #F0EDF4;             /* token.lineSoft */
+  --gray-200: #E8E6ED;             /* token.line */
   --gray-300: #D1CDD8;
-  --gray-500: #9088A3;
-  --gray-600: #47405A;
-  --gray-900: #17131E;
-  --green: #10B981;  --amber: #F59E0B;  --red: #EF4444;
+  --gray-500: #9088A3;             /* token.mute */
+  --gray-600: #6B5C7B;             /* token.ink3 — bumped for legibility parity */
+  --gray-700: #3C354A;             /* token.ink2 */
+  --gray-900: #17131E;             /* token.ink */
+
+  /* ── Accents (match app token.green / amber / red exactly) ── */
+  --green:      #059669;           /* token.green */
+  --green-bg:   #ECFDF5;
+  --green-border: #86EFAC;
+  --amber:      #D97706;           /* token.amber */
+  --amber-bg:   #FFFBEB;
+  --amber-border: #FCD34D;
+  --red:        #EF4444;           /* token.red */
+  --red-bg:     #FEF2F2;
+  --red-border: #FCA5A5;
+  --blue:       #2563EB;           /* token.blue */
+  --blue-bg:    #EFF6FF;
+
+  /* ── Layout ── */
   --sidebar-w:  240px;
   --topbar-h:   56px;
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", sans-serif;
-  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --r-sm: 8px;  --r-md: 12px;  --r-lg: 16px;  --r-xl: 24px;  --r-pill: 999px;
-  --sh-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --sh-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
-  --topbar-bg: rgba(255,255,255,0.92);
-}
 
-/* Aliases used by the contract pages — keep in sync with the main palette */
-:root {
-  --gray-700: #3D3651;
+  /* ── Type stack — Inter primary, matching the app's loaded font ── */
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Radius — match app's radius.sm/md/lg/xl/pill exactly ── */
+  --r-sm:   6px;
+  --r-md:  10px;
+  --r-lg:  14px;
+  --r-xl:  18px;
+  --r-pill: 999px;
+
+  /* ── Shadows (match app token.hover + a softer card shadow) ── */
+  --sh-sm: 0 1px 3px rgba(23,19,30,0.04), 0 1px 2px rgba(23,19,30,0.03);
+  --sh-md: 0 6px 18px -8px rgba(23,19,30,0.18), 0 1px 3px rgba(23,19,30,0.04);
+  --topbar-bg: rgba(255,255,255,0.92);
+
+  /* Aliases used by the contract pages — keep in sync with the main palette */
   --plum-band: rgba(64,36,63,0.08);
 }
 
@@ -75,11 +108,11 @@ a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
-/* ── Sidebar ── */
+/* ── Sidebar — identical to the app (plumDeep solid) ── */
 .sidebar {
   position: fixed; top: 0; left: 0; bottom: 0;
   width: var(--sidebar-w);
-  background: linear-gradient(170deg, #4C2C4B 0%, #2B1929 100%);
+  background: var(--plum-deep);
   display: flex; flex-direction: column;
   z-index: 100; overflow-y: auto; overflow-x: hidden;
   transition: width 0.25s var(--ease);
@@ -95,7 +128,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .user-select-panel {
   position: absolute; bottom: 100%; left: 0; right: 0;
   max-height: 0; opacity: 0; overflow: hidden;
-  background: linear-gradient(170deg, #4C2C4B 0%, #2B1929 100%);
+  background: var(--plum-deep);
   border-top: 1px solid rgba(255,255,255,0.1);
   transition: max-height 0.28s var(--ease), opacity 0.2s ease;
   z-index: 10;
@@ -133,22 +166,23 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .sidebar-nav { flex: 1; padding: 10px 10px; display: flex; flex-direction: column; gap: 1px; }
 .sidebar-label {
-  font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.13em; color: rgba(255,255,255,0.3);
-  padding: 16px 8px 5px;
+  font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: rgba(255,255,255,0.32);
+  padding: 16px 10px 6px;
   white-space: nowrap; overflow: hidden;
 }
 .sidebar-item {
-  display: flex; align-items: center; gap: 9px;
-  padding: 8px 10px; border-radius: var(--r-sm);
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; border-radius: var(--r-md);
   font-size: 0.82rem; font-weight: 500;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.55);
   transition: background 0.14s, color 0.14s;
   cursor: pointer;
   white-space: nowrap; overflow: hidden;
+  margin-bottom: 2px;
 }
-.sidebar-item:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.9); }
-.sidebar-item.active { background: rgba(255,255,255,0.14); color: #fff; font-weight: 600; }
+.sidebar-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.sidebar-item.active { background: rgba(255,255,255,0.12); color: #fff; font-weight: 600; }
 .sidebar-item svg { flex-shrink: 0; }
 .sidebar-item .ext { margin-left: auto; font-size: 0.65rem; opacity: 0.5; }
 .sidebar-footer {
@@ -173,12 +207,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .sidebar-user-option.active { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.45); color: #fff; }
 .sidebar-avatar {
   width: 30px; height: 30px; border-radius: 50%;
-  background: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.14);
   display: flex; align-items: center; justify-content: center;
   font-size: 0.72rem; font-weight: 800; color: #fff; flex-shrink: 0;
 }
-.sidebar-user-name { font-size: 0.76rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.sidebar-user-role { font-size: 0.62rem; color: rgba(255,255,255,0.45); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sidebar-user-name { font-size: 0.78rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -0.01em; }
+.sidebar-user-role { font-size: 0.65rem; color: rgba(255,255,255,0.42); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ── Topbar ── */
 .topbar {
@@ -225,29 +259,29 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .page-title {
   font-size: clamp(1.5rem, 2.5vw, 2rem);
-  font-weight: 800; letter-spacing: -0.04em; color: var(--gray-900);
-  line-height: 1.15; margin-bottom: 6px;
+  font-weight: 900; letter-spacing: -0.03em; color: var(--gray-900);
+  line-height: 1.1; margin-bottom: 6px;
 }
 .page-sub { font-size: 0.88rem; color: var(--gray-600); line-height: 1.6; }
 
-/* ── Cards ── */
+/* ── Cards (match app radius.xl + token.line) ── */
 .card {
   background: var(--white); border: 1px solid var(--gray-200);
-  border-radius: var(--r-lg); padding: 22px; box-shadow: var(--sh-sm);
+  border-radius: var(--r-xl); padding: 22px; box-shadow: var(--sh-sm);
 }
 .card-title {
-  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.08em; color: var(--gray-500); margin-bottom: 16px;
+  font-size: 0.65rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--gray-500); margin-bottom: 16px;
 }
 
-/* ── Stats strip ── */
+/* ── Stats strip (cards match app KpiCard pattern) ── */
 .stats-strip { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 28px; }
 .stat-card {
   background: var(--white); border: 1px solid var(--gray-200);
-  border-radius: var(--r-lg); padding: 18px 20px; box-shadow: var(--sh-sm);
+  border-radius: var(--r-xl); padding: 18px 20px; box-shadow: var(--sh-sm);
 }
-.stat-label { font-size: 0.68rem; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
-.stat-value { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.04em; color: var(--plum); line-height: 1; margin-bottom: 3px; }
+.stat-label { font-size: 0.62rem; font-weight: 800; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+.stat-value { font-size: 1.7rem; font-weight: 900; letter-spacing: -0.04em; color: var(--gray-900); line-height: 1; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
 .stat-sub { font-size: 0.68rem; color: var(--gray-500); }
 
 /* ── Grid helpers ── */
@@ -299,26 +333,28 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .quick-link:hover { border-color: var(--plum-border); color: var(--plum); background: var(--plum-tint); }
 
-/* ── Buttons — theme-aware so View / Review now / Upload all stay readable in both modes ── */
+/* ── Buttons — match app conventions (radius.md, 8px/16px padding, text.xs) ── */
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
-  font-family: inherit; font-weight: 600;
-  border-radius: var(--r-sm); border: 1px solid transparent;
-  padding: 7px 12px; font-size: 0.78rem; line-height: 1;
+  font-family: inherit; font-weight: 700;
+  border-radius: var(--r-md); border: 1px solid transparent;
+  padding: 8px 16px; font-size: 0.78rem; line-height: 1.2;
   text-decoration: none; cursor: pointer;
-  transition: background 0.14s, color 0.14s, border-color 0.14s;
+  transition: background 0.14s, color 0.14s, border-color 0.14s, opacity 0.14s;
 }
-.btn-sm { padding: 5px 10px; font-size: 0.72rem; }
+.btn:hover { opacity: 0.9; }
+.btn-sm { padding: 6px 12px; font-size: 0.72rem; }
 .btn-primary {
   background: var(--plum); color: #fff;
   border-color: var(--plum);
 }
-.btn-primary:hover { background: var(--plum-dark); border-color: var(--plum-dark); }
+.btn-primary:hover { background: var(--plum); border-color: var(--plum); opacity: 0.9; }
 .btn-secondary {
-  background: var(--bg); color: var(--gray-900);
+  background: var(--white); color: var(--gray-700);
   border-color: var(--gray-200);
+  font-weight: 600;
 }
-.btn-secondary:hover { border-color: var(--plum); color: var(--plum); background: var(--plum-tint); }
+.btn-secondary:hover { border-color: var(--plum-border); color: var(--plum); background: var(--plum-tint); opacity: 1; }
 [data-theme="dark"] .btn-secondary {
   background: var(--gray-100); color: var(--gray-900);
   border-color: var(--gray-300);
@@ -335,17 +371,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 [data-theme="dark"] .bc-current { color: rgba(255,255,255,0.95); }
 [data-theme="dark"] .bc-link { color: rgba(255,255,255,0.78); }
 
-/* ── Badges ── */
+/* ── Badges (match app severity-pill pattern) ── */
 .badge {
   display: inline-flex; align-items: center;
-  font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.06em; padding: 2px 8px; border-radius: var(--r-pill);
+  font-size: 0.65rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.04em; padding: 3px 9px; border-radius: var(--r-pill);
 }
-.badge-green { background: rgba(16,185,129,0.1); color: var(--green); border: 1px solid rgba(16,185,129,0.2); }
-.badge-amber { background: rgba(245,158,11,0.1); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
-.badge-red { background: rgba(239,68,68,0.1); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
-.badge-plum { background: var(--plum-tint); color: var(--plum-soft); border: 1px solid var(--plum-border); }
-.badge-gray { background: var(--gray-100); color: var(--gray-500); border: 1px solid var(--gray-200); }
+.badge-green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.badge-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+.badge-red   { background: var(--red-bg);   color: var(--red);   border: 1px solid var(--red-border); }
+.badge-plum  { background: var(--plum-tint); color: var(--plum); border: 1px solid var(--plum-border); }
+.badge-gray  { background: var(--gray-100); color: var(--gray-500); border: 1px solid var(--gray-200); }
 
 /* ── Section title ── */
 .section-label {
