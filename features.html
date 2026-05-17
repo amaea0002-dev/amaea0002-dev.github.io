@@ -401,7 +401,7 @@
           </div>
           <span class="badge badge-live" style="font-size:0.67rem;padding:3px 9px;border-radius:20px;white-space:nowrap;">Live</span>
         </div>
-        <p class="feature-desc">Generates the reports that compliance officers actually need to produce — RMAR, Consumer Duty board report, suitability review summary, annual compliance report. Drafted by AI from the firm's live data, editable by the Compliance Officer role, and exportable as a finished document ready for the FCA.</p>
+        <p class="feature-desc">Generates the reports compliance officers actually need to produce. Full RMAR pre-population today: Sections B (P&amp;L), D (Regulatory capital), E (PII), G (Training &amp; Competence), and H (COBS / complaints) — auto-filled from extracted documents and firm-entered figures, with combined draft view and PDF export. Plus AI-drafted Consumer Duty board reports, suitability review summaries, vulnerable-client reports, and a compliance activity log. Each report has Concise / Detailed toggle and an embedded RAG-grounded analysis section.</p>
         <div class="feature-footer">
           <span class="feature-layer">Reporting</span>
           <span class="priority-tag">Priority 7</span>
@@ -444,15 +444,15 @@
         </div>
       </div>
 
-      <div class="feature-card building" data-status="building">
+      <div class="feature-card live" data-status="live">
         <div class="feature-header">
           <div>
             <div class="feature-name">Embed</div>
             <div class="feature-tagline">RAG knowledge base — the AI foundation</div>
           </div>
-          <span class="badge badge-building" style="font-size:0.67rem;padding:3px 9px;border-radius:20px;white-space:nowrap;">Building</span>
+          <span class="badge badge-live" style="font-size:0.67rem;padding:3px 9px;border-radius:20px;white-space:nowrap;">Live · deepening</span>
         </div>
-        <p class="feature-desc">The vector database that powers Counsel and Horizon. Contains the FCA Handbook (14 sourcebooks), all Consumer Duty publications, enforcement notices, Dear CEO letters, finalised guidance, thematic reviews, and firm-specific data — all embedded via Voyage AI (voyage-3-lite, 512-dim) and searchable. What separates Amaea from a ChatGPT wrapper: every AI response is grounded in documents, not memory. Currently 11,645 chunks across 150 sources (23% of the 50,000 launch target); publications and enforcement context are well covered, deeper FCA Handbook ingestion is the next pass.</p>
+        <p class="feature-desc">The vector database that powers Counsel and Horizon. Contains the FCA Handbook (14 sourcebooks), all Consumer Duty publications, enforcement notices, Dear CEO letters, finalised guidance, thematic reviews, and firm-specific data — all embedded via Voyage AI (voyage-3-lite, 512-dim) and searchable. What separates Amaea from a ChatGPT wrapper: every AI response is grounded in documents, not memory. <strong>Live in production at 11,645 chunks across 150 sources</strong> (23% of the 50,000 launch target). Publications + enforcement context are well covered; deeper FCA Handbook ingestion is the next ingestion pass.</p>
         <div class="feature-footer">
           <span class="feature-layer">Data</span>
           <span class="priority-tag">AI foundation</span>
@@ -702,13 +702,13 @@
     <div class="stats-strip" style="margin-top:32px;">
       <div class="stat-card">
         <div class="stat-label">Live in MVP</div>
-        <div class="stat-value">12</div>
+        <div class="stat-value">13</div>
         <div class="stat-sub">Features shipped today</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Building now</div>
-        <div class="stat-value">2</div>
-        <div class="stat-sub">Horizon + Embed (corpus deepening)</div>
+        <div class="stat-value">1</div>
+        <div class="stat-sub">Horizon (regulatory change detection)</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Before launch</div>
