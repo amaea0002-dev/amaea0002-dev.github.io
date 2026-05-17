@@ -50,7 +50,7 @@
 </section>
 
 <nav class="doc-nav">
-  <a href="./">← All documents</a>
+  <a href="index.html">← All documents</a>
   <span class="doc-nav-meta">Doc 05 · ~20 min read</span>
 </nav>
 
@@ -167,14 +167,21 @@ npx vercel promote &lt;deployment-url&gt;      # promote a previous deploy to pr
 <h3 id="pulling-env-from-vercel-to-local">Pulling env from Vercel to local</h3>
 <pre><code>cd /Users/milan/Documents/Amaea/amaea-app
 npx vercel env pull .env.local</code></pre>
+<h3 id="connection-pooling-supabase-pooler-vs-direct">Connection pooling — Supabase pooler vs direct</h3>
+<p><code>NEXT_PUBLIC_SUPABASE_URL</code> is the <strong>REST URL</strong> (<code>https://&lt;project&gt;.supabase.co</code>), not the Postgres connection string — the supabase-js client uses HTTP under the hood, so connection pooling at the pg-protocol level isn&#x27;t directly in play for the app.</p>
+<p>However: if a future addition uses a direct pg driver (e.g. <code>pg</code>, <code>postgres.js</code>, Drizzle&#x27;s <code>postgres-js</code> adapter), it MUST connect via the <strong>pooler endpoint</strong> on port <code>6543</code> (transaction-mode pooling), not the direct connection on <code>5432</code>. Vercel&#x27;s per-function model creates new connections on cold starts; under burst load, direct connections will exhaust the Postgres connection limit and return 500s.</p>
+<p><strong>How to check:</strong> if a <code>DATABASE_URL</code> env var is ever added, it should look like:</p>
+<pre><code>postgresql://postgres.&lt;project&gt;:&lt;pwd&gt;@aws-0-&lt;region&gt;.pooler.supabase.com:6543/postgres</code></pre>
+<p>Note the <code>:6543</code> and the <code>pooler.supabase.com</code> host. If it shows <code>:5432</code> and <code>db.&lt;project&gt;.supabase.co</code>, that&#x27;s the <strong>direct</strong> endpoint — fine for migrations from the CLI, not safe for serverless functions under load.</p>
+<p>The current app uses supabase-js (HTTP) everywhere, so this is precautionary — flag it whenever someone wires in a direct pg driver.</p>
 <p>This pulls the current production env vars into <code>.env.local</code>. Useful when setting up a new machine.</p>
 <h2 id="migrations">Migrations</h2>
 <h3 id="where-they-live">Where they live</h3>
 <ul>
-<li><code>/Users/milan/Documents/Amaea/amaea-db/migrations/</code> — the canonical numbered SQL files (<code>001_extensions.sql</code> through <code>026_revenue_record_doc_type.sql</code>)</li>
-<li><code>/Users/milan/Documents/Amaea/amaea-db/supabase/migrations/</code> — timestamped copies for Supabase CLI compatibility (<code>20260511000001_*.sql</code> through <code>20260516000026_*.sql</code>)</li>
+<li><code>/Users/milan/Documents/Amaea/amaea-db/migrations/</code> — the canonical numbered SQL files (<code>001_extensions.sql</code> through <code>030_documents_content_hash.sql</code>)</li>
+<li><code>/Users/milan/Documents/Amaea/amaea-db/supabase/migrations/</code> — timestamped copies for Supabase CLI compatibility (<code>20260511000001_*.sql</code> through <code>20260517000030_*.sql</code>); used by local <code>supabase db reset</code> and the RLS test suite</li>
 </ul>
-<p>When adding a new migration: create both copies. The numbered version is human-readable, the timestamped version is what <code>supabase db push</code> would use if we set that up.</p>
+<p>When adding a new migration: create both copies. The numbered version is human-readable, the timestamped version is what <code>supabase db push</code> would use if we set that up. Use the next sequential number for the canonical file and a UTC timestamp greater than the previous one for the supabase copy.</p>
 <h3 id="applying-a-migration">Applying a migration</h3>
 <p>The historic pattern is <strong>paste into the Supabase Dashboard SQL editor</strong> — not CLI push. To apply migration N:</p>
 <pre><code># 1. Copy to clipboard
@@ -232,26 +239,57 @@ open &quot;https://supabase.com/dashboard/project/sqsqyhcrkwjopwlosqlh/sql/new&q
 <td>attitude_to_risk as 19th canonical type</td>
 </tr>
 <tr>
+<td>022</td>
+<td><code>vulnerable_review_overdue_flag</code></td>
+<td>Adds <code>vulnerable_review_overdue</code> to <code>risk_flags.type</code> CHECK</td>
+</tr>
+<tr>
 <td>023</td>
 <td><code>rmar_manual_entries</code></td>
-<td>Firm-entered RMAR figures table (keyed by firm_id + period) — supplemented by revenue_record extraction (026)</td>
+<td>Firm-entered RMAR Section A/B/D figures (jsonb data)</td>
 </tr>
 <tr>
 <td>024</td>
-<td><code>pii_policy_doc_type</code></td>
-<td>pii_policy as firm-level doc type — drives RMAR Section E</td>
+<td><code>pii_policy</code></td>
+<td><code>pii_policy</code> doc type + PII renewal/expiry/cover risk flags</td>
 </tr>
 <tr>
 <td>025</td>
 <td><code>firm_advisers</code></td>
-<td>Canonical firm-managed adviser roster (source of truth for RMAR Section G) — managed via /settings/advisers UI + /api/firm-advisers</td>
+<td>Canonical adviser roster (Section E source)</td>
 </tr>
 <tr>
 <td>026</td>
-<td><code>revenue_record_doc_type</code></td>
-<td>revenue_record as firm-level doc type — auto-populates RMAR Section B (P&amp;L), Section D (Reg Capital), Section B sub-block (revenue breakdown)</td>
+<td><code>revenue_record</code></td>
+<td><code>revenue_record</code> doc type for RMAR Section A/D auto-populate</td>
+</tr>
+<tr>
+<td>027</td>
+<td><code>subscription_tiers</code></td>
+<td>Renames <code>firms.subscription_tier</code> to <code>essentials/professional/scale/enterprise</code></td>
+</tr>
+<tr>
+<td>028</td>
+<td><code>ai_usage_monthly</code></td>
+<td>Per-firm monthly counter for AI assistant fair-use rate limits</td>
+</tr>
+<tr>
+<td>029</td>
+<td><code>ai_usage_increment_rpc</code></td>
+<td><strong>Atomic</strong> <code>increment_ai_usage()</code> RPC — replaces broken SELECT-then-UPDATE in <code>lib/ai/usage.ts</code> that lost up to 94% of concurrent increments</td>
+</tr>
+<tr>
+<td>030</td>
+<td><code>documents_content_hash</code></td>
+<td><code>documents.content_hash</code> column + index — drives the 24h server-side idempotency check in the import route (avoids duplicate Anthropic calls + duplicate documents/flags on browser retry)</td>
+</tr>
+<tr>
+<td>031</td>
+<td><code>compliance_events_fk_set_null</code></td>
+<td>Drops the <code>no_delete_compliance_events</code> + <code>no_update_compliance_events</code> rules (they were rewriting FK-cascade DELETEs to NOTHING and breaking firm/user deletion). Switches <code>compliance_events.firm_id</code> FK from CASCADE to SET NULL so audit trail survives firm deletion. End-user append-only protection is preserved by the existing RLS posture (only a SELECT policy → default-deny on UPDATE/DELETE)</td>
 </tr>
 </tbody></table>
+<p>All migrations through 031 are applied to production as of 2026-05-17.</p>
 <h2 id="cron-inventory">Cron inventory</h2>
 <p>Defined in <code>amaea-app/vercel.json</code>:</p>
 <pre><code>{
@@ -434,7 +472,7 @@ open &quot;https://supabase.com/dashboard/project/sqsqyhcrkwjopwlosqlh/sql/new&q
 <li><strong>Cap too low for upload volume</strong> — if 31+ documents have been uploaded recently, the oldest get pushed out of the top 30. Either increase the limit (in <code>getRecentImportContext()</code> in chat route) or click Refresh to add them to firm embeddings.</li>
 </ol>
 <h3 id="document-upload-classified-as-the-wrong-type">Document upload classified as the wrong type</h3>
-<p>Inspect the response in the import page result card. The classifier returns one of 21 types. If consistently wrong on a category of document:</p>
+<p>Inspect the response in the import page result card. The classifier returns one of 19 types. If consistently wrong on a category of document:</p>
 <ol>
 <li>Check <code>TYPE_DESCRIPTIONS</code> in <code>extract.ts</code> for the type — does it cover the synonyms Claude is seeing?</li>
 <li>Add more synonyms (e.g. &quot;TVAS&quot; for <code>db_transfer_report</code>)</li>
@@ -446,6 +484,30 @@ open &quot;https://supabase.com/dashboard/project/sqsqyhcrkwjopwlosqlh/sql/new&q
 <h3 id="chat-says-no-data-but-the-data-is-in-the-db">Chat says &quot;no data&quot; but the data is in the DB</h3>
 <p>Usually a deploy lag issue — the cap bump or schema change hasn&#x27;t propagated yet. Re-deploy: <code>npx vercel --prod</code> from <code>amaea-app/</code> and wait 1 minute.</p>
 <p>If still failing after deploy: check the actual response payload via the Network tab in browser DevTools. The chat sends back <code>{ text, ragUsed }</code>. Check that <code>ragUsed: true</code>. If false, the Voyage API key may be missing or invalid.</p>
+<h3 id="document-import-fails-with-413-request-entity-too-large">Document import fails with 413 / &quot;Request Entity Too Large&quot;</h3>
+<p><strong>Vercel functions cap incoming request bodies at 4.5 MB.</strong> When a user uploads a single very large PDF, or a multi-file group whose combined size exceeds 4.5 MB, the upload fails at the Vercel boundary <em>before</em> the import route even runs — so there&#x27;s nothing in our logs to debug.</p>
+<p>Typical thresholds in practice:</p>
+<ul>
+<li>Single 5-page scanned PDF (image-heavy): often ~2 MB → safe</li>
+<li>Single 20-page scanned PDF: often ~6-8 MB → fails</li>
+<li>Multi-file group of 5 scanned pages × 1 MB each: 5 MB → fails</li>
+</ul>
+<p>User-side workarounds:</p>
+<ol>
+<li><strong>Compress the PDF</strong> before upload (Preview on macOS: File → Export → Quartz Filter → Reduce File Size)</li>
+<li><strong>Split a multi-page scanned PDF</strong> into smaller groups and upload them separately (the multi-file grouping toggle on the import page joins them logically)</li>
+<li><strong>Re-scan at lower DPI</strong> (200 dpi is plenty for text recognition; 600 dpi is usually overkill for IFA documents)</li>
+</ol>
+<p>Longer-term server-side options (not yet built):</p>
+<ul>
+<li>Stream uploads directly to Supabase Storage from the browser via a signed URL, then notify the import route by reference — bypasses the Vercel function body entirely. ~1 day of work.</li>
+<li>Move large-file ingestion to a background worker (e.g. Vercel Queues) so the function only triggers extraction rather than hosting the bytes.</li>
+</ul>
+<h3 id="document-import-idempotency-window">Document import idempotency window</h3>
+<p>The import route hashes uploaded files (SHA-256, or hash-of-hashes for multi-file groups) and short-circuits if the same content was already imported for the firm within the last <strong>24 hours</strong>. This avoids duplicate Anthropic vision calls, duplicate <code>documents</code> rows, and duplicate auto-raised flags on browser retries.</p>
+<p>If a user intentionally re-imports the same file within 24h (e.g. to re-trigger flag evaluation after a schema change), the response is:</p>
+<pre><code>{ &quot;success&quot;: true, &quot;duplicate&quot;: true, &quot;document_id&quot;: &quot;...&quot;, &quot;message&quot;: &quot;This file was already imported within the last 24h...&quot; }</code></pre>
+<p>To force a re-import within the window: change the file in any way before re-uploading (a single-byte edit, or re-save through a different PDF tool, produces a different SHA-256). Window length is <code>IDEMPOTENCY_WINDOW_HOURS</code> at the top of <code>src/app/api/import/documents/route.ts</code>.</p>
 <h2 id="disaster-recovery">Disaster recovery</h2>
 <h3 id="database-backup">Database backup</h3>
 <p>Supabase Pro tier includes automatic daily backups with 7-day retention. To trigger a manual backup:</p>
@@ -499,8 +561,8 @@ node scripts/ingest-scraped.mjs</code></pre>
 │   ├── vercel.json                      Cron schedule
 │   └── package.json
 ├── amaea-db/                            SQL migrations
-│   ├── migrations/                      Numbered (001-021)
-│   └── supabase/migrations/             Timestamped copies
+│   ├── migrations/                      Numbered (001-031)
+│   └── supabase/migrations/             Timestamped copies (used by local Supabase + RLS tests)
 ├── amaea-website/                       Marketing site (separate Vercel project)
 ├── amaea-brand/                         Internal intranet (mockup, GitHub)
 ├── docs/                                This documentation

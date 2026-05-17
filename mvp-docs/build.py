@@ -19,7 +19,9 @@ from pathlib import Path
 from textwrap import dedent
 
 ROOT = Path(__file__).parent
-DOCS_DIR = ROOT.parent / "docs"
+# Canonical docs live at /Users/milan/Documents/Amaea/docs/, one level up
+# from amaea-brand/, not inside it.
+DOCS_DIR = ROOT.parent.parent / "docs"
 
 # -------------------------------------------------------------------
 # Metadata for each doc: drives cover page + nav + filename

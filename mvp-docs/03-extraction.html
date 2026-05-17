@@ -21,7 +21,7 @@
   <div class="cover-body">
     <p class="cover-eyebrow">Doc 03 · Compliance evaluation · technical reviewers</p>
     <h1 class="cover-title">Document Extraction & Compliance Flag System</h1>
-    <p class="cover-sub">The core IP. All 21 document types, the classify-then-extract pipeline, per-type schemas, multi-page grouping, the auto-flag-raising system, and the FCA rule mapping table.</p>
+    <p class="cover-sub">The core IP. All 19 document types, the classify-then-extract pipeline, per-type schemas, multi-page grouping, the auto-flag-raising system, and the FCA rule mapping table.</p>
   </div>
 
   <div class="cover-foot">
@@ -50,15 +50,15 @@
 </section>
 
 <nav class="doc-nav">
-  <a href="./">← All documents</a>
+  <a href="index.html">← All documents</a>
   <span class="doc-nav-meta">Doc 03 · ~40 min read</span>
 </nav>
 
 <article class="doc">
 <p>This is the core IP. Amaea reads IFA compliance documents using Claude vision, extracts compliance-critical fields into validated structured data, and raises specific compliance flags with FCA rule citations when fields are missing or incorrect.</p>
-<p>This document covers: the 21 canonical document types, their per-type schemas, the classify-then-extract pipeline, multi-page document grouping, the auto-flag-raising system, and the complete FCA rule mapping table.</p>
-<h2 id="the-21-document-types">The 21 document types</h2>
-<p>Each type has its own Zod schema (<code>amaea-app/src/lib/extraction/schemas.ts</code>) that defines the extracted fields and the flag-raising rules. The classifier (<code>extract.ts</code>) routes each upload to the right schema. 19 are client-level; 2 are firm-level (<code>pii_policy</code> and <code>revenue_record</code>) and feed the RMAR return directly.</p>
+<p>This document covers: the 19 canonical document types, their per-type schemas, the classify-then-extract pipeline, multi-page document grouping, the auto-flag-raising system, and the complete FCA rule mapping table.</p>
+<h2 id="the-19-document-types">The 19 document types</h2>
+<p>Each type has its own Zod schema (<code>amaea-app/src/lib/extraction/schemas.ts</code>) that defines the extracted fields and the flag-raising rules. The classifier (<code>extract.ts</code>) routes each upload to the right schema.</p>
 <h3 id="client-level-documents-extend-baseclientdocfields">Client-level documents (extend <code>BaseClientDocFields</code>)</h3>
 <p>Most documents share a base set of fields (document date, adviser name, client name + reference, signed-by-client booleans, copy-filed/copy-sent booleans, extraction confidence). These are spread into each schema via <code>...BaseClientDocFields</code>.</p>
 <ol>
@@ -88,15 +88,9 @@
 <li><strong><code>sales_file_cover</code></strong> — Compliance File Index / Cover Sheet Extends <code>BaseClientDocFields</code>. Fields: <code>recommendationDate</code>, <strong><code>factFindPresent</code></strong>, <strong><code>suitabilityReportPresent</code></strong>, <code>applicationFormsPresent</code>, <code>illustrationsPresent</code>, <code>termsOfBusinessPresent</code>, <strong><code>complianceOfficerReviewed</code></strong>, <code>complianceOfficerName</code>, <code>complianceReviewDate</code>.</li>
 <li><strong><code>attitude_to_risk</code></strong> — Standalone ATR Questionnaire Extends <code>BaseClientDocFields</code>. Fields: <code>questionnaireProvider</code> (e.g. &quot;FinaMetrica Pro&quot;), <code>questionsAnswered</code> (number), <code>totalQuestions</code> (number), <code>riskRating</code> (string — e.g. &quot;Conservative (3/10)&quot;), <code>riskProfileCategory</code> (conservative / moderately_conservative / balanced / moderately_aggressive / aggressive), <strong><code>reviewedWithClient</code></strong> (boolean), <code>capacityForLossDiscussed</code>.</li>
 </ol>
-<h3 id="firm-level-doc-types-added-16-may-2026">Firm-level doc types added 16 May 2026</h3>
-<p>These two types are firm-level (no <code>client_id</code>) and drive the RMAR return directly. They are extracted from documents uploaded under the firm itself rather than against a client record.</p>
-<ol>
-<li><strong><code>pii_policy</code></strong> — Firm-Level Professional Indemnity Insurance Schedule Drives RMAR Section E. Fields: <code>insurerName</code>, <code>policyReference</code>, <code>policyHolderName</code>, <strong><code>coverLimitSingleClaim</code></strong> (number), <strong><code>coverLimitAggregate</code></strong> (number), <code>excess</code>, <code>policyStartDate</code>, <strong><code>renewalDate</code></strong>, <code>coveredActivities</code> (text), <code>excludedActivities</code> (text), <code>extractionConfidence</code>. Flag rules: <code>pii_expired</code> (critical when <code>renewalDate &lt; today</code>), <code>pii_renewal_due_soon</code> (high when &lt; 30 days / medium when &lt; 60 days), <code>pii_cover_insufficient</code> (high if cover below the FCA floor — ~£1.05M single claim / ~£1.55M aggregate).</li>
-<li><strong><code>revenue_record</code></strong> — Firm-Level Income / P&amp;L Record Auto-populates RMAR Section B (P&amp;L), Section D (Regulatory Capital), and the Section B sub-block (revenue breakdown). Fields: <code>sourceDocument</code>, <code>accountingPeriodStart</code>, <code>accountingPeriodEnd</code>, <strong><code>totalRegulatedRevenue</code></strong> (number), <code>initialAdviceIncome</code>, <code>ongoingServiceIncome</code>, <code>productCommissionIncome</code>, <code>nonRegulatedRevenue</code>, <strong><code>shareholdersFunds</code></strong>, <code>intangibles</code>, <strong><code>totalCapitalResources</code></strong>, <code>investmentBusinessIncome</code>, <code>pensionBusinessIncome</code>, <code>insuranceProtectionIncome</code>, <code>mortgageBusinessIncome</code>, <code>extractionConfidence</code>. Flag rule: <code>extraction_uncertain</code> raised when the Section B line items don&#x27;t sum to <code>totalRegulatedRevenue</code> (±£1) or the Section D categories don&#x27;t sum to <code>totalRegulatedRevenue</code>.</li>
-</ol>
 <h2 id="the-extraction-pipeline">The extraction pipeline</h2>
 <h3 id="step-1-classify">Step 1: Classify</h3>
-<p>Single Claude vision call. Output is one of the 21 type identifiers, or <code>unknown</code>.</p>
+<p>Single Claude vision call. Output is one of the 19 type identifiers, or <code>unknown</code>.</p>
 <p>Function: <code>classifyDocument(files: FileInput[])</code> in <code>extract.ts</code>.</p>
 <pre><code>Prompt (single-file):
   &quot;You are a UK FCA compliance document classifier. Look at this document
@@ -657,10 +651,6 @@ Prompt (multi-file):
 <li><code>017_document_metadata.sql</code> — adds <code>documents.metadata jsonb</code>, <code>risk_flags.source_document_id</code> + <code>metadata</code>, extends both type CHECK constraints, partial unique indexes (client-level vs doc-level flags)</li>
 <li><code>020_more_doc_types.sql</code> — adds 4 doc types: expression_of_wish, application_form, portfolio_snapshot, sales_file_cover</li>
 <li><code>021_atr_doc_type.sql</code> — adds attitude_to_risk as 19th canonical type</li>
-<li><code>023_rmar_manual_entries.sql</code> — adds <code>rmar_manual_entries</code> table for firm-entered RMAR figures (sections that aren&#x27;t yet derivable from extracted data). Key: (firm_id, period_start, period_end); <code>data jsonb</code>; RLS by <code>firm_id</code>. Largely supplemented by <code>revenue_record</code> extraction from migration 026.</li>
-<li><code>024_pii_policy_doc_type.sql</code> — adds <code>pii_policy</code> as a firm-level doc type (no <code>client_id</code>). Drives RMAR Section E.</li>
-<li><code>025_firm_advisers.sql</code> — adds <code>firm_advisers</code> table as the canonical, firm-managed adviser roster: <code>name</code>, <code>fca_individual_ref</code>, <code>qualifications[]</code>, <code>regulated_activities[]</code>, <code>status</code> (active / left), start/end dates. RLS by <code>firm_id</code>. Source of truth for RMAR Section G.</li>
-<li><code>026_revenue_record_doc_type.sql</code> — adds <code>revenue_record</code> as a firm-level doc type. Auto-populates RMAR Section B (P&amp;L), Section D (Regulatory Capital), and the Section B sub-block (revenue breakdown).</li>
 </ul>
 <h2 id="test-corpus">Test corpus</h2>
 <p>43 synthetic test PDFs in <code>/Users/milan/Documents/Amaea/test-samples/pdfs/</code>. Generated by:</p>

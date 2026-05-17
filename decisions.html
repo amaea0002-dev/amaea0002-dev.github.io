@@ -127,6 +127,26 @@
 
     <div class="decision-card">
       <div class="decision-meta">
+        <span class="decision-date">17 May 2026</span>
+        <span class="badge badge-green">Confirmed</span>
+      </div>
+      <div class="decision-title">MVP-readiness hardening pass — all engineering blockers closed</div>
+      <div class="decision-decision">A full MVP-readiness audit on 17 May 2026 found five engineering blockers and ten stress-test risks that the earlier "Phase 1 functionally complete" label had glossed over. All were closed in a single session: hardcoded demo firm name and RMAR deadline removed from AI prompts, multi-tenant data isolation hole closed across 11 API routes, atomic AI usage counter (was losing 50–94% of concurrent increments), document-import idempotency, AR-sweep concurrency cap, explicit Anthropic + Voyage timeouts, and RLS test coverage extended from 32 → 46 tests against the full 31-migration production schema. Migrations 029, 030, and 031 applied to production. Only remaining MVP item is non-engineering: legal drafting of Privacy Policy / DPA / Terms of Service.</div>
+      <div class="decision-rationale"><strong>Why:</strong> before this work the product would have actively embarrassed Amaea in front of a compliance officer (the AI literally claimed every real firm was monitoring "Sterling IFA Ltd"; a fake RMAR deadline was quoted to every user; under stress the rate-limit counter dropped 94% of increments so customers could exceed their tier silently). None of these were visible in the test suite or the live demo because the seed only had one firm. Closing the gaps before any real IFA touches the product is the floor for credible pilot conversations. See <code>mvp-hardening-2026-05-17</code> memory + migrations 029–031 in <code>amaea-db</code>.</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-meta">
+        <span class="decision-date">17 May 2026</span>
+        <span class="badge badge-green">Confirmed</span>
+      </div>
+      <div class="decision-title">compliance_events append-only enforcement: RLS-only, not DB rules</div>
+      <div class="decision-decision">Migration 031 dropped the two PostgreSQL RULES (<code>no_delete_compliance_events</code>, <code>no_update_compliance_events</code>) that previously rewrote any UPDATE/DELETE on the audit table to NOTHING at the DB level. End-user append-only protection is preserved by the existing RLS posture (only a SELECT policy exists → default-deny on UPDATE/DELETE/INSERT for authenticated users). Also changed <code>compliance_events.firm_id</code> FK from CASCADE to SET NULL so audit history survives firm deletion.</div>
+      <div class="decision-rationale"><strong>Why:</strong> the rules silently rewrote child DELETEs to no-ops when a parent firm/user was deleted — the FK trigger then expected N rows deleted and got 0, aborting the whole transaction with "referential integrity query gave unexpected result … due to a rule having rewritten the query." This blocked legitimate admin operations (cleaning up test firms, removing stale auth users). RLS provides equivalent protection at the user layer and doesn't interfere with FK cascades. Keeping the audit trail alive after firm deletion is also the more correct behaviour for FCA 7-year retention.</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-meta">
         <span class="decision-date">16 May 2026</span>
         <span class="badge badge-green">Confirmed</span>
       </div>

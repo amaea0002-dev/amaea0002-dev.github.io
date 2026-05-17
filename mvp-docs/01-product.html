@@ -50,7 +50,7 @@
 </section>
 
 <nav class="doc-nav">
-  <a href="./">← All documents</a>
+  <a href="index.html">← All documents</a>
   <span class="doc-nav-meta">Doc 01 · ~20 min read</span>
 </nav>
 
@@ -71,8 +71,8 @@
 <li><strong>The FCA has been data-led in supervision since 2022.</strong> Firms that look bad on regulatory data (overdue reviews, complaints data inconsistencies, missing documentation patterns) are identifiable before a supervision visit even takes place. Amaea is in effect a &quot;look as good as you should&quot; tool for firms that ARE compliant but can&#x27;t easily prove it.</li>
 </ol>
 <h2 id="key-features-mvp">Key features (MVP)</h2>
-<h3 id="1-document-import-with-21-type-extraction">1. Document import with 21-type extraction</h3>
-<p>Drag and drop any IFA compliance document. The system classifies it as one of 21 canonical types — 19 client-level (Suitability Report, Fact Find, Client Agreement, Annual Review, DB Transfer Report, Vulnerability Assessment, Consumer Duty Outcome, Letter of Authority, Product Illustration, Terms of Business, Complaint Record, Ongoing Service Evidence, AML/CDD, Training &amp; Competency, Expression of Wish, Application Form, Portfolio Snapshot, Sales File Cover, Attitude to Risk) plus 2 firm-level (PII Policy Schedule, Revenue / P&amp;L Record) which feed the RMAR return directly — extracts the compliance-critical fields per the document type, validates against a strict Zod schema, and persists to the database.</p>
+<h3 id="1-document-import-with-19-type-extraction">1. Document import with 19-type extraction</h3>
+<p>Drag and drop any IFA compliance document. The system classifies it as one of 19 canonical types (Suitability Report, Fact Find, Client Agreement, Annual Review, DB Transfer Report, Vulnerability Assessment, Consumer Duty Outcome, Letter of Authority, Product Illustration, Terms of Business, Complaint Record, Ongoing Service Evidence, AML/CDD, Training &amp; Competency, Expression of Wish, Application Form, Portfolio Snapshot, Sales File Cover, Attitude to Risk), extracts the compliance-critical fields per the document type, validates against a strict Zod schema, and persists to the database.</p>
 <p>Multi-part documents (a 5-part Suitability Report, an 18-page ATR questionnaire) can be uploaded as a group via a single toggle — the system treats them as one consolidated document and extracts across all pages.</p>
 <p>Full detail: see <strong><a href="03-extraction.html">03 — Document Extraction &amp; Compliance Flag System</a></strong>.</p>
 <h3 id="2-auto-flag-raising-with-fca-rule-citations">2. Auto-flag-raising with FCA rule citations</h3>
