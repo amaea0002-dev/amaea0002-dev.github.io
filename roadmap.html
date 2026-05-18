@@ -225,7 +225,7 @@
         </div>
         <span class="badge badge-green">In Progress · ~95% complete</span>
       </div>
-      <div class="phase-items">
+      <div class="phase-items" data-collapse-after="5" data-collapse-selector=".phase-item">
         <div class="phase-item"><span class="phase-icon done">✓</span> Core compliance dashboard <span style="margin-left:auto;display:inline-flex;gap:6px;"><span style="font-size: 0.65rem;color:var(--gray-500);">M</span><span class="badge badge-green" style="font-size:0.6rem;padding:1px 6px;">Shipped</span></span></div>
         <div class="phase-item"><span class="phase-icon done">✓</span> Client journey tracking <span style="margin-left:auto;display:inline-flex;gap:6px;"><span style="font-size: 0.65rem;color:var(--gray-500);">M</span><span class="badge badge-green" style="font-size:0.6rem;padding:1px 6px;">Shipped</span></span></div>
         <div class="phase-item"><span class="phase-icon done">✓</span> Intelliflo read integration <span style="margin-left:auto;display:inline-flex;gap:6px;"><span style="font-size: 0.65rem;color:var(--gray-500);">M</span><span class="badge badge-green" style="font-size:0.6rem;padding:1px 6px;">Shipped</span></span></div>
@@ -254,7 +254,7 @@
         </div>
         <span class="badge badge-plum">Planned</span>
       </div>
-      <div class="phase-items">
+      <div class="phase-items" data-collapse-after="5" data-collapse-selector=".phase-item">
         <div class="phase-item"><span class="phase-icon done">✓</span> AI compliance assistant (with dual RAG + 11,645-chunk FCA corpus) <span style="margin-left:auto;display:inline-flex;gap:6px;"><span style="font-size: 0.65rem;color:var(--gray-500);">M</span><span class="badge badge-green" style="font-size:0.6rem;padding:1px 6px;">Shipped (internal — kept conservative on marketing site)</span></span></div>
         <div class="phase-item"><span class="phase-icon todo">○</span> Annual review suitability auto-generation <span style="margin-left:auto;display:inline-flex;gap:6px;"><span style="font-size: 0.65rem;color:var(--gray-500);">M</span><span class="badge badge-amber" style="font-size:0.6rem;padding:1px 6px;">Med</span></span></div>
         <div class="phase-item"><span class="phase-icon todo">○</span> Consumer Duty annual assessment report <span style="margin-left:auto;display:inline-flex;gap:6px;"><span style="font-size: 0.65rem;color:var(--gray-500);">M</span><span class="badge badge-green" style="font-size:0.6rem;padding:1px 6px;">High</span></span></div>
@@ -273,7 +273,7 @@
         </div>
         <span class="badge badge-plum">Planned</span>
       </div>
-      <div class="phase-items">
+      <div class="phase-items" data-collapse-after="5" data-collapse-selector=".phase-item">
         <div class="phase-item"><span class="phase-icon todo">○</span> Full integration suite (Salesforce + additional CRMs) <span style="margin-left:auto;display:inline-flex;gap:6px;"><span style="font-size: 0.65rem;color:var(--gray-500);">M</span><span class="badge badge-amber" style="font-size:0.6rem;padding:1px 6px;">Med</span></span></div>
         <div class="phase-item"><span class="phase-icon todo">○</span> Board-level reporting packs <span style="margin-left:auto;display:inline-flex;gap:6px;"><span style="font-size: 0.65rem;color:var(--gray-500);">HM</span><span class="badge badge-green" style="font-size:0.6rem;padding:1px 6px;">High</span></span></div>
         <div class="phase-item"><span class="phase-icon todo">○</span> FCA visit preparation toolkit <span style="margin-left:auto;display:inline-flex;gap:6px;"><span style="font-size: 0.65rem;color:var(--gray-500);">H</span><span class="badge badge-amber" style="font-size:0.6rem;padding:1px 6px;">Med</span></span></div>
@@ -292,7 +292,7 @@
         </div>
         <span class="badge badge-gray">Future</span>
       </div>
-      <div class="phase-items">
+      <div class="phase-items" data-collapse-after="5" data-collapse-selector=".phase-item">
         <div class="phase-item"><span class="phase-icon todo">○</span> Public launch · September 2028 <span style="margin-left:auto;display:inline-flex;gap:6px;"><span style="font-size: 0.65rem;color:var(--gray-500);">HM</span><span class="badge badge-green" style="font-size:0.6rem;padding:1px 6px;">Anchor date</span></span></div>
         <div class="phase-item"><span class="phase-icon todo">○</span> Enterprise / network tier <span style="margin-left:auto;display:inline-flex;gap:6px;"><span style="font-size: 0.65rem;color:var(--gray-500);">H</span><span class="badge badge-amber" style="font-size:0.6rem;padding:1px 6px;">Med</span></span></div>
         <div class="phase-item"><span class="phase-icon todo">○</span> Custom AI training on firm policies <span style="margin-left:auto;display:inline-flex;gap:6px;"><span style="font-size: 0.65rem;color:var(--gray-500);">M</span><span class="badge badge-amber" style="font-size:0.6rem;padding:1px 6px;">Med</span></span></div>
@@ -416,6 +416,36 @@
       if (emailEl) emailEl.textContent = id.email;
     })
     .catch(function(){});
+})();
+</script>
+<script>
+// Progressive disclosure — show top N items per .phase-items, expand on click.
+(function () {
+  document.querySelectorAll('[data-collapse-after]').forEach(function (container) {
+    var visible  = parseInt(container.dataset.collapseAfter, 10) || 5;
+    var sel      = container.dataset.collapseSelector || '*';
+    var items    = Array.prototype.slice.call(container.querySelectorAll(':scope > ' + sel));
+    if (items.length <= visible) return;
+
+    var hidden = items.slice(visible);
+    hidden.forEach(function (el) { el.style.display = 'none'; });
+
+    var expanded = false;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'collapse-toggle';
+
+    function render() {
+      hidden.forEach(function (el) { el.style.display = expanded ? '' : 'none'; });
+      btn.setAttribute('aria-expanded', String(expanded));
+      btn.innerHTML = expanded
+        ? 'Show fewer <span class="arrow">&#9662;</span>'
+        : 'Show all ' + items.length + ' (' + hidden.length + ' more) <span class="arrow">&#9662;</span>';
+    }
+    btn.addEventListener('click', function () { expanded = !expanded; render(); });
+    container.appendChild(btn);
+    render();
+  });
 })();
 </script>
 </body>
