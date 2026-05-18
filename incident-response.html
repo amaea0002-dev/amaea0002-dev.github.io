@@ -64,6 +64,13 @@
     .ir-template pre { background: var(--gray-50, #fafafa); border: 1px solid var(--gray-200); border-radius: var(--r-md); padding: 14px 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--gray-700); line-height: 1.65; white-space: pre-wrap; word-break: break-word; margin: 0; }
     .ir-template pre .placeholder { background: var(--plum-tint); color: var(--plum); padding: 1px 4px; border-radius: 3px; }
 
+    .ir-checklist { list-style: none; padding: 0; margin: 0 0 16px; }
+    .ir-checklist li { padding: 13px 18px; border: 1px solid var(--gray-200); border-radius: var(--r-md); margin-bottom: 8px; font-size: 0.84rem; color: var(--gray-700); line-height: 1.6; background: var(--white); }
+    .ir-checklist li:last-child { margin-bottom: 0; }
+    .ir-checklist li strong { color: var(--gray-900); font-weight: 700; }
+    .ir-checklist li code { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; padding: 1px 5px; background: var(--gray-50, #fafafa); border: 1px solid var(--gray-200); border-radius: 4px; color: var(--gray-900); }
+    .ir-checklist-footer { font-size: 0.78rem; color: var(--gray-500); margin: 14px 0 0; line-height: 1.6; }
+
     .ir-flow-step { display: flex; gap: 14px; padding: 14px 16px; border: 1px solid var(--gray-200); border-radius: var(--r-md); margin-bottom: 8px; background: var(--white); }
     .ir-flow-q { font-size: 0.74rem; font-weight: 800; color: var(--plum); text-transform: uppercase; letter-spacing: 0.08em; min-width: 32px; }
     .ir-flow-body { flex: 1; }
@@ -243,6 +250,7 @@
         <a href="#ico-flow"><span class="ir-toc-num">E</span> ICO decision flow</a>
         <a href="#postmortem"><span class="ir-toc-num">F</span> Post-incident review</a>
         <a href="#contacts"><span class="ir-toc-num">G</span> Vendor &amp; regulator contacts</a>
+        <a href="#quarterly-audits"><span class="ir-toc-num">H</span> Quarterly access audits</a>
       </div>
     </div>
 
@@ -963,19 +971,21 @@ FCA notified: <span class="placeholder">[Yes/No/N/A]</span></pre>
       </div>
     </div>
 
-    <div class="ir-section" id="quarterly-audits" style="margin-top:18px;">
+    <div class="ir-section" id="quarterly-audits">
       <h2>H · Quarterly access &amp; supply-chain audits</h2>
       <p class="ir-section-sub">Run every quarter (next: 2026-08-18). Triggered by the April 2026 Context.ai / Vercel OAuth compromise — supply-chain attacks now arrive via vendor OAuth integrations, not just compromised packages.</p>
-      <ul class="sec-list" style="list-style:none;padding:0;">
-        <li style="padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:0.86rem;color:var(--gray-700);line-height:1.6;"><strong style="color:var(--gray-900);">Vercel</strong> — team members + Integrations. Remove inactive members; audit every OAuth-connected app for active need + minimum scopes.</li>
-        <li style="padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:0.86rem;color:var(--gray-700);line-height:1.6;"><strong style="color:var(--gray-900);">GitHub org</strong> — members, OAuth apps, deploy keys. Same questions.</li>
-        <li style="padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:0.86rem;color:var(--gray-700);line-height:1.6;"><strong style="color:var(--gray-900);">Supabase</strong> — team + API tokens. Confirm only ES256 signing key is "in use"; legacy JWT keys revoked. Audit non-canonical API keys.</li>
-        <li style="padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:0.86rem;color:var(--gray-700);line-height:1.6;"><strong style="color:var(--gray-900);">Google Workspace</strong> — admin.google.com → Security → API permissions + third-party app access. Confirm only known apps reach amaea.co.uk mail/drive.</li>
-        <li style="padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:0.86rem;color:var(--gray-700);line-height:1.6;"><strong style="color:var(--gray-900);">Cloudflare</strong> — API tokens + Access service tokens. Revoke any unused.</li>
-        <li style="padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:0.86rem;color:var(--gray-700);line-height:1.6;"><strong style="color:var(--gray-900);">1Password Family Organizer</strong> — confirm only Milan + recovery vault. Audit guest invites / shared items.</li>
-        <li style="padding:10px 0;font-size:0.86rem;color:var(--gray-700);line-height:1.6;"><strong style="color:var(--gray-900);">Anthropic / Voyage / Resend / Sentry</strong> — confirm only known team accounts have access; rotate abandoned API keys.</li>
+
+      <ul class="ir-checklist">
+        <li><strong>Vercel</strong> — team members + Integrations. Remove inactive members; audit every OAuth-connected app for active need + minimum scopes.</li>
+        <li><strong>GitHub org</strong> — members, OAuth apps, deploy keys. Same questions.</li>
+        <li><strong>Supabase</strong> — team + API tokens. Confirm only ES256 signing key is &ldquo;in use&rdquo;; legacy JWT keys revoked. Audit non-canonical API keys.</li>
+        <li><strong>Google Workspace</strong> — admin.google.com &rarr; Security &rarr; API permissions + third-party app access. Confirm only known apps reach <code>amaea.co.uk</code> mail/drive.</li>
+        <li><strong>Cloudflare</strong> — API tokens + Access service tokens. Revoke any unused.</li>
+        <li><strong>1Password Family Organizer</strong> — confirm only Milan + recovery vault. Audit guest invites / shared items.</li>
+        <li><strong>Anthropic / Voyage / Resend / Sentry</strong> — confirm only known team accounts have access; rotate abandoned API keys.</li>
       </ul>
-      <p style="font-size:0.78rem;color:var(--gray-500);margin-top:14px;line-height:1.6;">Document the audit in the <a href="decisions" style="color:var(--plum);text-decoration:underline;">decisions log</a>. If any anomaly is found, treat as a potential <a href="#rb-provider" style="color:var(--plum);text-decoration:underline;">Runbook 3 (vendor compromise)</a> trigger.</p>
+
+      <p class="ir-checklist-footer">Document the audit in the <a href="decisions">decisions log</a>. If any anomaly is found, treat as a potential <a href="#rb-provider">Runbook 3 (vendor compromise)</a> trigger.</p>
     </div>
 
   </div>

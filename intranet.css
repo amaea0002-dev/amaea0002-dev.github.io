@@ -13,7 +13,7 @@
   /* ── Plum ── */
   --plum:        #40243F;   /* primary action / brand */
   --plum-deep:   #2A1729;   /* sidebar background, dark hero strips */
-  --plum-dark:   #2A1729;   /* alias for legacy refs — same as plum-deep */
+  --plum-dark:   #2D1A2C;   /* canonical per brand.html swatch (was #2A1729 — alias for plum-deep) */
   --plum-mid:    #5A3558;
   --plum-soft:   #6B5C7B;   /* aligned with app token.ink3 for secondary plum text */
   --plum-tint:   rgba(64,36,63,0.06);  /* matches token.plumSoft */
