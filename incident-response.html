@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Incident Response | Amaea Intranet</title>
+  <link rel="icon" href="logo-plum.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="intranet.css"/>
+  <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <style>
+    .ir-toc { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+    .ir-toc a { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-md); text-decoration: none; color: var(--gray-700); font-size: 0.82rem; font-weight: 500; transition: border-color .15s ease, color .15s ease, background .15s ease; }
+    .ir-toc a:hover { border-color: var(--plum-border); color: var(--plum); background: var(--plum-tint); }
+    .ir-toc a .ir-toc-num { font-size: 0.68rem; font-weight: 700; color: var(--gray-400); min-width: 16px; }
+
+    .ir-section { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-lg); padding: 24px 26px; margin-bottom: 16px; }
+    .ir-section h2 { font-size: 1.05rem; font-weight: 800; color: var(--gray-900); letter-spacing: -0.02em; margin: 0 0 4px; }
+    .ir-section .ir-section-sub { font-size: 0.78rem; color: var(--gray-500); margin: 0 0 18px; }
+
+    .ir-sev { display: grid; grid-template-columns: 70px 1fr; gap: 16px 18px; padding: 14px 16px; background: var(--gray-50, #fafafa); border-radius: var(--r-md); margin-bottom: 8px; align-items: start; }
+    .ir-sev-label { font-size: 0.74rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--white); padding: 6px 10px; border-radius: 999px; text-align: center; height: fit-content; }
+    .ir-sev-1 .ir-sev-label { background: #b91c1c; }
+    .ir-sev-2 .ir-sev-label { background: #c2410c; }
+    .ir-sev-3 .ir-sev-label { background: #b45309; }
+    .ir-sev-body strong { color: var(--gray-900); font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
+    .ir-sev-body p { font-size: 0.8rem; color: var(--gray-600); margin: 0 0 6px; line-height: 1.55; }
+    .ir-sev-examples { font-size: 0.74rem; color: var(--gray-500); }
+    .ir-sev-examples code { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; padding: 1px 6px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 4px; }
+
+    .ir-step-grid { display: grid; grid-template-columns: 44px 1fr; gap: 14px 16px; }
+    .ir-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--plum); color: white; font-weight: 800; font-size: 0.78rem; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .ir-step-body { padding-bottom: 14px; border-bottom: 1px solid var(--gray-100, #f3f4f6); }
+    .ir-step-grid > div:last-child { border-bottom: none; padding-bottom: 0; }
+    .ir-step-title { font-size: 0.86rem; font-weight: 700; color: var(--gray-900); margin: 0 0 4px; }
+    .ir-step-body p { font-size: 0.8rem; color: var(--gray-600); margin: 0 0 6px; line-height: 1.6; }
+
+    .runbook { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-lg); margin-bottom: 14px; overflow: hidden; }
+    .runbook summary { padding: 18px 24px; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 14px; user-select: none; }
+    .runbook summary::-webkit-details-marker { display: none; }
+    .runbook summary:hover { background: var(--plum-tint); }
+    .runbook[open] summary { background: var(--plum-tint); border-bottom: 1px solid var(--gray-200); }
+    .runbook-chip { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 8px; border-radius: 4px; color: white; }
+    .chip-sev1 { background: #b91c1c; }
+    .chip-sev2 { background: #c2410c; }
+    .chip-sev3 { background: #b45309; }
+    .runbook-title { font-size: 0.92rem; font-weight: 700; color: var(--gray-900); flex: 1; letter-spacing: -0.01em; }
+    .runbook-toggle { font-size: 0.74rem; color: var(--gray-400); font-weight: 600; }
+    .runbook[open] .runbook-toggle { color: var(--plum); }
+    .runbook-body { padding: 20px 24px 22px; }
+    .runbook-body h4 { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-500); font-weight: 800; margin: 18px 0 8px; }
+    .runbook-body h4:first-child { margin-top: 0; }
+    .runbook-body p { font-size: 0.84rem; color: var(--gray-700); line-height: 1.65; margin: 0 0 10px; }
+    .runbook-body ol, .runbook-body ul { margin: 0 0 12px; padding-left: 22px; }
+    .runbook-body li { font-size: 0.84rem; color: var(--gray-700); line-height: 1.65; margin-bottom: 6px; }
+    .runbook-body code { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; padding: 1px 6px; background: var(--gray-50, #fafafa); border: 1px solid var(--gray-200); border-radius: 4px; color: var(--gray-900); }
+    .runbook-body pre { background: var(--gray-50, #fafafa); border: 1px solid var(--gray-200); border-radius: var(--r-md); padding: 14px 16px; overflow-x: auto; margin: 8px 0 14px; }
+    .runbook-body pre code { background: none; border: none; padding: 0; font-size: 0.78rem; line-height: 1.6; }
+
+    .ir-template { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-lg); padding: 20px 24px; margin-bottom: 14px; }
+    .ir-template-title { font-size: 0.88rem; font-weight: 700; color: var(--gray-900); margin: 0 0 4px; }
+    .ir-template-meta { font-size: 0.74rem; color: var(--gray-500); margin: 0 0 12px; }
+    .ir-template pre { background: var(--gray-50, #fafafa); border: 1px solid var(--gray-200); border-radius: var(--r-md); padding: 14px 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--gray-700); line-height: 1.65; white-space: pre-wrap; word-break: break-word; margin: 0; }
+    .ir-template pre .placeholder { background: var(--plum-tint); color: var(--plum); padding: 1px 4px; border-radius: 3px; }
+
+    .ir-flow-step { display: flex; gap: 14px; padding: 14px 16px; border: 1px solid var(--gray-200); border-radius: var(--r-md); margin-bottom: 8px; background: var(--white); }
+    .ir-flow-q { font-size: 0.74rem; font-weight: 800; color: var(--plum); text-transform: uppercase; letter-spacing: 0.08em; min-width: 32px; }
+    .ir-flow-body { flex: 1; }
+    .ir-flow-body strong { font-size: 0.84rem; color: var(--gray-900); display: block; margin-bottom: 4px; }
+    .ir-flow-body p { font-size: 0.8rem; color: var(--gray-600); margin: 0; line-height: 1.55; }
+    .ir-flow-yes { color: #047857; font-weight: 600; }
+    .ir-flow-no { color: #c2410c; font-weight: 600; }
+
+    .contact-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    .contact-table th { text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-500); font-weight: 700; padding: 10px 12px; border-bottom: 1px solid var(--gray-200); }
+    .contact-table td { padding: 12px; border-bottom: 1px solid var(--gray-100, #f3f4f6); color: var(--gray-700); vertical-align: top; }
+    .contact-table td.vendor { font-weight: 700; color: var(--gray-900); }
+    .contact-table code { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; padding: 1px 5px; background: var(--gray-50, #fafafa); border: 1px solid var(--gray-200); border-radius: 4px; }
+
+    .ir-callout { display: flex; gap: 12px; padding: 14px 18px; border-radius: var(--r-md); margin-bottom: 14px; }
+    .ir-callout-red { background: #fef2f2; border: 1px solid #fecaca; }
+    .ir-callout-amber { background: #fffbeb; border: 1px solid #fde68a; }
+    .ir-callout-blue { background: #eff6ff; border: 1px solid #bfdbfe; }
+    .ir-callout strong { color: var(--gray-900); font-weight: 700; }
+    .ir-callout p { font-size: 0.82rem; color: var(--gray-700); margin: 0; line-height: 1.6; }
+
+    @media (max-width: 720px) {
+      .ir-sev { grid-template-columns: 1fr; }
+      .ir-step-grid { grid-template-columns: 32px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="logo-white.png" alt="Amaea"/>
+    <span class="sidebar-logo-badge">Intranet</span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-label">Workspace</div>
+    <a href="index" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="brand" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Brand
+    </a>
+    <a href="team" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Team
+    </a>
+    <a href="docs" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Documents
+    </a>
+    <a href="mvp-docs/" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Product Docs
+    </a>
+    <a href="features" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      Product Features
+    </a>
+    <a href="roadmap" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Roadmap
+    </a>
+    <a href="decisions" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Decisions
+    </a>
+    <a href="eval-v2" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      AI Eval
+    </a>
+    <a href="sector-research" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Sector Research
+    </a>
+    <a href="investor" class="sidebar-item">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      Funding
+    </a>
+    <div class="sidebar-label">Operations</div>
+    <a href="incident-response" class="sidebar-item active">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Incident Response
+    </a>
+    <div class="sidebar-label">External</div>
+    <a href="https://amaea.co.uk" class="sidebar-item" target="_blank">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website <span class="ext">↗</span>
+    </a>
+    <a href="https://app.amaea.co.uk" class="sidebar-item" target="_blank">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      App <span class="ext">↗</span>
+    </a>
+  </nav>
+  <div class="sidebar-footer" style="position:relative;">
+    <div class="user-select-panel" id="userSelectPanel">
+      <button class="user-select-btn" data-user="hasna">
+        <div class="usa" style="background:linear-gradient(135deg,#4C2C4B,#8B6189);">H</div>
+        <div class="user-select-info"><div class="user-select-name">Hasna Sahul Hameed</div><div class="user-select-role">CEO &amp; Co-Founder</div></div>
+        <span class="user-select-tick">✓</span>
+      </button>
+      <button class="user-select-btn" data-user="milan">
+        <div class="usa" style="background:linear-gradient(135deg,#1a4080,#4292c6);">M</div>
+        <div class="user-select-info"><div class="user-select-name">Milan Sajiv</div><div class="user-select-role">CTO &amp; Co-Founder</div></div>
+        <span class="user-select-tick" style="opacity:0;">✓</span>
+      </button>
+    </div>
+    <div class="sidebar-user sidebar-user-clickable" id="sidebarUserArea" title="Switch user">
+      <div class="sidebar-avatar" id="sidebarAvatar">H</div>
+      <div style="flex:1;min-width:0;">
+        <div class="sidebar-user-name" id="sidebarUserName">Hasna Sahul Hameed</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">CEO &amp; Co-Founder</div>
+      </div>
+      <svg width="11" height="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;margin-left:auto;"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </div>
+</aside>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="topbar-hamburger" id="menuBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <span class="bc-root">Amaea</span>
+    <span class="bc-sep">/</span>
+    <span class="bc-current">Incident Response</span>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-date" id="topbar-date"></span>
+    <div class="topbar-user">
+      <button class="topbar-user-trigger" id="topbarUserTrigger" aria-label="Account">?</button>
+      <div class="topbar-user-panel" id="topbarUserPanel" role="menu">
+        <div class="topbar-user-identity">
+          <div class="topbar-user-identity-name" id="topbarUserName">Signed in</div>
+          <div class="topbar-user-identity-email" id="topbarUserEmail">—</div>
+        </div>
+        <div class="topbar-user-actions">
+          <a class="topbar-user-action danger" href="/cdn-cgi/access/logout"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign out</a>
+        </div>
+      </div>
+    </div>
+    <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+  </div>
+</header>
+
+<main class="main">
+  <div class="content">
+
+    <div class="page-header">
+      <p class="page-eyebrow">Operations</p>
+      <h1 class="page-title">Incident Response Plan</h1>
+      <p class="page-sub">Concrete playbooks for the realistic security and availability incidents Amaea can face. Replaces improvisation under pressure. <span style="color:var(--gray-500);font-weight:500;">· Last reviewed 18 May 2026.</span></p>
+    </div>
+
+    <div class="ir-callout ir-callout-red">
+      <div>
+        <strong>If you are responding to an incident right now</strong>
+        <p>Jump straight to the matching runbook below (table of contents). Open <a href="mvp-docs/05-ops.html" style="color:var(--plum);font-weight:600;">Ops handbook</a> in a second tab for system context. Markdown copy of this page is committed at <code>amaea-app/docs/incident-response.md</code> in case the intranet itself is unavailable.</p>
+      </div>
+    </div>
+
+    <div class="ir-section">
+      <h2>Quick navigation</h2>
+      <p class="ir-section-sub">Pick the matching incident — every runbook is a self-contained checklist.</p>
+      <div class="ir-toc">
+        <a href="#framework"><span class="ir-toc-num">A</span> When to declare an incident</a>
+        <a href="#first-hour"><span class="ir-toc-num">B</span> First-hour playbook</a>
+        <a href="#roles"><span class="ir-toc-num">C</span> Roles &amp; responsibilities</a>
+        <a href="#rb-leaked-key"><span class="ir-toc-num">1</span> Leaked API key</a>
+        <a href="#rb-data-exposure"><span class="ir-toc-num">2</span> Cross-firm data exposure</a>
+        <a href="#rb-provider"><span class="ir-toc-num">3</span> Vendor breach announcement</a>
+        <a href="#rb-auth-bypass"><span class="ir-toc-num">4</span> Auth bypass discovered</a>
+        <a href="#rb-email"><span class="ir-toc-num">5</span> Email account compromise</a>
+        <a href="#rb-dns"><span class="ir-toc-num">6</span> DNS / domain compromise</a>
+        <a href="#rb-cost"><span class="ir-toc-num">7</span> Cost-explosion attack</a>
+        <a href="#templates"><span class="ir-toc-num">D</span> Communication templates</a>
+        <a href="#ico-flow"><span class="ir-toc-num">E</span> ICO decision flow</a>
+        <a href="#postmortem"><span class="ir-toc-num">F</span> Post-incident review</a>
+        <a href="#contacts"><span class="ir-toc-num">G</span> Vendor &amp; regulator contacts</a>
+      </div>
+    </div>
+
+    <!-- Framework: severity -->
+    <div class="ir-section" id="framework">
+      <h2>A · When to declare an incident</h2>
+      <p class="ir-section-sub">Pick the severity in the first 5 minutes. Err one level higher — easy to downgrade, costly to upgrade late.</p>
+
+      <div class="ir-sev ir-sev-1">
+        <div class="ir-sev-label">Sev 1</div>
+        <div class="ir-sev-body">
+          <strong>Critical — declare immediately</strong>
+          <p>Confirmed personal data leaving the system to an unauthorised party, confirmed cross-firm data exposure, total outage of <code>app.amaea.co.uk</code> &gt; 15 min, or compromise of any production secret being actively exploited.</p>
+          <p class="ir-sev-examples">Examples: <code>customer reports seeing another firm's data</code> · <code>Anthropic announces a breach affecting us</code> · <code>admin email account compromised</code> · <code>RLS bypass discovered in prod</code></p>
+        </div>
+      </div>
+      <div class="ir-sev ir-sev-2">
+        <div class="ir-sev-label">Sev 2</div>
+        <div class="ir-sev-body">
+          <strong>Significant — declare within 1 hour</strong>
+          <p>Suspected but unconfirmed data exposure, leaked secret with no evidence of exploitation, single feature degradation (RAG returning errors, RMAR generation broken), or cost-explosion attack against an endpoint.</p>
+          <p class="ir-sev-examples">Examples: <code>secret accidentally committed to git</code> · <code>vendor security advisory but exposure unknown</code> · <code>cron job failing repeatedly</code></p>
+        </div>
+      </div>
+      <div class="ir-sev ir-sev-3">
+        <div class="ir-sev-label">Sev 3</div>
+        <div class="ir-sev-body">
+          <strong>Minor — log and address within 24 hours</strong>
+          <p>Contained, low-impact issue. Single user affected, no data exposure, no regulator obligation triggered. Document, then fix in normal cadence.</p>
+          <p class="ir-sev-examples">Examples: <code>single user can't log in</code> · <code>email delivery delayed but not lost</code> · <code>minor UI flaw with security implication</code></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- First-hour playbook -->
+    <div class="ir-section" id="first-hour">
+      <h2>B · First-hour playbook</h2>
+      <p class="ir-section-sub">Run these five steps in order for any Sev 1 or Sev 2 incident. Don't skip ahead — order matters under stress.</p>
+
+      <div class="ir-step-grid">
+        <div class="ir-step-num">1</div>
+        <div class="ir-step-body">
+          <p class="ir-step-title">Detect &amp; verify</p>
+          <p>Confirm what's actually happening before acting. A customer report saying "I see another firm's data" might be a screenshot from before today's RLS migration. A "leak alert" might be a public Supabase anon key (these are designed to be public). Verify the claim against the actual production state before you trigger anything else.</p>
+        </div>
+        <div class="ir-step-num">2</div>
+        <div class="ir-step-body">
+          <p class="ir-step-title">Declare &amp; assign DRI</p>
+          <p>Pick the severity (above). Pick the DRI (Directly Responsible Individual) — for technical incidents, Milan; for customer/regulator-facing comms, Hasna. State both explicitly in a message to the other co-founder so there's no ambiguity. Use Signal or phone — don't rely on email under pressure.</p>
+        </div>
+        <div class="ir-step-num">3</div>
+        <div class="ir-step-body">
+          <p class="ir-step-title">Contain</p>
+          <p>Stop the bleeding before investigating. Specific containment actions per incident type are in the runbooks below. The default rule: if a credential might be compromised, rotate it; if a route might be exposing data, take it down; if an account might be compromised, sign all sessions out and force a password reset. Containment first, root cause second.</p>
+        </div>
+        <div class="ir-step-num">4</div>
+        <div class="ir-step-body">
+          <p class="ir-step-title">Communicate</p>
+          <p>Internal: keep the other co-founder informed with short factual updates ("Containment done. Investigating scope. Will update in 30 min."). External: do not communicate to customers until you have confirmed facts — speculation in writing becomes evidence later. ICO clock starts when Sev 1 with personal data is confirmed (see ICO decision flow). FCA notification only applies once we have signed pilot customers.</p>
+        </div>
+        <div class="ir-step-num">5</div>
+        <div class="ir-step-body">
+          <p class="ir-step-title">Document — even before resolution</p>
+          <p>Open a timestamped note (Apple Notes or a markdown file in a private gist). Log: detection time, what was observed, who was told, what was done, what was assumed. This is your evidence base for the postmortem AND for any regulator filing. Don't trust your memory — incidents distort time perception. Write it as it happens.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Roles -->
+    <div class="ir-section" id="roles">
+      <h2>C · Roles &amp; responsibilities</h2>
+      <p class="ir-section-sub">A 2-person team can't have a real on-call rotation. Roles are by domain, not shift.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;">
+        <div style="padding:18px 20px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);">
+          <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--plum);font-weight:800;margin:0 0 6px;">Technical DRI</p>
+          <p style="font-size:0.92rem;font-weight:700;color:var(--gray-900);margin:0 0 6px;">Milan Sajiv</p>
+          <p style="font-size:0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">Owns containment + investigation + technical remediation. Has root access to Supabase, Vercel, Cloudflare, GitHub, 1Password admin. Makes the call to rotate, take down, or revoke. Decides if the bug is in our code or a vendor's.</p>
+        </div>
+        <div style="padding:18px 20px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);">
+          <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--plum);font-weight:800;margin:0 0 6px;">Comms &amp; regulator lead</p>
+          <p style="font-size:0.92rem;font-weight:700;color:var(--gray-900);margin:0 0 6px;">Hasna Sahul Hameed</p>
+          <p style="font-size:0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">Owns external communication: customer notifications, ICO breach reports, FCA notifications (once we have pilot customers). Owns the narrative — never speculate to customers; only state confirmed facts. Co-signs Sev 1 declarations.</p>
+        </div>
+        <div style="padding:18px 20px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);">
+          <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--plum);font-weight:800;margin:0 0 6px;">Backstop</p>
+          <p style="font-size:0.92rem;font-weight:700;color:var(--gray-900);margin:0 0 6px;">Either co-founder if the other is unreachable</p>
+          <p style="font-size:0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">If Milan is unreachable, Hasna can do the basics: take down the app via Vercel pause-deployment, rotate the Resend key from 1Password, and post a status update. Full credential access lives in 1Password (Families recovery vault); deeper technical remediation waits.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RUNBOOKS -->
+    <div class="ir-section" id="runbooks-anchor" style="background:none;border:none;padding:0;margin:24px 0 8px;">
+      <h2 style="font-size:1.1rem;margin-bottom:6px;">Runbooks — by incident type</h2>
+      <p class="ir-section-sub">Each runbook is self-contained. Click to expand under pressure.</p>
+    </div>
+
+    <!-- Runbook 1: leaked API key -->
+    <details class="runbook" id="rb-leaked-key">
+      <summary>
+        <span class="runbook-chip chip-sev2">Sev 2</span>
+        <span class="runbook-title">1 · Leaked / exposed API key</span>
+        <span class="runbook-toggle">Expand →</span>
+      </summary>
+      <div class="runbook-body">
+        <h4>Triggers</h4>
+        <p>A production secret is suspected exposed: accidental commit to a public repo, paste into a chat/issue, screen-share recording, screenshot in a deck, vendor-side leak. Sev 1 if there is active evidence of exploitation; Sev 2 otherwise.</p>
+
+        <h4>Containment (do these in order — same flow we used on 18 May 2026 for the full 6-key rotation)</h4>
+        <ol>
+          <li><strong>Identify the key.</strong> Which env var? Which Vercel project (<code>amaea</code>, <code>amaea-brand</code>, <code>amaea.ai</code>)? Some keys live in multiple projects (e.g. Resend).</li>
+          <li><strong>Open the 1Password Secure Note</strong> for that project. This is the master record.</li>
+          <li><strong>Generate the replacement</strong> in the vendor dashboard. Copy the new value to a temp note (Apple Notes with FaceID lock).</li>
+          <li><strong>Update 1Password</strong> with the new value first — never skip this.</li>
+          <li><strong>Update <code>.env.local</code></strong> in <code>amaea-app/</code> (or matching directory): <code>open -e /Users/milan/Documents/Amaea/amaea-app/.env.local</code></li>
+          <li><strong>Update Vercel</strong> — Dashboard → project → Settings → Environment Variables. Keep the <strong>Sensitive</strong> flag ticked. Update in every project that holds the key.</li>
+          <li><strong>Redeploy</strong>: <code>cd /Users/milan/Documents/Amaea/amaea-app &amp;&amp; npx vercel --prod --yes</code></li>
+          <li><strong>Test the new key works</strong> before revoking the old. Run the matching endpoint: chat for Anthropic, embedding endpoint for Voyage, ingest cron for INGEST_SECRET, signin + cron for Supabase.</li>
+          <li><strong>Revoke the old key</strong> in the vendor dashboard.</li>
+          <li><strong>Delete the temp note.</strong> 1Password is now the only place the new value lives.</li>
+        </ol>
+
+        <h4>Special cases</h4>
+        <ul>
+          <li><strong>Supabase JWT signing key:</strong> use the standby-promote-revoke flow. ES256 (ECC P-256) is the SOC 2-aligned algorithm. Do not revoke previous keys until the new <code>sb_publishable_…</code> / <code>sb_secret_…</code> keys are deployed and tested.</li>
+          <li><strong>Resend:</strong> shared between <code>amaea</code> and <code>amaea.ai</code> projects. Update both before revoking.</li>
+          <li><strong>NEXT_PUBLIC_*</strong> keys are public by design. <code>NEXT_PUBLIC_SUPABASE_URL</code> being exposed is not an incident. Rotation rules apply to secret-side keys only.</li>
+        </ul>
+
+        <h4>Investigation</h4>
+        <ul>
+          <li>Check vendor usage logs for unfamiliar IPs / unusual call patterns in the window the key was exposed.</li>
+          <li>Anthropic + Resend + Voyage all expose usage dashboards with timestamps. Pull the last 7 days.</li>
+          <li>If the key was committed to git: check whether the commit was pushed to a remote. If yes, assume exposed. Use BFG or <code>git filter-repo</code> to scrub history if the repo is public.</li>
+        </ul>
+
+        <h4>Customer / regulator notification</h4>
+        <p>No personal data exposed by a leaked API key alone → no ICO notification, no customer notification required. If usage logs show actual data exfiltration via the leaked key, this escalates to <a href="#rb-data-exposure">Runbook 2 (data exposure)</a>.</p>
+      </div>
+    </details>
+
+    <!-- Runbook 2: data exposure -->
+    <details class="runbook" id="rb-data-exposure">
+      <summary>
+        <span class="runbook-chip chip-sev1">Sev 1</span>
+        <span class="runbook-title">2 · Cross-firm data exposure / RLS break</span>
+        <span class="runbook-toggle">Expand →</span>
+      </summary>
+      <div class="runbook-body">
+        <h4>Triggers</h4>
+        <p>Customer reports seeing another firm's data, internal audit discovers an RLS policy gap, a query returns rows from firms other than the authenticated user's. This is the highest-stakes incident type — it directly breaches Consumer Duty and UK GDPR.</p>
+
+        <div class="ir-callout ir-callout-red">
+          <p><strong>72-hour clock starts now.</strong> If personal data is involved and there is risk to data subjects' rights/freedoms, ICO must be notified within 72 hours of awareness (UK GDPR Art. 33). Document the awareness timestamp in the first 5 minutes.</p>
+        </div>
+
+        <h4>Containment</h4>
+        <ol>
+          <li><strong>Verify the report.</strong> Get exact details: which user, which page, what they saw, what time. A screenshot is gold. Do not assume the customer is wrong; do not assume they are right.</li>
+          <li><strong>Identify the affected route.</strong> If it's a single API route, take it down via Vercel: Dashboard → Project → Deployments → most recent → Promote to production a known-good build, OR roll back to the last known-good deployment.</li>
+          <li><strong>If the scope is unclear, take down the whole app:</strong> Vercel Dashboard → amaea → Settings → General → Pause Deployments. Better short outage than continued exposure.</li>
+          <li><strong>Run the RLS test suite</strong> from <code>amaea-app/scripts/test-rls.mjs</code> (or the canonical 46-test suite) against the live database. A test failure tells you exactly which table/policy broke.</li>
+          <li><strong>Audit the <code>compliance_events</code> table</strong> for any cross-firm reads in the exposure window. <code>SELECT ... WHERE created_at &gt; '2026-05-18 09:00' AND user_firm_id != target_firm_id</code> (or similar). This is your scope assessment.</li>
+        </ol>
+
+        <h4>Investigation</h4>
+        <ul>
+          <li><strong>What was the root cause?</strong> Missing RLS policy, service_role bypass on a server-side route that should have used the user client, hard-coded firm ID, broken JOIN that crossed firm boundaries?</li>
+          <li><strong>How long was the gap open?</strong> Check git blame on the affected migration/route to find when it was introduced.</li>
+          <li><strong>Who was exposed and to whom?</strong> Identify both data subjects (firms whose data leaked) and recipients (who saw it).</li>
+        </ul>
+
+        <h4>Remediation</h4>
+        <ol>
+          <li>Fix the underlying policy / route. Write a regression test before merging.</li>
+          <li>Add a row to <code>compliance_events</code> documenting the fix.</li>
+          <li>Redeploy. Re-run the full 46-test RLS suite.</li>
+          <li>Manually verify with a multi-firm test scenario in a non-prod environment.</li>
+        </ol>
+
+        <h4>Notification — required</h4>
+        <ol>
+          <li><strong>ICO:</strong> see <a href="#ico-flow">decision flow</a>. Default position for confirmed cross-firm exposure with personal data = notify. Use the <a href="#tpl-ico">ICO breach notification template</a>.</li>
+          <li><strong>Affected customers:</strong> use the <a href="#tpl-breach">customer breach notification template</a>. Send only after ICO is filed (or in parallel for Sev 1, but never before you have confirmed facts).</li>
+          <li><strong>FCA:</strong> only relevant once we have signed pilot customers. For pre-pilot, ICO is the only required regulator.</li>
+        </ol>
+      </div>
+    </details>
+
+    <!-- Runbook 3: vendor compromise -->
+    <details class="runbook" id="rb-provider">
+      <summary>
+        <span class="runbook-chip chip-sev1">Sev 1</span>
+        <span class="runbook-title">3 · Vendor breach announcement (Supabase / Vercel / Anthropic / Cloudflare)</span>
+        <span class="runbook-toggle">Expand →</span>
+      </summary>
+      <div class="runbook-body">
+        <h4>Triggers</h4>
+        <p>A critical vendor publicly announces a breach, security incident, or unauthorised access. Severity depends on what they hold: Supabase (full data tier) and Cloudflare (TLS + DNS) are Sev 1; Anthropic, Voyage, Resend are Sev 2 unless the announcement specifies actual data exposure affecting us.</p>
+
+        <h4>Containment</h4>
+        <ol>
+          <li><strong>Read the advisory carefully.</strong> Identify: dates of exposure, what was accessed, whether our project is in the affected list (Vercel and Supabase notify per-org if so), what action they recommend.</li>
+          <li><strong>Rotate every secret the vendor could have learned.</strong> For Supabase: all `sb_secret_…` and JWT signing key. For Vercel: every env var on the platform (it cached them). For Cloudflare: API tokens, Access service tokens, audit DNS for tampering.</li>
+          <li><strong>Force re-authentication</strong> of every active session on app.amaea.co.uk if the breach affects Supabase Auth. SQL: <code>UPDATE auth.users SET aud = aud;</code> followed by signing key revoke (forces re-issue).</li>
+          <li><strong>Increase monitoring.</strong> Watch the vendor's status page + Twitter/X feed for updates. Subscribe to their security mailing list if not already.</li>
+        </ol>
+
+        <h4>Investigation</h4>
+        <ul>
+          <li>Determine our exposure window. Was our project provisioned during the affected period?</li>
+          <li>Pull our own logs from the vendor (request history, login history) for the exposure window. Look for unfamiliar activity.</li>
+          <li>If the vendor offers a forensic audit option, request it.</li>
+        </ul>
+
+        <h4>Notification</h4>
+        <p>If the vendor confirms our data was exposed → ICO notification (72-hour clock starts at our awareness, not the vendor's). If exposure is suspected but not confirmed → use the <a href="#tpl-incident-no-breach">non-breach incident template</a> to inform customers proactively. Hasna leads comms. Refer to the vendor's official advisory in our customer notification — do not paraphrase.</p>
+      </div>
+    </details>
+
+    <!-- Runbook 4: auth bypass -->
+    <details class="runbook" id="rb-auth-bypass">
+      <summary>
+        <span class="runbook-chip chip-sev1">Sev 1</span>
+        <span class="runbook-title">4 · Auth bypass discovered</span>
+        <span class="runbook-toggle">Expand →</span>
+      </summary>
+      <div class="runbook-body">
+        <h4>Triggers</h4>
+        <p>A route is found to be accessible without authentication, or with a wrong-user authentication (token from firm A grants access to firm B's data). Discovered internally (audit), externally (responsible disclosure), or actively exploited (logs).</p>
+
+        <h4>Containment</h4>
+        <ol>
+          <li><strong>Take the affected route down</strong> immediately. Rollback to a known-good deployment is fastest if it's a recent regression; otherwise add a guard returning 503 and redeploy.</li>
+          <li><strong>If exploitation is suspected:</strong> revoke all active sessions (Supabase Auth → users → bulk action → sign out all), force password resets, regenerate the JWT signing key.</li>
+          <li><strong>Audit access logs</strong> for the affected route in the exposure window. Look for unauthenticated 200s, or 200s where the authenticated user's firm_id doesn't match the firm_id in the response.</li>
+        </ol>
+
+        <h4>Investigation</h4>
+        <ul>
+          <li>How did it slip past review? Was the middleware-redirect missing? Was the API route missing its <code>getUser()</code> check? Was the RLS policy default-allow rather than default-deny?</li>
+          <li>Check for sibling routes with the same pattern — bugs of this class are usually copy-paste.</li>
+        </ul>
+
+        <h4>Remediation + regression test</h4>
+        <ol>
+          <li>Fix the auth check.</li>
+          <li>Add a test that the route returns 401 when called unauthenticated AND 403 (or filtered results) when called with the wrong firm context.</li>
+          <li>Sweep all sibling routes for the same class of bug. Often there are 5–10.</li>
+        </ol>
+
+        <h4>Notification</h4>
+        <p>If logs show actual unauthorised access to personal data → treat as <a href="#rb-data-exposure">Runbook 2 (data exposure)</a>. If logs show only unauthenticated 200s with no personal data returned → no ICO obligation, but disclose to affected customers proactively if they exist.</p>
+      </div>
+    </details>
+
+    <!-- Runbook 5: email compromise -->
+    <details class="runbook" id="rb-email">
+      <summary>
+        <span class="runbook-chip chip-sev1">Sev 1</span>
+        <span class="runbook-title">5 · Email account compromise (founders / shared mailboxes)</span>
+        <span class="runbook-toggle">Expand →</span>
+      </summary>
+      <div class="runbook-body">
+        <h4>Triggers</h4>
+        <p><code>milan@amaea.co.uk</code>, <code>hasna@amaea.co.uk</code>, <code>founders@amaea.co.uk</code> (Google Group), or <code>amaea0002@gmail.com</code> shows signs of unauthorised access: unfamiliar sign-in alert, sent emails you didn't send, forwarding rules you didn't add, missing emails.</p>
+
+        <h4>Containment</h4>
+        <ol>
+          <li><strong>Sign out everywhere.</strong> Google Account → Security → Your devices → Sign out all other sessions.</li>
+          <li><strong>Reset the password</strong> from a different device (not the one suspected compromised). Use a long, unique passphrase from 1Password.</li>
+          <li><strong>Audit MFA settings.</strong> Check no backup phone or alternate 2FA method has been added without your knowledge. Remove if found.</li>
+          <li><strong>Audit Google account permissions.</strong> Workspace Admin → Security → check connected apps, third-party access, forwarding rules, vacation responders, filters.</li>
+          <li><strong>For shared mailboxes (founders@):</strong> rotate the Google Workspace admin password and any external integrations that posted there.</li>
+        </ol>
+
+        <h4>Investigation</h4>
+        <ul>
+          <li>Pull the last 30 days of login history from Google Account → Security → Recent security activity. Note unfamiliar IPs/locations/devices.</li>
+          <li>Check the Sent folder for any messages you didn't send.</li>
+          <li>Check forwarding rules — common attacker move is to set a silent forward to an external address.</li>
+          <li>If the account is the admin account on Vercel / Supabase / Cloudflare / GitHub / 1Password: treat all of those as potentially compromised → trigger the <a href="#rb-leaked-key">full secret rotation runbook</a>.</li>
+        </ul>
+
+        <h4>Notification</h4>
+        <p>If the account had access to customer-data systems (Supabase admin, GitHub, Vercel) → assume customer data was accessible → see <a href="#ico-flow">ICO decision flow</a>. If it's a purely external-facing inbox with no admin access, no regulator notification, but Hasna should still warn any customers whose emails were in that inbox of potential phishing risk.</p>
+      </div>
+    </details>
+
+    <!-- Runbook 6: DNS -->
+    <details class="runbook" id="rb-dns">
+      <summary>
+        <span class="runbook-chip chip-sev1">Sev 1</span>
+        <span class="runbook-title">6 · DNS / domain compromise</span>
+        <span class="runbook-toggle">Expand →</span>
+      </summary>
+      <div class="runbook-body">
+        <h4>Triggers</h4>
+        <p>Unauthorised changes to DNS records, the registrar account, or Cloudflare Access policies. Symptoms: <code>amaea.co.uk</code> resolves to an unexpected IP, MX records changed (email routing hijacked), Cloudflare Access policies modified, registrar account password reset email you didn't request.</p>
+
+        <h4>Containment</h4>
+        <ol>
+          <li><strong>Confirm the change is unauthorised.</strong> Check Cloudflare audit log: Dashboard → Account → Audit log. Filter on DNS / Access / Zone settings in the last 7 days.</li>
+          <li><strong>Revert any unauthorised records</strong> from the audit log's "previous value" column. Order: A/AAAA records for app.amaea.co.uk first, MX records second, TXT (SPF/DMARC/DKIM) third.</li>
+          <li><strong>Rotate Cloudflare credentials:</strong> API tokens, account password, MFA reset, all Access service tokens. Revoke all active Cloudflare API tokens from Dashboard → My Profile → API Tokens.</li>
+          <li><strong>Rotate the registrar account.</strong> Where is amaea.co.uk registered? (Likely IONOS or Cloudflare Registrar — verify.) Reset that account's password and audit its login history.</li>
+          <li><strong>Lock the domain at the registrar</strong> (registrar lock / transfer lock). Prevents transfer-out attacks during recovery.</li>
+        </ol>
+
+        <h4>Investigation</h4>
+        <ul>
+          <li>How did they get in? Email account compromise → registrar password reset is the most common path. Check Runbook 5 in parallel.</li>
+          <li>Check Cloudflare audit log for the full sequence of changes. Note the actor's IP.</li>
+          <li>Verify MX records are correct → if MX was changed, email may have been intercepted. Treat as Runbook 5 + check for any password resets initiated during the MX-changed window (those reset emails went to the attacker).</li>
+        </ul>
+
+        <h4>Notification</h4>
+        <p>If MX was changed (email rerouted), all customer communication during that window may have been intercepted. Notify customers directly via known-good channels (not email — use phone or LinkedIn if available). Trigger ICO decision flow if personal data was in any intercepted email.</p>
+      </div>
+    </details>
+
+    <!-- Runbook 7: cost -->
+    <details class="runbook" id="rb-cost">
+      <summary>
+        <span class="runbook-chip chip-sev2">Sev 2</span>
+        <span class="runbook-title">7 · Cost-explosion attack (runaway AI usage / rate limit breach)</span>
+        <span class="runbook-toggle">Expand →</span>
+      </summary>
+      <div class="runbook-body">
+        <h4>Triggers</h4>
+        <p>Anthropic or Voyage usage dashboard spikes above expected baseline. Vercel function invocations spike. Single firm exceeds tier cap by &gt;10x. Public chat endpoint (<code>/api/public/chat</code>) being abused by bots.</p>
+
+        <h4>Containment</h4>
+        <ol>
+          <li><strong>Identify which endpoint is hot.</strong> Vercel logs filtered by route, sorted by call count over the last hour.</li>
+          <li><strong>For <code>/api/public/chat</code>:</strong> already rate-limited by IP, but verify the limit is firing (200s should drop, 429s should appear). If not, the IP-based limit may need tightening or Cloudflare Bot Fight Mode enabling.</li>
+          <li><strong>For <code>/api/chat</code> (authenticated):</strong> per-firm monthly cap (migration 028, <code>ai_usage_monthly</code>) should already be enforcing. If a single firm is hitting cap, that's working as designed. If multiple firms are spiking, check whether the cap counter is functioning (it had concurrency issues pre-029).</li>
+          <li><strong>If a specific actor is responsible:</strong> sign their session out, suspend the user via Supabase Auth, contact them out of band.</li>
+          <li><strong>If the platform is being broadly abused:</strong> temporarily disable the affected endpoint (return 503 from the route, redeploy).</li>
+        </ol>
+
+        <h4>Investigation</h4>
+        <ul>
+          <li>Anthropic dashboard: which API key (we should only have one prod key — if multiple, that's a separate problem). Calls per hour, average tokens, cost.</li>
+          <li>Was the spike from one IP, one firm, one route? Distribution matters for the fix.</li>
+          <li>Did the rate limit fail to fire? If yes, that's a code fix; if no, the limit may just need lowering.</li>
+        </ul>
+
+        <h4>Notification</h4>
+        <p>Internal only unless there's a customer-impacting outcome (e.g. a legitimate firm hit cap and was blocked due to attacker noise). No ICO obligation for cost incidents alone — they don't involve personal data exposure.</p>
+      </div>
+    </details>
+
+    <!-- Templates -->
+    <div class="ir-section" id="templates">
+      <h2>D · Communication templates</h2>
+      <p class="ir-section-sub">Pre-written. Fill placeholders only. Hasna sends. Never speculate — only state confirmed facts.</p>
+
+      <div class="ir-template" id="tpl-breach">
+        <p class="ir-template-title">D.1 · Customer notification — confirmed personal data breach</p>
+        <p class="ir-template-meta">Use within 72 hours of confirmation. Hasna sends from hasna@amaea.co.uk. CC milan@.</p>
+<pre>Subject: Important security notice from Amaea — action may be required
+
+Dear <span class="placeholder">[customer name]</span>,
+
+I'm writing to inform you of a security incident affecting your data on the Amaea
+platform. On <span class="placeholder">[date]</span> at approximately <span class="placeholder">[time]</span>,
+we identified <span class="placeholder">[brief factual description — e.g. "that a configuration
+error in our database access controls allowed authenticated users from one firm
+to view a limited set of data belonging to another firm"]</span>.
+
+WHAT WAS AFFECTED
+The data accessible during this incident included:
+- <span class="placeholder">[specific data categories — e.g. "client names, NI numbers, and review notes"]</span>
+- <span class="placeholder">[etc.]</span>
+
+We have confirmed this affected <span class="placeholder">[N]</span> records belonging to your firm.
+
+WHAT WE DID
+- <span class="placeholder">[Containment action — e.g. "Took the affected feature offline at HH:MM"]</span>
+- <span class="placeholder">[Remediation — e.g. "Deployed a corrected access policy at HH:MM"]</span>
+- <span class="placeholder">[Verification — e.g. "Re-ran our full row-level security test suite (46 tests passed)"]</span>
+
+We notified the Information Commissioner's Office on <span class="placeholder">[date]</span>
+under UK GDPR Article 33.
+
+WHAT WE RECOMMEND YOU DO
+- <span class="placeholder">[Specific actions — e.g. "Inform any affected clients per your firm's own
+  Consumer Duty obligations"]</span>
+- <span class="placeholder">[Specific actions — e.g. "Review your firm's access logs in Amaea for the
+  period [start] to [end]"]</span>
+
+We are providing this information so you can meet your own regulatory obligations.
+A full post-incident report will follow within 14 days.
+
+If you have questions, contact us at hasna@amaea.co.uk or call <span class="placeholder">[phone]</span>.
+
+Hasna Sahul Hameed
+CEO &amp; Co-Founder, Amaea</pre>
+      </div>
+
+      <div class="ir-template" id="tpl-incident-no-breach">
+        <p class="ir-template-title">D.2 · Customer notification — incident, no breach confirmed</p>
+        <p class="ir-template-meta">For service interruptions, vendor advisories, or contained incidents with no data exposure.</p>
+<pre>Subject: Amaea service incident — <span class="placeholder">[date]</span>
+
+Dear <span class="placeholder">[customer name]</span>,
+
+We're writing to inform you of a service incident that affected the Amaea platform
+on <span class="placeholder">[date]</span> from approximately <span class="placeholder">[start]</span>
+to <span class="placeholder">[end]</span>.
+
+WHAT HAPPENED
+<span class="placeholder">[Factual description — e.g. "Our authentication provider, Supabase, announced
+a security advisory affecting projects provisioned between dates X and Y."]</span>
+
+WHAT WAS AFFECTED
+<span class="placeholder">[Factual scope — e.g. "Sign-in was unavailable between HH:MM and HH:MM.
+No data was accessed without authorisation."]</span>
+
+We have confirmed that <span class="placeholder">no personal data was exposed</span> as a result
+of this incident.
+
+WHAT WE DID
+- <span class="placeholder">[Actions taken]</span>
+- <span class="placeholder">[Verification steps]</span>
+
+No action is required from you. We will publish a full incident summary at
+team.amaea.co.uk/incident-response within 7 days.
+
+Hasna Sahul Hameed
+CEO &amp; Co-Founder, Amaea</pre>
+      </div>
+
+      <div class="ir-template" id="tpl-team">
+        <p class="ir-template-title">D.3 · Internal alert — co-founder ping</p>
+        <p class="ir-template-meta">Signal or phone, not email. First message in the incident.</p>
+<pre>INCIDENT — Sev <span class="placeholder">[1/2/3]</span>
+
+What: <span class="placeholder">[one-line factual description]</span>
+When detected: <span class="placeholder">[HH:MM]</span>
+DRI: <span class="placeholder">[Milan / Hasna]</span>
+Containment: <span class="placeholder">[in progress / done / not yet started]</span>
+Next update: <span class="placeholder">[+30 min / +1 hr]</span>
+
+Need from you: <span class="placeholder">[specific ask, or "nothing right now, will update"]</span></pre>
+      </div>
+
+      <div class="ir-template" id="tpl-ico">
+        <p class="ir-template-title">D.4 · ICO breach notification (UK GDPR Art. 33)</p>
+        <p class="ir-template-meta">File at <a href="https://ico.org.uk/for-organisations/report-a-breach/" target="_blank" style="color:var(--plum);">ico.org.uk/for-organisations/report-a-breach</a>. Phone line for urgent cases: 0303 123 1113. 72-hour clock from awareness.</p>
+<pre>Section 1 — About the organisation
+Organisation name: Amaea Ltd
+Company number: <span class="placeholder">[when incorporated]</span>
+DPO contact: <span class="placeholder">[Hasna Sahul Hameed, hasna@amaea.co.uk]</span>
+Sector: Financial services technology (RegTech)
+
+Section 2 — About the breach
+When did you become aware: <span class="placeholder">[date and time, UK]</span>
+When did the breach occur: <span class="placeholder">[date and time, or "discovered during audit"]</span>
+Has the breach been contained: <span class="placeholder">[Yes — at HH:MM / No — ongoing]</span>
+
+Section 3 — What happened
+Cause: <span class="placeholder">[e.g. "Configuration error in row-level security
+policy on the documents table allowed authenticated users from one firm to query
+a subset of documents belonging to other firms"]</span>
+
+Number of data subjects affected: <span class="placeholder">[N]</span>
+Number of records affected: <span class="placeholder">[N]</span>
+
+Section 4 — What data was involved
+Personal data categories:
+- <span class="placeholder">[e.g. names, addresses]</span>
+- <span class="placeholder">[e.g. National Insurance numbers]</span>
+- <span class="placeholder">[e.g. financial advice records]</span>
+
+Special category data (Art. 9):
+- <span class="placeholder">[None / health data / etc.]</span>
+
+Section 5 — Consequences
+Likely consequences for affected individuals:
+<span class="placeholder">[honest assessment — e.g. "Risk that a competitor firm
+accessed client identity and financial advice records. No evidence of further
+exfiltration. Risk of identity-based fraud assessed as low-to-medium."]</span>
+
+Section 6 — What you have done
+Containment actions:
+- <span class="placeholder">[time-stamped list]</span>
+
+Remediation:
+- <span class="placeholder">[time-stamped list]</span>
+
+Notification to data subjects: <span class="placeholder">[Yes — sent on DATE /
+Will be sent by DATE / Not yet decided]</span>
+
+Section 7 — Lessons
+What will prevent recurrence:
+- <span class="placeholder">[concrete control improvements]</span></pre>
+      </div>
+
+      <div class="ir-template" id="tpl-fca">
+        <p class="ir-template-title">D.5 · FCA notification (Principle 11 / SUP 15)</p>
+        <p class="ir-template-meta">Only applies once Amaea is FCA-authorised or providing services to FCA-authorised firms under contract. Not applicable pre-launch. Notify via firm contact at FCA Connect.</p>
+<pre>Notification under Principle 11 / SUP 15.3.1R
+
+Firm: Amaea Ltd
+FRN: <span class="placeholder">[FRN when registered]</span>
+Date: <span class="placeholder">[date]</span>
+
+Matter being notified
+<span class="placeholder">[Factual description — e.g. "A security incident on
+DATE that may have affected the personal data of clients of FCA-authorised
+firms that use the Amaea platform."]</span>
+
+Date of awareness: <span class="placeholder">[date and time]</span>
+Affected firms (by FRN if known): <span class="placeholder">[list]</span>
+Containment status: <span class="placeholder">[contained / ongoing]</span>
+
+Actions taken:
+- <span class="placeholder">[list]</span>
+
+ICO notification: <span class="placeholder">[filed on DATE — reference number XXX]</span>
+
+We will provide a full incident report within <span class="placeholder">[N]</span> days.
+
+Contact: <span class="placeholder">[Hasna Sahul Hameed, hasna@amaea.co.uk]</span></pre>
+      </div>
+    </div>
+
+    <!-- ICO flow -->
+    <div class="ir-section" id="ico-flow">
+      <h2>E · ICO notification decision flow</h2>
+      <p class="ir-section-sub">Under UK GDPR Art. 33, notify ICO within 72 hours of awareness IF there's a "risk to the rights and freedoms of natural persons". Use this flow to decide.</p>
+
+      <div class="ir-flow-step">
+        <div class="ir-flow-q">Q1</div>
+        <div class="ir-flow-body">
+          <strong>Was personal data involved?</strong>
+          <p>Personal data = any data identifying a living individual: names, NI numbers, addresses, emails, financial records, advice notes, client review documents. Anonymous logs / aggregate counts are not personal data. <span class="ir-flow-no">→ NO: Stop. No ICO obligation.</span> <span class="ir-flow-yes">→ YES: continue to Q2.</span></p>
+        </div>
+      </div>
+      <div class="ir-flow-step">
+        <div class="ir-flow-q">Q2</div>
+        <div class="ir-flow-body">
+          <strong>Was there actual or suspected unauthorised access, loss, or disclosure?</strong>
+          <p>"Suspected" with credible evidence counts. A theoretical possibility (e.g. a key was rotated as a precaution with no evidence of use) does not. <span class="ir-flow-no">→ NO: log internally, no ICO.</span> <span class="ir-flow-yes">→ YES: continue to Q3.</span></p>
+        </div>
+      </div>
+      <div class="ir-flow-step">
+        <div class="ir-flow-q">Q3</div>
+        <div class="ir-flow-body">
+          <strong>Is there a risk to data subjects' rights or freedoms?</strong>
+          <p>Default yes for: financial advice records, NI numbers, identity documents, financial account details. Default no for: business contact info that's already public, opt-in marketing data with no sensitivity. When unsure, lean toward yes — ICO would rather hear about a marginal case than learn about it later. <span class="ir-flow-no">→ NO: log internally with rationale; consider proactive customer comms anyway.</span> <span class="ir-flow-yes">→ YES: continue to Q4.</span></p>
+        </div>
+      </div>
+      <div class="ir-flow-step">
+        <div class="ir-flow-q">Q4</div>
+        <div class="ir-flow-body">
+          <strong>Is there a HIGH risk to data subjects?</strong>
+          <p>High risk = significant likelihood of identity fraud, financial loss, reputational damage, or psychological harm to individuals. <span class="ir-flow-no">→ NO: notify ICO within 72 hrs (template D.4). Notify customers when investigation complete.</span> <span class="ir-flow-yes">→ YES: notify ICO within 72 hrs AND notify affected individuals without undue delay (Art. 34).</span></p>
+        </div>
+      </div>
+
+      <div class="ir-callout ir-callout-amber">
+        <p><strong>If unsure, file.</strong> The ICO accepts preliminary notifications that can be updated as facts emerge. Filing late is the regulatory failure; filing early and revising is normal practice. Phone the ICO helpline (0303 123 1113) for live guidance if the situation is genuinely ambiguous.</p>
+      </div>
+    </div>
+
+    <!-- Postmortem template -->
+    <div class="ir-section" id="postmortem">
+      <h2>F · Post-incident review template</h2>
+      <p class="ir-section-sub">Run within 5 working days of resolution. Blameless. Goal: prevent recurrence, not assign fault.</p>
+
+      <div class="ir-template">
+<pre>Incident: <span class="placeholder">[short title]</span>
+Severity: <span class="placeholder">[Sev 1/2/3]</span>
+Date: <span class="placeholder">[detection → resolution]</span>
+Duration of impact: <span class="placeholder">[HH:MM]</span>
+Author: <span class="placeholder">[name]</span>
+Date written: <span class="placeholder">[date]</span>
+
+1. SUMMARY (3–5 sentences)
+What happened, what was affected, how it was resolved.
+
+2. TIMELINE
+HH:MM — <span class="placeholder">[event]</span>
+HH:MM — <span class="placeholder">[event]</span>
+HH:MM — <span class="placeholder">[event]</span>
+(Include detection, declaration, containment, communication, resolution)
+
+3. ROOT CAUSE
+The single technical or process failure that, if absent, would have prevented this.
+<span class="placeholder">[avoid "human error" — that's almost never the actual cause]</span>
+
+4. CONTRIBUTING FACTORS
+The conditions that allowed the root cause to manifest. (e.g. "test suite didn't
+cover multi-firm scenarios" or "review process didn't flag the missing RLS policy")
+
+5. WHAT WORKED
+Genuine wins. Detection, containment speed, communication, tooling. Document these
+so we keep doing them.
+
+6. WHAT DIDN'T
+Friction points. Wasted minutes. Things that made it harder than it needed to be.
+This is the most important section.
+
+7. ACTION ITEMS
+Specific, owned, dated. No "improve testing" — instead "Milan to add multi-firm
+case to test-rls.mjs by DATE".
+
+| #  | Action                                       | Owner   | Due  | Done |
+|----|----------------------------------------------|---------|------|------|
+| 1  | <span class="placeholder">[specific]</span>  | <span class="placeholder">[]</span>      | <span class="placeholder">[]</span>   | [ ]  |
+| 2  | <span class="placeholder">[specific]</span>  | <span class="placeholder">[]</span>      | <span class="placeholder">[]</span>   | [ ]  |
+
+8. WAS THE PLAN FOLLOWED?
+Did this IRP page actually help? What was missing, wrong, or unclear? Update the
+page directly as part of this PIR.
+
+9. REGULATORY OUTCOMES
+ICO filed: <span class="placeholder">[Yes/No/N/A — reference if filed]</span>
+Customer notifications sent: <span class="placeholder">[Yes/No/N/A — N customers]</span>
+FCA notified: <span class="placeholder">[Yes/No/N/A]</span></pre>
+      </div>
+    </div>
+
+    <!-- Contacts -->
+    <div class="ir-section" id="contacts">
+      <h2>G · Vendor &amp; regulator contacts</h2>
+      <p class="ir-section-sub">Status pages, support URLs, and regulator contacts. Use the status page first — most incidents are vendor-side and already known.</p>
+
+      <table class="contact-table">
+        <thead>
+          <tr><th>Vendor / Regulator</th><th>Role</th><th>Status / Support</th><th>Account ID</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="vendor">Supabase</td>
+            <td>Database, Auth, Storage</td>
+            <td><a href="https://status.supabase.com" target="_blank" style="color:var(--plum);">status.supabase.com</a><br/>support@supabase.io · Dashboard → Support</td>
+            <td><code>amaea0002-dev</code> org</td>
+          </tr>
+          <tr>
+            <td class="vendor">Vercel</td>
+            <td>Deploy, hosting, env vars</td>
+            <td><a href="https://www.vercel-status.com" target="_blank" style="color:var(--plum);">vercel-status.com</a><br/>Dashboard → Help → Contact support</td>
+            <td><code>amaea0002-devs-projects</code></td>
+          </tr>
+          <tr>
+            <td class="vendor">Cloudflare</td>
+            <td>DNS, TLS, Access (intranet auth)</td>
+            <td><a href="https://www.cloudflarestatus.com" target="_blank" style="color:var(--plum);">cloudflarestatus.com</a><br/>Dashboard → Support</td>
+            <td><code>amaea.co.uk</code> zone</td>
+          </tr>
+          <tr>
+            <td class="vendor">Anthropic</td>
+            <td>Claude API (chat + reports)</td>
+            <td><a href="https://status.anthropic.com" target="_blank" style="color:var(--plum);">status.anthropic.com</a><br/>support@anthropic.com</td>
+            <td>Console → Settings → Org</td>
+          </tr>
+          <tr>
+            <td class="vendor">Voyage AI</td>
+            <td>Embeddings (RAG)</td>
+            <td><a href="https://status.voyageai.com" target="_blank" style="color:var(--plum);">status.voyageai.com</a> · support@voyageai.com</td>
+            <td>Dashboard</td>
+          </tr>
+          <tr>
+            <td class="vendor">Resend</td>
+            <td>Transactional email</td>
+            <td><a href="https://status.resend.com" target="_blank" style="color:var(--plum);">status.resend.com</a> · support@resend.com</td>
+            <td>amaea.co.uk domain</td>
+          </tr>
+          <tr>
+            <td class="vendor">1Password</td>
+            <td>Secret storage (Families plan)</td>
+            <td>support.1password.com<br/>Recovery: Family Organizer</td>
+            <td>Family account</td>
+          </tr>
+          <tr>
+            <td class="vendor">Google Workspace</td>
+            <td>Email, calendar, group lists</td>
+            <td><a href="https://www.google.com/appsstatus" target="_blank" style="color:var(--plum);">google.com/appsstatus</a></td>
+            <td>amaea.co.uk workspace</td>
+          </tr>
+          <tr>
+            <td class="vendor">GitHub</td>
+            <td>Source code (amaea-app, amaea-db, amaea-brand, amaea-website)</td>
+            <td><a href="https://www.githubstatus.com" target="_blank" style="color:var(--plum);">githubstatus.com</a></td>
+            <td><code>amaea0002-dev</code> org</td>
+          </tr>
+          <tr>
+            <td class="vendor" style="background:#fef2f2;">ICO (UK regulator)</td>
+            <td>UK GDPR breach reporting</td>
+            <td><a href="https://ico.org.uk/for-organisations/report-a-breach/" target="_blank" style="color:var(--plum);">ico.org.uk/report-a-breach</a><br/>Phone: 0303 123 1113 (urgent line)<br/>72-hour clock from awareness</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td class="vendor" style="background:#fef2f2;">FCA (UK regulator)</td>
+            <td>Conduct + principle-based duties</td>
+            <td>FCA Connect (firm portal — when registered)<br/>Switchboard: 020 7066 1000<br/>Only applies post-FCA-authorisation</td>
+            <td>FRN TBC</td>
+          </tr>
+          <tr>
+            <td class="vendor" style="background:#fef2f2;">Action Fraud (UK)</td>
+            <td>Cybercrime / fraud reporting</td>
+            <td><a href="https://www.actionfraud.police.uk" target="_blank" style="color:var(--plum);">actionfraud.police.uk</a><br/>0300 123 2040</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ir-callout ir-callout-blue" style="margin-top:24px;">
+      <div>
+        <strong>Maintenance</strong>
+        <p>Review this page after every Sev 1 or Sev 2 incident (update the matching runbook with what was actually needed). Otherwise review quarterly — next due 18 August 2026. Markdown copy lives at <code>amaea-app/docs/incident-response.md</code> for offline access during an actual incident.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  document.querySelector('.theme-toggle').addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('amaea-theme', next);
+  });
+  const menuBtn = document.getElementById('menuBtn');
+  const sidebarEl = document.querySelector('.sidebar');
+  const overlayEl = document.getElementById('sidebarOverlay');
+  if (menuBtn && sidebarEl && overlayEl) {
+    if (window.innerWidth > 768 && localStorage.getItem('amaea-sidebar') === 'collapsed') document.body.classList.add('sidebar-collapsed');
+    const closeMobile = () => { sidebarEl.classList.remove('open'); overlayEl.classList.remove('open'); document.body.classList.remove('mobile-nav-open'); };
+    menuBtn.addEventListener('click', () => {
+      if (window.innerWidth <= 768) { const open = sidebarEl.classList.toggle('open'); overlayEl.classList.toggle('open', open); document.body.classList.toggle('mobile-nav-open', open); }
+      else { const c = document.body.classList.toggle('sidebar-collapsed'); localStorage.setItem('amaea-sidebar', c ? 'collapsed' : 'expanded'); }
+    });
+    overlayEl.addEventListener('click', closeMobile);
+    sidebarEl.querySelectorAll('a.sidebar-item').forEach(a => a.addEventListener('click', () => { if (window.innerWidth <= 768) closeMobile(); }));
+  }
+</script>
+<script>
+(function () {
+  const userArea  = document.getElementById('sidebarUserArea');
+  const userPanel = document.getElementById('userSelectPanel');
+  const nameEl    = document.getElementById('sidebarUserName');
+  const roleEl    = document.getElementById('sidebarUserRole');
+  const avatarEl  = document.getElementById('sidebarAvatar');
+  if (userPanel) userPanel.style.display = 'none';
+  if (userArea) {
+    userArea.classList.remove('sidebar-user-clickable');
+    userArea.style.cursor = 'default';
+    userArea.removeAttribute('title');
+    const chevron = userArea.querySelector('svg');
+    if (chevron) {
+      const logout = document.createElement('a');
+      logout.href  = '/cdn-cgi/access/logout';
+      logout.title = 'Sign out';
+      logout.setAttribute('aria-label', 'Sign out');
+      logout.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;color:rgba(255,255,255,0.4);text-decoration:none;flex-shrink:0;margin-left:auto;transition:background .15s ease, color .15s ease;';
+      logout.addEventListener('mouseenter', () => { logout.style.background = 'rgba(255,255,255,0.08)'; logout.style.color = 'rgba(255,255,255,0.85)'; });
+      logout.addEventListener('mouseleave', () => { logout.style.background = 'transparent';            logout.style.color = 'rgba(255,255,255,0.4)';   });
+      logout.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+      chevron.replaceWith(logout);
+    }
+  }
+  const ROLE_BY_EMAIL = {
+    'milan@amaea.co.uk': { role: 'CTO & Co-Founder', bg: 'linear-gradient(135deg,#1a4080,#4292c6)' },
+    'hasna@amaea.co.uk': { role: 'CEO & Co-Founder', bg: 'linear-gradient(135deg,#4C2C4B,#8B6189)' },
+  };
+  fetch('/cdn-cgi/access/get-identity', { credentials: 'include' })
+    .then(r => (r.ok ? r.json() : null))
+    .then(id => {
+      if (!id || !id.email) return;
+      const email = id.email;
+      const name = id.name || email.split('@')[0];
+      const initial = (name || '?').charAt(0).toUpperCase();
+      const meta = ROLE_BY_EMAIL[email] || { role: 'Team', bg: 'linear-gradient(135deg,#3D3651,#8B809C)' };
+      if (nameEl)    nameEl.textContent    = name;
+      if (roleEl)    roleEl.textContent    = meta.role;
+      if (avatarEl)  { avatarEl.textContent = initial; avatarEl.style.background = meta.bg; }
+    })
+    .catch(() => {});
+})();
+</script>
+<script>
+  (function(){
+    var el = document.getElementById('topbar-date');
+    if (!el) return;
+    el.textContent = new Date().toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'long', year:'numeric' });
+  })();
+</script>
+<script id="topbar-user-hydrate">
+(function(){
+  var trigger = document.getElementById("topbarUserTrigger");
+  var panel   = document.getElementById("topbarUserPanel");
+  var nameEl  = document.getElementById("topbarUserName");
+  var emailEl = document.getElementById("topbarUserEmail");
+  if (!trigger || !panel) return;
+  function close(){ panel.classList.remove("open"); trigger.classList.remove("open"); }
+  trigger.addEventListener("click", function(e){ e.stopPropagation(); var o = panel.classList.toggle("open"); trigger.classList.toggle("open", o); });
+  document.addEventListener("click", function(e){ if (panel.classList.contains("open") && !panel.contains(e.target) && e.target !== trigger) close(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") close(); });
+  fetch("/cdn-cgi/access/get-identity", { credentials: "include" })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(id){
+      if (!id || !id.email) return;
+      var name = id.name || id.email.split("@")[0];
+      var initial = (name || "?").charAt(0).toUpperCase();
+      trigger.textContent = initial;
+      if (nameEl)  nameEl.textContent  = name;
+      if (emailEl) emailEl.textContent = id.email;
+    })
+    .catch(function(){});
+})();
+</script>
+</body>
+</html>
