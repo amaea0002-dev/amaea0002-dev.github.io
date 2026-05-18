@@ -16,12 +16,12 @@
     .inv-check.done { background: var(--green); border-color: var(--green); color: #fff; }
     .inv-check.inprog { background: var(--amber); border-color: var(--amber); color: #fff; }
     .inv-check.urgent { border-color: var(--red); }
-    .inv-label { font-size: 0.84rem; color: var(--gray-900); flex: 1; }
+    .inv-label { font-size: 0.82rem; color: var(--gray-900); flex: 1; }
     .inv-label .inv-note { display: block; font-size: 0.74rem; color: var(--gray-500); margin-top: 1px; }
     .inv-target { display: flex; align-items: center; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--gray-200); }
     .inv-target:last-child { border-bottom: none; }
-    .inv-target-name { font-size: 0.84rem; font-weight: 600; color: var(--gray-900); flex: 1; }
-    .inv-target-type { font-size: 0.72rem; color: var(--gray-500); }
+    .inv-target-name { font-size: 0.82rem; font-weight: 600; color: var(--gray-900); flex: 1; }
+    .inv-target-type { font-size: 0.74rem; color: var(--gray-500); }
     .inv-section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
   </style>
 </head>
@@ -122,6 +122,18 @@
   </div>
   <div class="topbar-right">
     <span class="topbar-date" id="topbar-date"></span>
+    <div class="topbar-user">
+      <button class="topbar-user-trigger" id="topbarUserTrigger" aria-label="Account">?</button>
+      <div class="topbar-user-panel" id="topbarUserPanel" role="menu">
+        <div class="topbar-user-identity">
+          <div class="topbar-user-identity-name" id="topbarUserName">Signed in</div>
+          <div class="topbar-user-identity-email" id="topbarUserEmail">—</div>
+        </div>
+        <div class="topbar-user-actions">
+          <a class="topbar-user-action danger" href="/cdn-cgi/access/logout"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign out</a>
+        </div>
+      </div>
+    </div>
     <button class="theme-toggle" aria-label="Toggle dark mode"></button>
   </div>
 </header>
@@ -167,7 +179,7 @@
 
           <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-              <span style="width:22px;height:22px;border-radius:50%;background:var(--plum);color:#fff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">1</span>
+              <span style="width:22px;height:22px;border-radius:50%;background:var(--plum);color:#fff;font-size: 0.74rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">1</span>
               <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--gray-500);text-transform:uppercase;">2028 – 2030</span>
             </div>
             <p style="font-size:0.82rem;font-weight:700;color:var(--gray-900);margin:0 0 4px;letter-spacing:-0.01em;">Own UK IFA compliance</p>
@@ -176,7 +188,7 @@
 
           <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-              <span style="width:22px;height:22px;border-radius:50%;background:var(--plum);color:#fff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">2</span>
+              <span style="width:22px;height:22px;border-radius:50%;background:var(--plum);color:#fff;font-size: 0.74rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">2</span>
               <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--gray-500);text-transform:uppercase;">2030 – 2032</span>
             </div>
             <p style="font-size:0.82rem;font-weight:700;color:var(--gray-900);margin:0 0 4px;letter-spacing:-0.01em;">All UK regulated sectors</p>
@@ -185,7 +197,7 @@
 
           <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-              <span style="width:22px;height:22px;border-radius:50%;background:var(--plum);color:#fff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">3</span>
+              <span style="width:22px;height:22px;border-radius:50%;background:var(--plum);color:#fff;font-size: 0.74rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">3</span>
               <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--gray-500);text-transform:uppercase;">2032 – 2035</span>
             </div>
             <p style="font-size:0.82rem;font-weight:700;color:var(--gray-900);margin:0 0 4px;letter-spacing:-0.01em;">International (US, EU)</p>
@@ -194,7 +206,7 @@
 
           <div style="background:var(--plum-tint);border:1px solid var(--plum-border);border-radius:var(--r-md);padding:14px 16px;">
             <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-              <span style="width:22px;height:22px;border-radius:50%;background:var(--plum-dark);color:#fff;font-size:0.72rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">4</span>
+              <span style="width:22px;height:22px;border-radius:50%;background:var(--plum-dark);color:#fff;font-size: 0.74rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">4</span>
               <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--plum-soft);text-transform:uppercase;">2035 +</span>
             </div>
             <p style="font-size:0.82rem;font-weight:700;color:var(--gray-900);margin:0 0 4px;letter-spacing:-0.01em;">The compliance OS</p>
@@ -214,17 +226,17 @@
       </p>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
         <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:18px 20px;">
-          <p style="font-size:0.66rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-500);margin:0 0 6px;">Bear</p>
+          <p style="font-size: 0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-500);margin:0 0 6px;">Bear</p>
           <p style="font-size:1.35rem;font-weight:800;color:var(--gray-900);letter-spacing:-0.03em;margin:0 0 4px;">~110 firms</p>
           <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.5;margin:0;">£2M ARR · 90 Founders + 20 funnel. No major distribution channels land in beta.</p>
         </div>
         <div style="background:var(--plum-tint);border:1px solid var(--plum-border);border-radius:var(--r-md);padding:18px 20px;">
-          <p style="font-size:0.66rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);margin:0 0 6px;">Base — plan around this</p>
+          <p style="font-size: 0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);margin:0 0 6px;">Base — plan around this</p>
           <p style="font-size:1.35rem;font-weight:800;color:var(--plum-dark);letter-spacing:-0.03em;margin:0 0 4px;">~180 firms</p>
           <p style="font-size:0.82rem;color:var(--gray-700);line-height:1.5;margin:0;">£3.1M ARR · 150 Founders + 30 funnel. Intelliflo partnership confirmed, CISI endorsement warming.</p>
         </div>
         <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:18px 20px;">
-          <p style="font-size:0.66rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-500);margin:0 0 6px;">Bull</p>
+          <p style="font-size: 0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-500);margin:0 0 6px;">Bull</p>
           <p style="font-size:1.35rem;font-weight:800;color:var(--gray-900);letter-spacing:-0.03em;margin:0 0 4px;">~280 firms</p>
           <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.5;margin:0;">£4.8M ARR · 200 Founders maxed + 80 funnel. All 4 channels live (Intelliflo marketplace, CISI, Robin Powell, FP Advance).</p>
         </div>
@@ -423,7 +435,7 @@
               </div>
             </div>
           </div>
-          <p style="font-size:0.72rem;color:var(--gray-500);margin:16px 0 0 0;line-height:1.55;font-style:italic;">
+          <p style="font-size: 0.74rem;color:var(--gray-500);margin:16px 0 0 0;line-height:1.55;font-style:italic;">
             Blended ARPA £2,094/mo full-price · £1,675/mo Founders (20% lifetime discount) · 85–95% gross margin · 10% annual logo churn · CAC £2,500 · LTV:CAC 7.9:1.
           </p>
           <a href="financial-model" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:0.78rem;font-weight:700;color:var(--plum);text-decoration:none;">
@@ -476,7 +488,7 @@
               </div>
             </div>
           </div>
-          <p style="font-size:0.72rem;color:var(--gray-500);margin:16px 0 0 0;line-height:1.55;font-style:italic;">
+          <p style="font-size: 0.74rem;color:var(--gray-500);margin:16px 0 0 0;line-height:1.55;font-style:italic;">
             Y5 cash exceeds Y5 ARR in all three scenarios — signal that real companies would redeploy surplus into growth (more S&amp;M, faster hires, sector expansion). v2 deliberately under-reinvests; sector + international expansion will be modelled in v3.
           </p>
         </div>
@@ -633,6 +645,31 @@
       weekday:'short', day:'numeric', month:'long', year:'numeric'
     });
   })();
+</script>
+<script id="topbar-user-hydrate">
+// Topbar user menu — hydrates with Cloudflare Access identity and handles open/close
+(function(){
+  var trigger = document.getElementById("topbarUserTrigger");
+  var panel   = document.getElementById("topbarUserPanel");
+  var nameEl  = document.getElementById("topbarUserName");
+  var emailEl = document.getElementById("topbarUserEmail");
+  if (!trigger || !panel) return;
+  function close(){ panel.classList.remove("open"); trigger.classList.remove("open"); }
+  trigger.addEventListener("click", function(e){ e.stopPropagation(); var o = panel.classList.toggle("open"); trigger.classList.toggle("open", o); });
+  document.addEventListener("click", function(e){ if (panel.classList.contains("open") && !panel.contains(e.target) && e.target !== trigger) close(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") close(); });
+  fetch("/cdn-cgi/access/get-identity", { credentials: "include" })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(id){
+      if (!id || !id.email) return;
+      var name = id.name || id.email.split("@")[0];
+      var initial = (name || "?").charAt(0).toUpperCase();
+      trigger.textContent = initial;
+      if (nameEl)  nameEl.textContent  = name;
+      if (emailEl) emailEl.textContent = id.email;
+    })
+    .catch(function(){});
+})();
 </script>
 </body>
 </html>

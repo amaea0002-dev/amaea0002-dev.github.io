@@ -15,15 +15,15 @@
     .fm-formula { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px; padding: 14px 18px; font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace; font-size: 0.78rem; line-height: 1.55; color: var(--gray-800); overflow-x: auto; white-space: pre; }
     .fm-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
     .fm-table th, .fm-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--gray-100); }
-    .fm-table th { font-weight: 700; color: var(--gray-700); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; background: var(--gray-50); }
+    .fm-table th { font-weight: 700; color: var(--gray-700); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; background: var(--gray-50); }
     .fm-table td.num { font-variant-numeric: tabular-nums; font-weight: 600; }
     .fm-scenario-card { border-radius: 12px; padding: 18px 20px; margin-bottom: 12px; }
     .fm-scenario-card.bear  { background: var(--gray-50); border: 1px solid var(--gray-200); }
     .fm-scenario-card.base  { background: var(--plum-tint); border: 1px solid var(--plum-border); }
     .fm-scenario-card.bull  { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25); }
-    .fm-key  { font-weight: 700; color: var(--gray-500); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .fm-key  { font-weight: 700; color: var(--gray-500); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.08em; }
     .fm-val  { font-size: 1.1rem; font-weight: 800; color: var(--gray-900); letter-spacing: -0.02em; }
-    .fm-eyebrow { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); margin: 0 0 6px; }
+    .fm-eyebrow { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); margin: 0 0 6px; }
     .fm-eyebrow.plum { color: var(--plum); }
     .fm-eyebrow.green { color: var(--green); }
     .fm-version-pill { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 700; background: var(--plum); color: white; letter-spacing: 0.04em; }
@@ -136,6 +136,18 @@
   </div>
   <div class="topbar-right">
     <span class="topbar-date" id="topbar-date"></span>
+    <div class="topbar-user">
+      <button class="topbar-user-trigger" id="topbarUserTrigger" aria-label="Account">?</button>
+      <div class="topbar-user-panel" id="topbarUserPanel" role="menu">
+        <div class="topbar-user-identity">
+          <div class="topbar-user-identity-name" id="topbarUserName">Signed in</div>
+          <div class="topbar-user-identity-email" id="topbarUserEmail">—</div>
+        </div>
+        <div class="topbar-user-actions">
+          <a class="topbar-user-action danger" href="/cdn-cgi/access/logout"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign out</a>
+        </div>
+      </div>
+    </div>
     <button class="theme-toggle" aria-label="Toggle dark mode"></button>
   </div>
 </header>
@@ -469,35 +481,35 @@
             <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v1.0</span>
             <div>
               <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">Initial build · 16 May 2026</p>
-              <p style="font-size:0.84rem;color:var(--gray-600);line-height:1.6;margin:0;">8-section assumptions doc filled. 3 Google Sheets workbooks built from CSV starter pack. Flat cost rows. Hasna salary starting Q1 2028. Scenarios named Base / Probable / Best.</p>
+              <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.6;margin:0;">8-section assumptions doc filled. 3 Google Sheets workbooks built from CSV starter pack. Flat cost rows. Hasna salary starting Q1 2028. Scenarios named Base / Probable / Best.</p>
             </div>
           </div>
           <div style="display:flex;gap:14px;align-items:flex-start;">
             <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v1.1</span>
             <div>
               <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">Hasna salary timing fix</p>
-              <p style="font-size:0.84rem;color:var(--gray-600);line-height:1.6;margin:0;">Hasna stays at Lucent until Sept 2028 (public launch). Updated People formula to start at month 29, not month 21. Saves ~£8k in incorrectly modelled pre-revenue burn.</p>
+              <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.6;margin:0;">Hasna stays at Lucent until Sept 2028 (public launch). Updated People formula to start at month 29, not month 21. Saves ~£8k in incorrectly modelled pre-revenue burn.</p>
             </div>
           </div>
           <div style="display:flex;gap:14px;align-items:flex-start;">
             <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v1.2</span>
             <div>
               <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">Customer-driven cost scaling</p>
-              <p style="font-size:0.84rem;color:var(--gray-600);line-height:1.6;margin:0;">Added linear scaling to People (£50/customer), S&amp;M (£20/customer), G&amp;A (£5/customer) above the 50-customer threshold. Recognises that CS, content, and software seats scale with book size. Net margins drop from 93–96% to 85–88%. Scenarios renamed Bear / Base / Bull for investor consistency.</p>
+              <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.6;margin:0;">Added linear scaling to People (£50/customer), S&amp;M (£20/customer), G&amp;A (£5/customer) above the 50-customer threshold. Recognises that CS, content, and software seats scale with book size. Net margins drop from 93–96% to 85–88%. Scenarios renamed Bear / Base / Bull for investor consistency.</p>
             </div>
           </div>
           <div style="display:flex;gap:14px;align-items:flex-start;">
             <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v1.3</span>
             <div>
               <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">Engineer step functions</p>
-              <p style="font-size:0.84rem;color:var(--gray-600);line-height:1.6;margin:0;">Three engineer hire triggers in the People row: first engineer at &gt;30 customers, second at &gt;100, Milan full-time at &gt;150. Net margins drop to 79–83% — at the upper bound of real SaaS norms (60–75%) and defensible for investor due diligence.</p>
+              <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.6;margin:0;">Three engineer hire triggers in the People row: first engineer at &gt;30 customers, second at &gt;100, Milan full-time at &gt;150. Net margins drop to 79–83% — at the upper bound of real SaaS norms (60–75%) and defensible for investor due diligence.</p>
             </div>
           </div>
           <div style="display:flex;gap:14px;align-items:flex-start;">
             <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v2</span>
             <div>
               <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">60-month horizon · Founders discount modelled · realistic cost scaling <span style="font-size:0.7rem;color:var(--gray-400);font-weight:500;margin-left:6px;">— current</span></p>
-              <p style="font-size:0.84rem;color:var(--gray-600);line-height:1.6;margin:0;">Extended to 60 months (May 2026 → Apr 2031) so Y3 + new Y5 are both captured. Founders 20% lifetime discount properly modelled via cohort-split MRR (no mental adjustment). S&amp;M with 8% revenue floor — scales realistically at high MRR. Recruitment fees: auto-detected £12k spike per hire onboarding. Office: toggles on at &gt;100 active customers (+£2k/mo). COGS sensitivity row (£50 baseline vs £75 high-usage). Steady-state acquisition rates calibrated per-scenario (3 / 8 / 14 per month) instead of all collapsing to 6/mo.</p>
+              <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.6;margin:0;">Extended to 60 months (May 2026 → Apr 2031) so Y3 + new Y5 are both captured. Founders 20% lifetime discount properly modelled via cohort-split MRR (no mental adjustment). S&amp;M with 8% revenue floor — scales realistically at high MRR. Recruitment fees: auto-detected £12k spike per hire onboarding. Office: toggles on at &gt;100 active customers (+£2k/mo). COGS sensitivity row (£50 baseline vs £75 high-usage). Steady-state acquisition rates calibrated per-scenario (3 / 8 / 14 per month) instead of all collapsing to 6/mo.</p>
             </div>
           </div>
         </div>
@@ -648,6 +660,31 @@
       weekday:'short', day:'numeric', month:'long', year:'numeric'
     });
   })();
+</script>
+<script id="topbar-user-hydrate">
+// Topbar user menu — hydrates with Cloudflare Access identity and handles open/close
+(function(){
+  var trigger = document.getElementById("topbarUserTrigger");
+  var panel   = document.getElementById("topbarUserPanel");
+  var nameEl  = document.getElementById("topbarUserName");
+  var emailEl = document.getElementById("topbarUserEmail");
+  if (!trigger || !panel) return;
+  function close(){ panel.classList.remove("open"); trigger.classList.remove("open"); }
+  trigger.addEventListener("click", function(e){ e.stopPropagation(); var o = panel.classList.toggle("open"); trigger.classList.toggle("open", o); });
+  document.addEventListener("click", function(e){ if (panel.classList.contains("open") && !panel.contains(e.target) && e.target !== trigger) close(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") close(); });
+  fetch("/cdn-cgi/access/get-identity", { credentials: "include" })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(id){
+      if (!id || !id.email) return;
+      var name = id.name || id.email.split("@")[0];
+      var initial = (name || "?").charAt(0).toUpperCase();
+      trigger.textContent = initial;
+      if (nameEl)  nameEl.textContent  = name;
+      if (emailEl) emailEl.textContent = id.email;
+    })
+    .catch(function(){});
+})();
 </script>
 </body>
 </html>
