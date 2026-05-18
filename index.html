@@ -199,7 +199,7 @@
       <!-- Left: updates -->
       <div style="display:flex;flex-direction:column;gap:18px;">
 
-        <div class="card">
+        <div class="card" id="latest-updates" data-collapse-after="5" data-collapse-selector=".update-item">
           <p class="card-title">Latest updates</p>
 
           <div class="update-item">
@@ -551,6 +551,37 @@
       if (emailEl) emailEl.textContent = id.email;
     })
     .catch(function(){});
+})();
+</script>
+<script>
+// Progressive disclosure for lists tagged with data-collapse-after.
+// Items past index N stay hidden until "Show all" is clicked.
+(function () {
+  document.querySelectorAll('[data-collapse-after]').forEach(function (container) {
+    var visible  = parseInt(container.dataset.collapseAfter, 10) || 5;
+    var sel      = container.dataset.collapseSelector || '*';
+    var items    = Array.prototype.slice.call(container.querySelectorAll(':scope > ' + sel));
+    if (items.length <= visible) return;
+
+    var hidden = items.slice(visible);
+    hidden.forEach(function (el) { el.style.display = 'none'; });
+
+    var expanded = false;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'collapse-toggle';
+
+    function render() {
+      hidden.forEach(function (el) { el.style.display = expanded ? '' : 'none'; });
+      btn.setAttribute('aria-expanded', String(expanded));
+      btn.innerHTML = expanded
+        ? 'Show fewer <span class="arrow">&#9662;</span>'
+        : 'Show all ' + items.length + ' (' + hidden.length + ' more) <span class="arrow">&#9662;</span>';
+    }
+    btn.addEventListener('click', function () { expanded = !expanded; render(); });
+    container.appendChild(btn);
+    render();
+  });
 })();
 </script>
 </body>

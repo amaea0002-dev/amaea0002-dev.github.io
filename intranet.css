@@ -641,3 +641,90 @@ body.sidebar-collapsed .user-select-panel { display: none !important; }
   .stats-strip, .quick-links { grid-template-columns: 1fr; }
   .topbar-right { gap: 8px; }
 }
+
+/* ── Progressive disclosure (top-N + show more) ──────────────────
+   Pattern: any list whose items get progressively revealed via a
+   "Show all" / "Show less" button. Apply via inline script with
+   amaeaSetupCollapse() (see index.html, decisions.html).
+*/
+.collapse-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 9px 16px;
+  background: var(--surface, var(--white));
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-md);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, color .15s ease;
+  font-family: inherit;
+}
+.collapse-toggle:hover {
+  border-color: var(--plum-border);
+  background: var(--plum-tint);
+  color: var(--plum);
+}
+.collapse-toggle .arrow { display: inline-block; transition: transform 200ms ease; }
+.collapse-toggle[aria-expanded="true"] .arrow { transform: rotate(180deg); }
+
+/* ── In-page TOC (sticky right rail on desktop) ──────────────────
+   Wrap the page main content + TOC in .page-with-toc.
+   Desktop: TOC sticks on the right. Mobile: TOC stacks above content.
+*/
+.page-with-toc {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 36px;
+  align-items: start;
+}
+.page-toc {
+  position: sticky;
+  top: calc(var(--topbar-h) + 18px);
+  padding: 16px 18px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-md);
+  font-size: 0.78rem;
+  max-height: calc(100vh - var(--topbar-h) - 36px);
+  overflow-y: auto;
+}
+.page-toc-label {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin: 0 0 10px;
+}
+.page-toc a {
+  display: block;
+  padding: 7px 10px;
+  margin: 1px 0;
+  border-radius: 6px;
+  color: var(--gray-700);
+  border-left: 2px solid transparent;
+  line-height: 1.4;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.page-toc a:hover {
+  background: var(--plum-tint);
+  color: var(--plum);
+}
+.page-toc a.active {
+  color: var(--plum);
+  border-left-color: var(--plum);
+  background: var(--plum-tint);
+  font-weight: 600;
+}
+@media (max-width: 920px) {
+  .page-with-toc { grid-template-columns: 1fr; }
+  .page-toc {
+    position: static;
+    max-height: none;
+    margin-bottom: 8px;
+  }
+}

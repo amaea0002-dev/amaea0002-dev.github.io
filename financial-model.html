@@ -168,8 +168,31 @@
       </p>
     </div>
 
+    <!-- In-page table of contents -->
+    <nav aria-label="In this page" style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:16px 20px;margin-bottom:22px;">
+      <p style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-500);margin:0 0 10px;">On this page</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:6px;">
+        <a href="#scenarios"  class="fm-toc-link"><span class="fm-toc-num">1</span> Three scenarios</a>
+        <a href="#y3"         class="fm-toc-link"><span class="fm-toc-num">2</span> Year 3 outputs</a>
+        <a href="#y5"         class="fm-toc-link"><span class="fm-toc-num">3</span> Year 5 outputs</a>
+        <a href="#ramp"       class="fm-toc-link"><span class="fm-toc-num">4</span> Customer ramp inputs</a>
+        <a href="#formulas"   class="fm-toc-link"><span class="fm-toc-num">5</span> Cost scaling formulas</a>
+        <a href="#hires"      class="fm-toc-link"><span class="fm-toc-num">6</span> Engineer hire schedule</a>
+        <a href="#versions"   class="fm-toc-link"><span class="fm-toc-num">7</span> Version history</a>
+        <a href="#limits"     class="fm-toc-link"><span class="fm-toc-num">8</span> Known limitations</a>
+        <a href="#process"    class="fm-toc-link"><span class="fm-toc-num">9</span> How to update</a>
+        <a href="#pointers"   class="fm-toc-link"><span class="fm-toc-num">10</span> Pointers</a>
+      </div>
+      <style>
+        .fm-toc-link { display:flex; align-items:center; gap:9px; padding:8px 12px; border:1px solid transparent; border-radius:var(--r-md); font-size:0.78rem; font-weight:500; color:var(--gray-700); transition: border-color .15s ease, color .15s ease, background .15s ease; }
+        .fm-toc-link:hover { border-color:var(--plum-border); color:var(--plum); background:var(--plum-tint); }
+        .fm-toc-num { font-size:0.62rem; font-weight:800; color:var(--gray-500); min-width:18px; }
+        .fm-toc-link:hover .fm-toc-num { color:var(--plum); }
+      </style>
+    </nav>
+
     <!-- 1. Three scenarios summary -->
-    <div class="fm-section">
+    <div class="fm-section" id="scenarios">
       <div class="section-label">Overview</div>
       <h2 class="section-title-lg" style="margin-bottom:16px;">Three scenarios</h2>
       <div class="card" style="padding:24px 28px;">
@@ -200,7 +223,7 @@
     </div>
 
     <!-- 2. Headline outputs at Y3 -->
-    <div class="fm-section">
+    <div class="fm-section" id="y3">
       <div class="section-label">Headline outputs · v2</div>
       <h2 class="section-title-lg" style="margin-bottom:16px;">Year 3 (April 2029)</h2>
       <div class="card" style="padding:20px 24px;overflow:hidden;">
@@ -257,7 +280,7 @@
     </div>
 
     <!-- 2b. Headline outputs at Y5 (new in v2) -->
-    <div class="fm-section">
+    <div class="fm-section" id="y5">
       <div class="section-label">Headline outputs · v2</div>
       <h2 class="section-title-lg" style="margin-bottom:16px;">Year 5 (April 2031) — new in v2</h2>
       <div class="card" style="padding:20px 24px;overflow:hidden;">
@@ -317,7 +340,7 @@
     </div>
 
     <!-- 3. New customers ramp -->
-    <div class="fm-section">
+    <div class="fm-section" id="ramp">
       <div class="section-label">Spreadsheet inputs · v2</div>
       <h2 class="section-title-lg" style="margin-bottom:8px;">New customers ramp — Monthly tab Rows 5 + 6</h2>
       <p style="font-size:0.85rem;color:var(--gray-500);line-height:1.55;margin:0 0 16px;">
@@ -369,7 +392,7 @@
     </div>
 
     <!-- 4. Cost scaling formulas (v2) -->
-    <div class="fm-section">
+    <div class="fm-section" id="formulas">
       <div class="section-label">Cost scaling · v2</div>
       <h2 class="section-title-lg" style="margin-bottom:8px;">Formulas in the Monthly tab</h2>
       <p style="font-size:0.85rem;color:var(--gray-500);line-height:1.55;margin:0 0 16px;">
@@ -430,7 +453,7 @@
     </div>
 
     <!-- 5. Engineer step function timing per scenario -->
-    <div class="fm-section">
+    <div class="fm-section" id="hires">
       <div class="section-label">Hire schedule</div>
       <h2 class="section-title-lg" style="margin-bottom:16px;">When each engineer hire fires</h2>
       <div class="card" style="padding:20px 24px;overflow:hidden;">
@@ -477,7 +500,7 @@
     </div>
 
     <!-- 6. Version history -->
-    <div class="fm-section">
+    <div class="fm-section" id="versions">
       <div class="section-label">Evolution</div>
       <h2 class="section-title-lg" style="margin-bottom:16px;">Version history</h2>
       <div class="card" style="padding:20px 24px;">
@@ -522,7 +545,7 @@
     </div>
 
     <!-- 7. Known limitations -->
-    <div class="fm-section">
+    <div class="fm-section" id="limits">
       <div class="section-label">Caveats · v2</div>
       <h2 class="section-title-lg" style="margin-bottom:16px;">Known limitations (v3 candidates)</h2>
       <div class="card" style="padding:20px 24px;">
@@ -539,7 +562,7 @@
     </div>
 
     <!-- 8. How to update -->
-    <div class="fm-section">
+    <div class="fm-section" id="process">
       <div class="section-label">Process</div>
       <h2 class="section-title-lg" style="margin-bottom:16px;">How to update the model</h2>
       <div class="card" style="padding:20px 24px;">
@@ -568,7 +591,7 @@
     </div>
 
     <!-- 9. Pointers -->
-    <div class="fm-section">
+    <div class="fm-section" id="pointers">
       <div class="section-label">Related</div>
       <h2 class="section-title-lg" style="margin-bottom:16px;">Pointers</h2>
       <div class="card" style="padding:20px 24px;">
