@@ -86,11 +86,28 @@
     .contact-table code { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; padding: 1px 5px; background: var(--gray-50, #fafafa); border: 1px solid var(--gray-200); border-radius: 4px; }
 
     .ir-callout { display: flex; gap: 12px; padding: 14px 18px; border-radius: var(--r-md); margin-bottom: 14px; }
-    .ir-callout-red { background: #fef2f2; border: 1px solid #fecaca; }
+    .ir-callout-red   { background: #fef2f2; border: 1px solid #fecaca; }
     .ir-callout-amber { background: #fffbeb; border: 1px solid #fde68a; }
-    .ir-callout-blue { background: #eff6ff; border: 1px solid #bfdbfe; }
+    .ir-callout-blue  { background: #eff6ff; border: 1px solid #bfdbfe; }
     .ir-callout strong { color: var(--gray-900); font-weight: 700; }
     .ir-callout p { font-size: 0.82rem; color: var(--gray-700); margin: 0; line-height: 1.6; }
+
+    /* ── Dark-mode overrides ────────────────────────────────
+       Static light-tinted callouts and red regulator-row highlights
+       become tinted dark-mode panels rather than glowing pastel cards
+       against the dark page background. */
+    [data-theme="dark"] .ir-callout-red   { background: rgba(239,68,68,0.12);  border-color: rgba(239,68,68,0.32); }
+    [data-theme="dark"] .ir-callout-amber { background: rgba(217,119,6,0.12);  border-color: rgba(217,119,6,0.32); }
+    [data-theme="dark"] .ir-callout-blue  { background: rgba(37,99,235,0.12);  border-color: rgba(37,99,235,0.32); }
+    [data-theme="dark"] .ir-callout p     { color: var(--gray-600); }
+    /* Severity chip backgrounds (.ir-sev-* and .chip-sev*) and runbook
+       chips already use saturated dark reds/oranges that read fine on
+       both themes — no overrides needed there. */
+
+    /* Regulator-row highlight on the contact table — class-based so the
+       dark theme can swap it (previously was an inline style="background:#fef2f2"). */
+    .contact-table tr.regulator td { background: rgba(239,68,68,0.06); }
+    [data-theme="dark"] .contact-table tr.regulator td { background: rgba(239,68,68,0.12); }
 
     @media (max-width: 720px) {
       .ir-sev { grid-template-columns: 1fr; }
@@ -942,20 +959,20 @@ FCA notified: <span class="placeholder">[Yes/No/N/A]</span></pre>
             <td><a href="https://www.githubstatus.com" target="_blank" style="color:var(--plum);">githubstatus.com</a></td>
             <td><code>amaea0002-dev</code> org</td>
           </tr>
-          <tr>
-            <td class="vendor" style="background:#fef2f2;">ICO (UK regulator)</td>
+          <tr class="regulator">
+            <td class="vendor">ICO (UK regulator)</td>
             <td>UK GDPR breach reporting</td>
             <td><a href="https://ico.org.uk/for-organisations/report-a-breach/" target="_blank" style="color:var(--plum);">ico.org.uk/report-a-breach</a><br/>Phone: 0303 123 1113 (urgent line)<br/>72-hour clock from awareness</td>
             <td>—</td>
           </tr>
-          <tr>
-            <td class="vendor" style="background:#fef2f2;">FCA (UK regulator)</td>
+          <tr class="regulator">
+            <td class="vendor">FCA (UK regulator)</td>
             <td>Conduct + principle-based duties</td>
             <td>FCA Connect (firm portal — when registered)<br/>Switchboard: 020 7066 1000<br/>Only applies post-FCA-authorisation</td>
             <td>FRN TBC</td>
           </tr>
-          <tr>
-            <td class="vendor" style="background:#fef2f2;">Action Fraud (UK)</td>
+          <tr class="regulator">
+            <td class="vendor">Action Fraud (UK)</td>
             <td>Cybercrime / fraud reporting</td>
             <td><a href="https://www.actionfraud.police.uk" target="_blank" style="color:var(--plum);">actionfraud.police.uk</a><br/>0300 123 2040</td>
             <td>—</td>
