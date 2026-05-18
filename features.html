@@ -30,9 +30,9 @@
       border-color: var(--plum-border);
       box-shadow: 0 2px 12px rgba(64,36,63,0.07);
     }
-    .feature-card.live { border-left: 3px solid #10B981; }
+    .feature-card.live { border-left: 3px solid var(--green); }
     .feature-card.building { border-left: 3px solid #6366F1; }
-    .feature-card.planned { border-left: 3px solid #F59E0B; }
+    .feature-card.planned { border-left: 3px solid var(--amber); }
     .feature-card.future { border-left: 3px solid var(--gray-300, #D1D5DB); }
 
     .feature-header {
@@ -303,7 +303,7 @@
       <p style="font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--plum-soft);margin:0 0 14px;">Why features are prioritised this way</p>
       <p style="font-size:0.9rem;color:var(--gray-700);line-height:1.65;margin:0 0 12px;">Every feature on this page ladders to one of four strategic outcomes. We prioritise top-down — outcome 1 has to be airtight before outcome 2 matters.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;">
-        <div style="border-left:3px solid #10B981;padding:6px 0 6px 14px;">
+        <div style="border-left:3px solid var(--green);padding:6px 0 6px 14px;">
           <p style="font-size: 0.82rem;font-weight:800;color:var(--gray-900);margin:0 0 4px;">1 · Make Amaea usable on day one</p>
           <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">Dashboard, client journey, doc import + extraction, flag system, AI assistant. Live in the MVP today. Without these the product isn't real.</p>
         </div>
@@ -311,7 +311,7 @@
           <p style="font-size: 0.82rem;font-weight:800;color:var(--gray-900);margin:0 0 4px;">2 · Make Amaea valuable enough to switch from spreadsheets</p>
           <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">Annual review auto-generation, Consumer Duty annual assessment, second integration. Phase 2 — Q3–Q4 2026. Builds switching cost.</p>
         </div>
-        <div style="border-left:3px solid #F59E0B;padding:6px 0 6px 14px;">
+        <div style="border-left:3px solid var(--amber);padding:6px 0 6px 14px;">
           <p style="font-size: 0.82rem;font-weight:800;color:var(--gray-900);margin:0 0 4px;">3 · Make Amaea scale beyond 15-adviser firms</p>
           <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">Board packs, FCA visit toolkit, custom reports, full integration suite, multi-adviser management. Phase 3 — 2027. Opens the Scale tier and the next segment up.</p>
         </div>
@@ -333,9 +333,9 @@
           <p style="font-size:0.78rem;color:var(--gray-600);line-height:1.6;margin:0;">Features are grouped by when they become critical to the business — not by technical layer. The filter above each group lets you see only what you need. <strong style="color:var(--gray-900);">Green = live in the MVP today.</strong> Blue = being built now. Amber = planned before launch. Grey = future.</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:6px;min-width:160px;">
-          <div style="display:flex;align-items:center;gap:8px;font-size: 0.74rem;"><span style="width:10px;height:10px;border-radius:50%;background:#10B981;flex-shrink:0;"></span><span style="color:var(--gray-600);">Live in MVP</span></div>
+          <div style="display:flex;align-items:center;gap:8px;font-size: 0.74rem;"><span style="width:10px;height:10px;border-radius:50%;background:var(--green);flex-shrink:0;"></span><span style="color:var(--gray-600);">Live in MVP</span></div>
           <div style="display:flex;align-items:center;gap:8px;font-size: 0.74rem;"><span style="width:10px;height:10px;border-radius:50%;background:#6366F1;flex-shrink:0;"></span><span style="color:var(--gray-600);">Building now</span></div>
-          <div style="display:flex;align-items:center;gap:8px;font-size: 0.74rem;"><span style="width:10px;height:10px;border-radius:50%;background:#F59E0B;flex-shrink:0;"></span><span style="color:var(--gray-600);">Planned for launch</span></div>
+          <div style="display:flex;align-items:center;gap:8px;font-size: 0.74rem;"><span style="width:10px;height:10px;border-radius:50%;background:var(--amber);flex-shrink:0;"></span><span style="color:var(--gray-600);">Planned for launch</span></div>
           <div style="display:flex;align-items:center;gap:8px;font-size: 0.74rem;"><span style="width:10px;height:10px;border-radius:50%;background:#D1D5DB;flex-shrink:0;"></span><span style="color:var(--gray-600);">Post-launch / future</span></div>
         </div>
       </div>
