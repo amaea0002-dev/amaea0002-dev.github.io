@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Page not found | Amaea Intranet</title>
+  <link rel="icon" href="logo-plum.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="intranet.css"/>
+  <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <style>
+    body { background: var(--bg); display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
+    .nf-shell { max-width: 460px; text-align: center; }
+    .nf-code { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--plum-soft); margin-bottom: 14px; }
+    .nf-title { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 800; letter-spacing: -0.02em; color: var(--gray-900); margin-bottom: 10px; line-height: 1.15; }
+    .nf-sub { font-size: 0.95rem; color: var(--gray-600); line-height: 1.6; margin-bottom: 26px; }
+    .nf-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .nf-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: var(--r-md);
+      font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; transition: background 0.14s ease, color 0.14s ease;
+    }
+    .nf-btn-primary { background: var(--plum); color: #fff; }
+    .nf-btn-primary:hover { background: var(--plum-mid); }
+    .nf-btn-ghost { background: transparent; color: var(--gray-700); border: 1px solid var(--gray-200); }
+    .nf-btn-ghost:hover { background: var(--gray-100); color: var(--gray-900); }
+    .nf-quick {
+      margin-top: 30px; padding: 18px;
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: var(--r-lg); text-align: left;
+    }
+    .nf-quick-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gray-500); margin-bottom: 10px; }
+    .nf-quick-list { display: flex; flex-direction: column; gap: 6px; }
+    .nf-quick-list a {
+      display: block; padding: 7px 10px; border-radius: var(--r-sm);
+      font-size: 0.85rem; color: var(--gray-700); text-decoration: none;
+      transition: background 0.14s ease, color 0.14s ease;
+    }
+    .nf-quick-list a:hover { background: var(--plum-tint); color: var(--plum); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <main class="nf-shell" id="main" tabindex="-1">
+    <div class="nf-code">404 · Page not found</div>
+    <h1 class="nf-title">That page isn't here.</h1>
+    <p class="nf-sub">The link may be out of date, or the page may have moved. Head back to the dashboard, or pick one of the most-used pages below.</p>
+    <div class="nf-actions">
+      <a href="/" class="nf-btn nf-btn-primary">Back to dashboard</a>
+      <a href="javascript:history.back()" class="nf-btn nf-btn-ghost">Go back</a>
+    </div>
+    <div class="nf-quick">
+      <div class="nf-quick-label">Quick links</div>
+      <div class="nf-quick-list">
+        <a href="/decisions">Decisions log</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="/financial-model">Financial Model</a>
+        <a href="/incident-response">Incident Response</a>
+        <a href="/team">Team</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
