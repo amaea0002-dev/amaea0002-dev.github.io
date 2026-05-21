@@ -524,7 +524,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .profile-avatar {
   width: 60px; height: 60px; border-radius: 50%;
-  background: linear-gradient(135deg, #4C2C4B, #8B6189);
+  background: linear-gradient(135deg, var(--plum), var(--plum-mid));
   display: flex; align-items: center; justify-content: center;
   font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 14px;
   flex-shrink: 0;
@@ -591,7 +591,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .principle-title { font-size: 0.88rem; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
 .principle-desc { font-size: 0.82rem; color: var(--gray-600); line-height: 1.6; }
 .nono-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.nono-card { background: var(--white); border: 1px solid rgba(239,68,68,0.18); border-left: 3px solid var(--red); border-radius: var(--r-lg); padding: 18px; }
+.nono-card { background: var(--red-bg); border: 1px solid var(--red-border); border-radius: var(--r-lg); padding: 18px; }
 .nono-no { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--red); margin-bottom: 5px; }
 .nono-title { font-size: 0.85rem; font-weight: 700; color: var(--gray-900); margin-bottom: 5px; }
 .nono-desc { font-size: 0.74rem; color: var(--gray-600); line-height: 1.6; }
@@ -817,3 +817,58 @@ body.sidebar-collapsed .user-select-panel { display: none !important; }
 }
 .sidebar-sub-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
 .sidebar-sub-item.active { background: rgba(255,255,255,0.10); color: #fff; font-weight: 600; }
+
+/* ============================================================
+ * A11y baseline — added 2026-05-21 per /impeccable audit pass #1
+ * Skip-link, focus-visible ring, touch-target raise on coarse
+ * pointers. Critical keyboard-nav affordances that were missing.
+ * ============================================================ */
+
+/* Skip-link — first tab stop, visually hidden until focused.
+ * Lets keyboard users bypass the sidebar in one keystroke. */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 12px;
+  z-index: 10000;
+  background: var(--plum);
+  color: var(--white);
+  padding: 10px 16px;
+  border-radius: var(--r-md);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: var(--sh-md);
+  transition: top 0.18s var(--ease);
+}
+.skip-link:focus {
+  top: 12px;
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+/* Focus-visible ring — every interactive element gets a plum focus
+ * ring when reached via keyboard. Mouse clicks don't trigger it
+ * (browser :focus-visible heuristic handles that). */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--plum);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* Touch-target raise on coarse pointers — sidebar items, sub-items
+ * and toggles need to meet WCAG 44×44 minimum on touch devices.
+ * Desktop pointer users keep the denser default. */
+@media (pointer: coarse) {
+  .sidebar-item,
+  .sidebar-sub-item,
+  .sidebar-toggle {
+    min-height: 44px;
+  }
+}
