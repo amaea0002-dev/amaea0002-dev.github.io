@@ -872,3 +872,54 @@ textarea:focus-visible,
     min-height: 44px;
   }
 }
+
+/* ============================================================
+ * Inline-style distill utilities — 2026-05-21 per /impeccable
+ * audit Tier B/C. Extracts highest-frequency repeating patterns
+ * across data-heavy pages (eval-v2 = 207 inlines, investor = 160,
+ * financial-model = 102). Each class is narrowly named to match
+ * the pattern it replaces, not generalised beyond first use.
+ * ============================================================ */
+
+/* Muted secondary text in dense data layouts (eval scoring scales,
+ * sub-axis labels). 200+ instances replaced. */
+.text-muted-medium {
+  font-weight: 500;
+  color: var(--gray-400);
+}
+
+/* Small meta text — captions, footnotes inside dense rows. */
+.text-meta {
+  font-size: 0.65rem;
+  color: var(--gray-500);
+}
+
+/* Right-aligned inline-group used at row endings for badges/actions. */
+.row-end-group {
+  margin-left: auto;
+  display: inline-flex;
+  gap: 6px;
+}
+
+/* Tiny badge / tag variants for dense table rows. tag-mini and
+ * pill-mini compose with existing .badge / .badge-X classes. */
+.tag-mini {
+  font-size: 0.6rem;
+  padding: 2px 8px;
+}
+.pill-mini {
+  font-size: 0.65rem;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* Avatar / icon gradients — plum follows the brand, blue is a
+ * legacy hard-coded blue gradient retained as-is (no --blue-dark
+ * / --blue-light tokens exist; could be tokenised later). */
+.gradient-plum {
+  background: linear-gradient(135deg, var(--plum), var(--plum-mid));
+}
+.gradient-blue {
+  background: linear-gradient(135deg, #1a4080, #4292c6);
+}
