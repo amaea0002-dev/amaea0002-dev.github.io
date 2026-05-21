@@ -17,6 +17,8 @@
     .fm-table th, .fm-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--gray-100); }
     .fm-table th { font-weight: 700; color: var(--gray-700); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; background: var(--gray-50); }
     .fm-table td.num { font-variant-numeric: tabular-nums; font-weight: 600; }
+    .fm-table tr.fm-thead-group th { font-size: 0.62rem; font-weight: 800; color: var(--plum-soft); background: var(--white); border-bottom: 1px solid var(--gray-100); letter-spacing: 0.1em; padding-bottom: 4px; padding-top: 8px; }
+    .fm-table tr.fm-thead-group + tr th { padding-top: 8px; }
     .fm-scenario-card { border-radius: 12px; padding: 18px 20px; margin-bottom: 12px; }
     .fm-scenario-card.bear  { background: var(--gray-50); border: 1px solid var(--gray-200); }
     .fm-scenario-card.base  { background: var(--plum-tint); border: 1px solid var(--plum-border); }
@@ -263,6 +265,13 @@
         </p>
         <table class="fm-table">
           <thead>
+            <tr class="fm-thead-group">
+              <th></th>
+              <th>Volume</th>
+              <th colspan="2">Revenue</th>
+              <th>Cost</th>
+              <th colspan="3">Result</th>
+            </tr>
             <tr>
               <th>Scenario</th>
               <th>Active</th>
@@ -320,6 +329,13 @@
         </p>
         <table class="fm-table">
           <thead>
+            <tr class="fm-thead-group">
+              <th></th>
+              <th>Volume</th>
+              <th colspan="2">Revenue</th>
+              <th>Cost</th>
+              <th colspan="3">Result</th>
+            </tr>
             <tr>
               <th>Scenario</th>
               <th>Active (% SAM)</th>
