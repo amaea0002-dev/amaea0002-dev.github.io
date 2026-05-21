@@ -104,8 +104,56 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   transition: background-color 0.25s ease, color 0.25s ease;
+  /* Opacity-only on body — never `transform`, because the sidebar is
+     `position: fixed` and any transform on an ancestor creates a new
+     containing block, anchoring the sidebar to body instead of viewport
+     and clipping half its content. */
+  animation: amaea-page-fade 360ms cubic-bezier(0.32, 0.72, 0, 1) both;
 }
 a { text-decoration: none; color: inherit; }
+
+/* ── Motion system — Stripe-grade transitions (shared with app + website) ── */
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes amaea-page-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+button:not(:disabled):active,
+[role="button"]:not([aria-disabled="true"]):active,
+a[href]:active {
+  transform: scale(0.97);
+  transition: transform 80ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.001ms;
+    animation-name: none;
+  }
+  button:not(:disabled):active,
+  [role="button"]:not([aria-disabled="true"]):active,
+  a[href]:active {
+    transform: none;
+  }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
 img { display: block; max-width: 100%; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
 
@@ -444,6 +492,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: inline-flex; align-items: center;
   font-size: 0.65rem; font-weight: 800; text-transform: uppercase;
   letter-spacing: 0.04em; padding: 3px 9px; border-radius: var(--r-pill);
+  /* Pills never wrap mid-content — long labels like "Shipped 17 May 2026"
+     would otherwise break across multiple lines when the row is dense. */
+  white-space: nowrap;
 }
 .badge-green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
 .badge-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
