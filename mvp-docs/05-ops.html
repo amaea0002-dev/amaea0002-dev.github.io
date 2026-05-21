@@ -75,7 +75,7 @@
 </tr>
 <tr>
 <td>Supabase</td>
-<td><code>sqsqyhcrkwjopwlosqlh.supabase.co</code></td>
+<td><code>&lt;supabase-project-ref&gt;.supabase.co</code> (ref in 1Password)</td>
 <td>Postgres + Storage + Auth. EU-West (Ireland).</td>
 </tr>
 <tr>
@@ -106,9 +106,10 @@ npx vercel login
 # 2. Verify the project link
 cat /Users/milan/Documents/Amaea/amaea-app/.vercel/project.json
 # Should show:
-# { &quot;projectId&quot;: &quot;prj_51REnXWtZezLKKNAx744qlIqzacN&quot;,
-#   &quot;orgId&quot;:     &quot;team_p5flIlgZvFKNUiGtcywMWfB1&quot;,
+# { &quot;projectId&quot;: &quot;&lt;vercel-prj-id&gt;&quot;,
+#   &quot;orgId&quot;:     &quot;&lt;vercel-team-id&gt;&quot;,
 #   &quot;projectName&quot;: &quot;amaea&quot; }
+# (real IDs in 1Password: amaea / vercel / project.json)
 
 # 3. Deploy
 cd /Users/milan/Documents/Amaea/amaea-app &amp;&amp; npx vercel --prod</code></pre>
@@ -155,7 +156,7 @@ npx vercel promote &lt;deployment-url&gt;      # promote a previous deploy to pr
 <tr>
 <td><code>INGEST_SECRET</code></td>
 <td>Server only</td>
-<td>Bearer token for manual cron triggers (currently <code>amaea-ingest-2026</code>)</td>
+<td>Bearer token for manual cron triggers. Current value lives in 1Password (<code>amaea / vercel-env / INGEST_SECRET</code>) — never copy the literal value into docs</td>
 </tr>
 </tbody></table>
 <p><strong>Security notes:</strong></p>
@@ -188,7 +189,7 @@ npx vercel env pull .env.local</code></pre>
 pbcopy &lt; /Users/milan/Documents/Amaea/amaea-db/migrations/0NN_name.sql
 
 # 2. Open the SQL editor
-open &quot;https://supabase.com/dashboard/project/sqsqyhcrkwjopwlosqlh/sql/new&quot;
+open &quot;https://supabase.com/dashboard&quot;   # then navigate Project → SQL Editor
 
 # 3. Cmd+V, then click Run</code></pre>
 <p>After running, verify with a quick query (often a SELECT against <code>information_schema.columns</code> or a test row INSERT/DELETE).</p>
@@ -302,12 +303,12 @@ open &quot;https://supabase.com/dashboard/project/sqsqyhcrkwjopwlosqlh/sql/new&q
 <p>Fetches FCA RSS feed, embeds new publications, inserts into <code>fca_documents</code> with <code>source = &#x27;FCA Horizon&#x27;</code>. Skips duplicates by URL.</p>
 <p>Manual trigger:</p>
 <pre><code>curl -X GET https://amaea.vercel.app/api/rag/horizon \
-  -H &quot;Authorization: Bearer amaea-ingest-2026&quot;</code></pre>
+  -H &quot;Authorization: Bearer $INGEST_SECRET&quot;</code></pre>
 <h3 id="apicronar-sweep-every-day-at-0600-utc"><code>/api/cron/ar-sweep</code> — Every day at 06:00 UTC</h3>
 <p>Evaluates every overdue review against COBS 9.5 using Claude. Creates / resolves <code>overdue_review</code> flags. Max_tokens 512 per review.</p>
 <p>Manual trigger:</p>
 <pre><code>curl -X GET https://amaea.vercel.app/api/cron/ar-sweep \
-  -H &quot;Authorization: Bearer amaea-ingest-2026&quot;</code></pre>
+  -H &quot;Authorization: Bearer $INGEST_SECRET&quot;</code></pre>
 <h3 id="checking-cron-status">Checking cron status</h3>
 <p>Vercel Dashboard → Project <code>amaea</code> → Logs → filter by <code>/api/cron/</code>. Each cron execution logs with a request ID, duration, and any error.</p>
 <h2 id="cost-monitoring">Cost monitoring</h2>

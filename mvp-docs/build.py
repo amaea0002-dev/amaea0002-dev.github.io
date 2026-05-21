@@ -473,11 +473,58 @@ def build_doc(meta: dict) -> None:
     print(f"  ✓ {meta['src']:40s} → {meta['out']}")
 
 
+# -------------------------------------------------------------------
+# Secret-leak guard
+# -------------------------------------------------------------------
+# Patterns that should never appear in the rendered HTML. If they do, the
+# build fails — so a stray literal secret in a source markdown file is
+# caught before it ships. Add new patterns here when new secrets are minted.
+SECRET_PATTERNS = [
+    # Old INGEST_SECRET shape — `amaea-ingest-NNNN`. Rotation should produce a
+    # high-entropy value (use openssl rand -hex 32) that doesn't match.
+    re.compile(r"amaea-ingest-\d{4}"),
+    # Any literal Bearer token after "Bearer ". Allows shell-variable forms
+    # (`Bearer $INGEST_SECRET`, `Bearer <INGEST_SECRET>`) which start with $ or <.
+    re.compile(r"Bearer\s+(?![\$<])[A-Za-z0-9_\-]{8,}"),
+    # Supabase project refs leak the target Supabase tenant.
+    re.compile(r"\bsqsq[a-z0-9]{16,}\.supabase\.co\b"),
+    # Vercel project / team IDs.
+    re.compile(r"\b(prj_|team_)[A-Za-z0-9]{20,}\b"),
+]
+
+
+def scan_for_secrets(name: str, content: str) -> list[str]:
+    """Return a list of (pattern_label, matched_snippet) findings."""
+    findings: list[str] = []
+    for pat in SECRET_PATTERNS:
+        for m in pat.finditer(content):
+            # Show a small window around the match for context
+            start = max(0, m.start() - 30)
+            end = min(len(content), m.end() + 30)
+            snippet = content[start:end].replace("\n", " ")
+            findings.append(f"  {name}: /{pat.pattern}/ near …{snippet}…")
+    return findings
+
+
 def main() -> None:
     print("Building Amaea MVP documentation…")
+    leaks: list[str] = []
     for meta in DOCS:
         build_doc(meta)
-    print("Done.")
+        # Re-read the just-written file and scan it
+        out_path = ROOT / meta["out"]
+        leaks.extend(scan_for_secrets(meta["out"], out_path.read_text(encoding="utf-8")))
+    if leaks:
+        print("\n❌ Secret-leak guard tripped — DO NOT publish this build:")
+        for line in leaks:
+            print(line)
+        print(
+            "\nReplace the literal value in the source markdown with a "
+            "shell-style placeholder (e.g. `$INGEST_SECRET`) and point readers "
+            "to 1Password for the live value. See audit 2026-05-19."
+        )
+        raise SystemExit(1)
+    print("Done. (Secret-leak guard passed.)")
 
 
 if __name__ == "__main__":

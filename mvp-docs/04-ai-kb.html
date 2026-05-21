@@ -182,7 +182,7 @@ CREATE INDEX fca_documents_embedding_idx
 <p>The Governance page on the app queries this live, showing the actual item count and last-updated timestamp.</p>
 <p>Manual trigger:</p>
 <pre><code>GET https://amaea.vercel.app/api/rag/horizon
-Authorization: Bearer amaea-ingest-2026</code></pre>
+Authorization: Bearer $INGEST_SECRET</code></pre>
 <h2 id="embeddings">Embeddings</h2>
 <h3 id="voyage-ai-voyage-3-lite">Voyage AI <code>voyage-3-lite</code></h3>
 <table>
@@ -487,7 +487,7 @@ Kate Davies (86 clients, 0 overdue)</code></pre>
 <p>This is the part of the product that turns the platform from &quot;passive monitoring&quot; to &quot;active compliance attention&quot;. Every morning, the firm wakes up to a refreshed view of which overdue reviews have been adequately explained and which haven&#x27;t. The compliance officer can focus on the ones the AI judged insufficient.</p>
 <p>Manual trigger (for testing):</p>
 <pre><code>GET https://amaea.vercel.app/api/cron/ar-sweep
-Authorization: Bearer amaea-ingest-2026</code></pre>
+Authorization: Bearer $INGEST_SECRET</code></pre>
 <h2 id="the-evaluation-framework">The evaluation framework</h2>
 <p>50 annotated FCA compliance scenarios for measuring RAG pipeline quality. The primary output feeds the Imperial MSc ML research paper Milan is producing.</p>
 <h3 id="dataset-structure">Dataset structure</h3>

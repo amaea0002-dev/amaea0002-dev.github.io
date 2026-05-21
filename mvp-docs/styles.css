@@ -103,6 +103,54 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+body {
+  /* Opacity-only — never `transform` on body, see comment in intranet.css */
+  animation: amaea-page-fade 360ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+/* ── Motion system — Stripe-grade transitions (shared across all Amaea surfaces) ── */
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes amaea-page-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+button:not(:disabled):active,
+[role="button"]:not([aria-disabled="true"]):active,
+a[href]:active {
+  transform: scale(0.97);
+  transition: transform 80ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@media print { body { animation: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.001ms;
+    animation-name: none;
+  }
+  button:not(:disabled):active,
+  [role="button"]:not([aria-disabled="true"]):active,
+  a[href]:active {
+    transform: none;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
 
 a { color: var(--plum); text-decoration: none; border-bottom: 1px solid rgba(64,36,63,0.25); }
 a:hover { color: var(--plum-dark); border-bottom-color: var(--plum); }
