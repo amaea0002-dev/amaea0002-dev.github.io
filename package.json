@@ -1,0 +1,19 @@
+{
+  "name": "amaea-intranet",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Amaea team intranet — static HTML/CSS knowledge base at team.amaea.co.uk.",
+  "packageManager": "pnpm@10.33.4",
+  "scripts": {
+    "build": "lightningcss --minify --bundle intranet.css -o intranet.css",
+    "build:check": "lightningcss --minify --bundle intranet.css -o /tmp/_check.css && echo 'build check OK'"
+  },
+  "devDependencies": {
+    "lightningcss-cli": "^1.27.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "lightningcss-cli"
+    ]
+  }
+}

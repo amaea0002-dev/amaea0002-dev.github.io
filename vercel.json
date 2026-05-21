@@ -1,3 +1,5 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "."
 }
