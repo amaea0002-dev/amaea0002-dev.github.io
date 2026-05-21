@@ -9,15 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="intranet.css"/>
   <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
-  <style>
-    .decision-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-lg); padding: 22px 24px; margin-bottom: 14px; }
-    .decision-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-    .decision-date { font-size: 0.74rem; font-weight: 600; color: var(--gray-500); }
-    .decision-title { font-size: 0.96rem; font-weight: 700; color: var(--gray-900); letter-spacing: -0.02em; margin-bottom: 6px; }
-    .decision-decision { font-size: 0.83rem; color: var(--gray-900); margin-bottom: 8px; font-weight: 500; }
-    .decision-rationale { font-size: 0.82rem; color: var(--gray-500); line-height: 1.6; }
-    .decision-rationale strong { color: var(--gray-600); font-weight: 600; }
-  </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -169,179 +160,196 @@
   <div class="content" data-collapse-after="5" data-collapse-selector=".decision-card">
 
     <div class="page-header">
-      <p class="page-eyebrow">Strategy</p>
+      <p class="page-eyebrow">17 decisions · latest 17 May 2026</p>
       <h1 class="page-title">Decision Log</h1>
-      <p class="page-sub">Key product, commercial and operational decisions with rationale. Keeps us from relitigating past choices. <span style="color:var(--gray-500);font-weight:500;">· Last reviewed 18 May 2026.</span></p>
+      <p class="page-sub">Key product, commercial and operational decisions with rationale. Keeps us from relitigating past choices. <span class="text-mute">· Last reviewed 18 May 2026.</span></p>
     </div>
 
-    <div class="decision-card">
+    <div class="decision-card" id="decision-mvp-hardening">
       <div class="decision-meta">
         <span class="decision-date">17 May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
+        <span class="decision-cat decision-cat--engineering">Engineering</span>
+        <a class="decision-anchor" href="#decision-mvp-hardening" aria-label="Link to this decision">#</a>
       </div>
       <div class="decision-title">MVP-readiness hardening pass — all engineering blockers closed</div>
       <div class="decision-decision">A full MVP-readiness audit on 17 May 2026 found five engineering blockers and ten stress-test risks that the earlier "Phase 1 functionally complete" label had glossed over. All were closed in a single session: hardcoded demo firm name and RMAR deadline removed from AI prompts, multi-tenant data isolation hole closed across 11 API routes, atomic AI usage counter (was losing 50–94% of concurrent increments), document-import idempotency, AR-sweep concurrency cap, explicit Anthropic + Voyage timeouts, and RLS test coverage extended from 32 → 46 tests against the full 31-migration production schema. Migrations 029, 030, and 031 applied to production. Only remaining MVP item is non-engineering: legal drafting of Privacy Policy / DPA / Terms of Service.</div>
       <div class="decision-rationale"><strong>Why:</strong> before this work the product would have actively embarrassed Amaea in front of a compliance officer (the AI literally claimed every real firm was monitoring "Sterling IFA Ltd"; a fake RMAR deadline was quoted to every user; under stress the rate-limit counter dropped 94% of increments so customers could exceed their tier silently). None of these were visible in the test suite or the live demo because the seed only had one firm. Closing the gaps before any real IFA touches the product is the floor for credible pilot conversations. See <code>mvp-hardening-2026-05-17</code> memory + migrations 029–031 in <code>amaea-db</code>.</div>
     </div>
 
-    <div class="decision-card">
+    <div class="decision-card" id="decision-compliance-events-rls">
       <div class="decision-meta">
         <span class="decision-date">17 May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
+        <span class="decision-cat decision-cat--engineering">Engineering</span>
+        <a class="decision-anchor" href="#decision-compliance-events-rls" aria-label="Link to this decision">#</a>
       </div>
       <div class="decision-title">compliance_events append-only enforcement: RLS-only, not DB rules</div>
       <div class="decision-decision">Migration 031 dropped the two PostgreSQL RULES (<code>no_delete_compliance_events</code>, <code>no_update_compliance_events</code>) that previously rewrote any UPDATE/DELETE on the audit table to NOTHING at the DB level. End-user append-only protection is preserved by the existing RLS posture (only a SELECT policy exists → default-deny on UPDATE/DELETE/INSERT for authenticated users). Also changed <code>compliance_events.firm_id</code> FK from CASCADE to SET NULL so audit history survives firm deletion.</div>
       <div class="decision-rationale"><strong>Why:</strong> the rules silently rewrote child DELETEs to no-ops when a parent firm/user was deleted — the FK trigger then expected N rows deleted and got 0, aborting the whole transaction with "referential integrity query gave unexpected result … due to a rule having rewritten the query." This blocked legitimate admin operations (cleaning up test firms, removing stale auth users). RLS provides equivalent protection at the user layer and doesn't interfere with FK cascades. Keeping the audit trail alive after firm deletion is also the more correct behaviour for FCA 7-year retention.</div>
     </div>
 
-    <div class="decision-card">
+    <div class="decision-card" id="decision-equity-split">
       <div class="decision-meta">
         <span class="decision-date">16 May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
+        <span class="decision-cat decision-cat--commercial">Commercial</span>
+        <a class="decision-anchor" href="#decision-equity-split" aria-label="Link to this decision">#</a>
       </div>
       <div class="decision-title">Co-Founder equity split: 50 / 50</div>
       <div class="decision-decision">Milan Sajiv and Hasna Sahul Hameed each hold 50% of Amaea Ltd's ordinary shares on incorporation. 4-year reverse vesting with 1-year cliff, monthly thereafter. Single-trigger acceleration on acquisition, double-trigger on change-of-control + material role change. Vesting calculated from the signing of the Co-Founder &amp; Shareholder Agreement, not from Incorporation — pre-incorporation labour vests on the same schedule.</div>
       <div class="decision-rationale"><strong>Why:</strong> Milan built the prototype (significant prior IP) and is the technical founder; Hasna brings the regulatory-domain authority, will be the future full-time operator, and is the primary external face. The contributions are commercially equivalent across the lifetime of the Business notwithstanding short-term time-commitment differences (Milan 10 hrs/wk pre-launch, Hasna increasing to full-time at Lucent exit Q3 2028). A 50/50 split requires robust deadlock mechanics (discuss → mediate → expert-determination → shotgun) which the Co-Founder Agreement defines explicitly. See <a href="cofounder-agreement">/cofounder-agreement</a>.</div>
     </div>
 
-    <div class="decision-card">
+    <div class="decision-card" id="decision-bootstrap-first">
       <div class="decision-meta">
         <span class="decision-date">16 May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
+        <span class="decision-cat decision-cat--strategy">Strategy</span>
+        <a class="decision-anchor" href="#decision-bootstrap-first" aria-label="Link to this decision">#</a>
       </div>
       <div class="decision-title">Bootstrap-first — raise only after multi-sector AND international expansion</div>
       <div class="decision-decision">Tightening the earlier (7 May) bootstrap stance: no outside raise enters scope until <strong>both</strong> conditions are met: (1) Multi-sector expansion is live — Amaea has paying customers beyond UK IFA (mortgage brokers, insurance intermediaries, wealth managers, accountants); (2) International expansion is live — Amaea has paying customers in at least one market outside the UK. Both are post-2030 milestones. Until then, no pre-seed, no seed, no Series A.</div>
       <div class="decision-rationale"><strong>Why:</strong> The v2 financial model is cash-flow-positive from month 2 of revenue across Bear / Base / Bull scenarios — Amaea funds its own growth from Founders revenue (Q4 2027) onwards. £8k founder contribution at incorporation is the only outside capital needed. Bootstrap maximises founder optionality + ownership and avoids investor expectations driving the wrong product or pace. The dual trigger is deliberately high — only the genuine expansion phases (when capital can buy real time/leverage) justify the dilution. Materials on /investor are kept for advisor conversations, partnership discussions, and customer demos — not for active fundraising. See <a href="financial-model">/financial-model</a>.</div>
     </div>
 
-    <div class="decision-card">
+    <div class="decision-card" id="decision-founder-framework">
       <div class="decision-meta">
         <span class="decision-date">16 May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
+        <span class="decision-cat decision-cat--commercial">Commercial</span>
+        <a class="decision-anchor" href="#decision-founder-framework" aria-label="Link to this decision">#</a>
       </div>
       <div class="decision-title">Founder framework: Co-Founder Agreement + paired Working Agreements</div>
       <div class="decision-decision">Replace the earlier "Milan's Contract" working draft (which had no equity terms and framed Milan as an employee rather than a peer Co-Founder) with three documents: (1) <a href="cofounder-agreement">Co-Founder &amp; Shareholder Agreement</a> — equity, vesting, IP, leaver provisions, drag/tag, Reserved Matters, deadlock mechanics. (2) <a href="cto-working-agreement">CTO Working Agreement</a> (Milan). (3) <a href="ceo-working-agreement">CEO Working Agreement</a> (Hasna). Both Working Agreements are subordinate to the Founder Agreement. All three are draft v1 pending legal review (SeedLegals or boutique firm) before signing.</div>
       <div class="decision-rationale"><strong>Why:</strong> A co-founder agreement without equity terms is structurally incomplete. The replaced "Milan's Contract" treated Milan as reporting to Hasna with no final decision authority and no vesting — that's an employee structure dressed in co-founder language, and inconsistent with the agreed 50/50 split. The new framework is symmetric: identical equity, identical vesting, identical leaver provisions, peer governance with domain authority (Milan = technical, Hasna = commercial) plus mutual sign-off on Reserved Matters. Time-commitment + compensation asymmetries are documented in the Working Agreements (Milan 10 hrs/wk and £0; Hasna increasing to full-time + £12.5k salary + dividend post-Lucent), where reality is asymmetric.</div>
     </div>
 
-    <div class="decision-card">
+    <div class="decision-card" id="decision-document-taxonomy">
       <div class="decision-meta">
         <span class="decision-date">15 May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
+        <span class="decision-cat decision-cat--engineering">Engineering</span>
+        <a class="decision-anchor" href="#decision-document-taxonomy" aria-label="Link to this decision">#</a>
       </div>
       <div class="decision-title">21-type document taxonomy (19 client-level + 2 firm-level) with Zod-validated schemas</div>
       <div class="decision-decision">Classify every uploaded compliance document into one of 19 canonical IFA types, then extract per-type fields against a Zod schema. Lenient enum coercion handles case/spacing variance from Claude's vision output.</div>
       <div class="decision-rationale"><strong>Why:</strong> Loose JSON extraction returned inconsistent shapes that broke downstream code. Per-type Zod schemas force the extraction to either succeed cleanly or surface a typed error — never silent corruption. The taxonomy was chosen by mapping real Lucent documents to FCA rulebook obligations, then collapsing synonyms (e.g. SOA / ROA / Suitability Letter → one type). 19 types covers the entire IFA compliance file based on the May 2026 corpus review.</div>
     </div>
 
-    <div class="decision-card">
-      <div class="decision-meta">
-        <span class="decision-date">7 May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
-      </div>
-      <div class="decision-title">Bootstrap to public launch; no pre-launch seed</div>
-      <div class="decision-decision">Year 1 total cost ~£20–35k, funded by personal savings. Milan takes no Amaea salary while working full-time elsewhere. Hasna takes a tax-efficient £12k salary + £50k dividend (~£62k gross) once Lucent employment ends.</div>
-      <div class="decision-rationale"><strong>Why:</strong> With ~70–80% gross margins and a strong GTM stack (Robin Powell + CISI + Intelliflo + Founders Programme), Amaea should be self-funding from early scale. ~2 Professional firms = break-even, ~5 Professional firms = full dividend coverage. Raising VC pre-launch would dilute ownership for a problem we don't have. Raise from strength later, if at all.</div>
-    </div>
-
-    <div class="decision-card">
-      <div class="decision-meta">
-        <span class="decision-date">April 2026</span>
-        <span class="badge badge-green">Confirmed</span>
-      </div>
-      <div class="decision-title">Compliance health score formula: 40 / 35 / 25</div>
-      <div class="decision-decision">Live 0–100 firm health score = 40% document completeness + 35% review completion + 25% inverse flag severity (critical=15, high=8, medium=3, low=1 weighted penalty).</div>
-      <div class="decision-rationale"><strong>Why:</strong> An IFA's compliance posture is dominated by documentation gaps (which break FCA evidencing) and overdue annual reviews (which break COBS 9.5). Flag severity matters but must be weighted lower because it's already partly captured by the doc/review components. The weights produce intuitive results on the Sterling demo firm (88/100) and the formula is documented in the platform docs so we can defend it under FCA review.</div>
-    </div>
-
-    <div class="decision-card">
-      <div class="decision-meta">
-        <span class="decision-date">May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
-      </div>
-      <div class="decision-title">IFA-first go-to-market, not networks</div>
-      <div class="decision-decision">Target boutique IFA firms directly rather than going through networks or DA groups.</div>
-      <div class="decision-rationale"><strong>Why:</strong> Networks have long procurement cycles and impose constraints on pricing and product scope. Direct IFA relationships give us faster feedback loops, more pricing control, and real usage data before we scale.</div>
-    </div>
-
-    <div class="decision-card">
-      <div class="decision-meta">
-        <span class="decision-date">May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
-      </div>
-      <div class="decision-title">Read-only integrations at MVP</div>
-      <div class="decision-decision">Intelliflo integration is read-only at launch; we pull data in, we never write back to the source system.</div>
-      <div class="decision-rationale"><strong>Why:</strong> Write access creates liability risk (we could corrupt a CRM) and requires a much deeper security review process. Read-only is sufficient to deliver core value at MVP and significantly reduces our risk surface.</div>
-    </div>
-
-    <div class="decision-card">
-      <div class="decision-meta">
-        <span class="decision-date">April 2026</span>
-        <span class="badge badge-green">Confirmed</span>
-      </div>
-      <div class="decision-title">SaaS pricing by firm size, not per client</div>
-      <div class="decision-decision">Price by adviser count, not per managed client record.</div>
-      <div class="decision-rationale"><strong>Why:</strong> Per-client pricing penalises growth and creates unpredictable costs for the firm. IFAs want flat, predictable SaaS fees. Adviser-count tiers align our revenue growth with firm growth without creating friction.</div>
-    </div>
-
-    <div class="decision-card">
-      <div class="decision-meta">
-        <span class="decision-date">April 2026</span>
-        <span class="badge badge-green">Confirmed</span>
-      </div>
-      <div class="decision-title">UK-only launch, no international before 2030</div>
-      <div class="decision-decision">Launch exclusively in the UK market. No international expansion until at least 2030.</div>
-      <div class="decision-rationale"><strong>Why:</strong> FCA Consumer Duty is a UK-specific regulatory driver. International markets have entirely different compliance frameworks that would require separate product work. Focus beats optionality at this stage.</div>
-    </div>
-
-    <div class="decision-card">
-      <div class="decision-meta">
-        <span class="decision-date">March 2026</span>
-        <span class="badge badge-green">Confirmed</span>
-      </div>
-      <div class="decision-title">Founders programme as GTM entry point</div>
-      <div class="decision-decision">Use FP Advance, Robin Powell, CISI, and Intelliflo as early access channels. 200 founder spots with 20% lifetime discount.</div>
-      <div class="decision-rationale"><strong>Why:</strong> These channels concentrate compliance-aware IFAs who would be natural early adopters. The 200-spot scarcity creates urgency. The lifetime discount rewards early commitment and builds long-term loyalty before we have social proof.</div>
-    </div>
-
-    <div class="decision-card">
+    <div class="decision-card" id="decision-rmar-section-h">
       <div class="decision-meta">
         <span class="decision-date">15 May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
+        <span class="decision-cat decision-cat--engineering">Engineering</span>
+        <a class="decision-anchor" href="#decision-rmar-section-h" aria-label="Link to this decision">#</a>
       </div>
-      <div class="decision-title">Demo form delivery: switched from formsubmit.co to a Vercel serverless function using Resend</div>
-      <div class="decision-decision">New Vercel serverless function <code>api/demo.js</code> on the amaea.ai project calls the Resend HTTP API directly. Routes to milan@ and hasna@ via a comma-separated <code>DEMO_TO_EMAIL</code> env var. The old amaea0002@gmail.com address was purged from the codebase.</div>
-      <div class="decision-rationale"><strong>Why:</strong> formsubmit.co verification for the new amaea.co.uk email was stuck behind a provider outage. Resend was already verified for the domain (SPF/DKIM), so a single-file serverless function was faster to ship and removes a third-party dependency we no longer need.</div>
+      <div class="decision-title">RMAR Section H pre-population shipped without a DB migration</div>
+      <div class="decision-decision">The Section H aggregator queries the existing <code>documents</code> table directly using <code>type='complaint_record'</code> and <code>status='complete'</code> with a period filter. No new table or schema change was required for Slice 1. (Section H is the canonical FCA letter for the Conduct of Business return that includes complaints — earlier drafts of this log used "Section F", an internally-invented label since corrected against RegData.)</div>
+      <div class="decision-rationale"><strong>Why:</strong> Avoids touching the CHECK constraint on <code>documents</code> and ships Slice 1 today. A migration approach can be revisited if Slices 2 or 3 require it. Inline DISP 1.6 8-week breach flags surface on the Section H page at the moment compliance officers are reviewing complaints — persistent cron-raised flags deferred to a later slice.</div>
     </div>
 
-    <div class="decision-card">
+    <div class="decision-card" id="decision-ai-chat-dropped">
       <div class="decision-meta">
         <span class="decision-date">15 May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
-      </div>
-      <div class="decision-title">founders@amaea.co.uk clarified as a Google Group, not a mailbox</div>
-      <div class="decision-decision">Demo requests now route directly to milan@amaea.co.uk and hasna@amaea.co.uk via <code>DEMO_TO_EMAIL</code>. The founders@ group is retained for human-to-human external use only.</div>
-      <div class="decision-rationale"><strong>Why:</strong> The group was rejecting Resend-relayed mail (treated as an external sender). Routing directly to named inboxes was the simpler fix; configuring group posting policies would have added complexity with no benefit.</div>
-    </div>
-
-    <div class="decision-card">
-      <div class="decision-meta">
-        <span class="decision-date">15 May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
+        <span class="decision-cat decision-cat--product">Product</span>
+        <a class="decision-anchor" href="#decision-ai-chat-dropped" aria-label="Link to this decision">#</a>
       </div>
       <div class="decision-title">Live AI chat on the marketing site dropped; reverted to auto-loop animation only</div>
       <div class="decision-decision">Briefly integrated a live <code>/api/public/chat</code> input on the homepage. Reverted: the auto-typing demo animation conflicts with live request/response timing, creating overlapping outputs. The looping animation is retained as a passive showcase.</div>
       <div class="decision-rationale"><strong>Why:</strong> The demo is more reliable — and more legible — as a passive "show, don't interact" feature at this stage. A real try-it-yourself interface belongs in the product, not the marketing site, and requires session isolation we haven't built.</div>
     </div>
 
-    <div class="decision-card">
+    <div class="decision-card" id="decision-demo-form-resend">
       <div class="decision-meta">
         <span class="decision-date">15 May 2026</span>
-        <span class="badge badge-green">Confirmed</span>
+        <span class="decision-cat decision-cat--ops">Ops</span>
+        <a class="decision-anchor" href="#decision-demo-form-resend" aria-label="Link to this decision">#</a>
       </div>
-      <div class="decision-title">RMAR Section H pre-population shipped without a DB migration</div>
-      <div class="decision-decision">The Section H aggregator queries the existing <code>documents</code> table directly using <code>type='complaint_record'</code> and <code>status='complete'</code> with a period filter. No new table or schema change was required for Slice 1. (Section H is the canonical FCA letter for the Conduct of Business return that includes complaints — earlier drafts of this log used "Section F", an internally-invented label since corrected against RegData.)</div>
-      <div class="decision-rationale"><strong>Why:</strong> Avoids touching the CHECK constraint on <code>documents</code> and ships Slice 1 today. A migration approach can be revisited if Slices 2 or 3 require it. Inline DISP 1.6 8-week breach flags surface on the Section H page at the moment compliance officers are reviewing complaints — persistent cron-raised flags deferred to a later slice.</div>
+      <div class="decision-title">Demo form delivery: switched from formsubmit.co to a Vercel serverless function using Resend</div>
+      <div class="decision-decision">New Vercel serverless function <code>api/demo.js</code> on the amaea.ai project calls the Resend HTTP API directly. Routes to milan@ and hasna@ via a comma-separated <code>DEMO_TO_EMAIL</code> env var. The old amaea0002@gmail.com address was purged from the codebase.</div>
+      <div class="decision-rationale"><strong>Why:</strong> formsubmit.co verification for the new amaea.co.uk email was stuck behind a provider outage. Resend was already verified for the domain (SPF/DKIM), so a single-file serverless function was faster to ship and removes a third-party dependency we no longer need.</div>
+    </div>
+
+    <div class="decision-card" id="decision-founders-google-group">
+      <div class="decision-meta">
+        <span class="decision-date">15 May 2026</span>
+        <span class="decision-cat decision-cat--ops">Ops</span>
+        <a class="decision-anchor" href="#decision-founders-google-group" aria-label="Link to this decision">#</a>
+      </div>
+      <div class="decision-title">founders@amaea.co.uk clarified as a Google Group, not a mailbox</div>
+      <div class="decision-decision">Demo requests now route directly to milan@amaea.co.uk and hasna@amaea.co.uk via <code>DEMO_TO_EMAIL</code>. The founders@ group is retained for human-to-human external use only.</div>
+      <div class="decision-rationale"><strong>Why:</strong> The group was rejecting Resend-relayed mail (treated as an external sender). Routing directly to named inboxes was the simpler fix; configuring group posting policies would have added complexity with no benefit.</div>
+    </div>
+
+    <div class="decision-card" id="decision-bootstrap-to-launch">
+      <div class="decision-meta">
+        <span class="decision-date">7 May 2026</span>
+        <span class="decision-cat decision-cat--strategy">Strategy</span>
+        <a class="decision-anchor" href="#decision-bootstrap-to-launch" aria-label="Link to this decision">#</a>
+      </div>
+      <div class="decision-title">Bootstrap to public launch; no pre-launch seed</div>
+      <div class="decision-decision">Year 1 total cost ~£20–35k, funded by personal savings. Milan takes no Amaea salary while working full-time elsewhere. Hasna takes a tax-efficient £12k salary + £50k dividend (~£62k gross) once Lucent employment ends.</div>
+      <div class="decision-rationale"><strong>Why:</strong> With ~70–80% gross margins and a strong GTM stack (Robin Powell + CISI + Intelliflo + Founders Programme), Amaea should be self-funding from early scale. ~2 Professional firms = break-even, ~5 Professional firms = full dividend coverage. Raising VC pre-launch would dilute ownership for a problem we don't have. Raise from strength later, if at all.</div>
+    </div>
+
+    <div class="decision-card" id="decision-ifa-first-gtm">
+      <div class="decision-meta">
+        <span class="decision-date">May 2026</span>
+        <span class="decision-cat decision-cat--strategy">Strategy</span>
+        <a class="decision-anchor" href="#decision-ifa-first-gtm" aria-label="Link to this decision">#</a>
+      </div>
+      <div class="decision-title">IFA-first go-to-market, not networks</div>
+      <div class="decision-decision">Target boutique IFA firms directly rather than going through networks or DA groups.</div>
+      <div class="decision-rationale"><strong>Why:</strong> Networks have long procurement cycles and impose constraints on pricing and product scope. Direct IFA relationships give us faster feedback loops, more pricing control, and real usage data before we scale.</div>
+    </div>
+
+    <div class="decision-card" id="decision-read-only-integrations">
+      <div class="decision-meta">
+        <span class="decision-date">May 2026</span>
+        <span class="decision-cat decision-cat--product">Product</span>
+        <a class="decision-anchor" href="#decision-read-only-integrations" aria-label="Link to this decision">#</a>
+      </div>
+      <div class="decision-title">Read-only integrations at MVP</div>
+      <div class="decision-decision">Intelliflo integration is read-only at launch; we pull data in, we never write back to the source system.</div>
+      <div class="decision-rationale"><strong>Why:</strong> Write access creates liability risk (we could corrupt a CRM) and requires a much deeper security review process. Read-only is sufficient to deliver core value at MVP and significantly reduces our risk surface.</div>
+    </div>
+
+    <div class="decision-card" id="decision-health-score">
+      <div class="decision-meta">
+        <span class="decision-date">April 2026</span>
+        <span class="decision-cat decision-cat--product">Product</span>
+        <a class="decision-anchor" href="#decision-health-score" aria-label="Link to this decision">#</a>
+      </div>
+      <div class="decision-title">Compliance health score formula: 40 / 35 / 25</div>
+      <div class="decision-decision">Live 0–100 firm health score = 40% document completeness + 35% review completion + 25% inverse flag severity (critical=15, high=8, medium=3, low=1 weighted penalty).</div>
+      <div class="decision-rationale"><strong>Why:</strong> An IFA's compliance posture is dominated by documentation gaps (which break FCA evidencing) and overdue annual reviews (which break COBS 9.5). Flag severity matters but must be weighted lower because it's already partly captured by the doc/review components. The weights produce intuitive results on the Sterling demo firm (88/100) and the formula is documented in the platform docs so we can defend it under FCA review.</div>
+    </div>
+
+    <div class="decision-card" id="decision-pricing-by-firm-size">
+      <div class="decision-meta">
+        <span class="decision-date">April 2026</span>
+        <span class="decision-cat decision-cat--commercial">Commercial</span>
+        <a class="decision-anchor" href="#decision-pricing-by-firm-size" aria-label="Link to this decision">#</a>
+      </div>
+      <div class="decision-title">SaaS pricing by firm size, not per client</div>
+      <div class="decision-decision">Price by adviser count, not per managed client record.</div>
+      <div class="decision-rationale"><strong>Why:</strong> Per-client pricing penalises growth and creates unpredictable costs for the firm. IFAs want flat, predictable SaaS fees. Adviser-count tiers align our revenue growth with firm growth without creating friction.</div>
+    </div>
+
+    <div class="decision-card" id="decision-uk-only-launch">
+      <div class="decision-meta">
+        <span class="decision-date">April 2026</span>
+        <span class="decision-cat decision-cat--strategy">Strategy</span>
+        <a class="decision-anchor" href="#decision-uk-only-launch" aria-label="Link to this decision">#</a>
+      </div>
+      <div class="decision-title">UK-only launch, no international before 2030</div>
+      <div class="decision-decision">Launch exclusively in the UK market. No international expansion until at least 2030.</div>
+      <div class="decision-rationale"><strong>Why:</strong> FCA Consumer Duty is a UK-specific regulatory driver. International markets have entirely different compliance frameworks that would require separate product work. Focus beats optionality at this stage.</div>
+    </div>
+
+    <div class="decision-card" id="decision-founders-programme">
+      <div class="decision-meta">
+        <span class="decision-date">March 2026</span>
+        <span class="decision-cat decision-cat--strategy">Strategy</span>
+        <a class="decision-anchor" href="#decision-founders-programme" aria-label="Link to this decision">#</a>
+      </div>
+      <div class="decision-title">Founders programme as GTM entry point</div>
+      <div class="decision-decision">Use FP Advance, Robin Powell, CISI, and Intelliflo as early access channels. 200 founder spots with 20% lifetime discount.</div>
+      <div class="decision-rationale"><strong>Why:</strong> These channels concentrate compliance-aware IFAs who would be natural early adopters. The 200-spot scarcity creates urgency. The lifetime discount rewards early commitment and builds long-term loyalty before we have social proof.</div>
     </div>
 
   </div>
