@@ -208,10 +208,14 @@
         // Let the HTTP cache do its job; deploys publish a new search-index.json.
         const res = await fetch('/search-index.json');
         if (res.ok) index = await res.json();
-      } catch (_) { index = []; }
+      } catch (_) {
+        // Leave index null so the next open retries — a single Cloudflare
+        // hiccup shouldn't permanently disable search until page reload.
+      }
       allRows = null;
     }
     render(search(''));
+    if (!index) resultsEl.innerHTML = `<div class="cmdk-empty">Couldn't load the search index. Press Esc and try again.</div>`;
   }
 
   function close() {
