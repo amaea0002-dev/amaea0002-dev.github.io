@@ -55,6 +55,7 @@
   let index = null;
   let activeRow = 0;
   let lastResults = [];
+  let lastFocusedEl = null;
 
   // ────────────────────────────────────────────────────────────────
   // Search
@@ -135,17 +136,26 @@
       const tag = r.kind === 'heading'
         ? `<span class="cmdk-tag">H${r.level || 2}</span>`
         : `<span class="cmdk-tag cmdk-tag-page">Page</span>`;
+      const id = `cmdk-row-${i}`;
+      const selected = i === 0 ? 'true' : 'false';
       return `
-        <a href="${r.url}" class="cmdk-row${i === 0 ? ' is-active' : ''}" role="option" data-i="${i}">
+        <a href="${escapeAttr(r.url)}" id="${id}" class="cmdk-row${i === 0 ? ' is-active' : ''}" role="option" aria-selected="${selected}" data-i="${i}">
           ${tag}
           <div class="cmdk-row-body">
             <div class="cmdk-row-title">${escapeHtml(r.title)}</div>
             ${r.eyebrow ? `<div class="cmdk-row-eyebrow">${escapeHtml(r.eyebrow)}</div>` : ''}
           </div>
-          <svg class="cmdk-row-arrow" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg aria-hidden="true" class="cmdk-row-arrow" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
       `;
     }).join('');
+    inputEl.setAttribute('aria-activedescendant', rows.length ? 'cmdk-row-0' : '');
+  }
+
+  function escapeAttr(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
   }
 
   function escapeHtml(s) {
@@ -158,9 +168,16 @@
     const rows = resultsEl.querySelectorAll('.cmdk-row');
     if (!rows.length) return;
     activeRow = ((i % rows.length) + rows.length) % rows.length;
-    rows.forEach((r, j) => r.classList.toggle('is-active', j === activeRow));
+    rows.forEach((r, j) => {
+      const isActive = j === activeRow;
+      r.classList.toggle('is-active', isActive);
+      r.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
     const active = rows[activeRow];
-    if (active) active.scrollIntoView({ block: 'nearest' });
+    if (active) {
+      active.scrollIntoView({ block: 'nearest' });
+      inputEl.setAttribute('aria-activedescendant', active.id);
+    }
   }
 
   // ────────────────────────────────────────────────────────────────
@@ -173,8 +190,14 @@
       inputEl = overlayEl.querySelector('.cmdk-input');
       resultsEl = overlayEl.querySelector('.cmdk-results');
       modalEl = overlayEl.querySelector('.cmdk-modal');
+      inputEl.setAttribute('role', 'combobox');
+      inputEl.setAttribute('aria-controls', 'cmdk-results');
+      inputEl.setAttribute('aria-expanded', 'true');
+      inputEl.setAttribute('aria-autocomplete', 'list');
+      resultsEl.id = 'cmdk-results';
       attachHandlers();
     }
+    lastFocusedEl = document.activeElement;
     overlayEl.removeAttribute('hidden');
     document.body.classList.add('cmdk-open');
     inputEl.value = '';
@@ -182,7 +205,8 @@
 
     if (!index) {
       try {
-        const res = await fetch('/search-index.json', { cache: 'no-store' });
+        // Let the HTTP cache do its job; deploys publish a new search-index.json.
+        const res = await fetch('/search-index.json');
         if (res.ok) index = await res.json();
       } catch (_) { index = []; }
       allRows = null;
@@ -194,6 +218,12 @@
     if (!overlayEl) return;
     overlayEl.setAttribute('hidden', '');
     document.body.classList.remove('cmdk-open');
+    // Restore focus to whatever the user was on before opening — usually the
+    // ⌘K topbar trigger, sometimes a sidebar item.
+    if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+      try { lastFocusedEl.focus(); } catch (_) {}
+    }
+    lastFocusedEl = null;
   }
 
   function attachHandlers() {
@@ -207,11 +237,25 @@
       if (e.key === 'Escape') { e.preventDefault(); close(); return; }
       if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeRow + 1); return; }
       if (e.key === 'ArrowUp')   { e.preventDefault(); setActive(activeRow - 1); return; }
+      if (e.key === 'Home')      { e.preventDefault(); setActive(0); return; }
+      if (e.key === 'End')       { e.preventDefault(); setActive(-1); return; }
       if (e.key === 'Enter') {
         e.preventDefault();
         const rows = resultsEl.querySelectorAll('.cmdk-row');
         const active = rows[activeRow];
         if (active) window.location.href = active.getAttribute('href');
+        return;
+      }
+      // Focus trap: keep Tab cycling between input and active row.
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        if (e.target === inputEl) {
+          const rows = resultsEl.querySelectorAll('.cmdk-row');
+          const active = rows[activeRow];
+          if (active) active.focus();
+        } else {
+          inputEl.focus();
+        }
       }
     });
 
