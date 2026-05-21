@@ -9,29 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="intranet.css"/>
   <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
-  <style>
-    /* Page-specific styles for the financial model doc */
-    .fm-section { margin-bottom: 32px; }
-    .fm-formula { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px; padding: 14px 18px; font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace; font-size: 0.78rem; line-height: 1.55; color: var(--gray-800); overflow-x: auto; white-space: pre; }
-    .fm-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-    .fm-table th, .fm-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--gray-100); }
-    .fm-table th { font-weight: 700; color: var(--gray-700); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; background: var(--gray-50); }
-    .fm-table td.num { font-variant-numeric: tabular-nums; font-weight: 600; }
-    .fm-table tr.fm-thead-group th { font-size: 0.62rem; font-weight: 800; color: var(--plum-soft); background: var(--white); border-bottom: 1px solid var(--gray-100); letter-spacing: 0.1em; padding-bottom: 4px; padding-top: 8px; }
-    .fm-table tr.fm-thead-group + tr th { padding-top: 8px; }
-    .fm-scenario-card { border-radius: 12px; padding: 18px 20px; margin-bottom: 12px; }
-    .fm-scenario-card.bear  { background: var(--gray-50); border: 1px solid var(--gray-200); }
-    .fm-scenario-card.base  { background: var(--plum-tint); border: 1px solid var(--plum-border); }
-    .fm-scenario-card.bull  { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25); }
-    .fm-key  { font-weight: 700; color: var(--gray-500); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.08em; }
-    .fm-val  { font-size: 1.1rem; font-weight: 800; color: var(--gray-900); letter-spacing: -0.02em; }
-    .fm-eyebrow { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); margin: 0 0 6px; }
-    .fm-eyebrow.plum { color: var(--plum); }
-    .fm-eyebrow.green { color: var(--green); }
-    .fm-version-pill { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 700; background: var(--plum); color: white; letter-spacing: 0.04em; }
-    .fm-list { padding-left: 18px; margin: 0; }
-    .fm-list li { margin-bottom: 6px; line-height: 1.6; font-size: 0.86rem; color: var(--gray-700); }
-  </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -188,60 +165,54 @@
       <p class="page-eyebrow">Financial planning</p>
       <h1 class="page-title">Financial Model</h1>
       <p class="page-sub">
-        Three-scenario bootstrap-fundable model. Bear / Base / Bull projections across 60 months (May 2026 → Apr 2031) backed by three Google Sheets workbooks. Current version: <span class="fm-version-pill">v2</span> <span style="color:var(--gray-500);font-weight:500;">· Last reviewed 18 May 2026.</span>
+        Three-scenario bootstrap-fundable model. Bear / Base / Bull projections across 60 months (May 2026 → Apr 2031) backed by three Google Sheets workbooks. Current version: <span class="fm-version-pill">v2</span> <span class="text-mute">· Last reviewed 18 May 2026.</span>
       </p>
     </div>
 
     <!-- In-page table of contents -->
-    <nav aria-label="In this page" style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:16px 20px;margin-bottom:22px;">
-      <p style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-500);margin:0 0 10px;">On this page</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:6px;">
+    <nav class="fm-toc-nav" aria-label="In this page">
+      <p class="fm-toc-label">On this page</p>
+      <div class="fm-toc-grid">
         <a href="#scenarios"  class="fm-toc-link"><span class="fm-toc-num">1</span> Three scenarios</a>
         <a href="#y3"         class="fm-toc-link"><span class="fm-toc-num">2</span> Year 3 outputs</a>
         <a href="#y5"         class="fm-toc-link"><span class="fm-toc-num">3</span> Year 5 outputs</a>
         <a href="#ramp"       class="fm-toc-link"><span class="fm-toc-num">4</span> Customer ramp inputs</a>
         <a href="#formulas"   class="fm-toc-link"><span class="fm-toc-num">5</span> Cost scaling formulas</a>
-        <a href="#hires"      class="fm-toc-link"><span class="fm-toc-num">6</span> Engineer hire schedule</a>
+        <a href="#hires"      class="fm-toc-link"><span class="fm-toc-num">6</span> Hire schedule</a>
         <a href="#versions"   class="fm-toc-link"><span class="fm-toc-num">7</span> Version history</a>
         <a href="#limits"     class="fm-toc-link"><span class="fm-toc-num">8</span> Known limitations</a>
         <a href="#process"    class="fm-toc-link"><span class="fm-toc-num">9</span> How to update</a>
         <a href="#pointers"   class="fm-toc-link"><span class="fm-toc-num">10</span> Pointers</a>
       </div>
-      <style>
-        .fm-toc-link { display:flex; align-items:center; gap:9px; padding:8px 12px; border:1px solid transparent; border-radius:var(--r-md); font-size:0.78rem; font-weight:500; color:var(--gray-700); transition: border-color .15s ease, color .15s ease, background .15s ease; }
-        .fm-toc-link:hover { border-color:var(--plum-border); color:var(--plum); background:var(--plum-tint); }
-        .fm-toc-num { font-size:0.62rem; font-weight:800; color:var(--gray-500); min-width:18px; }
-        .fm-toc-link:hover .fm-toc-num { color:var(--plum); }
-      </style>
     </nav>
 
     <!-- 1. Three scenarios summary -->
     <div class="fm-section" id="scenarios">
       <div class="section-label">Overview</div>
       <h2 id="three-scenarios" class="section-title-lg mb-16">Three scenarios</h2>
-      <div class="card" style="padding:24px 28px;">
-        <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.65;margin:0 0 18px;">
+      <div class="card card--padded-lg">
+        <p class="fm-intro">
           All three scenarios share identical pricing (£2,094 blended ARPA), retention (10% annual churn), cost structure, and the £8,000 founder capital contribution at incorporation. They diverge only on <strong>Founders fill rate</strong> and <strong>post-launch funnel rate</strong>, driven by how many distribution channels land.
         </p>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+        <div class="fm-scenario-grid">
           <div class="fm-scenario-card bear">
-            <p class="fm-eyebrow">Bear</p>
+            <p class="fm-eyebrow">Bear · acquired by Dec 2028</p>
             <p class="fm-val">~110 firms</p>
-            <p style="font-size:0.78rem;color:var(--gray-600);margin:6px 0 0;line-height:1.5;">90 Founders + 20 funnel by Dec 2028. No major distribution channels land. Pure founder-led outbound.</p>
+            <p class="fm-scenario-desc">90 Founders + 20 funnel. No major distribution channels land. Pure founder-led outbound.</p>
           </div>
           <div class="fm-scenario-card base">
-            <p class="fm-eyebrow plum">Base — plan around this</p>
+            <p class="fm-eyebrow plum">Base — plan around this · acquired by Dec 2028</p>
             <p class="fm-val">~180 firms</p>
-            <p style="font-size:0.78rem;color:var(--gray-700);margin:6px 0 0;line-height:1.5;">150 Founders + 30 funnel. Intelliflo partnership confirmed; CISI endorsement warming.</p>
+            <p class="fm-scenario-desc">150 Founders + 30 funnel. Intelliflo partnership confirmed; CISI endorsement warming.</p>
           </div>
           <div class="fm-scenario-card bull">
-            <p class="fm-eyebrow green">Bull</p>
+            <p class="fm-eyebrow green">Bull · acquired by Dec 2028</p>
             <p class="fm-val">~280 firms</p>
-            <p style="font-size:0.78rem;color:var(--gray-700);margin:6px 0 0;line-height:1.5;">200 Founders maxed + 80 funnel. All four channels: Intelliflo marketplace, CISI, Robin Powell, FP Advance.</p>
+            <p class="fm-scenario-desc">200 Founders maxed + 80 funnel. All four channels: Intelliflo marketplace, CISI, Robin Powell, FP Advance.</p>
           </div>
         </div>
-        <p style="font-size:0.78rem;color:var(--gray-500);line-height:1.55;margin:18px 0 0;font-style:italic;">
-          Numbers above are at 90 days post-launch (Dec 2028). Y3 (Apr 2029) projections in the table below.
+        <p class="fm-caption">
+          Numbers above are total acquired (no churn applied yet). Apr 2029 active counts in the Y3 table below; Apr 2031 active counts in the Y5 table.
         </p>
       </div>
     </div>
@@ -250,8 +221,8 @@
     <div class="fm-section" id="y3">
       <div class="section-label">Headline outputs · v2</div>
       <h2 id="year-3-april-2029" class="section-title-lg mb-16">Year 3 (April 2029)</h2>
-      <div class="card" style="padding:20px 24px;overflow:hidden;">
-        <p style="font-size:0.82rem;color:var(--gray-500);margin:0 0 14px;line-height:1.55;">
+      <div class="card card--padded-md fm-table-card">
+        <p class="fm-intro fm-intro--muted">
           v2 properly models the Founders 20% lifetime discount per cohort (no mental adjustment needed). All v2 cost scaling applied: People + S&amp;M (with 8% revenue floor) + G&amp;A + engineer step functions + recruitment fees + office cost above 100 customers.
         </p>
         <table class="fm-table">
@@ -265,7 +236,7 @@
             </tr>
             <tr>
               <th>Scenario</th>
-              <th>Active</th>
+              <th>Active Apr 29</th>
               <th>ARR</th>
               <th>Revenue Y3</th>
               <th>Costs Y3</th>
@@ -285,7 +256,7 @@
               <td class="num">£2.09M</td>
               <td class="num">77%</td>
             </tr>
-            <tr style="background:var(--plum-tint);">
+            <tr class="fm-row-emphasized">
               <td><strong>Base</strong></td>
               <td class="num">211</td>
               <td class="num">£4.62M</td>
@@ -314,8 +285,8 @@
     <div class="fm-section" id="y5">
       <div class="section-label">Headline outputs · v2</div>
       <h2 id="year-5-april-2031-new-in-v2" class="section-title-lg mb-16">Year 5 (April 2031) — new in v2</h2>
-      <div class="card" style="padding:20px 24px;overflow:hidden;">
-        <p style="font-size:0.82rem;color:var(--gray-500);margin:0 0 14px;line-height:1.55;">
+      <div class="card card--padded-md fm-table-card">
+        <p class="fm-intro fm-intro--muted">
           v2 extended the model horizon from 36 to 60 months. Y5 captures the realistic end-state of the bootstrap trajectory — all three scenarios remain bootstrap-fundable through end Apr 2031 without outside capital.
         </p>
         <table class="fm-table">
@@ -329,7 +300,7 @@
             </tr>
             <tr>
               <th>Scenario</th>
-              <th>Active (% SAM)</th>
+              <th>Active Apr 31 (% SAM)</th>
               <th>ARR</th>
               <th>Revenue Y5</th>
               <th>Costs Y5</th>
@@ -349,7 +320,7 @@
               <td class="num">£7.87M</td>
               <td class="num">77%</td>
             </tr>
-            <tr style="background:var(--plum-tint);">
+            <tr class="fm-row-emphasized">
               <td><strong>Base</strong></td>
               <td class="num">346 (~19%)</td>
               <td class="num">£8.13M</td>
@@ -371,9 +342,16 @@
             </tr>
           </tbody>
         </table>
-        <p style="font-size:0.78rem;color:var(--gray-500);margin:14px 0 0;font-style:italic;line-height:1.55;">
-          Y5 cash &gt; Y5 ARR in all three scenarios — signal that real companies would redeploy surplus into growth (more S&amp;M, faster hires, sector expansion). v2 is deliberately under-reinvesting; sector / international expansion will be modelled in v3.
-        </p>
+      </div>
+
+      <div class="fm-implications">
+        <p class="fm-implications-label">Strategic implications · across all three scenarios</p>
+        <ul class="fm-list">
+          <li><strong>Bootstrap-fundable through Apr 2031.</strong> No outside capital needed in any of Bear / Base / Bull. £8k founder contribution at incorporation is the only equity-equivalent input.</li>
+          <li><strong>Y5 cash &gt; Y5 ARR — systematically under-reinvesting.</strong> Real companies would redeploy surplus into S&amp;M, faster hires, or sector / international expansion. v2 is deliberately conservative.</li>
+          <li><strong>Net margins 77–83% sit at the upper bound of SaaS norms (60–75%)</strong> — defensible for investor diligence, but reflects the under-investment above. Margin compression to ~70% is plausible once growth capital is deployed.</li>
+          <li><strong>v3 candidates:</strong> sector expansion (mortgage brokers, insurance intermediaries, wealth managers, accountants) + international + NRR modelling. See Section 7 below.</li>
+        </ul>
       </div>
     </div>
 
@@ -381,12 +359,12 @@
     <div class="fm-section" id="ramp">
       <div class="section-label">Spreadsheet inputs · v2</div>
       <h2 id="new-customers-ramp-monthly-tab-rows-5-6" class="section-title-lg mb-8">New customers ramp — Monthly tab Rows 5 + 6</h2>
-      <p style="font-size:0.85rem;color:var(--gray-500);line-height:1.55;margin:0 0 16px;">
+      <p class="fm-intro">
         Monthly tab covers 60 months: May 2026 (col B, M1) → April 2031 (col BI, M60). Key anchors: <strong>Q (M17, Sep 2027)</strong> = incorporation + founders.html goes live · <strong>AC (M29, Sep 2028)</strong> = public launch · <strong>BI (M60, Apr 2031)</strong> = model end. <strong>Row 5 = New Founders</strong>, <strong>Row 6 = New full-price</strong> — Founders ramp through Aug 2028 only; full-price funnel starts Sep 2028.
       </p>
 
-      <div class="card" style="padding:20px 24px;margin-bottom:14px;">
-        <p class="fm-eyebrow" style="margin-bottom:12px;">Bear (no channels, ~68 Founders, ~3/mo steady state)</p>
+      <div class="card card--padded-md fm-ramp-card">
+        <p class="fm-eyebrow fm-eyebrow-spaced">Bear (no channels, ~3/mo steady state)</p>
         <table class="fm-table">
           <thead><tr><th>Row</th><th>Phase</th><th>Cells / months</th><th>Value</th></tr></thead>
           <tbody>
@@ -395,11 +373,11 @@
             <tr><td><strong>6 Full-price</strong></td><td>Steady state</td><td>AG onwards (Jan 29 → Apr 31)</td><td class="num">3 / mo</td></tr>
           </tbody>
         </table>
-        <p style="font-size:0.78rem;color:var(--gray-500);margin:10px 0 0;font-style:italic;">5y total acquired: ~68 Founders + ~135 full-price = ~203 active end Y5.</p>
+        <p class="fm-caption">Apr 2031 active: ~68 Founders + ~135 full-price = ~203 (after 10%/yr churn applied to ~90 Founders + ~165 full-price acquired).</p>
       </div>
 
-      <div class="card" style="padding:20px 24px;margin-bottom:14px;background:var(--plum-tint);border-color:var(--plum-border);">
-        <p class="fm-eyebrow plum" style="margin-bottom:12px;">Base (Intelliflo confirmed, ~150 Founders, ~8/mo steady state)</p>
+      <div class="card card--padded-md card--plum-tint fm-ramp-card">
+        <p class="fm-eyebrow plum fm-eyebrow-spaced">Base (Intelliflo confirmed, ~8/mo steady state)</p>
         <table class="fm-table">
           <thead><tr><th>Row</th><th>Phase</th><th>Cells / months</th><th>Value</th></tr></thead>
           <tbody>
@@ -408,11 +386,11 @@
             <tr><td><strong>6 Full-price</strong></td><td>Steady state</td><td>AH onwards (Feb 29 → Apr 31)</td><td class="num">8 / mo</td></tr>
           </tbody>
         </table>
-        <p style="font-size:0.78rem;color:var(--gray-600);margin:10px 0 0;font-style:italic;">5y total acquired: ~150 Founders + ~280 full-price = ~346 active end Y5.</p>
+        <p class="fm-caption">Apr 2031 active: ~150 Founders + ~280 full-price = ~346 (post-churn).</p>
       </div>
 
-      <div class="card section-padded">
-        <p class="fm-eyebrow green" style="margin-bottom:12px;">Bull (all 4 channels, ~203 Founders, ~14/mo steady state)</p>
+      <div class="card card--padded-md fm-ramp-card">
+        <p class="fm-eyebrow green fm-eyebrow-spaced">Bull (all 4 channels, ~14/mo steady state)</p>
         <table class="fm-table">
           <thead><tr><th>Row</th><th>Phase</th><th>Cells / months</th><th>Value</th></tr></thead>
           <tbody>
@@ -421,10 +399,10 @@
             <tr><td><strong>6 Full-price</strong></td><td>Steady state</td><td>AH onwards (Feb 29 → Apr 31)</td><td class="num">14 / mo</td></tr>
           </tbody>
         </table>
-        <p style="font-size:0.78rem;color:var(--gray-500);margin:10px 0 0;font-style:italic;">5y total acquired: ~203 Founders + ~470 full-price = ~593 active end Y5.</p>
+        <p class="fm-caption">Apr 2031 active: ~203 Founders + ~470 full-price = ~593 (post-churn).</p>
       </div>
 
-      <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.55;margin:14px 0 0;font-style:italic;">
+      <p class="fm-caption fm-caption--block">
         Steady-state rates differ 5× across scenarios (3 → 14 per month) because Bear has no distribution channels, while Bull runs all four (Intelliflo marketplace, CISI endorsement, Robin Powell newsletter, FP Advance talk) plus a 200-firm Founders cohort generating referrals. v1.3 incorrectly had all scenarios collapse to 6/mo after the launch spike — v2 corrects this.
       </p>
     </div>
@@ -433,12 +411,12 @@
     <div class="fm-section" id="formulas">
       <div class="section-label">Cost scaling · v2</div>
       <h2 id="formulas-in-the-monthly-tab" class="section-title-lg mb-8">Formulas in the Monthly tab</h2>
-      <p style="font-size:0.85rem;color:var(--gray-500);line-height:1.55;margin:0 0 16px;">
+      <p class="fm-intro">
         v2 cost rows use time-varying ramps + per-customer scaling. People includes engineer step functions. S&amp;M adds a revenue floor. Office toggles on at &gt;100 customers. Recruitment fees auto-detect hire onboardings. References active customers via Row 12 (total active = Founders + full-price). Paste into the B-column cell, drag right to BI.
       </p>
 
-      <div class="card" style="padding:20px 24px;margin-bottom:14px;">
-        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">People — cell B22</p>
+      <div class="card card--padded-md fm-formula-card">
+        <p class="fm-formula-label">People — cell B22</p>
         <div class="fm-formula">=IF(B$2&lt;29,0,IF(B$2&lt;32,5041,9041)) + MAX(0,B12-50)*50 + IF(B12&gt;30,8000,0) + IF(B12&gt;100,8000,0) + IF(B12&gt;150,10000,0)</div>
         <ul class="fm-list mt-12">
           <li><strong>Months 1–28:</strong> £0 (Hasna at Lucent, no Amaea payroll)</li>
@@ -449,8 +427,8 @@
         </ul>
       </div>
 
-      <div class="card" style="padding:20px 24px;margin-bottom:14px;">
-        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">S&amp;M — cell B23 <span style="font-size:0.7rem;font-weight:600;color:var(--plum);background:var(--plum-tint);padding:2px 8px;border-radius:4px;margin-left:6px;">v2 fix: revenue floor</span></p>
+      <div class="card card--padded-md fm-formula-card">
+        <p class="fm-formula-label">S&amp;M — cell B23 <span class="fm-tag">v2 fix: revenue floor</span></p>
         <div class="fm-formula">=IF(B$2&lt;17,0,IF(B$2&lt;29,600+MAX(0,B12-50)*20,MAX(2700+MAX(0,B12-50)*20,B17*0.08)))</div>
         <ul class="fm-list mt-12">
           <li><strong>Months 1–16:</strong> £0 (pre-incorporation)</li>
@@ -460,8 +438,8 @@
         </ul>
       </div>
 
-      <div class="card" style="padding:20px 24px;margin-bottom:14px;">
-        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">G&amp;A — cell B24</p>
+      <div class="card card--padded-md fm-formula-card">
+        <p class="fm-formula-label">G&amp;A — cell B24</p>
         <div class="fm-formula">=IF(B$2&lt;17,0,IF(B$2&lt;29,675+MAX(0,B12-50)*5,1225+MAX(0,B12-50)*5))</div>
         <ul class="fm-list mt-12">
           <li><strong>Months 1–16:</strong> £0</li>
@@ -470,8 +448,8 @@
         </ul>
       </div>
 
-      <div class="card" style="padding:20px 24px;margin-bottom:14px;">
-        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">Office — cell B25 <span style="font-size:0.7rem;font-weight:600;color:var(--plum);background:var(--plum-tint);padding:2px 8px;border-radius:4px;margin-left:6px;">v2 new</span></p>
+      <div class="card card--padded-md fm-formula-card">
+        <p class="fm-formula-label">Office — cell B25 <span class="fm-tag">v2 new</span></p>
         <div class="fm-formula">=IF(B12&gt;100,2000,0)</div>
         <ul class="fm-list mt-12">
           <li>£2,000/mo small London office or co-working when active customers exceed 100</li>
@@ -479,8 +457,8 @@
         </ul>
       </div>
 
-      <div class="card section-padded">
-        <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">Recruitment fees — cell B26 <span style="font-size:0.7rem;font-weight:600;color:var(--plum);background:var(--plum-tint);padding:2px 8px;border-radius:4px;margin-left:6px;">v2 new</span></p>
+      <div class="card card--padded-md fm-formula-card">
+        <p class="fm-formula-label">Recruitment fees — cell B26 <span class="fm-tag">v2 new</span></p>
         <div class="fm-formula">=IF(B22-(prev B22)&gt;=3500,12000,0)</div>
         <ul class="fm-list mt-12">
           <li>Detects month-over-month People-cost jumps ≥£3,500 (a new hire onboarded)</li>
@@ -492,10 +470,10 @@
 
     <!-- 5. Engineer step function timing per scenario -->
     <div class="fm-section" id="hires">
-      <div class="section-label">Hire schedule</div>
+      <div class="section-label">Hire schedule · v2</div>
       <h2 id="when-each-engineer-hire-fires" class="section-title-lg mb-16">When each engineer hire fires</h2>
-      <div class="card" style="padding:20px 24px;overflow:hidden;">
-        <p style="font-size:0.82rem;color:var(--gray-500);margin:0 0 14px;line-height:1.55;">
+      <div class="card card--padded-md fm-table-card">
+        <p class="fm-intro fm-intro--muted">
           Derived from each scenario's customer ramp plus 10% annual churn. Engineer hires in beta (Base/Bull) are realistic — by then you'd have 30+ paying Founders generating £50k+/mo MRR, comfortably funding an £8k/mo hire.
         </p>
         <table class="fm-table">
@@ -542,40 +520,40 @@
       <div class="section-label">Evolution</div>
       <h2 id="version-history" class="section-title-lg mb-16">Version history</h2>
       <div class="card section-padded">
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          <div style="display:flex;gap:14px;align-items:flex-start;">
-            <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v1.0</span>
+        <div class="fm-version-list">
+          <div class="fm-version-row">
+            <span class="fm-version-pill">v1.0</span>
             <div>
-              <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">Initial build · 16 May 2026</p>
-              <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.6;margin:0;">8-section assumptions doc filled. 3 Google Sheets workbooks built from CSV starter pack. Flat cost rows. Hasna salary starting Q1 2028. Scenarios named Base / Probable / Best.</p>
+              <p class="fm-version-title">Initial build · 16 May 2026</p>
+              <p class="fm-version-desc">8-section assumptions doc filled. 3 Google Sheets workbooks built from CSV starter pack. Flat cost rows. Hasna salary starting Q1 2028. Scenarios named Base / Probable / Best.</p>
             </div>
           </div>
-          <div style="display:flex;gap:14px;align-items:flex-start;">
-            <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v1.1</span>
+          <div class="fm-version-row">
+            <span class="fm-version-pill">v1.1</span>
             <div>
-              <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">Hasna salary timing fix</p>
-              <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.6;margin:0;">Hasna stays at Lucent until Sept 2028 (public launch). Updated People formula to start at month 29, not month 21. Saves ~£8k in incorrectly modelled pre-revenue burn.</p>
+              <p class="fm-version-title">Hasna salary timing fix</p>
+              <p class="fm-version-desc">Hasna stays at Lucent until Sept 2028 (public launch). Updated People formula to start at month 29, not month 21. Saves ~£8k in incorrectly modelled pre-revenue burn.</p>
             </div>
           </div>
-          <div style="display:flex;gap:14px;align-items:flex-start;">
-            <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v1.2</span>
+          <div class="fm-version-row">
+            <span class="fm-version-pill">v1.2</span>
             <div>
-              <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">Customer-driven cost scaling</p>
-              <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.6;margin:0;">Added linear scaling to People (£50/customer), S&amp;M (£20/customer), G&amp;A (£5/customer) above the 50-customer threshold. Recognises that CS, content, and software seats scale with book size. Net margins drop from 93–96% to 85–88%. Scenarios renamed Bear / Base / Bull for investor consistency.</p>
+              <p class="fm-version-title">Customer-driven cost scaling</p>
+              <p class="fm-version-desc">Added linear scaling to People (£50/customer), S&amp;M (£20/customer), G&amp;A (£5/customer) above the 50-customer threshold. Recognises that CS, content, and software seats scale with book size. Net margins drop from 93–96% to 85–88%. Scenarios renamed Bear / Base / Bull for investor consistency.</p>
             </div>
           </div>
-          <div style="display:flex;gap:14px;align-items:flex-start;">
-            <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v1.3</span>
+          <div class="fm-version-row">
+            <span class="fm-version-pill">v1.3</span>
             <div>
-              <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">Engineer step functions</p>
-              <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.6;margin:0;">Three engineer hire triggers in the People row: first engineer at &gt;30 customers, second at &gt;100, Milan full-time at &gt;150. Net margins drop to 79–83% — at the upper bound of real SaaS norms (60–75%) and defensible for investor due diligence.</p>
+              <p class="fm-version-title">Engineer step functions</p>
+              <p class="fm-version-desc">Three engineer hire triggers in the People row: first engineer at &gt;30 customers, second at &gt;100, Milan full-time at &gt;150. Net margins drop to 79–83% — at the upper bound of real SaaS norms (60–75%) and defensible for investor due diligence.</p>
             </div>
           </div>
-          <div style="display:flex;gap:14px;align-items:flex-start;">
-            <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v2</span>
+          <div class="fm-version-row">
+            <span class="fm-version-pill">v2</span>
             <div>
-              <p style="font-weight:700;font-size:0.92rem;margin:0 0 4px;color:var(--gray-900);">60-month horizon · Founders discount modelled · realistic cost scaling <span style="font-size:0.7rem;color:var(--gray-400);font-weight:500;margin-left:6px;">— current</span></p>
-              <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.6;margin:0;">Extended to 60 months (May 2026 → Apr 2031) so Y3 + new Y5 are both captured. Founders 20% lifetime discount properly modelled via cohort-split MRR (no mental adjustment). S&amp;M with 8% revenue floor — scales realistically at high MRR. Recruitment fees: auto-detected £12k spike per hire onboarding. Office: toggles on at &gt;100 active customers (+£2k/mo). COGS sensitivity row (£50 baseline vs £75 high-usage). Steady-state acquisition rates calibrated per-scenario (3 / 8 / 14 per month) instead of all collapsing to 6/mo.</p>
+              <p class="fm-version-title">60-month horizon · Founders discount modelled · realistic cost scaling <span class="fm-version-current">— current</span></p>
+              <p class="fm-version-desc">Extended to 60 months (May 2026 → Apr 2031) so Y3 + new Y5 are both captured. Founders 20% lifetime discount properly modelled via cohort-split MRR (no mental adjustment). S&amp;M with 8% revenue floor — scales realistically at high MRR. Recruitment fees: auto-detected £12k spike per hire onboarding. Office: toggles on at &gt;100 active customers (+£2k/mo). COGS sensitivity row (£50 baseline vs £75 high-usage). Steady-state acquisition rates calibrated per-scenario (3 / 8 / 14 per month) instead of all collapsing to 6/mo.</p>
             </div>
           </div>
         </div>
@@ -587,9 +565,9 @@
       <div class="section-label">Caveats · v2</div>
       <h2 id="known-limitations-v3-candidates" class="section-title-lg mb-16">Known limitations (v3 candidates)</h2>
       <div class="card section-padded">
-        <p style="font-size:0.85rem;color:var(--gray-600);line-height:1.6;margin:0 0 12px;">v2 closed the four biggest v1.3 limitations (Founders discount, 60-month horizon, S&amp;M floor, recruitment fees, office). These are the remaining gaps — carry forward to v3 if/when the model needs to support sector or international expansion conversations.</p>
-        <ol class="fm-list" style="padding-left:22px;">
-          <li><strong>Sector expansion not modelled.</strong> v2 assumes UK IFA only forever. Real plan is to expand into mortgage brokers / insurance intermediaries / wealth managers / accountants. v3 should add a "sector mix" dimension. See <a href="financial-model#sector-timing" style="color:var(--plum);">sector expansion timing</a> below for the trigger logic.</li>
+        <p class="fm-intro fm-intro--muted">v2 closed the four biggest v1.3 limitations (Founders discount, 60-month horizon, S&amp;M floor, recruitment fees, office). These are the remaining gaps — carry forward to v3 if/when the model needs to support sector or international expansion conversations.</p>
+        <ol class="fm-list fm-list--ordered">
+          <li><strong>Sector expansion not modelled.</strong> v2 assumes UK IFA only forever. Real plan is to expand into mortgage brokers / insurance intermediaries / wealth managers / accountants. v3 should add a "sector mix" dimension.</li>
           <li><strong>NRR expansion not modelled</strong> (tier upgrades, seat add-ons, premium reports). Real SaaS NRR &gt; 100% is common.</li>
           <li><strong>International expansion not modelled.</strong> v3 should add country-by-country acquisition + cost lines.</li>
           <li><strong>Anthropic API spend assumption (£50/customer/mo) unverified.</strong> No production data yet. Revisit when 5+ Founders live. v2 already includes a B34 sensitivity row at £75/customer.</li>
@@ -604,7 +582,7 @@
       <div class="section-label">Process</div>
       <h2 id="how-to-update-the-model" class="section-title-lg mb-16">How to update the model</h2>
       <div class="card section-padded">
-        <p style="font-weight:700;font-size:0.88rem;margin:0 0 8px;color:var(--gray-900);">Adjusting a scenario (e.g. tweaking Base ramp)</p>
+        <p class="fm-step-label">Adjusting a scenario (e.g. tweaking Base ramp)</p>
         <ul class="fm-list mb-14">
           <li>Open the Google Sheets workbook for Bear / Base / Bull</li>
           <li>Edit cells in Monthly tab Row 5 (New customers)</li>
@@ -612,18 +590,18 @@
           <li>Annual tab and UnitEcon tab reflect the change</li>
         </ul>
 
-        <p style="font-weight:700;font-size:0.88rem;margin:0 0 8px;color:var(--gray-900);">Adjusting cost assumptions</p>
+        <p class="fm-step-label">Adjusting cost assumptions</p>
         <ul class="fm-list mb-14">
           <li>Edit formulas in B22 (People), B23 (S&amp;M), B24 (G&amp;A); drag right to BI</li>
           <li>Per-customer scaling factors: edit the multiplier (50, 20, 5)</li>
           <li>Step function thresholds: edit the IF conditions</li>
         </ul>
 
-        <p style="font-weight:700;font-size:0.88rem;margin:0 0 8px;color:var(--gray-900);">Updating this intranet page</p>
+        <p class="fm-step-label">Updating this intranet page</p>
         <ul class="fm-list">
-          <li>Source markdown: <code style="background:var(--gray-100);padding:2px 6px;border-radius:4px;font-size:0.78rem;">/Documents/Amaea/amaea-financial-model-scenarios.md</code></li>
-          <li>HTML mirror: <code style="background:var(--gray-100);padding:2px 6px;border-radius:4px;font-size:0.78rem;">amaea-brand/financial-model.html</code> (this page)</li>
-          <li>Commit + push to <code style="background:var(--gray-100);padding:2px 6px;border-radius:4px;font-size:0.78rem;">amaea0002-dev/amaea0002-dev.github.io</code> (intranet repo — legacy name from the GitHub Pages era, now deployed via Vercel project <code style="background:var(--gray-100);padding:2px 6px;border-radius:4px;font-size:0.78rem;">amaea-brand</code>). Push to <code style="background:var(--gray-100);padding:2px 6px;border-radius:4px;font-size:0.78rem;">main</code> auto-deploys to team.amaea.co.uk.</li>
+          <li>Source markdown: <code>/Documents/Amaea/amaea-financial-model-scenarios.md</code></li>
+          <li>HTML mirror: <code>amaea-brand/financial-model.html</code> (this page)</li>
+          <li>Commit + push to <code>amaea0002-dev/amaea0002-dev.github.io</code> (intranet repo — legacy name from the GitHub Pages era, now deployed via Vercel project <code>amaea-brand</code>). Push to <code>main</code> auto-deploys to team.amaea.co.uk.</li>
         </ul>
       </div>
     </div>
@@ -634,11 +612,11 @@
       <h2 id="pointers-2" class="section-title-lg mb-16">Pointers</h2>
       <div class="card section-padded">
         <ul class="fm-list">
-          <li><strong>Investor-facing scenarios:</strong> <a href="investor" style="color:var(--plum);">team.amaea.co.uk/investor</a> shows 90-day post-launch and Y3 cards built from this model</li>
+          <li><strong>Investor-facing scenarios:</strong> <a href="investor">team.amaea.co.uk/investor</a> shows 90-day post-launch and Y3 cards built from this model</li>
           <li><strong>Companion docs (local):</strong> assumptions doc (the <em>why</em>), template doc (the spreadsheet structure spec), CSV starter pack README</li>
           <li><strong>DB tier model:</strong> firms.subscription_tier (essentials / professional / scale / enterprise) — see migration 027 in the amaea-db repo</li>
           <li><strong>AI fair-use limits aligned with these tiers:</strong> amaea-app/src/lib/ai/limits.ts (500 / 1500 / 3500 / unlimited monthly AI requests)</li>
-          <li><strong>Pricing source of truth:</strong> <a href="https://amaea.co.uk/pricing" target="_blank" style="color:var(--plum);">amaea.co.uk/pricing</a></li>
+          <li><strong>Pricing source of truth:</strong> <a href="https://amaea.co.uk/pricing" target="_blank">amaea.co.uk/pricing</a></li>
         </ul>
       </div>
     </div>
