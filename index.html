@@ -111,24 +111,6 @@
     </a>
   </nav>
   <div class="sidebar-footer" style="position:relative;">
-    <div class="user-select-panel" id="userSelectPanel">
-      <button class="user-select-btn" data-user="hasna">
-        <div class="usa gradient-plum">H</div>
-        <div class="user-select-info">
-          <div class="user-select-name">Hasna Sahul Hameed</div>
-          <div class="user-select-role">CEO &amp; Co-Founder</div>
-        </div>
-        <span class="user-select-tick">✓</span>
-      </button>
-      <button class="user-select-btn" data-user="milan">
-        <div class="usa gradient-blue">M</div>
-        <div class="user-select-info">
-          <div class="user-select-name">Milan Sajiv</div>
-          <div class="user-select-role">CTO &amp; Co-Founder</div>
-        </div>
-        <span class="user-select-tick" style="opacity:0;">✓</span>
-      </button>
-    </div>
     <div class="sidebar-user sidebar-user-clickable" id="sidebarUserArea" title="Switch user">
       <div class="sidebar-avatar" id="sidebarAvatar">H</div>
       <div style="flex:1;min-width:0;">
@@ -148,7 +130,12 @@
     <span class="bc-current">Dashboard</span>
   </div>
   <div class="topbar-right">
-    <span class="topbar-date" id="topbar-date"></span>
+          <button class="topbar-search" data-cmdk-trigger aria-label="Search the intranet">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span class="topbar-search-label">Search</span>
+        <span class="topbar-search-kbd">⌘K</span>
+      </button>
+      <span class="topbar-date" id="topbar-date"></span>
     <div class="topbar-user">
       <button class="topbar-user-trigger" id="topbarUserTrigger" aria-label="Account"></button>
       <div class="topbar-user-panel" id="topbarUserPanel" role="menu">
@@ -343,22 +330,8 @@
             <a href="team#cofounder" class="quick-link">🤝 Co-founder Framework</a>
             <a href="https://amaea.co.uk" class="quick-link" target="_blank">↗ Amaea Website</a>
             <a href="https://app.amaea.co.uk" class="quick-link" target="_blank">↗ Prototype</a>
+            <a href="onboarding" class="quick-link">→ New joiner? Start here</a>
           </div>
-        </div>
-
-        <!-- New-joiner onboarding card -->
-        <div class="card" style="background:linear-gradient(135deg,var(--plum-tint),var(--plum-tint));border-color:var(--plum-border);">
-          <p style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--plum);margin:0 0 6px;">For new joiners</p>
-          <p style="font-size:0.94rem;font-weight:800;color:var(--gray-900);letter-spacing:-0.02em;margin:0 0 8px;">Start with the Product Docs.</p>
-          <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.6;margin:0 0 14px;">Five canonical documents (≈20,000 words · ~2½ hours) covering the product, architecture, document extraction pipeline, AI / FCA knowledge base, and operations. Everything an engineer, compliance reviewer, or investor needs to understand how the MVP actually works.</p>
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            <a href="mvp-docs/01-product.html" class="quick-link" style="padding-left:0;">→ 01 · Product &amp; architecture overview <span style="color:var(--gray-400);font-size: 0.74rem;">~20 min</span></a>
-            <a href="mvp-docs/02-architecture.html" class="quick-link" style="padding-left:0;">→ 02 · Technical architecture <span style="color:var(--gray-400);font-size: 0.74rem;">~30 min</span></a>
-            <a href="mvp-docs/03-extraction.html" class="quick-link" style="padding-left:0;">→ 03 · Document extraction &amp; flag system <span style="color:var(--gray-400);font-size: 0.74rem;">~40 min</span></a>
-            <a href="mvp-docs/04-ai-kb.html" class="quick-link" style="padding-left:0;">→ 04 · AI layer &amp; FCA knowledge base <span style="color:var(--gray-400);font-size: 0.74rem;">~30 min</span></a>
-            <a href="mvp-docs/05-ops.html" class="quick-link" style="padding-left:0;">→ 05 · Operations handbook <span style="color:var(--gray-400);font-size: 0.74rem;">~20 min</span></a>
-          </div>
-          <a href="mvp-docs/" style="display:inline-block;margin-top:14px;font-size: 0.82rem;font-weight:700;color:var(--plum);text-decoration:none;border-bottom:1px solid var(--plum-border);">See all five docs →</a>
         </div>
 
       </div>
@@ -615,6 +588,7 @@
   });
 })();
 </script>
+<script src="/intranet-search.js" defer></script>
 </body>
 </html>
 
