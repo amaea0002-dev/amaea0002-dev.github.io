@@ -170,23 +170,23 @@
       <p class="card-title" style="margin-bottom:4px;">The Amaea ecosystem</p>
       <p class="card-sub mb-16">Three properties, one product: how they connect</p>
       <div class="ecosystem-grid">
-        <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;">
-          <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--plum-soft);margin-bottom:6px;">Website</div>
-          <div style="font-size: 0.82rem;font-weight:700;color:var(--gray-900);margin-bottom:4px;">Marketing &amp; pre-launch</div>
-          <div style="font-size: 0.74rem;color:var(--gray-600);line-height:1.5;margin-bottom:10px;">The public face of Amaea. Shows the product story, compliance content, pricing tiers, and the waitlist/founders programme to prospective clients.</div>
-          <a href="https://amaea.co.uk" target="_blank" style="font-size: 0.74rem;font-weight:600;color:var(--plum-soft);">Visit →</a>
+        <div class="ecosystem-card">
+          <div class="ecosystem-card-label">Website</div>
+          <div class="ecosystem-card-title">Marketing &amp; pre-launch</div>
+          <div class="ecosystem-card-desc">The public face of Amaea. Shows the product story, compliance content, pricing tiers, and the waitlist/founders programme to prospective clients.</div>
+          <a href="https://amaea.co.uk" target="_blank" class="ecosystem-card-link">Visit →</a>
         </div>
-        <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;">
-          <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--plum-soft);margin-bottom:6px;">Prototype</div>
-          <div style="font-size: 0.82rem;font-weight:700;color:var(--gray-900);margin-bottom:4px;">Interactive product demo</div>
-          <div style="font-size: 0.74rem;color:var(--gray-600);line-height:1.5;margin-bottom:10px;">Used in sales conversations and investor meetings. Shows exactly how Amaea works: dashboard, client journeys, AI insights, reports, and integrations.</div>
-          <a href="https://app.amaea.co.uk" target="_blank" style="font-size: 0.74rem;font-weight:600;color:var(--plum-soft);">Visit →</a>
+        <div class="ecosystem-card">
+          <div class="ecosystem-card-label">App</div>
+          <div class="ecosystem-card-title">The product itself</div>
+          <div class="ecosystem-card-desc">Live at app.amaea.co.uk. Used by design partners; shown in sales and investor meetings. Dashboard, client journeys, AI insights, reports, and integrations.</div>
+          <a href="https://app.amaea.co.uk" target="_blank" class="ecosystem-card-link">Visit →</a>
         </div>
-        <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;">
-          <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--plum-soft);margin-bottom:6px;">Intranet</div>
-          <div style="font-size: 0.82rem;font-weight:700;color:var(--gray-900);margin-bottom:4px;">Founder operating system</div>
-          <div style="font-size: 0.74rem;color:var(--gray-600);line-height:1.5;margin-bottom:10px;">Internal only. Tracks build status, captures decisions, holds the brand, team structure, financial model, and funding optionality. The source of truth for the founding team.</div>
-          <span style="font-size: 0.74rem;font-weight:600;color:var(--gray-500);">You are here</span>
+        <div class="ecosystem-card">
+          <div class="ecosystem-card-label">Intranet</div>
+          <div class="ecosystem-card-title">Founder operating system</div>
+          <div class="ecosystem-card-desc">Internal only. Tracks build status, captures decisions, holds the brand, team structure, financial model, and funding optionality. The source of truth for the founding team.</div>
+          <span class="ecosystem-card-here">You are here</span>
         </div>
       </div>
     </div>
@@ -195,7 +195,7 @@
     <div class="stats-strip">
       <div class="stat-card">
         <div class="stat-label">Phase</div>
-        <div class="stat-value" style="font-size:1.2rem;padding-top:4px;">Pre-launch</div>
+        <div class="stat-value stat-value--sm">Pre-launch</div>
         <div class="stat-sub">Validation stage</div>
       </div>
       <div class="stat-card">
@@ -205,7 +205,7 @@
       </div>
       <div class="stat-card">
         <div class="stat-label">Launch target</div>
-        <div class="stat-value" style="font-size:1.3rem;padding-top:4px;">Sept 2028</div>
+        <div class="stat-value stat-value--sm">Sept 2028</div>
         <div class="stat-sub" id="months-to-launch">~28 months away</div>
       </div>
       <div class="stat-card">
@@ -229,7 +229,7 @@
             <div>
               <p class="update-title">Intelliflo Conference: prepare now</p>
               <p class="update-desc">June/July 2026. Most important near-term event. Need a working demo, target contact list, and a clear Amaea pitch ready before you arrive.</p>
-              <p class="update-meta">🔴 Urgent &nbsp;·&nbsp; June/July 2026</p>
+              <p class="update-meta">Urgent &nbsp;·&nbsp; June/July 2026</p>
             </div>
           </div>
 
@@ -238,7 +238,7 @@
             <div>
               <p class="update-title">Customer discovery: not started</p>
               <p class="update-desc">Target 15–20 interviews with IFA practice managers and compliance officers. The Intelliflo conference is an opportunity to run 3–4 in person.</p>
-              <p class="update-meta">🔴 Not started &nbsp;·&nbsp; Target: end 2026</p>
+              <p class="update-meta">Not started &nbsp;·&nbsp; Target: end 2026</p>
             </div>
           </div>
 
@@ -247,7 +247,7 @@
             <div>
               <p class="update-title">Founder agreements drafted — 50/50 equity locked in</p>
               <p class="update-desc">Three documents drafted to replace the earlier "Milan's Contract": <a href="cofounder-agreement">Co-Founder &amp; Shareholder Agreement</a> (50/50 equity, 4-year reverse vesting with 1-year cliff, IP assignment, leaver provisions, drag/tag, deadlock mechanics), <a href="cto-working-agreement">CTO Working Agreement</a>, <a href="ceo-working-agreement">CEO Working Agreement</a>. All v1 drafts pending legal review (SeedLegals or boutique firm) before signing.</p>
-              <p class="update-meta">✅ Done &nbsp;·&nbsp; 16 May 2026</p>
+              <p class="update-meta">Done &nbsp;·&nbsp; 16 May 2026</p>
             </div>
           </div>
 
@@ -256,7 +256,7 @@
             <div>
               <p class="update-title">Funding stance: bootstrap-first locked in</p>
               <p class="update-desc">Intranet sidebar renamed Investor → Funding. <a href="investor">/investor</a> rebuilt with explicit dual trigger: raise only enters scope when BOTH multi-sector expansion AND international expansion are live (post-2030). All £500k Q4 2026 pre-seed references removed. Materials retained for advisor / partnership conversations.</p>
-              <p class="update-meta">✅ Done &nbsp;·&nbsp; 16 May 2026</p>
+              <p class="update-meta">Done &nbsp;·&nbsp; 16 May 2026</p>
             </div>
           </div>
 
@@ -265,7 +265,7 @@
             <div>
               <p class="update-title">AI fair-use rate limits — shipped to production</p>
               <p class="update-desc">Per-firm monthly caps on the /api/chat AI assistant — Essentials 500 / Professional 1,500 / Scale 3,500 / Enterprise unlimited. New <code>ai_usage_monthly</code> table (migration 028), <code>subscription_tier</code> renamed to canonical 4-tier model (migration 027), &lt;UsageDisplay/&gt; widget on dashboard, 429 with tier-specific message when over cap. Prevents runaway Anthropic spend from breaking gross-margin assumption.</p>
-              <p class="update-meta">✅ Done &nbsp;·&nbsp; 16 May 2026</p>
+              <p class="update-meta">Done &nbsp;·&nbsp; 16 May 2026</p>
             </div>
           </div>
 
@@ -274,7 +274,7 @@
             <div>
               <p class="update-title">amaea-db schema repository under version control</p>
               <p class="update-desc">28 Supabase migrations committed to a new private GitHub repo (amaea0002-dev/amaea-db). Schema-as-code with PR review for future changes. 015_seed_data.sql (contains dev passwords) deliberately gitignored.</p>
-              <p class="update-meta">✅ Done &nbsp;·&nbsp; 16 May 2026</p>
+              <p class="update-meta">Done &nbsp;·&nbsp; 16 May 2026</p>
             </div>
           </div>
 
@@ -283,7 +283,7 @@
             <div>
               <p class="update-title">RMAR Section H Slice 1 — shipped to production</p>
               <p class="update-desc">Last Phase 1 feature live at app.amaea.co.uk. Aggregates complaint records (H.1–H.5), inline DISP 1.6 8-week breach flags, CSV export, and a period selector. 23 vitest tests passing. Slices 2 and 3 deferred.</p>
-              <p class="update-meta">✅ Done &nbsp;·&nbsp; 15 May 2026</p>
+              <p class="update-meta">Done &nbsp;·&nbsp; 15 May 2026</p>
             </div>
           </div>
 
@@ -292,7 +292,7 @@
             <div>
               <p class="update-title">App root route, CORS, and marketing site — deployed</p>
               <p class="update-desc">Root <code>/</code> now redirects to dashboard (was create-next-app boilerplate). CORS on <code>/api/public/chat</code> fixed for amaea.co.uk. Marketing site: Mission/Vision rebuilt with plum-border accent, demo form moved to Resend serverless function, email signatures finalised for both founders.</p>
-              <p class="update-meta">✅ Done &nbsp;·&nbsp; 15 May 2026</p>
+              <p class="update-meta">Done &nbsp;·&nbsp; 15 May 2026</p>
             </div>
           </div>
 
@@ -301,7 +301,7 @@
             <div>
               <p class="update-title">Brand identity published</p>
               <p class="update-desc">Mission, vision, tagline, values, operating principles, and non-negotiables all defined and live on the intranet.</p>
-              <p class="update-meta">✅ Done &nbsp;·&nbsp; May 2026</p>
+              <p class="update-meta">Done &nbsp;·&nbsp; May 2026</p>
             </div>
           </div>
 
@@ -310,7 +310,7 @@
             <div>
               <p class="update-title">FCA knowledge base ingested</p>
               <p class="update-desc">11,645 FCA document chunks across 150 sources (handbook, Final Notices, finalised guidance, policy statements, thematic reviews, Dear CEO letters) ingested into the compliance intelligence backend via Voyage + pgvector. 23% of the 50,000 launch target.</p>
-              <p class="update-meta">✅ Done &nbsp;·&nbsp; May 2026</p>
+              <p class="update-meta">Done &nbsp;·&nbsp; May 2026</p>
             </div>
           </div>
 
@@ -319,7 +319,7 @@
             <div>
               <p class="update-title">Financial model v2 built — 60-month horizon, Founders discount modelled</p>
               <p class="update-desc">v2 replaces v1.3. Three scenarios (Bear / Base / Bull) across 60 months (May 2026 → Apr 2031). Y3 (Apr 2029): <strong>Bear</strong> 123 firms · £2.69M ARR · £2.09M cash. <strong>Base</strong> 211 firms · £4.62M ARR · £3.29M cash (plan around this). <strong>Bull</strong> 341 firms · £7.66M ARR · £5.09M cash. Y5 (Apr 2031): <strong>Bear</strong> 203 firms · £4.80M ARR · £7.87M cash. <strong>Base</strong> 346 firms · £8.13M ARR · £13.72M cash. <strong>Bull</strong> 593 firms · £14.12M ARR · £23.51M cash. All bootstrap-fundable with £8k founder contribution. v2 fixes: Founders 20% discount properly modelled, S&amp;M revenue floor, recruitment fees, office cost above 100 customers. See the Funding page for projection cards.</p>
-              <p class="update-meta">✅ v2 done &nbsp;·&nbsp; 16 May 2026</p>
+              <p class="update-meta">v2 done &nbsp;·&nbsp; 16 May 2026</p>
             </div>
           </div>
 
@@ -328,13 +328,13 @@
         <div class="card">
           <p class="card-title">Quick links</p>
           <div class="quick-links">
-            <a href="brand" class="quick-link">◆ Brand Guidelines</a>
-            <a href="team" class="quick-link">⬡ Team Directory</a>
-            <a href="docs" class="quick-link">▤ Documents</a>
-            <a href="team#cofounder" class="quick-link">🤝 Co-founder Framework</a>
-            <a href="https://amaea.co.uk" class="quick-link" target="_blank">↗ Amaea Website</a>
-            <a href="https://app.amaea.co.uk" class="quick-link" target="_blank">↗ Prototype</a>
-            <a href="onboarding" class="quick-link">→ New joiner? Start here</a>
+            <a href="brand" class="quick-link">Brand Guidelines</a>
+            <a href="team" class="quick-link">Team Directory</a>
+            <a href="docs" class="quick-link">Documents</a>
+            <a href="team#cofounder" class="quick-link">Co-founder Framework</a>
+            <a href="https://amaea.co.uk" class="quick-link" target="_blank">Amaea Website <span class="ext">↗</span></a>
+            <a href="https://app.amaea.co.uk" class="quick-link" target="_blank">App <span class="ext">↗</span></a>
+            <a href="onboarding" class="quick-link">New joiner? Start here</a>
           </div>
         </div>
 
@@ -351,13 +351,6 @@
             <div>
               <div class="date-label">Intelliflo Conference</div>
               <div class="date-when">June / July 2026</div>
-            </div>
-          </div>
-          <div class="date-item">
-            <span class="date-badge soon">Q3 2026</span>
-            <div>
-              <div class="date-label">Financial model built</div>
-              <div class="date-when">ARR, CAC, LTV, runway</div>
             </div>
           </div>
           <div class="date-item">
@@ -442,6 +435,8 @@
   // Date in topbar
   const d = new Date();
   document.getElementById('topbar-date').textContent = d.toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'long', year:'numeric' });
+  // Time-of-day greeting eyebrow
+  (function(){const e=document.querySelector('.page-eyebrow');if(!e)return;const h=new Date().getHours();e.textContent=h<12?'Good morning':h<18?'Good afternoon':'Good evening';})();
   // Dynamic months-to-launch
   (function(){const el=document.getElementById('months-to-launch');if(!el)return;const m=Math.round((new Date('2028-09-01')-new Date())/(1000*60*60*24*30.44));el.textContent='~'+m+' months away';})();
 
