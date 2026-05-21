@@ -9,16 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="intranet.css"/>
   <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
-  <style>
-    .ob-step { display: grid; grid-template-columns: 36px 1fr auto; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--gray-200); align-items: start; }
-    .ob-step:last-child { border-bottom: none; }
-    .ob-num { width: 28px; height: 28px; border-radius: 50%; background: var(--plum-tint); border: 1px solid var(--plum-border); color: var(--plum); font-size: 0.72rem; font-weight: 800; display: flex; align-items: center; justify-content: center; }
-    .ob-body h2 { font-size: 0.92rem; font-weight: 700; color: var(--gray-900); margin: 2px 0 4px; letter-spacing: -0.01em; }
-    .ob-body p { font-size: 0.82rem; color: var(--gray-600); line-height: 1.6; margin: 0; }
-    .ob-meta { font-size: 0.7rem; color: var(--gray-500); white-space: nowrap; padding-top: 4px; }
-    .ob-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 600; color: var(--plum); margin-top: 8px; }
-    .ob-cta:hover { text-decoration: underline; }
-  </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -172,80 +162,100 @@
     <div class="page-header">
       <p class="page-eyebrow">For new joiners</p>
       <h1 class="page-title">Welcome to Amaea.</h1>
-      <p class="page-sub">This intranet is the team's reference for everything we've decided, built, and are planning. Five documents will get you from zero to operational in about half a working day.</p>
+      <p class="page-sub">This intranet is the team's reference for everything we've decided, built, and are planning. Five documents will get you from zero to operational in an afternoon.</p>
     </div>
 
-    <div class="card" style="margin-bottom:24px;background:var(--plum-tint);border-color:var(--plum-border);">
-      <p style="font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--plum);margin:0 0 8px;">Where you are</p>
-      <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.65;margin:0;">Amaea is a pre-launch FCA compliance platform for UK financial advisers. Public launch is September 2028. Today the founding team is four people: Hasna (CEO) and Milan (CTO) are full-time co-founders; two contractors. Investors and design partners have read-only access on shared links.</p>
+    <div class="intro-callout">
+      <p class="intro-callout-label">Where you are</p>
+      <p class="intro-callout-body">Amaea is a pre-launch FCA compliance platform for UK financial advisers. Public launch is September 2028. Today the founding team is four people: Hasna (CEO) and Milan (CTO) are full-time co-founders; two contractors. Investors and design partners have read-only access on shared links.</p>
     </div>
 
     <div class="card">
-      <p class="card-title">Read in this order</p>
-      <div class="ob-step">
-        <div class="ob-num">01</div>
-        <div class="ob-body">
-          <h2 id="product-architecture-overview">Product &amp; architecture overview</h2>
-          <p>What Amaea is, who it's for, the four-tier model (essentials/professional/scale/enterprise), and the shape of the product surface.</p>
-          <a class="ob-cta" href="mvp-docs/01-product.html">Open 01 →</a>
-        </div>
-        <div class="ob-meta">~20 min</div>
+      <div class="ob-card-head">
+        <p class="card-title">Read in this order</p>
+        <p class="ob-card-sub"><span data-ob-progress>0 of 5</span> read &nbsp;·&nbsp; 5 documents &nbsp;·&nbsp; ~2.5 hours total</p>
       </div>
-      <div class="ob-step">
-        <div class="ob-num">02</div>
-        <div class="ob-body">
-          <h2 id="technical-architecture">Technical architecture</h2>
-          <p>Stack, services, deploy topology, the auth model, multi-tenant isolation, and the RLS layer enforced in the database.</p>
-          <a class="ob-cta" href="mvp-docs/02-architecture.html">Open 02 →</a>
-        </div>
-        <div class="ob-meta">~30 min</div>
-      </div>
-      <div class="ob-step">
-        <div class="ob-num">03</div>
-        <div class="ob-body">
-          <h2 id="document-extraction-flag-system">Document extraction &amp; flag system</h2>
-          <p>The 19-type document extraction pipeline, the flag-raising engine, and the multi-page grouping logic. The compliance engine in practice.</p>
-          <a class="ob-cta" href="mvp-docs/03-extraction.html">Open 03 →</a>
-        </div>
-        <div class="ob-meta">~40 min</div>
-      </div>
-      <div class="ob-step">
-        <div class="ob-num">04</div>
-        <div class="ob-body">
-          <h2 id="ai-layer-fca-knowledge-base">AI layer &amp; FCA knowledge base</h2>
-          <p>How the AI assistant is composed, the RAG layer over the FCA handbook, per-tier rate limits, and the evaluation pipeline.</p>
-          <a class="ob-cta" href="mvp-docs/04-ai-kb.html">Open 04 →</a>
-        </div>
-        <div class="ob-meta">~30 min</div>
-      </div>
-      <div class="ob-step">
-        <div class="ob-num">05</div>
-        <div class="ob-body">
-          <h2 id="operations-handbook">Operations handbook</h2>
-          <p>Vendor stack, incident response, secret management, deploy pipeline, and the on-call rotation. Read this before changing anything in production.</p>
-          <a class="ob-cta" href="mvp-docs/05-ops.html">Open 05 →</a>
-        </div>
-        <div class="ob-meta">~20 min</div>
-      </div>
+      <ol class="ob-steps">
+        <li class="ob-step">
+          <div class="ob-num">01</div>
+          <div class="ob-body">
+            <h2 id="product-architecture-overview">Product &amp; architecture overview</h2>
+            <p>What Amaea is, who it's for, the four-tier model (essentials/professional/scale/enterprise), and the shape of the product surface.</p>
+            <a class="ob-cta" href="mvp-docs/01-product.html">Open 01 →</a>
+          </div>
+          <div class="ob-right">
+            <div class="ob-meta">~20 min</div>
+            <label class="ob-check"><input type="checkbox" data-ob-step="01"/><span>Read</span></label>
+          </div>
+        </li>
+        <li class="ob-step">
+          <div class="ob-num">02</div>
+          <div class="ob-body">
+            <h2 id="technical-architecture">Technical architecture</h2>
+            <p>Stack, services, deploy topology, the auth model, multi-tenant isolation, and the RLS layer enforced in the database.</p>
+            <a class="ob-cta" href="mvp-docs/02-architecture.html">Open 02 →</a>
+          </div>
+          <div class="ob-right">
+            <div class="ob-meta">~30 min</div>
+            <label class="ob-check"><input type="checkbox" data-ob-step="02"/><span>Read</span></label>
+          </div>
+        </li>
+        <li class="ob-step">
+          <div class="ob-num">03</div>
+          <div class="ob-body">
+            <h2 id="document-extraction-flag-system">Document extraction &amp; flag system</h2>
+            <p>The 19-type document extraction pipeline, the flag-raising engine, and the multi-page grouping logic. The compliance engine in practice.</p>
+            <a class="ob-cta" href="mvp-docs/03-extraction.html">Open 03 →</a>
+          </div>
+          <div class="ob-right">
+            <div class="ob-meta">~40 min</div>
+            <label class="ob-check"><input type="checkbox" data-ob-step="03"/><span>Read</span></label>
+          </div>
+        </li>
+        <li class="ob-step">
+          <div class="ob-num">04</div>
+          <div class="ob-body">
+            <h2 id="ai-layer-fca-knowledge-base">AI layer &amp; FCA knowledge base</h2>
+            <p>How the AI assistant is composed, the RAG layer over the FCA handbook, per-tier rate limits, and the evaluation pipeline.</p>
+            <a class="ob-cta" href="mvp-docs/04-ai-kb.html">Open 04 →</a>
+          </div>
+          <div class="ob-right">
+            <div class="ob-meta">~30 min</div>
+            <label class="ob-check"><input type="checkbox" data-ob-step="04"/><span>Read</span></label>
+          </div>
+        </li>
+        <li class="ob-step">
+          <div class="ob-num">05</div>
+          <div class="ob-body">
+            <h2 id="operations-handbook">Operations handbook</h2>
+            <p>Vendor stack, incident response, secret management, deploy pipeline, and the on-call rotation. Read this before changing anything in production.</p>
+            <a class="ob-cta" href="mvp-docs/05-ops.html">Open 05 →</a>
+          </div>
+          <div class="ob-right">
+            <div class="ob-meta">~20 min</div>
+            <label class="ob-check"><input type="checkbox" data-ob-step="05"/><span>Read</span></label>
+          </div>
+        </li>
+      </ol>
     </div>
 
     <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:18px;">
       <div class="card">
         <p class="card-title">Next, depending on your role</p>
         <div class="quick-links">
-          <a href="team" class="quick-link">⬡ Team — who does what</a>
-          <a href="decisions" class="quick-link">▤ Decisions log</a>
-          <a href="roadmap" class="quick-link">▶ Roadmap</a>
-          <a href="brand" class="quick-link">◆ Brand guidelines</a>
+          <a href="team" class="quick-link">Team — who does what</a>
+          <a href="decisions" class="quick-link">Decisions log</a>
+          <a href="roadmap" class="quick-link">Roadmap</a>
+          <a href="brand" class="quick-link">Brand guidelines</a>
         </div>
       </div>
       <div class="card">
         <p class="card-title">For investors &amp; design partners</p>
         <div class="quick-links">
-          <a href="investor" class="quick-link">↗ Funding</a>
-          <a href="financial-model" class="quick-link">↗ Financial model</a>
-          <a href="sector-research" class="quick-link">↗ Sector research</a>
-          <a href="features" class="quick-link">↗ Product features</a>
+          <a href="investor" class="quick-link">Funding</a>
+          <a href="financial-model" class="quick-link">Financial model</a>
+          <a href="sector-research" class="quick-link">Sector research</a>
+          <a href="features" class="quick-link">Product features</a>
         </div>
       </div>
     </div>
@@ -314,6 +324,33 @@
     if (emailEl) emailEl.textContent = em;
   }).catch(function(){});
 })();
+</script>
+<script>
+  // Onboarding read-progress (localStorage)
+  (function () {
+    var KEY = 'amaea-onboarding-read';
+    var boxes = document.querySelectorAll('input[data-ob-step]');
+    var counter = document.querySelector('[data-ob-progress]');
+    if (!boxes.length) return;
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+    function render() {
+      var done = 0;
+      boxes.forEach(function (b) {
+        if (state[b.dataset.obStep]) { b.checked = true; done++; b.closest('.ob-step').classList.add('is-read'); }
+        else { b.closest('.ob-step').classList.remove('is-read'); }
+      });
+      if (counter) counter.textContent = done + ' of ' + boxes.length;
+    }
+    boxes.forEach(function (b) {
+      b.addEventListener('change', function () {
+        state[b.dataset.obStep] = b.checked;
+        localStorage.setItem(KEY, JSON.stringify(state));
+        render();
+      });
+    });
+    render();
+  })();
 </script>
 <script src="/intranet-search.js" defer></script>
 </body>
