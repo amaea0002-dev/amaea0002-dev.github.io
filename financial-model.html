@@ -225,7 +225,7 @@
     <!-- 1. Three scenarios summary -->
     <div class="fm-section" id="scenarios">
       <div class="section-label">Overview</div>
-      <h2 class="section-title-lg" style="margin-bottom:16px;">Three scenarios</h2>
+      <h2 class="section-title-lg" class="mb-16">Three scenarios</h2>
       <div class="card" style="padding:24px 28px;">
         <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.65;margin:0 0 18px;">
           All three scenarios share identical pricing (£2,094 blended ARPA), retention (10% annual churn), cost structure, and the £8,000 founder capital contribution at incorporation. They diverge only on <strong>Founders fill rate</strong> and <strong>post-launch funnel rate</strong>, driven by how many distribution channels land.
@@ -256,7 +256,7 @@
     <!-- 2. Headline outputs at Y3 -->
     <div class="fm-section" id="y3">
       <div class="section-label">Headline outputs · v2</div>
-      <h2 class="section-title-lg" style="margin-bottom:16px;">Year 3 (April 2029)</h2>
+      <h2 class="section-title-lg" class="mb-16">Year 3 (April 2029)</h2>
       <div class="card" style="padding:20px 24px;overflow:hidden;">
         <p style="font-size:0.82rem;color:var(--gray-500);margin:0 0 14px;line-height:1.55;">
           v2 properly models the Founders 20% lifetime discount per cohort (no mental adjustment needed). All v2 cost scaling applied: People + S&amp;M (with 8% revenue floor) + G&amp;A + engineer step functions + recruitment fees + office cost above 100 customers.
@@ -313,7 +313,7 @@
     <!-- 2b. Headline outputs at Y5 (new in v2) -->
     <div class="fm-section" id="y5">
       <div class="section-label">Headline outputs · v2</div>
-      <h2 class="section-title-lg" style="margin-bottom:16px;">Year 5 (April 2031) — new in v2</h2>
+      <h2 class="section-title-lg" class="mb-16">Year 5 (April 2031) — new in v2</h2>
       <div class="card" style="padding:20px 24px;overflow:hidden;">
         <p style="font-size:0.82rem;color:var(--gray-500);margin:0 0 14px;line-height:1.55;">
           v2 extended the model horizon from 36 to 60 months. Y5 captures the realistic end-state of the bootstrap trajectory — all three scenarios remain bootstrap-fundable through end Apr 2031 without outside capital.
@@ -373,7 +373,7 @@
     <!-- 3. New customers ramp -->
     <div class="fm-section" id="ramp">
       <div class="section-label">Spreadsheet inputs · v2</div>
-      <h2 class="section-title-lg" style="margin-bottom:8px;">New customers ramp — Monthly tab Rows 5 + 6</h2>
+      <h2 class="section-title-lg" class="mb-8">New customers ramp — Monthly tab Rows 5 + 6</h2>
       <p style="font-size:0.85rem;color:var(--gray-500);line-height:1.55;margin:0 0 16px;">
         Monthly tab covers 60 months: May 2026 (col B, M1) → April 2031 (col BI, M60). Key anchors: <strong>Q (M17, Sep 2027)</strong> = incorporation + founders.html goes live · <strong>AC (M29, Sep 2028)</strong> = public launch · <strong>BI (M60, Apr 2031)</strong> = model end. <strong>Row 5 = New Founders</strong>, <strong>Row 6 = New full-price</strong> — Founders ramp through Aug 2028 only; full-price funnel starts Sep 2028.
       </p>
@@ -404,7 +404,7 @@
         <p style="font-size:0.78rem;color:var(--gray-600);margin:10px 0 0;font-style:italic;">5y total acquired: ~150 Founders + ~280 full-price = ~346 active end Y5.</p>
       </div>
 
-      <div class="card" style="padding:20px 24px;">
+      <div class="card" class="section-padded">
         <p class="fm-eyebrow green" style="margin-bottom:12px;">Bull (all 4 channels, ~203 Founders, ~14/mo steady state)</p>
         <table class="fm-table">
           <thead><tr><th>Row</th><th>Phase</th><th>Cells / months</th><th>Value</th></tr></thead>
@@ -425,7 +425,7 @@
     <!-- 4. Cost scaling formulas (v2) -->
     <div class="fm-section" id="formulas">
       <div class="section-label">Cost scaling · v2</div>
-      <h2 class="section-title-lg" style="margin-bottom:8px;">Formulas in the Monthly tab</h2>
+      <h2 class="section-title-lg" class="mb-8">Formulas in the Monthly tab</h2>
       <p style="font-size:0.85rem;color:var(--gray-500);line-height:1.55;margin:0 0 16px;">
         v2 cost rows use time-varying ramps + per-customer scaling. People includes engineer step functions. S&amp;M adds a revenue floor. Office toggles on at &gt;100 customers. Recruitment fees auto-detect hire onboardings. References active customers via Row 12 (total active = Founders + full-price). Paste into the B-column cell, drag right to BI.
       </p>
@@ -433,7 +433,7 @@
       <div class="card" style="padding:20px 24px;margin-bottom:14px;">
         <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">People — cell B22</p>
         <div class="fm-formula">=IF(B$2&lt;29,0,IF(B$2&lt;32,5041,9041)) + MAX(0,B12-50)*50 + IF(B12&gt;30,8000,0) + IF(B12&gt;100,8000,0) + IF(B12&gt;150,10000,0)</div>
-        <ul class="fm-list" style="margin-top:12px;">
+        <ul class="fm-list" class="mt-12">
           <li><strong>Months 1–28:</strong> £0 (Hasna at Lucent, no Amaea payroll)</li>
           <li><strong>Months 29–31:</strong> £5,041 (Hasna £1,041 + Sales hire £4,000)</li>
           <li><strong>Month 32+:</strong> £9,041 (CX manager onboards)</li>
@@ -445,7 +445,7 @@
       <div class="card" style="padding:20px 24px;margin-bottom:14px;">
         <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">S&amp;M — cell B23 <span style="font-size:0.7rem;font-weight:600;color:var(--plum);background:var(--plum-tint);padding:2px 8px;border-radius:4px;margin-left:6px;">v2 fix: revenue floor</span></p>
         <div class="fm-formula">=IF(B$2&lt;17,0,IF(B$2&lt;29,600+MAX(0,B12-50)*20,MAX(2700+MAX(0,B12-50)*20,B17*0.08)))</div>
-        <ul class="fm-list" style="margin-top:12px;">
+        <ul class="fm-list" class="mt-12">
           <li><strong>Months 1–16:</strong> £0 (pre-incorporation)</li>
           <li><strong>Months 17–28:</strong> £600 + £20/customer scaling</li>
           <li><strong>Month 29+:</strong> <strong>MAX of:</strong> base (£2,700 + £20/customer scaling) <strong>or</strong> 8% of MRR (revenue floor)</li>
@@ -456,7 +456,7 @@
       <div class="card" style="padding:20px 24px;margin-bottom:14px;">
         <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">G&amp;A — cell B24</p>
         <div class="fm-formula">=IF(B$2&lt;17,0,IF(B$2&lt;29,675+MAX(0,B12-50)*5,1225+MAX(0,B12-50)*5))</div>
-        <ul class="fm-list" style="margin-top:12px;">
+        <ul class="fm-list" class="mt-12">
           <li><strong>Months 1–16:</strong> £0</li>
           <li><strong>Months 17–28:</strong> £675 + £5/customer above 50 (accountancy + legal + Claude Max + software)</li>
           <li><strong>Month 29+:</strong> £1,225 + £5/customer (adds insurance + more software seats)</li>
@@ -466,16 +466,16 @@
       <div class="card" style="padding:20px 24px;margin-bottom:14px;">
         <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">Office — cell B25 <span style="font-size:0.7rem;font-weight:600;color:var(--plum);background:var(--plum-tint);padding:2px 8px;border-radius:4px;margin-left:6px;">v2 new</span></p>
         <div class="fm-formula">=IF(B12&gt;100,2000,0)</div>
-        <ul class="fm-list" style="margin-top:12px;">
+        <ul class="fm-list" class="mt-12">
           <li>£2,000/mo small London office or co-working when active customers exceed 100</li>
           <li>Triggers in Y4 for Bear, late Y3 for Base, mid-Y3 for Bull</li>
         </ul>
       </div>
 
-      <div class="card" style="padding:20px 24px;">
+      <div class="card" class="section-padded">
         <p style="font-weight:700;font-size:0.92rem;color:var(--gray-900);margin:0 0 8px;">Recruitment fees — cell B26 <span style="font-size:0.7rem;font-weight:600;color:var(--plum);background:var(--plum-tint);padding:2px 8px;border-radius:4px;margin-left:6px;">v2 new</span></p>
         <div class="fm-formula">=IF(B22-(prev B22)&gt;=3500,12000,0)</div>
-        <ul class="fm-list" style="margin-top:12px;">
+        <ul class="fm-list" class="mt-12">
           <li>Detects month-over-month People-cost jumps ≥£3,500 (a new hire onboarded)</li>
           <li>Adds £12,000 one-off — ≈15% of average loaded salary at UK tech recruiter fees</li>
           <li>Fires automatically when Sales / CX / engineers / Milan-FT come on board</li>
@@ -486,7 +486,7 @@
     <!-- 5. Engineer step function timing per scenario -->
     <div class="fm-section" id="hires">
       <div class="section-label">Hire schedule</div>
-      <h2 class="section-title-lg" style="margin-bottom:16px;">When each engineer hire fires</h2>
+      <h2 class="section-title-lg" class="mb-16">When each engineer hire fires</h2>
       <div class="card" style="padding:20px 24px;overflow:hidden;">
         <p style="font-size:0.82rem;color:var(--gray-500);margin:0 0 14px;line-height:1.55;">
           Derived from each scenario's customer ramp plus 10% annual churn. Engineer hires in beta (Base/Bull) are realistic — by then you'd have 30+ paying Founders generating £50k+/mo MRR, comfortably funding an £8k/mo hire.
@@ -533,8 +533,8 @@
     <!-- 6. Version history -->
     <div class="fm-section" id="versions">
       <div class="section-label">Evolution</div>
-      <h2 class="section-title-lg" style="margin-bottom:16px;">Version history</h2>
-      <div class="card" style="padding:20px 24px;">
+      <h2 class="section-title-lg" class="mb-16">Version history</h2>
+      <div class="card" class="section-padded">
         <div style="display:flex;flex-direction:column;gap:16px;">
           <div style="display:flex;gap:14px;align-items:flex-start;">
             <span class="fm-version-pill" style="flex-shrink:0;min-width:48px;text-align:center;">v1.0</span>
@@ -578,8 +578,8 @@
     <!-- 7. Known limitations -->
     <div class="fm-section" id="limits">
       <div class="section-label">Caveats · v2</div>
-      <h2 class="section-title-lg" style="margin-bottom:16px;">Known limitations (v3 candidates)</h2>
-      <div class="card" style="padding:20px 24px;">
+      <h2 class="section-title-lg" class="mb-16">Known limitations (v3 candidates)</h2>
+      <div class="card" class="section-padded">
         <p style="font-size:0.85rem;color:var(--gray-600);line-height:1.6;margin:0 0 12px;">v2 closed the four biggest v1.3 limitations (Founders discount, 60-month horizon, S&amp;M floor, recruitment fees, office). These are the remaining gaps — carry forward to v3 if/when the model needs to support sector or international expansion conversations.</p>
         <ol class="fm-list" style="padding-left:22px;">
           <li><strong>Sector expansion not modelled.</strong> v2 assumes UK IFA only forever. Real plan is to expand into mortgage brokers / insurance intermediaries / wealth managers / accountants. v3 should add a "sector mix" dimension. See <a href="financial-model#sector-timing" style="color:var(--plum);">sector expansion timing</a> below for the trigger logic.</li>
@@ -595,10 +595,10 @@
     <!-- 8. How to update -->
     <div class="fm-section" id="process">
       <div class="section-label">Process</div>
-      <h2 class="section-title-lg" style="margin-bottom:16px;">How to update the model</h2>
-      <div class="card" style="padding:20px 24px;">
+      <h2 class="section-title-lg" class="mb-16">How to update the model</h2>
+      <div class="card" class="section-padded">
         <p style="font-weight:700;font-size:0.88rem;margin:0 0 8px;color:var(--gray-900);">Adjusting a scenario (e.g. tweaking Base ramp)</p>
-        <ul class="fm-list" style="margin-bottom:14px;">
+        <ul class="fm-list" class="mb-14">
           <li>Open the Google Sheets workbook for Bear / Base / Bull</li>
           <li>Edit cells in Monthly tab Row 5 (New customers)</li>
           <li>All downstream cells (Active customers Row 7, MRR Row 10, ARR Row 11) recompute automatically</li>
@@ -606,7 +606,7 @@
         </ul>
 
         <p style="font-weight:700;font-size:0.88rem;margin:0 0 8px;color:var(--gray-900);">Adjusting cost assumptions</p>
-        <ul class="fm-list" style="margin-bottom:14px;">
+        <ul class="fm-list" class="mb-14">
           <li>Edit formulas in B22 (People), B23 (S&amp;M), B24 (G&amp;A); drag right to BI</li>
           <li>Per-customer scaling factors: edit the multiplier (50, 20, 5)</li>
           <li>Step function thresholds: edit the IF conditions</li>
@@ -624,8 +624,8 @@
     <!-- 9. Pointers -->
     <div class="fm-section" id="pointers">
       <div class="section-label">Related</div>
-      <h2 class="section-title-lg" style="margin-bottom:16px;">Pointers</h2>
-      <div class="card" style="padding:20px 24px;">
+      <h2 class="section-title-lg" class="mb-16">Pointers</h2>
+      <div class="card" class="section-padded">
         <ul class="fm-list">
           <li><strong>Investor-facing scenarios:</strong> <a href="investor" style="color:var(--plum);">team.amaea.co.uk/investor</a> shows 90-day post-launch and Y3 cards built from this model</li>
           <li><strong>Companion docs (local):</strong> assumptions doc (the <em>why</em>), template doc (the spreadsheet structure spec), CSV starter pack README</li>
