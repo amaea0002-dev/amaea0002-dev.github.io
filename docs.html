@@ -162,17 +162,27 @@
     <div class="page-header">
       <p class="page-eyebrow">Company records</p>
       <h1 class="page-title">Documents</h1>
-      <p class="page-sub">Company setup, legal documents, operational templates, and open action items. Last reviewed 18 May 2026.</p>
+      <p class="page-sub">Company setup, legal documents, operational templates, and open action items. <span class="text-mute">Last reviewed 18 May 2026.</span></p>
     </div>
 
-    <div class="card" style="background:var(--plum-tint);border-color:var(--plum-border);margin-bottom:22px;">
-      <p style="font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--plum);margin:0 0 6px;">MVP launch blocker</p>
-      <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.6;margin:0;">Phase 1 engineering is <strong>complete and hardened</strong> (May 2026). The remaining MVP-readiness item is legal: the <a href="#dpa" style="color:var(--plum);font-weight:700;">DPA framework</a> + <a href="#tos" style="color:var(--plum);font-weight:700;">Terms of Service / Privacy Policy</a>. Under UK GDPR Art. 28, no FCA-authorised firm can legally hand client data to Amaea without these — required before any IFA pilot.</p>
+    <nav class="doc-toc" aria-label="In this document">
+      <p class="doc-toc-label">In this document</p>
+      <div class="doc-toc-grid">
+        <a href="#company-setup"                class="doc-toc-link"><span class="doc-toc-num">1</span> Company Setup (6)</a>
+        <a href="#legal-fca-position"           class="doc-toc-link"><span class="doc-toc-num">2</span> Legal &amp; FCA Position (3)</a>
+        <a href="#commercial-financial"         class="doc-toc-link"><span class="doc-toc-num">3</span> Commercial &amp; Financial (3)</a>
+        <a href="#brand-operational-documents"  class="doc-toc-link"><span class="doc-toc-num">4</span> Brand &amp; Operational (5)</a>
+      </div>
+    </nav>
+
+    <div class="intro-callout">
+      <p class="intro-callout-label">MVP launch blocker</p>
+      <p class="intro-callout-body">Phase 1 engineering is <strong>complete and hardened</strong> (May 2026). The remaining MVP-readiness item is legal: the <a href="#legal-fca-position">DPA framework</a> + <a href="#legal-fca-position">Terms of Service / Privacy Policy</a>. Under UK GDPR Art. 28, no FCA-authorised firm can legally hand client data to Amaea without these — required before any IFA pilot.</p>
     </div>
 
     <!-- Company setup -->
     <div class="section-label">Company</div>
-    <h2 id="company-setup" class="section-title-lg mb-16">Company Setup</h2>
+    <h2 id="company-setup" class="section-title-lg mb-16">Company Setup <a class="section-anchor" href="#company-setup" aria-label="Link to this section">#</a></h2>
 
     <div class="card" style="margin-bottom:28px;">
       <div class="doc-item">
@@ -181,7 +191,7 @@
           <p class="doc-name">Limited Company Registration</p>
           <p class="doc-desc">Amaea Ltd (Companies House). Required before taking revenue or opening a business bank account.</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">Pending</span><button class="btn btn-secondary btn-sm" style="font-size: 0.74rem;" onclick="showToast('Upload confirmation of registration when complete','info')">Upload</button></div>
+        <div class="doc-status"><span class="badge badge-amber">Pending</span><button class="btn btn-secondary btn-sm" onclick="showToast('Upload confirmation of registration when complete','info')">Upload</button></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">📋</div>
@@ -189,7 +199,7 @@
           <p class="doc-name">Co-Founder &amp; Shareholder Agreement</p>
           <p class="doc-desc">50/50 equity split. 4-year reverse vesting with 1-year cliff. IP assignment, leaver provisions, drag/tag-along, Reserved Matters, peer governance. Drafted 16 May 2026 — pending independent review by both founders and a UK startup lawyer (SeedLegals or boutique firm) before signing.</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">v1 draft · pending legal review</span><a href="cofounder-agreement"><button class="btn btn-secondary btn-sm" style="font-size: 0.74rem;">View</button></a></div>
+        <div class="doc-status"><span class="badge badge-amber">Draft v1 · pending legal review</span><a href="cofounder-agreement"><button class="btn btn-secondary btn-sm">View</button></a></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">⚙</div>
@@ -197,7 +207,7 @@
           <p class="doc-name">CTO Working Agreement (Milan)</p>
           <p class="doc-desc">Operational expectations for the CTO role. Subordinate to the Co-Founder Agreement. ~10 hrs/week pre-launch, no cash compensation, technical domain authority. Drafted 16 May 2026.</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">v1 draft · pending review</span><a href="cto-working-agreement"><button class="btn btn-secondary btn-sm" style="font-size: 0.74rem;">View</button></a></div>
+        <div class="doc-status"><span class="badge badge-amber">Draft v1</span><a href="cto-working-agreement"><button class="btn btn-secondary btn-sm">View</button></a></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">⚙</div>
@@ -205,7 +215,7 @@
           <p class="doc-name">CEO Working Agreement (Hasna)</p>
           <p class="doc-desc">Operational expectations for the CEO role. Subordinate to the Co-Founder Agreement. Part-time through to Lucent exit Q3 2028, then full-time with £12,500 salary + up to £50k dividends post-profit. Commercial + regulatory domain authority. Drafted 16 May 2026.</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">v1 draft · pending review</span><a href="ceo-working-agreement"><button class="btn btn-secondary btn-sm" style="font-size: 0.74rem;">View</button></a></div>
+        <div class="doc-status"><span class="badge badge-amber">Draft v1</span><a href="ceo-working-agreement"><button class="btn btn-secondary btn-sm">View</button></a></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">📄</div>
@@ -221,13 +231,13 @@
           <p class="doc-name">Lucent Employment Contract Review</p>
           <p class="doc-desc">Hasna: check IP assignment, non-solicitation, and garden leave clauses before building anything that could be claimed by Lucent. Do this now, not on the way out.</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-red">Action required</span><button class="btn btn-primary btn-sm" style="font-size: 0.74rem;" onclick="showToast('Mark as reviewed once clauses are checked','info')">Review now</button></div>
+        <div class="doc-status"><span class="badge badge-red">Action required</span><button class="btn btn-primary btn-sm" onclick="showToast('Mark as reviewed once clauses are checked','info')">Review now</button></div>
       </div>
     </div>
 
     <!-- Legal / regulatory -->
     <div class="section-label">Legal &amp; Regulatory</div>
-    <h2 id="legal-fca-position" class="section-title-lg mb-16">Legal &amp; FCA Position</h2>
+    <h2 id="legal-fca-position" class="section-title-lg mb-16">Legal &amp; FCA Position <a class="section-anchor" href="#legal-fca-position" aria-label="Link to this section">#</a></h2>
 
     <div class="card" style="margin-bottom:28px;">
       <div class="doc-item">
@@ -236,7 +246,7 @@
           <p class="doc-name">FCA Regulatory Position for Amaea</p>
           <p class="doc-desc">Open question: does providing AI compliance guidance to FCA-regulated firms make Amaea itself a regulated entity? This is critical and needs a legal answer before product launch, not after. Seek specialist FCA regulatory counsel.</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-red">Open question</span><button class="btn btn-primary btn-sm" style="font-size: 0.74rem;" onclick="showToast('Book specialist FCA regulatory counsel: do not delay','info')">Book counsel</button></div>
+        <div class="doc-status"><span class="badge badge-red">Open question</span><button class="btn btn-primary btn-sm" onclick="showToast('Book specialist FCA regulatory counsel: do not delay','info')">Book counsel</button></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">🛡</div>
@@ -244,7 +254,7 @@
           <p class="doc-name">GDPR / Data Processing Agreement</p>
           <p class="doc-desc">Amaea will handle client data (IFA firm records, possibly client personal data). A DPA framework is needed before any beta client arrangement.</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">Not started</span><button class="btn btn-secondary btn-sm" style="font-size: 0.74rem;" onclick="showToast('Upload DPA template when drafted','info')">Upload</button></div>
+        <div class="doc-status"><span class="badge badge-amber">Not started</span><button class="btn btn-secondary btn-sm" onclick="showToast('Upload DPA template when drafted','info')">Upload</button></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">📝</div>
@@ -252,13 +262,13 @@
           <p class="doc-name">Terms of Service &amp; Privacy Policy</p>
           <p class="doc-desc">Required before charging any customer. Must accurately reflect how Amaea uses, stores, and processes data.</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">Not started</span><button class="btn btn-secondary btn-sm" style="font-size: 0.74rem;" onclick="showToast('Upload draft when ready','info')">Upload</button></div>
+        <div class="doc-status"><span class="badge badge-amber">Not started</span><button class="btn btn-secondary btn-sm" onclick="showToast('Upload draft when ready','info')">Upload</button></div>
       </div>
     </div>
 
     <!-- Commercial / financial -->
     <div class="section-label">Commercial</div>
-    <h2 id="commercial-financial" class="section-title-lg mb-16">Commercial &amp; Financial</h2>
+    <h2 id="commercial-financial" class="section-title-lg mb-16">Commercial &amp; Financial <a class="section-anchor" href="#commercial-financial" aria-label="Link to this section">#</a></h2>
 
     <div class="card" style="margin-bottom:28px;">
       <div class="doc-item">
@@ -267,7 +277,7 @@
           <p class="doc-name">Financial Model</p>
           <p class="doc-desc">v2 built 16 May 2026, replacing v1.3. Three scenarios (Bear / Base / Bull) across 60 months (May 2026 → Apr 2031). Y3 (Apr 2029): Bear 123 firms · £2.69M ARR. Base 211 firms · £4.62M ARR (plan around this). Bull 341 firms · £7.66M ARR. Y5 (Apr 2031): Base £8.13M ARR / £13.72M cash. All bootstrap-fundable with £8k founder contribution. See <a href="financial-model">/financial-model</a>.</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-green">v2 built</span><a href="financial-model"><button class="btn btn-secondary btn-sm" style="font-size: 0.74rem;">View</button></a></div>
+        <div class="doc-status"><span class="badge badge-green">v2 built</span><a href="financial-model"><button class="btn btn-secondary btn-sm">View</button></a></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">💰</div>
@@ -275,7 +285,7 @@
           <p class="doc-name">Pricing Model &amp; Validation</p>
           <p class="doc-desc">Current pricing page exists on the website but numbers are unvalidated. Must be tested through customer discovery interviews: "what would you budget for this?"</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">Unvalidated</span><a href="https://amaea.co.uk/pricing" target="_blank"><button class="btn btn-secondary btn-sm" style="font-size: 0.74rem;">View pricing →</button></a></div>
+        <div class="doc-status"><span class="badge badge-amber">Unvalidated</span><a href="https://amaea.co.uk/pricing" target="_blank"><button class="btn btn-secondary btn-sm">View pricing →</button></a></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">💼</div>
@@ -283,13 +293,13 @@
           <p class="doc-name">Exit Fund: Hasna</p>
           <p class="doc-desc">Target: £30–45k saved before leaving Lucent in September 2028. This covers personal living costs for 12–18 months while Amaea reaches revenue. Track monthly.</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">In progress</span><button class="btn btn-secondary btn-sm" style="font-size: 0.74rem;" onclick="showToast('Opening savings tracker…','info')">View tracker</button></div>
+        <div class="doc-status"><span class="badge badge-amber">In progress</span><button class="btn btn-secondary btn-sm" onclick="showToast('Opening savings tracker…','info')">View tracker</button></div>
       </div>
     </div>
 
     <!-- Brand / operational -->
     <div class="section-label">Operational</div>
-    <h2 id="brand-operational-documents" class="section-title-lg mb-16">Brand &amp; Operational Documents</h2>
+    <h2 id="brand-operational-documents" class="section-title-lg mb-16">Brand &amp; Operational Documents <a class="section-anchor" href="#brand-operational-documents" aria-label="Link to this section">#</a></h2>
 
     <div class="card" style="margin-bottom:28px;">
       <div class="doc-item">
@@ -314,7 +324,7 @@
           <p class="doc-name">Customer Discovery Template</p>
           <p class="doc-desc">Interview guide for IFA practice managers and compliance officers. 30-minute structured discovery framework. 15–20 interviews needed by end 2026.</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">To create</span><button class="btn btn-secondary btn-sm" style="font-size: 0.74rem;" onclick="showToast('Create discovery template in Google Docs, then upload here','info')">Create</button></div>
+        <div class="doc-status"><span class="badge badge-amber">To create</span><button class="btn btn-secondary btn-sm" onclick="showToast('Create discovery template in Google Docs, then upload here','info')">Create</button></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">🧪</div>
@@ -322,7 +332,7 @@
           <p class="doc-name">Competitive Analysis</p>
           <p class="doc-desc">Documented review of Thistle Initiatives, Threesixty Services, Defaqto, and emerging AI compliance tools. Where are they weak? Where is Amaea different?</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-amber">Not started</span><button class="btn btn-secondary btn-sm" style="font-size: 0.74rem;" onclick="showToast('Upload competitive analysis when complete','info')">Upload</button></div>
+        <div class="doc-status"><span class="badge badge-amber">Not started</span><button class="btn btn-secondary btn-sm" onclick="showToast('Upload competitive analysis when complete','info')">Upload</button></div>
       </div>
       <div class="doc-item">
         <div class="doc-icon">🎯</div>
@@ -330,14 +340,14 @@
           <p class="doc-name">Intelliflo Conference Plan</p>
           <p class="doc-desc">Target contact list, demo script, 60-second pitch, and specific ask. June/July 2026. The most important near-term event; needs dedicated preparation.</p>
         </div>
-        <div class="doc-status" style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;"><span class="badge badge-red">Urgent</span><button class="btn btn-primary btn-sm" style="font-size: 0.74rem;" onclick="showToast('Start conference plan now, 6 weeks out','info')">Start planning</button></div>
+        <div class="doc-status"><span class="badge badge-red">Urgent</span><button class="btn btn-primary btn-sm" onclick="showToast('Start conference plan now, 6 weeks out','info')">Start planning</button></div>
       </div>
     </div>
 
     <!-- Note -->
-    <div style="background:var(--plum-tint);border:1px solid var(--plum-border);border-radius:var(--r-lg);padding:20px 24px;">
-      <p style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--plum-soft);margin-bottom:8px;">Note on document status</p>
-      <p style="font-size:0.82rem;color:var(--gray-600);line-height:1.65;">This is a live tracker, not a static list. Documents marked "Not started" or "Pending" represent real gaps that need to be closed before Amaea can launch or raise money. Prioritise in the order shown on the dashboard.</p>
+    <div class="intro-callout">
+      <p class="intro-callout-label">Note on document status</p>
+      <p class="intro-callout-body">This is a live tracker, not a static list. Documents marked "Not started" or "Pending" represent real gaps that need to be closed before Amaea can launch or raise money. Prioritise in the order shown on the dashboard.</p>
     </div>
 
   </div>
