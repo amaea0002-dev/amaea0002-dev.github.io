@@ -1,40 +1,23 @@
 /* =========================================================
    Amaea — MVP Documentation
-   Brand stylesheet (Inter, Plum palette, print-ready)
+   Doc-specific stylesheet (print layout, cover, architecture).
+   Loaded AFTER ../intranet.css; reuses every brand var from there
+   (--plum*, --gray-50/100/200/300/500/600/700/900, --green, --amber,
+   --red) so there is one source of truth for the palette.
+   Only doc-only tokens are declared below.
    ========================================================= */
 
 :root {
-  /* Brand colours — sourced from amaea-brand/brand.html */
-  --plum:          #40243F;
-  --plum-dark:     #2D1A2C;
-  --plum-mid:      #5A3558;
-  --plum-soft:     #8B6189;
-  --plum-tint:     #F4EEF3;
+  /* Tokens only the docs use — intranet.css doesn't declare these. */
   --near-black:    #17131E;
+  --gray-400:      #A1A1AA;
+  --gray-800:      #27272A;
 
-  --green:         #10B981;
-  --amber:         #F59E0B;
-  --red:           #EF4444;
-
-  /* Greys */
-  --gray-50:  #FAFAFA;
-  --gray-100: #F4F4F5;
-  --gray-200: #E4E4E7;
-  --gray-300: #D4D4D8;
-  --gray-400: #A1A1AA;
-  --gray-500: #71717A;
-  --gray-600: #52525B;
-  --gray-700: #3F3F46;
-  --gray-800: #27272A;
-  --gray-900: #18181B;
-
-  /* Type */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display',
                'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-mono: 'SF Mono', ui-monospace, Menlo, Monaco, 'Cascadia Mono',
                Consolas, monospace;
 
-  /* Layout */
   --content-max: 760px;
   --radius: 14px;
   --radius-sm: 8px;
@@ -47,26 +30,12 @@
   --card-border:  var(--gray-200);
 }
 
-/* Dark-mode variants so MVP docs respect [data-theme="dark"] from intranet.css */
 [data-theme="dark"] {
   --card-surface: #2b192a;
   --card-border:  rgba(255,255,255,0.1);
-  --plum:       #a868a6;
-  --plum-dark:  #7a4878;
-  --plum-mid:   #c084be;
-  --plum-soft:  #c8a4c6;
-  --plum-tint:  rgba(168,104,166,0.12);
-  --near-black: #f0eaf2;
-  --gray-50:    #211421;
-  --gray-100:   #2b192a;
-  --gray-200:   rgba(255,255,255,0.08);
-  --gray-300:   rgba(255,255,255,0.15);
-  --gray-400:   #a494ae;
-  --gray-500:   #b8a8be;
-  --gray-600:   #c8b8cc;
-  --gray-700:   #d8c8dc;
-  --gray-800:   #e8d8ec;
-  --gray-900:   #f0eaf2;
+  --near-black:   #f0eaf2;
+  --gray-400:     #a494ae;
+  --gray-800:     #e8d8ec;
 }
 [data-theme="dark"] html, [data-theme="dark"] body { background: #1a0f19; color: var(--gray-800); }
 [data-theme="dark"] a { color: var(--plum-mid); border-bottom-color: rgba(192,132,190,0.35); }
