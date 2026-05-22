@@ -9,6 +9,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="intranet.css"/>
   <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
+  <style>
+    .inv-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--gray-200); }
+    .inv-item:last-child { border-bottom: none; }
+    .inv-check { width: 20px; height: 20px; border-radius: 4px; border: 2px solid var(--gray-200); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; cursor: pointer; transition: all 0.15s; }
+    .inv-check.done { background: var(--green); border-color: var(--green); color: #fff; }
+    .inv-check.inprog { background: var(--amber); border-color: var(--amber); color: #fff; }
+    .inv-check.urgent { border-color: var(--red); }
+    .inv-label { font-size: 0.82rem; color: var(--gray-900); flex: 1; }
+    .inv-label .inv-note { display: block; font-size: 0.74rem; color: var(--gray-500); margin-top: 1px; }
+    .inv-target { display: flex; align-items: center; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--gray-200); }
+    .inv-target:last-child { border-bottom: none; }
+    .inv-target-name { font-size: 0.82rem; font-weight: 600; color: var(--gray-900); flex: 1; }
+    .inv-target-type { font-size: 0.74rem; color: var(--gray-500); }
+    .inv-section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -169,38 +184,25 @@
     <div class="page-header">
       <p class="page-eyebrow">Funding &amp; optionality</p>
       <h1 class="page-title">Funding</h1>
-      <p class="page-sub">Default: bootstrap. The financial model is cash-flow-positive from month 2 of revenue across all three scenarios — Amaea funds its own growth from Founders revenue onwards. A raise enters scope only after multi-sector and international expansion are both active (post-2030). Materials below are maintained for that optionality. <span class="text-mute">Last reviewed 18 May 2026.</span></p>
+      <p class="page-sub">Default: bootstrap. The financial model is cash-flow-positive from month 2 of revenue across all three scenarios — Amaea funds its own growth from Founders revenue onwards. A raise enters scope only after multi-sector and international expansion are both active (post-2030). Materials below are maintained for that optionality. <span style="color:var(--gray-500);font-weight:500;">Last reviewed 18 May 2026.</span></p>
     </div>
-
-    <nav class="doc-toc" aria-label="In this document">
-      <p class="doc-toc-label">In this document</p>
-      <div class="doc-toc-grid">
-        <a href="#what-amaea-is-why-now-why-us"           class="doc-toc-link"><span class="doc-toc-num">1</span> The pitch</a>
-        <a href="#the-opportunity"                        class="doc-toc-link"><span class="doc-toc-num">2</span> The opportunity</a>
-        <a href="#the-first-quarter-modelled"             class="doc-toc-link"><span class="doc-toc-num">3</span> First quarter, modelled</a>
-        <a href="#reference-outcomes-in-adjacent-markets" class="doc-toc-link"><span class="doc-toc-num">4</span> Comparables</a>
-        <a href="#funding-stance"                         class="doc-toc-link"><span class="doc-toc-num">5</span> Funding stance + materials</a>
-        <a href="#financial-projections"                  class="doc-toc-link"><span class="doc-toc-num">6</span> Financial projections (Y3 + Y5)</a>
-        <a href="#milestones-investors"                   class="doc-toc-link"><span class="doc-toc-num">7</span> Milestones + target investors</a>
-      </div>
-    </nav>
 
     <!-- The pitch in one paragraph -->
     <div class="section-label">The pitch in one paragraph</div>
-    <h2 id="what-amaea-is-why-now-why-us" class="section-title-lg mb-16">What Amaea is, why now, why us <a class="section-anchor" href="#what-amaea-is-why-now-why-us" aria-label="Link to this section">#</a></h2>
-    <div class="card card--padded-lg mb-32">
-      <p class="inv-pitch-para">
+    <h2 id="what-amaea-is-why-now-why-us" class="section-title-lg mb-16">What Amaea is, why now, why us</h2>
+    <div class="card" style="margin-bottom:32px;padding:28px 32px;">
+      <p style="font-size:1rem;color:var(--gray-700);line-height:1.75;margin:0 0 14px;">
         Amaea is the FCA compliance platform UK Independent Financial Adviser firms have needed since Consumer Duty came into force in 2023. We replace the spreadsheets, fragmented file checks, and reactive supervision that every IFA practice uses today with a <strong>single live dashboard</strong> that reads the documents IFAs already produce, extracts the compliance-critical fields with AI vision, and surfaces every gap with a specific FCA rule citation. The product is built; the FCA knowledge base (11,645 chunks) is indexed; the document extraction pipeline handles 21 IFA compliance document types (19 client-level + 2 firm-level) with auto-flag-raising; the AI assistant grounds every answer in retrieval, never hallucination.
       </p>
-      <p class="inv-pitch-para">
+      <p style="font-size:1rem;color:var(--gray-700);line-height:1.75;margin:0;">
         <strong>Why now:</strong> Consumer Duty (PS22/9) made compliance evidencing a board-level concern. Claude Sonnet 4.6's vision performance on real IFA documents finally clears the bar a junior compliance officer sets. The FCA has been data-led in supervision since 2022 — firms that look bad on data are identifiable before a visit. <strong>Why us:</strong> Hasna is a financial-planning compliance specialist at a UK IFA; she speaks at FP Advance, is interviewed by Robin Powell, and is known to the CISI CEO. Milan is a software engineer building the technical product end-to-end. The team has the regulatory authority to sell and the engineering depth to build.
       </p>
     </div>
 
     <!-- Market -->
     <div class="section-label">Market</div>
-    <h2 id="the-opportunity" class="section-title-lg mb-16">The opportunity <a class="section-anchor" href="#the-opportunity" aria-label="Link to this section">#</a></h2>
-    <div class="grid-2 mb-32">
+    <h2 id="the-opportunity" class="section-title-lg mb-16">The opportunity</h2>
+    <div class="grid-2" style="margin-bottom:32px;">
       <div class="card">
         <p class="card-title mb-14">UK IFA market — beachhead</p>
         <p style="font-size:0.92rem;color:var(--gray-700);line-height:1.65;">
@@ -211,76 +213,81 @@
         </p>
       </div>
       <div class="card">
-        <p class="card-title stage-card-title">Stage 1–4 trajectory</p>
-        <p class="stage-intro">From pre-launch build through UK IFA dominance to multi-sector + international expansion. Numbers reflect the v2 financial model (60-month horizon, May 2026 → Apr 2031). Stages 3–4 are v3 candidates — modelled when sector + international expansion enter scope.</p>
-        <div class="stage-grid">
-          <div class="stage-card">
-            <div class="stage-card-head">
-              <span class="stage-card-num">1</span>
-              <span class="stage-card-period">pre-launch → Sep 2028</span>
+        <p class="card-title" style="margin-bottom:6px;">Stage 1–4 trajectory</p>
+        <p style="font-size:0.78rem;color:var(--gray-500);line-height:1.5;margin:0 0 16px;">From UK IFA beachhead through international expansion to category leadership. ARR target on stages 1–3; valuation target on stage 4.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+
+          <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <span style="width:22px;height:22px;border-radius:50%;background:var(--plum);color:#fff;font-size: 0.74rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">1</span>
+              <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--gray-500);text-transform:uppercase;">2028 – 2030</span>
             </div>
-            <p class="stage-card-title-line">Build, design partners, FCA corpus</p>
-            <p class="stage-card-value">£0 – £1M ARR</p>
+            <p style="font-size:0.82rem;font-weight:700;color:var(--gray-900);margin:0 0 4px;letter-spacing:-0.01em;">Own UK IFA compliance</p>
+            <p style="font-size:0.96rem;font-weight:800;color:var(--plum-dark);margin:6px 0 0;letter-spacing:-0.02em;">£2 – 5M ARR</p>
           </div>
-          <div class="stage-card">
-            <div class="stage-card-head">
-              <span class="stage-card-num">2</span>
-              <span class="stage-card-period">2028 – 2031 (v2 horizon)</span>
+
+          <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <span style="width:22px;height:22px;border-radius:50%;background:var(--plum);color:#fff;font-size: 0.74rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">2</span>
+              <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--gray-500);text-transform:uppercase;">2030 – 2032</span>
             </div>
-            <p class="stage-card-title-line">Own UK IFA compliance</p>
-            <p class="stage-card-value">Base £8.13M ARR · Bull £14.12M (Y5)</p>
+            <p style="font-size:0.82rem;font-weight:700;color:var(--gray-900);margin:0 0 4px;letter-spacing:-0.01em;">All UK regulated sectors</p>
+            <p style="font-size:0.96rem;font-weight:800;color:var(--plum-dark);margin:6px 0 0;letter-spacing:-0.02em;">£20 – 50M ARR</p>
           </div>
-          <div class="stage-card">
-            <div class="stage-card-head">
-              <span class="stage-card-num">3</span>
-              <span class="stage-card-period">2031 – 2034 (v3)</span>
+
+          <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:14px 16px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <span style="width:22px;height:22px;border-radius:50%;background:var(--plum);color:#fff;font-size: 0.74rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">3</span>
+              <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--gray-500);text-transform:uppercase;">2032 – 2035</span>
             </div>
-            <p class="stage-card-title-line">Multi-sector + international</p>
-            <p class="stage-card-value">v3 candidate (raise enters scope here)</p>
+            <p style="font-size:0.82rem;font-weight:700;color:var(--gray-900);margin:0 0 4px;letter-spacing:-0.01em;">International (US, EU)</p>
+            <p style="font-size:0.96rem;font-weight:800;color:var(--plum-dark);margin:6px 0 0;letter-spacing:-0.02em;">£100M+ ARR</p>
           </div>
-          <div class="stage-card stage-card--emphasized">
-            <div class="stage-card-head">
-              <span class="stage-card-num stage-card-num--dark">4</span>
-              <span class="stage-card-period stage-card-period--plum">2034 +</span>
+
+          <div style="background:var(--plum-tint);border:1px solid var(--plum-border);border-radius:var(--r-md);padding:14px 16px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <span style="width:22px;height:22px;border-radius:50%;background:var(--plum-dark);color:#fff;font-size: 0.74rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center;">4</span>
+              <span style="font-size:0.68rem;font-weight:800;letter-spacing:0.06em;color:var(--plum-soft);text-transform:uppercase;">2035 +</span>
             </div>
-            <p class="stage-card-title-line">The compliance OS</p>
-            <p class="stage-card-value stage-card-value--plum">Category leadership</p>
+            <p style="font-size:0.82rem;font-weight:700;color:var(--gray-900);margin:0 0 4px;letter-spacing:-0.01em;">The compliance OS</p>
+            <p style="font-size:0.96rem;font-weight:800;color:var(--plum);margin:6px 0 0;letter-spacing:-0.02em;">£3 – 10B+ valuation</p>
           </div>
+
         </div>
       </div>
     </div>
 
     <!-- 90-day post-launch -->
     <div class="section-label">90-day post-launch target</div>
-    <h2 id="the-first-quarter-modelled" class="section-title-lg mb-16">The first quarter, modelled <a class="section-anchor" href="#the-first-quarter-modelled" aria-label="Link to this section">#</a></h2>
-    <div class="card card--padded-lg mb-32">
-      <p class="inv-section-lede">
+    <h2 id="the-first-quarter-modelled" class="section-title-lg mb-16">The first quarter, modelled</h2>
+    <div class="card" style="margin-bottom:32px;padding:24px 28px;">
+      <p style="font-size:0.92rem;color:var(--gray-700);line-height:1.65;margin:0 0 16px;">
         Combining the GTM stack (FP Advance + Robin Powell + CISI + Intelliflo marketplace), three scenarios for the first 90 days after September 2028 public launch:
       </p>
-      <div class="ninety-grid">
-        <div class="ninety-card">
-          <p class="ninety-card-label">Bear</p>
-          <p class="ninety-card-value">~110 firms</p>
-          <p class="ninety-card-desc">£2M ARR · 90 Founders + 20 funnel. No major distribution channels land in beta.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+        <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:18px 20px;">
+          <p style="font-size: 0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-500);margin:0 0 6px;">Bear</p>
+          <p style="font-size:1.35rem;font-weight:800;color:var(--gray-900);letter-spacing:-0.03em;margin:0 0 4px;">~110 firms</p>
+          <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.5;margin:0;">£2M ARR · 90 Founders + 20 funnel. No major distribution channels land in beta.</p>
         </div>
-        <div class="ninety-card ninety-card--emphasized">
-          <p class="ninety-card-label ninety-card-label--plum">Base — plan around this</p>
-          <p class="ninety-card-value ninety-card-value--plum">~180 firms</p>
-          <p class="ninety-card-desc ninety-card-desc--strong">£3.1M ARR · 150 Founders + 30 funnel. Intelliflo partnership confirmed, CISI endorsement warming.</p>
+        <div style="background:var(--plum-tint);border:1px solid var(--plum-border);border-radius:var(--r-md);padding:18px 20px;">
+          <p style="font-size: 0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--plum);margin:0 0 6px;">Base — plan around this</p>
+          <p style="font-size:1.35rem;font-weight:800;color:var(--plum-dark);letter-spacing:-0.03em;margin:0 0 4px;">~180 firms</p>
+          <p style="font-size:0.82rem;color:var(--gray-700);line-height:1.5;margin:0;">£3.1M ARR · 150 Founders + 30 funnel. Intelliflo partnership confirmed, CISI endorsement warming.</p>
         </div>
-        <div class="ninety-card">
-          <p class="ninety-card-label">Bull</p>
-          <p class="ninety-card-value">~280 firms</p>
-          <p class="ninety-card-desc">£4.8M ARR · 200 Founders maxed + 80 funnel. All 4 channels live (Intelliflo marketplace, CISI, Robin Powell, FP Advance).</p>
+        <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--r-md);padding:18px 20px;">
+          <p style="font-size: 0.65rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-500);margin:0 0 6px;">Bull</p>
+          <p style="font-size:1.35rem;font-weight:800;color:var(--gray-900);letter-spacing:-0.03em;margin:0 0 4px;">~280 firms</p>
+          <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.5;margin:0;">£4.8M ARR · 200 Founders maxed + 80 funnel. All 4 channels live (Intelliflo marketplace, CISI, Robin Powell, FP Advance).</p>
         </div>
       </div>
-      <p class="inv-section-footnote">
+      <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.55;margin-top:18px;">
         <strong>Critical constraint:</strong> two-person team onboards 3–5 firms/week. Base case = 13–15/week onboarding — Customer Success hire needed by month 1 of public launch (Q4 2028), not month 6. Aligned with v2 financial model.
       </p>
     </div>
 
     <!-- Unit economics + funding philosophy -->
-    <div class="grid-2 mb-32">
+    <div class="grid-2" style="margin-bottom:32px;">
       <div class="card">
         <p class="card-title mb-14">Unit economics</p>
         <div style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;color:var(--gray-700);">
@@ -312,61 +319,61 @@
 
     <!-- Comparables -->
     <div class="section-label">Comparables</div>
-    <h2 id="reference-outcomes-in-adjacent-markets" class="section-title-lg mb-16">Reference outcomes in adjacent markets <a class="section-anchor" href="#reference-outcomes-in-adjacent-markets" aria-label="Link to this section">#</a></h2>
-    <div class="card card--padded-lg mb-40">
-      <div class="compare-grid">
-        <div class="compare-col">
-          <p class="compare-name">Vanta</p>
-          <p class="compare-desc">SOC 2 compliance platform</p>
-          <p class="compare-value">~$1.6B</p>
+    <h2 id="reference-outcomes-in-adjacent-markets" class="section-title-lg mb-16">Reference outcomes in adjacent markets</h2>
+    <div class="card" style="margin-bottom:40px;padding:24px 28px;">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+        <div style="text-align:center;padding:14px 8px;border-right:1px solid var(--gray-200);">
+          <p style="font-size:0.92rem;font-weight:800;color:var(--gray-900);margin:0;">Vanta</p>
+          <p style="font-size:0.78rem;color:var(--gray-500);margin:4px 0;">SOC 2 compliance platform</p>
+          <p style="font-size:0.94rem;font-weight:700;color:var(--plum);margin:0;">~$1.6B</p>
         </div>
-        <div class="compare-col">
-          <p class="compare-name">Drata</p>
-          <p class="compare-desc">SOC 2 + ISO automation</p>
-          <p class="compare-value">~$2B</p>
+        <div style="text-align:center;padding:14px 8px;border-right:1px solid var(--gray-200);">
+          <p style="font-size:0.92rem;font-weight:800;color:var(--gray-900);margin:0;">Drata</p>
+          <p style="font-size:0.78rem;color:var(--gray-500);margin:4px 0;">SOC 2 + ISO automation</p>
+          <p style="font-size:0.94rem;font-weight:700;color:var(--plum);margin:0;">~$2B</p>
         </div>
-        <div class="compare-col">
-          <p class="compare-name">Diligent</p>
-          <p class="compare-desc">Governance, risk, compliance</p>
-          <p class="compare-value">$4.75B acq</p>
+        <div style="text-align:center;padding:14px 8px;border-right:1px solid var(--gray-200);">
+          <p style="font-size:0.92rem;font-weight:800;color:var(--gray-900);margin:0;">Diligent</p>
+          <p style="font-size:0.78rem;color:var(--gray-500);margin:4px 0;">Governance, risk, compliance</p>
+          <p style="font-size:0.94rem;font-weight:700;color:var(--plum);margin:0;">$4.75B acq</p>
         </div>
-        <div class="compare-col compare-col--last">
-          <p class="compare-name">Workiva</p>
-          <p class="compare-desc">Regulatory reporting</p>
-          <p class="compare-value">~$3–4B (public)</p>
+        <div style="text-align:center;padding:14px 8px;">
+          <p style="font-size:0.92rem;font-weight:800;color:var(--gray-900);margin:0;">Workiva</p>
+          <p style="font-size:0.78rem;color:var(--gray-500);margin:4px 0;">Regulatory reporting</p>
+          <p style="font-size:0.94rem;font-weight:700;color:var(--plum);margin:0;">~$3–4B (public)</p>
         </div>
       </div>
-      <p class="compare-footnote">
+      <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.55;margin-top:18px;text-align:center;">
         Compliance is a category that produces multi-billion-dollar outcomes when the documentation problem is solved well. Amaea's UK IFA beachhead is narrower than these — and that's the point. Beachhead first, expand later.
       </p>
     </div>
 
     <!-- Funding stance summary -->
-    <div id="funding-stance" class="stats-strip stats-strip--spaced">
+    <div class="stats-strip" style="margin-bottom:28px;">
       <div class="stat-card">
         <div class="stat-label">Funding stance</div>
-        <div class="stat-value stat-value--sm">Bootstrap-first</div>
+        <div class="stat-value" style="font-size:1rem;padding-top:6px;">Bootstrap-first</div>
         <div class="stat-sub">No outside raise planned</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Founder capital</div>
-        <div class="stat-value stat-value--sm">£8k</div>
+        <div class="stat-value" style="font-size:1.2rem;padding-top:4px;">£8k</div>
         <div class="stat-sub">At incorporation, Q3 2027</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Cash-flow positive</div>
-        <div class="stat-value stat-value--sm">Month 2</div>
+        <div class="stat-value" style="font-size:1rem;padding-top:6px;">Month 2</div>
         <div class="stat-sub">Post-revenue, all scenarios</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Pitch materials ready</div>
-        <div class="stat-value stat-value--sm" id="inv-ready-count">— / 5</div>
+        <div class="stat-label">Materials ready</div>
+        <div class="stat-value" id="inv-ready-count">2/5</div>
         <div class="stat-sub">Optionality only</div>
       </div>
     </div>
 
     <div class="grid-2">
-      <div class="inv-left-column">
+      <div style="display:flex;flex-direction:column;gap:18px;">
 
         <!-- Pitch materials -->
         <div class="card">
@@ -425,42 +432,42 @@
         </div>
 
         <!-- Financial model — Year 3 (Apr 2029) projections -->
-        <div class="card" id="financial-projections">
+        <div class="card">
           <p class="card-title mb-8">Financial model — Year 3 (Apr 2029) projections</p>
-          <p class="fm-mini-card-intro">
+          <p style="font-size:0.78rem;color:var(--gray-500);margin:0 0 16px 0;line-height:1.55;">
             <strong>v2 model</strong> built 16 May 2026. Founders 20% lifetime discount properly modelled per cohort — no mental adjustment needed. <strong>All bootstrap-fundable with £8k founder contribution at incorporation.</strong>
           </p>
-          <div class="fm-mini-card-list">
-            <div class="fm-mini-card">
-              <div class="fm-mini-card-head">
-                <span class="fm-mini-card-name">Bear</span>
-                <span class="badge badge-gray badge--xs">No channels · ~68 Founders</span>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="border:1px solid var(--gray-200);border-radius:8px;padding:14px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                <span style="font-size:0.86rem;font-weight:700;color:var(--gray-900);">Bear</span>
+                <span class="badge badge-gray" style="font-size:0.7rem;">No channels · ~68 Founders</span>
               </div>
-              <div class="fm-mini-card-stats">
+              <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;font-size:0.78rem;color:var(--gray-700);line-height:1.5;">
                 <div><span class="text-mute">Customers:</span> <strong>123</strong></div>
                 <div><span class="text-mute">ARR:</span> <strong>£2.69M</strong></div>
                 <div><span class="text-mute">Revenue Y3:</span> <strong>£2.11M</strong></div>
                 <div><span class="text-mute">Cash:</span> <strong>£2.09M</strong></div>
               </div>
             </div>
-            <div class="fm-mini-card fm-mini-card--emphasized">
-              <div class="fm-mini-card-head">
-                <span class="fm-mini-card-name">Base — plan around this</span>
-                <span class="badge badge-plum badge--xs">Intelliflo confirmed · ~150 Founders</span>
+            <div style="border:1px solid var(--plum);border-radius:8px;padding:14px;background:rgba(98,53,143,0.04);">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                <span style="font-size:0.86rem;font-weight:700;color:var(--gray-900);">Base — plan around this</span>
+                <span class="badge badge-plum" style="font-size:0.7rem;">Intelliflo confirmed · ~150 Founders</span>
               </div>
-              <div class="fm-mini-card-stats">
+              <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;font-size:0.78rem;color:var(--gray-700);line-height:1.5;">
                 <div><span class="text-mute">Customers:</span> <strong>211</strong></div>
                 <div><span class="text-mute">ARR:</span> <strong>£4.62M</strong></div>
                 <div><span class="text-mute">Revenue Y3:</span> <strong>£3.49M</strong></div>
                 <div><span class="text-mute">Cash:</span> <strong>£3.29M</strong></div>
               </div>
             </div>
-            <div class="fm-mini-card">
-              <div class="fm-mini-card-head">
-                <span class="fm-mini-card-name">Bull</span>
-                <span class="badge badge-green badge--xs">All 4 channels · ~203 Founders</span>
+            <div style="border:1px solid var(--gray-200);border-radius:8px;padding:14px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                <span style="font-size:0.86rem;font-weight:700;color:var(--gray-900);">Bull</span>
+                <span class="badge badge-green" style="font-size:0.7rem;">All 4 channels · ~203 Founders</span>
               </div>
-              <div class="fm-mini-card-stats">
+              <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;font-size:0.78rem;color:var(--gray-700);line-height:1.5;">
                 <div><span class="text-mute">Customers:</span> <strong>341</strong></div>
                 <div><span class="text-mute">ARR:</span> <strong>£7.66M</strong></div>
                 <div><span class="text-mute">Revenue Y3:</span> <strong>£5.40M</strong></div>
@@ -468,10 +475,10 @@
               </div>
             </div>
           </div>
-          <p class="fm-mini-card-footnote">
+          <p style="font-size: 0.74rem;color:var(--gray-500);margin:16px 0 0 0;line-height:1.55;font-style:italic;">
             Blended ARPA £2,094/mo full-price · £1,675/mo Founders (20% lifetime discount) · 85–95% gross margin · 10% annual logo churn · CAC £2,500 · LTV:CAC 7.9:1.
           </p>
-          <a href="financial-model" class="fm-mini-card-link">
+          <a href="financial-model" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:0.78rem;font-weight:700;color:var(--plum);text-decoration:none;">
             View full model documentation
             <svg aria-hidden="true" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
@@ -479,41 +486,41 @@
 
         <!-- Financial model — Year 5 (Apr 2031) projections (NEW in v2) -->
         <div class="card">
-          <p class="card-title mb-8">Financial model — Year 5 (Apr 2031) projections <span class="new-in-v2-badge">NEW IN v2</span></p>
-          <p class="fm-mini-card-intro">
+          <p class="card-title mb-8">Financial model — Year 5 (Apr 2031) projections <span style="font-size:0.62rem;font-weight:700;background:var(--plum);color:#fff;padding:2px 8px;border-radius:999px;margin-left:8px;letter-spacing:0.04em;">NEW IN v2</span></p>
+          <p style="font-size:0.78rem;color:var(--gray-500);margin:0 0 16px 0;line-height:1.55;">
             v2 extended the model horizon from 36 to 60 months. Y5 captures the realistic end-state of the bootstrap trajectory through April 2031. <strong>All three scenarios remain bootstrap-fundable.</strong>
           </p>
-          <div class="fm-mini-card-list">
-            <div class="fm-mini-card">
-              <div class="fm-mini-card-head">
-                <span class="fm-mini-card-name">Bear</span>
-                <span class="badge badge-gray badge--xs">~11% of SAM</span>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="border:1px solid var(--gray-200);border-radius:8px;padding:14px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                <span style="font-size:0.86rem;font-weight:700;color:var(--gray-900);">Bear</span>
+                <span class="badge badge-gray" style="font-size:0.7rem;">~11% of SAM</span>
               </div>
-              <div class="fm-mini-card-stats">
+              <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;font-size:0.78rem;color:var(--gray-700);line-height:1.5;">
                 <div><span class="text-mute">Customers:</span> <strong>203</strong></div>
                 <div><span class="text-mute">ARR:</span> <strong>£4.80M</strong></div>
                 <div><span class="text-mute">Net P&amp;L Y5:</span> <strong>£3.30M</strong></div>
                 <div><span class="text-mute">Cash:</span> <strong>£7.87M</strong></div>
               </div>
             </div>
-            <div class="fm-mini-card fm-mini-card--emphasized">
-              <div class="fm-mini-card-head">
-                <span class="fm-mini-card-name">Base — plan around this</span>
-                <span class="badge badge-plum badge--xs">~19% of SAM</span>
+            <div style="border:1px solid var(--plum);border-radius:8px;padding:14px;background:rgba(98,53,143,0.04);">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                <span style="font-size:0.86rem;font-weight:700;color:var(--gray-900);">Base — plan around this</span>
+                <span class="badge badge-plum" style="font-size:0.7rem;">~19% of SAM</span>
               </div>
-              <div class="fm-mini-card-stats">
+              <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;font-size:0.78rem;color:var(--gray-700);line-height:1.5;">
                 <div><span class="text-mute">Customers:</span> <strong>346</strong></div>
                 <div><span class="text-mute">ARR:</span> <strong>£8.13M</strong></div>
                 <div><span class="text-mute">Net P&amp;L Y5:</span> <strong>£5.99M</strong></div>
                 <div><span class="text-mute">Cash:</span> <strong>£13.72M</strong></div>
               </div>
             </div>
-            <div class="fm-mini-card">
-              <div class="fm-mini-card-head">
-                <span class="fm-mini-card-name">Bull</span>
-                <span class="badge badge-green badge--xs">~33% of SAM</span>
+            <div style="border:1px solid var(--gray-200);border-radius:8px;padding:14px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                <span style="font-size:0.86rem;font-weight:700;color:var(--gray-900);">Bull</span>
+                <span class="badge badge-green" style="font-size:0.7rem;">~33% of SAM</span>
               </div>
-              <div class="fm-mini-card-stats">
+              <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;font-size:0.78rem;color:var(--gray-700);line-height:1.5;">
                 <div><span class="text-mute">Customers:</span> <strong>593</strong></div>
                 <div><span class="text-mute">ARR:</span> <strong>£14.12M</strong></div>
                 <div><span class="text-mute">Net P&amp;L Y5:</span> <strong>£10.61M</strong></div>
@@ -521,14 +528,14 @@
               </div>
             </div>
           </div>
-          <p class="fm-mini-card-footnote">
+          <p style="font-size: 0.74rem;color:var(--gray-500);margin:16px 0 0 0;line-height:1.55;font-style:italic;">
             Y5 cash exceeds Y5 ARR in all three scenarios — signal that real companies would redeploy surplus into growth (more S&amp;M, faster hires, sector expansion). v2 deliberately under-reinvests; sector + international expansion will be modelled in v3.
           </p>
         </div>
 
       </div>
 
-      <div id="milestones-investors" class="inv-right-column">
+      <div style="display:flex;flex-direction:column;gap:18px;">
 
         <!-- Founder + product milestones -->
         <div class="card">
@@ -677,24 +684,6 @@
     el.textContent = new Date().toLocaleDateString('en-GB', {
       weekday:'short', day:'numeric', month:'long', year:'numeric'
     });
-  })();
-</script>
-<script>
-  // Auto-count "Pitch materials ready" from .inv-check.done in the Pitch materials card
-  (function(){
-    var ready = document.getElementById('inv-ready-count');
-    if (!ready) return;
-    // Find the Pitch materials card by its h3-equivalent title text
-    var cards = document.querySelectorAll('.card');
-    var pitchCard = null;
-    cards.forEach(function(c){
-      var title = c.querySelector('.card-title');
-      if (title && title.textContent.trim() === 'Pitch materials') pitchCard = c;
-    });
-    if (!pitchCard) return;
-    var allChecks = pitchCard.querySelectorAll('.inv-check');
-    var doneChecks = pitchCard.querySelectorAll('.inv-check.done');
-    ready.textContent = doneChecks.length + ' / ' + allChecks.length;
   })();
 </script>
 <script id="topbar-user-hydrate">
