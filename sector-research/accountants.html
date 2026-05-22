@@ -9,41 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../intranet.css"/>
   <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
-  <style>
-    .memo-meta-bar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 18px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--r-md); margin-bottom: 24px; font-size: 0.78rem; color: var(--gray-700); }
-    .memo-meta-bar strong { color: var(--gray-900); font-weight: 600; }
-    .memo-meta-sep { color: var(--gray-300); }
-    .memo-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--gray-600); text-decoration: none; margin-bottom: 18px; }
-    .memo-back:hover { color: var(--gray-900); }
-
-    .memo-body { font-size: 0.88rem; line-height: 1.7; color: var(--gray-800); }
-    .memo-body h2 { font-size: 1.35rem; font-weight: 700; color: var(--gray-900); margin: 38px 0 14px; letter-spacing: -0.02em; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
-    .memo-body h2:first-child { margin-top: 0; }
-    .memo-body h3 { font-size: 1.08rem; font-weight: 700; color: var(--gray-900); margin: 28px 0 10px; letter-spacing: -0.01em; }
-    .memo-body h4 { font-size: 0.95rem; font-weight: 700; color: var(--gray-800); margin: 22px 0 8px; }
-    .memo-body p { margin: 0 0 14px; }
-    .memo-body strong { color: var(--gray-900); font-weight: 600; }
-    .memo-body em { font-style: italic; color: var(--gray-700); }
-    .memo-body a { color: var(--accent, #4C2C4B); text-decoration: underline; text-underline-offset: 2px; }
-    .memo-body a:hover { text-decoration: none; }
-    .memo-body ul, .memo-body ol { margin: 0 0 16px; padding-left: 22px; }
-    .memo-body li { margin: 4px 0; }
-    .memo-body li > ul, .memo-body li > ol { margin: 6px 0 6px; }
-    .memo-body code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.84em; background: var(--gray-100); padding: 1px 5px; border-radius: 4px; color: var(--gray-900); }
-    .memo-body pre { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--r-md); padding: 14px 16px; overflow-x: auto; margin: 0 0 18px; }
-    .memo-body pre code { background: transparent; padding: 0; font-size: 0.82rem; line-height: 1.55; }
-    .memo-body table { width: 100%; border-collapse: collapse; margin: 8px 0 22px; font-size: 0.82rem; }
-    .memo-body th, .memo-body td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--gray-200); vertical-align: top; }
-    .memo-body th { font-weight: 600; color: var(--gray-900); background: var(--gray-50); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
-    .memo-body tr:last-child td { border-bottom: none; }
-    .memo-body hr { border: none; border-top: 1px solid var(--gray-200); margin: 28px 0; }
-    .memo-body blockquote { border-left: 3px solid var(--gray-300); padding: 4px 0 4px 16px; margin: 0 0 16px; color: var(--gray-600); font-style: italic; }
-
-    /* Constrain to readable width on wide screens */
-    .memo-body { max-width: 880px; }
-  </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar">
@@ -54,53 +22,96 @@
   <nav class="sidebar-nav">
     <div class="sidebar-label">Workspace</div>
     <a href="../index" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
       Dashboard
     </a>
+    <a href="../onboarding" class="sidebar-item">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/><polyline points="9 11 12 14 22 4"/></svg>
+      Onboarding
+    </a>
     <a href="../brand" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       Brand
     </a>
-    <a href="../team" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      Team
-    </a>
+    <div class="sidebar-group">
+      <div class="sidebar-item-row">
+        <a href="../team" class="sidebar-item">
+          <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Team
+        </a>
+        <button type="button" class="sidebar-toggle" aria-label="Toggle Team sub-menu" onclick="this.closest('.sidebar-group').toggleAttribute('data-open')">
+          <svg aria-hidden="true" class="sidebar-chevron" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+      <div class="sidebar-sub">
+        <a href="../cofounder-agreement" class="sidebar-sub-item">Co-founder Agreement</a>
+        <a href="../ceo-working-agreement" class="sidebar-sub-item">CEO Working Agreement</a>
+        <a href="../cto-working-agreement" class="sidebar-sub-item">CTO Working Agreement</a>
+      </div>
+    </div>
     <a href="../docs" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       Documents
     </a>
-    <a href="../mvp-docs/" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      Product Docs
-    </a>
+    <div class="sidebar-group">
+      <div class="sidebar-item-row">
+        <a href="../mvp-docs/" class="sidebar-item">
+          <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Product Docs
+        </a>
+        <button type="button" class="sidebar-toggle" aria-label="Toggle Product Docs sub-menu" onclick="this.closest('.sidebar-group').toggleAttribute('data-open')">
+          <svg aria-hidden="true" class="sidebar-chevron" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+      <div class="sidebar-sub">
+        <a href="../mvp-docs/01-product.html" class="sidebar-sub-item">01 · Product</a>
+        <a href="../mvp-docs/02-architecture.html" class="sidebar-sub-item">02 · Architecture</a>
+        <a href="../mvp-docs/03-extraction.html" class="sidebar-sub-item">03 · Extraction</a>
+        <a href="../mvp-docs/04-ai-kb.html" class="sidebar-sub-item">04 · AI &amp; KB</a>
+        <a href="../mvp-docs/05-ops.html" class="sidebar-sub-item">05 · Operations</a>
+      </div>
+    </div>
     <a href="../features" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
       Product Features
     </a>
     <a href="../roadmap" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       Roadmap
     </a>
     <a href="../decisions" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
       Decisions
     </a>
-    <a href="../sector-research" class="sidebar-item active">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <a href="../eval-v2" class="sidebar-item">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      AI Eval
+    </a>
+    <a href="../sector-research" class="sidebar-item active" aria-current="page">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       Sector Research
     </a>
     <a href="../investor" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
       Funding
     </a>
+    <a href="../financial-model" class="sidebar-item">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21H4.6c-.3 0-.6-.3-.6-.6V3"/><polyline points="8 13 12 9 16 13 21 8"/></svg>
+      Financial Model
+    </a>
+    <div class="sidebar-label">Operations</div>
+    <a href="../incident-response" class="sidebar-item">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Incident Response
+    </a>
     <div class="sidebar-label">External</div>
-    <a href="https://amaea0002-dev.github.io/webpage" class="sidebar-item" target="_blank">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <a href="https://amaea.co.uk" class="sidebar-item" target="_blank" rel="noopener">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       Website <span class="ext">↗</span>
     </a>
-    <a href="https://amaea0002-dev.github.io/prototype/dashboard.html" class="sidebar-item" target="_blank">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      Prototype <span class="ext">↗</span>
+    <a href="https://app.amaea.co.uk" class="sidebar-item" target="_blank" rel="noopener">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      App <span class="ext">↗</span>
     </a>
   </nav>
   <div class="sidebar-footer" style="position:relative;">
@@ -108,9 +119,9 @@
       <div class="sidebar-avatar" id="sidebarAvatar">H</div>
       <div style="flex:1;min-width:0;">
         <div class="sidebar-user-name" id="sidebarUserName">Hasna Sahul Hameed</div>
-        <div class="sidebar-user-role" id="sidebarUserRole">CEO &amp; Co-founder</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">CEO &amp; Co-Founder</div>
       </div>
-      <svg width="11" height="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;margin-left:auto;"><polyline points="6 9 12 15 18 9"/></svg>
+      <svg aria-hidden="true" width="11" height="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;margin-left:auto;"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
   </div>
 </aside>
@@ -125,12 +136,29 @@
     <span class="bc-current">Accountants</span>
   </div>
   <div class="topbar-right">
+    <button class="topbar-search" data-cmdk-trigger aria-label="Search the intranet">
+      <svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span class="topbar-search-label">Search</span>
+      <span class="topbar-search-kbd">⌘K</span>
+    </button>
     <span class="topbar-date" id="topbar-date"></span>
+    <div class="topbar-user">
+      <button class="topbar-user-trigger" id="topbarUserTrigger" aria-label="Account"></button>
+      <div class="topbar-user-panel" id="topbarUserPanel" role="menu">
+        <div class="topbar-user-identity">
+          <div class="topbar-user-identity-name" id="topbarUserName">Signed in</div>
+          <div class="topbar-user-identity-email" id="topbarUserEmail">—</div>
+        </div>
+        <div class="topbar-user-actions">
+          <a class="topbar-user-action danger" href="/cdn-cgi/access/logout"><svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign out</a>
+        </div>
+      </div>
+    </div>
     <button class="theme-toggle" aria-label="Toggle dark mode"></button>
   </div>
 </header>
 
-<main class="main">
+<main class="main" id="main" tabindex="-1">
   <div class="content">
 
     <a href="../sector-research" class="memo-back">← Back to Sector Research index</a>
@@ -141,6 +169,8 @@
     </div>
 
     <div class="memo-meta-bar">
+      <span><strong>Last reviewed:</strong> 18 May 2026</span>
+      <span class="memo-meta-sep">·</span>
       <span><strong>Next review:</strong> 16 Feb 2027</span>
       <span class="memo-meta-sep">·</span>
       <span><strong>Source:</strong> <code>sector-research/accountants.md</code></span>
@@ -148,10 +178,30 @@
       <span>Living document — update quarterly</span>
     </div>
 
+    <nav class="memo-toc" aria-label="In this memo">
+  <p class="memo-toc-label">In this memo</p>
+  <div class="memo-toc-grid">
+    <a href="#1-executive-summary" class="memo-toc-link">1. Executive Summary</a>
+    <a href="#2-regulatory-landscape-the-multi-supervisor-reality" class="memo-toc-link">2. Regulatory Landscape — The Multi-Supervisor Reality</a>
+    <a href="#3-market-sizing-tam-sam-som" class="memo-toc-link">3. Market Sizing — TAM / SAM / SOM</a>
+    <a href="#4-customer-segmentation" class="memo-toc-link">4. Customer Segmentation</a>
+    <a href="#5-sample-target-firms" class="memo-toc-link">5. Sample Target Firms</a>
+    <a href="#6-compliance-pain-points" class="memo-toc-link">6. Compliance Pain Points</a>
+    <a href="#7-competitive-landscape" class="memo-toc-link">7. Competitive Landscape</a>
+    <a href="#8-pricing-benchmarks" class="memo-toc-link">8. Pricing Benchmarks</a>
+    <a href="#9-go-to-market-notes" class="memo-toc-link">9. Go-to-Market Notes</a>
+    <a href="#10-domain-expert-profile" class="memo-toc-link">10. Domain Expert Profile</a>
+    <a href="#11-adjacency-to-uk-ifa" class="memo-toc-link">11. Adjacency to UK IFA</a>
+    <a href="#12-risks-and-unknowns" class="memo-toc-link">12. Risks and Unknowns</a>
+    <a href="#13-quarterly-update-log" class="memo-toc-link">13. Quarterly Update Log</a>
+    <a href="#14-sources-and-references" class="memo-toc-link">14. Sources and References</a>
+  </div>
+</nav>
+
     <div class="memo-body">
 <p><strong>Last updated:</strong> 2026-05-16 <strong>Next review:</strong> 2027-02-16 (Q1 2027 priority — post-AML Supervision Bill King&#x27;s Speech) <strong>Authors:</strong> Amaea (Milan + Hasna) <strong>Status:</strong> Living document — updated quarterly</p>
 <hr/>
-<h2 id="1-executive-summary">1. Executive Summary</h2>
+<h2 id="1-executive-summary">1. Executive Summary <a class="memo-anchor" href="#1-executive-summary" aria-label="Link to this section">#</a></h2>
 <p>The UK accountancy sector is the largest planned Phase 2 expansion target for Amaea, with a target launch year of 2031. It is a materially different regulatory environment from the IFA beachhead: accountants are not FCA-authorised in their core work, they are supervised for AML by a fragmented web of professional bodies (ICAEW, ACCA, AAT, CIOT, ICAS, CAI, IFA, CIPFA) plus HMRC as default supervisor, and some hold designated professional body (DPB) status to conduct limited investment business under FSMA Part 20.</p>
 <p><strong>Market size:</strong> Approximately 35,000 active accountancy firms in the UK employ over 400,000 professionals. The sector generates roughly £38.7bn in annual fees (IBISWorld, 2024). The primary Amaea target — SME firms with 2–20 staff, no dedicated compliance team — numbers approximately 25,000–28,000 firms.</p>
 <p><strong>Top compliance pains:</strong> Ongoing CDD failures (1 in 5 ICAEW-supervised firms fell short in 2024/25), inadequate firm-wide risk assessments, out-of-date AML policies, poor documentation of source-of-funds checks, PEP screening gaps, and SAR under-reporting. OPBAS has flagged persistent supervisory weakness across all professional body supervisors, and the NCA continues to assess accountancy as high risk for money laundering.</p>
@@ -159,8 +209,8 @@
 <p><strong>Key risks:</strong> (1) AML supervisory reform — the FCA is becoming the single AML supervisor for professional services, with a new AML Supervision Bill expected in the King&#x27;s Speech summer 2026. The supervisor landscape will look different by 2031 than it does today. (2) Pricing tolerance is likely lower than IFA — SME accountants are cost-sensitive and have many subscriptions. (3) The supervisor plurality makes a single-product positioning harder; Amaea must speak to MLR 2017 obligations generically, not to a single body&#x27;s rulebook. (4) Practice management incumbents (IRIS, Wolters Kluwer, Bright) are already building AML modules into their existing stacks.</p>
 <p><strong>Recommended launch posture:</strong> Enter as a specialist AML compliance layer that integrates with existing practice management software rather than competing with it. The wedge is AI-powered CDD tracking, ongoing monitoring automation, and audit-trail documentation — the bits that practice management tools do poorly. Pilot with 5–10 mid-market firms (10–50 staff) for discovery before public launch. Target ICAEW and ACCA members first — largest supervised populations with the clearest monitoring pressure.</p>
 <hr/>
-<h2 id="2-regulatory-landscape-the-multi-supervisor-reality">2. Regulatory Landscape — The Multi-Supervisor Reality</h2>
-<h3 id="21-the-core-distinction-from-ifa">2.1 The Core Distinction from IFA</h3>
+<h2 id="2-regulatory-landscape-the-multi-supervisor-reality">2. Regulatory Landscape — The Multi-Supervisor Reality <a class="memo-anchor" href="#2-regulatory-landscape-the-multi-supervisor-reality" aria-label="Link to this section">#</a></h2>
+<h3 id="21-the-core-distinction-from-ifa">2.1 The Core Distinction from IFA <a class="memo-anchor" href="#21-the-core-distinction-from-ifa" aria-label="Link to this section">#</a></h3>
 <p>This is the most important framing point for any Amaea product decision on accountants: <strong>accountants are not FCA-regulated in their core accountancy work.</strong> An IFA firm holds FCA authorisation, is subject to the FCA Handbook, Consumer Duty, COBS, TC, SYSC, DISP, and SM&amp;CR. An accountancy firm holds no FCA authorisation for its core accountancy, tax advisory, bookkeeping, or audit work. Instead:</p>
 <ul>
 <li>It is a member of one or more professional bodies (its &quot;recognised qualifying body&quot; for the accounting qualification)</li>
@@ -170,7 +220,7 @@
 <li>For investment business conducted incidentally to accountancy work, it may hold a DPB (Investment Business) licence from ICAEW or ACCA, giving it FCA-exempted regulated activity status under FSMA Part 20</li>
 </ul>
 <p>The absence of FCA authorisation means: no Consumer Duty, no SM&amp;CR, no COBS suitability rules, no RMAR, no FCA supervision visits. The compliance architecture is entirely different.</p>
-<h3 id="22-professional-body-supervisors">2.2 Professional Body Supervisors</h3>
+<h3 id="22-professional-body-supervisors">2.2 Professional Body Supervisors <a class="memo-anchor" href="#22-professional-body-supervisors" aria-label="Link to this section">#</a></h3>
 <p>The following bodies are approved professional body supervisors (PBSs) for AML purposes under MLR 2017 Schedule 1, supervised in turn by OPBAS (the Office for Professional Body Anti-Money Laundering Supervision, sitting within the FCA):</p>
 <p><strong>ICAEW — Institute of Chartered Accountants in England and Wales</strong></p>
 <ul>
@@ -227,10 +277,10 @@
 <li>Less relevant to Amaea&#x27;s target: public sector clients, not commercial practices with AML-intensive client bases</li>
 </ul>
 <p><strong>Key structural point:</strong> Multiple bodies can supervise the same firm if it holds multiple qualifications. A firm with ICAEW-qualified partners and AAT-qualified staff may have ICAEW as the primary AML supervisor by election. This causes complexity but does not change the underlying MLR 2017 obligations.</p>
-<h3 id="23-hmrc-as-default-aml-supervisor">2.3 HMRC as Default AML Supervisor</h3>
+<h3 id="23-hmrc-as-default-aml-supervisor">2.3 HMRC as Default AML Supervisor <a class="memo-anchor" href="#23-hmrc-as-default-aml-supervisor" aria-label="Link to this section">#</a></h3>
 <p>Any accountancy service provider that is not a member of an approved PBS must register with HMRC for AML supervision. HMRC acts as the &quot;default supervisor&quot; — it is not a preferred outcome. HMRC&#x27;s supervision is generally considered weaker than professional body supervision, but HMRC does impose penalties: between October 2024 and April 2025, HMRC issued 335 MLR penalty notices. Firms supervised by HMRC tend to be unaffiliated bookkeepers, small unqualified tax agents, and firms whose principals hold no recognised UK accountancy qualification.</p>
 <p>The number of firms under HMRC AML supervision is significant but not precisely published in the sources reviewed. [Needs verification via HMRC annual supervisory report.]</p>
-<h3 id="24-mlr-2017-core-obligations">2.4 MLR 2017 — Core Obligations</h3>
+<h3 id="24-mlr-2017-core-obligations">2.4 MLR 2017 — Core Obligations <a class="memo-anchor" href="#24-mlr-2017-core-obligations" aria-label="Link to this section">#</a></h3>
 <p>The Money Laundering, Terrorist Financing and Transfer of Funds (Information on the Payer) Regulations 2017 (SI 2017/692), as amended, is the foundational legislation. Key provisions for accountancy firms:</p>
 <p><strong>Regulation 18 — Firm-wide risk assessment:</strong> Every relevant firm must conduct and document a written risk assessment of its exposure to money laundering and terrorist financing, considering: client profile characteristics, geographic locations, products and services offered, transaction types, and delivery channels. This must be regularly reviewed and updated.</p>
 <p><strong>Regulation 28 — Customer due diligence:</strong> Firms must apply CDD when establishing a business relationship or carrying out occasional transactions above €15,000. CDD comprises: identifying the customer; verifying identity using reliable, independent source documents; identifying beneficial owners and taking reasonable measures to verify; understanding the business relationship purpose and nature; and conducting ongoing monitoring.</p>
@@ -240,20 +290,20 @@
 <p><strong>Regulation 26 — Reporting obligations:</strong> Firms must appoint a nominated officer (MLRO equivalent) who receives internal suspicious activity disclosures and determines whether to file a Suspicious Activity Report (SAR) with the National Crime Agency (NCA) via the SAR Online system. Failure to report known or suspected money laundering when there are reasonable grounds is a criminal offence under POCA 2002, carrying up to 14 years imprisonment.</p>
 <p><strong>Regulation 21 — Policies, controls and procedures:</strong> Firms must establish and maintain risk-sensitive policies, controls and procedures including: customer acceptance policies, CDD and ongoing monitoring, SAR reporting, record-keeping, staff training, and AML compliance monitoring. These must be approved by senior management and communicated to all relevant staff.</p>
 <p><strong>Regulation 24 — Staff training:</strong> All relevant employees must receive regular AML training. This is a common point of failure in ICAEW monitoring visits.</p>
-<h3 id="25-sanctions-screening">2.5 Sanctions Screening</h3>
+<h3 id="25-sanctions-screening">2.5 Sanctions Screening <a class="memo-anchor" href="#25-sanctions-screening" aria-label="Link to this section">#</a></h3>
 <p>Separate from MLR 2017, firms must comply with the UK sanctions regime under the Sanctions and Anti-Money Laundering Act 2018 (SAMLA). The Office of Financial Sanctions Implementation (OFSI) within HM Treasury administers financial sanctions. Firms must not deal with sanctioned individuals or entities, must freeze sanctioned assets, and must report to OFSI. Accountants who manage client funds, corporate structures, or who are involved in transactions involving sanctioned jurisdictions face material exposure. PEP screening and sanctions screening are typically bundled in AML software tools.</p>
-<h3 id="26-suspicious-activity-reports-and-the-nca">2.6 Suspicious Activity Reports and the NCA</h3>
+<h3 id="26-suspicious-activity-reports-and-the-nca">2.6 Suspicious Activity Reports and the NCA <a class="memo-anchor" href="#26-suspicious-activity-reports-and-the-nca" aria-label="Link to this section">#</a></h3>
 <p>The NCA&#x27;s UK Financial Intelligence Unit (UKFIU) receives SARs from the regulated sector. In 2023/24, total SARs received were 872,048 — a 1.5% increase from the prior year. The banking sector accounts for 78.55% of submissions; financial services a further 10.73%. The accountancy sector is a small but growing contributor; exact sector-level breakdown for 2023/24 was not separately reported in sources reviewed. [Needs verification via NCA 2023/24 SARs Annual Report, published March 2025.]</p>
 <p>SARs from accountants tend to be low relative to the scale of the profession, which OPBAS and HMRC have highlighted as an under-reporting concern. Accountants are in a position to detect financial crime indicators — unexplained wealth, unusual corporate structures, source of funds inconsistencies — but SAR quality and volume from the sector remains a regulatory concern.</p>
-<h3 id="27-trust-registration-service">2.7 Trust Registration Service</h3>
+<h3 id="27-trust-registration-service">2.7 Trust Registration Service <a class="memo-anchor" href="#27-trust-registration-service" aria-label="Link to this section">#</a></h3>
 <p>The Trust Registration Service (TRS), administered by HMRC, requires most express trusts to register by 1 September 2022 (retrospective deadline), with changes to trust details updated within 90 days. Accountants who act as agents for trustees must register with the TRS themselves and may need to assist clients with registration. When onboarding a client that has trustees, accountants must request a TRS extract and report discrepancies to HMRC. Non-compliance carries a £5,000 fixed penalty. TRS obligations add a layer of CDD complexity for accountants advising on trusts, estates, and wealth structuring.</p>
-<h3 id="28-economic-crime-and-corporate-transparency-act-2023-eccta">2.8 Economic Crime and Corporate Transparency Act 2023 (ECCTA)</h3>
+<h3 id="28-economic-crime-and-corporate-transparency-act-2023-eccta">2.8 Economic Crime and Corporate Transparency Act 2023 (ECCTA) <a class="memo-anchor" href="#28-economic-crime-and-corporate-transparency-act-2023-eccta" aria-label="Link to this section">#</a></h3>
 <p>The ECCTA 2023 is the most significant piece of economic crime legislation in a generation. For accountancy firms, key impacts include:</p>
 <p><strong>Authorised Corporate Service Providers (ACSPs):</strong> From 18 March 2025, accountants and other professional service providers registered for AML can register as ACSPs, allowing them to perform identity verification for Companies House filings on behalf of clients. ACSPs have enhanced record-keeping obligations (7 years) and ongoing compliance requirements with the registrar.</p>
 <p><strong>Identity verification at Companies House:</strong> From autumn 2025, all directors and persons with significant control (PSCs) for new incorporations must verify their identity. This creates demand for accountants to assist clients with verification — and for AML tools that can process this.</p>
 <p><strong>Enhanced transparency requirements:</strong> From 1 April 2027, Companies House will mandate iXBRL-tagged accounts filed via commercial software; micro-entities must file balance sheets and profit and loss accounts; small companies must file balance sheets, P&amp;L, and directors&#x27; reports. This materially increases the regulatory filing burden and creates workflow opportunity for practice management and compliance tooling.</p>
 <p><strong>Failure to prevent fraud (large organisations, from 1 September 2025):</strong> Accountants acting as agents for large organisations need to be aware of the corporate offence. For accountancy firms themselves, this is a cultural shift toward proactive fraud prevention documentation.</p>
-<h3 id="29-professional-conduct-in-relation-to-taxation-pcrt">2.9 Professional Conduct in Relation to Taxation (PCRT)</h3>
+<h3 id="29-professional-conduct-in-relation-to-taxation-pcrt">2.9 Professional Conduct in Relation to Taxation (PCRT) <a class="memo-anchor" href="#29-professional-conduct-in-relation-to-taxation-pcrt" aria-label="Link to this section">#</a></h3>
 <p>PCRT is jointly issued by seven professional bodies: AAT, ACCA, ATT, CIOT, ICAEW, ICAS, and STEP. It governs the ethical and professional obligations of all qualified tax advisers. Updated version effective 1 January 2023. Key PCRT obligations relevant to compliance tooling:</p>
 <ul>
 <li>Integrity and objectivity in advising on tax positions</li>
@@ -262,7 +312,7 @@
 <li>Professional competence — members must not undertake work outside their competence</li>
 </ul>
 <p>PCRT is enforced by each body separately through its disciplinary procedures. Non-compliance can result in exclusion from the relevant professional body. For accountants offering advisory services, PCRT documentation — the paper trail showing appropriate advice was given — is directly analogous to the suitability documentation that IFA firms must maintain. This is a compliance pain point Amaea&#x27;s document extraction and flag-raising architecture could address.</p>
-<h3 id="210-aml-supervisory-reform-the-fca-single-supervisor">2.10 AML Supervisory Reform — The FCA Single Supervisor</h3>
+<h3 id="210-aml-supervisory-reform-the-fca-single-supervisor">2.10 AML Supervisory Reform — The FCA Single Supervisor <a class="memo-anchor" href="#210-aml-supervisory-reform-the-fca-single-supervisor" aria-label="Link to this section">#</a></h3>
 <p><strong>This is the most significant structural change in the accountancy AML landscape and must be tracked closely before the 2031 Amaea launch.</strong></p>
 <p>HM Treasury concluded its consultation (November–December 2025) on the powers and duties needed for the FCA to become the single professional services AML supervisor. The FCA will absorb the supervisory functions currently spread across 22 PBSs. A new AML Supervision Bill is expected in the King&#x27;s Speech summer 2026.</p>
 <p>Key implications of the reform:</p>
@@ -273,16 +323,16 @@
 <li>Professional bodies will no longer function as primary AML supervisors — they may retain some compliance support and guidance role, but supervisory authority transfers to the FCA</li>
 </ul>
 <p><strong>For Amaea:</strong> By 2031, the regulatory frame may look more like FCA supervision than the current PBS patchwork. This is directionally positive — FCA supervision tends to be more rigorous, more documented, and more easily productised. But the transition period (estimated 2026–2030) will be complex. Amaea should track the Bill&#x27;s progress and draft statutory instruments closely. The risk is building a product in 2029–2030 against the old PBS framework, then finding the FCA has replaced it with a different set of requirements.</p>
-<h3 id="211-quality-assurance-reviews">2.11 Quality Assurance Reviews</h3>
+<h3 id="211-quality-assurance-reviews">2.11 Quality Assurance Reviews <a class="memo-anchor" href="#211-quality-assurance-reviews" aria-label="Link to this section">#</a></h3>
 <p><strong>ICAEW QAD (Quality Assurance Department):</strong> Conducts monitoring visits on all ICAEW-regulated audit firms and Practice Assurance scheme members. In 2023/24, nearly 500 audit monitoring visits reviewed 761 audits; 71% were good or generally acceptable. From early 2024, visits moved to a risk-focused cycle rather than a fixed rotation. Firms receive advance notice from QAD&#x27;s scheduling team. QAD reviews assess: engagement quality, ISQM1 (International Standard on Quality Management 1) implementation, independence, ethics, and technical accuracy. QAD preparation is a genuine pain point — firms need to pull together complete file evidence at short notice.</p>
 <p><strong>ACCA monitoring visits:</strong> ACCA completed approximately 370 AML compliance reviews in 2023/24. These are separate from audit quality reviews. The ACCA&#x27;s approach emphasises guidance before enforcement, but formal sanctions do apply.</p>
 <p><strong>Practice Assurance (ICAEW):</strong> Separate from audit-specific QAD visits, ICAEW&#x27;s Practice Assurance scheme requires all ICAEW member firms in public practice to have a practice assurance review — an on-site review of policies, procedures, and compliance with ICAEW regulations. This is a QAD visit with a broader scope than audit alone.</p>
 <hr/>
-<h2 id="3-market-sizing-tam-sam-som">3. Market Sizing — TAM / SAM / SOM</h2>
-<h3 id="31-total-uk-accountancy-firms">3.1 Total UK Accountancy Firms</h3>
+<h2 id="3-market-sizing-tam-sam-som">3. Market Sizing — TAM / SAM / SOM <a class="memo-anchor" href="#3-market-sizing-tam-sam-som" aria-label="Link to this section">#</a></h2>
+<h3 id="31-total-uk-accountancy-firms">3.1 Total UK Accountancy Firms <a class="memo-anchor" href="#31-total-uk-accountancy-firms" aria-label="Link to this section">#</a></h3>
 <p>Approximately <strong>35,000 active accountancy firms</strong> operate in the UK (VAT Scouts / NimbleFins estimate, 2024), employing over 400,000 professionals. Note: this figure includes all firms — from the Big 4 to sole practitioners — and is an estimate based on Companies House registrations and professional body directories. ICAEW&#x27;s own Directory of Firms contains details of more than 21,000 firms worldwide (including non-UK), of which the UK majority would be approximately 15,000–18,000 ICAEW-affiliated practices. [Needs verification via FRC Key Facts 2025 when accessible.]</p>
 <p>The sector contributed approximately £63bn to the UK economy in 2024 [estimate based on broader professional services data — needs verification]. IBISWorld places the Accounting and Auditing market size at £38.7bn in 2024, with 1.2% growth, and projected revenue to reach £39.8bn by 2025/26.</p>
-<h3 id="32-professional-body-breakdown">3.2 Professional Body Breakdown</h3>
+<h3 id="32-professional-body-breakdown">3.2 Professional Body Breakdown <a class="memo-anchor" href="#32-professional-body-breakdown" aria-label="Link to this section">#</a></h3>
 <table>
 <thead><tr>
 <th>Body</th>
@@ -336,29 +386,29 @@
 </tr>
 </tbody></table>
 <p><strong>Important caveat:</strong> Many practitioners hold multiple qualifications and may be counted across bodies. The total supervised population under MLR 2017 is estimated at 40,000–50,000 individuals and entities when HMRC-supervised firms are included, but distinct firm-level counts are not consistently published.</p>
-<h3 id="33-firm-size-breakdown">3.3 Firm Size Breakdown</h3>
+<h3 id="33-firm-size-breakdown">3.3 Firm Size Breakdown <a class="memo-anchor" href="#33-firm-size-breakdown" aria-label="Link to this section">#</a></h3>
 <p>The UK accountancy sector stratifies clearly:</p>
 <p><strong>Big 4 (PwC, Deloitte, EY, KPMG):</strong> Combined UK fee income exceeds £18bn annually. PwC leads at £6.36bn; Deloitte at £5.68bn; EY at £3.7bn; KPMG at £2.99bn (2024 data). These are not Amaea targets — they have extensive in-house compliance teams, bespoke risk management frameworks, and relationships with the major legal tech and GRC vendors.</p>
 <p><strong>Top 10 mid-tier (BDO, Grant Thornton, RSM, Mazars, Evelyn Partners, MHA, Forvis Mazars, Moore, Sumer, Azets):</strong> Fee incomes ranging from approximately £140m to £1bn. BDO at ~£1.02bn; Grant Thornton at ~£724m; RSM at ~£543m. These firms have dedicated risk and compliance functions but may be open to specialist tooling for specific workflows. Not primary Amaea targets for launch — long sales cycles, procurement processes.</p>
 <p><strong>Top 11–100 (Accountancy Age Top 50+50):</strong> Fee incomes ranging from approximately £20m to £140m. Consolidation is a major trend: 44% of top 100 firms engaged in M&amp;A in 2024. Private equity investment impacted 17 firms with a collective 19.8% fee income increase. These firms are mid-market — they have compliance awareness and budget, but in-house compliance teams may be small. Possible Phase 2.5 targets.</p>
 <p><strong>SME practices (1–10 partners, 1–50 staff, fee income £100k–£5m):</strong> The largest cohort by firm count — estimated 25,000–28,000 firms. These firms have one MLRO (often the managing partner or a designated senior accountant), no dedicated compliance team, and AML compliance is a burden they manage alongside billable client work. This is the primary Amaea target.</p>
 <p><strong>Sole practitioners and micro-firms:</strong> An estimated 15,000–20,000 sole practitioners in the UK. They face the same MLR 2017 obligations as larger firms but have zero compliance infrastructure. Price sensitivity is highest here. May be better served by a freemium tier or per-check model rather than a monthly SaaS subscription.</p>
-<h3 id="34-geographic-distribution">3.4 Geographic Distribution</h3>
+<h3 id="34-geographic-distribution">3.4 Geographic Distribution <a class="memo-anchor" href="#34-geographic-distribution" aria-label="Link to this section">#</a></h3>
 <p>Accountancy firms are distributed across all UK regions, with the highest concentration in London and the South East, followed by the Midlands, North West, and Scotland. Scottish firms tend to be ICAS-supervised; Northern Irish firms may be CAI or ICAEW. For Amaea&#x27;s Phase 2, England-first (ICAEW and ACCA dominated) is the natural entry point.</p>
-<h3 id="35-tam-sam-som-estimates">3.5 TAM / SAM / SOM Estimates</h3>
+<h3 id="35-tam-sam-som-estimates">3.5 TAM / SAM / SOM Estimates <a class="memo-anchor" href="#35-tam-sam-som-estimates" aria-label="Link to this section">#</a></h3>
 <p><strong>TAM:</strong> All UK accountancy firms with AML obligations (~35,000 firms) at a blended monthly ARPA of £150–£400 = approximately £63m–£168m ARR. Note this is a wide range because pricing has not been validated for this sector.</p>
 <p><strong>SAM:</strong> Firms with 2–50 staff where AML compliance is real but not automated — approximately 20,000–25,000 firms. At £150–£300/month ARPA = approximately £36m–£90m ARR.</p>
 <p><strong>SOM (5-year realistic):</strong> 500–2,000 firms paying £150–£350/month = approximately £1m–£8.4m ARR from accountancy alone. This is conservative and accounts for competitive intensity from practice management incumbents, pricing compression versus the IFA tier, and a 5-year build-from-launch horizon.</p>
 <p><strong>Note on ARPA vs IFA:</strong> IFA tier ARPA is ~£2,094/month (blended). Accountancy ARPA will likely be substantially lower — perhaps £150–£350/month — reflecting: (a) smaller average firm size, (b) more price-competitive tooling landscape, (c) lower urgency of compliance (ICAEW fines are modest — 41 firms fined an average of £4,822 each in 2024/25), and (d) the compliance regulatory frame is AML-specific rather than the broader FCA framework Amaea addresses for IFAs.</p>
 <hr/>
-<h2 id="4-customer-segmentation">4. Customer Segmentation</h2>
-<h3 id="41-big-4-not-amaea-targets">4.1 Big 4 — Not Amaea Targets</h3>
+<h2 id="4-customer-segmentation">4. Customer Segmentation <a class="memo-anchor" href="#4-customer-segmentation" aria-label="Link to this section">#</a></h2>
+<h3 id="41-big-4-not-amaea-targets">4.1 Big 4 — Not Amaea Targets <a class="memo-anchor" href="#41-big-4-not-amaea-targets" aria-label="Link to this section">#</a></h3>
 <p>PwC, Deloitte, EY, and KPMG have internal compliance functions with hundreds of staff, bespoke GRC frameworks, relationships with the large legal tech and GRC platforms (Thomson Reuters, Wolters Kluwer enterprise, Diligent), and procurement processes that take 12–18 months. Not viable for a bootstrapped startup targeting launch in 2031.</p>
-<h3 id="42-top-100-mid-tier-not-initial-targets-track-for-later">4.2 Top 100 / Mid-Tier — Not Initial Targets, Track for Later</h3>
+<h3 id="42-top-100-mid-tier-not-initial-targets-track-for-later">4.2 Top 100 / Mid-Tier — Not Initial Targets, Track for Later <a class="memo-anchor" href="#42-top-100-mid-tier-not-initial-targets-track-for-later" aria-label="Link to this section">#</a></h3>
 <p>BDO, Grant Thornton, RSM, Mazars, Evelyn Partners, and the broader top 100 have dedicated risk and compliance teams. Sales cycles are 6–12 months. Budget approval involves multiple stakeholders. However, by 2031–2033 (Phase 2.5), if Amaea has demonstrated success in the SME tier, these firms become viable. Some are actively consolidating (M&amp;A) and may need compliance tooling that scales across newly acquired practices — a potential wedge.</p>
-<h3 id="43-mid-market-1050-staff-fee-income-1m10m-possible-phase-25-targets">4.3 Mid-Market (10–50 staff, fee income £1m–£10m) — Possible Phase 2.5 Targets</h3>
+<h3 id="43-mid-market-1050-staff-fee-income-1m10m-possible-phase-25-targets">4.3 Mid-Market (10–50 staff, fee income £1m–£10m) — Possible Phase 2.5 Targets <a class="memo-anchor" href="#43-mid-market-1050-staff-fee-income-1m10m-possible-phase-25-targets" aria-label="Link to this section">#</a></h3>
 <p>These firms have enough complexity to need systematic compliance management — multiple partners, multiple office locations in some cases, mixed services (accounts, tax, audit where registered, insolvency, corporate finance) — but typically lack a dedicated compliance officer. The MLRO is usually a senior partner doing compliance alongside client work. AML compliance is increasingly on their radar, particularly with OPBAS pressure and the upcoming FCA transition. These firms may also hold DPB licences for investment business, adding an FCA-adjacent compliance dimension. Realistic Amaea customer from approximately Year 2 of the accountancy launch.</p>
-<h3 id="44-sme-practices-110-partners-130-staff-primary-amaea-target">4.4 SME Practices (1–10 partners, 1–30 staff) — Primary Amaea Target</h3>
+<h3 id="44-sme-practices-110-partners-130-staff-primary-amaea-target">4.4 SME Practices (1–10 partners, 1–30 staff) — Primary Amaea Target <a class="memo-anchor" href="#44-sme-practices-110-partners-130-staff-primary-amaea-target" aria-label="Link to this section">#</a></h3>
 <p>This is the sweet spot: enough clients (typically 100–500) to generate recurring AML compliance workload, no dedicated compliance team, and a practice manager or managing partner who genuinely feels the pain of CDD chasing, monitoring visits preparation, and keeping policies up to date. These firms are currently using: a combination of AMLCC or Veriphy for individual CDD checks, email for document collection, word-processed policy documents, and a spreadsheet to track who has been checked and when. This is the same messy, manual-first approach that IFA firms use for Consumer Duty compliance — the problem Amaea was built to solve.</p>
 <p><strong>Profile of the ideal Amaea accountancy customer:</strong></p>
 <ul>
@@ -370,14 +420,14 @@
 <li>Current tools: AMLCC or Veriphy (per-check), a shared folder for CDD documents, paper-based or Word AML policy documents</li>
 <li>Pain: ICAEW monitoring visit coming up, partner not sure their files are in order; one long-standing client whose CDD hasn&#x27;t been updated in three years; new corporate client with complex beneficial ownership structure they don&#x27;t know how to document</li>
 </ul>
-<h3 id="45-specialist-segments">4.5 Specialist Segments</h3>
+<h3 id="45-specialist-segments">4.5 Specialist Segments <a class="memo-anchor" href="#45-specialist-segments" aria-label="Link to this section">#</a></h3>
 <p><strong>Tax-only advisers (CIOT members):</strong> High demand for PCRT compliance documentation and SAR guidance. May be sole practitioners or small specialist tax consultancies. If Amaea builds PCRT-specific workflows, this segment becomes accessible. AML obligations apply if they provide tax advice to clients.</p>
 <p><strong>Audit-registered firms:</strong> Subject to ICAEW QAD visits in addition to AML monitoring. File review pressure is higher and more structured. QAD preparation tooling is a potential wedge. These firms must implement ISQM1, creating a quality management paper-trail need that Amaea&#x27;s compliance tracking architecture could address.</p>
 <p><strong>Insolvency practitioners (IPs):</strong> Regulated by ICAEW, ACCA, IPA (Insolvency Practitioners Association). Subject to strict case documentation requirements. Compliance monitoring is regular and document-intensive. Potential niche segment if Amaea builds IP-specific workflows — but a separate product consideration from general accountancy AML.</p>
 <p><strong>R&amp;D tax credit specialists:</strong> A highly scrutinised segment post-HMRC crackdown on R&amp;D abuse. Firms specialising in R&amp;D claims face significant compliance and professional indemnity pressure. Documentation of the advice given, due diligence on qualifying expenditure, and PCRT compliance are all live pain points. Not core AML but potentially adjacent advisory compliance tooling.</p>
 <p><strong>DPB-licensed firms:</strong> Firms that hold a DPB (Investment Business) licence from ICAEW or ACCA can conduct limited investment business (e.g. arranging life assurance, managing investments as incidental to accountancy work). These firms have a light FCA-adjacent compliance obligation under the DPB handbook, including keeping records of the exempt regulated activities. DPB compliance reviews are conducted by the professional body. This is the most natural bridge between the IFA and accountancy Amaea products — a DPB-licensed firm needs compliance tooling that spans both AML and investment-business documentation.</p>
 <hr/>
-<h2 id="5-sample-target-firms">5. Sample Target Firms</h2>
+<h2 id="5-sample-target-firms">5. Sample Target Firms <a class="memo-anchor" href="#5-sample-target-firms" aria-label="Link to this section">#</a></h2>
 <p>The following are illustrative UK SME accountancy practices that represent the Amaea primary target profile. All are real firms; size and specialism data sourced from their public websites and Companies House. Note: these firms have not been contacted; this list is research only for GTM planning.</p>
 <table>
 <thead><tr>
@@ -600,9 +650,9 @@
 </tbody></table>
 <p><strong>Notes on the list:</strong> Old Mill is particularly interesting — it operates both an accountancy practice and an FCA-authorised financial planning operation, making it a potential Amaea cross-sell where one platform serves both compliance frameworks. SJD Accountancy (contractor-focused) has high-volume CDD requirements due to the contractor client profile. TaxAssist (franchise) is a franchise network where compliance tooling sold at network level is a strong GTM model.</p>
 <hr/>
-<h2 id="6-compliance-pain-points">6. Compliance Pain Points</h2>
+<h2 id="6-compliance-pain-points">6. Compliance Pain Points <a class="memo-anchor" href="#6-compliance-pain-points" aria-label="Link to this section">#</a></h2>
 <p>This section documents the specific, researched compliance failures and workflow pain points in UK SME accountancy firms. Amaea&#x27;s product must address these specifically, not generically.</p>
-<h3 id="61-customer-due-diligence-the-dominant-pain">6.1 Customer Due Diligence — The Dominant Pain</h3>
+<h3 id="61-customer-due-diligence-the-dominant-pain">6.1 Customer Due Diligence — The Dominant Pain <a class="memo-anchor" href="#61-customer-due-diligence-the-dominant-pain" aria-label="Link to this section">#</a></h3>
 <p>ICAEW&#x27;s 2024/25 AML Supervision Report identified CDD failures as the single most common area of non-compliance:</p>
 <ul>
 <li><strong>11.9% of firms</strong> had ineffective client identification procedures</li>
@@ -612,13 +662,13 @@
 </ul>
 <p>The failure pattern: firms do adequate CDD at onboarding but treat it as a one-time exercise. For long-standing clients (5–10+ years), the original CDD is out of date — passport expired, business structure changed, beneficial ownership changed — and no refresh has been triggered. ICAEW specifically flagged that monitoring visit findings most commonly related to ongoing CDD rather than initial onboarding CDD.</p>
 <p><strong>Amaea opportunity:</strong> A persistent client record that tracks when CDD was last refreshed, when documents expire (passport, utility bill), and automatically flags when refresh is overdue. Directly analogous to Amaea&#x27;s annual review tracking for IFAs. This is the core product wedge in accountancy.</p>
-<h3 id="62-firm-wide-risk-assessment">6.2 Firm-Wide Risk Assessment</h3>
+<h3 id="62-firm-wide-risk-assessment">6.2 Firm-Wide Risk Assessment <a class="memo-anchor" href="#62-firm-wide-risk-assessment" aria-label="Link to this section">#</a></h3>
 <p>Many SME accountancy firms do not have a documented, up-to-date firm-wide risk assessment. This is required by MLR 2017 Regulation 18. Common failures: no written document at all; document exists but hasn&#x27;t been reviewed in 2–3 years; document exists but doesn&#x27;t reflect actual client base risks (e.g., a firm that has grown into high-value property work still has a low-risk assessment).</p>
 <p><strong>Amaea opportunity:</strong> An AI-assisted firm-wide risk assessment tool that pulls from the actual client data in the system — client risk scores, geographic exposure, service types — to generate a documented, defensible risk assessment. This is a genuine AI use case: synthesising client-level data into a firm-level document.</p>
-<h3 id="63-aml-policies-and-procedures">6.3 AML Policies and Procedures</h3>
+<h3 id="63-aml-policies-and-procedures">6.3 AML Policies and Procedures <a class="memo-anchor" href="#63-aml-policies-and-procedures" aria-label="Link to this section">#</a></h3>
 <p>Many SME firms use template AML policies from their professional body or purchased from a compliance consultant — often last updated 2–4 years ago. MLR 2017 requires policies to be regularly reviewed and updated when regulations or firm circumstances change. OPBAS has flagged that many PBSs are themselves not effectively checking policy currency during monitoring visits.</p>
 <p><strong>Amaea opportunity:</strong> Policy management with version control, review reminders, and AI-assisted gap analysis against current regulatory requirements.</p>
-<h3 id="64-beneficial-ownership-and-complex-corporate-structures">6.4 Beneficial Ownership and Complex Corporate Structures</h3>
+<h3 id="64-beneficial-ownership-and-complex-corporate-structures">6.4 Beneficial Ownership and Complex Corporate Structures <a class="memo-anchor" href="#64-beneficial-ownership-and-complex-corporate-structures" aria-label="Link to this section">#</a></h3>
 <p>The UBO (Ultimate Beneficial Owner) identification requirement is a persistent challenge, especially for:</p>
 <ul>
 <li>UK companies with complex holding structures</li>
@@ -628,7 +678,7 @@
 </ul>
 <p>Since the ECCTA 2023 and Companies House reforms, beneficial ownership data is increasingly accessible — but accountants still need to verify and document their own assessment, not just rely on Companies House data.</p>
 <p><strong>Amaea opportunity:</strong> UBO tracking within the client record, with a structured fields capture for corporate structure documentation and a flag when UBO information hasn&#x27;t been updated after a Companies House filing change.</p>
-<h3 id="65-source-of-funds-and-source-of-wealth">6.5 Source of Funds and Source of Wealth</h3>
+<h3 id="65-source-of-funds-and-source-of-wealth">6.5 Source of Funds and Source of Wealth <a class="memo-anchor" href="#65-source-of-funds-and-source-of-wealth" aria-label="Link to this section">#</a></h3>
 <p>For higher-risk clients — particularly those involved in property transactions, large corporate restructurings, significant investment activity, or with a PEP dimension — accountants are required to conduct source-of-funds (SoF) and source-of-wealth (SoW) enquiries under EDD. This is frequently under-documented:</p>
 <ul>
 <li>Where documentation exists, it&#x27;s often a client-signed form with no verification of the asserted source</li>
@@ -636,7 +686,7 @@
 <li>Files reviewed by QAD or AML monitors frequently show SoF documentation that would not withstand scrutiny</li>
 </ul>
 <p><strong>Amaea opportunity:</strong> Structured SoF/SoW capture forms with a document attachment workflow and an AI flag that checks whether the asserted source is plausible given other known client facts. This requires domain expertise to build correctly — this is where the domain expert hire (Section 11) is critical.</p>
-<h3 id="66-sar-drafting-and-tipping-off-risk">6.6 SAR Drafting and Tipping-Off Risk</h3>
+<h3 id="66-sar-drafting-and-tipping-off-risk">6.6 SAR Drafting and Tipping-Off Risk <a class="memo-anchor" href="#66-sar-drafting-and-tipping-off-risk" aria-label="Link to this section">#</a></h3>
 <p>SAR filing from the accountancy sector is chronically low relative to what OPBAS and the NCA expect. The primary reason: fear of getting it wrong. Accountants worry about:</p>
 <ul>
 <li>Filing a SAR unnecessarily and damaging a client relationship</li>
@@ -646,44 +696,44 @@
 </ul>
 <p>The SAR portal and DAML (Defence Against Money Laundering) requests are procedurally unfamiliar to most SME accountants.</p>
 <p><strong>Amaea opportunity:</strong> A structured SAR drafting workflow — question-based, output a draft that the MLRO reviews and submits — with guidance on tipping-off boundaries and DAML request logic. This is the highest legal-sensitivity feature; requires careful wording. The AI here assists drafting, not filing. Filing goes through the MLRO&#x27;s professional judgement.</p>
-<h3 id="67-pep-identification">6.7 PEP Identification</h3>
+<h3 id="67-pep-identification">6.7 PEP Identification <a class="memo-anchor" href="#67-pep-identification" aria-label="Link to this section">#</a></h3>
 <p>Most SME accountancy firms conduct PEP screening at onboarding but do not refresh it. PEP status can change — a client&#x27;s family member may be appointed to public office after onboarding; a foreign client may return to a politically active role. Sanctions screening is analogously static.</p>
 <p><strong>Amaea opportunity:</strong> Scheduled PEP and sanctions re-screening, integrated with a third-party data provider (SmartSearch, Veriphy, Credas), with alerts surfaced in the Amaea dashboard. Amaea doesn&#x27;t need to own the screening data — it needs to own the workflow and audit trail.</p>
-<h3 id="68-engagement-letters">6.8 Engagement Letters</h3>
+<h3 id="68-engagement-letters">6.8 Engagement Letters <a class="memo-anchor" href="#68-engagement-letters" aria-label="Link to this section">#</a></h3>
 <p>Engagement letters (or letters of engagement — LoEs) are a professional body requirement as well as a good-practice AML tool: they document the scope of the engagement, the client&#x27;s obligations, and the firm&#x27;s AML obligations (including that the firm must file a SAR if required). Many SME firms use outdated engagement letter templates that don&#x27;t reflect current MLR 2017 requirements or PCRT obligations.</p>
 <p>Separately, Practice Track and Engager are specialist engagement letter tools used in the accountancy market — both focus on proposal and LoE generation rather than compliance tracking.</p>
 <p><strong>Amaea opportunity:</strong> Engagement letter compliance check — run an uploaded LoE through the AI to verify it includes required AML clauses, and flag if it&#x27;s based on an outdated template. Lower complexity than full document extraction, but high value for compliance audit-readiness.</p>
-<h3 id="69-qad-review-preparation">6.9 QAD Review Preparation</h3>
+<h3 id="69-qad-review-preparation">6.9 QAD Review Preparation <a class="memo-anchor" href="#69-qad-review-preparation" aria-label="Link to this section">#</a></h3>
 <p>ICAEW QAD and ACCA monitoring visits are significant stress events for SME partners. Firms need to pull together: the firm-wide risk assessment, AML policies, a sample of CDD files for reviewed engagements, training records, SAR decision log (even where no SAR was filed), and evidence of ongoing monitoring. Most SME firms do this manually — creating a file folder, printing documents, hoping the files are up to date.</p>
 <p><strong>Amaea opportunity:</strong> A QAD Prep Pack — a generated report showing: overall CDD currency across client base, policies and last review date, training completion records, SAR decision log, and flagged items that need fixing before the visit. This is directly analogous to Amaea&#x27;s FCA Visit Preparation Toolkit for IFAs. The name differs, the architecture is the same.</p>
-<h3 id="610-staff-training-records">6.10 Staff Training Records</h3>
+<h3 id="610-staff-training-records">6.10 Staff Training Records <a class="memo-anchor" href="#610-staff-training-records" aria-label="Link to this section">#</a></h3>
 <p>MLR 2017 Regulation 24 requires regular staff training. Firms must document who has been trained, when, on what, and keep records. Many SME firms rely on professional body CPD records but don&#x27;t maintain a separate AML training log.</p>
 <p><strong>Amaea opportunity:</strong> AML training record management — log training completion dates per staff member, alert when refresher training is due. Low complexity, high compliance value.</p>
-<h3 id="611-uk-gdpr-and-client-data">6.11 UK GDPR and Client Data</h3>
+<h3 id="611-uk-gdpr-and-client-data">6.11 UK GDPR and Client Data <a class="memo-anchor" href="#611-uk-gdpr-and-client-data" aria-label="Link to this section">#</a></h3>
 <p>Accountancy firms handle substantial personal data — tax returns, payroll data, financial statements, beneficial ownership records, source of wealth documentation. UK GDPR obligations apply: lawful basis for processing, data subject rights, retention and deletion schedules, data processor agreements with software vendors. ICO registration (for firms processing personal data) is required. Most SME firms are ICO registered but do not have formal data protection policies that are reviewed regularly.</p>
 <p>This is lower urgency for Amaea&#x27;s initial accountancy wedge — the AML compliance angle is more commercially compelling — but GDPR tooling is adjacent and could be bundled in later.</p>
 <hr/>
-<h2 id="7-competitive-landscape">7. Competitive Landscape</h2>
-<h3 id="71-aml-saas-tools">7.1 AML SaaS Tools</h3>
+<h2 id="7-competitive-landscape">7. Competitive Landscape <a class="memo-anchor" href="#7-competitive-landscape" aria-label="Link to this section">#</a></h2>
+<h3 id="71-aml-saas-tools">7.1 AML SaaS Tools <a class="memo-anchor" href="#71-aml-saas-tools" aria-label="Link to this section">#</a></h3>
 <p><strong>SmartSearch (now merged with Credas, January 2026 — £78m transaction)</strong> The combined entity is the largest dedicated AML compliance platform in UK professional services, serving 1 in 2 of the UK&#x27;s top 100 accountancy firms. SmartSearch provides electronic ID verification, PEP and sanctions screening, UBO checking, and ongoing monitoring alerts. Pricing is not publicly listed; enterprise pricing for top-100 firms. For SME accountants, SmartSearch is the premium option — well-known, ICAEW-accredited, but potentially expensive relative to budget. The Credas merger adds biometric facial ID and open-banking source-of-funds verification. Integrated via T-Tech&#x27;s Practice Gateway and Bright&#x27;s platform.</p>
 <p><strong>Veriphy</strong> Per-check pricing model: £4+VAT per check, no subscription, no setup fee. Marketed to SME firms that do low volumes of checks and resist subscription costs. Simple ID verification and PEP/sanctions screening. No ongoing monitoring, no workflow management, no policy documentation. The price point is attractive but the product is thin — it&#x27;s an ID check tool, not a compliance management platform. This is where Amaea can differentiate: Veriphy does the check; Amaea manages the full CDD lifecycle and audit trail.</p>
 <p><strong>Credas (pre-merger with SmartSearch)</strong> Mobile-first biometric ID and facial verification, UBO and company structure checks, open-banking source-of-funds. Now part of SmartSearch group. App-based check request flow — the accountant sends a check request to the client&#x27;s phone; client completes biometric and document upload. Results returned in real time. Strong technology but focused purely on the verification moment, not the ongoing compliance lifecycle.</p>
 <p><strong>Thirdfort</strong> FCA-authorised IDV platform. Mobile app-based: ID verification, facial biometrics, source-of-funds via open banking, UBO discovery, company structure. Used across accountancy, legal, and property. Pricing: not publicly listed on website (speak to sales). Competitors position it as mid-to-premium. Strong in conveyancing and legal; growing in accountancy. Again, focused on the check moment rather than the full compliance management workflow.</p>
 <p><strong>AMLCC (Anti-Money Laundering Compliance Company)</strong> Dedicated AML compliance platform used by over 15,000 professionals across accountancy, legal, property, and insolvency. Provides: AML policy templates, firm-wide risk assessment tools, client risk assessment, ongoing monitoring checklist workflows, PEP/sanctions screening integration, SAR decision logging, staff training records, and regulatory update alerts. Pricing: from approximately £315.20+VAT/year for a 3-person firm (with 20% new subscriber discount), or ~£28.89+VAT/month. This is the most direct competitor to what Amaea would build for accountants. AMLCC is well-established, ICAEW and ACCA recommended, and widely used. Its weakness: it is a templated, document-centric tool, not an AI-assisted one. No document extraction, no automated flag-raising, no predictive monitoring. Effectively a compliance filing cabinet with scheduled reminders.</p>
 <p><strong>Firmcheck / OnTaskAML</strong> Newer entrants in the SME accountancy AML space. Firmcheck focuses on practice-level AML compliance management with automated monitoring and regulatory update alerts. [OnTaskAML not confirmed as a distinct product — may refer to AMLCC&#x27;s task workflow feature. Needs verification.]</p>
-<h3 id="72-practice-management-software-with-amlcompliance-modules">7.2 Practice Management Software with AML/Compliance Modules</h3>
+<h3 id="72-practice-management-software-with-amlcompliance-modules">7.2 Practice Management Software with AML/Compliance Modules <a class="memo-anchor" href="#72-practice-management-software-with-amlcompliance-modules" aria-label="Link to this section">#</a></h3>
 <p><strong>CCH iFirm (Wolters Kluwer)</strong> Enterprise practice management platform with an integrated AML module. Launched in UK in early 2024. AML module described as facilitating AML checks directly from CCH Central client onboarding. Pricing: not publicly listed; enterprise-oriented. The AML module is a bolt-on to a broader practice management suite that includes tax, accounts production, and document management. Large firms in the top 100 use CCH as their primary practice management system; adding the AML module is a natural upsell. For SME firms, CCH iFirm is likely too expensive and complex unless they&#x27;re already using CCH Central.</p>
 <p><strong>IRIS (various products — Senta, KashFlow, IRIS Accountancy Suite)</strong> IRIS is the dominant UK accountancy software group, owning Senta (practice management, acquired 2021), KashFlow (bookkeeping), IRIS Accounts Production, IRIS Personal Tax, and IRIS Practice Management. Senta (now part of Bright via IRIS&#x27;s Bright subsidiary) is used by many SME practices for client and task management. IRIS does not have a standalone AML compliance product comparable to AMLCC — its AML touchpoints are within broader workflow templates. The SmartSearch/Credas integration with Bright&#x27;s platform is the most likely route to IRIS-adjacent AML tooling.</p>
 <p><strong>BrightManager (formerly AccountancyManager)</strong> Acquired by Bright in 2022 and rebranded. Practice management tool with client onboarding workflows including AML task prompts. Pricing: from approximately £33.60+VAT/user/month (annual billing). BrightManager&#x27;s AML functionality is workflow-based — it can prompt staff to collect CDD documents and mark tasks complete — but it does not verify documents, assess risk, or conduct PEP/sanctions screening. It integrates with SmartSearch for verification. A natural partnership target: Amaea provides the AI compliance intelligence layer; BrightManager handles practice workflow.</p>
 <p><strong>Karbon</strong> US-origin practice management platform with strong UK adoption. Pricing: Team £34/user/month, Business £49/user/month. Used by tech-forward SME accountancy firms. Strong in workflow, collaboration, and client communication. No AML-specific compliance features. Karbon targets firms that are already process-conscious — this is an Amaea ideal customer profile.</p>
 <p><strong>Senta (now within Bright)</strong> Legacy UK practice management tool with strong SME accountancy adoption. Similar to BrightManager in positioning. Pricing: from £31/month for one user. AML features are workflow-prompt based, not substantive compliance management.</p>
 <p><strong>TaxCalc AML Centre</strong> TaxCalc is a widely used UK tax software for SME accountancy firms. It has launched an AML Centre module — a compliance management add-on within the TaxCalc ecosystem. Specific features and pricing not confirmed in research. Given TaxCalc&#x27;s deep penetration in SME practices (it competes with IRIS on price and simplicity), the AML Centre could be a significant competitor if it gains traction. [Needs verification via TaxCalc product documentation.]</p>
-<h3 id="73-aml-consultancies">7.3 AML Consultancies</h3>
+<h3 id="73-aml-consultancies">7.3 AML Consultancies <a class="memo-anchor" href="#73-aml-consultancies" aria-label="Link to this section">#</a></h3>
 <p><strong>AMLCC</strong> (also listed above as SaaS) — runs consultancy and training alongside its software.</p>
 <p><strong>AML Bytes</strong> — specialist AML training and consultancy for legal and accountancy. Not a software product. Competes for the advisory/training spend rather than tooling spend.</p>
 <p><strong>Mercia Group</strong> — professional body CPD and compliance training provider. Significant ICAEW and ACCA partner for training content. Not software.</p>
 <p><strong>Innervate Compliance</strong> and similar boutique compliance consultancies — typically ex-MLRO or ex-professional-body staff providing bespoke policy reviews, MLRO support, and monitoring visit preparation. Charge day rates of £800–£2,000/day. These are what SME firms turn to when they receive a monitoring visit notice and realise their files are not in order. Amaea should make these consultancies unnecessary for routine compliance — and potentially partner with them for implementation support.</p>
-<h3 id="74-where-each-falls-short-the-amaea-wedge">7.4 Where Each Falls Short — The Amaea Wedge</h3>
+<h3 id="74-where-each-falls-short-the-amaea-wedge">7.4 Where Each Falls Short — The Amaea Wedge <a class="memo-anchor" href="#74-where-each-falls-short-the-amaea-wedge" aria-label="Link to this section">#</a></h3>
 <table>
 <thead><tr>
 <th>Tool</th>
@@ -728,8 +778,8 @@
 </tbody></table>
 <p><strong>The Amaea wedge for accountancy:</strong> AI-powered persistent CDD compliance monitoring. Not a verification tool — partner with Veriphy/SmartSearch for the actual ID check. Not a practice management tool — integrate with BrightManager/Karbon. What Amaea uniquely provides: a persistent compliance record per client that tracks CDD currency, triggers re-verification when documents expire, auto-generates a firm-wide risk profile from client data, drafts SARs via structured AI workflow, and produces a QAD Prep Pack on demand. The AI layer on top of structured compliance data is the moat — no current competitor has it in this market.</p>
 <hr/>
-<h2 id="8-pricing-benchmarks">8. Pricing Benchmarks</h2>
-<h3 id="81-what-sme-accountancy-firms-currently-pay">8.1 What SME Accountancy Firms Currently Pay</h3>
+<h2 id="8-pricing-benchmarks">8. Pricing Benchmarks <a class="memo-anchor" href="#8-pricing-benchmarks" aria-label="Link to this section">#</a></h2>
+<h3 id="81-what-sme-accountancy-firms-currently-pay">8.1 What SME Accountancy Firms Currently Pay <a class="memo-anchor" href="#81-what-sme-accountancy-firms-currently-pay" aria-label="Link to this section">#</a></h3>
 <table>
 <thead><tr>
 <th>Tool/Service</th>
@@ -783,7 +833,7 @@
 </tr>
 </tbody></table>
 <p><strong>Total current spend estimate for a 5-person SME accountancy firm on AML/compliance tooling:</strong> approximately £2,000–£8,000/year across software, training, and occasional consultancy. Most of this is fragmented — multiple tools, no unified compliance view.</p>
-<h3 id="82-amaea-pricing-strategy-for-accountancy">8.2 Amaea Pricing Strategy for Accountancy</h3>
+<h3 id="82-amaea-pricing-strategy-for-accountancy">8.2 Amaea Pricing Strategy for Accountancy <a class="memo-anchor" href="#82-amaea-pricing-strategy-for-accountancy" aria-label="Link to this section">#</a></h3>
 <p>Given the IFA pricing reference (Essentials £699/month, Professional £1,599/month), direct application to accountancy is not appropriate — SME accountants cannot support £699–£1,599/month pricing without demonstrable ROI at a level IFAs have with Consumer Duty obligations.</p>
 <p><strong>Recommended pricing architecture for accountancy (to be validated with discovery interviews):</strong></p>
 <table>
@@ -821,26 +871,26 @@
 <p><strong>Rationale:</strong> At £199–£299/month, Amaea replaces AMLCC (~£350/year) + Veriphy checks (~£400/year) + a fraction of a consultant&#x27;s day — and delivers substantially more compliance assurance. The ROI story is: avoid a fine from ICAEW (41 firms fined, average £4,822 in 2024/25), avoid the disruption of a monitoring visit gone badly, and reduce the managing partner&#x27;s AML compliance time from 3–4 hours/week to 1 hour/week. At £299/month (£3,588/year), that&#x27;s credible if the product genuinely reduces manual compliance effort.</p>
 <p><strong>Do not try to sell at IFA pricing into the accountancy market.</strong> The regulatory urgency (Consumer Duty vs MLR 2017), the fine severity (FCA vs ICAEW enforcement), and the average firm size all support a lower price point. Build the accountancy product to a lower price point from day one and expand as the FCA takes over supervision and enforcement credibility increases.</p>
 <hr/>
-<h2 id="9-go-to-market-notes">9. Go-to-Market Notes</h2>
-<h3 id="91-professional-bodies-as-channels">9.1 Professional Bodies as Channels</h3>
+<h2 id="9-go-to-market-notes">9. Go-to-Market Notes <a class="memo-anchor" href="#9-go-to-market-notes" aria-label="Link to this section">#</a></h2>
+<h3 id="91-professional-bodies-as-channels">9.1 Professional Bodies as Channels <a class="memo-anchor" href="#91-professional-bodies-as-channels" aria-label="Link to this section">#</a></h3>
 <p><strong>ICAEW:</strong> Accredits technology vendors through its Technology Accreditation programme. SmartSearch and others have ICAEW accreditation. Getting ICAEW accreditation is a credibility signal and gives access to member communications and events. ICAEW has a Practice Hub (resources for member firms), Faculty events (Tax Faculty, IT Faculty, etc.), and regular webinars. The ICAEW Small Practitioners community is particularly relevant — this is where sole practitioners and micro-firms congregate.</p>
 <p><strong>ACCA:</strong> Has a dedicated SME and SMP (Small and Medium Practices) community, conference programme, and technology partner programme. ACCA members in practice receive regular communications. An ACCA technology partner endorsement would give access to the ACCA member directory.</p>
 <p><strong>AAT:</strong> Smaller body; targeted communications to bookkeepers and technicians. Potentially useful for the Starter tier targeting sole practitioners and very small practices.</p>
 <p><strong>Strategy:</strong> ICAEW technology accreditation should be a pre-launch milestone for the accountancy product. The accreditation process will also force Amaea to document the product&#x27;s AML compliance positioning rigorously — a useful discipline.</p>
-<h3 id="92-trade-press">9.2 Trade Press</h3>
+<h3 id="92-trade-press">9.2 Trade Press <a class="memo-anchor" href="#92-trade-press" aria-label="Link to this section">#</a></h3>
 <p><strong>AccountingWEB</strong> (accountingweb.co.uk): The dominant UK accountancy trade site. Heavily read by SME practitioners. Any Money article sections (&quot;Any Answers&quot; community Q&amp;A) are particularly engaging — accountants ask each other what AML software to use. Amaea should have a presence in AccountingWEB from early in the market development phase (circa 2029–2030, pre-launch).</p>
 <p><strong>Accountancy Age</strong> (accountancyage.com): More mid-market and top-100 focused. Good for brand building in the professional community. Less direct for SME sales.</p>
 <p><strong>Economia</strong> (economia.icaew.com): ICAEW&#x27;s member magazine. A feature or vendor placement here is ICAEW-endorsed by association.</p>
 <p><strong>Accounting Today UK / Accountancy Daily</strong> (accountancydaily.co): Good source for regulatory news and compliance developments. Advertising and editorial coverage possible.</p>
-<h3 id="93-conferences">9.3 Conferences</h3>
+<h3 id="93-conferences">9.3 Conferences <a class="memo-anchor" href="#93-conferences" aria-label="Link to this section">#</a></h3>
 <p><strong>Accountex London:</strong> World&#x27;s largest accountancy conference (ExCeL London, May annually). 10,000+ attendees, 295+ exhibitors. This is the primary conference entry point for the accountancy market. Amaea should attend as a visitor for market intelligence in 2028–2029 and exhibit for the launch year (2030/31). Cost of exhibiting is significant — budget £15,000–£30,000 for a stand.</p>
 <p><strong>Digital Accountancy Show:</strong> Technology-forward accountants. Smaller than Accountex but more targeted to tech-adopting firms — Amaea&#x27;s ideal early adopter profile.</p>
 <p><strong>Accountex Summit Manchester:</strong> Regional; good for North-focused SME practices.</p>
 <p><strong>ICAEW Practice Management Conference:</strong> Direct channel to practice managers at SME firms.</p>
-<h3 id="94-practice-management-vendor-partnerships">9.4 Practice Management Vendor Partnerships</h3>
+<h3 id="94-practice-management-vendor-partnerships">9.4 Practice Management Vendor Partnerships <a class="memo-anchor" href="#94-practice-management-vendor-partnerships" aria-label="Link to this section">#</a></h3>
 <p>BrightManager, Karbon, and Senta are used by Amaea&#x27;s target customers. A partnership — where Amaea integrates as the AML compliance layer within these platforms — is both a distribution channel and a moat. It mirrors the Intelliflo relationship in IFA: the practice management platform becomes the channel.</p>
 <p>Risk: these same vendors may build competing AML functionality natively. Bright&#x27;s integration with SmartSearch is a signal of this. Amaea must move fast enough to be embedded before the native solutions close the gap.</p>
-<h3 id="95-linkedin-voices-and-community-engagement">9.5 LinkedIn Voices and Community Engagement</h3>
+<h3 id="95-linkedin-voices-and-community-engagement">9.5 LinkedIn Voices and Community Engagement <a class="memo-anchor" href="#95-linkedin-voices-and-community-engagement" aria-label="Link to this section">#</a></h3>
 <p>The accountancy community is active on LinkedIn, AccountingWEB, and at ICAEW/ACCA events. Key voices to track and engage:</p>
 <ul>
 <li>ICAEW Practice Hub editors and authors</li>
@@ -850,7 +900,7 @@
 </ul>
 <p><strong>Note:</strong> Unlike the IFA market where Hasna has pre-existing relationships (Robin Powell, CISI CEO, Intelliflo), Amaea has no established network in accountancy. Building a network equivalent will take 2–3 years of deliberate community engagement before the 2031 launch. This should begin in earnest circa 2028.</p>
 <hr/>
-<h2 id="10-domain-expert-profile">10. Domain Expert Profile</h2>
+<h2 id="10-domain-expert-profile">10. Domain Expert Profile <a class="memo-anchor" href="#10-domain-expert-profile" aria-label="Link to this section">#</a></h2>
 <p>For Amaea to build a credible accountancy AML product, it needs domain expertise that neither Milan nor Hasna currently has. The IFA product was built with Hasna&#x27;s embedded FCA regulatory knowledge. The accountancy product needs an equivalent.</p>
 <p><strong>Ideal profile — &quot;the accountancy Hasna&quot;:</strong></p>
 <ul>
@@ -861,14 +911,14 @@
 <p><strong>Engagement model:</strong> Advisory role initially (2–3 days/month) to validate product requirements and review the regulatory accuracy of the knowledge base and flag logic. Move to fractional MLRO-equivalent role as the product approaches launch. This is not a full-time hire until the accountancy business is generating revenue.</p>
 <p><strong>Timing:</strong> Engage by 2028–2029, 2–3 years before the planned 2031 launch. Early enough to build the regulatory knowledge base and validate the product design with someone who can explain what a monitoring visit reviewer actually looks for.</p>
 <hr/>
-<h2 id="11-adjacency-to-uk-ifa">11. Adjacency to UK IFA</h2>
-<h3 id="111-whats-similar">11.1 What&#x27;s Similar</h3>
+<h2 id="11-adjacency-to-uk-ifa">11. Adjacency to UK IFA <a class="memo-anchor" href="#11-adjacency-to-uk-ifa" aria-label="Link to this section">#</a></h2>
+<h3 id="111-whats-similar">11.1 What&#x27;s Similar <a class="memo-anchor" href="#111-whats-similar" aria-label="Link to this section">#</a></h3>
 <p><strong>File review culture:</strong> Both IFA firms and accountancy practices have regulatory oversight bodies that conduct file reviews — FCA supervision visits for IFAs, QAD and AML monitoring visits for accountants. The underlying compliance motion is the same: maintain complete, up-to-date records that demonstrate regulatory compliance, so that when the reviewer arrives, you can produce them.</p>
 <p><strong>Professional body oversight:</strong> Both sectors are professionally regulated with continuing professional development requirements, ethical codes, and disciplinary procedures. The accountability structure is similar even if the specific bodies differ.</p>
 <p><strong>Documentation-first compliance:</strong> Both sectors create and maintain compliance documentation as the primary evidence of good practice. Suitability letters for IFAs; CDD files and AML policies for accountants. Amaea&#x27;s core product architecture — classify documents, extract fields, raise flags from gaps — is directly applicable.</p>
 <p><strong>Annual review obligation analog:</strong> IFAs have COBS 9.5 annual review obligations. Accountants have the annual requirement to review and update CDD for ongoing client relationships. Both create a recurring compliance workflow that benefits from automation.</p>
 <p><strong>SME firm profile:</strong> The ideal IFA customer (2–10 adviser firm, no dedicated compliance officer, managing partner doubles as CO) maps almost exactly onto the ideal accountancy customer (3–10 partner firm, no dedicated MLRO, managing partner doubles as MLRO). Same pain, different regulation.</p>
-<h3 id="112-whats-different">11.2 What&#x27;s Different</h3>
+<h3 id="112-whats-different">11.2 What&#x27;s Different <a class="memo-anchor" href="#112-whats-different" aria-label="Link to this section">#</a></h3>
 <p><strong>No FCA authorisation (core work):</strong> The single most important difference. FCA Consumer Duty, COBS, TC, SM&amp;CR — none of these apply to core accountancy work. The regulatory urgency is lower: ICAEW fine averages ~£4,800 vs FCA enforcement that can be existential. This affects willingness to pay for compliance tooling.</p>
 <p><strong>No Consumer Duty:</strong> Consumer Duty is the primary commercial hook for Amaea&#x27;s IFA product — it&#x27;s a new, broad obligation that firms are actively worried about. There is no equivalent in accountancy. MLR 2017 has been in force since 2017 and firms have adapted (imperfectly). The regulatory urgency pitch is harder.</p>
 <p><strong>Supervisor plurality:</strong> One FCA for IFAs; eight professional body supervisors plus HMRC for accountants. A single-message product positioning (&quot;Amaea for ICAEW firms&quot;) risks alienating ACCA-supervised firms. The messaging must be MLR-2017-first, body-agnostic, with body-specific configuration available.</p>
@@ -877,24 +927,24 @@
 <p><strong>Cross-sell opportunity — DPB firms:</strong> Some accountancy firms hold both FCA permissions (usually a DPB licence for limited investment business) and conduct accountancy work. These firms — like Old Mill (accountancy plus FCA-authorised financial planning) — are natural cross-sell targets where Amaea could serve both the IFA compliance need and the accountancy AML need from a single platform. These firms exist but are a minority of the accountancy market.</p>
 <p><strong>Cross-sell opportunity — associated practices:</strong> Many IFA firms have an associated accounting practice under a common umbrella group (the same principals own both). Amaea&#x27;s IFA customer relationship may open a door to the associated accountancy firm. This is a GTM shortcut worth pursuing.</p>
 <hr/>
-<h2 id="12-risks-and-unknowns">12. Risks and Unknowns</h2>
-<h3 id="121-pricing-tolerance-below-ifa-high-risk">12.1 Pricing Tolerance Below IFA (High Risk)</h3>
+<h2 id="12-risks-and-unknowns">12. Risks and Unknowns <a class="memo-anchor" href="#12-risks-and-unknowns" aria-label="Link to this section">#</a></h2>
+<h3 id="121-pricing-tolerance-below-ifa-high-risk">12.1 Pricing Tolerance Below IFA (High Risk) <a class="memo-anchor" href="#121-pricing-tolerance-below-ifa-high-risk" aria-label="Link to this section">#</a></h3>
 <p>The evidence strongly suggests accountancy firms will not bear IFA-level pricing. ICAEW fines average ~£4,800 — a small fraction of the FCA enforcement risk that motivates IFA firms to pay for compliance tooling. AMLCC at £350–£950/year is the current market benchmark for standalone AML compliance software. Amaea entering at £199–£299/month (£2,400–£3,600/year) is 3–10x AMLCC on price and requires a compelling ROI story that the product is materially better. <strong>Action required: validate pricing with 10+ SME accountancy firms before committing to a pricing architecture.</strong></p>
-<h3 id="122-aml-supervisory-reform-changes-the-landscape-mid-build">12.2 AML Supervisory Reform Changes the Landscape Mid-Build</h3>
+<h3 id="122-aml-supervisory-reform-changes-the-landscape-mid-build">12.2 AML Supervisory Reform Changes the Landscape Mid-Build <a class="memo-anchor" href="#122-aml-supervisory-reform-changes-the-landscape-mid-build" aria-label="Link to this section">#</a></h3>
 <p>The FCA single supervisor reform, with a Bill expected summer 2026 and implementation likely 2028–2030, will change the regulatory frame that Amaea is building against. If the FCA imposes FCA-style obligations (SM&amp;CR-equivalent, SYSC-style policies, FCA-branded supervision visits), the urgency and willingness-to-pay in accountancy increases materially — possibly to near-IFA levels. If the FCA&#x27;s supervision is lighter-touch (just taking over the existing PBS framework without adding new obligations), the urgency stays low.</p>
 <p><strong>Action required:</strong> Track the AML Supervision Bill through Parliament. The detail of the FCA&#x27;s new powers will determine whether accountancy becomes a high-urgency market. Review this memo when the Bill receives Royal Assent.</p>
-<h3 id="123-practice-management-incumbents-close-the-gap">12.3 Practice Management Incumbents Close the Gap</h3>
+<h3 id="123-practice-management-incumbents-close-the-gap">12.3 Practice Management Incumbents Close the Gap <a class="memo-anchor" href="#123-practice-management-incumbents-close-the-gap" aria-label="Link to this section">#</a></h3>
 <p>IRIS, Wolters Kluwer (CCH iFirm), and Bright (BrightManager, TaxCalc) are all moving toward integrated AML compliance modules within existing practice management suites. The SmartSearch/Credas merger and its integration with Bright&#x27;s platform is a direct move into this space. If these incumbents build AI-powered CDD tracking natively, the Amaea wedge shrinks. Amaea needs to be established with customers and embedded before this happens — which argues for the 2031 launch timeline being tight, not safe.</p>
-<h3 id="124-regulatory-knowledge-base-build-for-accountancy-is-a-substantial-effort">12.4 Regulatory Knowledge Base Build for Accountancy is a Substantial Effort</h3>
+<h3 id="124-regulatory-knowledge-base-build-for-accountancy-is-a-substantial-effort">12.4 Regulatory Knowledge Base Build for Accountancy is a Substantial Effort <a class="memo-anchor" href="#124-regulatory-knowledge-base-build-for-accountancy-is-a-substantial-effort" aria-label="Link to this section">#</a></h3>
 <p>Amaea&#x27;s IFA product is built on an 11,645-row FCA knowledge base covering the FCA Handbook, FCA publications, and Consumer Duty guidance. Building an equivalent for accountancy — covering MLR 2017 (as amended by 2022, 2023 regulations), all eight professional body AML supervision frameworks, PCRT, OPBAS reports, ICAEW QAD guidance, NCA SAR guidance, OFSI sanctions guidance, and ECCTA 2023 implications — is 3–6 months of dedicated corpus work, plus ongoing maintenance. This is a material build investment. Do not underestimate it.</p>
-<h3 id="125-no-established-network-in-accountancy">12.5 No Established Network in Accountancy</h3>
+<h3 id="125-no-established-network-in-accountancy">12.5 No Established Network in Accountancy <a class="memo-anchor" href="#125-no-established-network-in-accountancy" aria-label="Link to this section">#</a></h3>
 <p>Unlike IFA (where Hasna has Robin Powell, CISI CEO, Intelliflo, SP Advanced), Amaea has no existing relationships in the accountancy market. Building the equivalent network from scratch takes 2–3 years of deliberate community investment. The 2031 launch target should assume this network-building begins in earnest by 2028.</p>
-<h3 id="126-dual-supervisor-complexity-for-dpb-firms">12.6 Dual-Supervisor Complexity for DPB Firms</h3>
+<h3 id="126-dual-supervisor-complexity-for-dpb-firms">12.6 Dual-Supervisor Complexity for DPB Firms <a class="memo-anchor" href="#126-dual-supervisor-complexity-for-dpb-firms" aria-label="Link to this section">#</a></h3>
 <p>Firms holding both a DPB licence and accountancy professional body membership are supervised by both ICAEW/ACCA (AML) and the professional body&#x27;s DPB compliance function (investment business). A single Amaea product that covers both compliance frames is potentially very valuable but substantially more complex to build correctly. Do not try to cover DPB compliance in the initial accountancy product — that is a later extension.</p>
-<h3 id="127-pricing-model-risk">12.7 Pricing Model Risk</h3>
+<h3 id="127-pricing-model-risk">12.7 Pricing Model Risk <a class="memo-anchor" href="#127-pricing-model-risk" aria-label="Link to this section">#</a></h3>
 <p>Per-check pricing (Veriphy model) may be more intuitive for accountants than a monthly SaaS subscription — accountants think in terms of billable time and specific client engagements, not ongoing SaaS subscriptions. Amaea&#x27;s monthly subscription model (as used in IFA) may face resistance. Consider whether a hybrid model (subscription + per-client credits for verification checks) is needed.</p>
 <hr/>
-<h2 id="13-quarterly-update-log">13. Quarterly Update Log</h2>
+<h2 id="13-quarterly-update-log">13. Quarterly Update Log <a class="memo-anchor" href="#13-quarterly-update-log" aria-label="Link to this section">#</a></h2>
 <table>
 <thead><tr>
 <th>Date</th>
@@ -908,8 +958,8 @@
 </tr>
 </tbody></table>
 <hr/>
-<h2 id="14-sources-and-references">14. Sources and References</h2>
-<h3 id="regulatory">Regulatory</h3>
+<h2 id="14-sources-and-references">14. Sources and References <a class="memo-anchor" href="#14-sources-and-references" aria-label="Link to this section">#</a></h2>
+<h3 id="regulatory">Regulatory <a class="memo-anchor" href="#regulatory" aria-label="Link to this section">#</a></h3>
 <ul>
 <li><a href="https://www.legislation.gov.uk/uksi/2017/692">Money Laundering, Terrorist Financing and Transfer of Funds Regulations 2017 — legislation.gov.uk</a></li>
 <li><a href="https://www.icaew.com/technical/trust-and-ethics/anti-money-laundering/uk-law-and-guidance/money-laundering-regulations-2017">ICAEW: Money Laundering Regulations 2017 — UK Law and Guidance</a></li>
@@ -935,7 +985,7 @@
 <li><a href="https://www.icaew.com/technical/audit-and-assurance/audit/quality-management-in-audit-firms/how-to-prepare-for-a-qad-monitoring-visit">ICAEW: How to prepare for a QAD monitoring visit</a></li>
 <li><a href="https://complyport.com/understanding-hmrcs-role-in-aml-supervision/">HMRC as AML Supervisor — Complyport</a></li>
 </ul>
-<h3 id="market-data">Market Data</h3>
+<h3 id="market-data">Market Data <a class="memo-anchor" href="#market-data" aria-label="Link to this section">#</a></h3>
 <ul>
 <li><a href="https://www.frc.org.uk/library/supervision/professional-bodies-supervision/key-facts-and-trends-in-the-accountancy-profession/key-facts-and-trends-in-the-accountancy-profession-2025/">FRC: Key Facts and Trends in the Accountancy Profession 2025</a></li>
 <li><a href="https://www.ibisworld.com/united-kingdom/industry/accounting-auditing/3880/">IBISWorld: Accounting and Auditing in the UK 2025 — market size £38.7bn</a></li>
@@ -946,7 +996,7 @@
 <li><a href="https://www.tax.org.uk/CTA-member-milestone">CIOT: We did it — CIOT is now 20,000 members strong</a></li>
 <li><a href="https://accountancyeurope.eu/fact-figure/united-kingdom/">Accountancy Europe: United Kingdom member body data</a></li>
 </ul>
-<h3 id="competitive-pricing">Competitive / Pricing</h3>
+<h3 id="competitive-pricing">Competitive / Pricing <a class="memo-anchor" href="#competitive-pricing" aria-label="Link to this section">#</a></h3>
 <ul>
 <li><a href="https://accountio.co.uk/compliance/smartsearch-and-credas-aml-compliance-accounting-firms/">SmartSearch and Credas merger — Accountio</a></li>
 <li><a href="https://www.smartsearch.com/sectors/accountancy">SmartSearch: AML for Accountancy</a></li>
@@ -960,7 +1010,7 @@
 <li><a href="https://www.icaew.com/membership/offers-discounts-and-services/icaew-accredited-technology/technology-accreditation/anti-money-laundering-software">ICAEW: Anti-Money Laundering Software accreditation</a></li>
 <li><a href="https://www.iris.co.uk/blog/accountancy/aml-compliance-for-accountants/">IRIS: AML Compliance for Accountants guide</a></li>
 </ul>
-<h3 id="compliance-pain-points">Compliance Pain Points</h3>
+<h3 id="compliance-pain-points">Compliance Pain Points <a class="memo-anchor" href="#compliance-pain-points" aria-label="Link to this section">#</a></h3>
 <ul>
 <li><a href="https://accountancyage.com/2024/10/15/icaew-finds-1-in-5-firms-falling-short-on-aml-are-you-one-of-them/">ICAEW: 1 in 5 firms falling short on AML — Accountancy Age (October 2024)</a></li>
 <li><a href="https://www.accountingweb.co.uk/community/industry-insights/1-in-5-uk-accounting-firms-fail-aml-compliance-how-do-the-rest-get-it">AccountingWEB: 1 in 5 UK accounting firms fail AML compliance</a></li>
@@ -969,7 +1019,7 @@
 <li><a href="https://www.icaew.com/regulation/aml-supervision/anti-money-laundering-supervision-report/aml-top-compliance-insights/firm-wide-risk-assessments">ICAEW: Firm-wide risk assessments — AML compliance insights</a></li>
 <li><a href="https://www.accountingweb.co.uk/practice/practice-strategy/aml-compliance-is-high-on-regulators-agenda">AccountingWEB: AML compliance is high on regulators&#x27; agenda</a></li>
 </ul>
-<h3 id="go-to-market-events">Go-to-Market / Events</h3>
+<h3 id="go-to-market-events">Go-to-Market / Events <a class="memo-anchor" href="#go-to-market-events" aria-label="Link to this section">#</a></h3>
 <ul>
 <li><a href="https://www.accountex.co.uk/london/">Accountex London — world&#x27;s largest accountancy event</a></li>
 <li><a href="https://www.accaglobal.com/uk/en/member/sectors/smp/creating-tomorrows-practice-today/building-a-resilient-practice/community/accountancy-events.html">ACCA: Accountancy profession events</a></li>
@@ -1018,7 +1068,7 @@
       logout.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;color:rgba(255,255,255,0.4);text-decoration:none;flex-shrink:0;margin-left:auto;transition:background .15s ease, color .15s ease;';
       logout.addEventListener('mouseenter', () => { logout.style.background = 'rgba(255,255,255,0.08)'; logout.style.color = 'rgba(255,255,255,0.85)'; });
       logout.addEventListener('mouseleave', () => { logout.style.background = 'transparent';            logout.style.color = 'rgba(255,255,255,0.4)';   });
-      logout.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+      logout.innerHTML = '<svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
       chevron.replaceWith(logout);
     }
   }
@@ -1050,5 +1100,30 @@
     });
   })();
 </script>
+<script id="topbar-user-hydrate">
+(function(){
+  var trigger = document.getElementById("topbarUserTrigger");
+  var panel   = document.getElementById("topbarUserPanel");
+  var nameEl  = document.getElementById("topbarUserName");
+  var emailEl = document.getElementById("topbarUserEmail");
+  if (!trigger || !panel) return;
+  function close(){ panel.classList.remove("open"); trigger.classList.remove("open"); }
+  trigger.addEventListener("click", function(e){ e.stopPropagation(); var o = panel.classList.toggle("open"); trigger.classList.toggle("open", o); });
+  document.addEventListener("click", function(e){ if (panel.classList.contains("open") && !panel.contains(e.target) && e.target !== trigger) close(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") close(); });
+  fetch("/cdn-cgi/access/get-identity", { credentials: "include" })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(id){
+      if (!id || !id.email) return;
+      var name = id.name || id.email.split("@")[0];
+      var initial = (name || "?").charAt(0).toUpperCase();
+      trigger.textContent = initial;
+      if (nameEl)  nameEl.textContent  = name;
+      if (emailEl) emailEl.textContent = id.email;
+    })
+    .catch(function(){});
+})();
+</script>
+<script src="/intranet-search.js" defer></script>
 </body>
 </html>

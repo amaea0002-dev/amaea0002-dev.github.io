@@ -17,11 +17,14 @@ is inlined per page so this folder stays self-contained.
 
 from __future__ import annotations
 import html
+import os
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).parent
-SRC_DIR = Path("/Users/milan/Documents/Amaea/sector-research")
+# Default: markdown source lives at ~/Documents/Amaea/sector-research/ alongside
+# the amaea-brand repo. Override with SECTOR_RESEARCH_SRC env var on other machines.
+SRC_DIR = Path(os.environ.get("SECTOR_RESEARCH_SRC", str(ROOT.parent.parent / "sector-research")))
 
 MEMOS = [
     {
@@ -30,6 +33,7 @@ MEMOS = [
         "title": "Mortgage Brokers",
         "eyebrow": "Sector 1 · Q3 2026 priority",
         "next_review": "16 Aug 2026",
+        "last_reviewed": "18 May 2026",
     },
     {
         "src": "insurance-intermediaries.md",
@@ -37,6 +41,7 @@ MEMOS = [
         "title": "Insurance Intermediaries",
         "eyebrow": "Sector 2 · Q4 2026 priority",
         "next_review": "16 Nov 2026",
+        "last_reviewed": "18 May 2026",
     },
     {
         "src": "accountants.md",
@@ -44,6 +49,7 @@ MEMOS = [
         "title": "Accountants",
         "eyebrow": "Sector 3 · Q1 2027 priority",
         "next_review": "16 Feb 2027",
+        "last_reviewed": "18 May 2026",
     },
     {
         "src": "wealth-platforms-dfms.md",
@@ -51,6 +57,7 @@ MEMOS = [
         "title": "Wealth Platforms & DFMs",
         "eyebrow": "Sector 4 · Q2 2027 priority",
         "next_review": "16 May 2027",
+        "last_reviewed": "18 May 2026",
     },
 ]
 
@@ -215,8 +222,10 @@ def parse_list(lines: list[str], start: int, ordered: bool) -> tuple[str, int]:
     return f"<{tag}>\n" + "\n".join(items) + f"\n</{tag}>", i
 
 
-def md_to_html(md: str) -> tuple[str, str]:
-    """Strip YAML front-matter, return (h1_title, body_html). H1 dropped from body."""
+def md_to_html(md: str) -> tuple[str, str, list[tuple[str, str]]]:
+    """Strip YAML front-matter, return (h1_title, body_html, h2_toc).
+    h2_toc is a list of (slug_id, display_text) for top-level sections.
+    H1 dropped from body."""
     # Strip --- frontmatter --- if present
     if md.startswith("---\n"):
         end = md.find("\n---\n", 4)
@@ -227,6 +236,7 @@ def md_to_html(md: str) -> tuple[str, str]:
     i = 0
     body: list[str] = []
     h1_title = ""
+    h2_toc: list[tuple[str, str]] = []
 
     while i < len(lines):
         line = lines[i]
@@ -266,7 +276,14 @@ def md_to_html(md: str) -> tuple[str, str]:
                 i += 1
                 continue
             sid = slugify(text)
-            body.append(f'<h{level} id="{sid}">{render_inline(text)}</h{level}>')
+            # Collect H2s for generated TOC, skipping the markdown's own manual TOC section
+            if level == 2 and sid != "table-of-contents":
+                h2_toc.append((sid, render_inline_plain(text)))
+            # H2/H3 get hover-revealed anchor links for deep-linking
+            anchor = ""
+            if level in (2, 3):
+                anchor = f' <a class="memo-anchor" href="#{sid}" aria-label="Link to this section">#</a>'
+            body.append(f'<h{level} id="{sid}">{render_inline(text)}{anchor}</h{level}>')
             i += 1
             continue
 
@@ -307,7 +324,7 @@ def md_to_html(md: str) -> tuple[str, str]:
         body.append(f"<p>{render_inline(para)}</p>")
         i = j
 
-    return h1_title, "\n".join(body)
+    return h1_title, "\n".join(body), h2_toc
 
 
 # -----------------------------------------------------------
@@ -324,41 +341,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../intranet.css"/>
   <script>(function(){{var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}})();</script>
-  <style>
-    .memo-meta-bar {{ display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 18px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--r-md); margin-bottom: 24px; font-size: 0.78rem; color: var(--gray-700); }}
-    .memo-meta-bar strong {{ color: var(--gray-900); font-weight: 600; }}
-    .memo-meta-sep {{ color: var(--gray-300); }}
-    .memo-back {{ display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--gray-600); text-decoration: none; margin-bottom: 18px; }}
-    .memo-back:hover {{ color: var(--gray-900); }}
-
-    .memo-body {{ font-size: 0.88rem; line-height: 1.7; color: var(--gray-800); }}
-    .memo-body h2 {{ font-size: 1.35rem; font-weight: 700; color: var(--gray-900); margin: 38px 0 14px; letter-spacing: -0.02em; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }}
-    .memo-body h2:first-child {{ margin-top: 0; }}
-    .memo-body h3 {{ font-size: 1.08rem; font-weight: 700; color: var(--gray-900); margin: 28px 0 10px; letter-spacing: -0.01em; }}
-    .memo-body h4 {{ font-size: 0.95rem; font-weight: 700; color: var(--gray-800); margin: 22px 0 8px; }}
-    .memo-body p {{ margin: 0 0 14px; }}
-    .memo-body strong {{ color: var(--gray-900); font-weight: 600; }}
-    .memo-body em {{ font-style: italic; color: var(--gray-700); }}
-    .memo-body a {{ color: var(--accent, #4C2C4B); text-decoration: underline; text-underline-offset: 2px; }}
-    .memo-body a:hover {{ text-decoration: none; }}
-    .memo-body ul, .memo-body ol {{ margin: 0 0 16px; padding-left: 22px; }}
-    .memo-body li {{ margin: 4px 0; }}
-    .memo-body li > ul, .memo-body li > ol {{ margin: 6px 0 6px; }}
-    .memo-body code {{ font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.84em; background: var(--gray-100); padding: 1px 5px; border-radius: 4px; color: var(--gray-900); }}
-    .memo-body pre {{ background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--r-md); padding: 14px 16px; overflow-x: auto; margin: 0 0 18px; }}
-    .memo-body pre code {{ background: transparent; padding: 0; font-size: 0.82rem; line-height: 1.55; }}
-    .memo-body table {{ width: 100%; border-collapse: collapse; margin: 8px 0 22px; font-size: 0.82rem; }}
-    .memo-body th, .memo-body td {{ padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--gray-200); vertical-align: top; }}
-    .memo-body th {{ font-weight: 600; color: var(--gray-900); background: var(--gray-50); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }}
-    .memo-body tr:last-child td {{ border-bottom: none; }}
-    .memo-body hr {{ border: none; border-top: 1px solid var(--gray-200); margin: 28px 0; }}
-    .memo-body blockquote {{ border-left: 3px solid var(--gray-300); padding: 4px 0 4px 16px; margin: 0 0 16px; color: var(--gray-600); font-style: italic; }}
-
-    /* Constrain to readable width on wide screens */
-    .memo-body {{ max-width: 880px; }}
-  </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar">
@@ -369,53 +354,96 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <nav class="sidebar-nav">
     <div class="sidebar-label">Workspace</div>
     <a href="../index" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
       Dashboard
     </a>
+    <a href="../onboarding" class="sidebar-item">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/><polyline points="9 11 12 14 22 4"/></svg>
+      Onboarding
+    </a>
     <a href="../brand" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       Brand
     </a>
-    <a href="../team" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      Team
-    </a>
+    <div class="sidebar-group">
+      <div class="sidebar-item-row">
+        <a href="../team" class="sidebar-item">
+          <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Team
+        </a>
+        <button type="button" class="sidebar-toggle" aria-label="Toggle Team sub-menu" onclick="this.closest('.sidebar-group').toggleAttribute('data-open')">
+          <svg aria-hidden="true" class="sidebar-chevron" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+      <div class="sidebar-sub">
+        <a href="../cofounder-agreement" class="sidebar-sub-item">Co-founder Agreement</a>
+        <a href="../ceo-working-agreement" class="sidebar-sub-item">CEO Working Agreement</a>
+        <a href="../cto-working-agreement" class="sidebar-sub-item">CTO Working Agreement</a>
+      </div>
+    </div>
     <a href="../docs" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       Documents
     </a>
-    <a href="../mvp-docs/" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      Product Docs
-    </a>
+    <div class="sidebar-group">
+      <div class="sidebar-item-row">
+        <a href="../mvp-docs/" class="sidebar-item">
+          <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Product Docs
+        </a>
+        <button type="button" class="sidebar-toggle" aria-label="Toggle Product Docs sub-menu" onclick="this.closest('.sidebar-group').toggleAttribute('data-open')">
+          <svg aria-hidden="true" class="sidebar-chevron" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+      <div class="sidebar-sub">
+        <a href="../mvp-docs/01-product.html" class="sidebar-sub-item">01 · Product</a>
+        <a href="../mvp-docs/02-architecture.html" class="sidebar-sub-item">02 · Architecture</a>
+        <a href="../mvp-docs/03-extraction.html" class="sidebar-sub-item">03 · Extraction</a>
+        <a href="../mvp-docs/04-ai-kb.html" class="sidebar-sub-item">04 · AI &amp; KB</a>
+        <a href="../mvp-docs/05-ops.html" class="sidebar-sub-item">05 · Operations</a>
+      </div>
+    </div>
     <a href="../features" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
       Product Features
     </a>
     <a href="../roadmap" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       Roadmap
     </a>
     <a href="../decisions" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
       Decisions
     </a>
-    <a href="../sector-research" class="sidebar-item active">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <a href="../eval-v2" class="sidebar-item">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      AI Eval
+    </a>
+    <a href="../sector-research" class="sidebar-item active" aria-current="page">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       Sector Research
     </a>
     <a href="../investor" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
       Funding
     </a>
+    <a href="../financial-model" class="sidebar-item">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21H4.6c-.3 0-.6-.3-.6-.6V3"/><polyline points="8 13 12 9 16 13 21 8"/></svg>
+      Financial Model
+    </a>
+    <div class="sidebar-label">Operations</div>
+    <a href="../incident-response" class="sidebar-item">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Incident Response
+    </a>
     <div class="sidebar-label">External</div>
-    <a href="https://amaea0002-dev.github.io/webpage" class="sidebar-item" target="_blank">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <a href="https://amaea.co.uk" class="sidebar-item" target="_blank" rel="noopener">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       Website <span class="ext">↗</span>
     </a>
-    <a href="https://amaea0002-dev.github.io/prototype/dashboard.html" class="sidebar-item" target="_blank">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      Prototype <span class="ext">↗</span>
+    <a href="https://app.amaea.co.uk" class="sidebar-item" target="_blank" rel="noopener">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      App <span class="ext">↗</span>
     </a>
   </nav>
   <div class="sidebar-footer" style="position:relative;">
@@ -423,9 +451,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       <div class="sidebar-avatar" id="sidebarAvatar">H</div>
       <div style="flex:1;min-width:0;">
         <div class="sidebar-user-name" id="sidebarUserName">Hasna Sahul Hameed</div>
-        <div class="sidebar-user-role" id="sidebarUserRole">CEO &amp; Co-founder</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">CEO &amp; Co-Founder</div>
       </div>
-      <svg width="11" height="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;margin-left:auto;"><polyline points="6 9 12 15 18 9"/></svg>
+      <svg aria-hidden="true" width="11" height="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;margin-left:auto;"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
   </div>
 </aside>
@@ -440,12 +468,29 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <span class="bc-current">{title}</span>
   </div>
   <div class="topbar-right">
+    <button class="topbar-search" data-cmdk-trigger aria-label="Search the intranet">
+      <svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span class="topbar-search-label">Search</span>
+      <span class="topbar-search-kbd">⌘K</span>
+    </button>
     <span class="topbar-date" id="topbar-date"></span>
+    <div class="topbar-user">
+      <button class="topbar-user-trigger" id="topbarUserTrigger" aria-label="Account"></button>
+      <div class="topbar-user-panel" id="topbarUserPanel" role="menu">
+        <div class="topbar-user-identity">
+          <div class="topbar-user-identity-name" id="topbarUserName">Signed in</div>
+          <div class="topbar-user-identity-email" id="topbarUserEmail">—</div>
+        </div>
+        <div class="topbar-user-actions">
+          <a class="topbar-user-action danger" href="/cdn-cgi/access/logout"><svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign out</a>
+        </div>
+      </div>
+    </div>
     <button class="theme-toggle" aria-label="Toggle dark mode"></button>
   </div>
 </header>
 
-<main class="main">
+<main class="main" id="main" tabindex="-1">
   <div class="content">
 
     <a href="../sector-research" class="memo-back">← Back to Sector Research index</a>
@@ -456,12 +501,16 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     </div>
 
     <div class="memo-meta-bar">
+      <span><strong>Last reviewed:</strong> {last_reviewed}</span>
+      <span class="memo-meta-sep">·</span>
       <span><strong>Next review:</strong> {next_review}</span>
       <span class="memo-meta-sep">·</span>
       <span><strong>Source:</strong> <code>sector-research/{src}</code></span>
       <span class="memo-meta-sep">·</span>
       <span>Living document — update quarterly</span>
     </div>
+
+    {memo_toc_html}
 
     <div class="memo-body">
 {body}
@@ -506,7 +555,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       logout.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;color:rgba(255,255,255,0.4);text-decoration:none;flex-shrink:0;margin-left:auto;transition:background .15s ease, color .15s ease;';
       logout.addEventListener('mouseenter', () => {{ logout.style.background = 'rgba(255,255,255,0.08)'; logout.style.color = 'rgba(255,255,255,0.85)'; }});
       logout.addEventListener('mouseleave', () => {{ logout.style.background = 'transparent';            logout.style.color = 'rgba(255,255,255,0.4)';   }});
-      logout.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+      logout.innerHTML = '<svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
       chevron.replaceWith(logout);
     }}
   }}
@@ -538,9 +587,52 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     }});
   }})();
 </script>
+<script id="topbar-user-hydrate">
+(function(){{
+  var trigger = document.getElementById("topbarUserTrigger");
+  var panel   = document.getElementById("topbarUserPanel");
+  var nameEl  = document.getElementById("topbarUserName");
+  var emailEl = document.getElementById("topbarUserEmail");
+  if (!trigger || !panel) return;
+  function close(){{ panel.classList.remove("open"); trigger.classList.remove("open"); }}
+  trigger.addEventListener("click", function(e){{ e.stopPropagation(); var o = panel.classList.toggle("open"); trigger.classList.toggle("open", o); }});
+  document.addEventListener("click", function(e){{ if (panel.classList.contains("open") && !panel.contains(e.target) && e.target !== trigger) close(); }});
+  document.addEventListener("keydown", function(e){{ if (e.key === "Escape") close(); }});
+  fetch("/cdn-cgi/access/get-identity", {{ credentials: "include" }})
+    .then(function(r){{ return r.ok ? r.json() : null; }})
+    .then(function(id){{
+      if (!id || !id.email) return;
+      var name = id.name || id.email.split("@")[0];
+      var initial = (name || "?").charAt(0).toUpperCase();
+      trigger.textContent = initial;
+      if (nameEl)  nameEl.textContent  = name;
+      if (emailEl) emailEl.textContent = id.email;
+    }})
+    .catch(function(){{}});
+}})();
+</script>
+<script src="/intranet-search.js" defer></script>
 </body>
 </html>
 """
+
+
+def render_memo_toc(h2_toc: list[tuple[str, str]]) -> str:
+    """Render a clickable in-page TOC from collected H2 (id, text) pairs."""
+    if not h2_toc:
+        return ""
+    items = "\n".join(
+        f'    <a href="#{sid}" class="memo-toc-link">{text}</a>'
+        for sid, text in h2_toc
+    )
+    return (
+        '<nav class="memo-toc" aria-label="In this memo">\n'
+        '  <p class="memo-toc-label">In this memo</p>\n'
+        '  <div class="memo-toc-grid">\n'
+        f'{items}\n'
+        '  </div>\n'
+        '</nav>'
+    )
 
 
 def build_one(meta: dict) -> None:
@@ -549,12 +641,14 @@ def build_one(meta: dict) -> None:
         print(f"  ! MISSING: {src_path}")
         return
     md = src_path.read_text(encoding="utf-8")
-    _h1, body_html = md_to_html(md)
+    _h1, body_html, h2_toc = md_to_html(md)
     page = PAGE_TEMPLATE.format(
         title=meta["title"],
         eyebrow=meta["eyebrow"],
+        last_reviewed=meta["last_reviewed"],
         next_review=meta["next_review"],
         src=meta["src"],
+        memo_toc_html=render_memo_toc(h2_toc),
         body=body_html,
     )
     out_path = ROOT / meta["out"]
