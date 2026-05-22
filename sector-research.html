@@ -9,25 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="intranet.css"/>
   <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
-  <style>
-    .sector-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-lg); padding: 22px 24px; margin-bottom: 14px; }
-    .sector-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
-    .sector-eyebrow { font-size: 0.7rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.06em; }
-    .sector-title { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); letter-spacing: -0.02em; margin: 0 0 8px; }
-    .sector-tag { font-size: 0.82rem; color: var(--gray-700); margin-bottom: 14px; }
-    .sector-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 14px 0 16px; padding: 14px 16px; background: var(--gray-50); border-radius: var(--r-md); }
-    .sector-stat-label { font-size: 0.65rem; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
-    .sector-stat-value { font-size: 0.82rem; font-weight: 600; color: var(--gray-900); line-height: 1.4; }
-    .sector-summary { font-size: 0.83rem; color: var(--gray-700); line-height: 1.6; margin-bottom: 14px; }
-    .sector-summary strong { color: var(--gray-900); font-weight: 600; }
-    .sector-gaps { font-size: 0.78rem; color: var(--gray-500); line-height: 1.55; margin-bottom: 0; padding-left: 0; list-style: none; }
-    .sector-gaps li { padding: 4px 0 4px 16px; position: relative; }
-    .sector-gaps li::before { content: "•"; position: absolute; left: 4px; color: var(--gray-400); font-weight: 700; }
-    .sector-footer { display: flex; gap: 10px; align-items: center; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--gray-100); font-size: 0.74rem; color: var(--gray-500); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
-    .sector-file { color: var(--gray-600); }
-    .info-strip { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-lg); padding: 16px 20px; margin-bottom: 20px; font-size: 0.82rem; color: var(--gray-700); line-height: 1.6; }
-    .info-strip strong { color: var(--gray-900); font-weight: 600; }
-  </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -181,7 +162,7 @@
     <div class="page-header">
       <p class="page-eyebrow">Strategy · Phase 2 prep</p>
       <h1 class="page-title">Sector Research</h1>
-      <p class="page-sub">Living research memos for Amaea's four planned Phase 2 sectors (2030–2032). Each is a ~10,000-word working document covering regulation, market sizing, segmentation, named target firms, compliance pain points, competitive landscape, pricing benchmarks, and go-to-market notes. Reviewed quarterly; staggered so one comes due each quarter. <span style="color:var(--gray-500);font-weight:500;">Last reviewed 18 May 2026.</span></p>
+      <p class="page-sub">Living research memos for Amaea's four planned Phase 2 sectors (2030–2032). Each is a ~10,000-word working document covering regulation, market sizing, segmentation, named target firms, compliance pain points, competitive landscape, pricing benchmarks, and go-to-market notes. Reviewed quarterly; staggered so one comes due each quarter. <span class="text-mute">Last reviewed 18 May 2026.</span></p>
     </div>
 
     <div class="info-strip">
@@ -192,9 +173,8 @@
     <div class="sector-card">
       <div class="sector-meta">
         <span class="sector-eyebrow">Sector 1 · Q3 2026 priority</span>
-        <span class="badge badge-green">Initial version</span>
       </div>
-      <h2 id="mortgage-brokers" class="sector-title">Mortgage Brokers</h2>
+      <h2 id="mortgage-brokers" class="sector-title">Mortgage Brokers <a class="sector-anchor" href="#mortgage-brokers" aria-label="Link to this sector">#</a></h2>
       <div class="sector-tag">Fast follow-on to IFA — same regulator (FCA), adjacent rulebook (MCOB). Planned Mortgage Founders launch ~M41 (late 2029, Bull) or M53 (Sep 2030, Base).</div>
 
       <div class="sector-stats">
@@ -217,7 +197,7 @@
       </ul>
 
       <div class="sector-footer">
-        <a href="sector-research/mortgage-brokers" class="btn btn-primary" style="font-size: 0.82rem;padding:8px 16px;">Read full memo →</a>
+        <a href="sector-research/mortgage-brokers" class="btn btn-primary">Read full memo →</a>
         <span class="sector-file">sector-research/mortgage-brokers.md</span>
       </div>
     </div>
@@ -226,9 +206,8 @@
     <div class="sector-card">
       <div class="sector-meta">
         <span class="sector-eyebrow">Sector 2 · Q4 2026 priority</span>
-        <span class="badge badge-green">Initial version</span>
       </div>
-      <h2 id="insurance-intermediaries" class="sector-title">Insurance Intermediaries</h2>
+      <h2 id="insurance-intermediaries" class="sector-title">Insurance Intermediaries <a class="sector-anchor" href="#insurance-intermediaries" aria-label="Link to this sector">#</a></h2>
       <div class="sector-tag">Same regulator (FCA), conduct rules diverge from IFA (ICOBS ≠ COBS). GI brokers + life &amp; protection intermediaries. Planned Phase 2 launch 2030–2031.</div>
 
       <div class="sector-stats">
@@ -253,7 +232,7 @@
       </ul>
 
       <div class="sector-footer">
-        <a href="sector-research/insurance-intermediaries" class="btn btn-primary" style="font-size: 0.82rem;padding:8px 16px;">Read full memo →</a>
+        <a href="sector-research/insurance-intermediaries" class="btn btn-primary">Read full memo →</a>
         <span class="sector-file">sector-research/insurance-intermediaries.md</span>
       </div>
     </div>
@@ -262,9 +241,8 @@
     <div class="sector-card">
       <div class="sector-meta">
         <span class="sector-eyebrow">Sector 3 · Q1 2027 priority</span>
-        <span class="badge badge-green">Initial version</span>
       </div>
-      <h2 id="accountants" class="sector-title">Accountants</h2>
+      <h2 id="accountants" class="sector-title">Accountants <a class="sector-anchor" href="#accountants" aria-label="Link to this sector">#</a></h2>
       <div class="sector-tag">Different regulatory profile — not FCA-regulated in their core work. Multi-supervisor (ICAEW, ACCA, AAT, CIOT, ICAS, CAI, IFA, CIPFA, HMRC) under MLR 2017. AML-first wedge. Planned Phase 2 launch 2031.</div>
 
       <div class="sector-stats">
@@ -289,7 +267,7 @@
       </ul>
 
       <div class="sector-footer">
-        <a href="sector-research/accountants" class="btn btn-primary" style="font-size: 0.82rem;padding:8px 16px;">Read full memo →</a>
+        <a href="sector-research/accountants" class="btn btn-primary">Read full memo →</a>
         <span class="sector-file">sector-research/accountants.md</span>
       </div>
     </div>
@@ -298,9 +276,8 @@
     <div class="sector-card">
       <div class="sector-meta">
         <span class="sector-eyebrow">Sector 4 · Q2 2027 priority</span>
-        <span class="badge badge-green">Initial version</span>
       </div>
-      <h2 id="wealth-platforms-dfms" class="sector-title">Wealth Platforms &amp; DFMs</h2>
+      <h2 id="wealth-platforms-dfms" class="sector-title">Wealth Platforms &amp; DFMs <a class="sector-anchor" href="#wealth-platforms-dfms" aria-label="Link to this sector">#</a></h2>
       <div class="sector-tag">Most adjacent regulatorily (FCA · COBS · CASS · MiFID) but most different commercially. Enterprise-only buyer, 6–12 month sale cycle. Possibly Phase 3 not Phase 2. Planned launch 2031–2032.</div>
 
       <div class="sector-stats">
@@ -323,21 +300,21 @@
       </ul>
 
       <div class="sector-footer">
-        <a href="sector-research/wealth-platforms-dfms" class="btn btn-primary" style="font-size: 0.82rem;padding:8px 16px;">Read full memo →</a>
+        <a href="sector-research/wealth-platforms-dfms" class="btn btn-primary">Read full memo →</a>
         <span class="sector-file">sector-research/wealth-platforms-dfms.md</span>
       </div>
     </div>
 
     <!-- HOW THIS WORKS -->
-    <div class="sector-card" style="background: var(--gray-50); border-style: dashed;">
+    <div class="sector-card sector-card--callout">
       <div class="sector-meta">
         <span class="sector-eyebrow">Cadence · How this compounds</span>
       </div>
-      <h2 id="why-we-keep-these-living-and-what-to-do-at-each-review" class="sector-title">Why we keep these living, and what to do at each review</h2>
+      <h2 id="why-we-keep-these-living-and-what-to-do-at-each-review" class="sector-title">Why we keep these living, and what to do at each review <a class="sector-anchor" href="#why-we-keep-these-living-and-what-to-do-at-each-review" aria-label="Link to this sector">#</a></h2>
       <div class="sector-summary">
         Each memo carries a "Next review" date staggered across the year so one comes due each quarter. The aim is that when Amaea launches in any sector, the team is 4 years deep on the market, not 0 days. Cold-starting a new sector costs 3–6 months; compounding research now is near-free. <strong>At each quarterly review:</strong> verify regulatory citations are still current, update market size figures, resolve the flagged gaps, add new competitive entrants, append a row to that memo's update log table.
       </div>
-      <div class="sector-summary" style="margin-top: 10px;">
+      <div class="sector-summary sector-summary--spaced">
         Cross-cutting findings from the May 2026 initial pass: <strong>sector ARPA varies wildly</strong> (Wealth £5–30k/mo vs Accountants £99–599/mo) — the v3 financial model needs sector-specific ARPA tables, not a uniform 70%-of-IFA discount. <strong>110+ named target firms</strong> across all four sectors — usable directly for 2030+ outreach.
       </div>
     </div>
