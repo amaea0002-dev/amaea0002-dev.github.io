@@ -30,8 +30,8 @@
       <p class="cover-meta-value">MVP · pre-launch</p>
     </div>
     <div>
-      <p class="cover-meta-label">As of</p>
-      <p class="cover-meta-value">14 May 2026</p>
+      <p class="cover-meta-label">Last reviewed</p>
+      <p class="cover-meta-value">18 May 2026</p>
     </div>
     <div>
       <p class="cover-meta-label">Owners</p>
@@ -56,8 +56,24 @@
 
 <article class="doc">
 <p>This is the core IP. Amaea reads IFA compliance documents using Claude vision, extracts compliance-critical fields into validated structured data, and raises specific compliance flags with FCA rule citations when fields are missing or incorrect.</p>
-<p>This document covers: the 19 canonical document types, their per-type schemas, the classify-then-extract pipeline, multi-page document grouping, the auto-flag-raising system, and the complete FCA rule mapping table.</p>
-<h2 id="the-19-document-types">The 19 document types</h2>
+<p>This document covers: the 21 canonical document types (19 client-level + 2 firm-level), their per-type schemas, the classify-then-extract pipeline, multi-page document grouping, the auto-flag-raising system, and the complete FCA rule mapping table.</p>
+<nav class="doc-toc" aria-label="In this document">
+  <p class="doc-toc-label">In this document</p>
+  <div class="doc-toc-grid">
+    <a href="#the-document-types"                       class="doc-toc-link"><span class="doc-toc-num">1</span> Document types</a>
+    <a href="#the-extraction-pipeline"                  class="doc-toc-link"><span class="doc-toc-num">2</span> Extraction pipeline</a>
+    <a href="#the-fca-rule-mapping-flagsfromextraction" class="doc-toc-link"><span class="doc-toc-num">3</span> FCA rule mapping</a>
+    <a href="#flag-severity-penalty-impacts-health-score" class="doc-toc-link"><span class="doc-toc-num">4</span> Flag severity penalty</a>
+    <a href="#multi-page-document-grouping"             class="doc-toc-link"><span class="doc-toc-num">5</span> Multi-page grouping</a>
+    <a href="#what-the-ai-is-good-at-vs-not"            class="doc-toc-link"><span class="doc-toc-num">6</span> What the AI is good at vs not</a>
+    <a href="#code-references"                          class="doc-toc-link"><span class="doc-toc-num">7</span> Code references</a>
+    <a href="#migrations-affecting-this-system"         class="doc-toc-link"><span class="doc-toc-num">8</span> Migrations</a>
+    <a href="#test-corpus"                              class="doc-toc-link"><span class="doc-toc-num">9</span> Test corpus</a>
+    <a href="#future-enhancements"                      class="doc-toc-link"><span class="doc-toc-num">10</span> Future enhancements</a>
+    <a href="#what-to-read-next"                        class="doc-toc-link"><span class="doc-toc-num">11</span> What to read next</a>
+  </div>
+</nav>
+<h2 id="the-document-types">The 21 document types</h2>
 <p>Each type has its own Zod schema (<code>amaea-app/src/lib/extraction/schemas.ts</code>) that defines the extracted fields and the flag-raising rules. The classifier (<code>extract.ts</code>) routes each upload to the right schema.</p>
 <h3 id="client-level-documents-extend-baseclientdocfields">Client-level documents (extend <code>BaseClientDocFields</code>)</h3>
 <p>Most documents share a base set of fields (document date, adviser name, client name + reference, signed-by-client booleans, copy-filed/copy-sent booleans, extraction confidence). These are spread into each schema via <code>...BaseClientDocFields</code>.</p>
@@ -69,7 +85,7 @@
 <li><strong><code>db_transfer_report</code></strong> — Pension Transfer Report Extracted: <code>tvaDate</code>, <code>pensionTransferSpecialistName</code>, <strong><code>ptsQualificationConfirmed</code></strong>, <code>transferRecommended</code>, <code>clientSignOffDate</code>, <strong><code>coolingOffNoticeProvided</code></strong>, <code>schemeName</code>, <code>transferValue</code> (number), <code>cedingSchemeDetails</code>, <code>receivingArrangementDetails</code> + base fields.</li>
 </ol>
 <h3 id="documents-with-their-own-field-set">Documents with their own field set</h3>
-<ol>
+<ol start="6">
 <li><strong><code>vulnerability_assessment</code></strong> — Consumer Duty Vulnerability Record Fields: <code>assessmentDate</code>, <code>adviserName</code>, <code>clientName</code>, <code>clientReference</code>, <strong><code>vulnerabilityDriver</code></strong> (health / life_event / financial_resilience / low_capability), <code>functionalImpact</code>, <code>serviceAdaptations</code>, <strong><code>clientConsentForSensitiveData</code></strong> (boolean — UK GDPR Art. 9), <code>nextReviewDate</code>, extraction confidence.</li>
 <li><strong><code>consumer_duty_outcome</code></strong> — Consumer Duty Client-Level Outcome Assessment Fields: <code>assessmentDate</code>, adviser/client identifiers, <strong><code>outcomeAreasAssessed</code></strong> (array of: products_and_services / price_and_value / consumer_understanding / consumer_support), <code>fairValueConfirmed</code>, <code>concernsIdentified</code>, <code>actionsTakenOrPlanned</code>, <code>nextAssessmentDate</code>.</li>
 <li><strong><code>letter_of_authority</code></strong> — LOA / Third Party Authority Fields: <code>documentDate</code>, <code>dateSignedByClient</code>, <code>providerName</code>, <code>productOrPlanReferenced</code>, <strong><code>authorityExpiryDate</code></strong>, <code>copyFiled</code>, client identifiers.</li>
@@ -81,12 +97,18 @@
 <li><strong><code>training_competency</code></strong> — Adviser-Level Training &amp; Competency Fields: <strong><code>adviserName</code></strong>, <code>qualificationHeld</code>, <code>awardingBody</code>, <strong><code>spsRenewalDate</code></strong>, <code>cpdHoursTotal</code>, <strong><code>cpdHoursStructured</code></strong>, <code>cpdHoursUnstructured</code>, <code>lastCompetencyAssessmentDate</code>, <code>supervisionStatus</code> (supervised / unsupervised / training). Note: this type has no <code>client_id</code> — adviser-level. Currently extracted but not persisted (DB requires <code>client_id NOT NULL</code>); a separate <code>adviser_documents</code> table is post-MVP.</li>
 </ol>
 <h3 id="doc-types-added-15-may-2026">Doc types added 15 May 2026</h3>
-<ol>
+<ol start="15">
 <li><strong><code>expression_of_wish</code></strong> — Pension Death Benefit Nomination Extends <code>BaseClientDocFields</code>. Fields: <code>pensionScheme</code>, <code>pensionPolicyReference</code>, <strong><code>nominees</code></strong> (array of <code>{ name, relationship, sharePercent }</code>, <code>.partial()</code>), <strong><code>totalSharePercent</code></strong> (number — should equal 100), <code>witnessSignaturePresent</code>, <strong><code>lastReviewedDate</code></strong>.</li>
 <li><strong><code>application_form</code></strong> — Transfer In / New Account / Wrapper Change Extends <code>BaseClientDocFields</code>. Fields: <code>applicationType</code> (transfer_in / new_account / wrapper_change / withdrawal_instruction / other), <code>receivingProvider</code> (e.g. &quot;Fundment&quot;), <code>receivingProductWrapper</code> (e.g. &quot;Fundment SIPP&quot;), <code>cedingProvider</code>, <code>cedingPolicyReference</code>, <code>transferAmount</code> (number), <strong><code>isDbTransfer</code></strong> (boolean), <strong><code>adviserSignedOff</code></strong>.</li>
 <li><strong><code>portfolio_snapshot</code></strong> — Point-in-Time Valuation Extends <code>BaseClientDocFields</code>. Fields: <code>snapshotDate</code>, <code>totalPortfolioValue</code> (number), <code>numberOfHoldings</code>, <code>riskProfileAtSnapshot</code>, <code>yearToDateReturnPct</code> (number), <code>benchmarkComparison</code> (text). No automatic flags — informational.</li>
 <li><strong><code>sales_file_cover</code></strong> — Compliance File Index / Cover Sheet Extends <code>BaseClientDocFields</code>. Fields: <code>recommendationDate</code>, <strong><code>factFindPresent</code></strong>, <strong><code>suitabilityReportPresent</code></strong>, <code>applicationFormsPresent</code>, <code>illustrationsPresent</code>, <code>termsOfBusinessPresent</code>, <strong><code>complianceOfficerReviewed</code></strong>, <code>complianceOfficerName</code>, <code>complianceReviewDate</code>.</li>
 <li><strong><code>attitude_to_risk</code></strong> — Standalone ATR Questionnaire Extends <code>BaseClientDocFields</code>. Fields: <code>questionnaireProvider</code> (e.g. &quot;FinaMetrica Pro&quot;), <code>questionsAnswered</code> (number), <code>totalQuestions</code> (number), <code>riskRating</code> (string — e.g. &quot;Conservative (3/10)&quot;), <code>riskProfileCategory</code> (conservative / moderately_conservative / balanced / moderately_aggressive / aggressive), <strong><code>reviewedWithClient</code></strong> (boolean), <code>capacityForLossDiscussed</code>.</li>
+</ol>
+<h3 id="firm-level-documents">Firm-level documents</h3>
+<p>Two doc types do not attach to a client — they describe the firm itself. Both extract via the same classify-then-extract pipeline but persist against the firm rather than a client record.</p>
+<ol start="20">
+<li><strong><code>pii_policy</code></strong> — Professional Indemnity Insurance Policy (added migration 024) Fields: <code>insurerName</code>, <code>policyNumber</code>, <strong><code>policyStartDate</code></strong>, <strong><code>policyRenewalDate</code></strong>, <code>limitOfIndemnity</code> (number, £), <code>excess</code> (number, £), <code>coverageScope</code> (text), <code>retroactiveDate</code>. Auto-raises PII-renewal / PII-expiry / PII-cover risk flags when the renewal date is near, expired, or the limit of indemnity sits below the FCA minimum for the firm&#x27;s permissions.</li>
+<li><strong><code>revenue_record</code></strong> — Firm Revenue / RMAR Source Document (added migration 026) Fields: <code>recordPeriodStart</code>, <code>recordPeriodEnd</code>, <code>totalRevenue</code> (number, £), <code>revenueBreakdown</code> (jsonb — Section A categories), <code>regulatoryFees</code> (number, £). Feeds RMAR Section A (revenue) and Section D (regulatory capital) auto-populate so the Scribe report can pre-fill the financial sections from extracted source documents.</li>
 </ol>
 <h2 id="the-extraction-pipeline">The extraction pipeline</h2>
 <h3 id="step-1-classify">Step 1: Classify</h3>
@@ -650,10 +672,12 @@ Prompt (multi-file):
 <ul>
 <li><code>017_document_metadata.sql</code> — adds <code>documents.metadata jsonb</code>, <code>risk_flags.source_document_id</code> + <code>metadata</code>, extends both type CHECK constraints, partial unique indexes (client-level vs doc-level flags)</li>
 <li><code>020_more_doc_types.sql</code> — adds 4 doc types: expression_of_wish, application_form, portfolio_snapshot, sales_file_cover</li>
-<li><code>021_atr_doc_type.sql</code> — adds attitude_to_risk as 19th canonical type</li>
+<li><code>021_atr_doc_type.sql</code> — adds attitude_to_risk as the 19th client-level type</li>
+<li><code>024_pii_policy.sql</code> — adds <code>pii_policy</code> firm-level doc type + PII renewal / expiry / cover risk flags</li>
+<li><code>026_revenue_record.sql</code> — adds <code>revenue_record</code> firm-level doc type for RMAR Section A / D auto-populate</li>
 </ul>
 <h2 id="test-corpus">Test corpus</h2>
-<p>43 synthetic test PDFs in <code>/Users/milan/Documents/Amaea/test-samples/pdfs/</code>. Generated by:</p>
+<p>43 synthetic test PDFs in <code>test-samples/pdfs/</code> (repo-local, gitignored). Generated by:</p>
 <ul>
 <li><code>amaea-app/scripts/generate-test-pdfs.mjs</code> — the original 5 (docs 01-05)</li>
 <li><code>amaea-app/scripts/generate-test-pdfs-v2.mjs</code> — extended set 06-48 (with gaps; 36 PDFs in this set)</li>
