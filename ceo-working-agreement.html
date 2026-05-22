@@ -9,69 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="intranet.css"/>
 <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
-<style>
-  /* Colour variables sourced from intranet.css (supports light + dark mode). */
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 400; color: var(--gray-900); background: var(--bg); line-height: 1.65; font-size: 15px; -webkit-font-smoothing: antialiased; }
-  .doc-cover { background: linear-gradient(135deg, var(--plum-dark) 0%, var(--plum) 60%, var(--plum-mid) 100%); color: white; padding: 64px 64px 56px; margin: 0 0 48px; }
-  .doc-cover-eyebrow { font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(255,255,255,0.55); margin: 0 0 22px; }
-  .doc-cover-logo { height: 32px; margin-bottom: 36px; filter: brightness(0) invert(1); }
-  .doc-cover h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.035em; line-height: 1.1; margin: 0 0 14px; color: white; }
-  .doc-cover-sub { font-size: 1.02rem; color: rgba(255,255,255,0.78); line-height: 1.55; max-width: 640px; margin: 0 0 24px; }
-  .doc-cover-meta { display: flex; gap: 36px; font-size: 0.82rem; color: rgba(255,255,255,0.55); border-top: 1px solid rgba(255,255,255,0.12); padding-top: 22px; flex-wrap: wrap; }
-  .doc-cover-meta dt { font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.65rem; margin: 0 0 3px; color: rgba(255,255,255,0.4); }
-  .doc-cover-meta dd { margin: 0; color: rgba(255,255,255,0.85); font-weight: 500; }
-  .doc-content { max-width: 820px; padding: 0 64px 80px; margin: 0 auto; }
-  .preamble { background: var(--plum-tint); border: 1px solid var(--plum-border); padding: 22px 26px; margin: 0 0 36px; border-radius: var(--r-lg); }
-  .preamble p { margin: 0 0 12px; } .preamble p:last-child { margin: 0; }
-  .draft-notice { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.22); color: var(--gray-700); padding: 18px 22px; margin: 0 0 40px; border-radius: 8px; font-size: 0.88rem; line-height: 1.6; }
-  .draft-notice strong { color: var(--amber); }
-  h2 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; color: var(--plum); margin: 44px 0 14px; padding-bottom: 10px; border-bottom: 2px solid var(--plum-band); }
-  h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); margin: 28px 0 10px; letter-spacing: -0.01em; }
-  p { margin: 0 0 14px; }
-  ul, ol { margin: 0 0 18px; padding-left: 26px; }
-  ul li, ol li { margin-bottom: 6px; }
-  ul li::marker { color: var(--plum-soft); }
-  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 0 0 22px; border: 1px solid var(--gray-200); border-radius: 6px; overflow: hidden; }
-  th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--gray-100); vertical-align: top; }
-  th { background: var(--plum-tint); color: var(--plum); font-weight: 700; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; }
-  tr:last-child td { border-bottom: none; }
-  .note { background: var(--plum-tint); border: 1px solid var(--plum-border); padding: 16px 20px; margin: 20px 0; font-size: 0.88rem; line-height: 1.65; border-radius: var(--r-md); color: var(--gray-700); }
-  .note strong { color: var(--plum); }
-  code { font-family: 'JetBrains Mono', monospace; font-size: 0.84em; background: var(--gray-100); color: var(--plum-dark); padding: 2px 6px; border-radius: 4px; }
-  hr { border: none; border-top: 1px solid var(--gray-200); margin: 36px 0; }
-  .signature-block { background: var(--plum-tint); border: 1px solid var(--plum-band); border-radius: 8px; padding: 32px 36px; margin: 48px 0 28px; page-break-inside: avoid; }
-  .signature-block h3 { color: var(--plum); margin-top: 0; font-size: 1.1rem; border-bottom: 1px solid var(--plum-band); padding-bottom: 10px; margin-bottom: 22px; }
-  .sig-party { margin-bottom: 26px; }
-  .sig-party-name { font-weight: 700; color: var(--gray-900); margin: 0 0 12px; font-size: 0.98rem; }
-  .sig-party-role { font-size: 0.78rem; color: var(--gray-500); font-weight: 500; margin-left: 4px; }
-  .sig-line { display: flex; gap: 24px; align-items: flex-end; margin-top: 8px; }
-  .sig-field { flex: 1; display: flex; flex-direction: column; }
-  .sig-field-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: var(--plum-soft); margin-bottom: 4px; }
-  .sig-field-line { border-bottom: 1.5px solid var(--gray-300); height: 28px; }
-  .doc-footer { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--gray-200); font-size: 0.78rem; color: var(--gray-500); text-align: center; line-height: 1.6; }
-  .doc-footer .tagline { color: var(--plum); font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px; font-size: 0.82rem; }
-  .clause-num { color: var(--plum-soft); font-weight: 700; }
-  .nav-strip { background: var(--gray-50); border-bottom: 1px solid var(--gray-200); padding: 14px 64px; font-size: 0.82rem; display: flex; align-items: center; gap: 12px; }
-  .nav-strip .nav-crumb { color: var(--gray-500); }
-  .nav-strip .nav-sep { color: var(--gray-300); }
-  .back-link { color: var(--plum-soft); text-decoration: none; font-weight: 600; transition: color 0.15s; display: inline-flex; align-items: center; gap: 6px; }
-  .back-link:hover { color: var(--plum); }
-  .main > .doc-cover { margin: 0 0 40px; }
-  @media print {
-    .sidebar, .topbar, .sidebar-overlay, .nav-strip { display: none !important; }
-    .main { margin-left: 0 !important; padding-top: 0 !important; }
-    body { font-size: 11pt; }
-    .doc-cover { background: var(--plum) !important; padding: 36px 36px 32px; margin: 0 0 28px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .doc-cover h1 { font-size: 1.7rem; }
-    .doc-content { padding: 0 36px 40px; max-width: none; }
-    h2 { page-break-after: avoid; font-size: 1.15rem; }
-    h3 { page-break-after: avoid; }
-    .signature-block { page-break-inside: avoid; }
-    .note, .preamble { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  }
-</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -204,7 +141,8 @@
     <div><dt>Founder</dt><dd>Hasna Sahul Hameed</dd></div>
     <div><dt>Role</dt><dd>Chief Executive Officer &amp; Co-Founder</dd></div>
     <div><dt>Drafted</dt><dd>16 May 2026</dd></div>
-    <div><dt>Status</dt><dd>Draft</dd></div>
+    <div><dt>Last reviewed</dt><dd>18 May 2026</dd></div>
+    <div><dt>Status</dt><dd>Draft v1</dd></div>
   </dl>
 </header>
 
@@ -219,7 +157,24 @@
   <strong>PURPOSE.</strong> This document captures the day-to-day operational expectations of the CEO role. It is <strong>not</strong> an employment contract — Hasna is a Co-Founder, not (initially) an employee. When Hasna begins drawing a salary from the Business post-Incorporation, the Company should put a complementary statutory employment contract in place alongside this Working Agreement.
 </div>
 
-<h2 id="1-role-domain-authority"><span class="clause-num">1.</span> Role &amp; Domain Authority</h2>
+<nav class="contract-toc" aria-label="Clauses in this agreement">
+  <p class="contract-toc-label">Clauses</p>
+  <ol class="contract-toc-list">
+    <li><a href="#1-role-domain-authority">Role &amp; Domain Authority</a></li>
+    <li><a href="#2-time-commitment">Time Commitment</a></li>
+    <li><a href="#3-responsibilities">Responsibilities</a></li>
+    <li><a href="#4-working-structure">Working Structure</a></li>
+    <li><a href="#5-compensation">Compensation</a></li>
+    <li><a href="#6-communication-disagreements">Communication &amp; Disagreements</a></li>
+    <li><a href="#7-values-mission-vision">Values, Mission &amp; Vision</a></li>
+    <li><a href="#8-commitment-to-customer-regulator-trust">Commitment to Customer &amp; Regulator Trust</a></li>
+    <li><a href="#9-exit-transition">Exit &amp; Transition</a></li>
+    <li><a href="#10-future-evolution">Future Evolution</a></li>
+    <li><a href="#11-relationship-to-founder-agreement">Relationship to Founder Agreement</a></li>
+  </ol>
+</nav>
+
+<h2 id="1-role-domain-authority"><span class="clause-num">1.</span> Role &amp; Domain Authority <a class="clause-anchor" href="#1-role-domain-authority" aria-label="Link to this clause">#</a></h2>
 <h3 id="11-role-title">1.1 Role title</h3>
 <p><strong>Chief Executive Officer &amp; Co-Founder</strong>.</p>
 
@@ -243,7 +198,7 @@
 <h3 id="14-external-representation">1.4 External representation</h3>
 <p>By default, Hasna is the <strong>primary external face of the Business</strong> — investor conversations, press, conferences, industry-body engagement, customer demos. This recognises Hasna's regulatory-domain expertise and outward-facing role. Milan participates in external engagements where technical depth is needed (architecture reviews, technical due diligence, engineering recruiting events).</p>
 
-<h2 id="2-time-commitment"><span class="clause-num">2.</span> Time Commitment</h2>
+<h2 id="2-time-commitment"><span class="clause-num">2.</span> Time Commitment <a class="clause-anchor" href="#2-time-commitment" aria-label="Link to this clause">#</a></h2>
 <h3 id="21-current-phase-today-lucent-exit-targeted-q3-2028">2.1 Current phase (today → Lucent exit, targeted Q3 2028)</h3>
 <p><strong>Part-time alongside primary employment at Lucent.</strong> Indicative commitment: increasing from current levels through to full-time. The Founders shall agree a rough quarterly target (e.g. evenings + weekends; ~15–25 hours/week).</p>
 
@@ -259,7 +214,7 @@
 <h3 id="25-outside-work">2.5 Outside work</h3>
 <p>Hasna is <strong>expressly permitted</strong> to retain her existing employment at Lucent until her planned exit date. She may not, however, take any additional engagement that materially competes with the Business or that meaningfully diminishes her ability to perform CEO duties — see Clause 5.2 of the Founder Agreement.</p>
 
-<h2 id="3-responsibilities"><span class="clause-num">3.</span> Responsibilities</h2>
+<h2 id="3-responsibilities"><span class="clause-num">3.</span> Responsibilities <a class="clause-anchor" href="#3-responsibilities" aria-label="Link to this clause">#</a></h2>
 <h3 id="31-core-deliverables">3.1 Core deliverables</h3>
 <p>Hasna is responsible for:</p>
 <ul>
@@ -283,7 +238,7 @@
   <li>Founder calls + customer demos (alternating lead)</li>
 </ul>
 
-<h2 id="4-working-structure"><span class="clause-num">4.</span> Working Structure</h2>
+<h2 id="4-working-structure"><span class="clause-num">4.</span> Working Structure <a class="clause-anchor" href="#4-working-structure" aria-label="Link to this clause">#</a></h2>
 <h3 id="41-joint-sessions">4.1 Joint sessions</h3>
 <p>At minimum <strong>one joint working session per week</strong> with the CTO. Cadence and format (call, in-person, async update) by mutual agreement.</p>
 
@@ -300,7 +255,7 @@
   <li>On request from either Founder, with at least 14 days' notice</li>
 </ul>
 
-<h2 id="5-compensation"><span class="clause-num">5.</span> Compensation</h2>
+<h2 id="5-compensation"><span class="clause-num">5.</span> Compensation <a class="clause-anchor" href="#5-compensation" aria-label="Link to this clause">#</a></h2>
 <h3 id="51-pre-incorporation">5.1 Pre-Incorporation</h3>
 <p><strong>No cash compensation.</strong> Hasna retains her Lucent income and contributes labour as a Founder. The equity granted under the Founder Agreement is the principal consideration for this period.</p>
 
@@ -324,7 +279,7 @@
 <h3 id="56-expense-reimbursement">5.6 Expense reimbursement</h3>
 <p>Reasonable business expenses (travel to customer/partner meetings, conference attendance, professional memberships, software subscriptions used for Business) are reimbursable by the Company on production of receipts. Pre-Incorporation expenses are tracked and reimbursed at Incorporation.</p>
 
-<h2 id="6-communication-disagreements"><span class="clause-num">6.</span> Communication &amp; Disagreements</h2>
+<h2 id="6-communication-disagreements"><span class="clause-num">6.</span> Communication &amp; Disagreements <a class="clause-anchor" href="#6-communication-disagreements" aria-label="Link to this clause">#</a></h2>
 <h3 id="61-communication-principles">6.1 Communication principles</h3>
 <p>Hasna commits to:</p>
 <ul>
@@ -340,7 +295,7 @@
 <h3 id="63-confidentiality-of-disputes">6.3 Confidentiality of disputes</h3>
 <p>Until escalated under the Founder Agreement dispute mechanism, any disagreement is treated as confidential between the Founders. Neither Founder shall raise the disagreement publicly, with employees, investors, customers, or third parties without the other Founder's consent.</p>
 
-<h2 id="7-values-mission-vision"><span class="clause-num">7.</span> Values, Mission &amp; Vision</h2>
+<h2 id="7-values-mission-vision"><span class="clause-num">7.</span> Values, Mission &amp; Vision <a class="clause-anchor" href="#7-values-mission-vision" aria-label="Link to this clause">#</a></h2>
 <p>Hasna commits to:</p>
 <ul>
   <li>Upholding Amaea's values in all work and decisions</li>
@@ -349,7 +304,7 @@
   <li>Prioritising the Business's reputation in the UK IFA market over short-term shortcuts</li>
 </ul>
 
-<h2 id="8-commitment-to-customer-regulator-trust"><span class="clause-num">8.</span> Commitment to Customer &amp; Regulator Trust</h2>
+<h2 id="8-commitment-to-customer-regulator-trust"><span class="clause-num">8.</span> Commitment to Customer &amp; Regulator Trust <a class="clause-anchor" href="#8-commitment-to-customer-regulator-trust" aria-label="Link to this clause">#</a></h2>
 <p>Hasna will prioritise:</p>
 <ul>
   <li><strong>Regulator-grade product positioning</strong> — Amaea's value depends on being trusted by compliance-sensitive buyers. Hasna will not approve marketing or sales claims that overstate the product's compliance capabilities or that risk FCA scrutiny.</li>
@@ -357,7 +312,7 @@
   <li><strong>Honest communication</strong> with prospects and Founders Programme firms about what the platform does and doesn't do.</li>
 </ul>
 
-<h2 id="9-exit-transition"><span class="clause-num">9.</span> Exit &amp; Transition</h2>
+<h2 id="9-exit-transition"><span class="clause-num">9.</span> Exit &amp; Transition <a class="clause-anchor" href="#9-exit-transition" aria-label="Link to this clause">#</a></h2>
 <p>If Hasna wishes to step away from the CEO role:</p>
 <ul>
   <li><strong>Notice:</strong> Eight (8) weeks' written notice per Clause 9.3 of the Founder Agreement. Where the Lucent exit has already happened (so Hasna has no fallback employment), notice is extended to <strong>twelve (12) weeks</strong> to give the Business adequate transition time.</li>
@@ -366,10 +321,10 @@
   <li><strong>Equity:</strong> Vesting and leaver provisions per Clauses 3 and 9 of the Founder Agreement.</li>
 </ul>
 
-<h2 id="10-future-evolution"><span class="clause-num">10.</span> Future Evolution</h2>
+<h2 id="10-future-evolution"><span class="clause-num">10.</span> Future Evolution <a class="clause-anchor" href="#10-future-evolution" aria-label="Link to this clause">#</a></h2>
 <p>This Working Agreement may evolve as Amaea progresses. Both Founders agree to revisit it at the cadence in Clause 4.3, and to update it (in writing, signed by both) to reflect material changes in Hasna's role, time commitment, or compensation — particularly at the Lucent exit and on transitions across phases.</p>
 
-<h2 id="11-relationship-to-founder-agreement"><span class="clause-num">11.</span> Relationship to Founder Agreement</h2>
+<h2 id="11-relationship-to-founder-agreement"><span class="clause-num">11.</span> Relationship to Founder Agreement <a class="clause-anchor" href="#11-relationship-to-founder-agreement" aria-label="Link to this clause">#</a></h2>
 <p>Where this Working Agreement is silent, the Founder Agreement governs.</p>
 <p>Where this Working Agreement conflicts with the Founder Agreement, the Founder Agreement prevails.</p>
 <p>Where the Founder Agreement is silent, this Working Agreement governs operational expectations.</p>
@@ -380,21 +335,21 @@
     <p class="sig-party-name">Hasna Sahul Hameed<span class="sig-party-role">CEO &amp; Co-Founder</span></p>
     <div class="sig-line">
       <div class="sig-field"><span class="sig-field-label">Signature</span><span class="sig-field-line"></span></div>
-      <div class="sig-field" style="max-width:160px;"><span class="sig-field-label">Date</span><span class="sig-field-line"></span></div>
+      <div class="sig-field sig-field--date"><span class="sig-field-label">Date</span><span class="sig-field-line"></span></div>
     </div>
   </div>
   <div class="sig-party">
     <p class="sig-party-name">Milan Sajiv<span class="sig-party-role">CTO &amp; Co-Founder, acknowledging</span></p>
     <div class="sig-line">
       <div class="sig-field"><span class="sig-field-label">Signature</span><span class="sig-field-line"></span></div>
-      <div class="sig-field" style="max-width:160px;"><span class="sig-field-label">Date</span><span class="sig-field-line"></span></div>
+      <div class="sig-field sig-field--date"><span class="sig-field-label">Date</span><span class="sig-field-line"></span></div>
     </div>
   </div>
 </div>
 
 <div class="doc-footer">
   <p class="tagline">Stay compliant. Stay confident.</p>
-  <p>Amaea Ltd (in formation) · Confidential · Founder Working Agreement · v1 draft 16 May 2026</p>
+  <p>Amaea Ltd (in formation) · Confidential · Founder Working Agreement</p>
 </div>
 
 </div>
@@ -424,9 +379,24 @@
     if (el) el.textContent = new Date().toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'long', year:'numeric' });
   })();
   (function () {
+    const userArea = document.getElementById('sidebarUserArea');
     const nameEl = document.getElementById('sidebarUserName');
     const roleEl = document.getElementById('sidebarUserRole');
     const avatarEl = document.getElementById('sidebarAvatar');
+    if (userArea) {
+      const chevron = userArea.querySelector('svg');
+      if (chevron) {
+        const logout = document.createElement('a');
+        logout.href = '/cdn-cgi/access/logout';
+        logout.title = 'Sign out';
+        logout.setAttribute('aria-label', 'Sign out');
+        logout.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;color:rgba(255,255,255,0.4);text-decoration:none;flex-shrink:0;margin-left:auto;transition:background .15s ease, color .15s ease;';
+        logout.addEventListener('mouseenter', () => { logout.style.background = 'rgba(255,255,255,0.08)'; logout.style.color = 'rgba(255,255,255,0.85)'; });
+        logout.addEventListener('mouseleave', () => { logout.style.background = 'transparent'; logout.style.color = 'rgba(255,255,255,0.4)'; });
+        logout.innerHTML = '<svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+        chevron.replaceWith(logout);
+      }
+    }
     const ROLE_BY_EMAIL = {
       'milan@amaea.co.uk': { role: 'CTO & Co-Founder', bg: 'linear-gradient(135deg,#1a4080,#4292c6)' },
       'hasna@amaea.co.uk': { role: 'CEO & Co-Founder', bg: 'linear-gradient(135deg,#4C2C4B,#8B6189)' },
