@@ -9,130 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="intranet.css"/>
   <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
-  <style>
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 14px;
-      margin-top: 20px;
-    }
-    .feature-card {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 14px;
-      padding: 18px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
-    .feature-card:hover {
-      border-color: var(--plum-border);
-      box-shadow: 0 2px 12px rgba(64,36,63,0.07);
-    }
-    /* Status is conveyed by the .badge-live/.badge-building/.badge-planned/.badge-future
-     * pill in the card header — the side-stripe accent that used to repeat the signal
-     * was decorative redundancy. */
-
-    .feature-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .feature-name {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: var(--gray-900);
-      letter-spacing: -0.02em;
-    }
-    .feature-tagline {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--plum-soft);
-      margin-top: 1px;
-    }
-    .feature-desc {
-      font-size: 0.79rem;
-      color: var(--gray-600);
-      line-height: 1.6;
-    }
-    .feature-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 4px;
-    }
-    .feature-layer {
-      font-size: 0.65rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--gray-500, #9088A3);
-      background: var(--gray-100, #F3F2F6);
-      padding: 2px 8px;
-      border-radius: 20px;
-    }
-    /* Theme-aware tints that work in light + dark mode */
-    .badge-live    { background: rgba(16,185,129,0.12); color: var(--green); border: 1px solid rgba(16,185,129,0.28); }
-    .badge-building { background: rgba(99,102,241,0.12); color: #818cf8;      border: 1px solid rgba(99,102,241,0.28); }
-    .badge-planned  { background: rgba(245,158,11,0.12); color: var(--amber); border: 1px solid rgba(245,158,11,0.28); }
-    .badge-future   { background: var(--gray-100, #F3F2F6); color: var(--gray-600); border: 1px solid var(--gray-200); }
-
-    .filter-bar {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 4px;
-    }
-    .filter-btn {
-      padding: 5px 14px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      border: 1px solid var(--gray-200);
-      background: var(--white);
-      color: var(--gray-600);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--plum);
-      color: #fff;
-      border-color: var(--plum);
-    }
-    .group-label {
-      font-size: 0.74rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--gray-500, #9088A3);
-      margin-top: 28px;
-      margin-bottom: 2px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .group-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--gray-200);
-    }
-    .hidden { display: none !important; }
-    .priority-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: var(--plum-soft);
-      background: var(--plum-tint);
-      border: 1px solid var(--plum-border);
-      padding: 2px 8px;
-      border-radius: 20px;
-    }
-  </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -284,71 +160,65 @@
   <div class="content">
 
     <div class="page-header">
-      <p class="page-eyebrow">Product</p>
+      <p class="page-eyebrow">26 features · 4 priority groups · Sept 2028 launch</p>
       <h1 class="page-title">Amaea Feature Map</h1>
-      <p class="page-sub">Every named feature across the product — ordered by priority. These names are internal; they help us plan, pitch, and stay aligned. Firms just see the product. <span style="color:var(--gray-500);font-weight:500;">· Last reviewed 18 May 2026.</span></p>
+      <p class="page-sub">Every named feature across the product, grouped by where it sits in the sales funnel: what closes deals, what wins them, what retains firms, what's future. These names are internal; they help us plan, pitch, and stay aligned. Firms just see the product. <span class="text-mute">· Last reviewed 18 May 2026.</span></p>
     </div>
 
     <!-- Strategic framing -->
-    <div class="card" style="margin-bottom:24px;padding:24px 28px;">
-      <p style="font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--plum-soft);margin:0 0 14px;">Why features are prioritised this way</p>
-      <p style="font-size:0.9rem;color:var(--gray-700);line-height:1.65;margin:0 0 12px;">Every feature on this page ladders to one of four strategic outcomes. We prioritise top-down — outcome 1 has to be airtight before outcome 2 matters.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;">
-        <div style="padding:8px 0;">
-          <p style="font-size: 0.82rem;font-weight:800;color:var(--gray-900);margin:0 0 4px;"><span style="color:var(--green);">1 ·</span> Make Amaea usable on day one</p>
-          <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">Dashboard, client journey, doc import + extraction, flag system, AI assistant. Live in the MVP today. Without these the product isn't real.</p>
+    <div class="intro-callout intro-callout--phases">
+      <p class="intro-callout-label">Why features are prioritised this way</p>
+      <p class="features-lede">Every feature on this page ladders to one of four strategic outcomes. We prioritise top-down — outcome 1 has to be airtight before outcome 2 matters.</p>
+      <div class="features-outcomes">
+        <div class="features-outcome">
+          <p class="features-outcome-title"><span class="features-outcome-num features-outcome-num--green">1 ·</span> Make Amaea usable on day one</p>
+          <p class="features-outcome-desc">Dashboard, client journey, doc import + extraction, flag system, AI assistant. Live in the MVP today. Without these the product isn't real.</p>
         </div>
-        <div style="padding:8px 0;">
-          <p style="font-size: 0.82rem;font-weight:800;color:var(--gray-900);margin:0 0 4px;"><span style="color:var(--plum-soft);">2 ·</span> Make Amaea valuable enough to switch from spreadsheets</p>
-          <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">Annual review auto-generation, Consumer Duty annual assessment, second integration. Phase 2 — Q3–Q4 2026. Builds switching cost.</p>
+        <div class="features-outcome">
+          <p class="features-outcome-title"><span class="features-outcome-num features-outcome-num--plum">2 ·</span> Make Amaea valuable enough to switch from spreadsheets</p>
+          <p class="features-outcome-desc">Annual review auto-generation, Consumer Duty annual assessment, second integration. Phase 2 — Q3–Q4 2026. Builds switching cost.</p>
         </div>
-        <div style="padding:8px 0;">
-          <p style="font-size: 0.82rem;font-weight:800;color:var(--gray-900);margin:0 0 4px;"><span style="color:var(--amber);">3 ·</span> Make Amaea scale beyond 15-adviser firms</p>
-          <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">Board packs, FCA visit toolkit, custom reports, full integration suite, multi-adviser management. Phase 3 — 2027. Opens the Scale tier and the next segment up.</p>
+        <div class="features-outcome">
+          <p class="features-outcome-title"><span class="features-outcome-num features-outcome-num--amber">3 ·</span> Make Amaea scale beyond 15-adviser firms</p>
+          <p class="features-outcome-desc">Board packs, FCA visit toolkit, custom reports, full integration suite, multi-adviser management. Phase 3 — 2027. Opens the Scale tier and the next segment up.</p>
         </div>
-        <div style="padding:8px 0;">
-          <p style="font-size: 0.82rem;font-weight:800;color:var(--gray-900);margin:0 0 4px;"><span style="color:var(--plum-mid);">4 ·</span> Earn the premium tier at launch</p>
-          <p style="font-size: 0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">Enterprise tier, custom AI training, FCA mock audit, dedicated Customer Success. Phase 4 — Q1–Q3 2028. The first three phases earn the right to charge a premium.</p>
+        <div class="features-outcome">
+          <p class="features-outcome-title"><span class="features-outcome-num features-outcome-num--mid">4 ·</span> Earn the premium tier at launch</p>
+          <p class="features-outcome-desc">Enterprise tier, custom AI training, FCA mock audit, dedicated Customer Success. Phase 4 — Q1–Q3 2028. The first three phases earn the right to charge a premium.</p>
         </div>
       </div>
-      <p style="font-size: 0.82rem;color:var(--gray-500);line-height:1.55;margin:18px 0 0;border-top:1px solid var(--gray-200);padding-top:14px;">
-        <strong style="color:var(--gray-700);">Cut rule:</strong> if a feature doesn't ladder to a specific outcome above, it doesn't get built. We've already cut several "nice to have" ideas — feature scope discipline is what makes the Sept 2028 launch date realistic.
+      <p class="features-cut-rule">
+        <strong>Cut rule:</strong> if a feature doesn't ladder to a specific outcome above, it doesn't get built. We've already cut several "nice to have" ideas — feature scope discipline is what makes the Sept 2028 launch date realistic.
       </p>
     </div>
 
-    <!-- Context banner -->
-    <div class="card" style="margin-bottom:24px;background:var(--plum-tint);border-color:var(--plum-border);padding:16px 20px;">
-      <div style="display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:200px;">
-          <p class="card-title" style="margin-bottom:3px;">How to read this</p>
-          <p style="font-size:0.78rem;color:var(--gray-600);line-height:1.6;margin:0;">Features are grouped by when they become critical to the business — not by technical layer. The filter above each group lets you see only what you need. <strong style="color:var(--gray-900);">Green = live in the MVP today.</strong> Blue = being built now. Amber = planned before launch. Grey = future.</p>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:6px;min-width:160px;">
-          <div style="display:flex;align-items:center;gap:8px;font-size: 0.74rem;"><span style="width:10px;height:10px;border-radius:50%;background:var(--green);flex-shrink:0;"></span><span style="color:var(--gray-600);">Live in MVP</span></div>
-          <div style="display:flex;align-items:center;gap:8px;font-size: 0.74rem;"><span style="width:10px;height:10px;border-radius:50%;background:#6366F1;flex-shrink:0;"></span><span style="color:var(--gray-600);">Building now</span></div>
-          <div style="display:flex;align-items:center;gap:8px;font-size: 0.74rem;"><span style="width:10px;height:10px;border-radius:50%;background:var(--amber);flex-shrink:0;"></span><span style="color:var(--gray-600);">Planned for launch</span></div>
-          <div style="display:flex;align-items:center;gap:8px;font-size: 0.74rem;"><span style="width:10px;height:10px;border-radius:50%;background:#D1D5DB;flex-shrink:0;"></span><span style="color:var(--gray-600);">Post-launch / future</span></div>
-        </div>
+    <!-- Status legend -->
+    <div class="status-legend-row">
+      <div class="status-legend">
+        <span class="status-legend-item"><span class="status-dot status-dot--live"></span>Live in MVP</span>
+        <span class="status-legend-item"><span class="status-dot status-dot--building"></span>Building now</span>
+        <span class="status-legend-item"><span class="status-dot status-dot--planned"></span>Planned for launch</span>
+        <span class="status-legend-item"><span class="status-dot status-dot--future"></span>Post-launch / future</span>
       </div>
     </div>
 
     <!-- Filter bar -->
     <div class="filter-bar" id="filterBar">
-      <button class="filter-btn active" data-filter="all">All features</button>
-      <button class="filter-btn" data-filter="live">Live now</button>
-      <button class="filter-btn" data-filter="building">Building</button>
-      <button class="filter-btn" data-filter="planned">Planned</button>
-      <button class="filter-btn" data-filter="future">Future</button>
+      <button class="filter-btn active" data-filter="all">All features <span class="filter-count" data-count-for="all"></span></button>
+      <button class="filter-btn" data-filter="live">Live now <span class="filter-count" data-count-for="live"></span></button>
+      <button class="filter-btn" data-filter="building">Building <span class="filter-count" data-count-for="building"></span></button>
+      <button class="filter-btn" data-filter="planned">Planned <span class="filter-count" data-count-for="planned"></span></button>
+      <button class="filter-btn" data-filter="future">Future <span class="filter-count" data-count-for="future"></span></button>
     </div>
 
     <!-- ── GROUP 1: What closes the first deal ────────────────── -->
     <div class="group-label" data-group="1">What closes the first deal · Day 1 essentials</div>
     <div class="feature-grid">
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-pulse">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Pulse</div>
+            <div class="feature-name">Pulse <a class="decision-anchor" href="#feature-pulse" aria-label="Link to Pulse">#</a></div>
             <div class="feature-tagline">Live compliance health score</div>
           </div>
           <span class="badge badge-live pill-mini">Live</span>
@@ -360,10 +230,10 @@
         </div>
       </div>
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-counsel">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Counsel</div>
+            <div class="feature-name">Counsel <a class="decision-anchor" href="#feature-counsel" aria-label="Link to Counsel">#</a></div>
             <div class="feature-tagline">FCA-grounded AI compliance assistant</div>
           </div>
           <span class="badge badge-live pill-mini">Live</span>
@@ -375,10 +245,10 @@
         </div>
       </div>
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-sentinel">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Sentinel</div>
+            <div class="feature-name">Sentinel <a class="decision-anchor" href="#feature-sentinel" aria-label="Link to Sentinel">#</a></div>
             <div class="feature-tagline">Automated risk flag engine</div>
           </div>
           <span class="badge badge-live pill-mini">Live</span>
@@ -390,10 +260,10 @@
         </div>
       </div>
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-client">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Client</div>
+            <div class="feature-name">Client <a class="decision-anchor" href="#feature-client" aria-label="Link to Client">#</a></div>
             <div class="feature-tagline">Full client compliance profiles</div>
           </div>
           <span class="badge badge-live pill-mini">Live</span>
@@ -405,10 +275,10 @@
         </div>
       </div>
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-guard">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Guard</div>
+            <div class="feature-name">Guard <a class="decision-anchor" href="#feature-guard" aria-label="Link to Guard">#</a></div>
             <div class="feature-tagline">Vulnerable client and Consumer Duty tracking</div>
           </div>
           <span class="badge badge-live pill-mini">Live</span>
@@ -420,10 +290,10 @@
         </div>
       </div>
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-review">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Review</div>
+            <div class="feature-name">Review <a class="decision-anchor" href="#feature-review" aria-label="Link to Review">#</a></div>
             <div class="feature-tagline">Annual review management</div>
           </div>
           <span class="badge badge-live pill-mini">Live</span>
@@ -435,10 +305,10 @@
         </div>
       </div>
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-scribe">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Scribe</div>
+            <div class="feature-name">Scribe <a class="decision-anchor" href="#feature-scribe" aria-label="Link to Scribe">#</a></div>
             <div class="feature-tagline">AI-drafted compliance reports</div>
           </div>
           <span class="badge badge-live pill-mini">Live</span>
@@ -450,10 +320,10 @@
         </div>
       </div>
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-trail">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Trail</div>
+            <div class="feature-name">Trail <a class="decision-anchor" href="#feature-trail" aria-label="Link to Trail">#</a></div>
             <div class="feature-tagline">Immutable FCA-grade audit trail</div>
           </div>
           <span class="badge badge-live pill-mini">Live</span>
@@ -471,10 +341,10 @@
     <div class="group-label" data-group="2">What wins deals · The differentiators</div>
     <div class="feature-grid">
 
-      <div class="feature-card building" data-status="building">
+      <div class="feature-card building" data-status="building" id="feature-horizon">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Horizon</div>
+            <div class="feature-name">Horizon <a class="decision-anchor" href="#feature-horizon" aria-label="Link to Horizon">#</a></div>
             <div class="feature-tagline">Regulatory change detection and impact analysis</div>
           </div>
           <span class="badge badge-building pill-mini">Building</span>
@@ -486,10 +356,10 @@
         </div>
       </div>
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-embed">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Embed</div>
+            <div class="feature-name">Embed <a class="decision-anchor" href="#feature-embed" aria-label="Link to Embed">#</a></div>
             <div class="feature-tagline">RAG knowledge base — the AI foundation</div>
           </div>
           <span class="badge badge-live pill-mini">Live · deepening</span>
@@ -501,10 +371,10 @@
         </div>
       </div>
 
-      <div class="feature-card planned" data-status="planned">
+      <div class="feature-card planned" data-status="planned" id="feature-sync">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Sync</div>
+            <div class="feature-name">Sync <a class="decision-anchor" href="#feature-sync" aria-label="Link to Sync">#</a></div>
             <div class="feature-tagline">Intelliflo and practice system integrations</div>
           </div>
           <span class="badge badge-planned pill-mini">Planned</span>
@@ -516,10 +386,10 @@
         </div>
       </div>
 
-      <div class="feature-card planned" data-status="planned">
+      <div class="feature-card planned" data-status="planned" id="feature-dispatch">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Dispatch</div>
+            <div class="feature-name">Dispatch <a class="decision-anchor" href="#feature-dispatch" aria-label="Link to Dispatch">#</a></div>
             <div class="feature-tagline">Automated alerts and compliance notifications</div>
           </div>
           <span class="badge badge-planned pill-mini">Planned</span>
@@ -530,10 +400,10 @@
         </div>
       </div>
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-vault">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Vault</div>
+            <div class="feature-name">Vault <a class="decision-anchor" href="#feature-vault" aria-label="Link to Vault">#</a></div>
             <div class="feature-tagline">Document storage and expiry tracking</div>
           </div>
           <span class="badge badge-live pill-mini">Live</span>
@@ -544,10 +414,10 @@
         </div>
       </div>
 
-      <div class="feature-card planned" data-status="planned">
+      <div class="feature-card planned" data-status="planned" id="feature-signal">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Signal</div>
+            <div class="feature-name">Signal <a class="decision-anchor" href="#feature-signal" aria-label="Link to Signal">#</a></div>
             <div class="feature-tagline">Compliance analytics and performance trends</div>
           </div>
           <span class="badge badge-planned pill-mini">Planned</span>
@@ -564,10 +434,10 @@
     <div class="group-label" data-group="3">What retains firms and enables scale</div>
     <div class="feature-grid">
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-shield">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Shield</div>
+            <div class="feature-name">Shield <a class="decision-anchor" href="#feature-shield" aria-label="Link to Shield">#</a></div>
             <div class="feature-tagline">Multi-tenant security and data isolation</div>
           </div>
           <span class="badge badge-live pill-mini">Live</span>
@@ -578,10 +448,10 @@
         </div>
       </div>
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-access">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Access</div>
+            <div class="feature-name">Access <a class="decision-anchor" href="#feature-access" aria-label="Link to Access">#</a></div>
             <div class="feature-tagline">Role-based access control</div>
           </div>
           <span class="badge badge-live pill-mini">Live</span>
@@ -592,10 +462,10 @@
         </div>
       </div>
 
-      <div class="feature-card live" data-status="live">
+      <div class="feature-card live" data-status="live" id="feature-portal">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Portal</div>
+            <div class="feature-name">Portal <a class="decision-anchor" href="#feature-portal" aria-label="Link to Portal">#</a></div>
             <div class="feature-tagline">Firm administration, settings, and billing</div>
           </div>
           <span class="badge badge-live pill-mini">Live</span>
@@ -606,10 +476,10 @@
         </div>
       </div>
 
-      <div class="feature-card planned" data-status="planned">
+      <div class="feature-card planned" data-status="planned" id="feature-desk">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Desk</div>
+            <div class="feature-name">Desk <a class="decision-anchor" href="#feature-desk" aria-label="Link to Desk">#</a></div>
             <div class="feature-tagline">Compliance officer task management</div>
           </div>
           <span class="badge badge-planned pill-mini">Planned · Scale tier</span>
@@ -620,10 +490,10 @@
         </div>
       </div>
 
-      <div class="feature-card planned" data-status="planned">
+      <div class="feature-card planned" data-status="planned" id="feature-connect">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Connect</div>
+            <div class="feature-name">Connect <a class="decision-anchor" href="#feature-connect" aria-label="Link to Connect">#</a></div>
             <div class="feature-tagline">FCA Register verification and onboarding</div>
           </div>
           <span class="badge badge-planned pill-mini">Planned</span>
@@ -640,10 +510,10 @@
     <div class="group-label" data-group="4">Future / post-launch — Year 2 and beyond</div>
     <div class="feature-grid">
 
-      <div class="feature-card future" data-status="future">
+      <div class="feature-card future" data-status="future" id="feature-foresight">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Foresight</div>
+            <div class="feature-name">Foresight <a class="decision-anchor" href="#feature-foresight" aria-label="Link to Foresight">#</a></div>
             <div class="feature-tagline">Predictive compliance risk</div>
           </div>
           <span class="badge badge-future pill-mini">Year 2</span>
@@ -654,10 +524,10 @@
         </div>
       </div>
 
-      <div class="feature-card future" data-status="future">
+      <div class="feature-card future" data-status="future" id="feature-verify">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Verify</div>
+            <div class="feature-name">Verify <a class="decision-anchor" href="#feature-verify" aria-label="Link to Verify">#</a></div>
             <div class="feature-tagline">Cryptographically verifiable compliance attestation</div>
           </div>
           <span class="badge badge-future pill-mini">Year 2+</span>
@@ -668,10 +538,10 @@
         </div>
       </div>
 
-      <div class="feature-card future" data-status="future">
+      <div class="feature-card future" data-status="future" id="feature-lens">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Lens</div>
+            <div class="feature-name">Lens <a class="decision-anchor" href="#feature-lens" aria-label="Link to Lens">#</a></div>
             <div class="feature-tagline">Cross-firm benchmarking and systemic intelligence</div>
           </div>
           <span class="badge badge-future pill-mini">Year 2+ · Enterprise</span>
@@ -682,10 +552,10 @@
         </div>
       </div>
 
-      <div class="feature-card future" data-status="future">
+      <div class="feature-card future" data-status="future" id="feature-scale">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Scale</div>
+            <div class="feature-name">Scale <a class="decision-anchor" href="#feature-scale" aria-label="Link to Scale">#</a></div>
             <div class="feature-tagline">Enterprise infrastructure and SLAs</div>
           </div>
           <span class="badge badge-future pill-mini">Enterprise tier</span>
@@ -696,10 +566,10 @@
         </div>
       </div>
 
-      <div class="feature-card future" data-status="future">
+      <div class="feature-card future" data-status="future" id="feature-model">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Model</div>
+            <div class="feature-name">Model <a class="decision-anchor" href="#feature-model" aria-label="Link to Model">#</a></div>
             <div class="feature-tagline">Proprietary compliance foundation model</div>
           </div>
           <span class="badge badge-future pill-mini">Year 3+</span>
@@ -710,10 +580,10 @@
         </div>
       </div>
 
-      <div class="feature-card future" data-status="future">
+      <div class="feature-card future" data-status="future" id="feature-eval">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Eval</div>
+            <div class="feature-name">Eval <a class="decision-anchor" href="#feature-eval" aria-label="Link to Eval">#</a></div>
             <div class="feature-tagline">AI accuracy benchmarking framework</div>
           </div>
           <span class="badge badge-future pill-mini">Building · Internal tool</span>
@@ -724,10 +594,10 @@
         </div>
       </div>
 
-      <div class="feature-card future" data-status="future">
+      <div class="feature-card future" data-status="future" id="feature-lab">
         <div class="feature-header">
           <div>
-            <div class="feature-name">Lab</div>
+            <div class="feature-name">Lab <a class="decision-anchor" href="#feature-lab" aria-label="Link to Lab">#</a></div>
             <div class="feature-tagline">AI research division</div>
           </div>
           <span class="badge badge-future pill-mini">Year 5+</span>
@@ -738,30 +608,6 @@
         </div>
       </div>
 
-    </div>
-
-    <!-- Summary strip -->
-    <div class="stats-strip" style="margin-top:32px;">
-      <div class="stat-card">
-        <div class="stat-label">Live in MVP</div>
-        <div class="stat-value">13</div>
-        <div class="stat-sub">Features shipped today</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Building now</div>
-        <div class="stat-value">1</div>
-        <div class="stat-sub">Horizon (regulatory change detection)</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Before launch</div>
-        <div class="stat-value">5</div>
-        <div class="stat-sub">Sync, Dispatch, Signal, Desk, Connect</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Post-launch</div>
-        <div class="stat-value">7</div>
-        <div class="stat-sub">Foresight, Verify, Lens, Scale, Model, Eval, Lab</div>
-      </div>
     </div>
 
   </div>
@@ -776,7 +622,16 @@
     localStorage.setItem('amaea-theme', next);
   });
 
-  // Filter
+  // Filter — populate counts then wire up filter buttons
+  (function () {
+    const cards = document.querySelectorAll('.feature-card');
+    const counts = { all: cards.length, live: 0, building: 0, planned: 0, future: 0 };
+    cards.forEach(c => { if (counts[c.dataset.status] !== undefined) counts[c.dataset.status]++; });
+    document.querySelectorAll('.filter-count').forEach(el => {
+      const k = el.dataset.countFor;
+      if (counts[k] !== undefined) el.textContent = counts[k];
+    });
+  })();
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -787,8 +642,6 @@
       });
       // Hide group labels with no visible cards
       document.querySelectorAll('.group-label').forEach(label => {
-        const grp = label.dataset.group;
-        // find sibling grid
         let next = label.nextElementSibling;
         let hasVisible = false;
         while (next && next.classList.contains('feature-grid')) {
