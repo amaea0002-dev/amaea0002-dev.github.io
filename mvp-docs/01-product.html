@@ -30,8 +30,8 @@
       <p class="cover-meta-value">MVP · pre-launch</p>
     </div>
     <div>
-      <p class="cover-meta-label">As of</p>
-      <p class="cover-meta-value">14 May 2026</p>
+      <p class="cover-meta-label">Last reviewed</p>
+      <p class="cover-meta-value">18 May 2026</p>
     </div>
     <div>
       <p class="cover-meta-label">Owners</p>
@@ -55,6 +55,23 @@
 </nav>
 
 <article class="doc">
+<nav class="doc-toc" aria-label="In this document">
+  <p class="doc-toc-label">In this document</p>
+  <div class="doc-toc-grid">
+    <a href="#what-amaea-is"                          class="doc-toc-link"><span class="doc-toc-num">1</span> What Amaea is</a>
+    <a href="#who-its-for"                            class="doc-toc-link"><span class="doc-toc-num">2</span> Who it's for</a>
+    <a href="#why-now"                                class="doc-toc-link"><span class="doc-toc-num">3</span> Why now</a>
+    <a href="#key-features-mvp"                       class="doc-toc-link"><span class="doc-toc-num">4</span> Key features (MVP)</a>
+    <a href="#tech-stack-at-a-glance"                 class="doc-toc-link"><span class="doc-toc-num">5</span> Tech stack</a>
+    <a href="#architecture-at-a-glance"               class="doc-toc-link"><span class="doc-toc-num">6</span> Architecture</a>
+    <a href="#strategic-decisions-baked-into-the-mvp" class="doc-toc-link"><span class="doc-toc-num">7</span> Strategic decisions</a>
+    <a href="#pricing"                                class="doc-toc-link"><span class="doc-toc-num">8</span> Pricing</a>
+    <a href="#roadmap"                                class="doc-toc-link"><span class="doc-toc-num">9</span> Roadmap</a>
+    <a href="#team"                                   class="doc-toc-link"><span class="doc-toc-num">10</span> Team</a>
+    <a href="#investment"                             class="doc-toc-link"><span class="doc-toc-num">11</span> Investment</a>
+    <a href="#where-to-read-next"                     class="doc-toc-link"><span class="doc-toc-num">12</span> Where to read next</a>
+  </div>
+</nav>
 <h2 id="what-amaea-is">What Amaea is</h2>
 <p>Amaea is an <strong>FCA compliance platform for UK Independent Financial Adviser (IFA) firms</strong>. It replaces manual compliance tracking — spreadsheets, fragmented file checking, and reactive supervision — with a single AI-driven dashboard that monitors every client&#x27;s compliance state in real time.</p>
 <p>The product reads the documents IFAs already produce — Fact Finds, Suitability Reports, Annual Reviews, Pension Transfer Reports, Letters of Authority, AML records — extracts the compliance-critical fields from each one using Claude vision, validates them against the FCA Handbook, and raises specific compliance flags with rule citations when something is missing or wrong.</p>
@@ -171,7 +188,8 @@
 </tbody></table>
 <p>Full detail: see <strong><a href="02-architecture.html">02 — Technical Architecture</a></strong>.</p>
 <h2 id="architecture-at-a-glance">Architecture at a glance</h2>
-<pre><code>                                            FCA Handbook + Publications archive
+<figure class="arch-figure">
+  <pre role="img" aria-label="Amaea dataflow diagram"><code>                                            FCA Handbook + Publications archive
                                             (scraped + chunked + embedded)
                                                      │
                                                      ▼
@@ -217,58 +235,19 @@
    │   • Unconditional recent-imports injection      │
    │   • Claude completion (max_tokens 16384)        │
    └─────────────────────────────────────────────────┘</code></pre>
+  <figcaption>User uploads documents → Claude vision classifies and extracts → persisted to <code>documents</code> table with rich metadata → <code>flagsFromExtraction()</code> auto-raises <code>risk_flags</code> with FCA rule citations → feeds the dashboard health score, insights page, and chat assistant. The chat assistant performs dual RAG: live firm SQL stats + firm embeddings + the 11,645-chunk FCA corpus via pgvector semantic search.</figcaption>
+</figure>
 <h2 id="strategic-decisions-baked-into-the-mvp">Strategic decisions baked into the MVP</h2>
 <p>These have been deliberately chosen, not defaults, and are worth knowing.</p>
 <p><strong>IFA-first GTM, not networks (May 2026).</strong> Network deals come with long procurement cycles and pricing constraints. Direct IFA relationships give faster feedback, pricing control, and real usage data before scaling. We will revisit network distribution once we have ~50 direct customers and clear product-market fit signals.</p>
 <p><strong>Read-only Intelliflo integration at MVP (May 2026).</strong> Write access creates liability (we could corrupt an IFA&#x27;s CRM) and requires deeper security review. Read-only is sufficient to deliver core value at MVP and dramatically reduces the firm&#x27;s risk surface.</p>
 <p><strong>Adviser-count tier pricing, not per-client (April 2026).</strong> Per-client pricing penalises growth and creates unpredictable costs. Flat per-firm-size SaaS pricing aligns Amaea&#x27;s revenue with the firm&#x27;s growth without friction.</p>
 <p><strong>UK-only launch, no international before 2030 (April 2026).</strong> Consumer Duty is UK-specific. International markets have entirely different compliance frameworks. Focus beats optionality at this stage.</p>
-<p><strong>Founders Programme as GTM entry (March 2026).</strong> 200 founder spots at 20% lifetime discount, accessed through four warm channels: SP Advanced Conference, Robin Powell&#x27;s newsletter, the CISI member network, and Intelliflo&#x27;s firm base. These channels concentrate compliance-aware IFAs who are predisposed to be early adopters.</p>
+<p><strong>Founders Programme as GTM entry (March 2026).</strong> 200 founder spots at 20% lifetime discount, accessed through four warm channels: FP Advance Conference, Robin Powell&#x27;s newsletter, the CISI member network, and Intelliflo&#x27;s firm base. These channels concentrate compliance-aware IFAs who are predisposed to be early adopters.</p>
 <p><strong>Bootstrap by default; raise only from strength (May 2026).</strong> With Hasna&#x27;s GTM network and ~70% gross margins, the business should be self-funding from early scale. External capital is optional, not required. If raised, it&#x27;ll be from strength (competitor entry / international expansion / acquisition opportunity) rather than need.</p>
-<h2 id="pricing-from-amaeaaivercelapppricinghtml">Pricing (from <code>amaeaai.vercel.app/pricing.html</code>)</h2>
-<table>
-<thead><tr>
-<th>Tier</th>
-<th>Monthly</th>
-<th>Annual</th>
-<th>Clients</th>
-<th>Notes</th>
-</tr></thead><tbody>
-<tr>
-<td>Essentials</td>
-<td>£699/mo</td>
-<td>£582/mo</td>
-<td>Up to 100</td>
-<td>No AI assistant, no Consumer Duty monitoring, no RMAR pre-population</td>
-</tr>
-<tr>
-<td>Professional ⭐</td>
-<td>£1,599/mo</td>
-<td>£1,332/mo</td>
-<td>Up to 350</td>
-<td>AI assistant, Consumer Duty, RMAR, SharePoint + Salesforce — <strong>most popular</strong></td>
-</tr>
-<tr>
-<td>Scale</td>
-<td>£2,199/mo</td>
-<td>£1,832/mo</td>
-<td>Up to 1,000</td>
-<td>Board-level packs, FCA visit toolkit, custom reports</td>
-</tr>
-<tr>
-<td>Enterprise</td>
-<td>Custom</td>
-<td>Custom</td>
-<td>Unlimited</td>
-<td>Networks / AR firms</td>
-</tr>
-</tbody></table>
-<ul>
-<li><strong>30-day free trial</strong>, no credit card</li>
-<li><strong>3-month minimum commitment</strong> after trial</li>
-<li><strong>Annual billing = 2 months free</strong> (~17–20% discount)</li>
-<li><strong>Founders Programme</strong>: 200 spots at 20% off for life, ref-based via SP Advanced / Robin Powell / CISI / Intelliflo</li>
-</ul>
+<h2 id="pricing">Pricing</h2>
+<p>Four tiers — Essentials, Professional, Scale, Enterprise — priced by adviser count, not per managed client. The Professional tier (~£1,599/mo) is the assumed default in the financial model. The full live pricing, tier feature splits, trial terms, and Founders Programme details are the canonical source of truth at <a href="https://amaea.co.uk/pricing" target="_blank" rel="noopener">amaea.co.uk/pricing</a> — this doc deliberately does not reproduce them to avoid drift.</p>
+<p><strong>Founders Programme:</strong> 200 spots at 20% off for life, ref-based via FP Advance / Robin Powell / CISI / Intelliflo.</p>
 <h2 id="roadmap">Roadmap</h2>
 <p><strong>Phase 1 — Foundation (Q1–Q2 2026, in progress)</strong> Core compliance dashboard, client journey tracking, Intelliflo read integration, marketing website, <strong>19-type document extraction pipeline (shipped May 2026)</strong>, <strong>auto-flag-raising with FCA rule citations (shipped May 2026)</strong>, <strong>AI compliance assistant (shipped May 2026 with dual RAG + 11,645-chunk FCA corpus)</strong>, <strong>multi-page document grouping (shipped May 2026)</strong>.</p>
 <p><strong>Phase 2 — Intelligence (Q3–Q4 2026, planned)</strong> Annual review auto-generation, Consumer Duty annual assessment report generation, vulnerable client enhanced monitoring, SharePoint integration, priority support and onboarding workflows.</p>
@@ -279,8 +258,9 @@
 <p><strong>Milan Sajiv — CTO &amp; Co-founder.</strong> Owns: technical architecture, product build, infrastructure, AI/ML layer, integrations, technical due diligence.</p>
 <p>50/50 equity, 4-year vesting with 1-year cliff. Nominee director (Hasna&#x27;s mother) on dormant holding company until Hasna leaves Lucent.</p>
 <h2 id="investment">Investment</h2>
-<p>Stage 1 (2028–2030): own UK IFA compliance, £2–5M ARR. Stage 2 (2030–2032): expand to all UK regulated sectors, £20–50M ARR. Stage 3 (2032–2035): international (US SEC/FINRA, EU MiFID II), £100M+ ARR. Stage 4 (2035+): the compliance OS, £3–10B+ valuation.</p>
-<p>Default position: bootstrapped. With ~70–80% gross margins and the Founders Programme + Robin Powell + CISI + Intelliflo GTM stack, the business should be self-funding from early scale.</p>
+<p>Default position: <strong>bootstrapped</strong>. Per the v2 financial model (Bear / Base / Bull over a 60-month horizon, May 2026 → Apr 2031), all three scenarios remain bootstrap-fundable through end Apr 2031 without outside capital. £8k founder contribution at incorporation is the only equity-equivalent input. ~70–80% gross margins + the FP Advance / Robin Powell / CISI / Intelliflo GTM stack make the business self-funding from early scale.</p>
+<p><strong>Y3 (Apr 2029):</strong> Bear £2.69M ARR · Base £4.62M · Bull £7.66M. <strong>Y5 (Apr 2031):</strong> Bear £4.80M · Base £8.13M · Bull £14.12M. Net margins 77–83% (at the upper bound of SaaS norms, reflecting deliberate under-reinvestment).</p>
+<p>Outside capital enters scope only after <strong>both</strong> multi-sector expansion (beyond UK IFA) <strong>and</strong> international expansion are live — both post-2030 milestones modelled as v3 candidates. See <a href="../financial-model">/financial-model</a> for the full model + sensitivities + version history.</p>
 <h2 id="where-to-read-next">Where to read next</h2>
 <ul>
 <li>For technical depth: <strong><a href="02-architecture.html">02 — Technical Architecture</a></strong></li>
