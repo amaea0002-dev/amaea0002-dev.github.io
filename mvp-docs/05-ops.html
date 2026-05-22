@@ -30,8 +30,8 @@
       <p class="cover-meta-value">MVP · pre-launch</p>
     </div>
     <div>
-      <p class="cover-meta-label">As of</p>
-      <p class="cover-meta-value">14 May 2026</p>
+      <p class="cover-meta-label">Last reviewed</p>
+      <p class="cover-meta-value">18 May 2026</p>
     </div>
     <div>
       <p class="cover-meta-label">Owners</p>
@@ -56,6 +56,25 @@
 
 <article class="doc">
 <p>The runbook. How to deploy, what to do when something breaks, what costs to monitor, what routine maintenance looks like.</p>
+<nav class="doc-toc" aria-label="In this document">
+  <p class="doc-toc-label">In this document</p>
+  <div class="doc-toc-grid">
+    <a href="#production-environments"                                       class="doc-toc-link"><span class="doc-toc-num">1</span> Production environments</a>
+    <a href="#deployment"                                                    class="doc-toc-link"><span class="doc-toc-num">2</span> Deployment</a>
+    <a href="#environment-variables"                                         class="doc-toc-link"><span class="doc-toc-num">3</span> Environment variables</a>
+    <a href="#migrations"                                                    class="doc-toc-link"><span class="doc-toc-num">4</span> Migrations</a>
+    <a href="#cron-inventory"                                                class="doc-toc-link"><span class="doc-toc-num">5</span> Cron inventory</a>
+    <a href="#cost-monitoring"                                               class="doc-toc-link"><span class="doc-toc-num">6</span> Cost monitoring</a>
+    <a href="#routine-maintenance"                                           class="doc-toc-link"><span class="doc-toc-num">7</span> Routine maintenance</a>
+    <a href="#common-issues-fixes"                                           class="doc-toc-link"><span class="doc-toc-num">8</span> Common issues + fixes</a>
+    <a href="#disaster-recovery"                                             class="doc-toc-link"><span class="doc-toc-num">9</span> Disaster recovery</a>
+    <a href="#production-checklist-before-opening-a-firm-to-a-real-user"     class="doc-toc-link"><span class="doc-toc-num">10</span> Production checklist</a>
+    <a href="#pre-launch-ops-items-post-mvp-pre-sept-2028"                   class="doc-toc-link"><span class="doc-toc-num">11</span> Pre-launch ops items</a>
+    <a href="#file-paths-quick-reference"                                    class="doc-toc-link"><span class="doc-toc-num">12</span> File paths quick reference</a>
+    <a href="#contact-escalation"                                            class="doc-toc-link"><span class="doc-toc-num">13</span> Contact + escalation</a>
+    <a href="#where-to-read-next"                                            class="doc-toc-link"><span class="doc-toc-num">14</span> Where to read next</a>
+  </div>
+</nav>
 <h2 id="production-environments">Production environments</h2>
 <table>
 <thead><tr>
@@ -65,12 +84,12 @@
 </tr></thead><tbody>
 <tr>
 <td>App (production)</td>
-<td><code>https://amaea.vercel.app</code></td>
+<td><code>https://app.amaea.co.uk</code></td>
 <td>The main IFA-facing product. Authenticated.</td>
 </tr>
 <tr>
 <td>Marketing site</td>
-<td><code>https://amaeaai.vercel.app</code></td>
+<td><code>https://amaea.co.uk</code></td>
 <td>Public marketing. Includes the live AI demo.</td>
 </tr>
 <tr>
@@ -87,14 +106,14 @@
 <h2 id="deployment">Deployment</h2>
 <h3 id="standard-deploy">Standard deploy</h3>
 <p>The Vercel CLI deploys the current local state directly — there&#x27;s no GitHub remote / Git-based deploy at present. From a Mac with <code>vercel login</code> already done:</p>
-<pre><code>cd /Users/milan/Documents/Amaea/amaea-app
+<pre><code>cd ~/amaea-app
 npx vercel --prod</code></pre>
 <p>Vercel:</p>
 <ol>
 <li>Uploads the working tree (~90MB compressed)</li>
 <li>Runs <code>npm install</code> (picks up dependencies from <code>package.json</code>)</li>
 <li>Runs <code>next build</code></li>
-<li>Deploys to the production alias <code>amaea.vercel.app</code></li>
+<li>Deploys to the production alias <code>app.amaea.co.uk</code></li>
 </ol>
 <p>Typical end-to-end time: 1–3 minutes (faster on warm cache).</p>
 <h3 id="first-time-deploy-on-a-new-machine">First-time deploy on a new machine</h3>
@@ -104,7 +123,7 @@ npx vercel login
 # Browser opens for confirmation
 
 # 2. Verify the project link
-cat /Users/milan/Documents/Amaea/amaea-app/.vercel/project.json
+cat ~/amaea-app/.vercel/project.json
 # Should show:
 # { &quot;projectId&quot;: &quot;&lt;vercel-prj-id&gt;&quot;,
 #   &quot;orgId&quot;:     &quot;&lt;vercel-team-id&gt;&quot;,
@@ -112,7 +131,7 @@ cat /Users/milan/Documents/Amaea/amaea-app/.vercel/project.json
 # (real IDs in 1Password: amaea / vercel / project.json)
 
 # 3. Deploy
-cd /Users/milan/Documents/Amaea/amaea-app &amp;&amp; npx vercel --prod</code></pre>
+cd ~/amaea-app &amp;&amp; npx vercel --prod</code></pre>
 <p>If <code>.vercel/project.json</code> is missing, run <code>npx vercel link</code> first and select the existing <code>amaea</code> project under the <code>amaea0002-devs-projects</code> team.</p>
 <h3 id="rolling-back">Rolling back</h3>
 <pre><code>npx vercel list                          # see recent deployments
@@ -166,7 +185,7 @@ npx vercel promote &lt;deployment-url&gt;      # promote a previous deploy to pr
 <li><code>INGEST_SECRET</code> is only useful for manually triggering crons; rotating it requires updating both Vercel env and any manual trigger scripts.</li>
 </ul>
 <h3 id="pulling-env-from-vercel-to-local">Pulling env from Vercel to local</h3>
-<pre><code>cd /Users/milan/Documents/Amaea/amaea-app
+<pre><code>cd ~/amaea-app
 npx vercel env pull .env.local</code></pre>
 <h3 id="connection-pooling-supabase-pooler-vs-direct">Connection pooling — Supabase pooler vs direct</h3>
 <p><code>NEXT_PUBLIC_SUPABASE_URL</code> is the <strong>REST URL</strong> (<code>https://&lt;project&gt;.supabase.co</code>), not the Postgres connection string — the supabase-js client uses HTTP under the hood, so connection pooling at the pg-protocol level isn&#x27;t directly in play for the app.</p>
@@ -179,14 +198,14 @@ npx vercel env pull .env.local</code></pre>
 <h2 id="migrations">Migrations</h2>
 <h3 id="where-they-live">Where they live</h3>
 <ul>
-<li><code>/Users/milan/Documents/Amaea/amaea-db/migrations/</code> — the canonical numbered SQL files (<code>001_extensions.sql</code> through <code>030_documents_content_hash.sql</code>)</li>
-<li><code>/Users/milan/Documents/Amaea/amaea-db/supabase/migrations/</code> — timestamped copies for Supabase CLI compatibility (<code>20260511000001_*.sql</code> through <code>20260517000030_*.sql</code>); used by local <code>supabase db reset</code> and the RLS test suite</li>
+<li><code>amaea-db/migrations/</code> — the canonical numbered SQL files (<code>001_extensions.sql</code> through <code>031_compliance_events_fk_set_null.sql</code>)</li>
+<li><code>amaea-db/supabase/migrations/</code> — timestamped copies for Supabase CLI compatibility (<code>20260511000001_*.sql</code> through <code>20260517000031_*.sql</code>); used by local <code>supabase db reset</code> and the RLS test suite</li>
 </ul>
 <p>When adding a new migration: create both copies. The numbered version is human-readable, the timestamped version is what <code>supabase db push</code> would use if we set that up. Use the next sequential number for the canonical file and a UTC timestamp greater than the previous one for the supabase copy.</p>
 <h3 id="applying-a-migration">Applying a migration</h3>
 <p>The historic pattern is <strong>paste into the Supabase Dashboard SQL editor</strong> — not CLI push. To apply migration N:</p>
 <pre><code># 1. Copy to clipboard
-pbcopy &lt; /Users/milan/Documents/Amaea/amaea-db/migrations/0NN_name.sql
+pbcopy &lt; ~/amaea-db/migrations/0NN_name.sql
 
 # 2. Open the SQL editor
 open &quot;https://supabase.com/dashboard&quot;   # then navigate Project → SQL Editor
@@ -302,12 +321,12 @@ open &quot;https://supabase.com/dashboard&quot;   # then navigate Project → SQ
 <h3 id="apiraghorizon-mondays-at-0800-utc"><code>/api/rag/horizon</code> — Mondays at 08:00 UTC</h3>
 <p>Fetches FCA RSS feed, embeds new publications, inserts into <code>fca_documents</code> with <code>source = &#x27;FCA Horizon&#x27;</code>. Skips duplicates by URL.</p>
 <p>Manual trigger:</p>
-<pre><code>curl -X GET https://amaea.vercel.app/api/rag/horizon \
+<pre><code>curl -X GET https://app.amaea.co.uk/api/rag/horizon \
   -H &quot;Authorization: Bearer $INGEST_SECRET&quot;</code></pre>
 <h3 id="apicronar-sweep-every-day-at-0600-utc"><code>/api/cron/ar-sweep</code> — Every day at 06:00 UTC</h3>
 <p>Evaluates every overdue review against COBS 9.5 using Claude. Creates / resolves <code>overdue_review</code> flags. Max_tokens 512 per review.</p>
 <p>Manual trigger:</p>
-<pre><code>curl -X GET https://amaea.vercel.app/api/cron/ar-sweep \
+<pre><code>curl -X GET https://app.amaea.co.uk/api/cron/ar-sweep \
   -H &quot;Authorization: Bearer $INGEST_SECRET&quot;</code></pre>
 <h3 id="checking-cron-status">Checking cron status</h3>
 <p>Vercel Dashboard → Project <code>amaea</code> → Logs → filter by <code>/api/cron/</code>. Each cron execution logs with a request ID, duration, and any error.</p>
@@ -553,8 +572,8 @@ node scripts/ingest-scraped.mjs</code></pre>
 <li>[ ] <strong>Nominee Director Agreement</strong> for Hasna&#x27;s mother on dormant holding company until she leaves Lucent</li>
 </ul>
 <h2 id="file-paths-quick-reference">File paths quick reference</h2>
-<pre><code>~/Documents/Amaea/                       Root
-├── amaea-app/                           Next.js app (deployed)
+<pre><code>~/                                       Root (repos checked out here in the runbook examples)
+├── amaea-app/                           Next.js 16 app (live at app.amaea.co.uk)
 │   ├── .env.local                       Local env (gitignored)
 │   ├── .vercel/                         Vercel link
 │   ├── scripts/                         CLI scripts (ingest, eval, verify)
@@ -564,16 +583,20 @@ node scripts/ingest-scraped.mjs</code></pre>
 ├── amaea-db/                            SQL migrations
 │   ├── migrations/                      Numbered (001-031)
 │   └── supabase/migrations/             Timestamped copies (used by local Supabase + RLS tests)
-├── amaea-website/                       Marketing site (separate Vercel project)
-├── amaea-brand/                         Internal intranet (mockup, GitHub)
-├── docs/                                This documentation
-│   ├── 00-INDEX.md
-│   ├── 01-product.html
-│   ├── 02-architecture.html
-│   ├── 03-extraction.html
-│   ├── 04-ai-kb.html
-│   └── 05-ops.html
-└── test-samples/pdfs/                   43 synthetic test PDFs</code></pre>
+├── amaea-website/                       Marketing site (live at amaea.co.uk)
+├── amaea-brand/                         Internal intranet (live at team.amaea.co.uk) + this MVP doc set
+│   ├── (intranet HTML pages at root)
+│   └── mvp-docs/                        This documentation set
+│       ├── 01-product.html
+│       ├── 02-architecture.html
+│       ├── 03-extraction.html
+│       ├── 04-ai-kb.html
+│       └── 05-ops.html (you are here)
+├── amaea-app-r2/                        App design-exploration prototype (per intranet "r2" convention)
+├── amaea-website-r2/                    Marketing-site design exploration
+├── amaea-website-r3/                    Marketing-site design exploration
+├── amaea-website-r4/                    Marketing-site design exploration
+└── test-samples/pdfs/                   43 synthetic test PDFs (gitignored)</code></pre>
 <h2 id="contact-escalation">Contact + escalation</h2>
 <p>In the MVP phase, all production issues route to Milan. Post-launch:</p>
 <ul>
@@ -590,7 +613,7 @@ node scripts/ingest-scraped.mjs</code></pre>
 <li>For the AI side: <strong><a href="04-ai-kb.html">04 — AI Layer &amp; FCA Knowledge Base</a></strong></li>
 </ul>
 <hr/>
-<p><em>End of MVP documentation set. Last updated: 14 May 2026.</em></p>
+<p><em>End of MVP documentation set. Last reviewed: 18 May 2026.</em></p>
 </article>
 
 </body>
