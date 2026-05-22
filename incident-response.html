@@ -9,111 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="intranet.css"/>
   <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
-  <style>
-    .ir-toc { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
-    .ir-toc a { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-md); text-decoration: none; color: var(--gray-700); font-size: 0.82rem; font-weight: 500; transition: border-color .15s ease, color .15s ease, background .15s ease; }
-    .ir-toc a:hover { border-color: var(--plum-border); color: var(--plum); background: var(--plum-tint); }
-    .ir-toc a .ir-toc-num { font-size: 0.68rem; font-weight: 700; color: var(--gray-400); min-width: 16px; }
-
-    .ir-section { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-lg); padding: 24px 26px; margin-bottom: 16px; }
-    .ir-section h2 { font-size: 1.05rem; font-weight: 800; color: var(--gray-900); letter-spacing: -0.02em; margin: 0 0 4px; }
-    .ir-section .ir-section-sub { font-size: 0.78rem; color: var(--gray-500); margin: 0 0 18px; }
-
-    .ir-sev { display: grid; grid-template-columns: 70px 1fr; gap: 16px 18px; padding: 14px 16px; background: var(--gray-50, #fafafa); border-radius: var(--r-md); margin-bottom: 8px; align-items: start; }
-    .ir-sev-label { font-size: 0.74rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--white); padding: 6px 10px; border-radius: 999px; text-align: center; height: fit-content; }
-    .ir-sev-1 .ir-sev-label { background: #b91c1c; }
-    .ir-sev-2 .ir-sev-label { background: #c2410c; }
-    .ir-sev-3 .ir-sev-label { background: #b45309; }
-    .ir-sev-body strong { color: var(--gray-900); font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 4px; }
-    .ir-sev-body p { font-size: 0.8rem; color: var(--gray-600); margin: 0 0 6px; line-height: 1.55; }
-    .ir-sev-examples { font-size: 0.74rem; color: var(--gray-500); }
-    .ir-sev-examples code { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; padding: 1px 6px; background: var(--white); border: 1px solid var(--gray-200); border-radius: 4px; }
-
-    .ir-step-grid { display: grid; grid-template-columns: 44px 1fr; gap: 14px 16px; }
-    .ir-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--plum); color: white; font-weight: 800; font-size: 0.78rem; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
-    .ir-step-body { padding-bottom: 14px; border-bottom: 1px solid var(--gray-100, #f3f4f6); }
-    .ir-step-grid > div:last-child { border-bottom: none; padding-bottom: 0; }
-    .ir-step-title { font-size: 0.86rem; font-weight: 700; color: var(--gray-900); margin: 0 0 4px; }
-    .ir-step-body p { font-size: 0.8rem; color: var(--gray-600); margin: 0 0 6px; line-height: 1.6; }
-
-    .runbook { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-lg); margin-bottom: 14px; overflow: hidden; }
-    .runbook summary { padding: 18px 24px; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 14px; user-select: none; }
-    .runbook summary::-webkit-details-marker { display: none; }
-    .runbook summary:hover { background: var(--plum-tint); }
-    .runbook[open] summary { background: var(--plum-tint); border-bottom: 1px solid var(--gray-200); }
-    .runbook-chip { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 8px; border-radius: 4px; color: white; }
-    .chip-sev1 { background: #b91c1c; }
-    .chip-sev2 { background: #c2410c; }
-    .chip-sev3 { background: #b45309; }
-    .runbook-title { font-size: 0.92rem; font-weight: 700; color: var(--gray-900); flex: 1; letter-spacing: -0.01em; }
-    .runbook-toggle { font-size: 0.74rem; color: var(--gray-400); font-weight: 600; }
-    .runbook[open] .runbook-toggle { color: var(--plum); }
-    .runbook-body { padding: 20px 24px 22px; }
-    .runbook-body h4 { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-500); font-weight: 800; margin: 18px 0 8px; }
-    .runbook-body h4:first-child { margin-top: 0; }
-    .runbook-body p { font-size: 0.84rem; color: var(--gray-700); line-height: 1.65; margin: 0 0 10px; }
-    .runbook-body ol, .runbook-body ul { margin: 0 0 12px; padding-left: 22px; }
-    .runbook-body li { font-size: 0.84rem; color: var(--gray-700); line-height: 1.65; margin-bottom: 6px; }
-    .runbook-body code { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; padding: 1px 6px; background: var(--gray-50, #fafafa); border: 1px solid var(--gray-200); border-radius: 4px; color: var(--gray-900); }
-    .runbook-body pre { background: var(--gray-50, #fafafa); border: 1px solid var(--gray-200); border-radius: var(--r-md); padding: 14px 16px; overflow-x: auto; margin: 8px 0 14px; }
-    .runbook-body pre code { background: none; border: none; padding: 0; font-size: 0.78rem; line-height: 1.6; }
-
-    .ir-template { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--r-lg); padding: 20px 24px; margin-bottom: 14px; }
-    .ir-template-title { font-size: 0.88rem; font-weight: 700; color: var(--gray-900); margin: 0 0 4px; }
-    .ir-template-meta { font-size: 0.74rem; color: var(--gray-500); margin: 0 0 12px; }
-    .ir-template pre { background: var(--gray-50, #fafafa); border: 1px solid var(--gray-200); border-radius: var(--r-md); padding: 14px 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--gray-700); line-height: 1.65; white-space: pre-wrap; word-break: break-word; margin: 0; }
-    .ir-template pre .placeholder { background: var(--plum-tint); color: var(--plum); padding: 1px 4px; border-radius: 3px; }
-
-    .ir-checklist { list-style: none; padding: 0; margin: 0 0 16px; }
-    .ir-checklist li { padding: 13px 18px; border: 1px solid var(--gray-200); border-radius: var(--r-md); margin-bottom: 8px; font-size: 0.84rem; color: var(--gray-700); line-height: 1.6; background: var(--white); }
-    .ir-checklist li:last-child { margin-bottom: 0; }
-    .ir-checklist li strong { color: var(--gray-900); font-weight: 700; }
-    .ir-checklist li code { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; padding: 1px 5px; background: var(--gray-50, #fafafa); border: 1px solid var(--gray-200); border-radius: 4px; color: var(--gray-900); }
-    .ir-checklist-footer { font-size: 0.78rem; color: var(--gray-500); margin: 14px 0 0; line-height: 1.6; }
-
-    .ir-flow-step { display: flex; gap: 14px; padding: 14px 16px; border: 1px solid var(--gray-200); border-radius: var(--r-md); margin-bottom: 8px; background: var(--white); }
-    .ir-flow-q { font-size: 0.74rem; font-weight: 800; color: var(--plum); text-transform: uppercase; letter-spacing: 0.08em; min-width: 32px; }
-    .ir-flow-body { flex: 1; }
-    .ir-flow-body strong { font-size: 0.84rem; color: var(--gray-900); display: block; margin-bottom: 4px; }
-    .ir-flow-body p { font-size: 0.8rem; color: var(--gray-600); margin: 0; line-height: 1.55; }
-    .ir-flow-yes { color: #047857; font-weight: 600; }
-    .ir-flow-no { color: #c2410c; font-weight: 600; }
-
-    .contact-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
-    .contact-table th { text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-500); font-weight: 700; padding: 10px 12px; border-bottom: 1px solid var(--gray-200); }
-    .contact-table td { padding: 12px; border-bottom: 1px solid var(--gray-100, #f3f4f6); color: var(--gray-700); vertical-align: top; }
-    .contact-table td.vendor { font-weight: 700; color: var(--gray-900); }
-    .contact-table code { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; padding: 1px 5px; background: var(--gray-50, #fafafa); border: 1px solid var(--gray-200); border-radius: 4px; }
-
-    .ir-callout { display: flex; gap: 12px; padding: 14px 18px; border-radius: var(--r-md); margin-bottom: 14px; }
-    .ir-callout-red   { background: #fef2f2; border: 1px solid #fecaca; }
-    .ir-callout-amber { background: #fffbeb; border: 1px solid #fde68a; }
-    .ir-callout-blue  { background: #eff6ff; border: 1px solid #bfdbfe; }
-    .ir-callout strong { color: var(--gray-900); font-weight: 700; }
-    .ir-callout p { font-size: 0.82rem; color: var(--gray-700); margin: 0; line-height: 1.6; }
-
-    /* ── Dark-mode overrides ────────────────────────────────
-       Static light-tinted callouts and red regulator-row highlights
-       become tinted dark-mode panels rather than glowing pastel cards
-       against the dark page background. */
-    [data-theme="dark"] .ir-callout-red   { background: rgba(239,68,68,0.12);  border-color: rgba(239,68,68,0.32); }
-    [data-theme="dark"] .ir-callout-amber { background: rgba(217,119,6,0.12);  border-color: rgba(217,119,6,0.32); }
-    [data-theme="dark"] .ir-callout-blue  { background: rgba(37,99,235,0.12);  border-color: rgba(37,99,235,0.32); }
-    [data-theme="dark"] .ir-callout p     { color: var(--gray-600); }
-    /* Severity chip backgrounds (.ir-sev-* and .chip-sev*) and runbook
-       chips already use saturated dark reds/oranges that read fine on
-       both themes — no overrides needed there. */
-
-    /* Regulator-row highlight on the contact table — class-based so the
-       dark theme can swap it (previously was an inline style="background:#fef2f2"). */
-    .contact-table tr.regulator td { background: rgba(239,68,68,0.06); }
-    [data-theme="dark"] .contact-table tr.regulator td { background: rgba(239,68,68,0.12); }
-
-    @media (max-width: 720px) {
-      .ir-sev { grid-template-columns: 1fr; }
-      .ir-step-grid { grid-template-columns: 32px 1fr; }
-    }
-  </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -265,15 +160,15 @@
   <div class="content">
 
     <div class="page-header">
-      <p class="page-eyebrow">Operations</p>
+      <p class="page-eyebrow">Operations · 8 sections · 7 runbooks</p>
       <h1 class="page-title">Incident Response Plan</h1>
-      <p class="page-sub">Concrete playbooks for the realistic security and availability incidents Amaea can face. Replaces improvisation under pressure. <span style="color:var(--gray-500);font-weight:500;">· Last reviewed 18 May 2026.</span></p>
+      <p class="page-sub">Concrete playbooks for the realistic security and availability incidents Amaea can face. Replaces improvisation under pressure. <span class="text-mute">· Last reviewed 18 May 2026.</span></p>
     </div>
 
     <div class="ir-callout ir-callout-red">
       <div>
         <strong>If you are responding to an incident right now</strong>
-        <p>Jump straight to the matching runbook below (table of contents). Open <a href="mvp-docs/05-ops.html" style="color:var(--plum);font-weight:600;">Ops handbook</a> in a second tab for system context. Markdown copy of this page is committed at <code>amaea-app/docs/incident-response.md</code> in case the intranet itself is unavailable.</p>
+        <p>Jump straight to the matching runbook below (table of contents). Open <a href="mvp-docs/05-ops.html">Ops handbook</a> in a second tab for system context. Markdown copy of this page is committed at <code>amaea-app/docs/incident-response.md</code> in case the intranet itself is unavailable.</p>
       </div>
     </div>
 
@@ -369,28 +264,28 @@
       <h2 id="c-roles-responsibilities">C · Roles &amp; responsibilities</h2>
       <p class="ir-section-sub">A 2-person team can't have a real on-call rotation. Roles are by domain, not shift.</p>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;">
-        <div style="padding:18px 20px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);">
-          <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--plum);font-weight:800;margin:0 0 6px;">Technical DRI</p>
-          <p style="font-size:0.92rem;font-weight:700;color:var(--gray-900);margin:0 0 6px;">Milan Sajiv</p>
-          <p style="font-size:0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">Owns containment + investigation + technical remediation. Has root access to Supabase, Vercel, Cloudflare, GitHub, 1Password admin. Makes the call to rotate, take down, or revoke. Decides if the bug is in our code or a vendor's.</p>
+      <div class="ir-role-grid">
+        <div class="ir-role-card">
+          <p class="ir-role-label">Technical DRI</p>
+          <p class="ir-role-name">Milan Sajiv</p>
+          <p class="ir-role-desc">Owns containment + investigation + technical remediation. Has root access to Supabase, Vercel, Cloudflare, GitHub, 1Password admin. Makes the call to rotate, take down, or revoke. Decides if the bug is in our code or a vendor's.</p>
         </div>
-        <div style="padding:18px 20px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);">
-          <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--plum);font-weight:800;margin:0 0 6px;">Comms &amp; regulator lead</p>
-          <p style="font-size:0.92rem;font-weight:700;color:var(--gray-900);margin:0 0 6px;">Hasna Sahul Hameed</p>
-          <p style="font-size:0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">Owns external communication: customer notifications, ICO breach reports, FCA notifications (once we have pilot customers). Owns the narrative — never speculate to customers; only state confirmed facts. Co-signs Sev 1 declarations.</p>
+        <div class="ir-role-card">
+          <p class="ir-role-label">Comms &amp; regulator lead</p>
+          <p class="ir-role-name">Hasna Sahul Hameed</p>
+          <p class="ir-role-desc">Owns external communication: customer notifications, ICO breach reports, FCA notifications (once we have pilot customers). Owns the narrative — never speculate to customers; only state confirmed facts. Co-signs Sev 1 declarations.</p>
         </div>
-        <div style="padding:18px 20px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-md);">
-          <p style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--plum);font-weight:800;margin:0 0 6px;">Backstop</p>
-          <p style="font-size:0.92rem;font-weight:700;color:var(--gray-900);margin:0 0 6px;">Either co-founder if the other is unreachable</p>
-          <p style="font-size:0.82rem;color:var(--gray-600);line-height:1.55;margin:0;">If Milan is unreachable, Hasna can do the basics: take down the app via Vercel pause-deployment, rotate the Resend key from 1Password, and post a status update. Full credential access lives in 1Password (Families recovery vault); deeper technical remediation waits.</p>
+        <div class="ir-role-card">
+          <p class="ir-role-label">Backstop</p>
+          <p class="ir-role-name">Either co-founder if the other is unreachable</p>
+          <p class="ir-role-desc">If Milan is unreachable, Hasna can do the basics: take down the app via Vercel pause-deployment, rotate the Resend key from 1Password, and post a status update. Full credential access lives in 1Password (Families recovery vault); deeper technical remediation waits.</p>
         </div>
       </div>
     </div>
 
     <!-- RUNBOOKS -->
-    <div class="ir-section" id="runbooks-anchor" style="background:none;border:none;padding:0;margin:24px 0 8px;">
-      <h2 id="runbooks-by-incident-type" style="font-size:1.1rem;margin-bottom:6px;">Runbooks — by incident type</h2>
+    <div class="ir-section ir-section--bare" id="runbooks-anchor">
+      <h2 id="runbooks-by-incident-type" class="ir-runbooks-h2">Runbooks — by incident type</h2>
       <p class="ir-section-sub">Each runbook is self-contained. Click to expand under pressure.</p>
     </div>
 
@@ -399,7 +294,7 @@
       <summary>
         <span class="runbook-chip chip-sev2">Sev 2</span>
         <span class="runbook-title">1 · Leaked / exposed API key</span>
-        <span class="runbook-toggle">Expand →</span>
+        <a class="runbook-anchor" href="#rb-leaked-key" aria-label="Link to this runbook" onclick="event.stopPropagation();">#</a><span class="runbook-toggle">Expand →</span>
       </summary>
       <div class="runbook-body">
         <h3 id="triggers">Triggers</h3>
@@ -411,9 +306,9 @@
           <li><strong>Open the 1Password Secure Note</strong> for that project. This is the master record.</li>
           <li><strong>Generate the replacement</strong> in the vendor dashboard. Copy the new value to a temp note (Apple Notes with FaceID lock).</li>
           <li><strong>Update 1Password</strong> with the new value first — never skip this.</li>
-          <li><strong>Update <code>.env.local</code></strong> in <code>amaea-app/</code> (or matching directory): <code>open -e /Users/milan/Documents/Amaea/amaea-app/.env.local</code></li>
+          <li><strong>Update <code>.env.local</code></strong> in <code>amaea-app/</code> (or matching directory): <code>open -e ~/amaea-app/.env.local</code></li>
           <li><strong>Update Vercel</strong> — Dashboard → project → Settings → Environment Variables. Keep the <strong>Sensitive</strong> flag ticked. Update in every project that holds the key.</li>
-          <li><strong>Redeploy</strong>: <code>cd /Users/milan/Documents/Amaea/amaea-app &amp;&amp; npx vercel --prod --yes</code></li>
+          <li><strong>Redeploy</strong>: <code>cd ~/amaea-app &amp;&amp; npx vercel --prod --yes</code></li>
           <li><strong>Test the new key works</strong> before revoking the old. Run the matching endpoint: chat for Anthropic, embedding endpoint for Voyage, ingest cron for INGEST_SECRET, signin + cron for Supabase.</li>
           <li><strong>Revoke the old key</strong> in the vendor dashboard.</li>
           <li><strong>Delete the temp note.</strong> 1Password is now the only place the new value lives.</li>
@@ -443,7 +338,7 @@
       <summary>
         <span class="runbook-chip chip-sev1">Sev 1</span>
         <span class="runbook-title">2 · Cross-firm data exposure / RLS break</span>
-        <span class="runbook-toggle">Expand →</span>
+        <a class="runbook-anchor" href="#rb-data-exposure" aria-label="Link to this runbook" onclick="event.stopPropagation();">#</a><span class="runbook-toggle">Expand →</span>
       </summary>
       <div class="runbook-body">
         <h3 id="triggers-2">Triggers</h3>
@@ -491,7 +386,7 @@
       <summary>
         <span class="runbook-chip chip-sev1">Sev 1</span>
         <span class="runbook-title">3 · Vendor breach announcement (Supabase / Vercel / Anthropic / Cloudflare)</span>
-        <span class="runbook-toggle">Expand →</span>
+        <a class="runbook-anchor" href="#rb-provider" aria-label="Link to this runbook" onclick="event.stopPropagation();">#</a><span class="runbook-toggle">Expand →</span>
       </summary>
       <div class="runbook-body">
         <h3 id="triggers-3">Triggers</h3>
@@ -522,7 +417,7 @@
       <summary>
         <span class="runbook-chip chip-sev1">Sev 1</span>
         <span class="runbook-title">4 · Auth bypass discovered</span>
-        <span class="runbook-toggle">Expand →</span>
+        <a class="runbook-anchor" href="#rb-auth-bypass" aria-label="Link to this runbook" onclick="event.stopPropagation();">#</a><span class="runbook-toggle">Expand →</span>
       </summary>
       <div class="runbook-body">
         <h3 id="triggers-4">Triggers</h3>
@@ -558,7 +453,7 @@
       <summary>
         <span class="runbook-chip chip-sev1">Sev 1</span>
         <span class="runbook-title">5 · Email account compromise (founders / shared mailboxes)</span>
-        <span class="runbook-toggle">Expand →</span>
+        <a class="runbook-anchor" href="#rb-email" aria-label="Link to this runbook" onclick="event.stopPropagation();">#</a><span class="runbook-toggle">Expand →</span>
       </summary>
       <div class="runbook-body">
         <h3 id="triggers-5">Triggers</h3>
@@ -591,7 +486,7 @@
       <summary>
         <span class="runbook-chip chip-sev1">Sev 1</span>
         <span class="runbook-title">6 · DNS / domain compromise</span>
-        <span class="runbook-toggle">Expand →</span>
+        <a class="runbook-anchor" href="#rb-dns" aria-label="Link to this runbook" onclick="event.stopPropagation();">#</a><span class="runbook-toggle">Expand →</span>
       </summary>
       <div class="runbook-body">
         <h3 id="triggers-6">Triggers</h3>
@@ -623,7 +518,7 @@
       <summary>
         <span class="runbook-chip chip-sev2">Sev 2</span>
         <span class="runbook-title">7 · Cost-explosion attack (runaway AI usage / rate limit breach)</span>
-        <span class="runbook-toggle">Expand →</span>
+        <a class="runbook-anchor" href="#rb-cost" aria-label="Link to this runbook" onclick="event.stopPropagation();">#</a><span class="runbook-toggle">Expand →</span>
       </summary>
       <div class="runbook-body">
         <h3 id="triggers-7">Triggers</h3>
@@ -747,7 +642,7 @@ Need from you: <span class="placeholder">[specific ask, or "nothing right now, w
 
       <div class="ir-template" id="tpl-ico">
         <p class="ir-template-title">D.4 · ICO breach notification (UK GDPR Art. 33)</p>
-        <p class="ir-template-meta">File at <a href="https://ico.org.uk/for-organisations/report-a-breach/" target="_blank" style="color:var(--plum);">ico.org.uk/for-organisations/report-a-breach</a>. Phone line for urgent cases: 0303 123 1113. 72-hour clock from awareness.</p>
+        <p class="ir-template-meta">File at <a href="https://ico.org.uk/for-organisations/report-a-breach/" target="_blank">ico.org.uk/for-organisations/report-a-breach</a>. Phone line for urgent cases: 0303 123 1113. 72-hour clock from awareness.</p>
 <pre>Section 1 — About the organisation
 Organisation name: Amaea Ltd
 Company number: <span class="placeholder">[when incorporated]</span>
@@ -936,37 +831,37 @@ FCA notified: <span class="placeholder">[Yes/No/N/A]</span></pre>
           <tr>
             <td class="vendor">Supabase</td>
             <td>Database, Auth, Storage</td>
-            <td><a href="https://status.supabase.com" target="_blank" style="color:var(--plum);">status.supabase.com</a><br/>support@supabase.io · Dashboard → Support</td>
+            <td><a href="https://status.supabase.com" target="_blank">status.supabase.com</a><br/>support@supabase.io · Dashboard → Support</td>
             <td><code>amaea0002-dev</code> org</td>
           </tr>
           <tr>
             <td class="vendor">Vercel</td>
             <td>Deploy, hosting, env vars</td>
-            <td><a href="https://www.vercel-status.com" target="_blank" style="color:var(--plum);">vercel-status.com</a><br/>Dashboard → Help → Contact support</td>
+            <td><a href="https://www.vercel-status.com" target="_blank">vercel-status.com</a><br/>Dashboard → Help → Contact support</td>
             <td><code>amaea0002-devs-projects</code></td>
           </tr>
           <tr>
             <td class="vendor">Cloudflare</td>
             <td>DNS, TLS, Access (intranet auth)</td>
-            <td><a href="https://www.cloudflarestatus.com" target="_blank" style="color:var(--plum);">cloudflarestatus.com</a><br/>Dashboard → Support</td>
+            <td><a href="https://www.cloudflarestatus.com" target="_blank">cloudflarestatus.com</a><br/>Dashboard → Support</td>
             <td><code>amaea.co.uk</code> zone</td>
           </tr>
           <tr>
             <td class="vendor">Anthropic</td>
             <td>Claude API (chat + reports)</td>
-            <td><a href="https://status.anthropic.com" target="_blank" style="color:var(--plum);">status.anthropic.com</a><br/>support@anthropic.com</td>
+            <td><a href="https://status.anthropic.com" target="_blank">status.anthropic.com</a><br/>support@anthropic.com</td>
             <td>Console → Settings → Org</td>
           </tr>
           <tr>
             <td class="vendor">Voyage AI</td>
             <td>Embeddings (RAG)</td>
-            <td><a href="https://status.voyageai.com" target="_blank" style="color:var(--plum);">status.voyageai.com</a> · support@voyageai.com</td>
+            <td><a href="https://status.voyageai.com" target="_blank">status.voyageai.com</a> · support@voyageai.com</td>
             <td>Dashboard</td>
           </tr>
           <tr>
             <td class="vendor">Resend</td>
             <td>Transactional email</td>
-            <td><a href="https://status.resend.com" target="_blank" style="color:var(--plum);">status.resend.com</a> · support@resend.com</td>
+            <td><a href="https://status.resend.com" target="_blank">status.resend.com</a> · support@resend.com</td>
             <td>amaea.co.uk domain</td>
           </tr>
           <tr>
@@ -978,19 +873,19 @@ FCA notified: <span class="placeholder">[Yes/No/N/A]</span></pre>
           <tr>
             <td class="vendor">Google Workspace</td>
             <td>Email, calendar, group lists</td>
-            <td><a href="https://www.google.com/appsstatus" target="_blank" style="color:var(--plum);">google.com/appsstatus</a></td>
+            <td><a href="https://www.google.com/appsstatus" target="_blank">google.com/appsstatus</a></td>
             <td>amaea.co.uk workspace</td>
           </tr>
           <tr>
             <td class="vendor">GitHub</td>
             <td>Source code (amaea-app, amaea-db, amaea-brand, amaea-website)</td>
-            <td><a href="https://www.githubstatus.com" target="_blank" style="color:var(--plum);">githubstatus.com</a></td>
+            <td><a href="https://www.githubstatus.com" target="_blank">githubstatus.com</a></td>
             <td><code>amaea0002-dev</code> org</td>
           </tr>
           <tr class="regulator">
             <td class="vendor">ICO (UK regulator)</td>
             <td>UK GDPR breach reporting</td>
-            <td><a href="https://ico.org.uk/for-organisations/report-a-breach/" target="_blank" style="color:var(--plum);">ico.org.uk/report-a-breach</a><br/>Phone: 0303 123 1113 (urgent line)<br/>72-hour clock from awareness</td>
+            <td><a href="https://ico.org.uk/for-organisations/report-a-breach/" target="_blank">ico.org.uk/report-a-breach</a><br/>Phone: 0303 123 1113 (urgent line)<br/>72-hour clock from awareness</td>
             <td>—</td>
           </tr>
           <tr class="regulator">
@@ -1002,14 +897,14 @@ FCA notified: <span class="placeholder">[Yes/No/N/A]</span></pre>
           <tr class="regulator">
             <td class="vendor">Action Fraud (UK)</td>
             <td>Cybercrime / fraud reporting</td>
-            <td><a href="https://www.actionfraud.police.uk" target="_blank" style="color:var(--plum);">actionfraud.police.uk</a><br/>0300 123 2040</td>
+            <td><a href="https://www.actionfraud.police.uk" target="_blank">actionfraud.police.uk</a><br/>0300 123 2040</td>
             <td>—</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="ir-callout ir-callout-blue" style="margin-top:24px;">
+    <div class="ir-callout ir-callout-blue ir-callout--spaced">
       <div>
         <strong>Maintenance</strong>
         <p>Review this page after every Sev 1 or Sev 2 incident (update the matching runbook with what was actually needed). Otherwise review quarterly — next due 18 August 2026. Markdown copy lives at <code>amaea-app/docs/incident-response.md</code> for offline access during an actual incident.</p>
