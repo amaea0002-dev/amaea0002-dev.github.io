@@ -9,41 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../intranet.css"/>
   <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
-  <style>
-    .memo-meta-bar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 18px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--r-md); margin-bottom: 24px; font-size: 0.78rem; color: var(--gray-700); }
-    .memo-meta-bar strong { color: var(--gray-900); font-weight: 600; }
-    .memo-meta-sep { color: var(--gray-300); }
-    .memo-back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--gray-600); text-decoration: none; margin-bottom: 18px; }
-    .memo-back:hover { color: var(--gray-900); }
-
-    .memo-body { font-size: 0.88rem; line-height: 1.7; color: var(--gray-800); }
-    .memo-body h2 { font-size: 1.35rem; font-weight: 700; color: var(--gray-900); margin: 38px 0 14px; letter-spacing: -0.02em; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
-    .memo-body h2:first-child { margin-top: 0; }
-    .memo-body h3 { font-size: 1.08rem; font-weight: 700; color: var(--gray-900); margin: 28px 0 10px; letter-spacing: -0.01em; }
-    .memo-body h4 { font-size: 0.95rem; font-weight: 700; color: var(--gray-800); margin: 22px 0 8px; }
-    .memo-body p { margin: 0 0 14px; }
-    .memo-body strong { color: var(--gray-900); font-weight: 600; }
-    .memo-body em { font-style: italic; color: var(--gray-700); }
-    .memo-body a { color: var(--accent, #4C2C4B); text-decoration: underline; text-underline-offset: 2px; }
-    .memo-body a:hover { text-decoration: none; }
-    .memo-body ul, .memo-body ol { margin: 0 0 16px; padding-left: 22px; }
-    .memo-body li { margin: 4px 0; }
-    .memo-body li > ul, .memo-body li > ol { margin: 6px 0 6px; }
-    .memo-body code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.84em; background: var(--gray-100); padding: 1px 5px; border-radius: 4px; color: var(--gray-900); }
-    .memo-body pre { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--r-md); padding: 14px 16px; overflow-x: auto; margin: 0 0 18px; }
-    .memo-body pre code { background: transparent; padding: 0; font-size: 0.82rem; line-height: 1.55; }
-    .memo-body table { width: 100%; border-collapse: collapse; margin: 8px 0 22px; font-size: 0.82rem; }
-    .memo-body th, .memo-body td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--gray-200); vertical-align: top; }
-    .memo-body th { font-weight: 600; color: var(--gray-900); background: var(--gray-50); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
-    .memo-body tr:last-child td { border-bottom: none; }
-    .memo-body hr { border: none; border-top: 1px solid var(--gray-200); margin: 28px 0; }
-    .memo-body blockquote { border-left: 3px solid var(--gray-300); padding: 4px 0 4px 16px; margin: 0 0 16px; color: var(--gray-600); font-style: italic; }
-
-    /* Constrain to readable width on wide screens */
-    .memo-body { max-width: 880px; }
-  </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar">
@@ -54,53 +22,96 @@
   <nav class="sidebar-nav">
     <div class="sidebar-label">Workspace</div>
     <a href="../index" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
       Dashboard
     </a>
+    <a href="../onboarding" class="sidebar-item">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/><polyline points="9 11 12 14 22 4"/></svg>
+      Onboarding
+    </a>
     <a href="../brand" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       Brand
     </a>
-    <a href="../team" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      Team
-    </a>
+    <div class="sidebar-group">
+      <div class="sidebar-item-row">
+        <a href="../team" class="sidebar-item">
+          <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Team
+        </a>
+        <button type="button" class="sidebar-toggle" aria-label="Toggle Team sub-menu" onclick="this.closest('.sidebar-group').toggleAttribute('data-open')">
+          <svg aria-hidden="true" class="sidebar-chevron" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+      <div class="sidebar-sub">
+        <a href="../cofounder-agreement" class="sidebar-sub-item">Co-founder Agreement</a>
+        <a href="../ceo-working-agreement" class="sidebar-sub-item">CEO Working Agreement</a>
+        <a href="../cto-working-agreement" class="sidebar-sub-item">CTO Working Agreement</a>
+      </div>
+    </div>
     <a href="../docs" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       Documents
     </a>
-    <a href="../mvp-docs/" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      Product Docs
-    </a>
+    <div class="sidebar-group">
+      <div class="sidebar-item-row">
+        <a href="../mvp-docs/" class="sidebar-item">
+          <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Product Docs
+        </a>
+        <button type="button" class="sidebar-toggle" aria-label="Toggle Product Docs sub-menu" onclick="this.closest('.sidebar-group').toggleAttribute('data-open')">
+          <svg aria-hidden="true" class="sidebar-chevron" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+      <div class="sidebar-sub">
+        <a href="../mvp-docs/01-product.html" class="sidebar-sub-item">01 · Product</a>
+        <a href="../mvp-docs/02-architecture.html" class="sidebar-sub-item">02 · Architecture</a>
+        <a href="../mvp-docs/03-extraction.html" class="sidebar-sub-item">03 · Extraction</a>
+        <a href="../mvp-docs/04-ai-kb.html" class="sidebar-sub-item">04 · AI &amp; KB</a>
+        <a href="../mvp-docs/05-ops.html" class="sidebar-sub-item">05 · Operations</a>
+      </div>
+    </div>
     <a href="../features" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
       Product Features
     </a>
     <a href="../roadmap" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       Roadmap
     </a>
     <a href="../decisions" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
       Decisions
     </a>
-    <a href="../sector-research" class="sidebar-item active">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <a href="../eval-v2" class="sidebar-item">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      AI Eval
+    </a>
+    <a href="../sector-research" class="sidebar-item active" aria-current="page">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       Sector Research
     </a>
     <a href="../investor" class="sidebar-item">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
       Funding
     </a>
+    <a href="../financial-model" class="sidebar-item">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21H4.6c-.3 0-.6-.3-.6-.6V3"/><polyline points="8 13 12 9 16 13 21 8"/></svg>
+      Financial Model
+    </a>
+    <div class="sidebar-label">Operations</div>
+    <a href="../incident-response" class="sidebar-item">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Incident Response
+    </a>
     <div class="sidebar-label">External</div>
-    <a href="https://amaea0002-dev.github.io/webpage" class="sidebar-item" target="_blank">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <a href="https://amaea.co.uk" class="sidebar-item" target="_blank" rel="noopener">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       Website <span class="ext">↗</span>
     </a>
-    <a href="https://amaea0002-dev.github.io/prototype/dashboard.html" class="sidebar-item" target="_blank">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      Prototype <span class="ext">↗</span>
+    <a href="https://app.amaea.co.uk" class="sidebar-item" target="_blank" rel="noopener">
+      <svg aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      App <span class="ext">↗</span>
     </a>
   </nav>
   <div class="sidebar-footer" style="position:relative;">
@@ -108,9 +119,9 @@
       <div class="sidebar-avatar" id="sidebarAvatar">H</div>
       <div style="flex:1;min-width:0;">
         <div class="sidebar-user-name" id="sidebarUserName">Hasna Sahul Hameed</div>
-        <div class="sidebar-user-role" id="sidebarUserRole">CEO &amp; Co-founder</div>
+        <div class="sidebar-user-role" id="sidebarUserRole">CEO &amp; Co-Founder</div>
       </div>
-      <svg width="11" height="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;margin-left:auto;"><polyline points="6 9 12 15 18 9"/></svg>
+      <svg aria-hidden="true" width="11" height="11" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;margin-left:auto;"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
   </div>
 </aside>
@@ -125,12 +136,29 @@
     <span class="bc-current">Insurance Intermediaries</span>
   </div>
   <div class="topbar-right">
+    <button class="topbar-search" data-cmdk-trigger aria-label="Search the intranet">
+      <svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span class="topbar-search-label">Search</span>
+      <span class="topbar-search-kbd">⌘K</span>
+    </button>
     <span class="topbar-date" id="topbar-date"></span>
+    <div class="topbar-user">
+      <button class="topbar-user-trigger" id="topbarUserTrigger" aria-label="Account"></button>
+      <div class="topbar-user-panel" id="topbarUserPanel" role="menu">
+        <div class="topbar-user-identity">
+          <div class="topbar-user-identity-name" id="topbarUserName">Signed in</div>
+          <div class="topbar-user-identity-email" id="topbarUserEmail">—</div>
+        </div>
+        <div class="topbar-user-actions">
+          <a class="topbar-user-action danger" href="/cdn-cgi/access/logout"><svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign out</a>
+        </div>
+      </div>
+    </div>
     <button class="theme-toggle" aria-label="Toggle dark mode"></button>
   </div>
 </header>
 
-<main class="main">
+<main class="main" id="main" tabindex="-1">
   <div class="content">
 
     <a href="../sector-research" class="memo-back">← Back to Sector Research index</a>
@@ -141,6 +169,8 @@
     </div>
 
     <div class="memo-meta-bar">
+      <span><strong>Last reviewed:</strong> 18 May 2026</span>
+      <span class="memo-meta-sep">·</span>
       <span><strong>Next review:</strong> 16 Nov 2026</span>
       <span class="memo-meta-sep">·</span>
       <span><strong>Source:</strong> <code>sector-research/insurance-intermediaries.md</code></span>
@@ -148,10 +178,30 @@
       <span>Living document — update quarterly</span>
     </div>
 
+    <nav class="memo-toc" aria-label="In this memo">
+  <p class="memo-toc-label">In this memo</p>
+  <div class="memo-toc-grid">
+    <a href="#executive-summary" class="memo-toc-link">Executive Summary</a>
+    <a href="#1-regulatory-landscape" class="memo-toc-link">1. Regulatory Landscape</a>
+    <a href="#2-market-sizing-tam-sam-som" class="memo-toc-link">2. Market Sizing — TAM / SAM / SOM</a>
+    <a href="#3-customer-segmentation" class="memo-toc-link">3. Customer Segmentation</a>
+    <a href="#4-sample-target-firms" class="memo-toc-link">4. Sample Target Firms</a>
+    <a href="#5-compliance-pain-points" class="memo-toc-link">5. Compliance Pain Points</a>
+    <a href="#6-competitive-landscape" class="memo-toc-link">6. Competitive Landscape</a>
+    <a href="#7-pricing-benchmarks" class="memo-toc-link">7. Pricing Benchmarks</a>
+    <a href="#8-go-to-market-notes" class="memo-toc-link">8. Go-to-Market Notes</a>
+    <a href="#9-domain-expert-profile" class="memo-toc-link">9. Domain Expert Profile</a>
+    <a href="#10-adjacency-to-uk-ifa-similarities-and-differences" class="memo-toc-link">10. Adjacency to UK IFA — Similarities and Differences</a>
+    <a href="#11-risks-and-unknowns" class="memo-toc-link">11. Risks and Unknowns</a>
+    <a href="#12-quarterly-update-log" class="memo-toc-link">12. Quarterly Update Log</a>
+    <a href="#13-sources-and-references" class="memo-toc-link">13. Sources and References</a>
+  </div>
+</nav>
+
     <div class="memo-body">
 <p><strong>Last updated:</strong> 2026-05-16 <strong>Next review:</strong> 2026-11-16 (Q4 2026 priority — review FCA Regulatory Priorities Report updates, Pure Protection Market Study final report expected Q3 2026, and any GIPP enforcement developments) <strong>Authors:</strong> Amaea (Milan Sajiv + Hasna Sahul Hameed) <strong>Classification:</strong> Internal strategy document — do not distribute</p>
 <hr/>
-<h2 id="executive-summary">Executive Summary</h2>
+<h2 id="executive-summary">Executive Summary <a class="memo-anchor" href="#executive-summary" aria-label="Link to this section">#</a></h2>
 <p>The UK insurance intermediary sector is Amaea&#x27;s highest-priority Phase 2 expansion target. It is larger than the IFA market by revenue, more fragmented, and currently underserved by compliance-specific SaaS. It shares enough regulatory DNA with the IFA sector — Consumer Duty, SM&amp;CR, vulnerable customer obligations, complaints handling — that Amaea&#x27;s core compliance-tracking architecture can be adapted rather than rebuilt.</p>
 <p><strong>Market headline numbers.</strong> Revenue from non-investment insurance distribution reached £26.1 billion in 2024 (up 6.6% year-on-year, per FCA RMAR data). BIBA members alone arrange £150 billion of general insurance premiums annually, employing over 130,000 people across roughly 1,700 regulated firms. Total firm population (directly authorised plus appointed representatives) likely exceeds 5,000 distinct legal entities when the AR network model is included.</p>
 <p><strong>Key regulators.</strong> FCA is the single regulator. The PRA supervises insurers but not brokers. Lloyd&#x27;s of London has overlay governance for Lloyd&#x27;s brokers. There is no separate insurance intermediary regulator equivalent to the PRA.</p>
@@ -160,8 +210,8 @@
 <p><strong>Key risks.</strong> ICOBS is meaningfully different from COBS: there is no fact-find culture equivalent, commission economics dominate, and the product governance obligations apply at the manufacturer-distributor interface in a way that has no direct IFA parallel. Amaea will need a sector-specific module rather than a direct port of its IFA product. The broker market is also deeply concentrated at the top (Gallagher, Howden, Marsh, Aon) where enterprise sales cycles are 12-18 months, and consolidation is rapidly shrinking the mid-market. Amaea&#x27;s sweet spot is the 1,700 or so BIBA-member brokers below the top 20, plus the MGA population. Distribution via broker networks (Cobra, Movo, Brokerbility) could accelerate penetration.</p>
 <p><strong>Recommended launch posture.</strong> Enter in 2030-2031 as planned. Do not try to force entry earlier. Use 2027-2030 to build relationships (BIBA conference, Insurance Age coverage, domain hire), develop the insurance-specific module in parallel with scaling the IFA product, and identify 3-5 Founders Programme-equivalent early adopters from the mid-market broker segment. Price initially at the IFA Essentials equivalent (£699/mo), building credibility before moving to full-tier pricing.</p>
 <hr/>
-<h2 id="1-regulatory-landscape">1. Regulatory Landscape</h2>
-<h3 id="11-fca-as-regulator">1.1 FCA as Regulator</h3>
+<h2 id="1-regulatory-landscape">1. Regulatory Landscape <a class="memo-anchor" href="#1-regulatory-landscape" aria-label="Link to this section">#</a></h2>
+<h3 id="11-fca-as-regulator">1.1 FCA as Regulator <a class="memo-anchor" href="#11-fca-as-regulator" aria-label="Link to this section">#</a></h3>
 <p>The Financial Conduct Authority (FCA) is the sole conduct regulator for insurance intermediaries in the UK. Firms distributing insurance products to retail or commercial customers must be either directly authorised by the FCA (with a Financial Services Register entry under regulated activity &#x27;arranging and/or advising on general insurance contracts&#x27;) or operate as appointed representatives (ARs) under a directly authorised principal.</p>
 <p>The FCA&#x27;s insurance supervisory framework was codified domestically after UK withdrawal from the EU. The FCA&#x27;s approach post-2023 has become materially more assertive: the 2026 Regulatory Priorities Report replaces over 40 previous portfolio letters with a single consolidated statement of expectations, and the FCA has explicitly stated it will take faster, firmer enforcement action against firms that cannot demonstrate good customer outcomes.</p>
 <p>Relevant FCA supervisory functions for brokers:</p>
@@ -171,7 +221,7 @@
 <li><strong>Enforcement</strong> — FCA fined two GI broking individuals a combined £1.11 million in 2024; total insurance-related fines in 2024 were £1.1 million (comparatively low, but the FCA has signalled escalation)</li>
 </ul>
 <p><strong>FCA&#x27;s five-year strategy (2025-2030)</strong> frames the regulator as &quot;smarter, faster and more assertive.&quot; Key themes for insurance intermediaries: consumer understanding and claims handling; data and MI quality; proportionate supervision for firms that evidence good outcomes; faster intervention for those that do not; and regulatory simplification (December 2025 policy statement removed the mandatory 15-hour annual CPD requirement, giving firms flexibility on competency training).</p>
-<h3 id="12-icobs-insurance-conduct-of-business-sourcebook">1.2 ICOBS — Insurance: Conduct of Business Sourcebook</h3>
+<h3 id="12-icobs-insurance-conduct-of-business-sourcebook">1.2 ICOBS — Insurance: Conduct of Business Sourcebook <a class="memo-anchor" href="#12-icobs-insurance-conduct-of-business-sourcebook" aria-label="Link to this section">#</a></h3>
 <p>ICOBS is the primary conduct rulebook for insurance distribution. It applies to all firms arranging or advising on non-investment insurance (general insurance, pure protection) sold to retail customers. Key chapters:</p>
 <p><strong>ICOBS 2 — General matters and client communication.</strong> Best interests rule: a firm must act honestly, fairly and professionally in accordance with the best interests of its customer. Applies regardless of whether the sale is advised or non-advised.</p>
 <p><strong>ICOBS 4 — Information requirements.</strong> Firms must provide information about themselves, their remuneration, and whether they give advice. Following IDD implementation, firms must specify the nature of their service (advised/non-advised), disclose conflicts of interest, and provide the Insurance Product Information Document (IPID).</p>
@@ -179,7 +229,7 @@
 <p><strong>ICOBS 6 — Product information.</strong> Includes requirements on renewals, changes to cover, and — critically — the GIPP-linked rules in ICOBS 6B governing renewal pricing for motor and home insurance products.</p>
 <p><strong>ICOBS 7 — Cancellation.</strong> Governs the 14-day cooling-off period and associated documentation.</p>
 <p><strong>ICOBS 8 — Claims handling.</strong> Insurers and firms acting in claims handling must not reject claims unreasonably, must handle claims fairly and promptly, and must keep claimants appropriately informed. This chapter is increasingly scrutinised: the FCA&#x27;s 2026 priorities explicitly flag claims handling oversight as an active supervisory area.</p>
-<h3 id="13-idd-insurance-distribution-directive-and-uk-onshoring">1.3 IDD — Insurance Distribution Directive and UK Onshoring</h3>
+<h3 id="13-idd-insurance-distribution-directive-and-uk-onshoring">1.3 IDD — Insurance Distribution Directive and UK Onshoring <a class="memo-anchor" href="#13-idd-insurance-distribution-directive-and-uk-onshoring" aria-label="Link to this section">#</a></h3>
 <p>The EU&#x27;s Insurance Distribution Directive (IDD) came into force in the UK in October 2018, replacing the Insurance Mediation Directive. Post-Brexit, the IDD was onshored into domestic law via the Insurance Distribution (Amendment) (EU Exit) Regulations 2019, and the FCA subsequently replaced retained EU law delegated regulations with its own rules and guidance (PS23/18: Smarter Regulatory Framework, changes effective 5 April 2024).</p>
 <p>Key IDD-derived requirements that remain in UK law:</p>
 <ul>
@@ -192,7 +242,7 @@
 <li>Cross-selling requirements (firms selling packages must make each component available separately)</li>
 </ul>
 <p>Post-April 2024, the UK has formally separated its insurance distribution rulebook from EU law. The FCA continues to consult on further simplification; the direction of travel is towards relying more heavily on the Consumer Duty as the overarching framework, with more prescriptive ICOBS rules potentially being retracted or simplified over the 2026-2028 period. Amaea should monitor this — it creates risk if the compliance framework narrows significantly, but more likely it creates opportunity as firms struggle to self-interpret principles-based obligations.</p>
-<h3 id="14-product-oversight-and-governance-pog-prod-4">1.4 Product Oversight and Governance (POG) — PROD 4</h3>
+<h3 id="14-product-oversight-and-governance-pog-prod-4">1.4 Product Oversight and Governance (POG) — PROD 4 <a class="memo-anchor" href="#14-product-oversight-and-governance-pog-prod-4" aria-label="Link to this section">#</a></h3>
 <p>PROD 4 (part of the FCA Product Intervention and Product Governance Sourcebook) governs how insurance products are designed, approved, distributed and reviewed. It applies to both manufacturers (insurers, MGAs creating products) and distributors (brokers placing those products with customers).</p>
 <p><strong>Manufacturer obligations (PROD 4.2):</strong></p>
 <ul>
@@ -220,7 +270,7 @@
 </ul>
 <p><strong>FCA enforcement consequence:</strong> The FCA is requiring firms to withdraw products where it has material fair value concerns. This is a significant escalation from guidance to direct intervention.</p>
 <p><strong>Amaea opportunity:</strong> POG attestation workflow management — tracking annual review cycles, maintaining the evidence trail for FVAs, flagging when PDAs have not been reviewed within required timeframes, and producing the board-reportable MI the FCA expects — is a direct automation target.</p>
-<h3 id="15-general-insurance-pricing-practices-gipp">1.5 General Insurance Pricing Practices (GIPP)</h3>
+<h3 id="15-general-insurance-pricing-practices-gipp">1.5 General Insurance Pricing Practices (GIPP) <a class="memo-anchor" href="#15-general-insurance-pricing-practices-gipp" aria-label="Link to this section">#</a></h3>
 <p>GIPP rules came into force on 1 January 2022 following FCA Policy Statements PS21/5 and PS21/11. They apply to personal lines motor and home insurance products only (not commercial, life, or protection).</p>
 <p><strong>Core requirements:</strong></p>
 <ul>
@@ -232,7 +282,7 @@
 <p><strong>FCA multi-firm GIPP review (2022-2023):</strong> The FCA conducted a review to assess whether firms had implemented appropriate systems and controls following the January 2022 implementation. Findings highlighted that some firms had inadequate pricing controls, particularly where pricing models were complex or where multiple distribution channels created ENBP calculation challenges.</p>
 <p><strong>FCA evaluation (EP25/2, 2025):</strong> The FCA published an evaluation of the GIPP remedies in 2025. The evaluation found that the price-walking ban had materially reduced the extent to which loyal customers were paying premiums above equivalent new business prices, but noted ongoing challenges in multi-channel environments and for customers who did not engage at renewal.</p>
 <p><strong>Amaea opportunity:</strong> Annual attestation workflow management, pricing monitoring alerts (flagging when renewal data needs ENBP validation), and audit-ready evidence trails for the senior manager attestation. The attestation is a recurring, high-stakes obligation with personal liability for the attesting senior manager — exactly the type of workflow Amaea should own.</p>
-<h3 id="16-consumer-duty-applied-to-insurance-distribution-prin-2a">1.6 Consumer Duty Applied to Insurance Distribution (PRIN 2A)</h3>
+<h3 id="16-consumer-duty-applied-to-insurance-distribution-prin-2a">1.6 Consumer Duty Applied to Insurance Distribution (PRIN 2A) <a class="memo-anchor" href="#16-consumer-duty-applied-to-insurance-distribution-prin-2a" aria-label="Link to this section">#</a></h3>
 <p>Consumer Duty (PRIN 2A) applies to all FCA-regulated firms with a role in the distribution chain for retail products, including insurance intermediaries. It came into force on 31 July 2023 for open products and 31 July 2024 for closed products.</p>
 <p><strong>The four outcomes for insurance intermediaries:</strong></p>
 <ol>
@@ -250,7 +300,7 @@
 </ul>
 <p><strong>FCA Dear CEO — February 2024 (Product Governance):</strong> Addressed to insurance manufacturers but with direct implications for distributors who must receive and act on manufacturer information. Key FCA concern: firms signing attestations without being able to evidence the underlying analysis.</p>
 <p><strong>Ongoing (2026):</strong> The FCA&#x27;s February 2026 Regulatory Priorities Report confirmed Consumer Duty remains a live supervisory priority for insurance intermediaries, with particular focus on consumer understanding (sales process analysis in Q1 2026) and delegated authority / remuneration oversight (Q2 2026 expansion, findings expected Q3 2027).</p>
-<h3 id="17-smcr-for-insurance-intermediaries">1.7 SM&amp;CR for Insurance Intermediaries</h3>
+<h3 id="17-smcr-for-insurance-intermediaries">1.7 SM&amp;CR for Insurance Intermediaries <a class="memo-anchor" href="#17-smcr-for-insurance-intermediaries" aria-label="Link to this section">#</a></h3>
 <p>The Senior Managers and Certification Regime (SM&amp;CR) has applied to FCA solo-regulated insurance intermediaries (brokers, MGAs, other intermediaries) since 9 December 2019.</p>
 <p><strong>Three firm categories (proportionate):</strong></p>
 <ul>
@@ -267,7 +317,7 @@
 <li>Maintenance of Management Responsibilities Maps (Enhanced firms only)</li>
 </ul>
 <p>SM&amp;CR creates significant ongoing administrative burden, particularly for multi-site or growing brokers where SMF responsibilities shift as the business changes. The annual fit and proper cycle is a direct Amaea workflow target.</p>
-<h3 id="18-claims-handling-expectations-and-oversight">1.8 Claims Handling Expectations and Oversight</h3>
+<h3 id="18-claims-handling-expectations-and-oversight">1.8 Claims Handling Expectations and Oversight <a class="memo-anchor" href="#18-claims-handling-expectations-and-oversight" aria-label="Link to this section">#</a></h3>
 <p>ICOBS 8 and the Consumer Duty create joint obligations on brokers who handle claims on behalf of customers. The FCA&#x27;s attention to claims has intensified:</p>
 <ul>
 <li>The FCA conducted a claims handling thematic review (August 2024), emphasising that claims data — handling times, frequency, severity, acceptance/decline rates — should be actively used in POG reviews and fair value assessments</li>
@@ -275,7 +325,7 @@
 <li>The FCA has stated it will conduct &quot;continued supervisory and enforcement action in home and travel insurance markets&quot;</li>
 </ul>
 <p>For pure GI brokers, claims handling is often outsourced or delegated. The compliance question is whether the broker can demonstrate oversight of the outsourced function, including appropriate monitoring MI.</p>
-<h3 id="19-vulnerable-customer-obligations">1.9 Vulnerable Customer Obligations</h3>
+<h3 id="19-vulnerable-customer-obligations">1.9 Vulnerable Customer Obligations <a class="memo-anchor" href="#19-vulnerable-customer-obligations" aria-label="Link to this section">#</a></h3>
 <p>FCA Finalised Guidance FG21/1 (February 2021) sets out expectations for all firms. Applied to insurance intermediaries, it requires:</p>
 <ul>
 <li><strong>Identification:</strong> Systems and processes to identify customers who may be vulnerable (health, financial resilience, life events, capability)</li>
@@ -285,7 +335,7 @@
 </ul>
 <p><strong>March 2025 FCA vulnerability review findings:</strong> The FCA assessed how firms had implemented FG21/1 since 2021. Key findings: vulnerable customers continue to experience challenges, particularly those with multiple vulnerability drivers. The FCA found examples of good practice (tailored support, adjusted communication) but concluded that existing guidance remains appropriate — no new requirements were introduced at that time. However, the FCA signalled it will continue monitoring closely.</p>
 <p>The practical compliance challenge for insurance brokers (particularly non-advised GI brokers) is that they often have minimal customer interaction beyond the point of sale and renewal. Identifying vulnerability in a transactional, online-first environment requires system-level triggers and workflow — something Amaea can provide.</p>
-<h3 id="110-recent-enforcement-and-regulatory-signals">1.10 Recent Enforcement and Regulatory Signals</h3>
+<h3 id="110-recent-enforcement-and-regulatory-signals">1.10 Recent Enforcement and Regulatory Signals <a class="memo-anchor" href="#110-recent-enforcement-and-regulatory-signals" aria-label="Link to this section">#</a></h3>
 <p><strong>FCA enforcement in insurance (2024):</strong> Total insurance-related FCA fines in 2024 were £1.11 million, levied against two GI broking individuals. This is low in absolute terms but the FCA has explicitly stated it will use &quot;the full range of regulatory tools&quot; for firms that cannot demonstrate fair value compliance. Product withdrawal orders (ordering insurers and intermediaries to stop selling products) have become an active enforcement tool.</p>
 <p><strong>FCA February 2026 Regulatory Priorities Report (Insurance):</strong> This is the most significant recent regulatory publication for Amaea&#x27;s research. Key implications:</p>
 <ul>
@@ -297,8 +347,8 @@
 </ul>
 <p><strong>Pure Protection Market Study MS24/1 (ongoing):</strong> Launched in 2024, interim report published, final report expected Q3 2026. Key interim finding: approximately 12,000 intermediaries active in the pure protection market; 92% of income protection and 83% of critical illness premiums from new sales are generated through intermediaries. The study examines whether commission structures and distribution practices deliver good consumer outcomes. Final recommendations could impose new obligations on protection intermediaries in 2026-2027.</p>
 <hr/>
-<h2 id="2-market-sizing-tam-sam-som">2. Market Sizing — TAM / SAM / SOM</h2>
-<h3 id="21-firm-population">2.1 Firm Population</h3>
+<h2 id="2-market-sizing-tam-sam-som">2. Market Sizing — TAM / SAM / SOM <a class="memo-anchor" href="#2-market-sizing-tam-sam-som" aria-label="Link to this section">#</a></h2>
+<h3 id="21-firm-population">2.1 Firm Population <a class="memo-anchor" href="#21-firm-population" aria-label="Link to this section">#</a></h3>
 <p><strong>Total market (FCA-authorised insurance intermediaries):</strong></p>
 <p>Based on FCA data, approximately 12,000 firms submit at least one element of the RMAR annually, though this number includes firms conducting insurance distribution as a secondary activity alongside mortgage broking, retail investment advice, or consumer credit. The directly addressable population of dedicated insurance intermediary firms is smaller.</p>
 <p>From the FCA&#x27;s May 2025 FOI release:</p>
@@ -345,7 +395,7 @@
 </tr>
 </tbody></table>
 <p><strong>Realistic directly authorised firm count:</strong> Approximately 5,000-6,000 directly authorised insurance intermediary firms (excluding the AR tail and the broader protection intermediary universe which heavily overlaps with IFAs).</p>
-<h3 id="22-revenue-and-market-size">2.2 Revenue and Market Size</h3>
+<h3 id="22-revenue-and-market-size">2.2 Revenue and Market Size <a class="memo-anchor" href="#22-revenue-and-market-size" aria-label="Link to this section">#</a></h3>
 <ul>
 <li><strong>Non-investment insurance distribution revenue (2024):</strong> £26.1 billion (FCA RMAR data, up 6.6% vs 2023)</li>
 <li><strong>Commission as share of revenue:</strong> 82.6% of the £26.1 billion (approximately £21.6 billion in commission)</li>
@@ -355,14 +405,14 @@
 <li><strong>LIIBA member premium placement:</strong> £45 billion in London Market + £8 billion globally from London operations</li>
 <li><strong>Regulatory compliance costs to brokers:</strong> Estimated at 8.1% of insurance mediation fees and commissions (BIBA 2023 research), equivalent to ~£2.1 billion annually — the &quot;cost of compliance&quot; that Amaea directly reduces</li>
 </ul>
-<h3 id="23-tam-sam-som-for-amaea">2.3 TAM / SAM / SOM for Amaea</h3>
+<h3 id="23-tam-sam-som-for-amaea">2.3 TAM / SAM / SOM for Amaea <a class="memo-anchor" href="#23-tam-sam-som-for-amaea" aria-label="Link to this section">#</a></h3>
 <p><strong>TAM (Total Addressable Market):</strong> All FCA-regulated insurance intermediary firms capable of paying for compliance SaaS. Approximate population: 5,000 directly authorised firms (excluding the very smallest sole-trader ARs). At Amaea&#x27;s blended IFA ARPA of ~£2,094/month, TAM = ~£125 million ARR. In practice, insurance ARPA will likely be lower for entry-level at launch (pricing discussed in Section 9).</p>
 <p><strong>SAM (Serviceable Addressable Market):</strong> Mid-market GI brokers (1-100 staff) and protection intermediaries who do not have in-house compliance teams and are not already locked into enterprise compliance platforms. Estimated population: 3,000-4,000 firms. At a blended entry ARPA of £900/month (reflecting a modest discount to IFA pricing until Amaea builds insurance-specific features): SAM = ~£32-43 million ARR.</p>
 <p><strong>SOM (Serviceable Obtainable Market — by 2033):</strong> Amaea target: 3-5% market penetration of SAM within 2 years of launch in insurance. At 150-200 insurance broker clients at a blended ARPA of £1,200/month: SOM = £2.2-2.9 million ARR from insurance sector. This is additive to the IFA base and positions Amaea for Series A credibility.</p>
 <p><em>Note: All SOM figures are illustrative planning estimates, not forecasts. They should be stress-tested against actual sales cycle data from the IFA Founders Programme before committing to insurance sales resource.</em></p>
 <hr/>
-<h2 id="3-customer-segmentation">3. Customer Segmentation</h2>
-<h3 id="31-large-commercial-brokers-not-amaea-targets-phase-2">3.1 Large Commercial Brokers — Not Amaea Targets (Phase 2)</h3>
+<h2 id="3-customer-segmentation">3. Customer Segmentation <a class="memo-anchor" href="#3-customer-segmentation" aria-label="Link to this section">#</a></h2>
+<h3 id="31-large-commercial-brokers-not-amaea-targets-phase-2">3.1 Large Commercial Brokers — Not Amaea Targets (Phase 2) <a class="memo-anchor" href="#31-large-commercial-brokers-not-amaea-targets-phase-2" aria-label="Link to this section">#</a></h3>
 <p>The top 10 UK brokers by revenue are Gallagher, Howden, Marsh, Aon, Lockton, BMS, Ardonagh, Specialty Group, PIB Group, and similar. Gallagher became the first UK broker to exceed £1 billion in UK non-life broking revenue. These firms have:</p>
 <ul>
 <li>In-house compliance teams of 10-50+ people</li>
@@ -372,7 +422,7 @@
 <li>Pricing expectations in the £50,000-£500,000+ annual contract range</li>
 </ul>
 <p>Amaea should not target these firms in Phase 2. The only exception would be if one of these firms has an SME or regional division that operates semi-independently with devolved compliance responsibility — in which case the division could be a Founders Programme candidate.</p>
-<h3 id="32-mid-market-brokers-10-100m-gwp-50-300-staff-primary-target">3.2 Mid-Market Brokers (£10-100m GWP, 50-300 staff) — Primary Target</h3>
+<h3 id="32-mid-market-brokers-10-100m-gwp-50-300-staff-primary-target">3.2 Mid-Market Brokers (£10-100m GWP, 50-300 staff) — Primary Target <a class="memo-anchor" href="#32-mid-market-brokers-10-100m-gwp-50-300-staff-primary-target" aria-label="Link to this section">#</a></h3>
 <p>This is Amaea&#x27;s core Phase 2 sweet spot. Characteristics:</p>
 <ul>
 <li>Compliance function exists but is typically a team of 2-5 people (compliance manager plus juniors)</li>
@@ -384,7 +434,7 @@
 <li>Deal sizes: £1,000-£3,000/month realistic; align to Amaea Professional/Scale tiers</li>
 </ul>
 <p>Firms in this band include (see Section 6 for more detail): Jensten, Clear Group, Bollington, Seventeen Group, Marsh Commercial (SME division), Howden SME, Sabre Insurance (distribution arm), Partners&amp;, JMG Group, Clegg Gifford.</p>
-<h3 id="33-sme-brokers-1-20-staff-secondary-target-via-networks">3.3 SME Brokers (1-20 staff) — Secondary Target via Networks</h3>
+<h3 id="33-sme-brokers-1-20-staff-secondary-target-via-networks">3.3 SME Brokers (1-20 staff) — Secondary Target via Networks <a class="memo-anchor" href="#33-sme-brokers-1-20-staff-secondary-target-via-networks" aria-label="Link to this section">#</a></h3>
 <p>Small regional and specialist brokers (sole traders to ~20 staff) represent the largest number of firms but the smallest individual deal size. Most operate as Appointed Representatives of Cobra, Movo, Brokerbility, or similar networks, meaning:</p>
 <ul>
 <li>Compliance responsibility is partially delegated to the principal (network)</li>
@@ -394,14 +444,14 @@
 <li>Network-level distribution is the logical channel: sell to the network, get 50-200 ARs as customers</li>
 </ul>
 <p>Segment includes: commercial lines SME brokers in regional towns, personal lines specialists, motor trade specialists, farm and rural specialists, professional indemnity niche brokers.</p>
-<h3 id="34-specialist-segments">3.4 Specialist Segments</h3>
+<h3 id="34-specialist-segments">3.4 Specialist Segments <a class="memo-anchor" href="#34-specialist-segments" aria-label="Link to this section">#</a></h3>
 <p><strong>Motor and Household (personal lines GI):</strong> Highest regulatory burden from GIPP (price-walking ban applies here and not in commercial). Renewal pricing attestations, ENBP calculations, and the consumer understanding obligations at renewal are significant. However, the largest players (Direct Line, Admiral, LV=, etc.) are insurers not brokers, and the broker intermediary population in pure personal lines is relatively small. GIPP-specific compliance module is a differentiator here.</p>
 <p><strong>Commercial Lines (SME and mid-market):</strong> Largest broker revenue segment. GIPP does not apply. Primary obligations: POG, ICOBS demands and needs, Consumer Duty, SM&amp;CR. Highly fragmented; many regional firms. Good Amaea target.</p>
 <p><strong>Marine and Aviation:</strong> Highly specialist. Most place through Lloyd&#x27;s. Primarily LIIBA territory. Sophisticated in-house compliance. Not a near-term Amaea target.</p>
 <p><strong>Professional Indemnity:</strong> Specialist but often embedded within broader commercial brokers. PI is a high-scrutiny product class with significant consumer protection obligations. Some standalone PI specialists exist (e.g. Lockton, DUAL, Tokio Marine HCC in MGA form).</p>
 <p><strong>Protection / Life:</strong> Heavily overlaps with IFA sector. Pure protection intermediaries (no investment advice) are subject to ICOBS not COBS, but Consumer Duty, vulnerable customer obligations, and SM&amp;CR apply identically. The FCA&#x27;s Pure Protection Market Study (MS24/1) is driving regulatory attention to this segment. Cross-sell from IFA is relevant here: many IFA firms have protection-only advisers or run separate protection businesses.</p>
 <p><strong>MGAs (Managing General Agents):</strong> MGAs are not brokers — they are underwriting agents acting on behalf of insurers. But they are FCA-regulated (for distribution activities), subject to POG as manufacturers/co-manufacturers, and face Lloyd&#x27;s Blueprint Two compliance requirements if they are Lloyd&#x27;s MGAs. 233 MGAA members underwrite £13.2 billion GWP. MGAs need POG manufacturer-side tooling and Lloyd&#x27;s operational requirements. A natural Phase 3 expansion target for Amaea, distinct from broker-side tooling.</p>
-<h3 id="35-network-structures">3.5 Network Structures</h3>
+<h3 id="35-network-structures">3.5 Network Structures <a class="memo-anchor" href="#35-network-structures" aria-label="Link to this section">#</a></h3>
 <p>UK broker networks serve as principal firms for large numbers of AR brokers, taking on regulatory responsibility for their conduct in exchange for fees and/or access to scheme markets. Key networks:</p>
 <table>
 <thead><tr>
@@ -437,7 +487,7 @@
 </tbody></table>
 <p>Networks are a critical GTM channel for Amaea. If Amaea becomes the compliance platform of choice for a network principal, it gets the AR base as a near-automatic customer pool. Pricing via networks likely involves a platform-level deal with per-AR unit economics. This is worth modelling before 2030 entry.</p>
 <hr/>
-<h2 id="4-sample-target-firms">4. Sample Target Firms</h2>
+<h2 id="4-sample-target-firms">4. Sample Target Firms <a class="memo-anchor" href="#4-sample-target-firms" aria-label="Link to this section">#</a></h2>
 <p>The following table covers 25 named firms across size segments. Firms are identified as potential Amaea Founders Programme equivalents (launch 2030-2031) or as reference accounts to understand needs.</p>
 <table>
 <thead><tr>
@@ -625,9 +675,9 @@
 </tbody></table>
 <p><em>Notes: Staff counts are estimates from public sources (Companies House, LinkedIn, trade press) as of 2024-2025. Where a firm has been acquired or merged recently, the listed entity may differ from current branding. Verify FCA register status before any commercial approach.</em></p>
 <hr/>
-<h2 id="5-compliance-pain-points">5. Compliance Pain Points</h2>
+<h2 id="5-compliance-pain-points">5. Compliance Pain Points <a class="memo-anchor" href="#5-compliance-pain-points" aria-label="Link to this section">#</a></h2>
 <p>This section maps the specific operational compliance burdens facing insurance broker compliance teams, and identifies where Amaea&#x27;s AI-assisted workflow can add concrete, demonstrable value.</p>
-<h3 id="51-pog-attestations-and-fair-value-assessments">5.1 POG Attestations and Fair Value Assessments</h3>
+<h3 id="51-pog-attestations-and-fair-value-assessments">5.1 POG Attestations and Fair Value Assessments <a class="memo-anchor" href="#51-pog-attestations-and-fair-value-assessments" aria-label="Link to this section">#</a></h3>
 <p><strong>The pain:</strong> Every product a broker distributes requires a Fair Value Assessment (FVA) demonstrating that the product — including the broker&#x27;s own commission or fee — provides fair value to customers within the target market. For a mid-market broker distributing 50-200 products across commercial, personal lines, and protection, this creates 50-200 annual review obligations, each requiring:</p>
 <ul>
 <li>Evidence of the manufacturer&#x27;s FVA receipt and review</li>
@@ -639,33 +689,33 @@
 <p><strong>Current state:</strong> Most mid-market brokers manage this via spreadsheets, shared drives, and an annual crunch period. External consultants (UKGI, Branko, ICSR) often run the review process. There is no systematic tracking of which products have been reviewed, when, by whom, and with what evidence.</p>
 <p><strong>FCA finding (TR24/2, 2024):</strong> Insufficient MI; governance processes lacking senior management challenge; attestations signed without adequate underlying evidence.</p>
 <p><strong>Amaea automation:</strong> Product registry with review cycle tracking; automated alerts when annual review is due or overdue; evidence upload and tagging against specific PROD 4 requirements; MI dashboard showing coverage rates and outstanding items; senior manager attestation workflow with digital sign-off and audit trail.</p>
-<h3 id="52-gipp-renewal-pricing-attestation">5.2 GIPP Renewal Pricing Attestation</h3>
+<h3 id="52-gipp-renewal-pricing-attestation">5.2 GIPP Renewal Pricing Attestation <a class="memo-anchor" href="#52-gipp-renewal-pricing-attestation" aria-label="Link to this section">#</a></h3>
 <p><strong>The pain:</strong> For personal lines motor and home products, the annual senior manager attestation under ICOBS 6B requires documented evidence that renewal pricing has complied with the ENBP rule throughout the year. This is a personal liability for the attesting Senior Manager.</p>
 <p><strong>Current state:</strong> Large personal lines brokers have built or bought pricing tools. Smaller firms rely on their BMS renewal feed and informal checks. The attestation itself is often a Word document signed and filed with no systematic evidence management.</p>
 <p><strong>Amaea automation:</strong> Annual attestation workflow with structured evidence capture; renewal pricing monitoring integration (flagging anomalies); attestation history with signatory records; personal dashboard for the attesting Senior Manager showing their outstanding obligations and evidence status.</p>
-<h3 id="53-demands-and-needs-documentation">5.3 Demands and Needs Documentation</h3>
+<h3 id="53-demands-and-needs-documentation">5.3 Demands and Needs Documentation <a class="memo-anchor" href="#53-demands-and-needs-documentation" aria-label="Link to this section">#</a></h3>
 <p><strong>The pain:</strong> Every insurance sale — advised or non-advised — requires a Statement of Demands and Needs (SDN) provided before contract conclusion (ICOBS 5.2). For high-volume non-advised transactional brokers (commercial lines, personal lines), the SDN is often a template checkbox form. For advised protection brokers it resembles a suitability letter. The FCA expects the SDN to be genuinely tailored: &quot;modulated according to the complexity of the contract of insurance proposed.&quot;</p>
 <p><strong>Current state:</strong> SDN templates embedded in BMS systems are frequently generic and not genuinely modulated. Advisers know they exist; compliance teams rarely have visibility of whether they are completed correctly, held on record, or accessible for audit.</p>
 <p><strong>Amaea automation:</strong> SDN quality monitoring — flagging cases where SDN templates appear to be inadequately completed or where there is a mismatch between declared customer needs and product placed; file sampling workflow for compliance managers; retention tracking to ensure SDNs are held for the required period (typically six years).</p>
-<h3 id="54-vulnerable-customer-identification-and-outcomes-tracking">5.4 Vulnerable Customer Identification and Outcomes Tracking</h3>
+<h3 id="54-vulnerable-customer-identification-and-outcomes-tracking">5.4 Vulnerable Customer Identification and Outcomes Tracking <a class="memo-anchor" href="#54-vulnerable-customer-identification-and-outcomes-tracking" aria-label="Link to this section">#</a></h3>
 <p><strong>The pain:</strong> FG21/1 requires firms to identify vulnerable customers, take appropriate action, and demonstrate through MI that vulnerable customers receive equivalent outcomes. For GI brokers operating in transactional models with minimal ongoing client contact, this is genuinely hard. There is no obvious trigger to flag vulnerability (unlike an IFA where an annual review creates a touchpoint). Renewal-only contacts mean the broker may have one meaningful customer interaction per year per client.</p>
 <p><strong>FCA finding (March 2025):</strong> Firms in multi-touchpoint sectors generally perform better; transactional, online-first models perform worst. Insurance brokers are disproportionately represented in the worst-performing group.</p>
 <p><strong>Amaea automation:</strong> Vulnerability flag prompts within the customer journey workflow (integrated into renewal or contact workflows); staff training completion tracking (vulnerability-specific competence); outcome sampling — pulling a random sample of &#x27;flagged vulnerable&#x27; cases for compliance manager review quarterly; MI dashboard showing vulnerability identification rates, action rates, and outcome data vs. non-vulnerable customer comparators.</p>
-<h3 id="55-conflicts-of-interest-management">5.5 Conflicts of Interest Management</h3>
+<h3 id="55-conflicts-of-interest-management">5.5 Conflicts of Interest Management <a class="memo-anchor" href="#55-conflicts-of-interest-management" aria-label="Link to this section">#</a></h3>
 <p><strong>The pain:</strong> FCA Thematic Review TR14/9 (Conflicts of Interest and Intermediary Remuneration, 2014) found that many brokers — particularly those serving SME clients — relied on disclosure alone to manage conflicts, rather than having active control frameworks. This remains an ongoing FCA concern, codified now through Consumer Duty (PRIN 2A). Specific conflicts include: volume-based incentives from insurers, preferential access to scheme markets, co-manufacture arrangements, and bundled add-on products.</p>
 <p><strong>Amaea automation:</strong> Conflicts register with ongoing review cycle; remuneration disclosure management; alerts when new products or insurer relationships might create undisclosed conflicts; integration with Product Distribution Arrangements to flag where a distributor&#x27;s remuneration may be inconsistent with a manufacturer&#x27;s FVA.</p>
-<h3 id="56-complaints-handling">5.6 Complaints Handling</h3>
+<h3 id="56-complaints-handling">5.6 Complaints Handling <a class="memo-anchor" href="#56-complaints-handling" aria-label="Link to this section">#</a></h3>
 <p><strong>The pain:</strong> ICOBS 8, Consumer Duty, and the FCA&#x27;s 2026 priorities all emphasise complaints management. For insurance brokers, complaints must be resolved within defined timeframes (Dispute Resolution Rules, DISP), with root cause analysis conducted and MI reported. The FOS (Financial Ombudsman Service) levies costs per case referred. The FCA expects complaints data to feed into POG reviews and fair value assessments.</p>
 <p><strong>Amaea automation:</strong> Complaints log with statutory timeframe tracking; root cause categorisation (enabling pattern detection); automatic escalation alerts for complaints approaching breach of timeframe; output feeding into POG MI module (showing complaints rate by product as evidence for FVA).</p>
-<h3 id="57-smcr-annual-fit-and-proper-assessments">5.7 SM&amp;CR Annual Fit and Proper Assessments</h3>
+<h3 id="57-smcr-annual-fit-and-proper-assessments">5.7 SM&amp;CR Annual Fit and Proper Assessments <a class="memo-anchor" href="#57-smcr-annual-fit-and-proper-assessments" aria-label="Link to this section">#</a></h3>
 <p><strong>The pain:</strong> Annual fit and proper assessments for all SMFs and Certified Persons, including verification of criminal record checks, regulatory history, and ongoing competence. For a 100-staff broker with 30 certified persons and 3-4 SMFs, this is a recurring annual process generating significant documentation.</p>
 <p><strong>Amaea automation:</strong> Identical to the IFA product — this is direct portability from the core Amaea module.</p>
-<h3 id="58-management-information-mi-production-for-board">5.8 Management Information (MI) Production for Board</h3>
+<h3 id="58-management-information-mi-production-for-board">5.8 Management Information (MI) Production for Board <a class="memo-anchor" href="#58-management-information-mi-production-for-board" aria-label="Link to this section">#</a></h3>
 <p><strong>The pain:</strong> Consumer Duty requires boards to receive regular MI demonstrating that the firm is delivering good customer outcomes. For insurance brokers, this MI should include: complaints data by product; fair value indicators; vulnerable customer outcome data; renewal retention data; claims acceptance rates (where the broker has oversight); training completion rates. In practice, most mid-market brokers produce MI manually, quarterly, from multiple disconnected data sources.</p>
 <p><strong>Amaea automation:</strong> Automated MI compilation from internal data sources; templated board pack with Consumer Duty outcomes dashboard; trend analysis and flagging of deteriorating indicators before they become FCA concerns.</p>
 <hr/>
-<h2 id="6-competitive-landscape">6. Competitive Landscape</h2>
-<h3 id="61-specialist-gi-compliance-consultancies">6.1 Specialist GI Compliance Consultancies</h3>
+<h2 id="6-competitive-landscape">6. Competitive Landscape <a class="memo-anchor" href="#6-competitive-landscape" aria-label="Link to this section">#</a></h2>
+<h3 id="61-specialist-gi-compliance-consultancies">6.1 Specialist GI Compliance Consultancies <a class="memo-anchor" href="#61-specialist-gi-compliance-consultancies" aria-label="Link to this section">#</a></h3>
 <p>These firms provide human-delivered compliance advice, audits, and ongoing support to insurance intermediaries. They are the current dominant model for mid-market and SME brokers.</p>
 <p><strong>UKGI Group (formerly RWA + UKGI):</strong> Merged in 2023 to create one of the largest compliance consultancies in the GI sector. Provides: compliance consultancy and outsourced compliance, training (Searchlight Insurance Training, The Development Zone e-learning), FCAS (Fixed Cost Advisory Service) retainer model, and specialist support for Lloyd&#x27;s and London market firms. UKGI is the most likely incumbent to lose clients to Amaea. Their delivery model is consultant-led, not software-driven; they have limited systematic workflow automation. They are well-embedded in the mid-market via long-standing relationships.</p>
 <p><strong>Branko (Branko Bjelobaba FCII):</strong> Individual compliance consultant / small firm known specifically in GI. Delivers compliance training, audits, and advisory. No software product. Competes on expertise and personal relationship. Not a scalable software competitor but a potential channel partner (consultants who recommend Amaea to clients).</p>
@@ -673,7 +723,7 @@
 <p><strong>Insurance Compliance Services Ltd (ICS):</strong> Described as &quot;leading compliance service provider&quot; supporting all firm sizes. Provides outsourced compliance for traditional brokers, wholesale brokers, Lloyd&#x27;s, MGAs. Human-delivered service with some digital content delivery. No significant SaaS product.</p>
 <p><strong>RWA Business (UKGI Insight):</strong> Now part of UKGI Group. Regulatory content and updates via the UKGI Insight platform. Content subscription model rather than workflow software.</p>
 <p><strong>Gap Amaea fills vs. all the above:</strong> All these players deliver compliance via people, not software. They are expensive (retainer models), non-scalable, and create dependency rather than capability. Amaea replaces the admin burden with software, allowing compliance staff to focus on judgement. Amaea can also be positioned as complementary to consultants — &quot;the platform your compliance consultant actually uses&quot; — creating a channel rather than an adversarial relationship.</p>
-<h3 id="62-broker-management-systems-bms-compliance-modules">6.2 Broker Management Systems (BMS) — Compliance Modules</h3>
+<h3 id="62-broker-management-systems-bms-compliance-modules">6.2 Broker Management Systems (BMS) — Compliance Modules <a class="memo-anchor" href="#62-broker-management-systems-bms-compliance-modules" aria-label="Link to this section">#</a></h3>
 <p>The three dominant BMS platforms in UK GI broking are Acturis, Open GI, and Applied Systems / SSP. These systems handle policy administration, etrading, document management, and basic workflow. Their compliance functionality:</p>
 <p><strong>Acturis:</strong></p>
 <ul>
@@ -697,7 +747,7 @@
 </ul>
 <p><strong>Go-Insur (Pancentric):</strong> Transparent modular subscription model starting from £1,500/month. Positioned as an Acturis alternative for MGAs. Not compliance-focused.</p>
 <p><strong>Verdict on BMS platforms:</strong> They are the operating system of the broker. Amaea is the compliance layer. The relationship should be framed as an integration partner, not a competitor. Amaea should build API or data import connections to Acturis and Open GI as a near-term priority when entering the insurance sector.</p>
-<h3 id="63-compliance-content-and-workflow-saas">6.3 Compliance Content and Workflow SaaS</h3>
+<h3 id="63-compliance-content-and-workflow-saas">6.3 Compliance Content and Workflow SaaS <a class="memo-anchor" href="#63-compliance-content-and-workflow-saas" aria-label="Link to this section">#</a></h3>
 <p><strong>Worksmart (UK financial services compliance):</strong></p>
 <ul>
 <li>Award-winning SM&amp;CR, T&amp;C, QA, and Complaints Management software</li>
@@ -726,8 +776,8 @@
 </ul>
 <p><strong>Gap summary:</strong> No SaaS product currently provides insurance intermediaries with an integrated workflow platform covering POG attestations, GIPP attestations, Consumer Duty outcome MI, vulnerable customer tracking, SM&amp;CR, complaints management, and demands-and-needs quality monitoring in one place. This is the white space Amaea should occupy.</p>
 <hr/>
-<h2 id="7-pricing-benchmarks">7. Pricing Benchmarks</h2>
-<h3 id="71-what-insurance-brokers-currently-pay-for-compliance">7.1 What Insurance Brokers Currently Pay for Compliance</h3>
+<h2 id="7-pricing-benchmarks">7. Pricing Benchmarks <a class="memo-anchor" href="#7-pricing-benchmarks" aria-label="Link to this section">#</a></h2>
+<h3 id="71-what-insurance-brokers-currently-pay-for-compliance">7.1 What Insurance Brokers Currently Pay for Compliance <a class="memo-anchor" href="#71-what-insurance-brokers-currently-pay-for-compliance" aria-label="Link to this section">#</a></h3>
 <table>
 <thead><tr>
 <th>Item</th>
@@ -772,7 +822,7 @@
 </tbody></table>
 <p><strong>Regulatory cost burden:</strong> BIBA&#x27;s own research found that direct regulatory costs for brokers are 8.1% of insurance mediation fees and commissions (2023 data), and that regulatory costs had increased 40% since 2019. For a broker earning £500,000 in fees/commissions, this implies approximately £40,500/year in regulatory compliance costs.</p>
 <p><strong>Benchmarking Go-Insur:</strong> The only publicly disclosed pricing for a SaaS tool in this sector is Go-Insur at £1,500+/month. This is a BMS/PAS, not compliance-specific, but signals that GI brokers will pay £18,000+/year for operational technology.</p>
-<h3 id="72-amaea-pricing-recommendations-for-insurance-intermediary-sector">7.2 Amaea Pricing Recommendations for Insurance Intermediary Sector</h3>
+<h3 id="72-amaea-pricing-recommendations-for-insurance-intermediary-sector">7.2 Amaea Pricing Recommendations for Insurance Intermediary Sector <a class="memo-anchor" href="#72-amaea-pricing-recommendations-for-insurance-intermediary-sector" aria-label="Link to this section">#</a></h3>
 <p><strong>Reference IFA pricing:</strong> Essentials £699/mo, Professional £1,599/mo, Scale £2,199/mo, Enterprise £3,500+/mo.</p>
 <p><strong>Insurance intermediary recommended tier structure:</strong></p>
 <table>
@@ -816,14 +866,14 @@
 <p><strong>Founders Programme equivalent for insurance:</strong> 20% discount on Professional and Scale tiers for first 10 Founders firms (target: recruited during 2029 pre-launch year). Founders get co-development input rights; Amaea gets reference accounts and real workflow data.</p>
 <p><strong>Pricing confidence level:</strong> Medium. The £12,000-£60,000/year consultant retainer sets the ceiling for &quot;what firms will pay for compliance support.&quot; Amaea should be positioned clearly below that ceiling while delivering higher productivity. A £16,800/year (£1,400/mo) GI Professional subscription that replaces £25,000/year of consultant time is a straightforward ROI story.</p>
 <hr/>
-<h2 id="8-go-to-market-notes">8. Go-to-Market Notes</h2>
-<h3 id="81-key-associations">8.1 Key Associations</h3>
+<h2 id="8-go-to-market-notes">8. Go-to-Market Notes <a class="memo-anchor" href="#8-go-to-market-notes" aria-label="Link to this section">#</a></h2>
+<h3 id="81-key-associations">8.1 Key Associations <a class="memo-anchor" href="#81-key-associations" aria-label="Link to this section">#</a></h3>
 <p><strong>BIBA (British Insurance Brokers&#x27; Association):</strong> The most important trade body. 1,700+ member firms; £150 billion in arranged premiums; advocates for the broker community with the FCA, government, and market. BIBA runs training, compliance resources, and its own Find Insurance broker directory. Partnership with BIBA — or listing as a recommended technology supplier — is the single highest-leverage GTM move for the insurance sector. Amaea should begin relationship-building with BIBA&#x27;s development and compliance teams by 2028 at the latest.</p>
 <p><strong>LIIBA (London and International Insurance Brokers&#x27; Association):</strong> Represents Lloyd&#x27;s brokers; 95% of Lloyd&#x27;s business is placed by LIIBA members; member placements total £45 billion from London. More specialist than BIBA. Relevant if Amaea extends into London Market / Lloyd&#x27;s compliance (Blueprint Two). Secondary priority to BIBA.</p>
 <p><strong>MGAA (Managing General Agents&#x27; Association):</strong> 233 members; £13.2 billion in GWP. Represents MGAs who are manufacturers under PROD 4. Relevant for Phase 3 (manufacturer-side POG tooling) rather than Phase 2 (distributor-side).</p>
 <p><strong>AMII (Association of Medical Insurers and Intermediaries):</strong> Private medical insurance and healthcare intermediaries. Niche but growing sector. Not a priority for 2030-2031 entry; potentially Phase 3.</p>
 <p><strong>AMI (Association of Mortgage Intermediaries):</strong> Not insurance-specific but many AMI members also distribute pure protection products. Relevant for the protection intermediary segment and cross-sell from IFA/mortgage advice.</p>
-<h3 id="82-trade-press">8.2 Trade Press</h3>
+<h3 id="82-trade-press">8.2 Trade Press <a class="memo-anchor" href="#82-trade-press" aria-label="Link to this section">#</a></h3>
 <table>
 <thead><tr>
 <th>Publication</th>
@@ -861,13 +911,13 @@
 <td>Monitor regularly; their clients are the target market</td>
 </tr>
 </tbody></table>
-<h3 id="83-conferences-and-events">8.3 Conferences and Events</h3>
+<h3 id="83-conferences-and-events">8.3 Conferences and Events <a class="memo-anchor" href="#83-conferences-and-events" aria-label="Link to this section">#</a></h3>
 <p><strong>BIBA Annual Conference (Manchester, May each year):</strong> ~10,000 attendees; 220+ exhibitors; the largest insurance broking event in the world. Hasna and/or Milan should attend from 2028 onwards as attendees (not exhibitors initially) to build relationships. Consider exhibiting in 2030 (the year before planned insurance launch) to generate demand pipeline.</p>
 <p><strong>Insurance Times Brokers Forum:</strong> Smaller, more targeted to mid-market and regional brokers. Better for peer-level conversations with compliance managers and owner-brokers.</p>
 <p><strong>MGAA Conference:</strong> Annual conference for MGAs. Relevant if/when Amaea extends to manufacturer-side tooling.</p>
 <p><strong>Insurance Times Awards:</strong> Annual awards including Broker of the Year, Technology Company of the Year, and compliance-adjacent categories. Sponsor a category from 2030.</p>
 <p><strong>British Insurance Awards (BIA):</strong> Prestigious broader market awards. Lower broker-specific relevance but good for brand awareness.</p>
-<h3 id="84-linkedin-voices-hasna-should-follow-and-engage-with">8.4 LinkedIn Voices Hasna Should Follow and Engage With</h3>
+<h3 id="84-linkedin-voices-hasna-should-follow-and-engage-with">8.4 LinkedIn Voices Hasna Should Follow and Engage With <a class="memo-anchor" href="#84-linkedin-voices-hasna-should-follow-and-engage-with" aria-label="Link to this section">#</a></h3>
 <p>The following individuals are active in UK insurance compliance and broker regulatory commentary on LinkedIn. Engaging with their content (thoughtful, substantive replies — not promotional) builds Amaea&#x27;s presence in the sector before formal launch.</p>
 <ul>
 <li><strong>Steve White</strong> — Former BIBA CEO; widely followed; comments on regulatory and market developments</li>
@@ -879,7 +929,7 @@
 <li><strong>FCA Insurance Team</strong> — Follow FCA LinkedIn page; reshare relevant GI regulatory updates with Amaea commentary</li>
 </ul>
 <hr/>
-<h2 id="9-domain-expert-profile">9. Domain Expert Profile</h2>
+<h2 id="9-domain-expert-profile">9. Domain Expert Profile <a class="memo-anchor" href="#9-domain-expert-profile" aria-label="Link to this section">#</a></h2>
 <p>Before entering the insurance intermediary sector, Amaea needs at least one domain expert embedded in the team. This should be identified and recruited or retained as an adviser by 2028-2029 (1-2 years before insurance sector entry).</p>
 <p><strong>Ideal profile:</strong></p>
 <p>An individual with 10-15 years of senior compliance experience in the UK GI or protection intermediary sector. Specifically:</p>
@@ -897,8 +947,8 @@
 <li>FCA alumni — check FCA LinkedIn page for former GI supervisors who have entered private sector</li>
 </ul>
 <hr/>
-<h2 id="10-adjacency-to-uk-ifa-similarities-and-differences">10. Adjacency to UK IFA — Similarities and Differences</h2>
-<h3 id="101-what-is-the-same">10.1 What is the Same</h3>
+<h2 id="10-adjacency-to-uk-ifa-similarities-and-differences">10. Adjacency to UK IFA — Similarities and Differences <a class="memo-anchor" href="#10-adjacency-to-uk-ifa-similarities-and-differences" aria-label="Link to this section">#</a></h2>
+<h3 id="101-what-is-the-same">10.1 What is the Same <a class="memo-anchor" href="#101-what-is-the-same" aria-label="Link to this section">#</a></h3>
 <table>
 <thead><tr>
 <th>Area</th>
@@ -943,7 +993,7 @@
 <td>Similar; insurance-specific RMAR sections differ but structure familiar</td>
 </tr>
 </tbody></table>
-<h3 id="102-what-is-different">10.2 What is Different</h3>
+<h3 id="102-what-is-different">10.2 What is Different <a class="memo-anchor" href="#102-what-is-different" aria-label="Link to this section">#</a></h3>
 <table>
 <thead><tr>
 <th>Area</th>
@@ -1000,10 +1050,10 @@
 <td>Adaptation of annual review workflow to renewal-specific workflow</td>
 </tr>
 </tbody></table>
-<h3 id="103-cross-sell-opportunity">10.3 Cross-Sell Opportunity</h3>
+<h3 id="103-cross-sell-opportunity">10.3 Cross-Sell Opportunity <a class="memo-anchor" href="#103-cross-sell-opportunity" aria-label="Link to this section">#</a></h3>
 <p>Many IFA firms have a protection arm. Approximately 12,000 intermediaries are active in the pure protection market (FCA MS24/1), and 12% of protection policies sold via intermediaries in 2024 were sold by financial advisers (the remainder by protection specialists and mortgage advisers). An IFA firm on Amaea&#x27;s platform that also sells protection products faces ICOBS obligations for those sales alongside COBS obligations for investment advice. Amaea can serve both obligations from one platform — a genuine cross-sell with no new customer acquisition cost.</p>
 <hr/>
-<h2 id="11-risks-and-unknowns">11. Risks and Unknowns</h2>
+<h2 id="11-risks-and-unknowns">11. Risks and Unknowns <a class="memo-anchor" href="#11-risks-and-unknowns" aria-label="Link to this section">#</a></h2>
 <p>These are the things Amaea does not yet know that could materially affect the Phase 2 plan. They should be actively researched and monitored.</p>
 <p><strong>1. Regulatory simplification may reduce the compliance burden.</strong> The FCA&#x27;s direction of travel is towards greater reliance on Consumer Duty and less on prescriptive ICOBS rules. If the FCA materially reduces ICOBS obligations (e.g., simplifying SDN requirements, removing PROD 4 prescriptions in favour of Consumer Duty self-assessment), some of the specific workflow modules Amaea builds may lose their justification. Probability: Medium (FCA has signalled simplification but pace is slow); Impact: Medium (Consumer Duty itself creates MI requirements that Amaea can serve).</p>
 <p><strong>2. BMS platforms may build compliance modules.</strong> Acturis or Open GI could decide to build deeper compliance workflow capability — POG attestation tracking, Consumer Duty MI — as an extension of their existing platforms. Open GI&#x27;s 2024 AI chatbot deal suggests they are thinking about adjacent functionality. If Acturis builds a POG module, it could be bundled into existing BMS contracts at low incremental cost, pricing Amaea out for brokers already on Acturis. Probability: Medium (BMS platforms have tried compliance add-ons before with limited success; it&#x27;s not their core competency); Impact: High if it happens in target segment.</p>
@@ -1014,7 +1064,7 @@
 <p><strong>7. The AR network model complicates pricing and contracting.</strong> A significant portion of the SME broker population operates as Appointed Representatives. Their principal (network) bears ultimate regulatory responsibility, but the AR still needs practical compliance tools for its own conduct. Who pays for the Amaea subscription — the network or the AR? How does Amaea manage the relationship if the network changes its AR&#x27;s compliance requirements? This needs to be worked through before network-channel deals are pursued. Probability of complexity: High; Impact: Medium (solvable with right commercial structure, but requires deliberate design).</p>
 <p><strong>8. Amaea&#x27;s IFA pricing may anchor expectations unhelpfully.</strong> If Amaea enters the insurance market with IFA brand recognition and IFA pricing, large GI brokers may assume the pricing reflects IFA-scale firms (typically 1-10 advisers) rather than GI brokers (who may have 100 clients and 2 compliance staff). The value articulation needs to be insurance-specific. Probability: Medium; Impact: Medium.</p>
 <hr/>
-<h2 id="12-quarterly-update-log">12. Quarterly Update Log</h2>
+<h2 id="12-quarterly-update-log">12. Quarterly Update Log <a class="memo-anchor" href="#12-quarterly-update-log" aria-label="Link to this section">#</a></h2>
 <table>
 <thead><tr>
 <th>Date</th>
@@ -1028,9 +1078,9 @@
 </tr>
 </tbody></table>
 <hr/>
-<h2 id="13-sources-and-references">13. Sources and References</h2>
+<h2 id="13-sources-and-references">13. Sources and References <a class="memo-anchor" href="#13-sources-and-references" aria-label="Link to this section">#</a></h2>
 <p>All URLs verified as of 2026-05-16 unless otherwise noted.</p>
-<h3 id="fca-publications-and-official-sources">FCA Publications and Official Sources</h3>
+<h3 id="fca-publications-and-official-sources">FCA Publications and Official Sources <a class="memo-anchor" href="#fca-publications-and-official-sources" aria-label="Link to this section">#</a></h3>
 <ol>
 <li><strong>FCA Retail Intermediary Market Data 2024</strong> — Non-investment insurance distribution revenue £26.1bn; RMAR statistics: <a href="https://www.fca.org.uk/data/retail-intermediary-market-data-2024">https://www.fca.org.uk/data/retail-intermediary-market-data-2024</a></li>
 <li><strong>FCA Freedom of Information — Insurance Intermediaries May 2025</strong> — AR approval volumes 2020-2024; directly authorised approval volumes: <a href="https://www.fca.org.uk/freedom-information/information-insurance-intermediaries-may-2025">https://www.fca.org.uk/freedom-information/information-insurance-intermediaries-may-2025</a></li>
@@ -1051,7 +1101,7 @@
 <li><strong>FCA 2024 Insurance-Related Fines:</strong> <a href="https://www.insuranceage.co.uk/insight/7955882/fca-insurance-related-fines-total-ps11m-in-2024">https://www.insuranceage.co.uk/insight/7955882/fca-insurance-related-fines-total-ps11m-in-2024</a></li>
 <li><strong>FCA ICOBS 5.2 — Demands and Needs:</strong> <a href="https://handbook.fca.org.uk/handbook/ICOBS/5/2.html">https://handbook.fca.org.uk/handbook/ICOBS/5/2.html</a></li>
 </ol>
-<h3 id="trade-association-sources">Trade Association Sources</h3>
+<h3 id="trade-association-sources">Trade Association Sources <a class="memo-anchor" href="#trade-association-sources" aria-label="Link to this section">#</a></h3>
 <ol>
 <li><strong>BIBA — About, Membership, and Market Statistics:</strong> &quot;1,700 regulated firms; £150bn arranged premiums; 130,000 employees&quot;: <a href="https://www.biba.org.uk/about-biba/">https://www.biba.org.uk/about-biba/</a></li>
 <li><strong>BIBA — Regulation Costs 8% of Fees and Commissions (2023):</strong> <a href="https://www.biba.org.uk/press-releases/regulation-costs-brokers-8-of-their-fees-and-commissions-biba-research-reveals/">https://www.biba.org.uk/press-releases/regulation-costs-brokers-8-of-their-fees-and-commissions-biba-research-reveals/</a></li>
@@ -1060,7 +1110,7 @@
 <li><strong>MGAA — Membership and Market Data (2024):</strong> 233 members; £13.2bn GWP; 58.5% membership growth since 2019: <a href="https://mgaa.co.uk/">https://mgaa.co.uk/</a></li>
 <li><strong>MGAA — Role of MGAs in UK Insurance Market (Milliman):</strong> Over 350 MGAs; &gt;10% of £47bn UK GI market: <a href="https://uk.milliman.com/en-GB/insight/role-mgas-uk-insurance-market">https://uk.milliman.com/en-GB/insight/role-mgas-uk-insurance-market</a></li>
 </ol>
-<h3 id="market-size-and-commercial-data">Market Size and Commercial Data</h3>
+<h3 id="market-size-and-commercial-data">Market Size and Commercial Data <a class="memo-anchor" href="#market-size-and-commercial-data" aria-label="Link to this section">#</a></h3>
 <ol>
 <li><strong>UK SME Insurance Market — GWP £15.52bn (2023); broker share 43.7%:</strong> <a href="https://www.globenewswire.com/news-release/2024/01/24/2814725/28124/en/UK-SME-Insurance-Market-Dynamics-and-Opportunities-Report-SME-GWP-is-Set-to-Rise-Steadily-to-GBP17-32-Billion-by-2027.html">https://www.globenewswire.com/news-release/2024/01/24/2814725/28124/en/UK-SME-Insurance-Market-Dynamics-and-Opportunities-Report-SME-GWP-is-Set-to-Rise-Steadily-to-GBP17-32-Billion-by-2027.html</a></li>
 <li><strong>Gallagher — First UK broker to exceed £1bn UK non-life broking revenue:</strong> <a href="https://www.insuranceage.co.uk/top-100-uk-brokers-2024">https://www.insuranceage.co.uk/top-100-uk-brokers-2024</a></li>
@@ -1071,7 +1121,7 @@
 <li><strong>Open GI — ~500 intermediary clients; £60m revenue (FY 2025):</strong> <a href="https://www.insurancebusinessmag.com/uk/news/breaking-news/open-gi-revenue-dips-but-eyes-growth-under-ares-566381.aspx">https://www.insurancebusinessmag.com/uk/news/breaking-news/open-gi-revenue-dips-but-eyes-growth-under-ares-566381.aspx</a></li>
 <li><strong>Go-Insur transparent pricing from £1,500/month:</strong> <a href="https://www.pancentric.com/software/go-insur-pas/best-acturis-alternative/">https://www.pancentric.com/software/go-insur-pas/best-acturis-alternative/</a></li>
 </ol>
-<h3 id="compliance-competitor-sources">Compliance Competitor Sources</h3>
+<h3 id="compliance-competitor-sources">Compliance Competitor Sources <a class="memo-anchor" href="#compliance-competitor-sources" aria-label="Link to this section">#</a></h3>
 <ol>
 <li><strong>UKGI Group — merger of RWA and UKGI (2023):</strong> <a href="https://insight.rwabusiness.com/about-ukgi-and-rwa/">https://insight.rwabusiness.com/about-ukgi-and-rwa/</a></li>
 <li><strong>UKGI — Acquisitions of Think Compliance (Aug 2024) and Insurance Development &amp; Training (Jul 2024):</strong> <a href="https://insight.rwabusiness.com/blog/posts/2024/august/ukgi-compliance-welcomes-think-compliance/">https://insight.rwabusiness.com/blog/posts/2024/august/ukgi-compliance-welcomes-think-compliance/</a></li>
@@ -1080,7 +1130,7 @@
 <li><strong>Branko Bjelobaba — Insurance compliance consultancy:</strong> <a href="https://branko.org.uk/">https://branko.org.uk/</a></li>
 <li><strong>Broker network structures — Cobra (PIB), Bravo (Ardonagh), Brokerbility (Clear), Movo (independent):</strong> <a href="https://cobranetwork.co.uk/">https://cobranetwork.co.uk/</a>; <a href="https://movopartnership.co.uk/">https://movopartnership.co.uk/</a>; <a href="https://brokerbility.co.uk/">https://brokerbility.co.uk/</a></li>
 </ol>
-<h3 id="regulatory-analysis-and-commentary">Regulatory Analysis and Commentary</h3>
+<h3 id="regulatory-analysis-and-commentary">Regulatory Analysis and Commentary <a class="memo-anchor" href="#regulatory-analysis-and-commentary" aria-label="Link to this section">#</a></h3>
 <ol>
 <li><strong>UKGI — FCA Five-Year Direction and Insurance Brokers 2026+:</strong> <a href="https://ukgicompliance.com/what-the-fca-five-year-direction-means-for-insurance-brokers-in-2026-and-beyond/">https://ukgicompliance.com/what-the-fca-five-year-direction-means-for-insurance-brokers-in-2026-and-beyond/</a></li>
 <li><strong>Browne Jacobson — FCA Insurance Regulatory Priorities 2026:</strong> <a href="https://www.brownejacobson.com/insights/fcas-regulatory-priorities-for-insurance-explained">https://www.brownejacobson.com/insights/fcas-regulatory-priorities-for-insurance-explained</a></li>
@@ -1132,7 +1182,7 @@
       logout.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;color:rgba(255,255,255,0.4);text-decoration:none;flex-shrink:0;margin-left:auto;transition:background .15s ease, color .15s ease;';
       logout.addEventListener('mouseenter', () => { logout.style.background = 'rgba(255,255,255,0.08)'; logout.style.color = 'rgba(255,255,255,0.85)'; });
       logout.addEventListener('mouseleave', () => { logout.style.background = 'transparent';            logout.style.color = 'rgba(255,255,255,0.4)';   });
-      logout.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+      logout.innerHTML = '<svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
       chevron.replaceWith(logout);
     }
   }
@@ -1164,5 +1214,30 @@
     });
   })();
 </script>
+<script id="topbar-user-hydrate">
+(function(){
+  var trigger = document.getElementById("topbarUserTrigger");
+  var panel   = document.getElementById("topbarUserPanel");
+  var nameEl  = document.getElementById("topbarUserName");
+  var emailEl = document.getElementById("topbarUserEmail");
+  if (!trigger || !panel) return;
+  function close(){ panel.classList.remove("open"); trigger.classList.remove("open"); }
+  trigger.addEventListener("click", function(e){ e.stopPropagation(); var o = panel.classList.toggle("open"); trigger.classList.toggle("open", o); });
+  document.addEventListener("click", function(e){ if (panel.classList.contains("open") && !panel.contains(e.target) && e.target !== trigger) close(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") close(); });
+  fetch("/cdn-cgi/access/get-identity", { credentials: "include" })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(id){
+      if (!id || !id.email) return;
+      var name = id.name || id.email.split("@")[0];
+      var initial = (name || "?").charAt(0).toUpperCase();
+      trigger.textContent = initial;
+      if (nameEl)  nameEl.textContent  = name;
+      if (emailEl) emailEl.textContent = id.email;
+    })
+    .catch(function(){});
+})();
+</script>
+<script src="/intranet-search.js" defer></script>
 </body>
 </html>
