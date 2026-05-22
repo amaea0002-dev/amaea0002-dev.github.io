@@ -9,296 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="intranet.css"/>
 <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
-<style>
-  /* Colour variables sourced from intranet.css (supports light + dark mode). */
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-weight: 400;
-    color: var(--gray-900);
-    background: var(--bg);
-    line-height: 1.65;
-    font-size: 15px;
-    -webkit-font-smoothing: antialiased;
-  }
-  .doc-cover {
-    background: linear-gradient(135deg, var(--plum-dark) 0%, var(--plum) 60%, var(--plum-mid) 100%);
-    color: white;
-    padding: 64px 64px 56px;
-    margin: 0 0 48px;
-  }
-  .doc-cover-eyebrow {
-    font-size: 0.74rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: rgba(255,255,255,0.55);
-    margin: 0 0 22px;
-  }
-  .doc-cover-logo {
-    height: 32px;
-    margin-bottom: 36px;
-    filter: brightness(0) invert(1);
-  }
-  .doc-cover h1 {
-    font-size: 2.6rem;
-    font-weight: 800;
-    letter-spacing: -0.035em;
-    line-height: 1.1;
-    margin: 0 0 14px;
-    color: white;
-  }
-  .doc-cover-sub {
-    font-size: 1.05rem;
-    color: rgba(255,255,255,0.78);
-    line-height: 1.55;
-    max-width: 640px;
-    margin: 0 0 24px;
-  }
-  .doc-cover-meta {
-    display: flex;
-    gap: 36px;
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.55);
-    border-top: 1px solid rgba(255,255,255,0.12);
-    padding-top: 22px;
-    flex-wrap: wrap;
-  }
-  .doc-cover-meta dt {
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    font-size: 0.65rem;
-    margin: 0 0 3px;
-    color: rgba(255,255,255,0.4);
-  }
-  .doc-cover-meta dd {
-    margin: 0;
-    color: rgba(255,255,255,0.85);
-    font-weight: 500;
-  }
-  .doc-content {
-    max-width: 820px;
-    padding: 0 64px 80px;
-    margin: 0 auto;
-  }
-  .preamble {
-    background: var(--plum-tint);
-    border: 1px solid var(--plum-border);
-    padding: 22px 26px;
-    margin: 0 0 36px;
-    border-radius: var(--r-lg);
-  }
-  .preamble p { margin: 0 0 12px; }
-  .preamble p:last-child { margin: 0; }
-  .draft-notice {
-    background: rgba(245,158,11,0.06);
-    border: 1px solid rgba(245,158,11,0.22);
-    color: var(--gray-700);
-    padding: 18px 22px;
-    margin: 0 0 40px;
-    border-radius: 8px;
-    font-size: 0.88rem;
-    line-height: 1.6;
-  }
-  .draft-notice strong { color: var(--amber); }
-  h2 {
-    font-size: 1.4rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: var(--plum);
-    margin: 44px 0 14px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--plum-band);
-  }
-  h3 {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--gray-900);
-    margin: 28px 0 10px;
-    letter-spacing: -0.01em;
-  }
-  h4 {
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: var(--plum-mid);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin: 22px 0 8px;
-  }
-  p { margin: 0 0 14px; }
-  ul, ol {
-    margin: 0 0 18px;
-    padding-left: 26px;
-  }
-  ul li, ol li { margin-bottom: 6px; }
-  ul li::marker { color: var(--plum-soft); }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.88rem;
-    margin: 0 0 22px;
-    border: 1px solid var(--gray-200);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  th, td {
-    padding: 12px 14px;
-    text-align: left;
-    border-bottom: 1px solid var(--gray-100);
-    vertical-align: top;
-  }
-  th {
-    background: var(--plum-tint);
-    color: var(--plum);
-    font-weight: 700;
-    font-size: 0.74rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  tr:last-child td { border-bottom: none; }
-  .note {
-    background: var(--plum-tint);
-    border: 1px solid var(--plum-border);
-    padding: 16px 20px;
-    margin: 20px 0;
-    font-size: 0.88rem;
-    line-height: 1.65;
-    border-radius: var(--r-md);
-    color: var(--gray-700);
-  }
-  .note strong { color: var(--plum); }
-  code {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.84em;
-    background: var(--gray-100);
-    color: var(--plum-dark);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-  hr {
-    border: none;
-    border-top: 1px solid var(--gray-200);
-    margin: 36px 0;
-  }
-  .signature-block {
-    background: var(--plum-tint);
-    border: 1px solid var(--plum-band);
-    border-radius: 8px;
-    padding: 32px 36px;
-    margin: 48px 0 28px;
-    page-break-inside: avoid;
-  }
-  .signature-block h3 {
-    color: var(--plum);
-    margin-top: 0;
-    font-size: 1.1rem;
-    border-bottom: 1px solid var(--plum-band);
-    padding-bottom: 10px;
-    margin-bottom: 22px;
-  }
-  .sig-party {
-    margin-bottom: 26px;
-  }
-  .sig-party-name {
-    font-weight: 700;
-    color: var(--gray-900);
-    margin: 0 0 12px;
-    font-size: 0.98rem;
-  }
-  .sig-party-role {
-    font-size: 0.78rem;
-    color: var(--gray-500);
-    font-weight: 500;
-    margin-left: 4px;
-  }
-  .sig-line {
-    display: flex;
-    gap: 24px;
-    align-items: flex-end;
-    margin-top: 8px;
-  }
-  .sig-field {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .sig-field-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-weight: 700;
-    color: var(--plum-soft);
-    margin-bottom: 4px;
-  }
-  .sig-field-line {
-    border-bottom: 1.5px solid var(--gray-300);
-    height: 28px;
-  }
-  .doc-footer {
-    margin-top: 64px;
-    padding-top: 28px;
-    border-top: 1px solid var(--gray-200);
-    font-size: 0.78rem;
-    color: var(--gray-500);
-    text-align: center;
-    line-height: 1.6;
-  }
-  .doc-footer .tagline {
-    color: var(--plum);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    margin-bottom: 6px;
-    font-size: 0.82rem;
-  }
-  .clause-num {
-    color: var(--plum-soft);
-    font-weight: 700;
-  }
-  .nav-strip {
-    background: var(--gray-50);
-    border-bottom: 1px solid var(--gray-200);
-    padding: 14px 64px;
-    font-size: 0.82rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .nav-strip .nav-crumb { color: var(--gray-500); }
-  .nav-strip .nav-sep { color: var(--gray-300); }
-  .back-link {
-    color: var(--plum-soft);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .back-link:hover { color: var(--plum); }
-  /* In-shell adjustments: cover and content live inside .main (sidebar + topbar) */
-  .main > .doc-cover { margin: 0 0 40px; }
-  /* Print styles — clean, no gradient, hide sidebar+topbar */
-  @media print {
-    .sidebar, .topbar, .sidebar-overlay, .nav-strip { display: none !important; }
-    .main { margin-left: 0 !important; padding-top: 0 !important; }
-    body { font-size: 11pt; }
-    .doc-cover {
-      background: var(--plum) !important;
-      padding: 36px 36px 32px;
-      margin: 0 0 28px;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-    .doc-cover h1 { font-size: 1.8rem; }
-    .doc-content { padding: 0 36px 40px; max-width: none; }
-    h2 { page-break-after: avoid; font-size: 1.15rem; }
-    h3 { page-break-after: avoid; }
-    .signature-block { page-break-inside: avoid; }
-    .note, .preamble { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  }
-</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -430,7 +140,8 @@
   <dl class="doc-cover-meta">
     <div><dt>Parties</dt><dd>Milan Sajiv · Hasna Sahul Hameed</dd></div>
     <div><dt>Drafted</dt><dd>16 May 2026</dd></div>
-    <div><dt>Status</dt><dd>Draft — pending legal review</dd></div>
+    <div><dt>Last reviewed</dt><dd>18 May 2026</dd></div>
+    <div><dt>Status</dt><dd>Draft v1 — pending legal review</dd></div>
     <div><dt>Governing law</dt><dd>England &amp; Wales</dd></div>
   </dl>
 </header>
@@ -451,7 +162,29 @@
   <strong>DRAFT STATUS.</strong> This is a working draft prepared 2026-05-16 to replace an earlier "Milan's Contract" working agreement. Both Founders should review independently, then jointly bring this to a UK startup lawyer (e.g. SeedLegals, Linkilaw, or equivalent boutique firm) for validation before signing. Estimated lawyer cost for review + refinement: £500–£1,500.
 </div>
 
-<h2 id="1-definitions"><span class="clause-num">1.</span> Definitions</h2>
+<nav class="contract-toc" aria-label="Clauses in this agreement">
+  <p class="contract-toc-label">Clauses</p>
+  <ol class="contract-toc-list">
+    <li><a href="#1-definitions">Definitions</a></li>
+    <li><a href="#2-equity-split-share-issuance">Equity Split &amp; Share Issuance</a></li>
+    <li><a href="#3-vesting">Vesting</a></li>
+    <li><a href="#4-roles-responsibilities">Roles &amp; Responsibilities</a></li>
+    <li><a href="#5-time-commitment">Time Commitment</a></li>
+    <li><a href="#6-intellectual-property">Intellectual Property</a></li>
+    <li><a href="#7-confidentiality">Confidentiality</a></li>
+    <li><a href="#8-non-compete-non-solicit">Non-Compete &amp; Non-Solicit</a></li>
+    <li><a href="#9-leaver-provisions">Leaver Provisions</a></li>
+    <li><a href="#10-drag-along-tag-along">Drag-Along &amp; Tag-Along</a></li>
+    <li><a href="#11-reserved-matters-governance">Reserved Matters &amp; Governance</a></li>
+    <li><a href="#12-personal-relationship">Personal Relationship</a></li>
+    <li><a href="#13-future-founders-investors">Future Founders &amp; Investors</a></li>
+    <li><a href="#14-term-termination">Term &amp; Termination</a></li>
+    <li><a href="#15-general-provisions">General Provisions</a></li>
+    <li><a href="#schedule-1-reserved-matters">Schedule 1 — Reserved Matters</a></li>
+  </ol>
+</nav>
+
+<h2 id="1-definitions"><span class="clause-num">1.</span> Definitions <a class="clause-anchor" href="#1-definitions" aria-label="Link to this clause">#</a></h2>
 <table>
   <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
   <tbody>
@@ -467,7 +200,7 @@
   </tbody>
 </table>
 
-<h2 id="2-equity-split-share-issuance"><span class="clause-num">2.</span> Equity Split &amp; Share Issuance</h2>
+<h2 id="2-equity-split-share-issuance"><span class="clause-num">2.</span> Equity Split &amp; Share Issuance <a class="clause-anchor" href="#2-equity-split-share-issuance" aria-label="Link to this clause">#</a></h2>
 <h3 id="21-agreed-equity-split">2.1 Agreed equity split</h3>
 <p>On the Incorporation Date, ordinary shares in the Company shall be issued as follows:</p>
 <ul>
@@ -485,7 +218,7 @@
 <h3 id="23-seis-eis">2.3 SEIS / EIS</h3>
 <p>The Founders intend for the Company to seek SEIS advance assurance at Incorporation, and for the £8,000 capital subscription to qualify for SEIS relief where eligible. Each Founder will claim their proportionate SEIS tax relief on their personal tax return for the relevant year.</p>
 
-<h2 id="3-vesting"><span class="clause-num">3.</span> Vesting</h2>
+<h2 id="3-vesting"><span class="clause-num">3.</span> Vesting <a class="clause-anchor" href="#3-vesting" aria-label="Link to this clause">#</a></h2>
 <h3 id="31-reverse-vesting">3.1 Reverse vesting</h3>
 <p>Notwithstanding that the Founders' Shares are issued in full at Incorporation, each Founder's shares are subject to <strong>reverse vesting</strong> over the Vesting Period. Unvested shares are subject to repurchase by the Company at nominal value if the Founder ceases to be active in the Business as a Bad Leaver.</p>
 
@@ -505,7 +238,7 @@
 <h3 id="34-effective-date-for-vesting-purposes">3.4 Effective Date for vesting purposes</h3>
 <p>The Vesting Period and Cliff are calculated from the <strong>Effective Date</strong> of this Agreement (i.e. from signing), not from Incorporation. This recognises that founder labour invested before formal incorporation also vests toward the same schedule.</p>
 
-<h2 id="4-roles-responsibilities"><span class="clause-num">4.</span> Roles &amp; Responsibilities</h2>
+<h2 id="4-roles-responsibilities"><span class="clause-num">4.</span> Roles &amp; Responsibilities <a class="clause-anchor" href="#4-roles-responsibilities" aria-label="Link to this clause">#</a></h2>
 <h3 id="41-initial-roles">4.1 Initial roles</h3>
 <ul>
   <li><strong>Milan</strong>: Chief Technology Officer ("<strong>CTO</strong>"). Detailed expectations in <em>Amaea CTO Working Agreement</em>.</li>
@@ -532,7 +265,7 @@
 <h3 id="44-peer-governance-not-principalagent">4.4 Peer governance, not principal/agent</h3>
 <p>For the avoidance of doubt: the Founders are <strong>peers</strong>, not in an employer/employee or principal/agent relationship with each other. Neither Founder reports to the other. Both Founders report jointly to the Board (which is composed of the Founders until external investors are admitted).</p>
 
-<h2 id="5-time-commitment"><span class="clause-num">5.</span> Time Commitment</h2>
+<h2 id="5-time-commitment"><span class="clause-num">5.</span> Time Commitment <a class="clause-anchor" href="#5-time-commitment" aria-label="Link to this clause">#</a></h2>
 <h3 id="51-minimum-commitment">5.1 Minimum commitment</h3>
 <ul>
   <li><strong>Milan:</strong> A minimum of 10 hours per week pre-Incorporation; reviewed at Incorporation; expected to increase if and when the Business can support full-time founder compensation. See <em>Amaea CTO Working Agreement</em> for detail.</li>
@@ -542,7 +275,7 @@
 <h3 id="52-no-moonlighting-in-conflicting-roles">5.2 No moonlighting in conflicting roles</h3>
 <p>Neither Founder shall engage in any other paid work, consulting, advisory role, or directorship that materially competes with, or impairs their ability to perform, their role in the Business, without the other Founder's prior written consent. Outside employment in a non-competing field (e.g. Milan's existing software engineering role) is expressly permitted.</p>
 
-<h2 id="6-intellectual-property"><span class="clause-num">6.</span> Intellectual Property</h2>
+<h2 id="6-intellectual-property"><span class="clause-num">6.</span> Intellectual Property <a class="clause-anchor" href="#6-intellectual-property" aria-label="Link to this clause">#</a></h2>
 <h3 id="61-pre-incorporation-ip">6.1 Pre-Incorporation IP</h3>
 <p>Each Founder hereby:</p>
 <ul>
@@ -560,11 +293,11 @@
 <h3 id="64-personal-capacity-work">6.4 Personal capacity work</h3>
 <p>Work created by a Founder that is genuinely outside the scope of the Business (e.g. unrelated open-source contributions, personal projects) remains the property of that Founder.</p>
 
-<h2 id="7-confidentiality"><span class="clause-num">7.</span> Confidentiality</h2>
+<h2 id="7-confidentiality"><span class="clause-num">7.</span> Confidentiality <a class="clause-anchor" href="#7-confidentiality" aria-label="Link to this clause">#</a></h2>
 <p>Each Founder shall keep confidential, both during their tenure and indefinitely thereafter, all non-public information relating to the Business, including but not limited to: customer data, pricing, financial information, technical architecture, AI models, strategy, prospect lists, internal communications, and the terms of this Agreement itself.</p>
 <p>This obligation does not apply to information that (a) becomes public through no fault of the Founder, (b) is required to be disclosed by law or regulator, or (c) is independently developed by the Founder without reference to confidential information.</p>
 
-<h2 id="8-non-compete-non-solicit"><span class="clause-num">8.</span> Non-Compete &amp; Non-Solicit</h2>
+<h2 id="8-non-compete-non-solicit"><span class="clause-num">8.</span> Non-Compete &amp; Non-Solicit <a class="clause-anchor" href="#8-non-compete-non-solicit" aria-label="Link to this clause">#</a></h2>
 <h3 id="81-non-compete">8.1 Non-compete</h3>
 <p>During each Founder's tenure and for <strong>twelve (12) months</strong> following their cessation, that Founder shall not, directly or indirectly, anywhere in the United Kingdom:</p>
 <ul>
@@ -580,7 +313,7 @@
   <li>Solicit any customer, prospect (where active engagement existed in the 12 months pre-cessation), or partnership counterparty for a competing purpose.</li>
 </ul>
 
-<h2 id="9-leaver-provisions"><span class="clause-num">9.</span> Leaver Provisions</h2>
+<h2 id="9-leaver-provisions"><span class="clause-num">9.</span> Leaver Provisions <a class="clause-anchor" href="#9-leaver-provisions" aria-label="Link to this clause">#</a></h2>
 <h3 id="91-bad-leaver">9.1 Bad Leaver</h3>
 <p>If a Founder ceases to be active as a <strong>Bad Leaver</strong>, the Company may, within 90 days of cessation, <strong>repurchase 100% of that Founder's shares (both vested and unvested) at the lower of:</strong></p>
 <ul>
@@ -603,7 +336,7 @@
   <li>Assist in the search and onboarding of a suitable replacement if and as required.</li>
 </ul>
 
-<h2 id="10-drag-along-tag-along"><span class="clause-num">10.</span> Drag-Along &amp; Tag-Along</h2>
+<h2 id="10-drag-along-tag-along"><span class="clause-num">10.</span> Drag-Along &amp; Tag-Along <a class="clause-anchor" href="#10-drag-along-tag-along" aria-label="Link to this clause">#</a></h2>
 <h3 id="101-drag-along">10.1 Drag-along</h3>
 <p>If Founders together holding at least 75% of the issued ordinary shares accept a bona fide offer for 100% of the Company, they may require the remaining Founder to sell their shares on the same terms ("drag-along").</p>
 
@@ -613,7 +346,7 @@
 <h3 id="103-pre-emption">10.3 Pre-emption</h3>
 <p>Before any third-party sale, the selling Founder must first offer their shares to the other Founder on the same terms, with a 30-day acceptance window.</p>
 
-<h2 id="11-reserved-matters-governance"><span class="clause-num">11.</span> Reserved Matters &amp; Governance</h2>
+<h2 id="11-reserved-matters-governance"><span class="clause-num">11.</span> Reserved Matters &amp; Governance <a class="clause-anchor" href="#11-reserved-matters-governance" aria-label="Link to this clause">#</a></h2>
 <h3 id="111-reserved-matters">11.1 Reserved Matters</h3>
 <p>While the Founders are the only shareholders, all matters listed in <strong>Schedule 1</strong> require the <strong>unanimous written consent of both Founders</strong>.</p>
 
@@ -629,7 +362,7 @@
 </ol>
 <div class="note"><strong>Drafting note:</strong> Shotgun clauses are nuclear options and rarely invoked. Their presence usually motivates resolution through earlier steps. A lawyer may suggest alternative deadlock mechanics; this is a robust default.</div>
 
-<h2 id="12-personal-relationship"><span class="clause-num">12.</span> Personal Relationship</h2>
+<h2 id="12-personal-relationship"><span class="clause-num">12.</span> Personal Relationship <a class="clause-anchor" href="#12-personal-relationship" aria-label="Link to this clause">#</a></h2>
 <p>The Founders acknowledge that they share a personal relationship in addition to their professional one. Both Founders agree to:</p>
 <ul>
   <li><strong>Separate company governance from personal dynamics.</strong> Decisions about the Business are made on the merits, not influenced by personal events.</li>
@@ -639,7 +372,7 @@
 <p>If the personal relationship materially changes (e.g. ends), the Founders agree that this <strong>does not in itself trigger any leaver provisions or change ownership</strong>. Both Founders retain their roles and equity subject only to the standard Bad Leaver / Good Leaver / non-compete provisions of this Agreement.</p>
 <p>The Founders further agree to revisit this clause within 30 days of any material change in the personal relationship to confirm — in writing — that the Business arrangements continue unchanged, or to negotiate adjustments in good faith.</p>
 
-<h2 id="13-future-founders-investors"><span class="clause-num">13.</span> Future Founders &amp; Investors</h2>
+<h2 id="13-future-founders-investors"><span class="clause-num">13.</span> Future Founders &amp; Investors <a class="clause-anchor" href="#13-future-founders-investors" aria-label="Link to this clause">#</a></h2>
 <h3 id="131-new-equity-issuance">13.1 New equity issuance</h3>
 <p>Any new shares issued (to new hires, advisors, an options pool, or external investors) shall dilute both Founders <strong>pro rata to their then-current holdings</strong>, unless both Founders agree otherwise in writing.</p>
 
@@ -649,7 +382,7 @@
 <h3 id="133-investor-admission">13.3 Investor admission</h3>
 <p>The admission of external investors (whether by equity, convertible note, SAFE, or otherwise) is a Reserved Matter (Schedule 1) and requires mutual agreement. The Founders confirm their current stance is <strong>bootstrap-first</strong> — see <em>Funding stance memo / intranet</em>.</p>
 
-<h2 id="14-term-termination"><span class="clause-num">14.</span> Term &amp; Termination</h2>
+<h2 id="14-term-termination"><span class="clause-num">14.</span> Term &amp; Termination <a class="clause-anchor" href="#14-term-termination" aria-label="Link to this clause">#</a></h2>
 <p>This Agreement takes effect on the Effective Date and continues in force until:</p>
 <ul>
   <li>Both Founders agree in writing to terminate;</li>
@@ -659,7 +392,7 @@
 </ul>
 <p>Cessation of a Founder's active role does <strong>not</strong> terminate this Agreement as to that Founder's residual shareholding, leaver, confidentiality, and non-compete obligations.</p>
 
-<h2 id="15-general-provisions"><span class="clause-num">15.</span> General Provisions</h2>
+<h2 id="15-general-provisions"><span class="clause-num">15.</span> General Provisions <a class="clause-anchor" href="#15-general-provisions" aria-label="Link to this clause">#</a></h2>
 <h3 id="151-governing-law">15.1 Governing law</h3>
 <p>This Agreement is governed by the laws of <strong>England &amp; Wales</strong> and any dispute shall be subject to the exclusive jurisdiction of the English courts (subject to the dispute resolution mechanics in Clause 11.3).</p>
 
@@ -683,7 +416,7 @@
 <h3 id="156-amendment">15.6 Amendment</h3>
 <p>This Agreement may only be amended by written agreement signed by both Founders.</p>
 
-<h2 id="schedule-1-reserved-matters">Schedule 1 — Reserved Matters</h2>
+<h2 id="schedule-1-reserved-matters">Schedule 1 — Reserved Matters <a class="clause-anchor" href="#schedule-1-reserved-matters" aria-label="Link to this section">#</a></h2>
 <p>The following decisions require <strong>unanimous written consent of both Founders</strong> while they remain the only shareholders:</p>
 <ol>
   <li>Issuing new shares, granting options, or creating any class of equity.</li>
@@ -711,21 +444,21 @@
     <p class="sig-party-name">Milan Sajiv<span class="sig-party-role">CTO &amp; Co-Founder</span></p>
     <div class="sig-line">
       <div class="sig-field"><span class="sig-field-label">Signature</span><span class="sig-field-line"></span></div>
-      <div class="sig-field" style="max-width:160px;"><span class="sig-field-label">Date</span><span class="sig-field-line"></span></div>
+      <div class="sig-field sig-field--date"><span class="sig-field-label">Date</span><span class="sig-field-line"></span></div>
     </div>
   </div>
   <div class="sig-party">
     <p class="sig-party-name">Hasna Sahul Hameed<span class="sig-party-role">CEO &amp; Co-Founder</span></p>
     <div class="sig-line">
       <div class="sig-field"><span class="sig-field-label">Signature</span><span class="sig-field-line"></span></div>
-      <div class="sig-field" style="max-width:160px;"><span class="sig-field-label">Date</span><span class="sig-field-line"></span></div>
+      <div class="sig-field sig-field--date"><span class="sig-field-label">Date</span><span class="sig-field-line"></span></div>
     </div>
   </div>
 </div>
 
 <div class="doc-footer">
   <p class="tagline">Stay compliant. Stay confident.</p>
-  <p>Amaea Ltd (in formation) · Confidential · Founder document · v1 draft 16 May 2026</p>
+  <p>Amaea Ltd (in formation) · Confidential · Founder document</p>
 </div>
 
 </div>
@@ -755,9 +488,24 @@
     if (el) el.textContent = new Date().toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'long', year:'numeric' });
   })();
   (function () {
+    const userArea = document.getElementById('sidebarUserArea');
     const nameEl = document.getElementById('sidebarUserName');
     const roleEl = document.getElementById('sidebarUserRole');
     const avatarEl = document.getElementById('sidebarAvatar');
+    if (userArea) {
+      const chevron = userArea.querySelector('svg');
+      if (chevron) {
+        const logout = document.createElement('a');
+        logout.href = '/cdn-cgi/access/logout';
+        logout.title = 'Sign out';
+        logout.setAttribute('aria-label', 'Sign out');
+        logout.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;color:rgba(255,255,255,0.4);text-decoration:none;flex-shrink:0;margin-left:auto;transition:background .15s ease, color .15s ease;';
+        logout.addEventListener('mouseenter', () => { logout.style.background = 'rgba(255,255,255,0.08)'; logout.style.color = 'rgba(255,255,255,0.85)'; });
+        logout.addEventListener('mouseleave', () => { logout.style.background = 'transparent'; logout.style.color = 'rgba(255,255,255,0.4)'; });
+        logout.innerHTML = '<svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+        chevron.replaceWith(logout);
+      }
+    }
     const ROLE_BY_EMAIL = {
       'milan@amaea.co.uk': { role: 'CTO & Co-Founder', bg: 'linear-gradient(135deg,#1a4080,#4292c6)' },
       'hasna@amaea.co.uk': { role: 'CEO & Co-Founder', bg: 'linear-gradient(135deg,#4C2C4B,#8B6189)' },
