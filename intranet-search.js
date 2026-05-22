@@ -129,7 +129,8 @@
     lastResults = rows;
     activeRow = 0;
     if (!rows.length) {
-      resultsEl.innerHTML = `<div class="cmdk-empty">No matches. Try a different query.</div>`;
+      resultsEl.innerHTML = renderEmpty(inputEl ? inputEl.value : '');
+      inputEl && inputEl.setAttribute('aria-activedescendant', '');
       return;
     }
     resultsEl.innerHTML = rows.map((r, i) => {
@@ -150,6 +151,32 @@
       `;
     }).join('');
     inputEl.setAttribute('aria-activedescendant', rows.length ? 'cmdk-row-0' : '');
+  }
+
+  function renderEmpty(query) {
+    const q = (query || '').trim();
+    const titleHtml = q
+      ? `No matches for <em>&ldquo;${escapeHtml(q)}&rdquo;</em>.`
+      : `Type to search pages, sections, and runbooks.`;
+    return `
+      <div class="cmdk-empty">
+        <div class="cmdk-empty-icon">
+          <svg aria-hidden="true" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            <line x1="8" y1="11" x2="14" y2="11"/>
+          </svg>
+        </div>
+        <div class="cmdk-empty-title">${titleHtml}</div>
+        <div class="cmdk-empty-hints">
+          <p>Search looks at page titles and section headings. Try a shorter or different word.</p>
+          <ul>
+            <li>Browse the <a href="/" data-cmdk-link>dashboard</a> for the canonical page list</li>
+            <li>Or email <a href="mailto:milan@amaea.co.uk?subject=Intranet%20search%20miss" data-cmdk-link>milan@amaea.co.uk</a> if it should be here</li>
+          </ul>
+        </div>
+      </div>
+    `;
   }
 
   function escapeAttr(s) {
@@ -215,7 +242,17 @@
       allRows = null;
     }
     render(search(''));
-    if (!index) resultsEl.innerHTML = `<div class="cmdk-empty">Couldn't load the search index. Press Esc and try again.</div>`;
+    if (!index) {
+      resultsEl.innerHTML = `
+        <div class="cmdk-empty">
+          <div class="cmdk-empty-icon">
+            <svg aria-hidden="true" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="cmdk-empty-title">Couldn't load the search index.</div>
+          <div class="cmdk-empty-hints"><p>Press <kbd>Esc</kbd> and try again — usually a transient network hiccup.</p></div>
+        </div>
+      `;
+    }
   }
 
   function close() {
@@ -268,6 +305,14 @@
       if (!row) return;
       const i = parseInt(row.getAttribute('data-i'), 10);
       if (!Number.isNaN(i)) setActive(i);
+    });
+
+    // Close the palette when the user clicks one of the recovery links
+    // in the empty state (otherwise a mailto: would leave the modal open
+    // hovering over the new tab/composer).
+    resultsEl.addEventListener('click', e => {
+      const link = e.target.closest('a[data-cmdk-link]');
+      if (link) close();
     });
   }
 
