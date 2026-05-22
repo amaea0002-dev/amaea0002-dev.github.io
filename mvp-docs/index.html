@@ -144,7 +144,7 @@
   </div>
 
   <div class="cover-body">
-    <p class="cover-eyebrow">Official documentation set · v1.0 · 14 May 2026</p>
+    <p class="cover-eyebrow">Official documentation set · ~2.5h read · v1.0 <span class="text-mute">· Last reviewed 18 May 2026</span></p>
     <h1 class="cover-title">The Amaea MVP, in five documents.</h1>
     <p class="cover-sub">Everything an investor, engineer, compliance reviewer, or new joiner needs to understand the product, the technology, and how it runs in production.</p>
   </div>
@@ -160,11 +160,11 @@
     </div>
     <div>
       <p class="cover-meta-label">Live URLs</p>
-      <p class="cover-meta-value">amaea.vercel.app<br/>amaeaai.vercel.app</p>
+      <p class="cover-meta-value">amaea.co.uk<br/>app.amaea.co.uk</p>
     </div>
     <div>
       <p class="cover-meta-label">Length</p>
-      <p class="cover-meta-value">~2½ hours · 5 documents</p>
+      <p class="cover-meta-value">~2.5 hours</p>
     </div>
   </div>
 
@@ -175,8 +175,8 @@
 </section>
 
 <nav class="doc-nav">
-  <a href="../index.html">← Back to intranet</a>
-  <span class="doc-nav-meta">5 documents · ~20,000 words</span>
+  <a href="../index">← Back to intranet</a>
+  <span class="doc-nav-meta">~20,000 words</span>
 </nav>
 
 <article class="doc">
@@ -283,7 +283,7 @@
 
   <h2 id="conventions">Document conventions</h2>
   <ul>
-    <li>Code paths are absolute or relative to <code>/Users/milan/Documents/Amaea/</code>.</li>
+    <li>Code paths are relative to the repo root (e.g. <code>src/lib/...</code>) or use the repo name as prefix (e.g. <code>amaea-app/src/...</code>, <code>amaea-db/migrations/...</code>, <code>amaea-brand/...</code>).</li>
     <li>All references to FCA rules use the FCA Handbook abbreviation pattern: <code>COBS 9.5</code>, <code>PS22/9</code>, <code>FG21/1</code>, <code>SYSC 9.1</code>, <code>DISP 1.6.1</code>.</li>
     <li>"We" in operational docs refers to Sterling IFA (the demo firm) where the context is product behaviour, or to Amaea (the firm) where the context is business decisions.</li>
     <li>Money values shown in pounds sterling.</li>
@@ -320,9 +320,25 @@
     if (el) el.textContent = new Date().toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'long', year:'numeric' });
   })();
   (function () {
+    const userArea = document.getElementById('sidebarUserArea');
     const nameEl = document.getElementById('sidebarUserName');
     const roleEl = document.getElementById('sidebarUserRole');
     const avatarEl = document.getElementById('sidebarAvatar');
+    // Replace the (decorative) dropdown chevron with a logout icon button.
+    if (userArea) {
+      const chevron = userArea.querySelector('svg');
+      if (chevron) {
+        const logout = document.createElement('a');
+        logout.href = '/cdn-cgi/access/logout';
+        logout.title = 'Sign out';
+        logout.setAttribute('aria-label', 'Sign out');
+        logout.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:6px;color:rgba(255,255,255,0.4);text-decoration:none;flex-shrink:0;margin-left:auto;transition:background .15s ease, color .15s ease;';
+        logout.addEventListener('mouseenter', () => { logout.style.background = 'rgba(255,255,255,0.08)'; logout.style.color = 'rgba(255,255,255,0.85)'; });
+        logout.addEventListener('mouseleave', () => { logout.style.background = 'transparent'; logout.style.color = 'rgba(255,255,255,0.4)'; });
+        logout.innerHTML = '<svg aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>';
+        chevron.replaceWith(logout);
+      }
+    }
     const ROLE_BY_EMAIL = {
       'milan@amaea.co.uk': { role: 'CTO & Co-Founder', bg: 'linear-gradient(135deg,#1a4080,#4292c6)' },
       'hasna@amaea.co.uk': { role: 'CEO & Co-Founder', bg: 'linear-gradient(135deg,#4C2C4B,#8B6189)' },
