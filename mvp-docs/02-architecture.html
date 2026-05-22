@@ -30,8 +30,8 @@
       <p class="cover-meta-value">MVP · pre-launch</p>
     </div>
     <div>
-      <p class="cover-meta-label">As of</p>
-      <p class="cover-meta-value">14 May 2026</p>
+      <p class="cover-meta-label">Last reviewed</p>
+      <p class="cover-meta-value">18 May 2026</p>
     </div>
     <div>
       <p class="cover-meta-label">Owners</p>
@@ -56,6 +56,24 @@
 
 <article class="doc">
 <p>This document describes the production architecture of the Amaea MVP: tech stack, system design, database schema, multi-tenancy, and the key technical decisions that shape the build.</p>
+<nav class="doc-toc" aria-label="In this document">
+  <p class="doc-toc-label">In this document</p>
+  <div class="doc-toc-grid">
+    <a href="#tech-stack"                              class="doc-toc-link"><span class="doc-toc-num">1</span> Tech stack</a>
+    <a href="#high-level-architecture"                 class="doc-toc-link"><span class="doc-toc-num">2</span> High-level architecture</a>
+    <a href="#architecture-principles"                 class="doc-toc-link"><span class="doc-toc-num">3</span> Architecture principles</a>
+    <a href="#database-schema"                         class="doc-toc-link"><span class="doc-toc-num">4</span> Database schema</a>
+    <a href="#migrations"                              class="doc-toc-link"><span class="doc-toc-num">5</span> Migrations</a>
+    <a href="#application-code-structure"              class="doc-toc-link"><span class="doc-toc-num">6</span> Application code structure</a>
+    <a href="#data-flow-document-upload"               class="doc-toc-link"><span class="doc-toc-num">7</span> Data flow: upload</a>
+    <a href="#data-flow-chat-query"                    class="doc-toc-link"><span class="doc-toc-num">8</span> Data flow: chat</a>
+    <a href="#vercel-cron-jobs"                        class="doc-toc-link"><span class="doc-toc-num">9</span> Vercel cron jobs</a>
+    <a href="#environment-variables-production"        class="doc-toc-link"><span class="doc-toc-num">10</span> Environment variables</a>
+    <a href="#architectural-decisions-worth-knowing"   class="doc-toc-link"><span class="doc-toc-num">11</span> Architectural decisions</a>
+    <a href="#whats-deliberately-not-built"            class="doc-toc-link"><span class="doc-toc-num">12</span> Deliberately not built</a>
+    <a href="#what-to-read-next"                       class="doc-toc-link"><span class="doc-toc-num">13</span> What to read next</a>
+  </div>
+</nav>
 <h2 id="tech-stack">Tech stack</h2>
 <table>
 <thead><tr>
@@ -174,7 +192,8 @@
 </tr>
 </tbody></table>
 <h2 id="high-level-architecture">High-level architecture</h2>
-<pre><code>                         ┌─────────────────────────────────────────┐
+<figure class="arch-figure">
+  <pre role="img" aria-label="System topology diagram"><code>                         ┌─────────────────────────────────────────┐
                          │            VERCEL EU REGION              │
                          │                                          │
    browser ───https───▶ │  Next.js 16 (SSR + API routes)            │
@@ -211,6 +230,8 @@
                 │  Claude vision   │         │  Embeddings      │    │ Email    │
                 │  Claude messages │         │  (voyage-3-lite) │    │          │
                 └──────────────────┘         └──────────────────┘    └──────────┘</code></pre>
+  <figcaption>Browser hits Next.js 16 (SSR + API routes + crons) in the Vercel EU region. Next.js talks to Supabase EU-West (Ireland) for Postgres (tenant tables with RLS by <code>firm_id</code>, plus <code>fca_documents</code> and <code>firm_embeddings</code> in pgvector, plus the append-only <code>compliance_events</code> table), Storage (firm-documents bucket, path scoped by firm and client), and Auth (JWT with firm_id claim). Supabase fans out to three third-party services: Anthropic (Claude vision + messages), Voyage AI (embeddings via voyage-3-lite), and Resend (transactional email).</figcaption>
+</figure>
 <h2 id="architecture-principles">Architecture principles</h2>
 <h3 id="1-multi-tenancy-via-row-level-security">1. Multi-tenancy via Row Level Security</h3>
 <p>Every tenant table carries a <code>firm_id</code> column. Supabase RLS policies enforce at the database level that an authenticated user can only read or write rows where <code>firm_id = auth.jwt() -&gt;&gt; &#x27;firm_id&#x27;</code>.</p>
@@ -246,6 +267,17 @@
 <p>This means a client can simultaneously have one client-level <code>missing_signature</code> flag AND multiple doc-level <code>missing_signature</code> flags (one per source document).</p>
 <h2 id="database-schema">Database schema</h2>
 <p>All tables under the <code>public</code> schema. All have <code>firm_id</code> (except <code>firms</code> itself) and have RLS enabled.</p>
+<nav class="doc-toc doc-toc--inline" aria-label="Database schema sections">
+  <p class="doc-toc-label">Schema sections</p>
+  <div class="doc-toc-grid">
+    <a href="#core-tenancy-tables"        class="doc-toc-link">Core tenancy tables</a>
+    <a href="#client-reviews-documents"   class="doc-toc-link">Client + reviews + documents</a>
+    <a href="#audit-trail"                class="doc-toc-link">Audit trail</a>
+    <a href="#reports-integrations"       class="doc-toc-link">Reports + integrations</a>
+    <a href="#rag-infrastructure-migration-016" class="doc-toc-link">RAG infrastructure</a>
+    <a href="#helper-view-migration-017"  class="doc-toc-link">Helper view</a>
+  </div>
+</nav>
 <h3 id="core-tenancy-tables">Core tenancy tables</h3>
 <h4 id="firms"><code>firms</code></h4>
 <p>The top-level tenant. One row per IFA firm.</p>
@@ -973,7 +1005,7 @@ SELECT
   ) AS open_flag_count
 FROM public.documents d;</code></pre>
 <h2 id="migrations">Migrations</h2>
-<p>All migrations live in <code>/Users/milan/Documents/Amaea/amaea-db/migrations/</code> (numbered SQL files) with a parallel timestamped copy in <code>amaea-db/supabase/migrations/</code> for Supabase CLI compatibility.</p>
+<p>All migrations live in <code>amaea-db/migrations/</code> (numbered SQL files) with a parallel timestamped copy in <code>amaea-db/supabase/migrations/</code> for Supabase CLI compatibility.</p>
 <table>
 <thead><tr>
 <th>#</th>
@@ -1139,7 +1171,8 @@ FROM public.documents d;</code></pre>
 <p>Migrations are applied via the Supabase Dashboard SQL editor (paste + Run). <code>supabase db push</code> via the CLI is supported but requires <code>supabase login</code> + <code>supabase link</code> first; the historic pattern has been Dashboard pasting.</p>
 <p>All migrations through 031 are applied to production as of 2026-05-17.</p>
 <h2 id="application-code-structure">Application code structure</h2>
-<pre><code>amaea-app/
+<figure class="arch-figure">
+  <pre role="img" aria-label="Application directory tree"><code>amaea-app/
 ├── public/                       Static assets
 ├── scripts/                      Node scripts (ingest, eval, doc gen, verify)
 │   ├── ingest.mjs                Original FCA ingest (82 chunks, baseline)
@@ -1204,8 +1237,11 @@ FROM public.documents d;</code></pre>
 ├── next.config.ts
 ├── package.json
 └── .env.local                    Local secrets (gitignored)</code></pre>
+  <figcaption>Tree of the <code>amaea-app/</code> repo. Top-level: <code>public/</code> assets and <code>scripts/</code> for FCA ingest, scrapers, the 50-scenario eval harness, and test-PDF generators. Inside <code>src/</code>: <code>app/(app)/</code> holds the 11 authenticated routes (dashboard, clients, reviews, documents, assistant, insights, reports, governance, import, integrations, settings); <code>app/api/</code> holds the chat, cron, flags, import, RAG, and report-generation endpoints; <code>lib/extraction/</code> holds the 19 Zod schemas + classify/extract orchestrator; <code>lib/rag/</code> holds the Voyage AI client and chunker; <code>lib/supabase/</code> splits RLS-respecting (<code>server.ts</code>) from service-role (<code>admin.ts</code>) clients.</figcaption>
+</figure>
 <h2 id="data-flow-document-upload">Data flow: document upload</h2>
-<pre><code>1. User drags PDF(s) onto /import page
+<figure class="arch-figure">
+  <pre role="img" aria-label="Document upload sequence"><code>1. User drags PDF(s) onto /import page
 2. Optional: ticks &quot;Treat these N files as ONE document&quot;
 3. processAll() in ImportClient.tsx:
    - If group toggle ON + 2+ files: single POST with all files in one FormData
@@ -1230,8 +1266,11 @@ FROM public.documents d;</code></pre>
 13. Insert compliance_events row for audit trail
 14. Return JSON: { success, doc_type, doc_date, client_name, client_ref, raised_flags, extraction, ... }
 15. Frontend updates the result card with extracted fields + raised flag pills</code></pre>
+  <figcaption>Document upload pipeline. User drops PDFs (optionally grouped), the import route runs auth + firm_id resolution + base64 encoding, then <code>classifyDocument</code> + <code>extractDocument</code> against Claude vision, then client matching, Storage upload, persist to <code>documents</code> with extracted metadata, run <code>flagsFromExtraction</code> to upsert risk flags (with <code>source_document_id</code>), auto-resolve any pre-existing missing/expired flags, advance annual reviews if applicable, log to <code>compliance_events</code>, return JSON to the frontend.</figcaption>
+</figure>
 <h2 id="data-flow-chat-query">Data flow: chat query</h2>
-<pre><code>1. User asks question in dashboard chat OR /assistant OR /insights AskAmaea
+<figure class="arch-figure">
+  <pre role="img" aria-label="Chat query sequence"><code>1. User asks question in dashboard chat OR /assistant OR /insights AskAmaea
 2. POST /api/chat with { messages: [...], stats: {...} }
 3. Build context (Promise.all in parallel):
    a. retrieveFcaContext(query)
@@ -1263,6 +1302,8 @@ FROM public.documents d;</code></pre>
 5. anthropic.messages.create({ model: &#x27;claude-sonnet-4-6&#x27;, max_tokens: 16384, system, messages })
 6. Log compliance_event with token counts, latency, retrieval query
 7. Return { text, ragUsed }</code></pre>
+  <figcaption>Chat query pipeline. The POST handler runs four context fetches in parallel: FCA corpus retrieval (Voyage embed + <code>match_fca_documents</code> at threshold 0.60), firm-specific retrieval (<code>match_firm_embeddings</code> at threshold 0.45), recent-imports injection (top 25 doc-level flags + top 30 recent uploads, deduped), and per-adviser stats. The system prompt assembles identity + live stats + adviser stats + priority client notes + the three retrieved context blocks + formatting rules, then calls Claude (max_tokens 16384). Token counts + latency + retrieval query are written to <code>compliance_events</code>.</figcaption>
+</figure>
 <h2 id="vercel-cron-jobs">Vercel cron jobs</h2>
 <p>Defined in <code>amaea-app/vercel.json</code>:</p>
 <pre><code>{
@@ -1321,13 +1362,13 @@ FROM public.documents d;</code></pre>
 </tr>
 </tbody></table>
 <h2 id="architectural-decisions-worth-knowing">Architectural decisions worth knowing</h2>
-<p><strong>Why pgvector and not a separate vector DB.</strong> Co-locating embeddings with relational data means we can JOIN client records with their embedded summaries in one query, and we don&#x27;t operate two systems. Pinecone / Weaviate / Qdrant would add ops burden for no functional gain at MVP scale.</p>
-<p><strong>Why Voyage AI and not OpenAI embeddings.</strong> Voyage&#x27;s <code>voyage-3-lite</code> is 512-dim (vs 1536 for OpenAI ada-002 and 3072 for text-embedding-3-large), which means 6× smaller index footprint and faster retrieval at comparable quality on regulatory text. Cost is also ~5x lower. Quality benchmarks were run against the 50-scenario eval set during selection.</p>
-<p><strong>Why a discriminated union for ExtractedDocument.</strong> Each of the 19 document types has different fields. A discriminated union (<code>z.discriminatedUnion(&#x27;documentType&#x27;, [...])</code>) gives us full TypeScript type narrowing — if <code>docType === &#x27;db_transfer_report&#x27;</code>, we get <code>transferValue: number | null</code> available; if it&#x27;s a <code>fact_find</code>, we get <code>attitudeToRiskRating: string | null</code>. No type assertions needed.</p>
-<p><strong>Why classify-then-extract in two steps, not one.</strong> A single prompt asking Claude to both classify AND extract would either be too verbose (every field for every type listed) or too sloppy (Claude inventing fields). Splitting into a cheap classify call (max_tokens 20, just the type identifier) followed by a type-specific extract call gives better accuracy on both steps and lets the prompts stay focused.</p>
-<p><strong>Why Zod&#x27;s <code>.partial()</code> on inner array objects.</strong> Claude vision sometimes omits fields it can&#x27;t determine from a document (e.g. a phone-call touchpoint in an ongoing-service-evidence log doesn&#x27;t have a <code>chargeLevied</code> field shown). Without <code>.partial()</code>, undefined fields cause schema validation errors. With <code>.partial()</code>, missing fields are tolerated and the validated output represents what was actually extracted.</p>
-<p><strong>Why unconditional injection of recent uploads in the chat prompt.</strong> RAG retrieval is similarity-based. On broad queries like &quot;give me a compliance rundown&quot;, the highest-ranked chunks tend to be firm-overview summaries — specific document_extraction chunks score lower and miss the top-K. Injecting the 30 most recent uploads directly into the system prompt guarantees they&#x27;re always visible to the model, independent of retrieval. This is the layer that makes the chat able to reference &quot;Margaret&#x27;s £412,500 DB transfer&quot; by extracted value, not just by general description.</p>
-<p><strong>Why we accept doc records without file storage on the document import path.</strong> If the Supabase Storage upload fails (bucket misconfigured, file too large), the import route catches the error and proceeds without <code>file_path</code>. The extraction still runs and the metadata is still persisted. We optimise for &quot;compliance state is captured&quot; over &quot;file is archived&quot; because the former is the immediate user value.</p>
+<p id="decision-pgvector"><strong>Why pgvector and not a separate vector DB.</strong> <a class="decision-anchor" href="#decision-pgvector" aria-label="Link to this decision">#</a> Co-locating embeddings with relational data means we can JOIN client records with their embedded summaries in one query, and we don&#x27;t operate two systems. Pinecone / Weaviate / Qdrant would add ops burden for no functional gain at MVP scale.</p>
+<p id="decision-voyage"><strong>Why Voyage AI and not OpenAI embeddings.</strong> <a class="decision-anchor" href="#decision-voyage" aria-label="Link to this decision">#</a> Voyage&#x27;s <code>voyage-3-lite</code> is 512-dim (vs 1536 for OpenAI ada-002 and 3072 for text-embedding-3-large), which means 6× smaller index footprint and faster retrieval at comparable quality on regulatory text. Cost is also ~5x lower. Quality benchmarks were run against the 50-scenario eval set during selection.</p>
+<p id="decision-discriminated-union"><strong>Why a discriminated union for ExtractedDocument.</strong> <a class="decision-anchor" href="#decision-discriminated-union" aria-label="Link to this decision">#</a> Each of the 19 document types has different fields. A discriminated union (<code>z.discriminatedUnion(&#x27;documentType&#x27;, [...])</code>) gives us full TypeScript type narrowing — if <code>docType === &#x27;db_transfer_report&#x27;</code>, we get <code>transferValue: number | null</code> available; if it&#x27;s a <code>fact_find</code>, we get <code>attitudeToRiskRating: string | null</code>. No type assertions needed.</p>
+<p id="decision-classify-extract"><strong>Why classify-then-extract in two steps, not one.</strong> <a class="decision-anchor" href="#decision-classify-extract" aria-label="Link to this decision">#</a> A single prompt asking Claude to both classify AND extract would either be too verbose (every field for every type listed) or too sloppy (Claude inventing fields). Splitting into a cheap classify call (max_tokens 20, just the type identifier) followed by a type-specific extract call gives better accuracy on both steps and lets the prompts stay focused.</p>
+<p id="decision-zod-partial"><strong>Why Zod&#x27;s <code>.partial()</code> on inner array objects.</strong> <a class="decision-anchor" href="#decision-zod-partial" aria-label="Link to this decision">#</a> Claude vision sometimes omits fields it can&#x27;t determine from a document (e.g. a phone-call touchpoint in an ongoing-service-evidence log doesn&#x27;t have a <code>chargeLevied</code> field shown). Without <code>.partial()</code>, undefined fields cause schema validation errors. With <code>.partial()</code>, missing fields are tolerated and the validated output represents what was actually extracted.</p>
+<p id="decision-unconditional-injection"><strong>Why unconditional injection of recent uploads in the chat prompt.</strong> <a class="decision-anchor" href="#decision-unconditional-injection" aria-label="Link to this decision">#</a> RAG retrieval is similarity-based. On broad queries like &quot;give me a compliance rundown&quot;, the highest-ranked chunks tend to be firm-overview summaries — specific document_extraction chunks score lower and miss the top-K. Injecting the 30 most recent uploads directly into the system prompt guarantees they&#x27;re always visible to the model, independent of retrieval. This is the layer that makes the chat able to reference &quot;Margaret&#x27;s £412,500 DB transfer&quot; by extracted value, not just by general description.</p>
+<p id="decision-doc-without-file"><strong>Why we accept doc records without file storage on the document import path.</strong> <a class="decision-anchor" href="#decision-doc-without-file" aria-label="Link to this decision">#</a> If the Supabase Storage upload fails (bucket misconfigured, file too large), the import route catches the error and proceeds without <code>file_path</code>. The extraction still runs and the metadata is still persisted. We optimise for &quot;compliance state is captured&quot; over &quot;file is archived&quot; because the former is the immediate user value.</p>
 <h2 id="whats-deliberately-not-built">What&#x27;s deliberately not built</h2>
 <p>These have been considered and parked:</p>
 <ul>
