@@ -581,3 +581,70 @@ hr {
   table { font-size: 0.85rem; }
   th, td { padding: 10px 12px; }
 }
+
+/* In-page table of contents (Doc TOC) */
+.doc-toc {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 0 0 32px;
+}
+.doc-toc-label {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin: 0 0 12px;
+}
+.doc-toc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 4px;
+}
+.doc-toc-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.doc-toc-link:hover {
+  border-color: rgba(64,36,63,0.22);
+  color: var(--plum);
+  background: rgba(64,36,63,0.04);
+}
+.doc-toc-num {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: var(--gray-500);
+  min-width: 18px;
+}
+.doc-toc-link:hover .doc-toc-num { color: var(--plum); }
+
+/* Architecture diagram figure + caption */
+.arch-figure { margin: 22px 0; }
+.arch-figure pre {
+  margin: 0 0 14px;
+  border-radius: 10px;
+}
+.arch-figure figcaption {
+  font-size: 0.86rem;
+  color: var(--gray-700);
+  line-height: 1.65;
+  background: rgba(64,36,63,0.05);
+  border: 1px solid rgba(64,36,63,0.18);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 0;
+}
+.arch-figure figcaption code {
+  font-size: 0.82rem;
+}
