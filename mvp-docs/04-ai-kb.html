@@ -30,8 +30,8 @@
       <p class="cover-meta-value">MVP · pre-launch</p>
     </div>
     <div>
-      <p class="cover-meta-label">As of</p>
-      <p class="cover-meta-value">14 May 2026</p>
+      <p class="cover-meta-label">Last reviewed</p>
+      <p class="cover-meta-value">18 May 2026</p>
     </div>
     <div>
       <p class="cover-meta-label">Owners</p>
@@ -57,6 +57,21 @@
 <article class="doc">
 <p>The AI moat for Amaea is the combination of (a) a substantial proprietary FCA regulatory knowledge base and (b) the dual-RAG retrieval pattern that grounds every chat response and report in both firm data and regulatory text.</p>
 <p>This document covers: the FCA knowledge base (sources, ingestion, structure), the embedding model and retrieval RPCs, the chat assistant architecture (dual RAG + unconditional injection), firm embeddings, AI-generated reports, the nightly compliance crons, and the 50-scenario evaluation framework.</p>
+<nav class="doc-toc" aria-label="In this document">
+  <p class="doc-toc-label">In this document</p>
+  <div class="doc-toc-grid">
+    <a href="#the-fca-knowledge-base"          class="doc-toc-link"><span class="doc-toc-num">1</span> FCA knowledge base</a>
+    <a href="#embeddings"                      class="doc-toc-link"><span class="doc-toc-num">2</span> Embeddings</a>
+    <a href="#dual-rag-retrieval"              class="doc-toc-link"><span class="doc-toc-num">3</span> Dual RAG retrieval</a>
+    <a href="#firm-embeddings"                 class="doc-toc-link"><span class="doc-toc-num">4</span> Firm embeddings</a>
+    <a href="#the-chat-assistant"              class="doc-toc-link"><span class="doc-toc-num">5</span> Chat assistant</a>
+    <a href="#ai-generated-reports-scribe"     class="doc-toc-link"><span class="doc-toc-num">6</span> AI-generated reports (Scribe)</a>
+    <a href="#nightly-ar-sweep-cron"           class="doc-toc-link"><span class="doc-toc-num">7</span> Nightly AR sweep cron</a>
+    <a href="#the-evaluation-framework"        class="doc-toc-link"><span class="doc-toc-num">8</span> Evaluation framework</a>
+    <a href="#whats-deliberately-not-built"    class="doc-toc-link"><span class="doc-toc-num">9</span> Deliberately not built</a>
+    <a href="#where-to-read-next"              class="doc-toc-link"><span class="doc-toc-num">10</span> Where to read next</a>
+  </div>
+</nav>
 <h2 id="the-fca-knowledge-base">The FCA knowledge base</h2>
 <h3 id="scope">Scope</h3>
 <p>11,645 chunks in <code>fca_documents</code> covering:</p>
@@ -181,7 +196,7 @@ CREATE INDEX fca_documents_embedding_idx
 </ol>
 <p>The Governance page on the app queries this live, showing the actual item count and last-updated timestamp.</p>
 <p>Manual trigger:</p>
-<pre><code>GET https://amaea.vercel.app/api/rag/horizon
+<pre><code>GET https://app.amaea.co.uk/api/rag/horizon
 Authorization: Bearer $INGEST_SECRET</code></pre>
 <h2 id="embeddings">Embeddings</h2>
 <h3 id="voyage-ai-voyage-3-lite">Voyage AI <code>voyage-3-lite</code></h3>
@@ -317,7 +332,7 @@ transfer — raised by document upload extraction</code></pre>
 <p><strong>Typical per-call cost: $0.05 – $0.20</strong></p>
 <p>A firm with active daily compliance usage might generate 20-100 chat calls per day, putting the AI cost at £20-£100 per firm per month. The chat is the most expensive surface in the product — far more than the document import pipeline (which runs ~$0.04 per document).</p>
 <h3 id="system-prompt-structure">System prompt structure</h3>
-<p>The full prompt construction (in <code>buildSystemPrompt()</code> at <code>amaea-app/src/app/api/chat/route.ts</code>):</p>
+<p>The full prompt construction (in <code>buildSystemPrompt()</code> at <code>amaea-app/src/app/api/chat/route.ts</code>). Every <code>{placeholder}</code> below is resolved per-request from the firm&#x27;s live data — no demo firm names, FRNs, RMAR dates, or client references are hardcoded into the prompt (see the MVP-readiness hardening pass, 17 May 2026, on the <a href="../decisions#decision-mvp-hardening">decisions log</a>).</p>
 <pre><code>You are Amaea AI, an expert FCA compliance assistant built into the Amaea
 compliance platform for UK Independent Financial Advisers (IFAs).
 
@@ -329,20 +344,18 @@ You have deep knowledge of:
 - FCA Handbook rules on vulnerable customers — PRIN 12, FG21/1
 - FCA Final Notices and enforcement precedents
 
-Current firm dashboard — Sterling IFA Ltd (FRN 789012):
+Current firm dashboard — {firm.name} (FRN {firm.frn}):
 - {stats.activeClients} active clients monitored
 - {stats.overdueReviews} overdue annual reviews
 - {stats.missingDocs} clients with missing or expired documentation
 - {stats.vulnerable} clients flagged as vulnerable
 - Compliance health score: {stats.healthScore}/100
-- RMAR due: 31 May 2026 (3 data gaps in Section B outstanding)
+- Next RMAR due: {stats.nextRmarDue} ({stats.rmarGapCount} data gaps outstanding)
 - Advisers and current overdue review counts: {adviserStats}
 
-These named clients may have ongoing compliance issues — verify against the
-retrieved firm context and recent doc imports below before stating facts about them:
-- CLI-0047 Margaret Thompson (adviser: James Morrison)
-- CLI-0089 Robert Chen (adviser: Alex Williams)
-- CLI-0132 Priya Singh (adviser: Kate Davies)
+{priorityClients}  // dynamic block — up to N named clients with active
+                   // critical/high flags, formatted per firm. Empty if the
+                   // firm has no priority cases.
 
 Response guidelines:
 - Be specific, direct, action-oriented
@@ -452,11 +465,19 @@ Kate Davies (86 clients, 0 overdue)</code></pre>
 <ol>
 <li>Queries all overdue reviews across every firm: <code>status = &#x27;overdue&#x27;</code> OR (<code>status = &#x27;scheduled&#x27;</code> AND <code>completed_at IS NULL</code> AND <code>due_date &lt; today</code>)</li>
 <li>For each review: fetches the delay-reason notes recorded by the adviser on the client detail page</li>
-<li>Calls Claude (<code>max_tokens: 512</code>) with: ``` You are an FCA compliance assistant evaluating an overdue annual review. Under COBS 9.5, firms providing ongoing service must conduct suitability reviews at least every 12 months. The review below is overdue. Read the delay-reason notes (if any) and decide whether they constitute a sufficient justification for the delay.</li>
-</ol>
-<p>Review: {clientRef} {clientName}, due {dueDate}, {daysOverdue} days overdue. Delay reason notes: {notes ?? &#x27;(none recorded)&#x27;}</p>
-<p>Respond JSON: { sufficient: boolean, reasoning: string } ```</p>
-<ol>
+<li>Calls Claude (<code>max_tokens: 512</code>) with this prompt:
+<pre><code>You are an FCA compliance assistant evaluating an overdue annual
+review. Under COBS 9.5, firms providing ongoing service must conduct
+suitability reviews at least every 12 months. The review below is
+overdue. Read the delay-reason notes (if any) and decide whether they
+constitute a sufficient justification for the delay.
+
+Review: {clientRef} {clientName}, due {dueDate}, {daysOverdue} days
+overdue.
+Delay reason notes: {notes ?? &#x27;(none recorded)&#x27;}
+
+Respond JSON: { sufficient: boolean, reasoning: string }</code></pre>
+</li>
 <li>If <code>sufficient = false</code> OR notes are empty: create or update an <code>overdue_review</code> risk flag</li>
 <li>If <code>sufficient = true</code>: resolve any existing <code>overdue_review</code> flag for that client (the adviser has properly explained the delay)</li>
 </ol>
@@ -486,7 +507,7 @@ Kate Davies (86 clients, 0 overdue)</code></pre>
 <h3 id="why-its-important">Why it&#x27;s important</h3>
 <p>This is the part of the product that turns the platform from &quot;passive monitoring&quot; to &quot;active compliance attention&quot;. Every morning, the firm wakes up to a refreshed view of which overdue reviews have been adequately explained and which haven&#x27;t. The compliance officer can focus on the ones the AI judged insufficient.</p>
 <p>Manual trigger (for testing):</p>
-<pre><code>GET https://amaea.vercel.app/api/cron/ar-sweep
+<pre><code>GET https://app.amaea.co.uk/api/cron/ar-sweep
 Authorization: Bearer $INGEST_SECRET</code></pre>
 <h2 id="the-evaluation-framework">The evaluation framework</h2>
 <p>50 annotated FCA compliance scenarios for measuring RAG pipeline quality. The primary output feeds the Imperial MSc ML research paper Milan is producing.</p>
@@ -624,7 +645,7 @@ python3 scripts/eval-to-xlsx.py scripts/eval-scoring-2026-05-14T17-32-35.csv</co
 <h3 id="baseline-performance">Baseline performance</h3>
 <ul>
 <li><strong>Initial 82-chunk knowledge base</strong> (March 2026): scored by Hasna, mean ~6.5/10</li>
-<li><strong>11,645-chunk full corpus</strong> (May 2026): re-run on same 50 scenarios — pending Hasna scoring as of session end</li>
+<li><strong>11,645-chunk full corpus</strong> (May 2026): re-run on the same 50 scenarios; scoring pass scheduled with Hasna ahead of the Imperial MSc paper submission. Delta versus the 82-chunk baseline will land here once scored.</li>
 </ul>
 <p>The expected improvement is on rule citation accuracy (more chapter-precision available) and on enforcement precedent integration (the Final Notices weren&#x27;t in the baseline corpus).</p>
 <h2 id="whats-deliberately-not-built">What&#x27;s deliberately not built</h2>
