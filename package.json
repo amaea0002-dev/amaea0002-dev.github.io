@@ -5,9 +5,10 @@
   "description": "Amaea team intranet — static HTML/CSS knowledge base at team.amaea.co.uk.",
   "packageManager": "pnpm@10.33.4",
   "scripts": {
-    "build": "lightningcss --minify --bundle intranet.css -o intranet.css && node scripts/build-search-index.mjs",
+    "build": "lightningcss --minify --bundle intranet.css -o intranet.css && node scripts/build-search-index.mjs && node scripts/validate-pages.mjs",
     "build:css": "lightningcss --minify --bundle intranet.css -o intranet.css",
     "build:search": "node scripts/build-search-index.mjs",
+    "build:validate": "node scripts/validate-pages.mjs",
     "build:check": "lightningcss --minify --bundle intranet.css -o /tmp/_check.css && echo 'build check OK'"
   },
   "devDependencies": {
