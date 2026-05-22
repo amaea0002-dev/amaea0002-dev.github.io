@@ -10,244 +10,6 @@
   <link rel="stylesheet" href="intranet.css"/>
   <script>(function(){var t=localStorage.getItem('amaea-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();</script>
   
-<style>
-  .eval-meta {
-    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
-    margin-bottom: 8px;
-  }
-  .eval-id {
-    font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
-    font-size: 0.74rem; font-weight: 700;
-    letter-spacing: 0.04em; color: var(--plum);
-    background: var(--plum-tint);
-    padding: 3px 9px; border-radius: 999px;
-    border: 1px solid var(--plum-border);
-  }
-  .eval-pill {
-    font-size: 0.65rem; font-weight: 700;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    padding: 2px 9px; border-radius: 999px;
-    border: 1px solid;
-  }
-  .eval-pill.cat   { background: var(--gray-100); color: var(--gray-700); border-color: var(--gray-200); }
-  .eval-pill.diff-easy   { background: #ECFDF5; color: #065F46; border-color: #A7F3D0; }
-  .eval-pill.diff-medium { background: #FFFBEB; color: #92400E; border-color: #FCD34D; }
-  .eval-pill.diff-hard   { background: #FEF2F2; color: #B91C1C; border-color: #FCA5A5; }
-  .eval-question {
-    font-size: 1.02rem; font-weight: 700; color: var(--gray-900);
-    letter-spacing: -0.015em; line-height: 1.4;
-    margin: 4px 0 18px;
-  }
-  .eval-response {
-    background: var(--plum-tint);
-    border: 1px solid var(--plum-border);
-    border-radius: var(--r-md);
-    padding: 16px 18px;
-    font-size: 0.88rem;
-    color: var(--gray-900);
-    line-height: 1.6;
-    white-space: pre-wrap;
-    margin-bottom: 14px;
-  }
-  .eval-truth {
-    background: var(--gray-50);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--r-md);
-    padding: 12px 14px;
-    margin-bottom: 14px;
-    font-size: 0.78rem;
-    color: var(--gray-600);
-    line-height: 1.55;
-  }
-  .eval-truth-label {
-    font-size: 0.64rem; font-weight: 800;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--plum); margin-bottom: 4px;
-  }
-  .eval-truth-row { margin-bottom: 8px; }
-  .eval-truth-row:last-child { margin-bottom: 0; }
-  .eval-truth-key {
-    font-weight: 700; color: var(--gray-700);
-  }
-
-  .eval-score {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px 14px;
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--r-md);
-    padding: 14px 16px;
-    margin-bottom: 12px;
-  }
-  @media (min-width: 720px) { .eval-score { grid-template-columns: repeat(4, 1fr) auto; align-items: end; } }
-  .eval-axis {
-    display: flex; flex-direction: column; gap: 5px;
-  }
-  .eval-axis-label {
-    font-size: 0.65rem; font-weight: 700;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--gray-500);
-  }
-  .eval-axis-buttons {
-    display: flex; gap: 4px;
-  }
-  .eval-axis-buttons button {
-    flex: 1;
-    border: 1px solid var(--gray-200);
-    background: var(--white);
-    color: var(--gray-600);
-    font-size: 0.82rem; font-weight: 700;
-    padding: 6px 0;
-    border-radius: 6px;
-    transition: all 0.12s ease;
-  }
-  .eval-axis-buttons button:hover { border-color: var(--plum-border); }
-  .eval-axis-buttons button.active {
-    background: var(--plum); color: #fff; border-color: var(--plum);
-  }
-  .eval-total {
-    text-align: right;
-    font-family: var(--font-mono, ui-monospace, monospace);
-    font-size: 1.4rem; font-weight: 800;
-    color: var(--gray-900);
-    letter-spacing: -0.02em;
-    font-variant-numeric: tabular-nums;
-  }
-  .eval-total small {
-    font-size: 0.7rem; font-weight: 500; color: var(--gray-500);
-    margin-left: 4px;
-  }
-
-  .eval-notes-row { margin-bottom: 4px; }
-  .eval-notes-label {
-    font-size: 0.65rem; font-weight: 700;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--gray-500); margin-bottom: 5px;
-  }
-  .eval-notes-row textarea {
-    width: 100%; min-height: 56px; resize: vertical;
-    border: 1px solid var(--gray-200);
-    border-radius: var(--r-sm, 6px);
-    padding: 8px 10px;
-    font-family: inherit; font-size: 0.82rem;
-    color: var(--gray-900);
-    background: var(--white);
-    line-height: 1.5;
-  }
-  .eval-notes-row textarea:focus {
-    outline: none; border-color: var(--plum-border);
-    box-shadow: 0 0 0 3px var(--plum-tint);
-  }
-
-  .filter-row {
-    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--r-md);
-    padding: 12px 14px;
-    margin-bottom: 18px;
-    font-size: 0.78rem;
-  }
-  .filter-row select {
-    border: 1px solid var(--gray-200);
-    border-radius: 6px;
-    padding: 5px 8px;
-    font-family: inherit; font-size: 0.82rem;
-    color: var(--gray-900);
-    background: var(--white);
-  }
-  .filter-row .filter-label {
-    font-size: 0.64rem; font-weight: 700;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--gray-500);
-  }
-
-  /* ── Pagination (10 scenarios per page) ─────────────────── */
-  .eval-pagination {
-    display: flex; gap: 6px; margin: 24px 0 8px; justify-content: center; align-items: center; flex-wrap: wrap;
-  }
-  .eval-pagination .page-btn {
-    padding: 7px 13px;
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--r-md);
-    font-size: 0.78rem; font-weight: 600;
-    color: var(--gray-700);
-    cursor: pointer;
-    transition: border-color .15s, background .15s, color .15s;
-    font-family: inherit;
-  }
-  .eval-pagination .page-btn:hover:not(:disabled) {
-    border-color: var(--plum-border); color: var(--plum); background: var(--plum-tint);
-  }
-  .eval-pagination .page-btn.active {
-    background: var(--plum); color: #fff; border-color: var(--plum);
-  }
-  .eval-pagination .page-btn:disabled {
-    opacity: 0.4; cursor: not-allowed;
-  }
-  .eval-pagination .page-info {
-    font-size: 0.74rem; color: var(--gray-500); margin: 0 8px;
-  }
-
-  .eval-stats-strip {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-bottom: 22px;
-  }
-  @media (min-width: 720px) { .eval-stats-strip { grid-template-columns: repeat(5, 1fr); } }
-  .eval-stat {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--r-md);
-    padding: 12px 14px;
-  }
-  .eval-stat-label {
-    font-size: 0.62rem; font-weight: 700;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--gray-500); margin-bottom: 6px;
-  }
-  .eval-stat-value {
-    font-size: 1.4rem; font-weight: 800;
-    color: var(--gray-900);
-    letter-spacing: -0.02em;
-    font-variant-numeric: tabular-nums;
-  }
-  .eval-card {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--r-lg);
-    padding: 22px 24px;
-    margin-bottom: 16px;
-  }
-
-  .actions-bar {
-    position: sticky; bottom: 18px; z-index: 20;
-    display: flex; gap: 10px; align-items: center;
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: 999px;
-    padding: 8px 14px;
-    box-shadow: var(--sh-md, 0 4px 16px rgba(0,0,0,0.08));
-    width: fit-content; margin: 24px auto 0;
-  }
-  .actions-bar button {
-    background: var(--plum); color: #fff;
-    border: none; padding: 8px 14px; border-radius: 999px;
-    font-size: 0.78rem; font-weight: 700;
-    font-family: inherit; cursor: pointer;
-  }
-  .actions-bar button.secondary {
-    background: var(--gray-100); color: var(--gray-700);
-  }
-  .actions-bar .progress-text {
-    font-size: 0.74rem; color: var(--gray-600);
-    margin-right: 6px;
-    font-variant-numeric: tabular-nums;
-  }
-</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -399,15 +161,15 @@
   <div class="content">
 
     <div class="page-header">
-      <p class="page-eyebrow">AI Quality</p>
+      <p class="page-eyebrow">AI Eval v2 · 50 scenarios · 13 categories</p>
       <h1 class="page-title">RAG Eval v2 — 50 fresh scenarios</h1>
-      <p class="page-sub">Generated against the live AI assistant on 17 May 2026 at 22:29. Sterling IFA Ltd context — 261 clients · 2 overdue · 3 missing-doc · 4 vulnerable · health 74/100.</p>
+      <p class="page-sub">Run against the live AI assistant on 17 May 2026 at 22:29 with the demo firm (Sterling IFA Ltd) — 261 clients, 2 overdue, 3 missing-doc, 4 vulnerable, health 74/100.</p>
     </div>
 
-    <div class="card" style="background:var(--plum-tint);border-color:var(--plum-border);margin-bottom:22px;">
-      <p style="font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--plum);margin:0 0 8px;">How to score</p>
-      <p style="font-size:0.86rem;color:var(--gray-700);line-height:1.65;margin:0 0 6px;">Four axes, total 0-10. <span class="eval-truth-key">Rule citation</span> 0-3: are the named FCA rules right? <span class="eval-truth-key">Reasoning</span> 0-3: does the response cover the regulatory logic without disclaiming or padding? <span class="eval-truth-key">Firm context</span> 0-2: does it reference this firm's actual numbers? <span class="eval-truth-key">Actionability</span> 0-2: concrete next step plus the Amaea-routing CTA?</p>
-      <p style="font-size:0.78rem;color:var(--gray-600);line-height:1.6;margin:0;">Scores save to localStorage as you click. Use <strong>Export CSV</strong> at the bottom when done to download a scored copy.</p>
+    <div class="intro-callout">
+      <p class="intro-callout-label">How to score</p>
+      <p class="intro-callout-body">Four axes, total 0-10. <span class="eval-truth-key">Rule citation</span> 0-3: are the named FCA rules right? <span class="eval-truth-key">Reasoning</span> 0-3: does the response cover the regulatory logic without disclaiming or padding? <span class="eval-truth-key">Firm context</span> 0-2: does it reference this firm's actual numbers? <span class="eval-truth-key">Actionability</span> 0-2: concrete next step plus the Amaea-routing CTA?</p>
+      <p class="intro-callout-body intro-callout-body--small">Scores save to localStorage as you click. Use <strong>Export CSV</strong> at the top or bottom of the page when done to download a scored copy.</p>
     </div>
 
     <div class="eval-stats-strip">
@@ -416,6 +178,7 @@
       <div class="eval-stat"><div class="eval-stat-label">Medium</div><div class="eval-stat-value">19</div></div>
       <div class="eval-stat"><div class="eval-stat-label">Hard</div><div class="eval-stat-value">22</div></div>
       <div class="eval-stat"><div class="eval-stat-label">Categories</div><div class="eval-stat-value">13</div></div>
+      <div class="eval-stat"><div class="eval-stat-label">Scored</div><div class="eval-stat-value" id="evalStatScored">0 / 50</div></div>
     </div>
 
     <div class="filter-row">
@@ -432,14 +195,15 @@
         <option value="scored">Scored only</option>
         <option value="unscored">Unscored only</option>
       </select>
-      <span style="margin-left:auto;font-size:0.74rem;color:var(--gray-500);" id="visibleCount"></span>
+      <span class="filter-visible-count" id="visibleCount"></span>
+      <button type="button" id="exportCsvTop" class="filter-export">Export CSV</button>
     </div>
 
     <div id="scenarios">
       
-  <article class="eval-card" data-id="EVAL-051" data-category="Consumer Duty" data-difficulty="easy">
+  <article class="eval-card" id="eval-051" data-id="EVAL-051" data-category="Consumer Duty" data-difficulty="easy">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-051</span>
+      <span class="eval-id">EVAL-051</span> <a class="eval-anchor" href="#eval-051" aria-label="Link to EVAL-051">#</a>
       <span class="eval-pill cat">Consumer Duty</span>
       <span class="eval-pill diff-easy">easy</span>
     </div>
@@ -484,9 +248,9 @@ Open Reports → Consumer Duty: connect your CRM and SharePoint in Settings → 
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-052" data-category="Consumer Duty" data-difficulty="medium">
+  <article class="eval-card" id="eval-052" data-id="EVAL-052" data-category="Consumer Duty" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-052</span>
+      <span class="eval-id">EVAL-052</span> <a class="eval-anchor" href="#eval-052" aria-label="Link to EVAL-052">#</a>
       <span class="eval-pill cat">Consumer Duty</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -543,9 +307,9 @@ Open Insights filtered to Vulnerable Customers to evidence the positive-duty act
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-053" data-category="Consumer Duty" data-difficulty="medium">
+  <article class="eval-card" id="eval-053" data-id="EVAL-053" data-category="Consumer Duty" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-053</span>
+      <span class="eval-id">EVAL-053</span> <a class="eval-anchor" href="#eval-053" aria-label="Link to EVAL-053">#</a>
       <span class="eval-pill cat">Consumer Duty</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -600,9 +364,9 @@ Open Reports → Consumer Duty: connect your CRM and SharePoint in Settings → 
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-054" data-category="Consumer Duty" data-difficulty="hard">
+  <article class="eval-card" id="eval-054" data-id="EVAL-054" data-category="Consumer Duty" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-054</span>
+      <span class="eval-id">EVAL-054</span> <a class="eval-anchor" href="#eval-054" aria-label="Link to EVAL-054">#</a>
       <span class="eval-pill cat">Consumer Duty</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -657,9 +421,9 @@ Open Insights filtered to Vulnerable Customers: each flagged case has a per-clie
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-055" data-category="Consumer Duty" data-difficulty="hard">
+  <article class="eval-card" id="eval-055" data-id="EVAL-055" data-category="Consumer Duty" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-055</span>
+      <span class="eval-id">EVAL-055</span> <a class="eval-anchor" href="#eval-055" aria-label="Link to EVAL-055">#</a>
       <span class="eval-pill cat">Consumer Duty</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -715,9 +479,9 @@ Open Reviews to triage by next-due date and surface the 2 overdue cases immediat
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-056" data-category="Consumer Duty" data-difficulty="hard">
+  <article class="eval-card" id="eval-056" data-id="EVAL-056" data-category="Consumer Duty" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-056</span>
+      <span class="eval-id">EVAL-056</span> <a class="eval-anchor" href="#eval-056" aria-label="Link to EVAL-056">#</a>
       <span class="eval-pill cat">Consumer Duty</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -771,9 +535,9 @@ Open Reports → Consumer Duty: connect your CRM and SharePoint in Settings → 
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-057" data-category="Suitability" data-difficulty="easy">
+  <article class="eval-card" id="eval-057" data-id="EVAL-057" data-category="Suitability" data-difficulty="easy">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-057</span>
+      <span class="eval-id">EVAL-057</span> <a class="eval-anchor" href="#eval-057" aria-label="Link to EVAL-057">#</a>
       <span class="eval-pill cat">Suitability</span>
       <span class="eval-pill diff-easy">easy</span>
     </div>
@@ -832,9 +596,9 @@ Open Documents to check the gap list; drag any missing ATRs or suitability repor
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-058" data-category="Suitability" data-difficulty="medium">
+  <article class="eval-card" id="eval-058" data-id="EVAL-058" data-category="Suitability" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-058</span>
+      <span class="eval-id">EVAL-058</span> <a class="eval-anchor" href="#eval-058" aria-label="Link to EVAL-058">#</a>
       <span class="eval-pill cat">Suitability</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -894,9 +658,9 @@ Open Insights filtered to Vulnerable Customers to see if this client is already 
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-059" data-category="Suitability" data-difficulty="medium">
+  <article class="eval-card" id="eval-059" data-id="EVAL-059" data-category="Suitability" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-059</span>
+      <span class="eval-id">EVAL-059</span> <a class="eval-anchor" href="#eval-059" aria-label="Link to EVAL-059">#</a>
       <span class="eval-pill cat">Suitability</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -949,9 +713,9 @@ Open Reviews, apply the Status + Next Due filters, and sort by adviser — I aut
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-060" data-category="Suitability" data-difficulty="medium">
+  <article class="eval-card" id="eval-060" data-id="EVAL-060" data-category="Suitability" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-060</span>
+      <span class="eval-id">EVAL-060</span> <a class="eval-anchor" href="#eval-060" aria-label="Link to EVAL-060">#</a>
       <span class="eval-pill cat">Suitability</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -1005,9 +769,9 @@ Open Reviews to triage those 2 overdue cases before any insistent-client process
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-061" data-category="Suitability" data-difficulty="hard">
+  <article class="eval-card" id="eval-061" data-id="EVAL-061" data-category="Suitability" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-061</span>
+      <span class="eval-id">EVAL-061</span> <a class="eval-anchor" href="#eval-061" aria-label="Link to EVAL-061">#</a>
       <span class="eval-pill cat">Suitability</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -1059,9 +823,9 @@ Open Reviews, filter by assigned adviser, and reassign those clients; the overdu
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-062" data-category="Suitability" data-difficulty="hard">
+  <article class="eval-card" id="eval-062" data-id="EVAL-062" data-category="Suitability" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-062</span>
+      <span class="eval-id">EVAL-062</span> <a class="eval-anchor" href="#eval-062" aria-label="Link to EVAL-062">#</a>
       <span class="eval-pill cat">Suitability</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -1115,9 +879,9 @@ Open Documents to identify which of those 3 clients are missing signed ATRs or q
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-063" data-category="Suitability" data-difficulty="hard">
+  <article class="eval-card" id="eval-063" data-id="EVAL-063" data-category="Suitability" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-063</span>
+      <span class="eval-id">EVAL-063</span> <a class="eval-anchor" href="#eval-063" aria-label="Link to EVAL-063">#</a>
       <span class="eval-pill cat">Suitability</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -1172,9 +936,9 @@ Open Reviews to pull this client&#039;s file — filter by Status and Next Due t
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-064" data-category="Suitability" data-difficulty="medium">
+  <article class="eval-card" id="eval-064" data-id="EVAL-064" data-category="Suitability" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-064</span>
+      <span class="eval-id">EVAL-064</span> <a class="eval-anchor" href="#eval-064" aria-label="Link to EVAL-064">#</a>
       <span class="eval-pill cat">Suitability</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -1230,9 +994,9 @@ Sterling IFA Ltd is registered as independent (FRN 789012), so all adviser suita
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-065" data-category="Vulnerable Customers" data-difficulty="easy">
+  <article class="eval-card" id="eval-065" data-id="EVAL-065" data-category="Vulnerable Customers" data-difficulty="easy">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-065</span>
+      <span class="eval-id">EVAL-065</span> <a class="eval-anchor" href="#eval-065" aria-label="Link to EVAL-065">#</a>
       <span class="eval-pill cat">Vulnerable Customers</span>
       <span class="eval-pill diff-easy">easy</span>
     </div>
@@ -1289,9 +1053,9 @@ Open Insights filtered to Vulnerable Customers: each flagged case has a per-clie
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-066" data-category="Vulnerable Customers" data-difficulty="medium">
+  <article class="eval-card" id="eval-066" data-id="EVAL-066" data-category="Vulnerable Customers" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-066</span>
+      <span class="eval-id">EVAL-066</span> <a class="eval-anchor" href="#eval-066" aria-label="Link to EVAL-066">#</a>
       <span class="eval-pill cat">Vulnerable Customers</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -1340,9 +1104,9 @@ Open Insights filtered to Vulnerable Customers: each flagged case has a per-clie
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-067" data-category="Vulnerable Customers" data-difficulty="medium">
+  <article class="eval-card" id="eval-067" data-id="EVAL-067" data-category="Vulnerable Customers" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-067</span>
+      <span class="eval-id">EVAL-067</span> <a class="eval-anchor" href="#eval-067" aria-label="Link to EVAL-067">#</a>
       <span class="eval-pill cat">Vulnerable Customers</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -1391,9 +1155,9 @@ Open Insights filtered to Vulnerable Customers: each flagged case has a per-clie
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-068" data-category="Vulnerable Customers" data-difficulty="hard">
+  <article class="eval-card" id="eval-068" data-id="EVAL-068" data-category="Vulnerable Customers" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-068</span>
+      <span class="eval-id">EVAL-068</span> <a class="eval-anchor" href="#eval-068" aria-label="Link to EVAL-068">#</a>
       <span class="eval-pill cat">Vulnerable Customers</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -1448,9 +1212,9 @@ Open Insights filtered to Vulnerable Customers: each flagged case has a per-clie
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-069" data-category="Vulnerable Customers" data-difficulty="hard">
+  <article class="eval-card" id="eval-069" data-id="EVAL-069" data-category="Vulnerable Customers" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-069</span>
+      <span class="eval-id">EVAL-069</span> <a class="eval-anchor" href="#eval-069" aria-label="Link to EVAL-069">#</a>
       <span class="eval-pill cat">Vulnerable Customers</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -1507,9 +1271,9 @@ Open Insights filtered to Vulnerable Customers: the flagged client will have a p
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-070" data-category="SMCR" data-difficulty="easy">
+  <article class="eval-card" id="eval-070" data-id="EVAL-070" data-category="SMCR" data-difficulty="easy">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-070</span>
+      <span class="eval-id">EVAL-070</span> <a class="eval-anchor" href="#eval-070" aria-label="Link to EVAL-070">#</a>
       <span class="eval-pill cat">SMCR</span>
       <span class="eval-pill diff-easy">easy</span>
     </div>
@@ -1556,9 +1320,9 @@ The same individual can hold both at Sterling IFA, which is common at smaller IF
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-071" data-category="SMCR" data-difficulty="medium">
+  <article class="eval-card" id="eval-071" data-id="EVAL-071" data-category="SMCR" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-071</span>
+      <span class="eval-id">EVAL-071</span> <a class="eval-anchor" href="#eval-071" aria-label="Link to EVAL-071">#</a>
       <span class="eval-pill cat">SMCR</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -1613,9 +1377,9 @@ Go to Settings → Advisers to record each adviser&#039;s Certification status, 
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-072" data-category="SMCR" data-difficulty="medium">
+  <article class="eval-card" id="eval-072" data-id="EVAL-072" data-category="SMCR" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-072</span>
+      <span class="eval-id">EVAL-072</span> <a class="eval-anchor" href="#eval-072" aria-label="Link to EVAL-072">#</a>
       <span class="eval-pill cat">SMCR</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -1667,9 +1431,9 @@ Go to Settings → Advisers: add the adviser, then upload their training compete
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-073" data-category="SMCR" data-difficulty="hard">
+  <article class="eval-card" id="eval-073" data-id="EVAL-073" data-category="SMCR" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-073</span>
+      <span class="eval-id">EVAL-073</span> <a class="eval-anchor" href="#eval-073" aria-label="Link to EVAL-073">#</a>
       <span class="eval-pill cat">SMCR</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -1723,9 +1487,9 @@ The FCA has taken enforcement action on precisely this pattern — Wealthtek (20
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-074" data-category="DB Pension Transfers" data-difficulty="easy">
+  <article class="eval-card" id="eval-074" data-id="EVAL-074" data-category="DB Pension Transfers" data-difficulty="easy">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-074</span>
+      <span class="eval-id">EVAL-074</span> <a class="eval-anchor" href="#eval-074" aria-label="Link to EVAL-074">#</a>
       <span class="eval-pill cat">DB Pension Transfers</span>
       <span class="eval-pill diff-easy">easy</span>
     </div>
@@ -1774,9 +1538,9 @@ The Pension Freedoms reforms and PS22/9 tightened suitability and ongoing review
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-075" data-category="DB Pension Transfers" data-difficulty="medium">
+  <article class="eval-card" id="eval-075" data-id="EVAL-075" data-category="DB Pension Transfers" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-075</span>
+      <span class="eval-id">EVAL-075</span> <a class="eval-anchor" href="#eval-075" aria-label="Link to EVAL-075">#</a>
       <span class="eval-pill cat">DB Pension Transfers</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -1825,9 +1589,9 @@ Go to Settings → Advisers to record PTS qualification status and SPS dates; up
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-076" data-category="DB Pension Transfers" data-difficulty="hard">
+  <article class="eval-card" id="eval-076" data-id="EVAL-076" data-category="DB Pension Transfers" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-076</span>
+      <span class="eval-id">EVAL-076</span> <a class="eval-anchor" href="#eval-076" aria-label="Link to EVAL-076">#</a>
       <span class="eval-pill cat">DB Pension Transfers</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -1883,9 +1647,9 @@ Go to Settings → Advisers to verify the relevant adviser&#039;s qualification 
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-077" data-category="DB Pension Transfers" data-difficulty="hard">
+  <article class="eval-card" id="eval-077" data-id="EVAL-077" data-category="DB Pension Transfers" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-077</span>
+      <span class="eval-id">EVAL-077</span> <a class="eval-anchor" href="#eval-077" aria-label="Link to EVAL-077">#</a>
       <span class="eval-pill cat">DB Pension Transfers</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -1941,9 +1705,9 @@ Documents shows the gap list for any incomplete DB transfer files; drag the APTA
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-078" data-category="RMAR and Reporting" data-difficulty="easy">
+  <article class="eval-card" id="eval-078" data-id="EVAL-078" data-category="RMAR and Reporting" data-difficulty="easy">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-078</span>
+      <span class="eval-id">EVAL-078</span> <a class="eval-anchor" href="#eval-078" aria-label="Link to EVAL-078">#</a>
       <span class="eval-pill cat">RMAR and Reporting</span>
       <span class="eval-pill diff-easy">easy</span>
     </div>
@@ -1990,9 +1754,9 @@ Open Reports → RMAR — Sections B, D, E, G, and H are pre-populated; Section 
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-079" data-category="RMAR and Reporting" data-difficulty="medium">
+  <article class="eval-card" id="eval-079" data-id="EVAL-079" data-category="RMAR and Reporting" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-079</span>
+      <span class="eval-id">EVAL-079</span> <a class="eval-anchor" href="#eval-079" aria-label="Link to EVAL-079">#</a>
       <span class="eval-pill cat">RMAR and Reporting</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -2039,9 +1803,9 @@ Open Reports → RMAR — Section A will pre-populate from your firm profile; fl
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-080" data-category="RMAR and Reporting" data-difficulty="medium">
+  <article class="eval-card" id="eval-080" data-id="EVAL-080" data-category="RMAR and Reporting" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-080</span>
+      <span class="eval-id">EVAL-080</span> <a class="eval-anchor" href="#eval-080" aria-label="Link to EVAL-080">#</a>
       <span class="eval-pill cat">RMAR and Reporting</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -2088,9 +1852,9 @@ Open Reports → RMAR: Section H surfaces DISP 1.6 8-week breach data so you can
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-081" data-category="RMAR and Reporting" data-difficulty="hard">
+  <article class="eval-card" id="eval-081" data-id="EVAL-081" data-category="RMAR and Reporting" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-081</span>
+      <span class="eval-id">EVAL-081</span> <a class="eval-anchor" href="#eval-081" aria-label="Link to EVAL-081">#</a>
       <span class="eval-pill cat">RMAR and Reporting</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -2147,9 +1911,9 @@ Open Reports → RMAR — Sections B, D, E, G, and H are pre-populated; cross-re
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-082" data-category="RMAR and Reporting" data-difficulty="hard">
+  <article class="eval-card" id="eval-082" data-id="EVAL-082" data-category="RMAR and Reporting" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-082</span>
+      <span class="eval-id">EVAL-082</span> <a class="eval-anchor" href="#eval-082" aria-label="Link to EVAL-082">#</a>
       <span class="eval-pill cat">RMAR and Reporting</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -2204,9 +1968,9 @@ Open Reports → RMAR: Section H surfaces any DISP 1.6 8-week breaches that may 
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-083" data-category="AML" data-difficulty="easy">
+  <article class="eval-card" id="eval-083" data-id="EVAL-083" data-category="AML" data-difficulty="easy">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-083</span>
+      <span class="eval-id">EVAL-083</span> <a class="eval-anchor" href="#eval-083" aria-label="Link to EVAL-083">#</a>
       <span class="eval-pill cat">AML</span>
       <span class="eval-pill diff-easy">easy</span>
     </div>
@@ -2253,9 +2017,9 @@ Drop the CDD pack into Import Docs and Amaea extracts identity verification, ben
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-084" data-category="AML" data-difficulty="medium">
+  <article class="eval-card" id="eval-084" data-id="EVAL-084" data-category="AML" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-084</span>
+      <span class="eval-id">EVAL-084</span> <a class="eval-anchor" href="#eval-084" aria-label="Link to EVAL-084">#</a>
       <span class="eval-pill cat">AML</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -2312,9 +2076,9 @@ Drop the CDD pack into Import Docs and Amaea extracts identity verification, ben
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-085" data-category="AML" data-difficulty="hard">
+  <article class="eval-card" id="eval-085" data-id="EVAL-085" data-category="AML" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-085</span>
+      <span class="eval-id">EVAL-085</span> <a class="eval-anchor" href="#eval-085" aria-label="Link to EVAL-085">#</a>
       <span class="eval-pill cat">AML</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -2369,9 +2133,9 @@ Drop the CDD pack into Import Docs and Amaea extracts identity verification, ben
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-086" data-category="AML" data-difficulty="hard">
+  <article class="eval-card" id="eval-086" data-id="EVAL-086" data-category="AML" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-086</span>
+      <span class="eval-id">EVAL-086</span> <a class="eval-anchor" href="#eval-086" aria-label="Link to EVAL-086">#</a>
       <span class="eval-pill cat">AML</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -2416,9 +2180,9 @@ The MLRO must not tip off the subject (POCA 2002 s.333A / MLR 2017 reg.39) at ei
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-087" data-category="CASS Client Money" data-difficulty="medium">
+  <article class="eval-card" id="eval-087" data-id="EVAL-087" data-category="CASS Client Money" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-087</span>
+      <span class="eval-id">EVAL-087</span> <a class="eval-anchor" href="#eval-087" aria-label="Link to EVAL-087">#</a>
       <span class="eval-pill cat">CASS Client Money</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -2468,9 +2232,9 @@ The practical check to document:
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-088" data-category="CASS Client Money" data-difficulty="hard">
+  <article class="eval-card" id="eval-088" data-id="EVAL-088" data-category="CASS Client Money" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-088</span>
+      <span class="eval-id">EVAL-088</span> <a class="eval-anchor" href="#eval-088" aria-label="Link to EVAL-088">#</a>
       <span class="eval-pill cat">CASS Client Money</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -2523,9 +2287,9 @@ If client detriment arose (e.g., the cheque was time-sensitive for a subscriptio
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-089" data-category="Record Keeping" data-difficulty="easy">
+  <article class="eval-card" id="eval-089" data-id="EVAL-089" data-category="Record Keeping" data-difficulty="easy">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-089</span>
+      <span class="eval-id">EVAL-089</span> <a class="eval-anchor" href="#eval-089" aria-label="Link to EVAL-089">#</a>
       <span class="eval-pill cat">Record Keeping</span>
       <span class="eval-pill diff-easy">easy</span>
     </div>
@@ -2574,9 +2338,9 @@ Open Documents to see the gap list; drag any recovered agreements into Import Do
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-090" data-category="Record Keeping" data-difficulty="medium">
+  <article class="eval-card" id="eval-090" data-id="EVAL-090" data-category="Record Keeping" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-090</span>
+      <span class="eval-id">EVAL-090</span> <a class="eval-anchor" href="#eval-090" aria-label="Link to EVAL-090">#</a>
       <span class="eval-pill cat">Record Keeping</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -2635,9 +2399,9 @@ Documents shows the full gap list — drag any recovered or re-papered fact find
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-091" data-category="Record Keeping" data-difficulty="hard">
+  <article class="eval-card" id="eval-091" data-id="EVAL-091" data-category="Record Keeping" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-091</span>
+      <span class="eval-id">EVAL-091</span> <a class="eval-anchor" href="#eval-091" aria-label="Link to EVAL-091">#</a>
       <span class="eval-pill cat">Record Keeping</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -2690,9 +2454,9 @@ Drop the CDD packs, suitability files, ATRs, and fact finds into Import Docs and
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-092" data-category="Enforcement Precedents" data-difficulty="medium">
+  <article class="eval-card" id="eval-092" data-id="EVAL-092" data-category="Enforcement Precedents" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-092</span>
+      <span class="eval-id">EVAL-092</span> <a class="eval-anchor" href="#eval-092" aria-label="Link to EVAL-092">#</a>
       <span class="eval-pill cat">Enforcement Precedents</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -2746,9 +2510,9 @@ Documents shows the gap list for the 3 missing-doc cases; drag the relevant fact
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-093" data-category="Enforcement Precedents" data-difficulty="hard">
+  <article class="eval-card" id="eval-093" data-id="EVAL-093" data-category="Enforcement Precedents" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-093</span>
+      <span class="eval-id">EVAL-093</span> <a class="eval-anchor" href="#eval-093" aria-label="Link to EVAL-093">#</a>
       <span class="eval-pill cat">Enforcement Precedents</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -2802,9 +2566,9 @@ Open Reviews to triage the 2 overdue cases by next-due date; then open Documents
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-094" data-category="Enforcement Precedents" data-difficulty="hard">
+  <article class="eval-card" id="eval-094" data-id="EVAL-094" data-category="Enforcement Precedents" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-094</span>
+      <span class="eval-id">EVAL-094</span> <a class="eval-anchor" href="#eval-094" aria-label="Link to EVAL-094">#</a>
       <span class="eval-pill cat">Enforcement Precedents</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -2857,9 +2621,9 @@ This is procedural law, not a firm-specific compliance gap — Sterling IFA&#039
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-095" data-category="Financial Promotions" data-difficulty="easy">
+  <article class="eval-card" id="eval-095" data-id="EVAL-095" data-category="Financial Promotions" data-difficulty="easy">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-095</span>
+      <span class="eval-id">EVAL-095</span> <a class="eval-anchor" href="#eval-095" aria-label="Link to EVAL-095">#</a>
       <span class="eval-pill cat">Financial Promotions</span>
       <span class="eval-pill diff-easy">easy</span>
     </div>
@@ -2906,9 +2670,9 @@ Under PRIN 12 (Consumer Duty) and the FCA&#039;s Financial Promotions guidance, 
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-096" data-category="Financial Promotions" data-difficulty="medium">
+  <article class="eval-card" id="eval-096" data-id="EVAL-096" data-category="Financial Promotions" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-096</span>
+      <span class="eval-id">EVAL-096</span> <a class="eval-anchor" href="#eval-096" aria-label="Link to EVAL-096">#</a>
       <span class="eval-pill cat">Financial Promotions</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -2963,9 +2727,9 @@ The adviser must not post until compliance has reviewed and approved the content
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-097" data-category="Financial Promotions" data-difficulty="hard">
+  <article class="eval-card" id="eval-097" data-id="EVAL-097" data-category="Financial Promotions" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-097</span>
+      <span class="eval-id">EVAL-097</span> <a class="eval-anchor" href="#eval-097" aria-label="Link to EVAL-097">#</a>
       <span class="eval-pill cat">Financial Promotions</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -3019,9 +2783,9 @@ Sterling IFA Ltd should confirm whether any adviser or introducer arrangement in
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-098" data-category="Decumulation and Retirement" data-difficulty="medium">
+  <article class="eval-card" id="eval-098" data-id="EVAL-098" data-category="Decumulation and Retirement" data-difficulty="medium">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-098</span>
+      <span class="eval-id">EVAL-098</span> <a class="eval-anchor" href="#eval-098" aria-label="Link to EVAL-098">#</a>
       <span class="eval-pill cat">Decumulation and Retirement</span>
       <span class="eval-pill diff-medium">medium</span>
     </div>
@@ -3075,9 +2839,9 @@ The notification obligation under Finance Act 2004 s.227B requires the scheme th
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-099" data-category="Decumulation and Retirement" data-difficulty="hard">
+  <article class="eval-card" id="eval-099" data-id="EVAL-099" data-category="Decumulation and Retirement" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-099</span>
+      <span class="eval-id">EVAL-099</span> <a class="eval-anchor" href="#eval-099" aria-label="Link to EVAL-099">#</a>
       <span class="eval-pill cat">Decumulation and Retirement</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -3142,9 +2906,9 @@ Open Insights filtered to Vulnerable Customers to check whether this client is a
     </div>
   </article>
 
-  <article class="eval-card" data-id="EVAL-100" data-category="ESG and Sustainability" data-difficulty="hard">
+  <article class="eval-card" id="eval-100" data-id="EVAL-100" data-category="ESG and Sustainability" data-difficulty="hard">
     <div class="eval-meta">
-      <span class="eval-id">EVAL-100</span>
+      <span class="eval-id">EVAL-100</span> <a class="eval-anchor" href="#eval-100" aria-label="Link to EVAL-100">#</a>
       <span class="eval-pill cat">ESG and Sustainability</span>
       <span class="eval-pill diff-hard">hard</span>
     </div>
@@ -3305,6 +3069,8 @@ Open Reviews to pull up this client&#039;s record and log the updated ESG prefer
     const allCards = document.querySelectorAll('.eval-card');
     const scoredCount = Array.from(allCards).filter(c => computeTotal(scores[c.dataset.id]) !== null).length;
     document.getElementById('progressText').textContent = scoredCount + ' / ' + allCards.length + ' scored';
+    const statEl = document.getElementById('evalStatScored');
+    if (statEl) statEl.textContent = scoredCount + ' / ' + allCards.length;
   }
 
   document.querySelectorAll('.eval-card').forEach(card => {
@@ -3405,7 +3171,7 @@ Open Reviews to pull up this client&#039;s record and log the updated ESG prefer
   applyFilters();
 
   // ── Export CSV ─────────────────────────────────────────────────
-  document.getElementById('exportCsv').addEventListener('click', () => {
+  function exportCsv() {
     const data = JSON.parse(document.getElementById('eval-data').textContent);
     const cols = ['ID','Category','Difficulty','Question','AI Response','Expected Rules','Expected Themes','Ground Truth Notes','Rule Citation (0-3)','Reasoning (0-3)','Firm Context (0-2)','Actionability (0-2)','Total (0-10)','Scorer Notes','Input Tokens','Output Tokens','Chunks Retrieved','Run At'];
     const esc = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
@@ -3428,7 +3194,10 @@ Open Reviews to pull up this client&#039;s record and log the updated ESG prefer
     a.href = url; a.download = 'amaea-eval-v2-scored-' + new Date().toISOString().slice(0,10) + '.csv';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  });
+  }
+  document.getElementById('exportCsv').addEventListener('click', exportCsv);
+  const topExportBtn = document.getElementById('exportCsvTop');
+  if (topExportBtn) topExportBtn.addEventListener('click', exportCsv);
 
   // Reset
   document.getElementById('resetScores').addEventListener('click', () => {
