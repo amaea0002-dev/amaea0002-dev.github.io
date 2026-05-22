@@ -39,6 +39,28 @@
       transition: background 0.14s ease, color 0.14s ease;
     }
     .nf-quick-list a:hover { background: var(--plum-tint); color: var(--plum); }
+    .nf-search-hint {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 22px; padding: 9px 14px; border-radius: 999px;
+      background: var(--gray-100); color: var(--gray-700);
+      font-size: 0.82rem; border: none; font-family: inherit; cursor: pointer;
+      transition: background 0.14s ease, color 0.14s ease;
+    }
+    .nf-search-hint kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.72rem; font-weight: 700; padding: 2px 7px;
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: 4px; color: var(--gray-900);
+      transition: border-color 0.14s ease;
+    }
+    .nf-search-hint:hover { background: var(--plum-tint); color: var(--plum); }
+    .nf-search-hint:hover kbd { border-color: var(--plum-border); }
+    .nf-broken {
+      margin-top: 18px; font-size: 0.76rem;
+      color: var(--gray-500); line-height: 1.6;
+    }
+    .nf-broken a { color: var(--plum); text-decoration: underline; }
+    .nf-broken a:hover { text-decoration: none; }
   </style>
 </head>
 <body>
@@ -46,13 +68,17 @@
   <main class="nf-shell" id="main" tabindex="-1">
     <div class="nf-code">404 · Page not found</div>
     <h1 class="nf-title">That page isn't here.</h1>
-    <p class="nf-sub">The link may be out of date, or the page may have moved. Head back to the dashboard, or pick one of the most-used pages below.</p>
+    <p class="nf-sub">The link may be out of date, or the page may have moved. Search for what you wanted, head back to the dashboard, or pick one of the shortcuts below.</p>
     <div class="nf-actions">
       <a href="/" class="nf-btn nf-btn-primary">Back to dashboard</a>
-      <a href="javascript:history.back()" class="nf-btn nf-btn-ghost">Go back</a>
+      <button type="button" id="goBackBtn" class="nf-btn nf-btn-ghost">Go back</button>
     </div>
+    <button type="button" class="nf-search-hint" data-cmdk-trigger>
+      Search the intranet
+      <kbd>⌘K</kbd>
+    </button>
     <div class="nf-quick">
-      <div class="nf-quick-label">Quick links</div>
+      <div class="nf-quick-label">Jump to</div>
       <div class="nf-quick-list">
         <a href="/decisions">Decisions log</a>
         <a href="/roadmap">Roadmap</a>
@@ -61,7 +87,25 @@
         <a href="/team">Team</a>
       </div>
     </div>
+    <p class="nf-broken">Got here from a broken intranet link? Copy the URL and email it to <a href="mailto:milan@amaea.co.uk?subject=Broken%20intranet%20link">milan@amaea.co.uk</a>.</p>
   </main>
+<script>
+  // Hide "Go back" if the user landed here directly (no same-origin referrer).
+  (function () {
+    var btn = document.getElementById('goBackBtn');
+    if (!btn) return;
+    var ref = document.referrer;
+    var sameOrigin = false;
+    if (ref) {
+      try { sameOrigin = new URL(ref).origin === window.location.origin; } catch (e) {}
+    }
+    if (sameOrigin) {
+      btn.addEventListener('click', function () { history.back(); });
+    } else {
+      btn.style.display = 'none';
+    }
+  })();
+</script>
 <script src="/intranet-search.js" defer></script>
 </body>
 </html>
